@@ -668,7 +668,7 @@ show_files_or_kill (void)
       {
 	if (header && (file->flags & FLAG_VERB))
 	  {
-	    fprintf (stderr, "\n%*s USER        PID ACCESS COMMAND\n", NAME_FIELD, "");
+	    fprintf (stderr, _("\n%*s USER        PID ACCESS COMMAND\n"), NAME_FIELD, "");
 	    header = 0;
 	  }
 	length = 0;

@@ -8,6 +8,13 @@
 #include <string.h>
 #include <ctype.h>
 #include <signal.h>
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#include <locale.h>
+#define _(String) gettext (String)
+#else
+#define _(String) (String)
+#endif
 #include "signals.h"
 
 
@@ -60,6 +67,6 @@ get_signal (char *name, const char *cmd)
       break;
   if (walk->name)
     return walk->number;
-  fprintf (stderr, "%s: unknown signal; %s -l lists signals.\n", name, cmd);
+  fprintf (stderr, _("%s: unknown signal; %s -l lists signals.\n"), name, cmd);
   exit (1);
 }

@@ -733,9 +733,9 @@ usage (void)
   fprintf (stderr, _("    -s     show Flask SIDs\n"));
   fprintf (stderr, _("    -x     show Flask security contexts\n"));
 #endif /*FLASK_LINUX*/
-  fprintf (stderr, _("    -U     use UTF-8 (Unicode)) line drawing characters\n"));
+  fprintf (stderr, _("    -U     use UTF-8 (Unicode) line drawing characters\n"));
   fprintf (stderr, _("    -V     display version information\n"));
-  fprintf (stderr, _("    pid    start at pid, default 1 (init))\n"));
+  fprintf (stderr, _("    pid    start at pid, default 1 (init)\n"));
   fprintf (stderr, _("    user   show only trees rooted at processes of that user\n\n"));
   exit (1);
 }
@@ -772,6 +772,8 @@ main (int argc, char **argv)
   
 #ifdef ENABLE_NLS
   setlocale(LC_ALL, "");
+  bindtextdomain(PACKAGE, LOCALEDIR);
+  textdomain(PACKAGE);
 #endif
   
   if ( (tmpstr = strrchr(argv[0],'/'))) {

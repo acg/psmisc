@@ -390,13 +390,13 @@ kill_all (int signal, int names, char **namelist)
 static void
 usage_pidof (void)
 {
-  fprintf (stderr, "usage: pidof [ -eg ] name ...\n");
-  fprintf (stderr, "       pidof -V\n\n");
-  fprintf (stderr, "    -e      require exact match for very long names;\n");
-  fprintf (stderr, "            skip if the command line is unavailable\n");
+  fprintf (stderr, _("usage: pidof [ -eg ] name ...\n"));
+  fprintf (stderr, _("       pidof -V\n\n"));
+  fprintf (stderr, _("    -e      require exact match for very long names;\n"));
+  fprintf (stderr, _("            skip if the command line is unavailable\n"));
   fprintf (stderr,
-	   "    -g      show process group ID instead of process ID\n");
-  fprintf (stderr, "    -V      display version information\n\n");
+	   _("    -g      show process group ID instead of process ID\n"));
+  fprintf (stderr, _("    -V      display version information\n\n"));
 }
 
 
@@ -404,26 +404,26 @@ static void
 usage_killall (void)
 {
 #ifdef FLASK_LINUX
-  fprintf(stderr,"Usage: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n");
+  fprintf(stderr,_("Usage: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n"));
 #else  /*FLASK_LINUX*/
-  fprintf (stderr, "usage: killall [ OPTIONS ] [ -- ] name ...\n");
+  fprintf (stderr, _("usage: killall [ OPTIONS ] [ -- ] name ...\n"));
 #endif /*FLASK_LINUX*/
-  fprintf (stderr, "       killall -l, --list\n");
-  fprintf (stderr, "       killall -V --version\n\n");
-  fprintf (stderr, "  -e,--exact          require exact match for very long names\n");
-  fprintf (stderr, "  -I,--ignore-case-   case insensitive process name match\n");
-  fprintf (stderr, "  -g,--process-group  kill process group instead of process\n");
-  fprintf (stderr, "  -i,--interactive    ask for confirmation before killing\n");
-  fprintf (stderr, "  -l,--list           list all known signal names\n");
-  fprintf (stderr, "  -q,--quiet          don't print complaints\n");
-  fprintf (stderr, "  -s,--signal         send signal instead of SIGTERM\n");
-  fprintf (stderr, "  -v,--verbose        report if the signal was successfully sent\n");
-  fprintf (stderr, "  -V,--version        display version information\n");
-  fprintf (stderr, "  -w,--wait           wait for processes to die\n\n");
+  fprintf (stderr, _("       killall -l, --list\n"));
+  fprintf (stderr, _("       killall -V --version\n\n"));
+  fprintf (stderr, _("  -e,--exact          require exact match for very long names\n"));
+  fprintf (stderr, _("  -I,--ignore-case-   case insensitive process name match\n"));
+  fprintf (stderr, _("  -g,--process-group  kill process group instead of process\n"));
+  fprintf (stderr, _("  -i,--interactive    ask for confirmation before killing\n"));
+  fprintf (stderr, _("  -l,--list           list all known signal names\n"));
+  fprintf (stderr, _("  -q,--quiet          don't print complaints\n"));
+  fprintf (stderr, _("  -s,--signal         send signal instead of SIGTERM\n"));
+  fprintf (stderr, _("  -v,--verbose        report if the signal was successfully sent\n"));
+  fprintf (stderr, _("  -V,--version        display version information\n"));
+  fprintf (stderr, _("  -w,--wait           wait for processes to die\n\n"));
 #ifdef FLASK_LINUX
-  fprintf (stderr, "  -d,--sid            kill only process(es) having sid\n");
-  fprintf (stderr, "  -c,--context        kill only process(es) having scontext\n");
-  fprintf(stderr, "   (-s, -c are mutually exclusive and must precede other arguments)\n\n");
+  fprintf (stderr, _("  -d,--sid            kill only process(es) having sid\n"));
+  fprintf (stderr, _("  -c,--context        kill only process(es) having scontext\n"));
+  fprintf(stderr, _("   (-s, -c are mutually exclusive and must precede other arguments)\n\n"));
 #endif /*FLASK_LINUX*/
 }
 
@@ -441,11 +441,11 @@ usage (void)
 void print_version()
 {
   fprintf(stderr, "%s (psmisc) %s\n", pidof ? "pidof" : "killall", VERSION);
-  fprintf(stderr, "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n\n");
-  fprintf(stderr, "PSmisc comes with ABSOLUTELY NO WARRANTY.\n");
-  fprintf(stderr, "This is free software, and you are welcome to redistribute it under the terms\n");
-  fprintf(stderr, "of the GNU General Public License.\n");
-  fprintf(stderr, "For more information about these matters, see the files named COPYING.\n");
+  fprintf(stderr, _("Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n\n"));
+  fprintf(stderr, _("PSmisc comes with ABSOLUTELY NO WARRANTY.\n"));
+  fprintf(stderr, _("This is free software, and you are welcome to redistribute it under the terms\n"));
+  fprintf(stderr, _("of the GNU General Public License.\n"));
+  fprintf(stderr, _("For more information about these matters, see the files named COPYING.\n"));
 }
 
 int
@@ -559,7 +559,7 @@ main (int argc, char **argv)
 
 	  lsid = strtol(optarg, buf, 0);
           if ( **buf ) {
-              (void) fprintf(stderr, "%s: SID (%s) must be numeric\n", name, *argv);
+              (void) fprintf(stderr, _("%s: SID (%s) must be numeric\n"), name, *argv);
               (void) fflush(stderr);
               return( 1 );
           }
