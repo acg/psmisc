@@ -18,7 +18,6 @@
 #include <curses.h>
 #include <term.h>
 #include <termios.h>
-#include <termcap.h>
 #include <langinfo.h>
 #include <sys/types.h>
 #include <sys/stat.h>

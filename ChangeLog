@@ -11,6 +11,9 @@ Changes in 21.6 (not released yet)
 	* Symbolic link created properly for pstree.x11 Debian #250096
 	* Strange mount points handled better Debian #178972
 	* Added Catalan translation
+	* killall can be case insenstive now
+	* Warning in killall.1 about process changing names Debian #187941
+	* Removed include termcap.h to fix RH include problem.
 
 Changes in 21.5
 ===============

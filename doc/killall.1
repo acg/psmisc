@@ -14,6 +14,7 @@ killall \- kill processes by name
 .IR signal ]
 .RB [ \-v , \-\-verbose ]
 .RB [ \-w , \-\-wait ]
+.RB [ \-I , \-\-ignore-case ]
 .RB [ \-V, \-\-version ]
 .RB [ \-\- ]
 .I name ...
@@ -90,6 +91,9 @@ user.
 .PP
 \fBkillall \-w\fP doesn't detect if a process disappears and is replaced by
 a new process with the same PID between scans.
+.PP
+If processes change their name, \fBkillall\fP may not be able to match 
+them correctly.
 .SH AUTHORS
 Werner Almesberger <werner@almesberger.net> wrote the original version
 of psmisc. Since version 20 Craig Small <csmall@small.dropbear.id.au>
