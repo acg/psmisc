@@ -3,7 +3,7 @@
 pstree \- display a tree of processes
 .SH SYNOPSIS
 .ad l
-.B pstree
+.B pstree 
 .RB [ \-a ]
 .RB [ \-c ]
 .RB [ \-h | \-H \fIpid\fB ]
@@ -39,6 +39,11 @@ becomes
     init\-\-\-4*[getty]
 .sp
 .fi
+.PP
+If \fBpstree\fR is called as \fBpstree.x11\fR then it will prompt the user
+at the end of the line to press return and will not return until that
+has happened.  This is useful for when \fBpstree\fR is run in a xterminal.
+
 .SH OPTIONS
 .IP \fB\-a\fP
 Show command line arguments. If the command line of a process is swapped out,
@@ -82,8 +87,9 @@ Display version information.
 .nf
 /proc	location of the proc file system
 .fi
-.SH AUTHOR
+.SH AUTHORS
 Werner Almesberger <Werner.Almesberger@epfl.ch>
+Craig Small <csmall@small.dropbear.id.au>
 .SH "SEE ALSO"
 ps(1), top(1)
 .\"{{{}}}

@@ -105,7 +105,7 @@ sym_ascii =
 static PROC *list = NULL;
 static int width[MAX_DEPTH], more[MAX_DEPTH];
 static int print_args = 0, compact = 1, user_change = 0, pids = 0, by_pid = 0,
-  trunc = 1;
+  trunc = 1, wait_end = 0;
 #ifdef FLASK_LINUX
 static int show_sids    = 0;
 static int show_scontext = 0;
@@ -756,6 +756,7 @@ main (int argc, char **argv)
   pid_t pid, highlight;
   char termcap_area[1024];
   int c;
+  char *tmpstr;
 
   if (ioctl (1, TIOCGWINSZ, &winsz) >= 0)
     if (winsz.ws_col)
@@ -766,6 +767,13 @@ main (int argc, char **argv)
   
   setlocale(LC_ALL, "");
   
+  if ( (tmpstr = strrchr(argv[0],'/'))) {
+    tmpstr++;
+    if (strcmp(tmpstr, "pstree.x11") ==0)
+      wait_end=1;
+  }
+
+
 #ifdef FLASK_LINUX
   while ((c = getopt (argc, argv, "acGhH:npluUVsx")) != EOF)
 #else  /*FLASK_LINUX*/
@@ -874,5 +882,10 @@ main (int argc, char **argv)
 	  return 1;
 	}
     }
+  if (wait_end == 1) {
+    fprintf(stderr, "Press return to close\n");
+    (void)getchar();
+  }
+
   return 0;
 }

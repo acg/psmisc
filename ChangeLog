@@ -5,6 +5,8 @@ not yet released Craig Small <csmall@small.dropbear.id.au>
 	* fuser -ki now tells user default is N Closes Debian: #197356
 	* pstree -a doesn't print space at end of line Closes Debian: #182099
 	* Works with new sort flags +2 -> -k 3 Thankyou Andrew Walrond
+	* pstree.x11 now just pstree with a trick Closes Debian: #201042
+	* Icons for pstree, thankyou Tatlin! Closes Debian: #192636
 
 Changes in 21.3
 ===============
