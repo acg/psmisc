@@ -1,3 +1,6 @@
+Changes in 20.2
+ - Added NLS/gettext
+
 Changes in 20.1 (31-MAR-2001)
 =============================
  - command line -<num> put back in.

@@ -16,6 +16,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <getopt.h>
+#include <libintl.h>
 
 #include "comm.h"
 #include "signals.h"
@@ -36,7 +37,7 @@ ask (char *name, pid_t pid)
 
   do
     {
-      printf ("Kill %s(%s%d) ? (y/n) ", name, process_group ? "pgid " : "",
+      printf (_("Kill %s(%s%d) ? (y/n) "), name, process_group ? "pgid " : "",
 	      pid);
       fflush (stdout);
       do
@@ -183,7 +184,7 @@ kill_all (int signal, int names, char **namelist)
 	  if (exact && !okay)
 	    {
 	      if (verbose)
-		fprintf (stderr, "skipping partial match %s(%d)\n", comm,
+		fprintf (stderr, _("skipping partial match %s(%d)\n"), comm,
 			 pid_table[i]);
 	      continue;
 	    }
@@ -243,7 +244,7 @@ kill_all (int signal, int names, char **namelist)
 	  else if (kill (process_group ? -id : id, signal) >= 0)
 	    {
 	      if (verbose)
-		fprintf (stderr, "Killed %s(%s%d) with signal %d\n", got_long ? command :
+		fprintf (stderr, _("Killed %s(%s%d) with signal %d\n"), got_long ? command :
 			 comm, process_group ? "pgid " : "", id, signal);
 	      found |= 1 << j;
 	      pid_killed[pids_killed++] = id;
@@ -255,13 +256,13 @@ kill_all (int signal, int names, char **namelist)
     }
   if (empty)
     {
-      fprintf (stderr, PROC_BASE " is empty (not mounted ?)\n");
+      fprintf (stderr, _("%s is empty (not mounted ?)\n"), PROC_BASE);
       exit (1);
     }
   if (!quiet && !pidof)
     for (i = 0; i < names; i++)
       if (!(found & (1 << i)))
-	fprintf (stderr, "%s: no process killed\n", namelist[i]);
+	fprintf (stderr, _("%s: no process killed\n"), namelist[i]);
   if (pidof)
     putchar ('\n');
   error = found == ((1 << (names - 1)) | ((1 << (names - 1)) - 1)) ? 0 : 1;
@@ -436,7 +437,7 @@ main (int argc, char **argv)
 
   if (argc - myoptind > MAX_NAMES + 1)
     {
-      fprintf (stderr, "Maximum number of names is %d\n", MAX_NAMES);
+      fprintf (stderr, _("Maximum number of names is %d\n"), MAX_NAMES);
       exit (1);
     }
   argv = argv + myoptind;
