@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 20.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-25 14:55+1100\n"
+"POT-Creation-Date: 2005-02-23 11:52+1100\n"
 "PO-Revision-Date: 2002-04-12 21:33+1000\n"
 "Last-Translator: Marc Léger <sorata@users.sourceforge.net>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -29,7 +29,7 @@ msgstr "Ignore la correspondance partielle %s(%d)\n"
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Tué %s(%s%d) avec le signal %d\n"
 
-#: src/killall.c:351 src/fuser.c:493 src/pstree.c:674
+#: src/killall.c:351 src/fuser.c:494 src/pstree.c:673
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s est vide (non monté ?)\n"
@@ -90,14 +90,14 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/killall.c:444 src/fuser.c:993 src/pstree.c:744
+#: src/killall.c:444 src/fuser.c:989 src/pstree.c:743
 #, c-format
 msgid ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
 
-#: src/killall.c:446 src/fuser.c:995 src/pstree.c:746
+#: src/killall.c:446 src/fuser.c:991 src/pstree.c:745
 #, fuzzy, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -119,75 +119,75 @@ msgstr ""
 msgid "%s: SID (%s) must be numeric\n"
 msgstr ""
 
-#: src/killall.c:618
+#: src/killall.c:614
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Le nombre maximum de noms est %d\n"
 
-#: src/fuser.c:242
+#: src/fuser.c:243
 #, c-format
 msgid "-4 flag used but proc file %s is not readable\n"
 msgstr "drapeau -4 utilisé mais le fichier proc %s est illisible\n"
 
-#: src/fuser.c:251
+#: src/fuser.c:252
 #, c-format
 msgid "-6 flag used but proc file %s is not readable\n"
 msgstr "drapeau -6 utilisé mais le fichier proc %s est illisible\n"
 
-#: src/fuser.c:596
+#: src/fuser.c:592
 #, fuzzy, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Tuer le processus %d ? (y/n) "
 
-#: src/fuser.c:630
+#: src/fuser.c:626
 #, c-format
 msgid "kill %d"
 msgstr "tuer %d"
 
-#: src/fuser.c:634 src/fuser.c:638
+#: src/fuser.c:630 src/fuser.c:634
 #, c-format
 msgid "No automatic removal. Please use  umount %s\n"
 msgstr "Pas de démontage automatique. Utiliser SVP  umount %s\n"
 
-#: src/fuser.c:642
+#: src/fuser.c:638
 #, c-format
 msgid "No automatic removal. Please use  swapoff %s\n"
 msgstr ""
 "Pas de démontage automatique du fichier d'échange. Utiliser SVP  swapoff %s\n"
 
-#: src/fuser.c:665
+#: src/fuser.c:661
 #, c-format
 msgid ""
 "\n"
 "%*s USER        PID ACCESS COMMAND\n"
 msgstr ""
 
-#: src/fuser.c:756
+#: src/fuser.c:752
 #, c-format
 msgid "Internal error (type %d)\n"
 msgstr "Erreur interne (type %d)\n"
 
-#: src/fuser.c:794
+#: src/fuser.c:790
 #, c-format
 msgid "kernel mount  "
 msgstr "montage du noyau   "
 
-#: src/fuser.c:797
+#: src/fuser.c:793
 #, c-format
 msgid "kernel loop   "
 msgstr "boucle du noyau   "
 
-#: src/fuser.c:800
+#: src/fuser.c:796
 #, c-format
 msgid "kernel swap   "
 msgstr "fichier d'échange du noyau   "
 
-#: src/fuser.c:956
+#: src/fuser.c:952
 #, c-format
 msgid "can't find sockets' device number"
 msgstr "ne peut pas trouver le numéro du périphérique des sockets"
 
-#: src/fuser.c:965
+#: src/fuser.c:961
 #, fuzzy, c-format
 msgid ""
 "usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -239,27 +239,27 @@ msgstr ""
 "  noms udp/tcp: [port_local][,[hôte_distant][,[port_distant]]]\n"
 "\n"
 
-#: src/fuser.c:991
+#: src/fuser.c:987
 #, c-format
 msgid "fuser (psmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/fuser.c:1177
+#: src/fuser.c:1173
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
 msgstr "ignore -m dans l'espace de noms \"%s\"\n"
 
-#: src/fuser.c:1185
+#: src/fuser.c:1181
 #, fuzzy, c-format
 msgid "%s/%s: invalid specification\n"
 msgstr "%s/%s: spécification invalide\n"
 
-#: src/pstree.c:378
+#: src/pstree.c:377
 #, c-format
 msgid "MAX_DEPTH not big enough.\n"
 msgstr ""
 
-#: src/pstree.c:714
+#: src/pstree.c:713
 #, c-format
 msgid ""
 "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -278,14 +278,14 @@ msgid ""
 "    -u     show uid transitions\n"
 msgstr ""
 
-#: src/pstree.c:729
+#: src/pstree.c:728
 #, c-format
 msgid ""
 "    -s     show Flask SIDs\n"
 "    -x     show Flask security contexts\n"
 msgstr ""
 
-#: src/pstree.c:733
+#: src/pstree.c:732
 #, c-format
 msgid ""
 "    -U     use UTF-8 (Unicode) line drawing characters\n"
@@ -295,32 +295,32 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/pstree.c:742
+#: src/pstree.c:741
 #, fuzzy, c-format
 msgid "pstree (psmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/pstree.c:836
+#: src/pstree.c:835
 #, c-format
 msgid "TERM is not set\n"
 msgstr ""
 
-#: src/pstree.c:841
+#: src/pstree.c:840
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr ""
 
-#: src/pstree.c:885
+#: src/pstree.c:884
 #, c-format
 msgid "No such user name: %s\n"
 msgstr ""
 
-#: src/pstree.c:901
+#: src/pstree.c:900
 #, c-format
 msgid "No processes found.\n"
 msgstr ""
 
-#: src/pstree.c:906
+#: src/pstree.c:905
 #, c-format
 msgid "Press return to close\n"
 msgstr ""

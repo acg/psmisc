@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 21.6cvs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-25 14:55+1100\n"
+"POT-Creation-Date: 2005-02-23 11:52+1100\n"
 "PO-Revision-Date: 2004-12-08 12:46+0100\n"
 "Last-Translator: Guillem Jover <guillem@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -30,7 +30,7 @@ msgstr "s'evitarà la coincidència parcial %s(%d)\n"
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "S'ha matat %s(%s%d) amb el senyal %d\n"
 
-#: src/killall.c:351 src/fuser.c:493 src/pstree.c:674
+#: src/killall.c:351 src/fuser.c:494 src/pstree.c:673
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s és buit (no s'ha muntat?)\n"
@@ -118,7 +118,7 @@ msgstr ""
 "   (-s, -c són mútuament excloents i han de precedir altres arguments)\n"
 "\n"
 
-#: src/killall.c:444 src/fuser.c:993 src/pstree.c:744
+#: src/killall.c:444 src/fuser.c:989 src/pstree.c:743
 #, c-format
 msgid ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
@@ -127,7 +127,7 @@ msgstr ""
 "Copyright (C) 1993-2002 Werner Almesberger i Craig Small\n"
 "\n"
 
-#: src/killall.c:446 src/fuser.c:995 src/pstree.c:746
+#: src/killall.c:446 src/fuser.c:991 src/pstree.c:745
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -146,42 +146,42 @@ msgstr ""
 msgid "%s: SID (%s) must be numeric\n"
 msgstr "%s: el SID (%s) ha de ser numèric\n"
 
-#: src/killall.c:618
+#: src/killall.c:614
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "El nombre màxim de noms és %d\n"
 
-#: src/fuser.c:242
+#: src/fuser.c:243
 #, c-format
 msgid "-4 flag used but proc file %s is not readable\n"
 msgstr "s'ha usat l'argument -4 però el fitxer proc %s no s'ha pogut llegir\n"
 
-#: src/fuser.c:251
+#: src/fuser.c:252
 #, c-format
 msgid "-6 flag used but proc file %s is not readable\n"
 msgstr "s'ha usat l'argument -6 però el fitxer proc %s no s'ha pogut llegir\n"
 
-#: src/fuser.c:596
+#: src/fuser.c:592
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Voleu matar el procés %d? (s/N)"
 
-#: src/fuser.c:630
+#: src/fuser.c:626
 #, c-format
 msgid "kill %d"
 msgstr "mata %d"
 
-#: src/fuser.c:634 src/fuser.c:638
+#: src/fuser.c:630 src/fuser.c:634
 #, c-format
 msgid "No automatic removal. Please use  umount %s\n"
 msgstr "No s'eliminarà automàticament. Si us plau useu «umount %s»\n"
 
-#: src/fuser.c:642
+#: src/fuser.c:638
 #, c-format
 msgid "No automatic removal. Please use  swapoff %s\n"
 msgstr "No s'eliminarà automàticament. Si us plau useu «swapoff %s»\n"
 
-#: src/fuser.c:665
+#: src/fuser.c:661
 #, c-format
 msgid ""
 "\n"
@@ -190,32 +190,32 @@ msgstr ""
 "\n"
 "%*s USUARI      PID ACCÉS  ORDRE\n"
 
-#: src/fuser.c:756
+#: src/fuser.c:752
 #, c-format
 msgid "Internal error (type %d)\n"
 msgstr "Error intern (tipus %d)\n"
 
-#: src/fuser.c:794
+#: src/fuser.c:790
 #, c-format
 msgid "kernel mount  "
 msgstr "muntatge de nucli "
 
-#: src/fuser.c:797
+#: src/fuser.c:793
 #, c-format
 msgid "kernel loop   "
 msgstr "bucle de nucli "
 
-#: src/fuser.c:800
+#: src/fuser.c:796
 #, c-format
 msgid "kernel swap   "
 msgstr "intercanvi de nucli "
 
-#: src/fuser.c:956
+#: src/fuser.c:952
 #, c-format
 msgid "can't find sockets' device number"
 msgstr "no s'ha pogut trobar el nombre de dispositiu del sòcol"
 
-#: src/fuser.c:965
+#: src/fuser.c:961
 #, c-format
 msgid ""
 "usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -269,27 +269,27 @@ msgstr ""
 "  noms udp/tcp: [port_local][,[hoste_remot][,[port_remot]]]\n"
 "\n"
 
-#: src/fuser.c:991
+#: src/fuser.c:987
 #, c-format
 msgid "fuser (psmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/fuser.c:1177
+#: src/fuser.c:1173
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
 msgstr "s'està ignorant -m en l'espai de noms «%s»\n"
 
-#: src/fuser.c:1185
+#: src/fuser.c:1181
 #, c-format
 msgid "%s/%s: invalid specification\n"
 msgstr "%s/%s: especificació no vàlida\n"
 
-#: src/pstree.c:378
+#: src/pstree.c:377
 #, c-format
 msgid "MAX_DEPTH not big enough.\n"
 msgstr "MAX_DEPTH no és prou gran.\n"
 
-#: src/pstree.c:714
+#: src/pstree.c:713
 #, c-format
 msgid ""
 "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -307,7 +307,8 @@ msgid ""
 "    -p     show PIDs; implies -c\n"
 "    -u     show uid transitions\n"
 msgstr ""
-"Forma d'ús: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+"Forma d'ús: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -"
+"u ]\n"
 "                   [ -A | -G | -U ] [ pid | usuari ]\n"
 "            pstree -V\n"
 "\n"
@@ -322,7 +323,7 @@ msgstr ""
 "    -p     mostra els PID; implica -c\n"
 "    -u     mostra transicions de uid\n"
 
-#: src/pstree.c:729
+#: src/pstree.c:728
 #, c-format
 msgid ""
 "    -s     show Flask SIDs\n"
@@ -331,7 +332,7 @@ msgstr ""
 "    -s     mostra els SID de Flask\n"
 "    -x     mostra els contextes de seguretat de Flask\n"
 
-#: src/pstree.c:733
+#: src/pstree.c:732
 #, c-format
 msgid ""
 "    -U     use UTF-8 (Unicode) line drawing characters\n"
@@ -346,32 +347,32 @@ msgstr ""
 "    user   només mostra arbres amb arrel en processos d'aquest usuari\n"
 "\n"
 
-#: src/pstree.c:742
+#: src/pstree.c:741
 #, c-format
 msgid "pstree (psmisc) %s\n"
 msgstr "pstree (psmisc) %s\n"
 
-#: src/pstree.c:836
+#: src/pstree.c:835
 #, c-format
 msgid "TERM is not set\n"
 msgstr "TERM no està especificada\n"
 
-#: src/pstree.c:841
+#: src/pstree.c:840
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "No s'han pogut obtenir les capacitats\n"
 
-#: src/pstree.c:885
+#: src/pstree.c:884
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "No existeix aquest nom d'usuari: %s\n"
 
-#: src/pstree.c:901
+#: src/pstree.c:900
 #, c-format
 msgid "No processes found.\n"
 msgstr "No s'han trobat processos.\n"
 
-#: src/pstree.c:906
+#: src/pstree.c:905
 #, c-format
 msgid "Press return to close\n"
 msgstr "Premeu retorn per a tancar\n"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 21.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-25 14:55+1100\n"
+"POT-Creation-Date: 2005-02-23 11:52+1100\n"
 "PO-Revision-Date: 2004-10-29 15:14+0300\n"
 "Last-Translator: Lars Wirzenius <liw@iki.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -31,7 +31,7 @@ msgstr "ohitan osittaisen osuman %s(%d)\n"
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Prosessi %s(%s%d) lopetettu signaalilla %d\n"
 
-#: src/killall.c:351 src/fuser.c:493 src/pstree.c:674
+#: src/killall.c:351 src/fuser.c:494 src/pstree.c:673
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s on tyhjä (ei liitetty?)\n"
@@ -92,7 +92,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/killall.c:444 src/fuser.c:993 src/pstree.c:744
+#: src/killall.c:444 src/fuser.c:989 src/pstree.c:743
 #, c-format
 msgid ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
@@ -101,7 +101,7 @@ msgstr ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
 "\n"
 
-#: src/killall.c:446 src/fuser.c:995 src/pstree.c:746
+#: src/killall.c:446 src/fuser.c:991 src/pstree.c:745
 #, fuzzy, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -123,74 +123,74 @@ msgstr ""
 msgid "%s: SID (%s) must be numeric\n"
 msgstr ""
 
-#: src/killall.c:618
+#: src/killall.c:614
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Suurin sallittu määrä nimiä on %d\n"
 
-#: src/fuser.c:242
+#: src/fuser.c:243
 #, c-format
 msgid "-4 flag used but proc file %s is not readable\n"
 msgstr "optio -4 käytössä mutta proc-tiedosto %s ei ole luettavissa\n"
 
-#: src/fuser.c:251
+#: src/fuser.c:252
 #, c-format
 msgid "-6 flag used but proc file %s is not readable\n"
 msgstr "optio -6 käytössä mutta proc-tiedosto %s ei ole luettavissa\n"
 
-#: src/fuser.c:596
+#: src/fuser.c:592
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Lopeta prosess %d? (y=kyllä, N=ei) "
 
-#: src/fuser.c:630
+#: src/fuser.c:626
 #, c-format
 msgid "kill %d"
 msgstr "lopeta %d"
 
-#: src/fuser.c:634 src/fuser.c:638
+#: src/fuser.c:630 src/fuser.c:634
 #, c-format
 msgid "No automatic removal. Please use  umount %s\n"
 msgstr "Ei automaattista poistoa. Poista liitos %s\n"
 
-#: src/fuser.c:642
+#: src/fuser.c:638
 #, c-format
 msgid "No automatic removal. Please use  swapoff %s\n"
 msgstr "Ei automaattista poistoa. Käytä  swapoff %s\n"
 
-#: src/fuser.c:665
+#: src/fuser.c:661
 #, c-format
 msgid ""
 "\n"
 "%*s USER        PID ACCESS COMMAND\n"
 msgstr ""
 
-#: src/fuser.c:756
+#: src/fuser.c:752
 #, c-format
 msgid "Internal error (type %d)\n"
 msgstr "Sisäinen virhe (tyyppiä %d)\n"
 
-#: src/fuser.c:794
+#: src/fuser.c:790
 #, c-format
 msgid "kernel mount  "
 msgstr "kernel mount  "
 
-#: src/fuser.c:797
+#: src/fuser.c:793
 #, c-format
 msgid "kernel loop   "
 msgstr "kernel loop   "
 
-#: src/fuser.c:800
+#: src/fuser.c:796
 #, c-format
 msgid "kernel swap   "
 msgstr "kernel swap   "
 
-#: src/fuser.c:956
+#: src/fuser.c:952
 #, c-format
 msgid "can't find sockets' device number"
 msgstr "pistokkeen laitenumeroa ei löydy"
 
-#: src/fuser.c:965
+#: src/fuser.c:961
 #, fuzzy, c-format
 msgid ""
 "usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -244,27 +244,27 @@ msgstr ""
 "  udp/tcp-nimet: [paikallinen_portti][,[etäkone][,[etäkone]]]\n"
 "\n"
 
-#: src/fuser.c:991
+#: src/fuser.c:987
 #, c-format
 msgid "fuser (psmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/fuser.c:1177
+#: src/fuser.c:1173
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
 msgstr "optio -m merkityksetön nimiavaruudessa \"%s\"\n"
 
-#: src/fuser.c:1185
+#: src/fuser.c:1181
 #, fuzzy, c-format
 msgid "%s/%s: invalid specification\n"
 msgstr "%s/%s: epäkelpo määrittely\n"
 
-#: src/pstree.c:378
+#: src/pstree.c:377
 #, c-format
 msgid "MAX_DEPTH not big enough.\n"
 msgstr "MAX_DEPTH-vakio on liian pieni.\n"
 
-#: src/pstree.c:714
+#: src/pstree.c:713
 #, c-format
 msgid ""
 "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -283,14 +283,14 @@ msgid ""
 "    -u     show uid transitions\n"
 msgstr ""
 
-#: src/pstree.c:729
+#: src/pstree.c:728
 #, fuzzy, c-format
 msgid ""
 "    -s     show Flask SIDs\n"
 "    -x     show Flask security contexts\n"
 msgstr "    -x     näytä Flask-kontekstit\n"
 
-#: src/pstree.c:733
+#: src/pstree.c:732
 #, c-format
 msgid ""
 "    -U     use UTF-8 (Unicode) line drawing characters\n"
@@ -300,32 +300,32 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/pstree.c:742
+#: src/pstree.c:741
 #, c-format
 msgid "pstree (psmisc) %s\n"
 msgstr "pstree (psmisc) %s\n"
 
-#: src/pstree.c:836
+#: src/pstree.c:835
 #, c-format
 msgid "TERM is not set\n"
 msgstr "TERM ei ole asetettu\n"
 
-#: src/pstree.c:841
+#: src/pstree.c:840
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "Päätteen ominaisuudet eivät ole selvillä\n"
 
-#: src/pstree.c:885
+#: src/pstree.c:884
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "Käyttäjätunnus puuttuu: %s\n"
 
-#: src/pstree.c:901
+#: src/pstree.c:900
 #, c-format
 msgid "No processes found.\n"
 msgstr "Prosesseja ei löydy.\n"
 
-#: src/pstree.c:906
+#: src/pstree.c:905
 #, c-format
 msgid "Press return to close\n"
 msgstr "Enter-näppäin sulkee\n"
