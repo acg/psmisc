@@ -137,6 +137,11 @@ Accesses by the kernel are only shown with the \fB-v\fP option.
 .PP
 The \fB-k\fP option only works on processes. If the user is the kernel,
 \fBfuser\fP will print an advice, but take no action beyond that.
+.SH BUGS
+.PP
+fuser -m /dev/sgX will show (or kill with the -k flag) all processes, even
+if you don't have that device configured. There may be other devices it 
+does this for too.
 .SH AUTHOR
 Werner Almesberger <Werner.Almesberger@epfl.ch>
 .SH "SEE ALSO"

@@ -54,7 +54,7 @@ m4trace:configure.in:2: -1- AC_SUBST([LIBS])
 m4trace:configure.in:3: -1- AC_CONFIG_HEADERS([config.h], [# update the timestamp
 echo timestamp >"AS_ESCAPE(_AM_DIRNAME(config.h))/stamp-h1"
 ])
-m4trace:configure.in:4: -1- AM_INIT_AUTOMAKE([psmisc], [21.3cvs])
+m4trace:configure.in:4: -1- AM_INIT_AUTOMAKE([psmisc], [21.4cvs])
 m4trace:configure.in:4: -1- AC_PROG_INSTALL
 m4trace:configure.in:4: -1- AC_SUBST([INSTALL_PROGRAM])
 m4trace:configure.in:4: -1- AC_SUBST([INSTALL_SCRIPT])
@@ -117,40 +117,20 @@ m4trace:configure.in:9: -1- AC_SUBST([host], [$ac_cv_host])
 m4trace:configure.in:9: -1- AC_SUBST([host_cpu], [`echo $ac_cv_host | sed 's/^\([[^-]]*\)-\([[^-]]*\)-\(.*\)$/\1/'`])
 m4trace:configure.in:9: -1- AC_SUBST([host_vendor], [`echo $ac_cv_host | sed 's/^\([[^-]]*\)-\([[^-]]*\)-\(.*\)$/\2/'`])
 m4trace:configure.in:9: -1- AC_SUBST([host_os], [`echo $ac_cv_host | sed 's/^\([[^-]]*\)-\([[^-]]*\)-\(.*\)$/\3/'`])
+m4trace:configure.in:9: -1- AC_SUBST([EGREP])
 m4trace:configure.in:9: -1- AC_PROG_LN_S
 m4trace:configure.in:9: -1- AC_SUBST([LN_S], [$as_ln_s])
 m4trace:configure.in:9: -1- AC_SUBST([ECHO])
+m4trace:configure.in:9: -1- AC_SUBST([AR])
+m4trace:configure.in:9: -1- AC_SUBST([ac_ct_AR])
 m4trace:configure.in:9: -1- AC_SUBST([RANLIB])
 m4trace:configure.in:9: -1- AC_SUBST([ac_ct_RANLIB])
 m4trace:configure.in:9: -1- AC_SUBST([STRIP])
 m4trace:configure.in:9: -1- AC_SUBST([ac_ct_STRIP])
-m4trace:configure.in:9: -1- AC_CHECK_LIB([dld], [shl_load], [lt_cv_dlopen="shl_load" lt_cv_dlopen_libs="-dld"], [AC_CHECK_FUNC([dlopen],
-	      [lt_cv_dlopen="dlopen"],
-	  [AC_CHECK_LIB([dl], [dlopen],
-	        [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-ldl"],
-	    [AC_CHECK_LIB([svld], [dlopen],
-	          [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-lsvld"],
-	      [AC_CHECK_LIB([dld], [dld_link],
-	            [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
-	      ])
-	    ])
-	  ])
-	])
-m4trace:configure.in:9: -1- AC_CHECK_LIB([dl], [dlopen], [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-ldl"], [AC_CHECK_LIB([svld], [dlopen],
-	          [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-lsvld"],
-	      [AC_CHECK_LIB([dld], [dld_link],
-	            [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
-	      ])
-	    ])
-m4trace:configure.in:9: -1- AC_CHECK_LIB([svld], [dlopen], [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-lsvld"], [AC_CHECK_LIB([dld], [dld_link],
-	            [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
-	      ])
-m4trace:configure.in:9: -1- AC_CHECK_LIB([dld], [dld_link], [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
 m4trace:configure.in:9: -1- AC_CHECK_HEADERS([dlfcn.h])
 m4trace:configure.in:9: -1- AH_OUTPUT([HAVE_DLFCN_H], [/* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H])
 m4trace:configure.in:9: -1- AC_HEADER_STDC
-m4trace:configure.in:9: -1- AC_SUBST([EGREP])
 m4trace:configure.in:9: -1- AC_DEFINE_TRACE_LITERAL([STDC_HEADERS])
 m4trace:configure.in:9: -1- AH_OUTPUT([STDC_HEADERS], [/* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS])
@@ -174,6 +154,103 @@ m4trace:configure.in:9: -1- AH_OUTPUT([HAVE_STDINT_H], [/* Define to 1 if you ha
 #undef HAVE_STDINT_H])
 m4trace:configure.in:9: -1- AH_OUTPUT([HAVE_UNISTD_H], [/* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([dl], [dlopen], [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-ldl"], [
+    lt_cv_dlopen="dyld"
+    lt_cv_dlopen_libs=
+    lt_cv_dlopen_self=yes
+    ])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([dld], [shl_load], [lt_cv_dlopen="shl_load" lt_cv_dlopen_libs="-dld"], [AC_CHECK_FUNC([dlopen],
+	      [lt_cv_dlopen="dlopen"],
+	  [AC_CHECK_LIB([dl], [dlopen],
+		[lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-ldl"],
+	    [AC_CHECK_LIB([svld], [dlopen],
+		  [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-lsvld"],
+	      [AC_CHECK_LIB([dld], [dld_link],
+		    [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
+	      ])
+	    ])
+	  ])
+	])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([dl], [dlopen], [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-ldl"], [AC_CHECK_LIB([svld], [dlopen],
+		  [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-lsvld"],
+	      [AC_CHECK_LIB([dld], [dld_link],
+		    [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
+	      ])
+	    ])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([svld], [dlopen], [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-lsvld"], [AC_CHECK_LIB([dld], [dld_link],
+		    [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
+	      ])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([dld], [dld_link], [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
+m4trace:configure.in:9: -1- AC_PROG_CXX
+m4trace:configure.in:9: -1- AC_SUBST([CXX])
+m4trace:configure.in:9: -1- AC_SUBST([CXXFLAGS])
+m4trace:configure.in:9: -1- AC_SUBST([LDFLAGS])
+m4trace:configure.in:9: -1- AC_SUBST([CPPFLAGS])
+m4trace:configure.in:9: -1- AC_SUBST([CXX])
+m4trace:configure.in:9: -1- AC_SUBST([ac_ct_CXX])
+m4trace:configure.in:9: -1- AC_SUBST([CXXDEPMODE])
+m4trace:configure.in:9: -1- AC_SUBST([CXXCPP])
+m4trace:configure.in:9: -1- AC_SUBST([CPPFLAGS])
+m4trace:configure.in:9: -1- AC_SUBST([CXXCPP])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([dl], [dlopen], [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-ldl"], [
+    lt_cv_dlopen="dyld"
+    lt_cv_dlopen_libs=
+    lt_cv_dlopen_self=yes
+    ])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([dld], [shl_load], [lt_cv_dlopen="shl_load" lt_cv_dlopen_libs="-dld"], [AC_CHECK_FUNC([dlopen],
+	      [lt_cv_dlopen="dlopen"],
+	  [AC_CHECK_LIB([dl], [dlopen],
+		[lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-ldl"],
+	    [AC_CHECK_LIB([svld], [dlopen],
+		  [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-lsvld"],
+	      [AC_CHECK_LIB([dld], [dld_link],
+		    [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
+	      ])
+	    ])
+	  ])
+	])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([dl], [dlopen], [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-ldl"], [AC_CHECK_LIB([svld], [dlopen],
+		  [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-lsvld"],
+	      [AC_CHECK_LIB([dld], [dld_link],
+		    [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
+	      ])
+	    ])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([svld], [dlopen], [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-lsvld"], [AC_CHECK_LIB([dld], [dld_link],
+		    [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
+	      ])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([dld], [dld_link], [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
+m4trace:configure.in:9: -1- AC_SUBST([F77])
+m4trace:configure.in:9: -1- AC_SUBST([FFLAGS])
+m4trace:configure.in:9: -1- AC_SUBST([LDFLAGS])
+m4trace:configure.in:9: -1- AC_SUBST([F77])
+m4trace:configure.in:9: -1- AC_SUBST([ac_ct_F77])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([dl], [dlopen], [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-ldl"], [
+    lt_cv_dlopen="dyld"
+    lt_cv_dlopen_libs=
+    lt_cv_dlopen_self=yes
+    ])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([dld], [shl_load], [lt_cv_dlopen="shl_load" lt_cv_dlopen_libs="-dld"], [AC_CHECK_FUNC([dlopen],
+	      [lt_cv_dlopen="dlopen"],
+	  [AC_CHECK_LIB([dl], [dlopen],
+		[lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-ldl"],
+	    [AC_CHECK_LIB([svld], [dlopen],
+		  [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-lsvld"],
+	      [AC_CHECK_LIB([dld], [dld_link],
+		    [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
+	      ])
+	    ])
+	  ])
+	])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([dl], [dlopen], [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-ldl"], [AC_CHECK_LIB([svld], [dlopen],
+		  [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-lsvld"],
+	      [AC_CHECK_LIB([dld], [dld_link],
+		    [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
+	      ])
+	    ])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([svld], [dlopen], [lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-lsvld"], [AC_CHECK_LIB([dld], [dld_link],
+		    [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
+	      ])
+m4trace:configure.in:9: -1- AC_CHECK_LIB([dld], [dld_link], [lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-dld"])
 m4trace:configure.in:9: -1- AC_SUBST([LIBTOOL])
 m4trace:configure.in:12: -1- AC_SUBST([FLASK_LINUX])
 m4trace:configure.in:14: -2- AC_DEFINE_TRACE_LITERAL([FLASK_LINUX])
@@ -329,6 +406,7 @@ m4trace:configure.in:55: -1- AH_OUTPUT([INO_T_IS_LONG_LONG], [/* Define to 1 if 
 #undef INO_T_IS_LONG_LONG])
 m4trace:configure.in:61: -1- AM_GNU_GETTEXT([external])
 m4trace:configure.in:61: -1- AC_SUBST([MKINSTALLDIRS])
+m4trace:configure.in:61: -1- AC_SUBST([USE_NLS])
 m4trace:configure.in:61: -1- AC_SUBST([MSGFMT])
 m4trace:configure.in:61: -1- AC_SUBST([GMSGFMT], [$ac_cv_path_GMSGFMT])
 m4trace:configure.in:61: -1- AC_SUBST([XGETTEXT])

@@ -591,7 +591,7 @@ ask (pid_t pid)
 
   fflush (stdout);
   do {
-    fprintf (stderr, _("Kill process %d ? (y/n) "), pid);
+    fprintf (stderr, _("Kill process %d ? (y/N) "), pid);
     fflush (stderr);
     do {
       if ((ch = getchar ()) == EOF)

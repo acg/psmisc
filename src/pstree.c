@@ -450,7 +450,8 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
     {
       for (i = 0; i < current->argc; i++)
 	{
-	  out_char (' ');
+      if (i < current->argc-1) /* Space between words but not at the end of last */
+	    out_char (' '); 
 	  len = 0;
 	  for (here = current->argv[i]; *here; here++)
 	    len += *here > ' ' && *here <= '~' ? 1 : 4;

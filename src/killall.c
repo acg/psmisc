@@ -38,7 +38,7 @@
 
 
 static int verbose = 0, exact = 0, interactive = 0, quiet =
-  0, wait_until_dead = 0, process_group = 0, pidof;
+  0, wait_until_dead = 0, process_group = 0, user = 0, pidof;
 
 
 static int
@@ -64,6 +64,99 @@ ask (char *name, pid_t pid)
   return ch == 'y' || ch == 'Y';
 }
 
+#define MAX_PATHNAME  (NAME_MAX * 2 + 14 + 1)
+#define MAX_TESTPATH  (NAME_MAX + 14 + 1)
+int getuserprocs(int mysignal, int names, char **namelist)
+{ 
+	int i;
+	int j;
+	int waitpid = 0;
+	DIR *dir;
+	pid_t pidkilled;
+	pid_t* killedarray;
+	struct dirent *de;
+	char pathname[MAX_PATHNAME + 1];
+	char testpath[MAX_TESTPATH + 1 ]; /* /proc//environ\0 15 chars */
+	struct stat statbuf;
+	int maxnum = 100;
+	char answer;
+	
+	if(!namelist) exit(1);
+	if(!(killedarray = malloc( 100 * sizeof(pid_t) )))
+	{
+		perror("malloc");
+		exit(1);
+	}
+	for ( i = 0; i < names; i++)
+	{
+		if (exact) 
+		{
+                        for(j = 0; j < strlen(namelist[i]); j++)
+                        {
+                                if  ( (namelist[i][j] == '*')  || (namelist[i][j] =='?') )
+                                {
+                                        printf("Error, cannot match wildcards in exact mode\n");
+                                        exit(1);
+                                }
+                        } 
+		}
+		if (!(dir = opendir (PROC_BASE)))
+		{	
+			perror (PROC_BASE);
+			exit (1);
+		} 
+		while ( (de = readdir(dir)) !=  NULL)
+		{
+			snprintf(testpath, NAME_MAX+14, "/proc/%s/environ", de->d_name);
+			if (!stat(testpath, &statbuf) )
+			{
+				if(S_ISREG(statbuf.st_mode) )
+				{
+					sprintf(pathname, "cat /proc/%s/environ | grep LOGNAME=%s > /dev/null ", de->d_name, namelist[i]); 
+					if ( system (pathname) == 0) 
+					{
+						pidkilled = (pid_t)atoi(de->d_name);
+						killedarray[waitpid++] = pidkilled;
+						if ( waitpid == maxnum)
+						{
+							maxnum *= 2;
+							if (!(killedarray = realloc(killedarray, maxnum * sizeof(pid_t))))
+							{
+								perror("realloc");
+								exit(1);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	closedir(dir);
+	for (i = 0; i < waitpid; i++)
+	{
+		if (interactive)
+		{
+			printf("Kill %d (y/n)?", (int)killedarray[i]);	
+			scanf("%s", &answer);
+		}     
+		if ( ( (interactive) && ( (answer == 'y') || (answer == 'Y') ) ) || !(interactive) )
+		{		
+			if(kill (process_group? -killedarray[i]: killedarray[i], mysignal ) == 0)
+			{
+				if(verbose) printf("Pid %d killed with signal %d\n",  (int)killedarray[i], mysignal);
+				if(wait_until_dead)
+				{
+					kill(process_group? -killedarray[i]: killedarray[i], mysignal);
+					sleep(1);                                                       
+               		        }
+
+			}   
+		}  
+	} 
+	free(killedarray);
+	return 0;	
+	
+}
 #ifdef FLASK_LINUX
 static int
 kill_all(int signal, int names, char **namelist, security_id_t sid )

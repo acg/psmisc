@@ -36,7 +36,7 @@ If the command name contains a slash (\fB/\fP), processes executing that
 particular file will be selected for killing, independent of their name.
 .PP
 \fBkillall\fP returns a zero return code if at least one process has been 
-killed for each ilisted command. \fBkillall\fP returns zero otherwise.
+killed for each listed command. \fBkillall\fP returns non-zero otherwise.
 .PP
 A \fBkillall\fP process never kills itself (but may kill other \fBkillall\fP
 processes).

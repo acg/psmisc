@@ -21,7 +21,7 @@ CLEANFILES = signames.h
 
 signames.h: signames.c
 		@CPP@ -dM $< |\
-		tr -s '\t ' ' ' | sort -n +2 | sed \
+		tr -s '\t ' ' ' | sort -n -k 3 | sed \
 	's:#define SIG\([A-Z]\+[0-9]*\) \([0-9]\+\) *\(\|/\*.*\)$$:{\
 \2,"\1" },:p;d' | \
 		  grep -v '[0-9][0-9][0-9]' >signames.h || \

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 1.0\n"
-"POT-Creation-Date: 2002-09-27 21:08+1000\n"
+"POT-Creation-Date: 2003-05-29 09:39+1000\n"
 "PO-Revision-Date: 2001-10-28 22:14-0200\n"
 "Last-Translator: Edesio Costa e Silva <edesio+psmisc@ieee.org>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
@@ -13,93 +13,93 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: src/killall.c:50
+#: src/killall.c:51
 #, c-format
 msgid "Kill %s(%s%d) ? (y/n) "
 msgstr "Termina %s(%s%d) ? (y/n) "
 
-#: src/killall.c:237
+#: src/killall.c:239
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "ignorando resultado parcial %s(%d)\n"
 
-#: src/killall.c:318
+#: src/killall.c:325
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Abortado %s(%s%d) com sinal %d\n"
 
-#: src/killall.c:330 src/fuser.c:491
+#: src/killall.c:337 src/fuser.c:496
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s está vazio (não está montado?)\n"
 
-#: src/killall.c:336
+#: src/killall.c:343
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: nenhum processo abortado\n"
 
-#: src/killall.c:576
+#: src/killall.c:588
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Número máximo de nomes é %d\n"
 
-#: src/fuser.c:243
+#: src/fuser.c:248
 #, c-format
 msgid "-4 flag used but proc file %s is not readable\n"
 msgstr "opção -4 utilizada mas o arquivo %s não pode ser lido\n"
 
-#: src/fuser.c:252
+#: src/fuser.c:257
 #, c-format
 msgid "-6 flag used but proc file %s is not readable\n"
 msgstr "opção -6 utilizada mas o arquivo %s não pode ser lido\n"
 
-#: src/fuser.c:589
+#: src/fuser.c:594
 #, c-format
 msgid "Kill process %d ? (y/n) "
 msgstr "Aborta processo %d ? (y/n) "
 
-#: src/fuser.c:619
+#: src/fuser.c:624
 #, c-format
 msgid "kill %d"
 msgstr "kill %d"
 
-#: src/fuser.c:623 src/fuser.c:627
+#: src/fuser.c:628 src/fuser.c:632
 #, c-format
 msgid "No automatic removal. Please use  umount %s\n"
 msgstr "Não pode ser automaticamente removido. Por favor, utilize  umount %s\n"
 
-#: src/fuser.c:631
+#: src/fuser.c:636
 #, c-format
 msgid "No automatic removal. Please use  swapoff %s\n"
 msgstr ""
 "Não pode ser automaticamente removido. Por favor, utilize  swapoff %s\n"
 
-#: src/fuser.c:734
+#: src/fuser.c:745
 #, c-format
 msgid "Internal error (type %d)\n"
 msgstr "Erro interno (tipo %d)\n"
 
-#: src/fuser.c:764
+#: src/fuser.c:775
 msgid "kernel mount  "
 msgstr "kernel mount  "
 
-#: src/fuser.c:767
+#: src/fuser.c:778
 msgid "kernel loop   "
 msgstr "kernel loop   "
 
-#: src/fuser.c:770
+#: src/fuser.c:781
 msgid "kernel swap   "
 msgstr "kernel swap   "
 
-#: src/fuser.c:790
+#: src/fuser.c:801
 msgid "No process references; use -v for the complete list\n"
 msgstr "Nenhuma referência a processo; utilize -v para uma listagem completa\n"
 
-#: src/fuser.c:928
+#: src/fuser.c:939
 msgid "can't find sockets' device number"
 msgstr "não pode achar o número de dispositivo do socket"
 
-#: src/fuser.c:937
+#: src/fuser.c:948
 msgid ""
 "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -151,12 +151,12 @@ msgstr ""
 "\"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\\n\"\n"
 "\"\\n\"\n"
 
-#: src/fuser.c:961
+#: src/fuser.c:972
 #, c-format
 msgid "fuser (psmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/fuser.c:963
+#: src/fuser.c:974
 #, fuzzy
 msgid ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
@@ -175,12 +175,12 @@ msgstr ""
 "Para maiores informações sobre estes assuntos, veja os arquivos com nome "
 "COPYING.\n"
 
-#: src/fuser.c:1141
+#: src/fuser.c:1152
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
 msgstr "ignorando opção -m no espaço de nomes \"%s\"\n"
 
-#: src/fuser.c:1149
+#: src/fuser.c:1160
 #, c-format
 msgid "%s/%s: invalid specificiation\n"
 msgstr "%s/%s: especificação invalida\n"
