@@ -2,6 +2,7 @@
 *.lo
 .deps
 .libs
+ABOUT-NLS
 INSTALL
 Makefile
 Makefile.in
@@ -27,4 +28,5 @@ missing
 mkinstalldirs
 psmisc-*.tar.gz
 stamp-h
+stamp-h1
 stamp-h.in 

@@ -1,4 +1,11 @@
 *.gmo
+*.sed
+*.sin
+*.header
+stamp-po
+Rules-quot
+Makevars.template
+Makefile.in.in
 Makefile.in
 Makefile
 POTFILES
