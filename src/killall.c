@@ -20,6 +20,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <getopt.h>
+#ifdef FLASK_LINUX
+#include <fs_secure.h>
+#include <ss.h>
+#endif /*FLASK_LINUX*/
 #include <libintl.h>
 #include <locale.h>
 #define _(String) gettext (String)
@@ -59,9 +63,13 @@ ask (char *name, pid_t pid)
   return ch == 'y' || ch == 'Y';
 }
 
-
+#ifdef FLASK_LINUX
+static int
+kill_all(int signal, int names, char **namelist, security_id_t sid )
+#else  /*FLASK_LINUX*/
 static int
 kill_all (int signal, int names, char **namelist)
+#endif /*FLASK_LINUX*/
 {
   DIR *dir;
   struct dirent *de;
@@ -76,23 +84,36 @@ kill_all (int signal, int names, char **namelist)
   int empty, i, j, okay, length, got_long, error;
   int pids, max_pids, pids_killed;
   unsigned long found;
+#ifdef FLASK_LINUX
+  security_id_t lsid;
+
+  if ( names == 0 || ! namelist ) exit( 1 ); /* do the obvious thing...*/
+#endif /*FLASK_LINUX*/
 
   if (!(name_len = malloc (sizeof (int) * names)))
     {
       perror ("malloc");
       exit (1);
     }
-  for (i = 0; i < names; i++)
+  for (i = 0; i < names; i++) {
     if (!strchr (namelist[i], '/'))
       {
 	sts[i].st_dev = 0;
 	name_len[i] = strlen (namelist[i]);
       }
+#ifdef FLASK_LINUX
+      else if (stat_secure(namelist[i],&sts[i], &lsid) < 0) {
+              perror(namelist[i]);
+              exit(1);
+          }
+#else  /*FLASK_LINUX*/
     else if (stat (namelist[i], &sts[i]) < 0)
       {
 	perror (namelist[i]);
 	exit (1);
       }
+#endif /*FLASK_LINUX*/
+   } 
   self = getpid ();
   found = 0;
   if (!(dir = opendir (PROC_BASE)))
@@ -233,14 +254,30 @@ kill_all (int signal, int names, char **namelist)
 	      else if (got_long ? strcmp (namelist[j], command) :
 		       strncmp (namelist[j], comm, COMM_LEN - 1))
 		continue;
+#ifdef FLASK_LINUX
+              if ( (int) sid > 0 ) {
+                if ( stat_secure(path, &st, &lsid) < 0 )
+                  continue;
+                if ( lsid != sid )
+                  continue;
+              }
+#endif /*FLASK_LINUX*/
 	    }
 	  else
 	    {
 	      if (asprintf (&path, PROC_BASE "/%d/exe", pid_table[i]) < 0)
 		continue;
+#ifdef FLASK_LINUX
+              if (stat_secure(path,&st,&lsid) < 0) continue;
+              if (sts[j].st_dev != st.st_dev ||
+                  sts[j].st_ino != st.st_ino ||
+                  ((int) sid > 0 && (lsid != sid)) )
+                  continue;
+#else  /*FLASK_LINUX*/
 	      if (stat (path, &st) < 0) {
 		free (path);
 		continue;
+#endif /*FLASK_LINUX*/
 	      }
 	      free (path);
 
@@ -339,7 +376,11 @@ usage_pidof (void)
 static void
 usage_killall (void)
 {
+#ifdef FLASK_LINUX
+  fprintf(stderr,"Usage: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n");
+#else  /*FLASK_LINUX*/
   fprintf (stderr, "usage: killall [ OPTIONS ] [ -- ] name ...\n");
+#endif /*FLASK_LINUX*/
   fprintf (stderr, "       killall -l, --list\n");
   fprintf (stderr, "       killall -V --version\n\n");
   fprintf (stderr, "  -e,--exact          require exact match for very long names\n");
@@ -351,6 +392,12 @@ usage_killall (void)
   fprintf (stderr, "  -v,--verbose        report if the signal was successfully sent\n");
   fprintf (stderr, "  -V,--version        display version information\n");
   fprintf (stderr, "  -w,--wait           wait for processes to die\n\n");
+#ifdef FLASK_LINUX
+  fprintf (stderr, "  -S,--Sid            kill only process(es) having sid\n");
+  fprintf (stderr, "  -c,--context        kill only process(es) having scontext\n");
+  fprintf(stderr, "   (-s, -c are mutually exclusive and must precede other
+arguments)\n\n");
+#endif /*FLASK_LINUX*/
 }
 
 
@@ -381,7 +428,7 @@ main (int argc, char **argv)
   int sig_num;
   int optc;
   int myoptind;
-  int optsig = 0;
+  //int optsig = 0;
 
   struct option options[] = {
     {"exact", 0, NULL, 'e'},
@@ -392,8 +439,18 @@ main (int argc, char **argv)
     {"signal", 1, NULL, 's'},
     {"verbose", 0, NULL, 'v'},
     {"wait", 0, NULL, 'w'},
+#ifdef FLASK_LINUX
+    {"Sid", 1, NULL, 'S'},
+    {"context", 1, NULL, 'c'},
+#endif /*FLASK_LINUX*/
     {"version", 0, NULL, 'V'},
     {0,0,0,0 }};
+
+#ifdef FLASK_LINUX
+  security_id_t sid = -1;
+
+  if ( argc < 2 ) usage(); /* do the obvious thing... */
+#endif /*FLASK_LINUX*/
 
   name = strrchr (*argv, '/');
   if (name)
@@ -409,7 +466,7 @@ main (int argc, char **argv)
   textdomain(PACKAGE);
 
   opterr = 0;
-  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwV",options,NULL)) != EOF) {
+  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwS:c:V",options,NULL)) != EOF) {
     switch (optc) {
       case 'e':
         exact = 1;
@@ -450,6 +507,46 @@ main (int argc, char **argv)
         print_version();
         return 0;
         break;
+#ifdef FLASK_LINUX
+      case 'S': {
+          char **buf, *calloc();
+          int strlen(), rv;
+          security_id_t lsid;
+
+          buf = (char **) calloc(1, strlen(optarg));
+          if ( ! buf ) {
+             (void) fprintf(stderr, "%s: %s\n", name, strerror(errno));
+             return( 1 );
+          }
+
+	  lsid = strtol(optarg, buf, 0);
+          if ( **buf ) {
+              (void) fprintf(stderr, "%s: SID (%s) must be numeric\n", name, *argv);
+              (void) fflush(stderr);
+              return( 1 );
+          }
+
+          sid = (security_id_t) lsid;
+          /* sanity check */
+          rv = security_sid_to_context(sid, buf, strlen(optarg));
+          if ( rv < 0 && (errno != ENOSPC) ) {
+              (void) fprintf(stderr, "%s: security_sid_to_context(%d) %s\n", name, (int) sid, strerror(errno));
+              (void) fflush(stderr);
+              free(buf);
+              return( 1 );
+          }
+          free(buf);
+          break;
+      }
+      case 'c': {
+          if ( security_context_to_sid(optarg, strlen(optarg)+1, &sid) ) {
+              (void) fprintf(stderr, "%s: security_context_to_sid(%s): %s\n",
+                     name, optarg, strerror(errno));
+              (void) fflush(stderr);
+              return( 1 );
+          }
+      }
+#endif /*FLASK_LINUX*/
       case '?':
         /* Signal names are in uppercase, so check to see if the argv
          * is upper case */
@@ -481,5 +578,9 @@ main (int argc, char **argv)
     }
   argv = argv + myoptind;
   /*printf("sending signal %d to procs\n", sig_num);*/
-  return kill_all (sig_num, argc - myoptind, argv );
+#ifdef FLASK_LINUX
+  return kill_all(sig_num,argc - myoptind, argv, sid);
+#else  /*FLASK_LINUX*/
+  return kill_all(sig_num,argc - myoptind, argv );
+#endif /*FLASK_LINUX*/
 }

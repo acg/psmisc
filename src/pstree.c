@@ -25,6 +25,9 @@
 
 #include "comm.h"
 
+#ifdef FLASK_LINUX
+#include <fs_secure.h>
+#endif /*FLASK_LINUX*/
 
 #ifndef MAX_DEPTH
 #define MAX_DEPTH    100
@@ -53,6 +56,9 @@ typedef struct _proc
   int argc;			/* with -a   : number of arguments, -1 if swapped    */
   pid_t pid;
   uid_t uid;
+#ifdef FLASK_LINUX
+  security_id_t sid;
+#endif /*FLASK_LINUX*/
   int highlight;
   struct _child *children;
   struct _proc *parent;
@@ -100,6 +106,10 @@ static PROC *list = NULL;
 static int width[MAX_DEPTH], more[MAX_DEPTH];
 static int print_args = 0, compact = 1, user_change = 0, pids = 0, by_pid = 0,
   trunc = 1;
+#ifdef FLASK_LINUX
+static int show_sids    = 0;
+static int show_scontext = 0;
+#endif /*FLASK_LINUX*/
 static int output_width = 132;
 static int cur_x = 1;
 static char last_char = 0;
@@ -149,6 +159,38 @@ out_int (int x)			/* non-negative integers only */
   return digits;
 }
 
+#ifdef FLASK_LINUX
+static void 
+out_sid ( security_id_t sid )
+{
+  if ( (int) sid >= 0 )
+    out_int((int) sid);
+  else
+    out_string("??");
+}
+
+static void 
+out_scontext ( security_id_t sid )
+{
+  static char buf[256];
+  int security_sid_to_context();
+  int len = sizeof(buf);
+  int rv;
+
+  bzero(buf,256);
+
+  rv = security_sid_to_context((int)sid, buf, &len);
+  if ( rv ) {
+    out_string("`??'"); /* punt */
+  }
+  else {
+    out_string("`");
+    out_string(buf);
+    out_string("'");
+  }
+}
+#endif /*FLASK_LINUX*/
+
 
 static void
 out_newline (void)
@@ -172,9 +214,13 @@ find_proc (pid_t pid)
   return walk;
 }
 
-
+#ifdef FLASK_LINUX
+static PROC *
+new_proc(const char *comm, pid_t pid, uid_t uid, security_id_t sid)
+#else  /*FLASK_LINUX*/
 static PROC *
 new_proc (const char *comm, pid_t pid, uid_t uid)
+#endif /*FLASK_LINUX*/
 {
   PROC *new;
 
@@ -187,6 +233,9 @@ new_proc (const char *comm, pid_t pid, uid_t uid)
   new->pid = pid;
   new->uid = uid;
   new->highlight = 0;
+#ifdef FLASK_LINUX
+  new->sid = sid;
+#endif /*FLASK_LINUX*/
   new->children = NULL;
   new->parent = NULL;
   new->next = list;
@@ -255,15 +304,24 @@ set_args (PROC * this, const char *args, int size)
     this->argv[i] = start = strchr (start, 0) + 1;
 }
 
-
+#ifdef FLASK_LINUX
+static void
+add_proc(const char *comm, pid_t pid, pid_t ppid, uid_t uid,
+         const char *args, int size, security_id_t sid)
+#else  /*FLASK_LINUX*/
 static void
 add_proc (const char *comm, pid_t pid, pid_t ppid, uid_t uid,
 	  const char *args, int size)
+#endif /*FLASK_LINUX*/
 {
   PROC *this, *parent;
 
   if (!(this = find_proc (pid)))
+#ifdef FLASK_LINUX
+    this = new_proc(comm, pid, uid, sid);
+#else  /*FLASK_LINUX*/
     this = new_proc (comm, pid, uid);
+#endif /*FLASK_LINUX*/
   else
     {
       strcpy (this->comm, comm);
@@ -274,7 +332,11 @@ add_proc (const char *comm, pid_t pid, pid_t ppid, uid_t uid,
   if (pid == ppid)
     ppid = 0;
   if (!(parent = find_proc (ppid)))
+#ifdef FLASK_LINUX
+    parent = new_proc("?", ppid, 0, sid);
+#else  /*FLASK_LINUX*/
     parent = new_proc ("?", ppid, 0);
+#endif /*FLASK_LINUX*/
   add_child (parent, this);
   this->parent = parent;
 }
@@ -366,12 +428,26 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
       else
 	(void) out_int (current->uid);
     }
+#ifdef FLASK_LINUX
+  if ( show_sids ) {
+      out_char(',');
+      out_sid(current->sid);
+  }
+  if ( show_scontext ) {
+      out_char(',');
+      out_scontext(current->sid);
+  }
+#endif /*FLASK_LINUX*/
   /*XXX if (info || swapped) */
   if (swapped && print_args && current->argc < 0) 
     out_char (')');
   if (current->highlight && (tmp = tgetstr ("me", NULL)))
     tputs (tmp, 1, putchar);
+#ifdef FLASK_LINUX
+  if (show_scontext || print_args)
+#else  /*FLASK_LINUX*/
   if (print_args)
+#endif /*FLASK_LINUX*/
     {
       for (i = 0; i < current->argc; i++)
 	{
@@ -395,12 +471,20 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
 	    }
 	}
     }
+#ifdef FLASK_LINUX
+  if ( show_scontext || print_args || ! current->children )
+#else  /*FLASK_LINUX*/
   if (print_args || !current->children)
+#endif /*FLASK_LINUX*/
     {
       while (closing--)
 	out_char (']');
       out_newline ();
+#ifdef FLASK_LINUX
+      if ( show_scontext || print_args )
+#else /*FLASK_LINUX*/
       if (print_args)
+#endif /*FLASK_LINUX*/
 	{
 	  more[level] = !last;
 	  width[level] = swapped + (comm_len > 1 ? 0 : -1);
@@ -490,6 +574,9 @@ read_proc (void)
   pid_t pid, ppid;
   int fd, size;
   int empty;
+#ifdef FLASK_LINUX
+  security_id_t sid = -1;
+#endif /*FLASK_LINUX*/
 
   if (!print_args)
     buffer = NULL;
@@ -514,7 +601,11 @@ read_proc (void)
 	  {
 	    empty = 0;
 	    sprintf (path, "%s/%d", PROC_BASE, pid);
+#ifdef FLASK_LINUX
+            if (fstat_secure(fileno(file),&st,&sid) < 0)
+#else /*FLASK_LINUX*/
             if (stat (path, &st) < 0)
+#endif /*FLASK_LINUX*/
 	    {
 		perror (path);
 		exit (1);
@@ -539,7 +630,11 @@ read_proc (void)
 		 &ppid) == 4)
 	      */
 		if (!print_args)
+#ifdef FLASK_LINUX
+		  add_proc(comm, pid, ppid, st.st_uid, NULL, 0, sid);
+#else  /*FLASK_LINUX*/
 		  add_proc (comm, pid, ppid, st.st_uid, NULL, 0);
+#endif /*FLASK_LINUX*/
 		else
 		  {
 		    sprintf (path, "%s/%d/cmdline", PROC_BASE, pid);
@@ -556,7 +651,11 @@ read_proc (void)
 		    (void) close (fd);
 		    if (size)
 		      buffer[size++] = 0;
+#ifdef FLASK_LINUX
+		    add_proc(comm, pid, ppid, st.st_uid, buffer, size, sid);
+#else  /*FLASK_LINUX*/
 		    add_proc (comm, pid, ppid, st.st_uid, buffer, size);
+#endif /*FLASK_LINUX*/
 		  }
 		}
 	      }
@@ -595,7 +694,11 @@ read_stdin (void)
 	cmd = comm;
       if (*cmd == '-')
 	cmd++;
+#ifdef FLASK_LINUX
+      add_proc(cmd, pid, ppid, uid, NULL, 0, -1);
+#else  /*FLASK_LINUX*/
       add_proc (cmd, pid, ppid, uid, NULL, 0);
+#endif /*FLASK_LINUX*/
     }
 }
 
@@ -620,6 +723,10 @@ usage (void)
   fprintf (stderr, "    -n     sort output by PID\n");
   fprintf (stderr, "    -p     show PIDs; implies -c\n");
   fprintf (stderr, "    -u     show uid transitions\n");
+#ifdef FLASK_LINUX
+  fprintf (stderr, "    -s     show Flask SIDs\n");
+  fprintf (stderr, "    -x     show Flask security contexts\n");
+#endif /*FLASK_LINUX*/
   fprintf (stderr,
 	   "    -U     use UTF-8 (Unicode) line drawing characters\n");
   fprintf (stderr, "    -V     display version information\n");
@@ -659,7 +766,11 @@ main (int argc, char **argv)
   
   setlocale(LC_ALL, "");
   
+#ifdef FLASK_LINUX
+  while ((c = getopt (argc, argv, "acGhH:npluUVsx")) != EOF)
+#else  /*FLASK_LINUX*/
   while ((c = getopt (argc, argv, "acGhH:npluUV")) != EOF)
+#endif /*FLASK_LINUX*/
     switch (c)
       {
       case 'a':
@@ -716,6 +827,14 @@ main (int argc, char **argv)
       case 'V':
       print_version();
 	return 0;
+#ifdef FLASK_LINUX
+      case 's':
+        show_sids = 1;
+        break;
+      case 'x':
+        show_scontext = 1;
+        break;
+#endif /*FLASK_LINUX*/
       default:
 	usage ();
       }

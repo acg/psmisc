@@ -1,105 +1,106 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-04-12 21:33+1000\n"
+"POT-Creation-Date: 2002-08-26 20:06+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: 8-bit\n"
+"Content-Transfer-Encoding: 8bit\n"
 
-#: src/killall.c:42
+#: src/killall.c:46
 #, c-format
 msgid "Kill %s(%s%d) ? (y/n) "
 msgstr ""
 
-#: src/killall.c:189
+#: src/killall.c:216
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr ""
 
-#: src/killall.c:249
+#: src/killall.c:281
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr ""
 
-#: src/fuser.c:469 src/killall.c:261
+#: src/killall.c:293 src/fuser.c:492
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr ""
 
-#: src/killall.c:267
+#: src/killall.c:299
 #, c-format
 msgid "%s: no process killed\n"
 msgstr ""
 
-#: src/killall.c:447
+#: src/killall.c:479
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr ""
 
-#: src/fuser.c:228
+#: src/fuser.c:244
 #, c-format
 msgid "-4 flag used but proc file %s is not readable\n"
 msgstr ""
 
-#: src/fuser.c:237
+#: src/fuser.c:253
 #, c-format
 msgid "-6 flag used but proc file %s is not readable\n"
 msgstr ""
 
-#: src/fuser.c:553
+#: src/fuser.c:590
 #, c-format
 msgid "Kill process %d ? (y/n) "
 msgstr ""
 
-#: src/fuser.c:583
+#: src/fuser.c:620
 #, c-format
 msgid "kill %d"
 msgstr ""
 
-#: src/fuser.c:587 src/fuser.c:591
+#: src/fuser.c:624 src/fuser.c:628
 #, c-format
 msgid "No automatic removal. Please use  umount %s\n"
 msgstr ""
 
-#: src/fuser.c:595
+#: src/fuser.c:632
 #, c-format
 msgid "No automatic removal. Please use  swapoff %s\n"
 msgstr ""
 
-#: src/fuser.c:697
+#: src/fuser.c:735
 #, c-format
 msgid "Internal error (type %d)\n"
 msgstr ""
 
-#: src/fuser.c:727
+#: src/fuser.c:765
 msgid "kernel mount  "
 msgstr ""
 
-#: src/fuser.c:730
+#: src/fuser.c:768
 msgid "kernel loop   "
 msgstr ""
 
-#: src/fuser.c:733
+#: src/fuser.c:771
 msgid "kernel swap   "
 msgstr ""
 
-#: src/fuser.c:753
+#: src/fuser.c:791
 msgid "No process references; use -v for the complete list\n"
 msgstr ""
 
-#: src/fuser.c:891
+#: src/fuser.c:929
 msgid "can't find sockets' device number"
 msgstr ""
 
-#: src/fuser.c:900
+#: src/fuser.c:938
 msgid ""
 "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -125,14 +126,14 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/fuser.c:924
+#: src/fuser.c:962
 #, c-format
 msgid "fuser (psmisc) %s\n"
 msgstr ""
 
-#: src/fuser.c:926
+#: src/fuser.c:964
 msgid ""
-"Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n"
+"Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
 "\n"
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
 "This is free software, and you are welcome to redistribute it under the "
@@ -141,12 +142,12 @@ msgid ""
 "For more information about these matters, see the files named COPYING.\n"
 msgstr ""
 
-#: src/fuser.c:1106
+#: src/fuser.c:1142
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
 msgstr ""
 
-#: src/fuser.c:1114
+#: src/fuser.c:1150
 #, c-format
 msgid "%s/%s: invalid specificiation\n"
 msgstr ""

@@ -11,6 +11,8 @@ killall \- kill processes by name
 .RB [ \-v , \-\-verbose ]
 .RB [ \-w , \-\-wait ]
 .RB [ \-V, \-\-version ]
+.RB [ \-S , \-\-sid ]
+.RB [ \-c , \-\-context ] 
 .RB [ \-s , \-\-signal
 .IR signal ]
 .RB [ \-\- ]
@@ -65,6 +67,12 @@ Wait for all killed processes to die. \fBkillall\fP checks once per second if
 any of the killed processes still exist and only returns if none are left.
 Note that \fBkillall\fP may wait forever if the signal was ignored, had no
 effect, or if the process stays in zombie state.
+.IP \fB\-S\fP
+(Flask only) Specify SID: kill only processes with given SID. Mutually exclusive
+with \fB-c\fP argument.  Must precede other arguments on command line.
+.IP \fB\-c\fP
+(Flask only) Specify security context: kill only processes with given security context.
+Mutually exclusive with \fB-s\fP.  Must precede other arguments on the command line.
 .SH FILES
 .nf
 /proc	location of the proc file system
