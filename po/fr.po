@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-10-19 12:12+1000\n"
+"POT-Creation-Date: 2002-04-12 21:33+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr "Ignore la correspondance partielle %s(%d)\n"
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Tué %s(%s%d) avec le signal %d\n"
 
-#: src/fuser.c:452 src/killall.c:261
+#: src/fuser.c:469 src/killall.c:261
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s est vide (non monté ?)\n"
@@ -43,62 +43,62 @@ msgstr "%s: aucun processus tué\n"
 msgid "Maximum number of names is %d\n"
 msgstr "Le nombre maximum de noms est %d\n"
 
-#: src/fuser.c:211
+#: src/fuser.c:228
 #, c-format
 msgid "-4 flag used but proc file %s is not readable\n"
 msgstr "drapeau -4 utilisé mais le fichier proc %s est illisible\n"
 
-#: src/fuser.c:220
+#: src/fuser.c:237
 #, c-format
 msgid "-6 flag used but proc file %s is not readable\n"
 msgstr "drapeau -6 utilisé mais le fichier proc %s est illisible\n"
 
-#: src/fuser.c:536
+#: src/fuser.c:553
 #, c-format
 msgid "Kill process %d ? (y/n) "
 msgstr "Tuer le processus %d ? (y/n) "
 
-#: src/fuser.c:566
+#: src/fuser.c:583
 #, c-format
 msgid "kill %d"
 msgstr "tuer %d"
 
-#: src/fuser.c:570 src/fuser.c:574
+#: src/fuser.c:587 src/fuser.c:591
 #, c-format
 msgid "No automatic removal. Please use  umount %s\n"
 msgstr "Pas de démontage automatique. Utiliser SVP  umount %s\n"
 
-#: src/fuser.c:578
+#: src/fuser.c:595
 #, c-format
 msgid "No automatic removal. Please use  swapoff %s\n"
 msgstr "Pas de démontage automatique du fichier d'échange. Utiliser SVP  swapoff %s\n"
 
-#: src/fuser.c:680
+#: src/fuser.c:697
 #, c-format
 msgid "Internal error (type %d)\n"
 msgstr "Erreur interne (type %d)\n"
 
-#: src/fuser.c:710
+#: src/fuser.c:727
 msgid "kernel mount  "
 msgstr "montage du noyau   "
 
-#: src/fuser.c:713
+#: src/fuser.c:730
 msgid "kernel loop   "
 msgstr "boucle du noyau   "
 
-#: src/fuser.c:716
+#: src/fuser.c:733
 msgid "kernel swap   "
 msgstr "fichier d'échange du noyau   "
 
-#: src/fuser.c:736
+#: src/fuser.c:753
 msgid "No process references; use -v for the complete list\n"
 msgstr "Pas de références sur le processus; utiliser -v pour la liste complète\n"
 
-#: src/fuser.c:869
+#: src/fuser.c:891
 msgid "can't find sockets' device number"
-msgstr "ne peut pas trouver le numéro du périphérique des sockets\n"
+msgstr "ne peut pas trouver le numéro du périphérique des sockets"
 
-#: src/fuser.c:878
+#: src/fuser.c:900
 msgid ""
 "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -123,7 +123,8 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"utilisation.: fuser [ -a | -s ] [ -n espace ] [ -signal ] [ -kimuv ] nom ...\n"
+"utilisation.: fuser [ -a | -s ] [ -n espace ] [ -signal ] [ -kimuv ] "
+"nom ...\n"
 "             [ - ] [ -n espace ] [ -signal ] [ -kimuv ] nom ...\n"
 "       fuser -l\n"
 "       fuser -V\n"
@@ -135,7 +136,7 @@ msgstr ""
 "    -m        système de fichiers monté\n"
 "    -n espace cherche dans l'espace de noms spécifié (fichier, udp, ou tcp)\n"
 "    -s        mode silencieux\n"
-"    -signal   envoi le signal "signal" au lieu de SIGKILL\n"
+"    -signal   envoi le signal \"signal\" au lieu de SIGKILL\n"
 "    -u        affiche l'identificateur de l'utilisateur\n"
 "    -v        mode détaillé\n"
 "    -V        affiche des informations sur la version\n"
@@ -146,12 +147,12 @@ msgstr ""
 "  noms udp/tcp: [port_local][,[hôte_distant][,[port_distant]]]\n"
 "\n"
 
-#: src/fuser.c:902
+#: src/fuser.c:924
 #, c-format
 msgid "fuser (psmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/fuser.c:904
+#: src/fuser.c:926
 msgid ""
 "Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n"
 "\n"
@@ -169,12 +170,12 @@ msgstr ""
 "de la licence GNU General Public License.\n"
 "Pour plus de précisions à propos de ces problèmes, voir les fichiers nommés COPYING.\n"
 
-#: src/fuser.c:1084
+#: src/fuser.c:1106
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
 msgstr "ignore -m dans l'espace de noms \"%s\"\n"
 
-#: src/fuser.c:1092
+#: src/fuser.c:1114
 #, c-format
 msgid "%s/%s: invalid specificiation\n"
 msgstr "%s/%s: spécification invalide\n"

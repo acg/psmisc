@@ -1,4 +1,4 @@
-# Makefile.in generated automatically by automake 1.4-p4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4 from Makefile.am
 
 # Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
@@ -59,22 +59,29 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 host_alias = @host_alias@
 host_triplet = @host@
+AS = @AS@
 BUILD_INCLUDED_LIBINTL = @BUILD_INCLUDED_LIBINTL@
 CATALOGS = @CATALOGS@
 CATOBJEXT = @CATOBJEXT@
 CC = @CC@
 CPP = @CPP@
 DATADIRNAME = @DATADIRNAME@
+DLLTOOL = @DLLTOOL@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
 INTLBISON = @INTLBISON@
 INTLLIBS = @INTLLIBS@
 INTLOBJS = @INTLOBJS@
 INTL_LIBTOOL_SUFFIX_PREFIX = @INTL_LIBTOOL_SUFFIX_PREFIX@
+LD = @LD@
 LIBICONV = @LIBICONV@
+LIBTOOL = @LIBTOOL@
+LN_S = @LN_S@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
+NM = @NM@
+OBJDUMP = @OBJDUMP@
 PACKAGE = @PACKAGE@
 POFILES = @POFILES@
 POSUB = @POSUB@
@@ -218,6 +225,7 @@ clean-am:  clean-generic mostlyclean-am
 clean: clean-am
 
 distclean-am:  distclean-generic clean-am
+	-rm -f libtool
 
 distclean: distclean-am
 

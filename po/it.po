@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: psmisc version 20\n"
-"POT-Creation-Date: 2001-10-19 12:12+1000\n"
+"POT-Creation-Date: 2002-04-12 21:33+1000\n"
 "PO-Revision-Date: 2001-10-28 18:57--700\n"
 "Last-Translator: Daniele Pagano <dan@esaurito.com>\n"
 "Language-Team: esaurito <esaurito@users.sourceforge.net>\n"
@@ -21,137 +21,91 @@ msgstr "Termina %s(%s%d) ? (y/n) "
 
 #: src/killall.c:189
 #, c-format
-msgid ""
-"skipping partial match %s(%d)\n"
-""
-msgstr ""
-"ignorata corrispondenza parziale %s(%d)\n"
-""
+msgid "skipping partial match %s(%d)\n"
+msgstr "ignorata corrispondenza parziale %s(%d)\n"
 
 #: src/killall.c:249
 #, c-format
-msgid ""
-"Killed %s(%s%d) with signal %d\n"
-""
-msgstr ""
-"Terminato %s(%s%d) con segnale %d\n"
-""
+msgid "Killed %s(%s%d) with signal %d\n"
+msgstr "Terminato %s(%s%d) con segnale %d\n"
 
-#: src/fuser.c:452
-#: src/killall.c:261
+#: src/fuser.c:469 src/killall.c:261
 #, c-format
-msgid ""
-"%s is empty (not mounted ?)\n"
-""
-msgstr ""
-"%s è vuoto (non montato?)\n"
-""
+msgid "%s is empty (not mounted ?)\n"
+msgstr "%s è vuoto (non montato?)\n"
 
 #: src/killall.c:267
 #, c-format
-msgid ""
-"%s: no process killed\n"
-""
-msgstr ""
-"%s: nessun processo terminato\n"
-""
+msgid "%s: no process killed\n"
+msgstr "%s: nessun processo terminato\n"
 
 #: src/killall.c:447
 #, c-format
-msgid ""
-"Maximum number of names is %d\n"
-""
-msgstr ""
-"Il massimo numero di nomi è %d\n"
-""
+msgid "Maximum number of names is %d\n"
+msgstr "Il massimo numero di nomi è %d\n"
 
 # 'proc' non tradotto: termine specifico di Linux
-#: src/fuser.c:211
+#: src/fuser.c:228
 #, c-format
-msgid ""
-"-4 flag used but proc file %s is not readable\n"
-""
-msgstr ""
-"usata opzione -4  ma file proc %s non leggibile\n"
-""
+msgid "-4 flag used but proc file %s is not readable\n"
+msgstr "usata opzione -4  ma file proc %s non leggibile\n"
 
-#: src/fuser.c:220
+#: src/fuser.c:237
 #, c-format
-msgid ""
-"-6 flag used but proc file %s is not readable\n"
-""
-msgstr ""
-"usata opzione -6  ma file proc %s non leggibile\n"
-""
+msgid "-6 flag used but proc file %s is not readable\n"
+msgstr "usata opzione -6  ma file proc %s non leggibile\n"
 
-#: src/fuser.c:536
+#: src/fuser.c:553
 #, c-format
 msgid "Kill process %d ? (y/n) "
 msgstr "Termina processo %d ? (y/n) "
 
-#: src/fuser.c:566
+#: src/fuser.c:583
 #, c-format
 msgid "kill %d"
 msgstr "termina %d"
 
 # nomi comandi non tradotti
-#: src/fuser.c:570
-#: src/fuser.c:574
+#: src/fuser.c:587 src/fuser.c:591
 #, c-format
-msgid ""
-"No automatic removal. Please use  umount %s\n"
-""
-msgstr ""
-"Impossible rimuovere automaticamente. Usare umount %s\n"
-""
+msgid "No automatic removal. Please use  umount %s\n"
+msgstr "Impossible rimuovere automaticamente. Usare umount %s\n"
 
-#: src/fuser.c:578
+#: src/fuser.c:595
 #, c-format
-msgid ""
-"No automatic removal. Please use  swapoff %s\n"
-""
-msgstr ""
-"Impossible rimuovere automaticamente. Usare swapoff %s\n"
-""
+msgid "No automatic removal. Please use  swapoff %s\n"
+msgstr "Impossible rimuovere automaticamente. Usare swapoff %s\n"
 
-#: src/fuser.c:680
+#: src/fuser.c:697
 #, c-format
-msgid ""
-"Internal error (type %d)\n"
-""
-msgstr ""
-"Errore interno (tipo %d)\n"
-""
+msgid "Internal error (type %d)\n"
+msgstr "Errore interno (tipo %d)\n"
 
 # kernel e mount non tradotti: termini specifici
-#: src/fuser.c:710
+#: src/fuser.c:727
 msgid "kernel mount  "
 msgstr "mount del kernel"
 
-#: src/fuser.c:713
+#: src/fuser.c:730
 msgid "kernel loop   "
 msgstr "ciclo del kernel"
 
 # assunto 'swap' sta per 'swap filesystem'
-#: src/fuser.c:716
+#: src/fuser.c:733
 msgid "kernel swap   "
 msgstr "file di scambio del kernel"
 
-#: src/fuser.c:736
-msgid ""
-"No process references; use -v for the complete list\n"
-""
-msgstr ""
-"Nessun riferimento al processo; usare -v per lista completa\n"
-""
+#: src/fuser.c:753
+msgid "No process references; use -v for the complete list\n"
+msgstr "Nessun riferimento al processo; usare -v per lista completa\n"
 
 # socket non tradotto: termine tecnico
-#: src/fuser.c:869
+#: src/fuser.c:891
 msgid "can't find sockets' device number"
 msgstr "impossibile trovare numero della periferica del socket"
 
 # tradotto 'namespace' con 'contesto'; modificata indentazione descrizioni
-#: src/fuser.c:878
+#: src/fuser.c:900
 msgid ""
 "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -175,7 +129,6 @@ msgid ""
 "\n"
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
-""
 msgstr ""
 "uso: fuser [ -a | -s ] [ -n contesto] [ -signal ] [ -kimuv ] nome...\n"
 "             [ - ] [ -n contesto] [ -signal ] [ -kimuv ] nome...\n"
@@ -199,51 +152,37 @@ msgstr ""
 "\n"
 "  udp/tcp nomi: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
-""
 
-#: src/fuser.c:902
+#: src/fuser.c:924
 #, c-format
-msgid ""
-"fuser (psmisc) %s\n"
-""
-msgstr ""
-"fuser (psmisc) %s\n"
-""
+msgid "fuser (psmisc) %s\n"
+msgstr "fuser (psmisc) %s\n"
 
 # Traduzione mia (non ufficiale) del messaggio GNU
-#: src/fuser.c:904
+#: src/fuser.c:926
 msgid ""
 "Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n"
 "\n"
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
-"This is free software, and you are welcome to redistribute it under the terms\n"
+"This is free software, and you are welcome to redistribute it under the "
+"terms\n"
 "of the GNU General Public License.\n"
 "For more information about these matters, see the files named COPYING.\n"
-""
 msgstr ""
 "Copyright (C) 1993-2000 Werner Almesberger e Craig Small\n"
 "\n"
 "PSmisc non ha ASSOLUTAMENTE NESSUNA GARANZIA D'USO.\n"
 "Questo è software gratuito, ed è possibile redistribuirlo entro i termini\n"
 "della GNU General Public License.\n"
-"Per ulteriori informazioni in merito, consultare il file COPYING (in lingua inglese).\n"
-""
+"Per ulteriori informazioni in merito, consultare il file COPYING (in lingua "
+"inglese).\n"
 
-#: src/fuser.c:1084
+#: src/fuser.c:1106
 #, c-format
-msgid ""
-"ignoring -m in name space \"%s\"\n"
-""
-msgstr ""
-"ignorato -m nel contesto \"%s\"\n"
-""
+msgid "ignoring -m in name space \"%s\"\n"
+msgstr "ignorato -m nel contesto \"%s\"\n"
 
-#: src/fuser.c:1092
+#: src/fuser.c:1114
 #, c-format
-msgid ""
-"%s/%s: invalid specificiation\n"
-""
-msgstr ""
-"%s/%s: specificazione non valida\n"
-""
-
+msgid "%s/%s: invalid specificiation\n"
+msgstr "%s/%s: specificazione non valida\n"
