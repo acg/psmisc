@@ -27,7 +27,7 @@ AC_STRUCT_ST_RDEV
 AC_TYPE_UID_T
 
 dnl Check for language stuff
-ALL_LINGUAS="en it pt"
+ALL_LINGUAS="de en fr it pt"
 AM_GNU_GETTEXT
 
 dnl Checks for library functions.

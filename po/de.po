@@ -1,103 +1,104 @@
-# English language file for psmisc
-# Copyright (C) 2001 Free Software Foundation, Inc.
-# Craig Small <csmall@small.dropbear.id.au>, 2001
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2001-10-19 12:12+1000\n"
-"PO-Revision-Date: 2001-10-29 15:00+11\n"
-"Last-Translator: Craig Small <csmall@small.dropbear.id.au>\n"
-"Language-Team: English <en@li.org>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Wolfgang Schorer <wcc@wolfgangs.com>\n"
+"Language-Team: woolfy <woolfy@users.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
+# "abbrechen" wird fuer "kill" verwendet
 #: src/killall.c:42
 #, c-format
 msgid "Kill %s(%s%d) ? (y/n) "
-msgstr "Kill %s(%s%d) ? (y/n) "
+msgstr "%s(%s%d) abbrechen? (y/n) "
 
 #: src/killall.c:189
 #, c-format
 msgid "skipping partial match %s(%d)\n"
-msgstr "skipping partial match %s(%d)\n"
+msgstr "ueberspringe teilweise Uebereinstimmung von %s(%d)\n"
 
 #: src/killall.c:249
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
-msgstr "Killed %s(%s%d) with signal %d\n"
+msgstr "%s(%s%d) mit dem Signal %d abgebrochen\n"
 
 #: src/fuser.c:452 src/killall.c:261
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
-msgstr "%s is empty (not mounted ?)\n"
+msgstr "%s ist leer (nicht gemountet ?)\n"
 
 #: src/killall.c:267
 #, c-format
 msgid "%s: no process killed\n"
-msgstr "%s: no process killed\n"
+msgstr "%s: Kein Prozess abgebrochen\n"
 
 #: src/killall.c:447
 #, c-format
 msgid "Maximum number of names is %d\n"
-msgstr "Maximum number of names is %d\n"
+msgstr "Die maximale Anzahl der Namen ist %d\n"
 
 #: src/fuser.c:211
 #, c-format
 msgid "-4 flag used but proc file %s is not readable\n"
-msgstr "-4 flag used but proc file %s is not readable\n"
+msgstr "-4 Flag verwendet, die Proc Datei %s ist aber nicht lesbar\n"
 
 #: src/fuser.c:220
 #, c-format
 msgid "-6 flag used but proc file %s is not readable\n"
-msgstr "-6 flag used but proc file %s is not readable\n"
+msgstr "-6 Flag verwendet, die Proc Datei %s ist aber nicht lesbar\n"
 
 #: src/fuser.c:536
 #, c-format
 msgid "Kill process %d ? (y/n) "
-msgstr "Kill process %d ? (y/n) "
+msgstr "Prozess %d abbrechen? (y/n) "
 
 #: src/fuser.c:566
 #, c-format
 msgid "kill %d"
-msgstr "kill %d"
+msgstr "Abbruch von %d"
 
 #: src/fuser.c:570 src/fuser.c:574
 #, c-format
 msgid "No automatic removal. Please use  umount %s\n"
-msgstr "No automatic removal. Please use  umount %s\n"
+msgstr "Keine automatische Loeschung. Bitte verwenden Sie  umount %s\n"
 
 #: src/fuser.c:578
 #, c-format
 msgid "No automatic removal. Please use  swapoff %s\n"
-msgstr "No automatic removal. Please use  swapoff %s\n"
+msgstr "Keine automatische Loeschung. Bitte verwenden Sie  swapoff %s\n"
 
 #: src/fuser.c:680
 #, c-format
 msgid "Internal error (type %d)\n"
-msgstr "Internal error (type %d)\n"
+msgstr "Interner Fehler (Typ %d)\n"
 
 #: src/fuser.c:710
 msgid "kernel mount  "
-msgstr "kernel mount  "
+msgstr "Kernel mount  "
 
 #: src/fuser.c:713
 msgid "kernel loop   "
-msgstr "kernel loop   "
+msgstr "Kernel Schleife (loop)   "
 
 #: src/fuser.c:716
 msgid "kernel swap   "
-msgstr "kernel swap   "
+msgstr "Kernel swap   "
 
 #: src/fuser.c:736
 msgid "No process references; use -v for the complete list\n"
-msgstr "No process references; use -v for the complete list\n"
+msgstr "Keine Prozess Referenzen; verwenden Sie -v fuer die komplette Liste\n"
 
 #: src/fuser.c:869
 msgid "can't find sockets' device number"
-msgstr "can't find sockets' device number"
+msgstr "Kann die Geraetenummer der Sockets nicht finden"
 
 #: src/fuser.c:878
 msgid ""
@@ -124,27 +125,27 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
-"             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+"Gebrauch: fuser [ -a | -s ] [ -n Raum ] [ -signal ] [ -kimuv ] Name ...\n"
+"             [ - ] [ -n Raum ] [ -signal ] [ -kimuv ] Name ...\n"
 "       fuser -l\n"
 "       fuser -V\n"
 "\n"
-"    -a        display unused files too\n"
-"    -k        kill processes accessing that file\n"
-"    -i        ask before killing (ignored without -k)\n"
-"    -l        list signal names\n"
+"    -a        Zeige auch die nicht genutzten Dateien an\n"
+"    -k        Breche die Prozesse ab, die auf diese Datei zugreifen\n"
+"    -i        Frage bevor abgebrochen wird (dies wird ignoriert ohne -k)\n"
+"    -l        Liste die Signalnamen auf\n"
 "    -m        mounted FS\n"
-"    -n space  search in the specified name space (file, udp, or tcp)\n"
-"    -s        silent operation\n"
-"    -signal   send signal instead of SIGKILL\n"
-"    -u        display user ids\n"
-"    -v        verbose output\n"
-"    -V        display version information\n"
-"    -4        search IPv4 sockets only\n"
-"    -6        search IPv6 sockets only\n"
-"    -         reset options\n"
+"    -n Raum   Suche in dem angegebenen Namensraum (file, udp, or tcp)\n"
+"    -s        Stille Operation\n"
+"    -signal   Sende 'signal' anstatt SIGKILL\n"
+"    -u        Zeige die Benutzer IDs an\n"
+"    -v        Ausfuehrliche Ausgabe\n"
+"    -V        Zeige Versionsinformationen an\n"
+"    -4        Suche nur IPv4 sockets\n"
+"    -6        Suche nur IPv6 sockets\n"
+"    -         Ruecksetzen der Optionen\n"
 "\n"
-"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"  udp/tcp Namen: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 
 #: src/fuser.c:902
@@ -164,19 +165,18 @@ msgid ""
 msgstr ""
 "Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n"
 "\n"
-"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
-"This is free software, and you are welcome to redistribute it under the "
-"terms\n"
-"of the GNU General Public License.\n"
-"For more information about these matters, see the files named COPYING.\n"
+"PSmisc kommt mit KEINERLEI GARANTIE.\n"
+"Dies ist freie Software, und Sie koennen sie gerne unter den GNU-Terms\n"
+" (General Public License) weitervertreiben\n"
+"Fuer weitere Informationen ueber diese Angelegenheit sehen Sie bitte in die Dateien, die\n"
+" COPYING genannt werden.\n"
 
 #: src/fuser.c:1084
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
-msgstr "ignoring -m in name space \"%s\"\n"
+msgstr "-m wird ignoriert im Namensraum \"%s\"\n"
 
 #: src/fuser.c:1092
 #, c-format
 msgid "%s/%s: invalid specificiation\n"
-msgstr "%s/%s: invalid specificiation\n"
-
+msgstr "%s/%s: Falsche Spezifikation\n"
