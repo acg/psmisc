@@ -154,8 +154,32 @@ kill_all (int signal, int names, char **namelist)
 	  sprintf (path, PROC_BASE "/%d/cmdline", pid_table[i]);
 	  if (!(file = fopen (path, "r")))
 	    continue;
-	  okay = fscanf (file, "%s", command_buf) == 1;
-	  (void) fclose (file);
+          while (1) {
+            /* look for actual command so we skip over initial "sh" if any */
+            char *p;
+            /* 'cmdline' has arguments separated by nulls */
+            for (p=command_buf; p<command_buf+PATH_MAX; p++) {
+              int c = fgetc(file);
+              if (c == EOF || c == '\0') {
+                *p = '\0';
+                break;
+              } else {
+                *p = c;
+              }
+            }
+            if (strlen(command_buf) == 0) {
+              okay = 0;
+              break;
+            }
+            p = strrchr(command_buf,'/');
+            p = p ? p+1 : command_buf;
+            if (strncmp(p, comm, COMM_LEN-1) == 0) {
+              okay = 1;
+              command = p;
+              break;
+            }
+          }
+          (void) fclose(file);
 	  if (exact && !okay)
 	    {
 	      if (verbose)
@@ -164,14 +188,6 @@ kill_all (int signal, int names, char **namelist)
 	      continue;
 	    }
 	  got_long = okay;
-	  if (okay)
-	    {
-	      command = strrchr (command_buf, '/');
-	      if (command)
-		command++;
-	      else
-		command = command_buf;
-	    }
 	}
       for (j = 0; j < names; j++)
 	{
