@@ -11,7 +11,7 @@ pstree \- display a tree of processes
 .RB [ \-n ]
 .RB [ \-p ]
 .RB [ \-u ]
-.RB [ \-G | \-U ]
+.RB [ \-A | \-G | \-U ]
 .RB [ \fIpid\fB | \fIuser\fB]
 .br
 .B pstree
@@ -48,6 +48,8 @@ has happened.  This is useful for when \fBpstree\fR is run in a xterminal.
 .IP \fB\-a\fP
 Show command line arguments. If the command line of a process is swapped out,
 that process is shown in parentheses. \fB\-a\fP implicitly disables compaction.
+.IP \fB\-A\fP
+Use ASCII characters to draw the tree.
 .IP \fB\-c\fP
 Disable compaction of identical subtrees. By default, subtrees are compacted
 whenever possible.

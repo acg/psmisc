@@ -15,6 +15,8 @@
 #include <getopt.h>
 #include <pwd.h>
 #include <dirent.h>
+#include <curses.h>
+#include <term.h>
 #include <termios.h>
 #include <termcap.h>
 #include <langinfo.h>
@@ -715,9 +717,10 @@ static void
 usage (void)
 {
   fprintf (stderr, _("usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"));
-  fprintf (stderr, _("              [ -G | -U ] [ pid | user]\n"));
+  fprintf (stderr, _("              [ -A | -G | -U ] [ pid | user]\n"));
   fprintf (stderr, _("       pstree -V\n\n"));
   fprintf (stderr, _("    -a     show command line arguments\n"));
+  fprintf (stderr, _("    -A     use ASCII line drawing characters\n"));
   fprintf (stderr, _("    -c     don't compact identical subtrees\n"));
   fprintf (stderr, _("    -h     highlight current process and its ancestors\n"));
   fprintf (stderr, _("    -H pid highlight process \"pid\" and its ancestors\n"));
@@ -756,6 +759,7 @@ main (int argc, char **argv)
   const struct passwd *pw;
   pid_t pid, highlight;
   char termcap_area[1024];
+  char *termname;
   int c;
   char *tmpstr;
 
@@ -776,23 +780,45 @@ main (int argc, char **argv)
       wait_end=1;
   }
 
+  /*
+   * Attempt to figure out a good default symbol set.  Will be overriden by
+   * command-line options, if given.
+   */
+
+  if (!strcmp(nl_langinfo(CODESET), "UTF-8")) {
+    /* Use UTF-8 symbols if the locale's character set is UTF-8. */
+    sym = &sym_utf;
+  } else if ((termname = getenv ("TERM")) && \
+             (strlen (termname) > 0) && \
+             (setupterm (NULL, 1 /* stdout */, NULL) == OK) && \
+             (tigetstr ("acsc") > 0)) {
+    /*
+     * Failing that, if TERM is defined, a non-null value, and the terminal
+     * has the VT100 graphics charset, use it.
+     */
+    sym = &sym_vt100;
+  } else {
+    /* Otherwise, fall back to ASCII. */
+    sym = &sym_ascii;
+  }
 
 #ifdef FLASK_LINUX
-  while ((c = getopt (argc, argv, "acGhH:npluUVsx")) != EOF)
+  while ((c = getopt (argc, argv, "aAcGhH:npluUVsx")) != EOF)
 #else  /*FLASK_LINUX*/
-  while ((c = getopt (argc, argv, "acGhH:npluUV")) != EOF)
+  while ((c = getopt (argc, argv, "aAcGhH:npluUV")) != EOF)
 #endif /*FLASK_LINUX*/
     switch (c)
       {
       case 'a':
 	print_args = 1;
 	break;
+      case 'A':
+	sym = &sym_ascii;
+	break;
       case 'c':
 	compact = 0;
 	break;
       case 'G':
-	if (sym != &sym_ascii)
-	  usage ();
 	sym = &sym_vt100;
 	break;
       case 'h':
@@ -831,8 +857,6 @@ main (int argc, char **argv)
 	user_change = 1;
 	break;
       case 'U':
-	if (sym != &sym_ascii)
-	  usage ();
 	sym = &sym_utf;
 	break;
       case 'V':
@@ -863,14 +887,6 @@ main (int argc, char **argv)
   }
   if (optind != argc)
     usage ();
-  if (sym == &sym_ascii) {
-  	/*
-  	 * If the locale's charset is UTF-8, automatically
-  	 * use the UTF-8 symbols
-  	 */
-	if (!strcmp(nl_langinfo(CODESET), "UTF-8"))
-		sym = &sym_utf;
-  }
   read_proc ();
   for (current = find_proc (highlight); current; current = current->parent)
     current->highlight = 1;
