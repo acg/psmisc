@@ -46,7 +46,7 @@ AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.14.1])
 
 dnl Checks for library functions.
-AC_CHECK_FUNCS([strdup strerror strtoul])
+AC_CHECK_FUNCS([strdup strerror strtoul rpmatch])
 
 dnl Checks for Large File System
 AC_SYS_LARGEFILE

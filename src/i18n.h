@@ -17,3 +17,10 @@
 
 #endif
 
+#ifndef HAVE_RPMATCH
+#define rpmatch(line) \
+	( (line == NULL)? -1 : \
+	  (*line == 'y' || *line == 'Y')? 1 : \
+	  (*line == 'n' || *line == 'N')? 0 : \
+	  -1 )
+#endif
