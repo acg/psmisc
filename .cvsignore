@@ -1,1 +1,7 @@
 psmisc-*.tar.gz
+config.status
+Makefile
+config.cache
+stamp-h
+config.h
+config.log
