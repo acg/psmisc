@@ -7,6 +7,10 @@ Changes in 21.6 (not released yet)
 	* Fixed NLS problems and some double ))s - Thanks to Jakub Bogusz
 	* Added Basque translation
 	* More NLS related fixes - Thanks to Guillem Jover
+	* killall aborts if it gets unknown flags Debian #250794
+	* Symbolic link created properly for pstree.x11 Debian #250096
+	* Strange mount points handled better Debian #178972
+	* Added Catalan translation
 
 Changes in 21.5
 ===============

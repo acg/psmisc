@@ -31,6 +31,7 @@
 #include <linux/kdev_t.h>	/* for MKDEV */
 #include <linux/major.h>	/* for LOOP_MAJOR */
 #endif
+#include <errno.h>
 
 #include "i18n.h"
 #include "comm.h"
@@ -510,24 +511,19 @@ scan_mounts (void)
     {
       if (sscanf (line, "%as %as", &path, &mounted) != 2)
 	continue;
-      /* new kernel :-) */
-      if (stat (path, &st_dev) < 0) {
-	free (path);            /* might be NFS or such */
-	free (mounted);
-	continue;		
-      }
-      if (S_ISBLK (st_dev.st_mode) && MAJOR (st_dev.st_rdev) == LOOP_MAJOR)
-	{
-          struct loop_info loopinfo;
-          int fd;
+      if ( stat (path, &st_dev) == 0) {
+      	if (S_ISBLK (st_dev.st_mode) && MAJOR (st_dev.st_rdev) == LOOP_MAJOR) {
+          	struct loop_info loopinfo;
+        	int fd;
 
-          if ((fd = open(path, O_RDWR)) > 0) {
-            if (ioctl(fd, LOOP_GET_STATUS, &loopinfo) >= 0) {
-              add_other(it_loop,loopinfo.lo_device,loopinfo.lo_device,loopinfo.lo_inode,path);
-            }
-            (void) close(fd);
+          	if ((fd = open(path, O_RDWR)) > 0) {
+            		if (ioctl(fd, LOOP_GET_STATUS, &loopinfo) >= 0) {
+              			add_other(it_loop,loopinfo.lo_device,loopinfo.lo_device,loopinfo.lo_inode,path);
+            		}
+            		(void) close(fd);
                 }
 	}
+      }
       if (stat (mounted, &st_mounted) < 0)
 	{
 	  perror (mounted);

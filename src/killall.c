@@ -592,23 +592,19 @@ main (int argc, char **argv)
       case '?':
         /* Signal names are in uppercase, so check to see if the argv
          * is upper case */
-        if (argv[optind-1][1] >= 'A' && argv[optind-1][1] <= 'Z') 
-	  sig_num = get_signal (argv[optind-1]+1, "killall");
-        /* Might also be a -## signal too */
-        if (argv[optind-1][1] >= '0' && argv[optind-1][1] <= '9')
-          sig_num = atoi(argv[optind-1]+1);
+        if (argv[optind-1][1] >= 'A' && argv[optind-1][1] <= 'Z') {
+	      sig_num = get_signal (argv[optind-1]+1, "killall");
+        } else {
+          /* Might also be a -## signal too */
+          if (argv[optind-1][1] >= '0' && argv[optind-1][1] <= '9') {
+            sig_num = atoi(argv[optind-1]+1);
+          } else {
+            usage();
+          }
+        }
         break;
     }
   }
-/*
-	  if (*walk)
-	    if (walk != *argv + 1 || pidof)
-	      usage ();
-	    else
-	      sig_num = get_signal (*argv + 1, "killall");
-	}
-    }
-    */
   myoptind = optind;
   if (argc - myoptind < 1) 
     usage();

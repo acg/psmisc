@@ -3,8 +3,6 @@ AM_CFLAGS = -Wall -DLOCALEDIR=\"/usr/share/locale\"
 
 bin_PROGRAMS = fuser killall pstree
 
-bin_SCRIPTS = pstree.x11
-
 fuser_SOURCES = fuser.c comm.h signals.c signals.h loop.h
 
 killall_SOURCES = killall.c comm.h signals.c signals.h 
@@ -19,7 +17,7 @@ BUILT_SOURCES = signames.h
 
 EXTRA_DIST = signames.c 
 
-CLEANFILES = signames.h pstree.x11
+CLEANFILES = signames.h
 
 signames.h: signames.c Makefile
 		@CPP@ -dM $< |\
@@ -31,7 +29,6 @@ signames.h: signames.c Makefile
 		grep '^{ 1,"HUP" },$$' signames.h >/dev/null || \
 		  { rm -f signames.h; exit 1; }
 
-Makefile:	signames.h
-
-pstree.x11:	pstree
-	ln -s pstree pstree.x11
+install-exec-hook:
+		cd $(DESTDIR)$(bindir) && \
+			$(LN_S) pstree pstree.x11
