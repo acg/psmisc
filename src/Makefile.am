@@ -1,5 +1,5 @@
 
-CFLAGS = -Wall
+CFLAGS = -Wall -DLOCALEDIR=\"/usr/share/locale\"
 
 bin_PROGRAMS = fuser killall pstree
 

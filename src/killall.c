@@ -17,6 +17,8 @@
 #include <sys/stat.h>
 #include <getopt.h>
 #include <libintl.h>
+#include <locale.h>
+#define _(String) gettext (String)
 
 #include "comm.h"
 #include "signals.h"
@@ -368,6 +370,11 @@ main (int argc, char **argv)
     name = *argv;
   pidof = strcmp (name, "killall");
   sig_num = SIGTERM;
+
+  /* Setup the i18n */
+  setlocale(LC_ALL, "");
+  bindtextdomain(PACKAGE, LOCALEDIR);
+  textdomain(PACKAGE);
 
   opterr = 0;
   while ( (optc = getopt_long_only(argc,argv,"egilqs:vwV",options,NULL)) != EOF) {

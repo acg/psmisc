@@ -1,2 +1,4 @@
 
-SUBDIRS = doc src
+SUBDIRS = doc intl src po
+
+EXTRA_DIST=ABOUT-NLS 
