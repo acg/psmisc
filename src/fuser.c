@@ -164,7 +164,6 @@ parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version 
   char line[MAX_LINE + 1];
   char rmt_addr[128];
   char addr6[128];
-  struct in6_addr in6;
 
   if (!(file = fopen (filename, "r")))
     {
@@ -182,7 +181,7 @@ parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version 
 	  exit (1);
 	}
       if (sscanf (line, "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d "
-		  "%ld", &new->lcl_port, rmt_addr, &new->rmt_port,
+		  "%Ld", &new->lcl_port, rmt_addr, &new->rmt_port,
 		  &new->ino) != 4)
 	{
 	  free (new);

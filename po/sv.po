@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 20.1\n"
-"POT-Creation-Date: 2002-09-26 09:26+1000\n"
+"POT-Creation-Date: 2002-09-27 21:08+1000\n"
 "PO-Revision-Date: 2002-05-04 12:27+0100\n"
 "Last-Translator: Joakim Mared <joakim at bfcom dot se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -29,7 +29,7 @@ msgstr "hoppar över delvis matchande process: %s(%d)\n"
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Avslutade %s(%s%d) med signal %d\n"
 
-#: src/killall.c:330 src/fuser.c:492
+#: src/killall.c:330 src/fuser.c:491
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s är tom (inte monterad ?)\n"
@@ -44,62 +44,62 @@ msgstr "%s: ingen process avslutad\n"
 msgid "Maximum number of names is %d\n"
 msgstr "Maximalt antal namn är %d\n"
 
-#: src/fuser.c:244
+#: src/fuser.c:243
 #, c-format
 msgid "-4 flag used but proc file %s is not readable\n"
 msgstr "-4 används men proc-fil %s kan inte läsas\n"
 
-#: src/fuser.c:253
+#: src/fuser.c:252
 #, c-format
 msgid "-6 flag used but proc file %s is not readable\n"
 msgstr "-6 används men proc-fil %s kan inte läsas\n"
 
-#: src/fuser.c:590
+#: src/fuser.c:589
 #, c-format
 msgid "Kill process %d ? (y/n) "
 msgstr "Avsluta process %d ? (y/n) "
 
-#: src/fuser.c:620
+#: src/fuser.c:619
 #, c-format
 msgid "kill %d"
 msgstr "avsluta %d"
 
-#: src/fuser.c:624 src/fuser.c:628
+#: src/fuser.c:623 src/fuser.c:627
 #, c-format
 msgid "No automatic removal. Please use  umount %s\n"
 msgstr "Ingen automatisk avmontering. Använd  umount %s\n"
 
-#: src/fuser.c:632
+#: src/fuser.c:631
 #, c-format
 msgid "No automatic removal. Please use  swapoff %s\n"
 msgstr "Ingen automatisk avmontering av swap. Använd  swapoff %s\n"
 
-#: src/fuser.c:735
+#: src/fuser.c:734
 #, c-format
 msgid "Internal error (type %d)\n"
 msgstr "Internt fel (typ %d)\n"
 
-#: src/fuser.c:765
+#: src/fuser.c:764
 msgid "kernel mount  "
 msgstr "monteringspunkt för kärna  "
 
-#: src/fuser.c:768
+#: src/fuser.c:767
 msgid "kernel loop   "
 msgstr "loop i kärna   "
 
-#: src/fuser.c:771
+#: src/fuser.c:770
 msgid "kernel swap   "
 msgstr "växlingsutrymme för kärna   "
 
-#: src/fuser.c:791
+#: src/fuser.c:790
 msgid "No process references; use -v for the complete list\n"
 msgstr "Processreferens saknas; använd -v för komplett lista\n"
 
-#: src/fuser.c:929
+#: src/fuser.c:928
 msgid "can't find sockets' device number"
 msgstr "kunde inte hitta uttagets (socket) enhetsnummer"
 
-#: src/fuser.c:938
+#: src/fuser.c:937
 msgid ""
 "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -148,12 +148,12 @@ msgstr ""
 "  udp/tcp namn: [lokal_port][,[fjärrvärd][,[fjärrport]]]\n"
 "\n"
 
-#: src/fuser.c:962
+#: src/fuser.c:961
 #, c-format
 msgid "fuser (psmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/fuser.c:964
+#: src/fuser.c:963
 #, fuzzy
 msgid ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
@@ -171,12 +171,12 @@ msgstr ""
 "GNU General Public License\n"
 "För mer information om detta, se filen COPYING.\n"
 
-#: src/fuser.c:1142
+#: src/fuser.c:1141
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
 msgstr "ignorerar -m i utrymme \"%s\"\n"
 
-#: src/fuser.c:1150
+#: src/fuser.c:1149
 #, c-format
 msgid "%s/%s: invalid specificiation\n"
 msgstr "%s/%s: ogiltig specifikation\n"

@@ -393,7 +393,8 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
     }
   if (current->highlight && (tmp = tgetstr ("md", NULL)))
     tputs (tmp, 1, putchar);
-  if ((swapped && print_args) && current->argc < 0)
+  swapped = info = print_args;
+  if (swapped  && current->argc < 0)
     out_char ('(');  
   comm_len = 0;
   for (here = current->comm; *here; here++)
@@ -414,15 +415,14 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
 	comm_len += 4;
       }
   offset = cur_x;
-  info = pids || (user_change && prev_uid != current->uid);
-  if (info)
-    out_char (swapped ? ',' : '(');
   if (pids)
+  {
+    out_char(info++ ? ',' : '(');
     (void) out_int (current->pid);
+  }
   if (user_change && prev_uid != current->uid)
     {
-      if (pids)
-	out_char (',');
+      out_char (info++ ? ',' : '(');
       if ((pw = getpwuid (current->uid)))
 	out_string (pw->pw_name);
       else
@@ -430,16 +430,15 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
     }
 #ifdef FLASK_LINUX
   if ( show_sids ) {
-      out_char(',');
-      out_sid(current->sid);
+    out_char (info++ ? ',' : '(');
+    out_sid(current->sid);
   }
   if ( show_scontext ) {
-      out_char(',');
-      out_scontext(current->sid);
+    out_char (info++ ? ',' : '(');
+    out_scontext(current->sid);
   }
 #endif /*FLASK_LINUX*/
-  /*XXX if (info || swapped) */
-  if (swapped && print_args && current->argc < 0) 
+  if ((swapped && print_args && current->argc < 0) || (!swapped && info))
     out_char (')');
   if (current->highlight && (tmp = tgetstr ("me", NULL)))
     tputs (tmp, 1, putchar);

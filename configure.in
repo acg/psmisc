@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(src/comm.h)
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(psmisc,21.1)
+AM_INIT_AUTOMAKE(psmisc,21.2)
 
 dnl checks for options
 AC_SUBST(FLASK_LINUX)

@@ -106,8 +106,6 @@ install_sh = @install_sh@
 SUBDIRS = doc src po 
 
 EXTRA_DIST = config.rpath ABOUT-NLS 
-
-ACLOCAL_AMFLAGS = -I m4
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
