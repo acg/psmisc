@@ -7,7 +7,22 @@ DIE=0
 
 PROJECT=psmisc
 
-(autoconf --version) < /dev/null > /dev/null 2>&1 || {
+# Make it possible to specify path in the environment
+: ${AUTOCONF=autoconf}
+: ${AUTOHEADER=autoheader}
+: ${AUTOMAKE=automake}
+: ${ACLOCAL=aclocal}
+: ${AUTOPOINT=autopoint}
+
+($AUTOPOINT --version) < /dev/null > /dev/null 2>&1 || {
+	echo
+	echo "You must have gettext installed to compile $PROJECT."
+	echo "Get ftp://ftp.gnu.org/pub/gnu/gettext-0.14.1.tar.gz"
+	echo "(or a newer version if it is available)"
+	DIE=1
+}
+
+($AUTOCONF --version) < /dev/null > /dev/null 2>&1 || {
 	echo
 	echo "You must have autoconf installed to compile $PROJECT."
 	echo "Download the appropriate package for your distribution,"
@@ -15,19 +30,10 @@ PROJECT=psmisc
 	DIE=1
 }
 
-# Do we really need libtool?
-(libtool --version) < /dev/null > /dev/null 2>&1 || {
-	echo
-	echo "You must have libtool installed to compile $PROJECT."
-	echo "Get ftp://ftp.gnu.org/pub/gnu/libtool-1.2.tar.gz"
-	echo "(or a newer version if it is available)"
-	DIE=1
-}
-
-(automake --version) < /dev/null > /dev/null 2>&1 || {
+($AUTOMAKE --version) < /dev/null > /dev/null 2>&1 || {
 	echo
 	echo "You must have automake installed to compile $PROJECT."
-	echo "Get ftp://ftp.gnu.org/pub/gnu/automake-1.3.tar.gz"
+	echo "Get ftp://ftp.gnu.org/pub/gnu/automake-1.6.tar.gz"
 	echo "(or a newer version if it is available)"
 	DIE=1
 }
@@ -46,19 +52,22 @@ case $CC in
 esac
 
 for dir in .
-do 
+do
   echo processing $dir
-  (cd $dir; \
-  aclocalinclude="$ACLOCAL_FLAGS"; \
-  aclocal $aclocalinclude -I m4; \
-  autoheader; automake --add-missing --gnu $am_opt; autoconf)
+  cd $dir
+  configdir="config"
+  test -d $configdir || mkdir $configdir
+  aclocalinclude="$ACLOCAL_FLAGS"
+  $AUTOPOINT
+  $ACLOCAL $aclocalinclude -I $configdir
+  $AUTOHEADER -Wall
+  $AUTOMAKE -Wall --add-missing --gnu $am_opt
+  $AUTOCONF -Wall
+  cd -
 done
 
 ./configure "$@"
 
-echo 
+echo
 echo "Now type 'make' to compile $PROJECT."
-
-
-
 
