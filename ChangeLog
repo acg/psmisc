@@ -1,19 +1,20 @@
-2002-08-16  gettextize  <bug-gnu-gettext@gnu.org>
-
-	* Makefile.am (SUBDIRS): Remove intl.
+Changes in 21.1
+===============
+2002-08-17
+	* Now has LFS support. Closes Debian #129157 and #156017
+	* Fixed pstree -a extra bracket problem, Closes Debian #96791
 
 2002-08-16  gettextize  <bug-gnu-gettext@gnu.org>
 
 	* Makefile.am (SUBDIRS): Add m4.
+	* Makefile.am (SUBDIRS): Remove intl.
 	(SUBDIRS): Remove intl.
 	(ACLOCAL_AMFLAGS): New variable.
 	(EXTRA_DIST): Add config.rpath.
 	* configure.in (AC_OUTPUT): Add po/Makefile.in,
 	(AC_OUTPUT): Remove intl/Makefile.
 
-Changes in 21.1
-===============
- - config.guess and config.sub are no longer syminks
+	* config.guess and config.sub are no longer syminks
 
 
 Changes in 21 (15-MAY-2002)

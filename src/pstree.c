@@ -329,8 +329,8 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
     }
   if (current->highlight && (tmp = tgetstr ("md", NULL)))
     tputs (tmp, 1, putchar);
-  if ((swapped = print_args) && current->argc < 0)
-    out_char ('(');
+  if ((swapped && print_args) && current->argc < 0)
+    out_char ('(');  
   comm_len = 0;
   for (here = current->comm; *here; here++)
     if (*here == '\\')
@@ -364,7 +364,8 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
       else
 	(void) out_int (current->uid);
     }
-  if (info || swapped)
+  /*XXX if (info || swapped) */
+  if (swapped && print_args && current->argc < 0) 
     out_char (')');
   if (current->highlight && (tmp = tgetstr ("me", NULL)))
     tputs (tmp, 1, putchar);
