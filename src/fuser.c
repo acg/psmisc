@@ -526,7 +526,6 @@ scan_mounts (void)
       }
       if (stat (mounted, &st_mounted) < 0)
 	{
-	  perror (mounted);
 	  free (path);
 	  free (mounted);
 	  continue;
