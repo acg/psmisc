@@ -296,44 +296,64 @@ m4trace:configure.in:32: -1- AH_OUTPUT([uid_t], [/* Define to \`int' if <sys/typ
 m4trace:configure.in:32: -1- AC_DEFINE_TRACE_LITERAL([gid_t])
 m4trace:configure.in:32: -1- AH_OUTPUT([gid_t], [/* Define to \`int' if <sys/types.h> doesn't define. */
 #undef gid_t])
-m4trace:configure.in:36: -1- AM_GNU_GETTEXT([external])
-m4trace:configure.in:36: -1- AC_SUBST([MKINSTALLDIRS])
-m4trace:configure.in:36: -1- AC_SUBST([MSGFMT])
-m4trace:configure.in:36: -1- AC_SUBST([GMSGFMT], [$ac_cv_path_GMSGFMT])
-m4trace:configure.in:36: -1- AC_SUBST([XGETTEXT])
-m4trace:configure.in:36: -1- AC_SUBST([MSGMERGE])
-m4trace:configure.in:36: -1- AC_SUBST([USE_NLS])
-m4trace:configure.in:36: -1- AC_DEFINE_TRACE_LITERAL([HAVE_ICONV])
-m4trace:configure.in:36: -1- AH_OUTPUT([HAVE_ICONV], [/* Define if you have the iconv() function. */
+m4trace:configure.in:35: -1- AC_SUBST([INO_T_IS_LONG_LONG])
+m4trace:configure.in:36: -1- AC_SUBST([INO_T_IS_INT])
+m4trace:configure.in:37: -1- AC_DEFINE_TRACE_LITERAL([SIZEOF_INO_T])
+m4trace:configure.in:37: -1- AH_OUTPUT([SIZEOF_INO_T], [/* The size of a \`ino_t', as computed by sizeof. */
+#undef SIZEOF_INO_T])
+m4trace:configure.in:38: -1- AC_DEFINE_TRACE_LITERAL([SIZEOF_INT])
+m4trace:configure.in:38: -1- AH_OUTPUT([SIZEOF_INT], [/* The size of a \`int', as computed by sizeof. */
+#undef SIZEOF_INT])
+m4trace:configure.in:39: -1- AC_DEFINE_TRACE_LITERAL([SIZEOF_LONG])
+m4trace:configure.in:39: -1- AH_OUTPUT([SIZEOF_LONG], [/* The size of a \`long', as computed by sizeof. */
+#undef SIZEOF_LONG])
+m4trace:configure.in:40: -1- AC_DEFINE_TRACE_LITERAL([SIZEOF_LONG_LONG])
+m4trace:configure.in:40: -1- AH_OUTPUT([SIZEOF_LONG_LONG], [/* The size of a \`long long', as computed by sizeof. */
+#undef SIZEOF_LONG_LONG])
+m4trace:configure.in:43: -1- AC_DEFINE_TRACE_LITERAL([INO_T_IS_INT])
+m4trace:configure.in:43: -1- AH_OUTPUT([INO_T_IS_INT], [/* Define to 1 if ino_t type is int */
+#undef INO_T_IS_INT])
+m4trace:configure.in:50: -1- AC_DEFINE_TRACE_LITERAL([INO_T_IS_LONG_LONG])
+m4trace:configure.in:50: -1- AH_OUTPUT([INO_T_IS_LONG_LONG], [/* Define to 1 if ino_t type is long long */
+#undef INO_T_IS_LONG_LONG])
+m4trace:configure.in:56: -1- AM_GNU_GETTEXT([external])
+m4trace:configure.in:56: -1- AC_SUBST([MKINSTALLDIRS])
+m4trace:configure.in:56: -1- AC_SUBST([MSGFMT])
+m4trace:configure.in:56: -1- AC_SUBST([GMSGFMT], [$ac_cv_path_GMSGFMT])
+m4trace:configure.in:56: -1- AC_SUBST([XGETTEXT])
+m4trace:configure.in:56: -1- AC_SUBST([MSGMERGE])
+m4trace:configure.in:56: -1- AC_SUBST([USE_NLS])
+m4trace:configure.in:56: -1- AC_DEFINE_TRACE_LITERAL([HAVE_ICONV])
+m4trace:configure.in:56: -1- AH_OUTPUT([HAVE_ICONV], [/* Define if you have the iconv() function. */
 #undef HAVE_ICONV])
-m4trace:configure.in:36: -1- AC_SUBST([LIBICONV])
-m4trace:configure.in:36: -1- AC_SUBST([LTLIBICONV])
-m4trace:configure.in:36: -1- AC_DEFINE_TRACE_LITERAL([ENABLE_NLS])
-m4trace:configure.in:36: -1- AH_OUTPUT([ENABLE_NLS], [/* Define to 1 if translation of program messages to the user's native
+m4trace:configure.in:56: -1- AC_SUBST([LIBICONV])
+m4trace:configure.in:56: -1- AC_SUBST([LTLIBICONV])
+m4trace:configure.in:56: -1- AC_DEFINE_TRACE_LITERAL([ENABLE_NLS])
+m4trace:configure.in:56: -1- AH_OUTPUT([ENABLE_NLS], [/* Define to 1 if translation of program messages to the user's native
    language is requested. */
 #undef ENABLE_NLS])
-m4trace:configure.in:36: -1- AC_DEFINE_TRACE_LITERAL([HAVE_GETTEXT])
-m4trace:configure.in:36: -1- AH_OUTPUT([HAVE_GETTEXT], [/* Define if the GNU gettext() function is already present or preinstalled. */
+m4trace:configure.in:56: -1- AC_DEFINE_TRACE_LITERAL([HAVE_GETTEXT])
+m4trace:configure.in:56: -1- AH_OUTPUT([HAVE_GETTEXT], [/* Define if the GNU gettext() function is already present or preinstalled. */
 #undef HAVE_GETTEXT])
-m4trace:configure.in:36: -1- AC_DEFINE_TRACE_LITERAL([HAVE_DCGETTEXT])
-m4trace:configure.in:36: -1- AH_OUTPUT([HAVE_DCGETTEXT], [/* Define if the GNU dcgettext() function is already present or preinstalled.
+m4trace:configure.in:56: -1- AC_DEFINE_TRACE_LITERAL([HAVE_DCGETTEXT])
+m4trace:configure.in:56: -1- AH_OUTPUT([HAVE_DCGETTEXT], [/* Define if the GNU dcgettext() function is already present or preinstalled.
    */
 #undef HAVE_DCGETTEXT])
-m4trace:configure.in:36: -1- AC_SUBST([INTLLIBS])
-m4trace:configure.in:36: -1- AC_SUBST([LIBINTL])
-m4trace:configure.in:36: -1- AC_SUBST([LTLIBINTL])
-m4trace:configure.in:36: -1- AC_SUBST([POSUB])
-m4trace:configure.in:39: -1- AC_CHECK_FUNCS([strdup strerror strtoul])
-m4trace:configure.in:39: -1- AH_OUTPUT([HAVE_STRDUP], [/* Define to 1 if you have the \`strdup' function. */
+m4trace:configure.in:56: -1- AC_SUBST([INTLLIBS])
+m4trace:configure.in:56: -1- AC_SUBST([LIBINTL])
+m4trace:configure.in:56: -1- AC_SUBST([LTLIBINTL])
+m4trace:configure.in:56: -1- AC_SUBST([POSUB])
+m4trace:configure.in:59: -1- AC_CHECK_FUNCS([strdup strerror strtoul])
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_STRDUP], [/* Define to 1 if you have the \`strdup' function. */
 #undef HAVE_STRDUP])
-m4trace:configure.in:39: -1- AH_OUTPUT([HAVE_STRERROR], [/* Define to 1 if you have the \`strerror' function. */
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_STRERROR], [/* Define to 1 if you have the \`strerror' function. */
 #undef HAVE_STRERROR])
-m4trace:configure.in:39: -1- AH_OUTPUT([HAVE_STRTOUL], [/* Define to 1 if you have the \`strtoul' function. */
+m4trace:configure.in:59: -1- AH_OUTPUT([HAVE_STRTOUL], [/* Define to 1 if you have the \`strtoul' function. */
 #undef HAVE_STRTOUL])
-m4trace:configure.in:42: -1- AC_DEFINE_TRACE_LITERAL([_FILE_OFFSET_BITS])
-m4trace:configure.in:42: -1- AH_OUTPUT([_FILE_OFFSET_BITS], [/* Number of bits in a file offset, on hosts where this is settable. */
+m4trace:configure.in:62: -1- AC_DEFINE_TRACE_LITERAL([_FILE_OFFSET_BITS])
+m4trace:configure.in:62: -1- AH_OUTPUT([_FILE_OFFSET_BITS], [/* Number of bits in a file offset, on hosts where this is settable. */
 #undef _FILE_OFFSET_BITS])
-m4trace:configure.in:42: -1- AC_DEFINE_TRACE_LITERAL([_LARGE_FILES])
-m4trace:configure.in:42: -1- AH_OUTPUT([_LARGE_FILES], [/* Define for large files, on AIX-style hosts. */
+m4trace:configure.in:62: -1- AC_DEFINE_TRACE_LITERAL([_LARGE_FILES])
+m4trace:configure.in:62: -1- AH_OUTPUT([_LARGE_FILES], [/* Define for large files, on AIX-style hosts. */
 #undef _LARGE_FILES])
-m4trace:configure.in:44: -1- AC_CONFIG_FILES([Makefile doc/Makefile src/Makefile po/Makefile.in po/Makefile.in ])
+m4trace:configure.in:64: -1- AC_CONFIG_FILES([Makefile doc/Makefile src/Makefile po/Makefile.in po/Makefile.in ])

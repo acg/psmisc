@@ -90,6 +90,12 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
+/* Define to 1 if ino_t type is int */
+#undef INO_T_IS_INT
+
+/* Define to 1 if ino_t type is long long */
+#undef INO_T_IS_LONG_LONG
+
 /* Name of package */
 #undef PACKAGE
 
@@ -107,6 +113,18 @@
 
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
+
+/* The size of a `ino_t', as computed by sizeof. */
+#undef SIZEOF_INO_T
+
+/* The size of a `int', as computed by sizeof. */
+#undef SIZEOF_INT
+
+/* The size of a `long', as computed by sizeof. */
+#undef SIZEOF_LONG
+
+/* The size of a `long long', as computed by sizeof. */
+#undef SIZEOF_LONG_LONG
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS

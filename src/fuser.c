@@ -181,7 +181,13 @@ parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version 
 	  exit (1);
 	}
       if (sscanf (line, "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d "
+#ifdef INO_T_IS_LONG_LONG
 		  "%Ld", &new->lcl_port, rmt_addr, &new->rmt_port,
+#elif defined(INO_T_IS_INT)
+		  "%d", &new->lcl_port, rmt_addr, &new->rmt_port,
+#else
+		  "%d", &new->lcl_port, rmt_addr, &new->rmt_port,
+#endif
 		  &new->ino) != 4)
 	{
 	  free (new);
