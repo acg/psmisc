@@ -586,20 +586,19 @@ ask (pid_t pid)
   int ch, c;
 
   fflush (stdout);
-  do
-    {
-      fprintf (stderr, _("Kill process %d ? (y/n) "), pid);
-      fflush (stderr);
-      do
-	if ((ch = getchar ()) == EOF)
-	  exit (0);
-      while (ch == '\n' || ch == '\t' || ch == ' ');
-      do
-	if ((c = getchar ()) == EOF)
-	  exit (0);
-      while (c != '\n');
-    }
-  while (ch != 'y' && ch != 'n' && ch != 'Y' && ch != 'N');
+  do {
+    fprintf (stderr, _("Kill process %d ? (y/n) "), pid);
+    fflush (stderr);
+    do {
+      if ((ch = getchar ()) == EOF)
+        exit (0);
+      if (ch == '\n') return 0;
+    } while (ch == '\t' || ch == ' ');
+    do
+      if ((c = getchar ()) == EOF)
+	    exit (0);
+    while (c != '\n');
+  } while (ch != '\n' && ch != 'y' && ch != 'n' && ch != 'Y' && ch != 'N');
   return ch == 'y' || ch == 'Y';
 }
 

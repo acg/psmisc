@@ -33,9 +33,8 @@ Signals can be specified either by name (e.g. \fB\-HUP\fP) or by number
 If the command name contains a slash (\fB/\fP), processes executing that
 particular file will be selected for killing, independent of their name.
 .PP
-\fBkillall\fP returns a non-zero return code if no process has been killed
-for any of the listed commands. If at least one process has been killed for
-each command, \fBkillall\fP returns zero.
+\fBkillall\fP returns a zero return code if at least one process has been 
+killed for each ilisted command. \fBkillall\fP returns zero otherwise.
 .PP
 A \fBkillall\fP process never kills itself (but may kill other \fBkillall\fP
 processes).
