@@ -128,7 +128,7 @@ out_char (char c)
   cur_x += (c & 0xc0) != 0x80;	/* only count first UTF-8 char */
   if (cur_x <= output_width || !trunc)
     putchar (c);
-  if (cur_x == output_width + 1 && trunc)
+  if (cur_x == output_width + 1 && trunc && ((c & 0xc0) != 0x80))
   {
     if (last_char || (c & 0x80))
       putchar ('+');

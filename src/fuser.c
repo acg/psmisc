@@ -320,7 +320,7 @@ fill_unix_cache (void)
 
 
 static unsigned long
-try_to_find_unix_dev (unsigned long inode)
+try_to_find_unix_dev (ino_t inode)
 {
   UNIX_CACHE *walk;
 
@@ -332,13 +332,13 @@ try_to_find_unix_dev (unsigned long inode)
 
 
 static void
-add_file (const char *path, unsigned long device, unsigned long inode,
+add_file (const char *path, dev_t device, ino_t inode,
 	  pid_t pid, int ref)
 {
   struct stat st;
   FILE_DSC *file, *next;
   ITEM_DSC **item, *this;
-  unsigned long mount_dev;
+  dev_t mount_dev;
 
   if (device)
     mount_dev = device;
@@ -382,8 +382,8 @@ add_file (const char *path, unsigned long device, unsigned long inode,
 
 
 static void
-add_other (ITEM_TYPE type, unsigned long mount_dev,
-	   unsigned long device, unsigned long inode, const char *path)
+add_other (ITEM_TYPE type, dev_t mount_dev,
+	   dev_t device, ino_t inode, const char *path)
 {
   FILE_DSC *file, *next;
   ITEM_DSC **item, *this;
@@ -433,16 +433,19 @@ check_map (const char *rel, pid_t pid, int type)
   FILE *file;
   char line[MAX_LINE + 1];
   int major, minor;
-  unsigned long inode;
+  ino_t inode;
+  unsigned long long tmp_inode;
 
   if (!(file = fopen (rel, "r")))
     return;
   while (fgets (line, MAX_LINE, file))
     {
-      if (sscanf (line, "%*s %*s %*s %x:%x %ld", &major, &minor, &inode) != 3)
+      if (sscanf (line, "%*s %*s %*s %x:%x %lld", &major, &minor, &tmp_inode) != 3)
 	continue;
-      if (major || minor || inode)
-	add_file (rel, MKDEV (major, minor), inode, pid, type);
+      if (major || minor || tmp_inode) {
+        inode = (ino_t)(tmp_inode);
+	    add_file (rel, MKDEV (major, minor), inode, pid, type);
+      }
     }
   fclose (file);
 }
@@ -893,7 +896,6 @@ parse_inet (const char *spec, const char *name_space, int *lcl_port,
   address_match = 0;
   for (here = s; here; here = next ? next + 1 : NULL)
     {
-      printf("here: %s\n", here);
       next = strchr (here, ',');
       if (next)
 	*next = 0;
@@ -1184,7 +1186,7 @@ main (int argc, char **argv)
 		}
 	      for (walk = this_name_space->cache; walk; walk = walk->next)
 		if ((lcl_port == -1 || walk->lcl_port == lcl_port) &&
-		    (rmt_addr.ss_family = 0|| ( memcmp(
+		    (rmt_addr.ss_family == 0 || ( memcmp(
                      &((struct sockaddr_in6*)&walk->rmt_addr)->sin6_addr,
                      &((struct sockaddr_in6*)&rmt_addr)->sin6_addr,
                      sizeof(struct in6_addr)) == 0) ) &&

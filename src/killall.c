@@ -38,12 +38,12 @@
 
 
 #define PROC_BASE "/proc"
-#define MAX_NAMES (sizeof(unsigned long)*8)
+#define MAX_NAMES (int)(sizeof(unsigned long)*8)
 
 
-static int verbose = 0, exact = 0, interactive = 0, quiet =
-  0, wait_until_dead = 0, process_group = 0, user = 0, pidof;
-
+static int verbose = 0, exact = 0, interactive = 0,
+           quiet = 0, wait_until_dead = 0, process_group = 0,
+           ignore_case = 0, pidof;
 
 static int
 ask (char *name, pid_t pid)
@@ -254,8 +254,16 @@ kill_all (int signal, int names, char **namelist)
 	    {
 	      if (length != COMM_LEN - 1 || name_len[j] < COMM_LEN - 1)
 		{
-		  if (strcmp (namelist[j], comm))
+		  if (ignore_case == 1)
+		  {
+		    if (strcasecmp (namelist[j], comm))
 		    continue;
+		  }
+		  else
+		  {
+		    if (strcmp(namelist[j], comm))
+		    continue;
+		  }
 		}
 	      else if (got_long ? strcmp (namelist[j], command) :
 		       strncmp (namelist[j], comm, COMM_LEN - 1))
@@ -395,6 +403,7 @@ usage_killall (void)
   fprintf (stderr, "       killall -l, --list\n");
   fprintf (stderr, "       killall -V --version\n\n");
   fprintf (stderr, "  -e,--exact          require exact match for very long names\n");
+  fprintf (stderr, "  -I,--ignore-case-   case insensitive process name match\n");
   fprintf (stderr, "  -g,--process-group  kill process group instead of process\n");
   fprintf (stderr, "  -i,--interactive    ask for confirmation before killing\n");
   fprintf (stderr, "  -l,--list           list all known signal names\n");
@@ -442,6 +451,7 @@ main (int argc, char **argv)
 
   struct option options[] = {
     {"exact", 0, NULL, 'e'},
+    {"ignore-case", 0, NULL, 'I'},
     {"process-group", 0, NULL, 'g'},
     {"interactive", 0, NULL, 'i'},
     {"list-signals", 0, NULL, 'l'},
@@ -479,9 +489,9 @@ main (int argc, char **argv)
 
   opterr = 0;
 #ifdef FLASK_LINUX
-  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwd:c:V",options,NULL)) != EOF) {
+  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwd:c:VI",options,NULL)) != EOF) {
 #else
-  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwV",options,NULL)) != EOF) {
+  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwVI",options,NULL)) != EOF) {
 #endif
     switch (optc) {
       case 'e':
@@ -518,6 +528,9 @@ main (int argc, char **argv)
         if (pidof)
           usage();
         wait_until_dead = 1;
+        break;
+      case 'I':
+        ignore_case = 1;
         break;
       case 'V':
         print_version();
