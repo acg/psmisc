@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 20.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-23 22:48+1000\n"
+"POT-Creation-Date: 2004-04-30 13:39+1000\n"
 "PO-Revision-Date: 2001-10-29 15:00+11\n"
 "Last-Translator: Craig Small <csmall@small.dropbear.id.au>\n"
 "Language-Team: English <en@li.org>\n"
@@ -25,90 +25,92 @@ msgstr "Kill %s(%s%d) ? (y/n) "
 msgid "skipping partial match %s(%d)\n"
 msgstr "skipping partial match %s(%d)\n"
 
-#: src/killall.c:329
+#: src/killall.c:337
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Killed %s(%s%d) with signal %d\n"
 
-#: src/killall.c:341 src/fuser.c:507 src/pstree.c:678
+#: src/killall.c:349 src/fuser.c:499 src/pstree.c:680
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s is empty (not mounted ?)\n"
 
-#: src/killall.c:347
+#: src/killall.c:355
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: no process killed\n"
 
-#: src/killall.c:594
+#: src/killall.c:607
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Maximum number of names is %d\n"
 
-#: src/fuser.c:259
+#: src/fuser.c:248
 #, c-format
 msgid "-4 flag used but proc file %s is not readable\n"
 msgstr "-4 flag used but proc file %s is not readable\n"
 
-#: src/fuser.c:268
+#: src/fuser.c:257
 #, c-format
 msgid "-6 flag used but proc file %s is not readable\n"
 msgstr "-6 flag used but proc file %s is not readable\n"
 
-#: src/fuser.c:605
+#: src/fuser.c:597
 #, fuzzy, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Kill process %d ? (y/n) "
 
-#: src/fuser.c:635
+#: src/fuser.c:627
 #, c-format
 msgid "kill %d"
 msgstr "kill %d"
 
-#: src/fuser.c:639 src/fuser.c:643
+#: src/fuser.c:631 src/fuser.c:635
 #, c-format
 msgid "No automatic removal. Please use  umount %s\n"
 msgstr "No automatic removal. Please use  umount %s\n"
 
-#: src/fuser.c:647
+#: src/fuser.c:639
 #, c-format
 msgid "No automatic removal. Please use  swapoff %s\n"
 msgstr "No automatic removal. Please use  swapoff %s\n"
 
-#: src/fuser.c:759
+#: src/fuser.c:752
 #, c-format
 msgid "Internal error (type %d)\n"
 msgstr "Internal error (type %d)\n"
 
-#: src/fuser.c:795
+#: src/fuser.c:790
 #, c-format
 msgid "kernel mount  "
 msgstr "kernel mount  "
 
-#: src/fuser.c:798
+#: src/fuser.c:793
 #, c-format
 msgid "kernel loop   "
 msgstr "kernel loop   "
 
-#: src/fuser.c:801
+#: src/fuser.c:796
 #, c-format
 msgid "kernel swap   "
 msgstr "kernel swap   "
 
-#: src/fuser.c:958
+#: src/fuser.c:952
 #, c-format
 msgid "can't find sockets' device number"
 msgstr "can't find sockets' device number"
 
-#: src/fuser.c:967
-#, c-format
+#: src/fuser.c:961
+#, fuzzy, c-format
 msgid ""
-"usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+"usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "       fuser -l\n"
 "       fuser -V\n"
 "\n"
 "    -a        display unused files too\n"
+"    -c        mounted FS\n"
+"    -f        silently ignored (for POSIX compatibility\n"
 "    -k        kill processes accessing that file\n"
 "    -i        ask before killing (ignored without -k)\n"
 "    -l        list signal names\n"
@@ -149,12 +151,12 @@ msgstr ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 
-#: src/fuser.c:991
+#: src/fuser.c:987
 #, c-format
 msgid "fuser (psmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/fuser.c:993
+#: src/fuser.c:989
 #, fuzzy, c-format
 msgid ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
@@ -173,172 +175,177 @@ msgstr ""
 "of the GNU General Public License.\n"
 "For more information about these matters, see the files named COPYING.\n"
 
-#: src/fuser.c:1173
+#: src/fuser.c:1172
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
 msgstr "ignoring -m in name space \"%s\"\n"
 
-#: src/fuser.c:1181
+#: src/fuser.c:1180
 #, c-format
 msgid "%s/%s: invalid specificiation\n"
 msgstr "%s/%s: invalid specificiation\n"
 
-#: src/pstree.c:382
+#: src/pstree.c:384
 #, c-format
 msgid "MAX_DEPTH not big enough.\n"
 msgstr ""
 
-#: src/pstree.c:717
+#: src/pstree.c:719
 #, c-format
 msgid ""
 "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 msgstr ""
 
-#: src/pstree.c:718
+#: src/pstree.c:720
 #, c-format
-msgid "              [ -G | -U ] [ pid | user]\n"
+msgid "              [ -A | -G | -U ] [ pid | user]\n"
 msgstr ""
 
-#: src/pstree.c:719
+#: src/pstree.c:721
 #, c-format
 msgid ""
 "       pstree -V\n"
 "\n"
 msgstr ""
 
-#: src/pstree.c:720
+#: src/pstree.c:722
 #, c-format
 msgid "    -a     show command line arguments\n"
 msgstr ""
 
-#: src/pstree.c:721
-#, c-format
-msgid "    -c     don't compact identical subtrees\n"
-msgstr ""
-
-#: src/pstree.c:722
-#, c-format
-msgid "    -h     highlight current process and its ancestors\n"
-msgstr ""
-
 #: src/pstree.c:723
 #, c-format
-msgid "    -H pid highlight process \"pid\" and its ancestors\n"
+msgid "    -A     use ASCII line drawing characters\n"
 msgstr ""
 
 #: src/pstree.c:724
 #, c-format
-msgid "    -G     use VT100 line drawing characters\n"
+msgid "    -c     don't compact identical subtrees\n"
 msgstr ""
 
 #: src/pstree.c:725
 #, c-format
-msgid "    -l     don't truncate long lines\n"
+msgid "    -h     highlight current process and its ancestors\n"
 msgstr ""
 
 #: src/pstree.c:726
 #, c-format
-msgid "    -n     sort output by PID\n"
+msgid "    -H pid highlight process \"pid\" and its ancestors\n"
 msgstr ""
 
 #: src/pstree.c:727
 #, c-format
-msgid "    -p     show PIDs; implies -c\n"
+msgid "    -G     use VT100 line drawing characters\n"
 msgstr ""
 
 #: src/pstree.c:728
 #, c-format
-msgid "    -u     show uid transitions\n"
+msgid "    -l     don't truncate long lines\n"
+msgstr ""
+
+#: src/pstree.c:729
+#, c-format
+msgid "    -n     sort output by PID\n"
 msgstr ""
 
 #: src/pstree.c:730
 #, c-format
-msgid "    -s     show Flask SIDs\n"
+msgid "    -p     show PIDs; implies -c\n"
 msgstr ""
 
 #: src/pstree.c:731
 #, c-format
-msgid "    -x     show Flask security contexts\n"
+msgid "    -u     show uid transitions\n"
 msgstr ""
 
 #: src/pstree.c:733
 #, c-format
-msgid "    -U     use UTF-8 (Unicode)) line drawing characters\n"
+msgid "    -s     show Flask SIDs\n"
 msgstr ""
 
 #: src/pstree.c:734
 #, c-format
+msgid "    -x     show Flask security contexts\n"
+msgstr ""
+
+#: src/pstree.c:736
+#, c-format
+msgid "    -U     use UTF-8 (Unicode)) line drawing characters\n"
+msgstr ""
+
+#: src/pstree.c:737
+#, c-format
 msgid "    -V     display version information\n"
 msgstr ""
 
-#: src/pstree.c:735
+#: src/pstree.c:738
 #, c-format
 msgid "    pid    start at pid, default 1 (init))\n"
 msgstr ""
 
-#: src/pstree.c:736
+#: src/pstree.c:739
 #, c-format
 msgid ""
 "    user   show only trees rooted at processes of that user\n"
 "\n"
 msgstr ""
 
-#: src/pstree.c:742
+#: src/pstree.c:745
 #, fuzzy, c-format
 msgid "pstree (psmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/pstree.c:743
+#: src/pstree.c:746
 #, c-format
 msgid ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
 
-#: src/pstree.c:744
+#: src/pstree.c:747
 #, c-format
 msgid "pstree comes with ABSOLUTELY NO WARRANTY.\n"
 msgstr ""
 
-#: src/pstree.c:745
+#: src/pstree.c:748
 #, c-format
 msgid ""
 "This is free software, and you are welcome to redistribute it under the "
 "terms\n"
 msgstr ""
 
-#: src/pstree.c:746
+#: src/pstree.c:749
 #, c-format
 msgid "of the GNU General Public License.\n"
 msgstr ""
 
-#: src/pstree.c:747
+#: src/pstree.c:750
 #, c-format
 msgid ""
 "For more information about these matters, see the files named COPYING.\n"
 msgstr ""
 
-#: src/pstree.c:809
+#: src/pstree.c:835
 #, c-format
 msgid "TERM is not set\n"
 msgstr ""
 
-#: src/pstree.c:814
+#: src/pstree.c:840
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr ""
 
-#: src/pstree.c:860
+#: src/pstree.c:884
 #, c-format
 msgid "No such user name: %s\n"
 msgstr ""
 
-#: src/pstree.c:884
+#: src/pstree.c:900
 #, c-format
 msgid "No processes found.\n"
 msgstr ""
 
-#: src/pstree.c:889
+#: src/pstree.c:905
 #, c-format
 msgid "Press return to close\n"
 msgstr ""

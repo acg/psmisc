@@ -7,8 +7,11 @@ fuser \- identify processes using files or sockets
 .RB [ \-a | \-s | \-c ]
 .RB [ \-4 | \-6 ]
 .RB [ \-n\ \fIspace ]
-.RB [ \-\fIsignal\fB ]
-.RB [ \-kimuvf ]
+.RB [ \-k
+.RB [ \-i ]
+.RB [ \-\fIsignal\fR ] 
+]
+.RB [ \-muvf ]
 .I name ...
 .br
 .B fuser 
@@ -88,7 +91,8 @@ Silent operation. \fB\-u\fP and \fB\-v\fP are ignored in this mode.
 .IP \fB\-\fIsignal\fP
 Use the specified signal instead of SIGKILL when killing processes. Signals
 can be specified either by name (e.g. \fB\-HUP\fP) or by number
-(e.g. \fB\-1\fP).
+(e.g. \fB\-1\fP).  This option is silently ignored if the \fB\-k\fP option
+is not used.
 .IP \fB\-u\fP
 Append the user name of the process owner to each PID.
 .IP \fB\-v\fP

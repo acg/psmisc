@@ -16,6 +16,10 @@ not-yet-released
 	* fuser sends PIDs only to stdout, the rest goes to stderr.
 	  Changed for POSIX compatibility
 	* Silently ignore -f option, for POSIX
+	* Using automake 1.8 now
+	* Built source signames.h not distributed in tar Debian: #240986
+	* Manual page for fuser explains -SIG is ignored with no -k
+	  Debian: #222935
 
 2004-04-05  gettextize  <bug-gnu-gettext@gnu.org>
 

@@ -5,9 +5,9 @@ bin_PROGRAMS = fuser killall pstree
 
 bin_SCRIPTS = pstree.x11
 
-fuser_SOURCES = fuser.c comm.h signals.c signals.h signames.h loop.h
+fuser_SOURCES = fuser.c comm.h signals.c signals.h loop.h
 
-killall_SOURCES = killall.c comm.h signals.c signals.h signames.h
+killall_SOURCES = killall.c comm.h signals.c signals.h 
 
 killall_LDADD = @FLASK_LIB@
 
@@ -21,7 +21,7 @@ EXTRA_DIST = signames.c
 
 CLEANFILES = signames.h pstree.x11
 
-signames.h: signames.c
+signames.h: signames.c Makefile
 		@CPP@ -dM $< |\
 		tr -s '\t ' ' ' | sort -n -k 3 | sed \
 	's:#define SIG\([A-Z]\+[0-9]*\) \([0-9]\+\) *\(\|/\*.*\)$$:{\
