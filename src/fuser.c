@@ -143,7 +143,7 @@ static int ipv4only = 0, ipv6only = 0;
 
 
 static void
-parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr )
+parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version )
 {
   FILE *file;
   NET_CACHE *new, *last;
@@ -874,36 +874,38 @@ static void find_net_dev(void)
 static void
 usage (void)
 {
-  fprintf (stderr, _("usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"));
-  fprintf (stderr, _("%13s[ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"), "");
-  fprintf (stderr, _("       fuser -l\n"));
-  fprintf (stderr, _("       fuser -V\n\n"));
-  fprintf (stderr, _("    -a        display unused files too\n"));
-  fprintf (stderr, _("    -k        kill processes accessing that file\n"));
-  fprintf (stderr, _("    -i        ask before killing (ignored without -k)\n"));
-  fprintf (stderr, _("    -l        list signal names\n"));
-  fprintf (stderr, _("    -m        mounted FS\n"));
-  fprintf (stderr, _("    -n space  search in the specified name space (file, udp, or tcp)\n"));
-  fprintf (stderr, _("    -s        silent operation\n"));
-  fprintf (stderr, _("    -signal   send signal instead of SIGKILL\n"));
-  fprintf (stderr, _("    -u        display user ids\n"));
-  fprintf (stderr, _("    -v        verbose output\n"));
-  fprintf (stderr, _("    -V        display version information\n"));
-  fprintf (stderr, _("    -4        search IPv4 sockets only\n"));
-  fprintf (stderr, _("    -6        search IPv6 sockets only\n"));
-  fprintf (stderr, _("    -         reset options\n\n"));
-  fprintf (stderr, _("  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n\n"));
+  fprintf (stderr, _(
+    "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+    "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+    "       fuser -l\n"
+    "       fuser -V\n\n"
+    "    -a        display unused files too\n"
+    "    -k        kill processes accessing that file\n"
+    "    -i        ask before killing (ignored without -k)\n"
+    "    -l        list signal names\n"
+    "    -m        mounted FS\n"
+    "    -n space  search in the specified name space (file, udp, or tcp)\n"
+    "    -s        silent operation\n"
+    "    -signal   send signal instead of SIGKILL\n"
+    "    -u        display user ids\n"
+    "    -v        verbose output\n"
+    "    -V        display version information\n"
+    "    -4        search IPv4 sockets only\n"
+    "    -6        search IPv6 sockets only\n"
+    "    -         reset options\n\n"
+    "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n\n"));
   exit (1);
 }
 
 void print_version()
 {
   fprintf(stderr, _("fuser (psmisc) %s\n"), VERSION);
-  fprintf(stderr, _("Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n\n"));
-  fprintf(stderr, _("PSmisc comes with ABSOLUTELY NO WARRANTY.\n"));
-  fprintf(stderr, _("This is free software, and you are welcome to redistribute it under the terms\n"));
-  fprintf(stderr, _("of the GNU General Public License.\n"));
-  fprintf(stderr, _("For more information about these matters, see the files named COPYING.\n"));
+  fprintf(stderr, _(
+    "Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n\n"
+    "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
+    "This is free software, and you are welcome to redistribute it under the terms\n"
+    "of the GNU General Public License.\n"
+    "For more information about these matters, see the files named COPYING.\n"));
 }
 
 
@@ -1087,16 +1089,18 @@ main (int argc, char **argv)
 	      if (!parse_inet (*argv, this_name_space->name, &lcl_port,
 			       &rmt_addr, &rmt_port))
 		{
-		  fprintf (stderr, _("%1%s/%2%s: invalid specificiation\n"), *argv,
+		  fprintf (stderr, _("%s/%s: invalid specificiation\n"), *argv,
 			   this_name_space->name);
 		  continue;
 		}
+                /* XXX fixme
 	      for (walk = this_name_space->cache; walk; walk = walk->next)
 		if ((lcl_port == -1 || walk->lcl_port == lcl_port) &&
 		    (!rmt_addr || walk->rmt_addr == rmt_addr) &&
 		    (rmt_port == -1 || walk->rmt_port == rmt_port))
 		  enter_item (*argv, flags, sig_number, net_dev, walk->ino,
 			      this_name_space);
+                              */
 	    }
 	}
     }

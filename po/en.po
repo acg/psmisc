@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-10-18 12:43+1000\n"
+"POT-Creation-Date: 2001-10-19 12:12+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,125 +99,84 @@ msgstr "No process references; use -v for the complete list\n"
 msgid "can't find sockets' device number"
 msgstr "can't find sockets' device number"
 
-#: src/fuser.c:877
-msgid "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
-msgstr "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
-
 #: src/fuser.c:878
-#, c-format
-msgid "%13s[ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
-msgstr ""
-
-#: src/fuser.c:879
-msgid "       fuser -l\n"
-msgstr ""
-
-#: src/fuser.c:880
 msgid ""
+"usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+"             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+"       fuser -l\n"
 "       fuser -V\n"
 "\n"
-msgstr ""
-
-#: src/fuser.c:881
-msgid "    -a        display unused files too\n"
-msgstr ""
-
-#: src/fuser.c:882
-msgid "    -k        kill processes accessing that file\n"
-msgstr ""
-
-#: src/fuser.c:883
-msgid "    -i        ask before killing (ignored without -k)\n"
-msgstr ""
-
-#: src/fuser.c:884
-msgid "    -l        list signal names\n"
-msgstr ""
-
-#: src/fuser.c:885
-msgid "    -m        mounted FS\n"
-msgstr ""
-
-#: src/fuser.c:886
-msgid "    -n space  search in the specified name space (file, udp, or tcp)\n"
-msgstr ""
-
-#: src/fuser.c:887
-msgid "    -s        silent operation\n"
-msgstr ""
-
-#: src/fuser.c:888
-msgid "    -signal   send signal instead of SIGKILL\n"
-msgstr ""
-
-#: src/fuser.c:889
-msgid "    -u        display user ids\n"
-msgstr ""
-
-#: src/fuser.c:890
-msgid "    -v        verbose output\n"
-msgstr ""
-
-#: src/fuser.c:891
-msgid "    -V        display version information\n"
-msgstr ""
-
-#: src/fuser.c:892
-msgid "    -4        search IPv4 sockets only\n"
-msgstr ""
-
-#: src/fuser.c:893
-msgid "    -6        search IPv6 sockets only\n"
-msgstr ""
-
-#: src/fuser.c:894
-msgid ""
+"    -a        display unused files too\n"
+"    -k        kill processes accessing that file\n"
+"    -i        ask before killing (ignored without -k)\n"
+"    -l        list signal names\n"
+"    -m        mounted FS\n"
+"    -n space  search in the specified name space (file, udp, or tcp)\n"
+"    -s        silent operation\n"
+"    -signal   send signal instead of SIGKILL\n"
+"    -u        display user ids\n"
+"    -v        verbose output\n"
+"    -V        display version information\n"
+"    -4        search IPv4 sockets only\n"
+"    -6        search IPv6 sockets only\n"
 "    -         reset options\n"
 "\n"
-msgstr ""
-
-#: src/fuser.c:895
-msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-
-#: src/fuser.c:901
-#, c-format
-msgid "fuser (psmisc) %s\n"
-msgstr ""
+"usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+"             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+"       fuser -l\n"
+"       fuser -V\n"
+"\n"
+"    -a        display unused files too\n"
+"    -k        kill processes accessing that file\n"
+"    -i        ask before killing (ignored without -k)\n"
+"    -l        list signal names\n"
+"    -m        mounted FS\n"
+"    -n space  search in the specified name space (file, udp, or tcp)\n"
+"    -s        silent operation\n"
+"    -signal   send signal instead of SIGKILL\n"
+"    -u        display user ids\n"
+"    -v        verbose output\n"
+"    -V        display version information\n"
+"    -4        search IPv4 sockets only\n"
+"    -6        search IPv6 sockets only\n"
+"    -         reset options\n"
+"\n"
+"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"\n"
 
 #: src/fuser.c:902
-msgid ""
-"Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n"
-"\n"
-msgstr ""
-
-#: src/fuser.c:903
-msgid "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
-msgstr ""
+#, c-format
+msgid "fuser (psmisc) %s\n"
+msgstr "fuser (psmisc) %s\n"
 
 #: src/fuser.c:904
 msgid ""
+"Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n"
+"\n"
+"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
 "This is free software, and you are welcome to redistribute it under the "
 "terms\n"
-msgstr ""
-
-#: src/fuser.c:905
-msgid "of the GNU General Public License.\n"
-msgstr ""
-
-#: src/fuser.c:906
-msgid ""
+"of the GNU General Public License.\n"
 "For more information about these matters, see the files named COPYING.\n"
 msgstr ""
+"Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n"
+"\n"
+"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
+"This is free software, and you are welcome to redistribute it under the "
+"terms\n"
+"of the GNU General Public License.\n"
+"For more information about these matters, see the files named COPYING.\n"
 
-#: src/fuser.c:1082
+#: src/fuser.c:1084
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
-msgstr ""
+msgstr "ignoring -m in name space \"%s\"\n"
 
-#: src/fuser.c:1090
+#: src/fuser.c:1092
 #, c-format
-msgid "%1%s/%2%s: invalid specificiation\n"
-msgstr ""
+msgid "%s/%s: invalid specificiation\n"
+msgstr "%s/%s: invalid specificiation\n"
+
