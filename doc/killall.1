@@ -48,6 +48,8 @@ out). In this case, \fBkillall\fP will kill everything that matches within
 the first 15 characters. With \fB\-e\fP, such entries are skipped.
 \fBkillall\fP prints a message for each skipped entry 
 if \fB\-v\fP is specified in addition to \fB\-e\fP,
+.IP "\fB\-I\fP, \fB\-\-ignore-case\fP"
+Do case insensitive process name match.
 .IP "\fB\-g\fP, \fB\-\-process-group\fP"
 Kill the process group to which the process belongs. The kill signal is only
 sent once per group, even if multiple processes belonging to the same process
