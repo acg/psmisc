@@ -210,7 +210,6 @@ parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version 
             &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr.s6_addr32[2],
             &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr.s6_addr32[3]);
         inet_ntop(AF_INET6, &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr, addr6, sizeof(addr6));
-        /*printf("address %s\n", addr6);*/
       } else {
         sscanf(rmt_addr, "%X",
             &((struct sockaddr_in *) &new->rmt_addr)->sin_addr.s_addr);
@@ -670,31 +669,31 @@ show_files_or_kill (void)
       {
 	if (header && (file->flags & FLAG_VERB))
 	  {
-	    printf ("\n%*s USER        PID ACCESS COMMAND\n", NAME_FIELD, "");
+	    fprintf (stderr, "\n%*s USER        PID ACCESS COMMAND\n", NAME_FIELD, "");
 	    header = 0;
 	  }
 	length = 0;
 	for (scan = file->name; scan && *scan; scan++)
 	  if (*scan == '\\')
-	    length += printf ("\\\\");
+	    length += fprintf (stderr, "\\\\");
 	  else if (*scan > ' ' && *scan <= '~')
 	    {
-	      putchar (*scan);
+	      putc(*scan,stderr);
 	      length++;
 	    }
 	  else
-	    length += printf ("\\%03o", *scan);
+	    length += fprintf (stderr, "\\%03o", *scan);
 	if (file->name_space)
-	  length += printf ("/%s", file->name_space->name);
+	  length += fprintf (stderr, "/%s", file->name_space->name);
 
 	if (length > 0)
 	  last_namelen=length;
 	else
-	  printf("\n%*.*s",last_namelen,last_namelen," ");
+	  fprintf(stderr, "\n%*.*s",last_namelen,last_namelen," ");
 
 	if (!(file->flags & FLAG_VERB))
 	  {
-	    putchar (':');
+	    putc (':',stderr);
 	    length++;
 	  }
 
@@ -708,27 +707,28 @@ show_files_or_kill (void)
         if ((first==1) && (item->u.proc.ref_set & (REF_FILE|REF_ROOT|REF_CWD|REF_EXE|REF_MMAP))) {
     while (length < NAME_FIELD)
     {
-      putchar (' ');
+      putc(' ',stderr);
       length++;
     }
         }
-		if (item->u.proc.ref_set & REF_FILE)
-		  printf ("%6d", item->u.proc.pid);
+		printf ("%6d", item->u.proc.pid);
+        fflush(stdout);
+		/* if (item->u.proc.ref_set & REF_FILE)*/
 		if (item->u.proc.ref_set & REF_ROOT)
-		  printf ("%6dr", item->u.proc.pid);
+		  putc ('r', stderr);
 		if (item->u.proc.ref_set & REF_CWD)
-		  printf ("%6dc", item->u.proc.pid);
+		  putc ('c', stderr);
 		if (item->u.proc.ref_set & REF_EXE)
-		  printf ("%6de", item->u.proc.pid);
+		  putc ('e', stderr);
 		else if (item->u.proc.ref_set & REF_MMAP)
-		  printf ("%6dm", item->u.proc.pid);
+		  putc ('m', stderr);
 		if ((file->flags & FLAG_UID) && item->u.proc.uid !=
 		    UID_UNKNOWN)
                 {
 		  if ((pw = getpwuid (item->u.proc.uid)) != NULL) {
-		    printf ("(%s)", pw->pw_name);
+		    fprintf (stderr, "(%s)", pw->pw_name);
                   } else {
-		    printf ("(%d)", item->u.proc.uid);
+		    fprintf (stderr, "(%d)", item->u.proc.uid);
                   }
                 }
 		first = 0;
@@ -773,20 +773,22 @@ show_files_or_kill (void)
 		    user = tmp;
 		  }
 		if (!first)
-		  printf ("%*s", NAME_FIELD, "");
+		  fprintf (stderr, "%*s", NAME_FIELD, "");
 		else if (length > NAME_FIELD)
-		  printf ("\n%*s", NAME_FIELD, "");
+		  fprintf (stderr, "\n%*s", NAME_FIELD, "");
         else
           while (length < NAME_FIELD)
           {
-            putchar (' ');
+            putc(' ', stderr);
             length++;
           }
-		printf (" %-8s ", user);
+		fprintf (stderr, " %-8s ", user);
 		switch (item->type)
 		  {
 		  case it_proc:
-		    printf ("%6d %c%c%c%c%c  ", item->u.proc.pid,
+		    printf ("%6d", item->u.proc.pid);
+            fflush(stdout);
+            fprintf (stderr, " %c%c%c%c%c  ",
 			    item->u.proc.ref_set & REF_FILE ? 'f' : '.',
 			    item->u.proc.ref_set & REF_ROOT ? 'r' : '.',
 			    item->u.proc.ref_set & REF_CWD ? 'c' : '.',
@@ -795,31 +797,31 @@ show_files_or_kill (void)
 			    !(item->u.proc.ref_set & REF_EXE) ? 'm' : '.');
 		    break;
 		  case it_mount:
-		    printf (_("kernel mount  "));
+		    fprintf (stderr, _("kernel mount  "));
 		    break;
 		  case it_loop:
-		    printf (_("kernel loop   "));
+		    fprintf (stderr, _("kernel loop   "));
 		    break;
 		  case it_swap:
-		    printf (_("kernel swap   "));
+		    fprintf (stderr, _("kernel swap   "));
 		    break;
 		  }
 		if (name)
                 {
 		  for (scan = name; *scan; scan++)
 		    if (*scan == '\\')
-		      printf ("\\\\");
+		      fprintf (stderr, "\\\\");
 		    else if (*scan > ' ' && *scan <= '~')
-		      putchar (*scan);
+		      putc (*scan,stderr);
 		    else
-		      printf ("\\%03o", (unsigned char) *scan);
+		      fprintf (stderr, "\\%03o", (unsigned char) *scan);
                 }
-		putchar ('\n');
+		putc ('\n',stderr);
 	      }
 	    first = 0;
 	  }
 	if (!(file->flags & FLAG_VERB) || first)
-	  putchar ('\n');
+	  putc('\n',stderr);
 	if (file->flags & FLAG_KILL)
 	  for (item = file->items; item; item = item->next)
 	    kill_item (file, item);
@@ -966,11 +968,12 @@ static void
 usage (void)
 {
   fprintf (stderr, _(
-    "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+    "usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
     "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
     "       fuser -l\n"
     "       fuser -V\n\n"
     "    -a        display unused files too\n"
+    "    -c        mounted FS\n"
     "    -k        kill processes accessing that file\n"
     "    -i        ask before killing (ignored without -k)\n"
     "    -l        list signal names\n"
@@ -1055,6 +1058,7 @@ main (int argc, char **argv)
 		  flags |= FLAG_ASK;
 		  break;
 		case 'm':
+		case 'c':
 		  flags |= FLAG_DEV;
 		  break;
 		case 'n':

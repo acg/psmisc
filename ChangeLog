@@ -8,6 +8,10 @@ not-yet-released
 	* inode and devices use ino_t and dev_t SF#: 
 	* Allow pstree to use ASCII characters with -A flag, patch by
 	  Branden Robinson Debian: #240973
+	* Debug "here" statement removed
+	* POSIX -m option added, part of SF Bug: #901841
+	* fuser sends PIDs only to stdout, the rest goes to stderr.
+	  Changed for POSIX compatibility
 
 2004-04-05  gettextize  <bug-gnu-gettext@gnu.org>
 
