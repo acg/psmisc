@@ -1,4 +1,6 @@
 
+CFLAGS = -Wall
+
 bin_PROGRAMS = fuser killall pstree
 
 fuser_SOURCES = fuser.c comm.h signals.c signals.h signames.h

@@ -15,6 +15,7 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <getopt.h>
 
 #include "comm.h"
 #include "signals.h"
@@ -100,7 +101,7 @@ kill_all (int signal, int names, char **namelist)
       exit (1);
     }
   pids = 0;
-  while (de = readdir (dir))
+  while ( (de = readdir (dir)) != NULL)
     {
       if (!(pid = atoi (de->d_name)) || pid == self)
 	continue;
@@ -314,12 +315,35 @@ usage (void)
   exit (1);
 }
 
+void print_version()
+{
+  fprintf(stderr, "%s (psmisc) %s\n", pidof ? "pidof" : "killall", VERSION);
+  fprintf(stderr, "Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n\n");
+  fprintf(stderr, "PSmisc comes with ABSOLUTELY NO WARRANTY.\n");
+  fprintf(stderr, "This is free software, and you are welcome to redistribute it under the terms\n");
+  fprintf(stderr, "of the GNU General Public License.\n");
+  fprintf(stderr, "For more information about these matters, see the files named COPYING.\n");
+}
 
 int
 main (int argc, char **argv)
 {
   char *name, *walk;
   int sig_num;
+  int optc;
+  int myoptind;
+
+  struct option options[] = {
+    {"exact", 0, NULL, 'e'},
+    {"process-group", 0, NULL, 'g'},
+    {"interactive", 0, NULL, 'i'},
+    {"list-signals", 0, NULL, 'l'},
+    {"quiet", 0, NULL, 'q'},
+    {"signal", 1, NULL, 's'},
+    {"verbose", 0, NULL, 's'},
+    {"wait", 0, NULL, 'w'},
+    {"version", 0, NULL, 'V'},
+    {0,0,0,0 }};
 
   name = strrchr (*argv, '/');
   if (name)
@@ -327,58 +351,59 @@ main (int argc, char **argv)
   else
     name = *argv;
   pidof = strcmp (name, "killall");
-  if (argc == 2 && !strcmp (argv[1], "-l"))
-    {
-      if (pidof)
-	usage ();
-      list_signals ();
-      return 0;
-    }
-  if (argc == 2 && !strcmp (argv[1], "-V"))
-    {
-      fprintf (stderr, "%s from psmisc version %s\n",
-	       pidof ? "pidof" : "killall", VERSION);
-      return 0;
-    }
   sig_num = SIGTERM;
-  while (argc > 1 && *argv[1] == '-')
-    {
-      argc--;
-      argv++;
-      if (**argv == '-')
-	{
-	  for (walk = *argv + 1; *walk && strchr ("eigqvw", *walk); walk++)
-	    {
-	      switch (*walk)
-		{
-		case 'e':
-		  exact = 1;
-		  break;
-		case 'i':
-		  if (pidof)
-		    usage ();
-		  interactive = 1;
-		  break;
-		case 'g':
-		  process_group = 1;
-		  break;
-		case 'q':
-		  if (pidof)
-		    usage ();
-		  quiet = 1;
-		  break;
-		case 'v':
-		  if (pidof)
-		    usage ();
-		  verbose = 1;
-		  break;
-		case 'w':
-		  if (pidof)
-		    usage ();
-		  wait_until_dead = 1;
-		  break;
-		}
-	    }
+
+  opterr = 0;
+  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwV",options,NULL)) != EOF) {
+    switch (optc) {
+      case 'e':
+        exact = 1;
+        break;
+      case 'g':
+        process_group = 1;
+        break;
+      case 'i':
+        if (pidof)
+          usage();
+        interactive = 1;
+        break;
+      case 'l':
+        if (pidof)
+          usage();
+        list_signals();
+        return 0;
+        break;
+      case 'q':
+        if (pidof)
+          usage();
+        quiet = 1;
+        break;
+      case 's':
+	sig_num = get_signal (optarg, "killall");
+        break;
+      case 'v':
+        if (pidof)
+          usage();
+        verbose = 1;
+        break;
+      case 'w':
+        if (pidof)
+          usage();
+        wait_until_dead = 1;
+        break;
+      case 'V':
+        print_version();
+        return 0;
+        break;
+      case '?':
+        /* Signal names are in uppercase, so check to see if the argv
+         * is upper case */
+        if (argv[optind-1][1] >= 'A' && argv[optind-1][1] <= 'Z') 
+	  sig_num = get_signal (argv[optind-1]+1, "killall");
+        break;
+    }
+  }
+/*
 	  if (*walk)
 	    if (walk != *argv + 1 || pidof)
 	      usage ();
@@ -386,12 +411,17 @@ main (int argc, char **argv)
 	      sig_num = get_signal (*argv + 1, "killall");
 	}
     }
-  if (argc < 2)
-    usage ();
-  if (argc > MAX_NAMES + 1)
+    */
+  myoptind = optind;
+  if (argc - myoptind < 1) 
+    usage();
+
+  if (argc - myoptind > MAX_NAMES + 1)
     {
       fprintf (stderr, "Maximum number of names is %d\n", MAX_NAMES);
       exit (1);
     }
-  return kill_all (sig_num, argc - 1, argv + 1);
+  argv = argv + myoptind;
+  printf("sending signal %d to procs\n", sig_num);
+  return kill_all (sig_num, argc - myoptind, argv );
 }

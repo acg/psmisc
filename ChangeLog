@@ -4,6 +4,7 @@ Changes from 19 to 20 (14-DEC-2000)
  - Uses automake/autoconf to determine things
  - License changed to GPL
  - signames.h generated better (suggested by Grant Erickson)
+ - uses getopt() for better command line stuff
 
 Changes from version 18 to 19 (25-OCT-1999)
 =============================

@@ -64,6 +64,8 @@ PACKAGE = @PACKAGE@
 TERMCAP_LIB = @TERMCAP_LIB@
 VERSION = @VERSION@
 
+CFLAGS = -Wall
+
 bin_PROGRAMS = fuser killall pstree
 
 fuser_SOURCES = fuser.c comm.h signals.c signals.h signames.h
@@ -96,7 +98,6 @@ killall_LDFLAGS =
 pstree_OBJECTS =  pstree.o
 pstree_DEPENDENCIES = 
 pstree_LDFLAGS = 
-CFLAGS = @CFLAGS@
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
@@ -331,8 +332,8 @@ mostlyclean-generic distclean-generic clean-generic \
 maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
 
-signames.h: /usr/include/signal.h
-		@CPP@ -dM - </usr/include/signal.h | \
+signames.h: signames.c
+		@CPP@ -dM $< |\
 		tr -s '\t ' ' ' | sort -n +2 | sed \
 	's:#define SIG\([A-Z]\+[0-9]*\) \([0-9]\+\) *\(\|/\*.*\)$$:{\
 \2,"\1" },:p;d' | \
