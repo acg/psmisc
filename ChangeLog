@@ -1,7 +1,8 @@
-Changes in 20.3
+Changes in 21
 ==============
  - signames.h is cleaned
  - More translatable strings
+ - Added Portuguese Language (thanks to Edesio Costa e Silva)
 
 
 Changes in 20.2 (18-OCT-2001)
@@ -32,7 +33,7 @@ Changes from 19 to 20 (14-DEC-2000)
  - Better selection of process name (thanks to David desJardins)
 
 Changes from version 18 to 19 (25-OCT-1999)
-=============================
+===========================================
 
  - pstree: "static int" was only "static" (fix by Jeremy Buhler)
  - now uses cc -E instead of /lib/cpp (suggested by Kristofer Karas)
@@ -43,7 +44,7 @@ Changes from version 18 to 19 (25-OCT-1999)
 
 
 Changes from version 17 to 18 (1-NOV-1998)
-=============================
+==========================================
 
  - fuser: usage summary listed -s (silent) as -q
  - fuser: fuser x/y yielded confusing error message if x/y doesn't exist
@@ -60,7 +61,7 @@ Changes from version 17 to 18 (1-NOV-1998)
 
 
 Changes from version 16 to 17 (17-FEB-1998)
-=============================
+===========================================
 
  - fuser: now also handles /proc of recent 2.1 kernels (fix by Andreas Schwab;
    other fixed also proposed by Chris Wedgwood and Luca Berra)
@@ -74,7 +75,7 @@ Changes from version 16 to 17 (17-FEB-1998)
 
 
 Changes from version 15 to 16 (28-JUL-1997)
-=============================
+===========================================
 
  - killall: now gets the list of all PIDs before killing processes, thereby
    avoiding race between readdir and /proc (found by Boris Zentner)
@@ -83,7 +84,7 @@ Changes from version 15 to 16 (28-JUL-1997)
 
 
 Changes from version 14 to 15 (16-JUN-1997)
-=============================
+===========================================
 
  - killall: killall -v didn't print the command name (fixed by Marty Leisner)
  - fuser: fuser -a <unix_domain_socket>  could crash (reported by Helmut Geyer)
@@ -95,7 +96,7 @@ Changes from version 14 to 15 (16-JUN-1997)
 
 
 Changes from version 13 to 14 (19-APR-1997)
-=============================
+===========================================
 
  - killall: command-line parser didn't accept -signal (fixed by Chris Wedgwood)
  - pidof: minor man page correction
@@ -104,7 +105,7 @@ Changes from version 13 to 14 (19-APR-1997)
 
 
 Changes from version 12 to 13 (16-APR-1997)
-=============================
+===========================================
 
  - fuser: didn't check for out of memory condition after malloc (oops !)
  - fuser: INET domain sockets can now be specified as
@@ -121,7 +122,7 @@ Changes from version 12 to 13 (16-APR-1997)
 
 
 Changes from version 11 to 12 (7-APR-1996)
-=============================
+==========================================
 
  - fuser is now able to look up INET and UNIX domain sockets
  - pstree: new option -n to sort its output by PID
@@ -129,7 +130,7 @@ Changes from version 11 to 12 (7-APR-1996)
 
 
 Changes from version 10 to 11 (20-SEP-1995)
-=============================
+===========================================
 
  - added VERSION file
  - size of command name is now defined in comm.h - the old approach of
@@ -143,7 +144,7 @@ Changes from version 10 to 11 (20-SEP-1995)
 
 
 Changes from version 9 to 10 (28-MAR-1995)
-============================
+==========================================
 
  - fuser: now prints header before first path (used to be on same line)
  - fuser: fixed line wrapping for long paths (used to wrap too early)
@@ -153,7 +154,7 @@ Changes from version 9 to 10 (28-MAR-1995)
  - updated e-mail address in README
 
 Changes from version 8 to 9 (22-JAN-1995)
-===========================
+=========================================
 
  - fuser: now works with Plan 9 semantics (i.e. what recent kernels use;
    reported by Harald Koenig, Nick Simicich, and others)
@@ -171,7 +172,7 @@ Changes from version 8 to 9 (22-JAN-1995)
  - updated e-mail address
 
 Changes from version 7 to 8 (11-OCT-1994)
-===========================
+=========================================
 
  - pstree: added -a to display command line arguments
  - pstree, fuser and killall: display an error message if /proc has

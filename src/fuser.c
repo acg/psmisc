@@ -148,6 +148,10 @@ parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version 
   FILE *file;
   NET_CACHE *new, *last;
   char line[MAX_LINE + 1];
+  char rmt_addr[128];
+  char addr6[128];
+  struct in6_addr in6;
+
   if (!(file = fopen (filename, "r")))
     {
       perror (filename);
@@ -163,13 +167,26 @@ parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version 
 	  perror ("malloc");
 	  exit (1);
 	}
-      if (sscanf (line, "%*d: %*x:%x %lx:%x %*x %*x:%*x %*x:%*x %*x %*d %*d "
-		  "%ld", &new->lcl_port, &new->rmt_addr, &new->rmt_port,
+      if (sscanf (line, "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d "
+		  "%ld", &new->lcl_port, rmt_addr, &new->rmt_port,
 		  &new->ino) != 4)
 	{
 	  free (new);
 	  continue;
 	}
+      if (strlen(rmt_addr) > 8) {
+        sscanf(rmt_addr, "%08X%08X%08X%08X",
+            &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr.s6_addr32[0],
+            &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr.s6_addr32[1],
+            &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr.s6_addr32[2],
+            &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr.s6_addr32[3]);
+        inet_ntop(AF_INET6, &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr, addr6, sizeof(addr6));
+        printf("address %s\n", addr6);
+      } else {
+        sscanf(rmt_addr, "%X",
+            &((struct sockaddr_in *) &new->rmt_addr)->sin_addr.s_addr);
+            ((struct sockaddr *) &new->rmt_addr)->sa_family = AF_INET;
+      }
       if (!new->ino)
 	{
 	  free (new);
@@ -794,10 +811,10 @@ enter_item (const char *name, int flags, int sig_number, dev_t dev,
 
 static int
 parse_inet (const char *spec, const char *name_space, int *lcl_port,
-	    unsigned long *rmt_addr, int *rmt_port)
+	    struct sockaddr_storage *rmt_addr, int *rmt_port)
 {
   char *s, *here, *next, *end;
-  int port, field;
+  int port, field, address_match;
 
   if (!(s = strdup (spec)))
     {
@@ -805,8 +822,9 @@ parse_inet (const char *spec, const char *name_space, int *lcl_port,
       exit (1);
     }
   *lcl_port = *rmt_port = -1;
-  *rmt_addr = 0;
+  memset(rmt_addr, 0, sizeof(struct sockaddr_storage));
   field = 0;
+  address_match = 0;
   for (here = s; here; here = next ? next + 1 : NULL)
     {
       next = strchr (here, ',');
@@ -836,16 +854,20 @@ parse_inet (const char *spec, const char *name_space, int *lcl_port,
 	case 1:
 	  if (!*here)
 	    break;
-	  if ((long) (*rmt_addr = inet_addr (here)) == -1)
-	    {
-	      struct hostent *hostent;
+          if (!ipv4only) {
 
-	      if (!(hostent = gethostbyname (here)))
-		return 0;
-	      if (hostent->h_addrtype != AF_INET)
-		return 0;
-	      memcpy (rmt_addr, hostent->h_addr, hostent->h_length);
-	    }
+            if (inet_pton(AF_INET6, here, &((struct sockaddr_in6*)rmt_addr)->sin6_addr) > 0) {
+              address_match = 1;
+              rmt_addr->ss_family = AF_INET6;
+             }
+          }
+          if (!ipv6only && !address_match) {
+            if (inet_pton(AF_INET, here, &((struct sockaddr_in*)rmt_addr)->sin_addr) > 0) {
+              address_match = 1;
+              rmt_addr->ss_family = AF_INET6;
+            }
+          }
+            
 	  break;
 	default:
 	  return 0;
@@ -1076,7 +1098,7 @@ main (int argc, char **argv)
 	  else
 	    {
 	      NET_CACHE *walk;
-	      unsigned long rmt_addr;
+	      struct sockaddr_storage rmt_addr;
 	      int lcl_port, rmt_port;
 
 	      if (flags & FLAG_DEV)
@@ -1093,14 +1115,15 @@ main (int argc, char **argv)
 			   this_name_space->name);
 		  continue;
 		}
-                /* XXX fixme
 	      for (walk = this_name_space->cache; walk; walk = walk->next)
 		if ((lcl_port == -1 || walk->lcl_port == lcl_port) &&
-		    (!rmt_addr || walk->rmt_addr == rmt_addr) &&
+		    (rmt_addr.ss_family = 0|| ( memcmp(
+                     &((struct sockaddr_in6*)&walk->rmt_addr)->sin6_addr,
+                     &((struct sockaddr_in6*)&rmt_addr)->sin6_addr,
+                     sizeof(struct in6_addr)) == 0) ) &&
 		    (rmt_port == -1 || walk->rmt_port == rmt_port))
 		  enter_item (*argv, flags, sig_number, net_dev, walk->ino,
 			      this_name_space);
-                              */
 	    }
 	}
     }

@@ -698,7 +698,7 @@ fi
 
 PACKAGE=psmisc
 
-VERSION=20.3
+VERSION=21
 
 if test "`cd $srcdir && pwd`" != "`pwd`" && test -f $srcdir/config.status; then
   { echo "configure: error: source directory already configured; run "make distclean" there first" 1>&2; exit 1; }
@@ -1648,7 +1648,7 @@ EOF
 fi
 
 
-ALL_LINGUAS="en"
+ALL_LINGUAS="en pt"
 
 # Make sure we can run config.sub.
 if ${CONFIG_SHELL-/bin/sh} $ac_config_sub sun4 >/dev/null 2>&1; then :
