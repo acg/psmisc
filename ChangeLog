@@ -14,6 +14,7 @@ Changes in 21.6 (not released yet)
 	* killall can be case insenstive now
 	* Warning in killall.1 about process changing names Debian #187941
 	* Removed include termcap.h to fix RH include problem.
+	* Added Vietnamese translation
 
 Changes in 21.5
 ===============

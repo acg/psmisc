@@ -1,0 +1,353 @@
+#  Vietnamese translation for psmisc-21.5.
+#  Copyright (C) 2005 Free Software Foundation, Inc.
+#  This file is distributed under the same license as the psmisc-21.5 package.
+# Clytie Siddall <clytie@riverland.net.au>, 2005.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: psmisc 21.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-04-30 13:39+1000\n"
+"PO-Revision-Date: 2005-02-19 17:46+0950\n"
+"Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
+"Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/killall.c:55
+#, c-format
+msgid "Kill %s(%s%d) ? (y/n) "
+msgstr "Có buộc kết thúc %s(%s%d) không? (y/n) (có/không)"
+
+#: src/killall.c:243
+#, c-format
+msgid "skipping partial match %s(%d)\n"
+msgstr "đang bỏ qua khớp cục bộ %s(%d)\n"
+
+#: src/killall.c:337
+#, c-format
+msgid "Killed %s(%s%d) with signal %d\n"
+msgstr "Mới buộc kết thức %s(%s%d) với tín hiệu %d\n"
+
+#: src/killall.c:349 src/fuser.c:499 src/pstree.c:680
+#, c-format
+msgid "%s is empty (not mounted ?)\n"
+msgstr "%s trống (chưa đươc lắp?)\n"
+
+#: src/killall.c:355
+#, c-format
+msgid "%s: no process killed\n"
+msgstr "%s: chưa buộc kết thức tiến trình\n"
+
+#: src/killall.c:607
+#, c-format
+msgid "Maximum number of names is %d\n"
+msgstr "Số tốí đa tên là %d\n"
+
+#: src/fuser.c:248
+#, c-format
+msgid "-4 flag used but proc file %s is not readable\n"
+msgstr "đã sử dụng cờ -4 nhưng chưa có thể đọc tập tin proc %s\n"
+
+#: src/fuser.c:257
+#, c-format
+msgid "-6 flag used but proc file %s is not readable\n"
+msgstr "đã sử dụng cờ -6 nhưng chưa có thể đọc tập tin proc %s\n"
+
+#: src/fuser.c:597
+#, c-format
+msgid "Kill process %d ? (y/N) "
+msgstr "Có buốc kết thức tiến trình %d không? (y/N) (có/không)"
+
+#: src/fuser.c:627
+#, c-format
+msgid "kill %d"
+msgstr "buộc kết thức %d"
+
+#: src/fuser.c:631 src/fuser.c:635
+#, c-format
+msgid "No automatic removal. Please use  umount %s\n"
+msgstr "Không tháo tự động thì hãy sử dụng lệnh umount %s (tháo gắn kết)\n"
+
+#: src/fuser.c:639
+#, c-format
+msgid "No automatic removal. Please use  swapoff %s\n"
+msgstr "Không tháo tự động thì hãy sử dụng lệnh swapoff %s (không trao đổi)\n"
+
+#: src/fuser.c:752
+#, c-format
+msgid "Internal error (type %d)\n"
+msgstr "Lỗi nội bộ (loại %d)\n"
+
+#: src/fuser.c:790
+#, c-format
+msgid "kernel mount  "
+msgstr "lắp "
+
+#: src/fuser.c:793
+#, c-format
+msgid "kernel loop   "
+msgstr "vòng lặp hạt nhân"
+
+#: src/fuser.c:796
+#, c-format
+msgid "kernel swap   "
+msgstr "trao đổi hạt nhân"
+
+#: src/fuser.c:952
+#, c-format
+msgid "can't find sockets' device number"
+msgstr "không tìm được số thiết bị của ổ cắm"
+
+#: src/fuser.c:961
+#, c-format
+msgid ""
+"usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+"             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+"       fuser -l\n"
+"       fuser -V\n"
+"\n"
+"    -a        display unused files too\n"
+"    -c        mounted FS\n"
+"    -f        silently ignored (for POSIX compatibility\n"
+"    -k        kill processes accessing that file\n"
+"    -i        ask before killing (ignored without -k)\n"
+"    -l        list signal names\n"
+"    -m        mounted FS\n"
+"    -n space  search in the specified name space (file, udp, or tcp)\n"
+"    -s        silent operation\n"
+"    -signal   send signal instead of SIGKILL\n"
+"    -u        display user ids\n"
+"    -v        verbose output\n"
+"    -V        display version information\n"
+"    -4        search IPv4 sockets only\n"
+"    -6        search IPv6 sockets only\n"
+"    -         reset options\n"
+"\n"
+"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"\n"
+msgstr ""
+"cách sử dụng: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+"             [ - ] [ -n space ] [ -signal ] [ -kimuv ] tên ...\n"
+"       fuser -l\n"
+"       fuser -V\n"
+"\n"
+"    -a        cũng trình bày những tập tin chưa được sử dụng\n"
+"    -c        hệ thống tập tin (FS) đươc lắp\n"
+"    -f        được bỏ qua âm thầm (để tương thích với POSIX)\n"
+"    -k        _buộc kết thức_ các tiến trình truy cập tập tin ấy\n"
+"    -i        xin trước khi buộc kết thứ (sẽ bỏ qua nếu không có -k)\n"
+"    -l        _ghi danh sách_ tên tín hiệu\n"
+"    -m      hệ thống tập tin (FS) được _lắp_\n"
+"    -n space  tìm kiếm trong _miền tên_ (namespace) ấy (tập tin, udp, hay tcp)\n"
+"    -s        thi hành _âm thầm_\n"
+"    -signal   gởi _tín hiệu_ thay thế lệnh SIGKILL\n"
+"    -u        trình bày ID của các _người dùng_\n"
+"    -v        xuất _chi tiết_\n"
+"    -V        trình bày thông tin _phiên bản_\n"
+"    -4        tìm kiếm chỉ ổ cắm loại IPv4\n"
+"    -6        tìm kiếm chỉ ổ cắm loại IPv6\n"
+"    -         lập tùy chọn lại\n"
+"\n"
+"  tên udp/tcp: [local_port][,[rmt_host][,[rmt_port]]] (cổng địa phương, máy chủ từ xa, cổng từ xa)\n"
+"\n"
+
+#: src/fuser.c:987
+#, c-format
+msgid "fuser (psmisc) %s\n"
+msgstr "fuser (psmisc) %s\n"
+
+#: src/fuser.c:989
+#, c-format
+msgid ""
+"Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
+"\n"
+"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
+"This is free software, and you are welcome to redistribute it under the terms\n"
+"of the GNU General Public License.\n"
+"For more information about these matters, see the files named COPYING.\n"
+msgstr ""
+"Bản quyền (C) 1993-2002 Werner Almesberger and Craig Small\n"
+"\n"
+"PSmisc không bảo đảm gì cả.\n"
+"Đây là phần mềm tự do thì bạn có thể phân phối nó với điều kiện của\n"
+"Quyền Công Chung Gnu (GPL)\n"
+"Để tìm thấy thông tin thêm thì hãy xem tập tin có tên COPYING.\n"
+
+#: src/fuser.c:1172
+#, c-format
+msgid "ignoring -m in name space \"%s\"\n"
+msgstr "Đang bỏ qua cờ -m trong miền tên \"%s\"\n"
+
+#: src/fuser.c:1180
+#, c-format
+msgid "%s/%s: invalid specificiation\n"
+msgstr "%s/%s: sự ghi rõ không hợp lệ\n"
+
+#: src/pstree.c:384
+#, c-format
+msgid "MAX_DEPTH not big enough.\n"
+msgstr "MAX_DEPTH (độ sâu tối đa) không đủ lớn.\n"
+
+#: src/pstree.c:719
+#, c-format
+msgid "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+msgstr "cách sử dụng: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+
+#: src/pstree.c:720
+#, c-format
+msgid "              [ -A | -G | -U ] [ pid | user]\n"
+msgstr "              [ -A | -G | -U ] [ pid | user]\n"
+
+#: src/pstree.c:721
+#, c-format
+msgid ""
+"       pstree -V\n"
+"\n"
+msgstr ""
+"       pstree -V\n"
+"\n"
+
+#: src/pstree.c:722
+#, c-format
+msgid "    -a     show command line arguments\n"
+msgstr "    -a     hiển thị những _đối số_ loại đường lệnh\n"
+
+#: src/pstree.c:723
+#, c-format
+msgid "    -A     use ASCII line drawing characters\n"
+msgstr "    -A     sử dụng ký tự vẽ đường loại _ASCII_\n"
+
+#: src/pstree.c:724
+#, c-format
+msgid "    -c     don't compact identical subtrees\n"
+msgstr "    -c     không _gọn_ những phụ cây trùng lập\n"
+
+#: src/pstree.c:725
+#, c-format
+msgid "    -h     highlight current process and its ancestors\n"
+msgstr "    -h     _nổi bật_ tiến trình hiện có và các tổ tiên của nó\n"
+
+#: src/pstree.c:726
+#, c-format
+msgid "    -H pid highlight process \"pid\" and its ancestors\n"
+msgstr "    -H pid _nổi bật_ tiến trình \"pid\" và các tổ tiên của nó\n"
+
+#: src/pstree.c:727
+#, c-format
+msgid "    -G     use VT100 line drawing characters\n"
+msgstr "    -G     sử dụng ký tự vẽ đường loại VT100\n"
+
+#: src/pstree.c:728
+#, c-format
+msgid "    -l     don't truncate long lines\n"
+msgstr "    -l     không chặt cụt _đường dài_\n"
+
+#: src/pstree.c:729
+#, c-format
+msgid "    -n     sort output by PID\n"
+msgstr "    -n     sắp xếp dữ liệu xuất bằng PID\n"
+
+#: src/pstree.c:730
+#, c-format
+msgid "    -p     show PIDs; implies -c\n"
+msgstr "    -p     hiển thị các _PID_; ngụ ý -c\n"
+
+#: src/pstree.c:731
+#, c-format
+msgid "    -u     show uid transitions\n"
+msgstr "    -u     hiển thị mọi việc chuyển tiếp _uid_\n"
+
+#: src/pstree.c:733
+#, c-format
+msgid "    -s     show Flask SIDs\n"
+msgstr "    -s     hiển thị các _SID_ loạị Flask\n"
+
+#: src/pstree.c:734
+#, c-format
+msgid "    -x     show Flask security contexts\n"
+msgstr "    -x     hiển thị các ngữ cảnh bảo mật loại Flask\n"
+
+#: src/pstree.c:736
+#, c-format
+msgid "    -U     use UTF-8 (Unicode)) line drawing characters\n"
+msgstr "    -U     sử dụng ký tự vẽ đường loại _UTF-8_ (Unicode)\n"
+
+#: src/pstree.c:737
+#, c-format
+msgid "    -V     display version information\n"
+msgstr "    -V     hiển thị thông tin _phiên bản_\n"
+
+#: src/pstree.c:738
+#, c-format
+msgid "    pid    start at pid, default 1 (init))\n"
+msgstr "    pid    bắt đầu pid, mặc định 1 (init))\n"
+
+#: src/pstree.c:739
+#, c-format
+msgid ""
+"    user   show only trees rooted at processes of that user\n"
+"\n"
+msgstr ""
+"    user   hiển thị chỉ cây có rễ trong tiến trình của người dùng ấy\n"
+"\n"
+
+#: src/pstree.c:745
+#, c-format
+msgid "pstree (psmisc) %s\n"
+msgstr "pstree (psmisc) %s\n"
+
+#: src/pstree.c:746
+#, c-format
+msgid ""
+"Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Bản quyền (C) 1993-2005 Werner Almesberger và Craig Small\n"
+"\n"
+
+#: src/pstree.c:747
+#, c-format
+msgid "pstree comes with ABSOLUTELY NO WARRANTY.\n"
+msgstr "Trình pstree không bảo đảm gì cả.\n"
+
+#: src/pstree.c:748
+#, c-format
+msgid "This is free software, and you are welcome to redistribute it under the terms\n"
+msgstr "Đây là phần mềm tự do thì bạn có thể phân phối nó với điều kiện\n"
+
+#: src/pstree.c:749
+#, c-format
+msgid "of the GNU General Public License.\n"
+msgstr "của Quyền Công Chung Gnu (GPL).\n"
+
+#: src/pstree.c:750
+#, c-format
+msgid "For more information about these matters, see the files named COPYING.\n"
+msgstr "Để tìm thấy thông tin thêm thì hãy xem tập tin có tên COPYING.\n"
+
+#: src/pstree.c:835
+#, c-format
+msgid "TERM is not set\n"
+msgstr "Chưa lặp TERM\n"
+
+#: src/pstree.c:840
+#, c-format
+msgid "Can't get terminal capabilities\n"
+msgstr "Không gọi được khả năng thiết bị cuối\n"
+
+#: src/pstree.c:884
+#, c-format
+msgid "No such user name: %s\n"
+msgstr "Không có tên người dùng như vậy: %s\n"
+
+#: src/pstree.c:900
+#, c-format
+msgid "No processes found.\n"
+msgstr "Chưa tìm tiến trình.\n"
+
+#: src/pstree.c:905
+#, c-format
+msgid "Press return to close\n"
+msgstr "Hãy bấm phím Return để đóng\n"
