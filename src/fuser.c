@@ -683,11 +683,7 @@ show_files_or_kill (void)
 	    putchar (':');
 	    length++;
 	  }
-	while (length < NAME_FIELD)
-	  {
-	    putchar (' ');
-	    length++;
-	  }
+
 	first = 1;
 	for (item = file->items; item; item = item->next)
 	  {
@@ -695,6 +691,13 @@ show_files_or_kill (void)
 	      {
 		if (item->type != it_proc)
 		  continue;
+        if ((first==1) && (item->u.proc.ref_set & (REF_FILE|REF_ROOT|REF_CWD|REF_EXE|REF_MMAP))) {
+    while (length < NAME_FIELD)
+    {
+      putchar (' ');
+      length++;
+    }
+        }
 		if (item->u.proc.ref_set & REF_FILE)
 		  printf ("%6d", item->u.proc.pid);
 		if (item->u.proc.ref_set & REF_ROOT)
@@ -759,6 +762,12 @@ show_files_or_kill (void)
 		  printf ("%*s", NAME_FIELD, "");
 		else if (length > NAME_FIELD)
 		  printf ("\n%*s", NAME_FIELD, "");
+        else
+          while (length < NAME_FIELD)
+          {
+            putchar (' ');
+            length++;
+          }
 		printf (" %-8s ", user);
 		switch (item->type)
 		  {
@@ -797,8 +806,6 @@ show_files_or_kill (void)
 	  }
 	if (!(file->flags & FLAG_VERB) || first)
 	  putchar ('\n');
-	if (first)
-	  fprintf (stderr, _("No process references; use -v for the complete list\n"));
 	if (file->flags & FLAG_KILL)
 	  for (item = file->items; item; item = item->next)
 	    kill_item (file, item);

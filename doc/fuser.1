@@ -1,4 +1,4 @@
-.TH FUSER 1 "October 25, 1999" "Linux" "User Commands"
+.TH FUSER 1 "September 26, 2003" "Linux" "User Commands"
 .SH NAME
 fuser \- identify processes using files or sockets
 .SH SYNOPSIS
@@ -142,8 +142,11 @@ The \fB-k\fP option only works on processes. If the user is the kernel,
 fuser -m /dev/sgX will show (or kill with the -k flag) all processes, even
 if you don't have that device configured. There may be other devices it 
 does this for too.
-.SH AUTHOR
-Werner Almesberger <Werner.Almesberger@epfl.ch>
+.SH AUTHORS
+.PP
+Werner Almesberger <werner@almesberger.net>
+.PP
+Craig Small <csmall@small.dropbear.id.au>
 .SH "SEE ALSO"
 kill(1), killall(1), lsof(8), ps(1), kill(2)
 .\"{{{}}}
