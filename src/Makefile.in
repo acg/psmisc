@@ -132,7 +132,7 @@ pstree_LDADD = @TERMCAP_LIB@ @FLASK_LIB@
 
 BUILT_SOURCES = signames.h
 
-EXTRA_DIST = signames.c pstree.x11
+EXTRA_DIST = signames.c 
 
 CLEANFILES = signames.h
 subdir = src
@@ -433,6 +433,9 @@ signames.h: signames.c
 		  { rm -f signames.h; exit 1; }
 
 Makefile:	signames.h
+
+pstree.x11:	pstree
+	ln -s pstree pstree.x11
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

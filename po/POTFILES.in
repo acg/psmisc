@@ -1,2 +1,3 @@
 src/killall.c
 src/fuser.c
+src/pstree.c

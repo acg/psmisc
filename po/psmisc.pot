@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-05-29 09:39+1000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-26 23:47+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +31,7 @@ msgstr ""
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr ""
 
-#: src/killall.c:337 src/fuser.c:496
+#: src/killall.c:337 src/fuser.c:496 src/pstree.c:674
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr ""
@@ -57,7 +58,7 @@ msgstr ""
 
 #: src/fuser.c:594
 #, c-format
-msgid "Kill process %d ? (y/n) "
+msgid "Kill process %d ? (y/N) "
 msgstr ""
 
 #: src/fuser.c:624
@@ -75,32 +76,28 @@ msgstr ""
 msgid "No automatic removal. Please use  swapoff %s\n"
 msgstr ""
 
-#: src/fuser.c:745
+#: src/fuser.c:748
 #, c-format
 msgid "Internal error (type %d)\n"
 msgstr ""
 
-#: src/fuser.c:775
+#: src/fuser.c:784
 msgid "kernel mount  "
 msgstr ""
 
-#: src/fuser.c:778
+#: src/fuser.c:787
 msgid "kernel loop   "
 msgstr ""
 
-#: src/fuser.c:781
+#: src/fuser.c:790
 msgid "kernel swap   "
 msgstr ""
 
-#: src/fuser.c:801
-msgid "No process references; use -v for the complete list\n"
-msgstr ""
-
-#: src/fuser.c:939
+#: src/fuser.c:946
 msgid "can't find sockets' device number"
 msgstr ""
 
-#: src/fuser.c:948
+#: src/fuser.c:955
 msgid ""
 "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -126,12 +123,12 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/fuser.c:972
+#: src/fuser.c:979
 #, c-format
 msgid "fuser (psmisc) %s\n"
 msgstr ""
 
-#: src/fuser.c:974
+#: src/fuser.c:981
 msgid ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
 "\n"
@@ -142,12 +139,144 @@ msgid ""
 "For more information about these matters, see the files named COPYING.\n"
 msgstr ""
 
-#: src/fuser.c:1152
+#: src/fuser.c:1159
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
 msgstr ""
 
-#: src/fuser.c:1160
+#: src/fuser.c:1167
 #, c-format
 msgid "%s/%s: invalid specificiation\n"
+msgstr ""
+
+#: src/pstree.c:378
+msgid "MAX_DEPTH not big enough.\n"
+msgstr ""
+
+#: src/pstree.c:713
+msgid ""
+"usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+msgstr ""
+
+#: src/pstree.c:714
+msgid "              [ -G | -U ] [ pid | user]\n"
+msgstr ""
+
+#: src/pstree.c:715
+msgid ""
+"       pstree -V\n"
+"\n"
+msgstr ""
+
+#: src/pstree.c:716
+msgid "    -a     show command line arguments\n"
+msgstr ""
+
+#: src/pstree.c:717
+msgid "    -c     don't compact identical subtrees\n"
+msgstr ""
+
+#: src/pstree.c:718
+msgid "    -h     highlight current process and its ancestors\n"
+msgstr ""
+
+#: src/pstree.c:719
+msgid "    -H pid highlight process \"pid\" and its ancestors\n"
+msgstr ""
+
+#: src/pstree.c:720
+msgid "    -G     use VT100 line drawing characters\n"
+msgstr ""
+
+#: src/pstree.c:721
+msgid "    -l     don't truncate long lines\n"
+msgstr ""
+
+#: src/pstree.c:722
+msgid "    -n     sort output by PID\n"
+msgstr ""
+
+#: src/pstree.c:723
+msgid "    -p     show PIDs; implies -c\n"
+msgstr ""
+
+#: src/pstree.c:724
+msgid "    -u     show uid transitions\n"
+msgstr ""
+
+#: src/pstree.c:726
+msgid "    -s     show Flask SIDs\n"
+msgstr ""
+
+#: src/pstree.c:727
+msgid "    -x     show Flask security contexts\n"
+msgstr ""
+
+#: src/pstree.c:729
+msgid "    -U     use UTF-8 (Unicode)) line drawing characters\n"
+msgstr ""
+
+#: src/pstree.c:730
+msgid "    -V     display version information\n"
+msgstr ""
+
+#: src/pstree.c:731
+msgid "    pid    start at pid, default 1 (init))\n"
+msgstr ""
+
+#: src/pstree.c:732
+msgid ""
+"    user   show only trees rooted at processes of that user\n"
+"\n"
+msgstr ""
+
+#: src/pstree.c:738
+#, c-format
+msgid "pstree (psmisc) %s\n"
+msgstr ""
+
+#: src/pstree.c:739
+msgid ""
+"Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+
+#: src/pstree.c:740
+msgid "pstree comes with ABSOLUTELY NO WARRANTY.\n"
+msgstr ""
+
+#: src/pstree.c:741
+msgid ""
+"This is free software, and you are welcome to redistribute it under the "
+"terms\n"
+msgstr ""
+
+#: src/pstree.c:742
+msgid "of the GNU General Public License.\n"
+msgstr ""
+
+#: src/pstree.c:743
+msgid ""
+"For more information about these matters, see the files named COPYING.\n"
+msgstr ""
+
+#: src/pstree.c:803
+msgid "TERM is not set\n"
+msgstr ""
+
+#: src/pstree.c:808
+msgid "Can't get terminal capabilities\n"
+msgstr ""
+
+#: src/pstree.c:854
+#, c-format
+msgid "No such user name: %s\n"
+msgstr ""
+
+#: src/pstree.c:878
+msgid "No processes found.\n"
+msgstr ""
+
+#: src/pstree.c:883
+msgid "Press return to close\n"
 msgstr ""

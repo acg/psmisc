@@ -22,6 +22,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
+#include <libintl.h>
+#define _(String) gettext (String)
 
 #include "comm.h"
 
@@ -373,7 +375,7 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
     return;
   if (level >= MAX_DEPTH - 1)
     {
-      fprintf (stderr, "MAX_DEPTH not big enough.\n");
+      fprintf (stderr, _("MAX_DEPTH not big enough.\n"));
       exit (1);
     }
   if (!leaf)
@@ -669,7 +671,7 @@ read_proc (void)
     free (buffer);
   if (empty)
     {
-      fprintf (stderr, PROC_BASE " is empty (not mounted ?)\n");
+      fprintf (stderr, _("%s is empty (not mounted ?)\n"), PROC_BASE) ;
       exit (1);
     }
 }
@@ -708,42 +710,37 @@ read_stdin (void)
 static void
 usage (void)
 {
-  fprintf (stderr,
-	   "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] "
-	   "[ -p ] [ -u ]\n%14s[ -G | -U ] [ pid | user]\n", "");
-  fprintf (stderr, "       pstree -V\n\n");
-  fprintf (stderr, "    -a     show command line arguments\n");
-  fprintf (stderr, "    -c     don't compact identical subtrees\n");
-  fprintf (stderr,
-	   "    -h     highlight current process and its ancestors\n");
-  fprintf (stderr,
-	   "    -H pid highlight process \"pid\" and its ancestors\n");
-  fprintf (stderr, "    -G     use VT100 line drawing characters\n");
-  fprintf (stderr, "    -l     don't truncate long lines\n");
-  fprintf (stderr, "    -n     sort output by PID\n");
-  fprintf (stderr, "    -p     show PIDs; implies -c\n");
-  fprintf (stderr, "    -u     show uid transitions\n");
+  fprintf (stderr, _("usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"));
+  fprintf (stderr, _("              [ -G | -U ] [ pid | user]\n"));
+  fprintf (stderr, _("       pstree -V\n\n"));
+  fprintf (stderr, _("    -a     show command line arguments\n"));
+  fprintf (stderr, _("    -c     don't compact identical subtrees\n"));
+  fprintf (stderr, _("    -h     highlight current process and its ancestors\n"));
+  fprintf (stderr, _("    -H pid highlight process \"pid\" and its ancestors\n"));
+  fprintf (stderr, _("    -G     use VT100 line drawing characters\n"));
+  fprintf (stderr, _("    -l     don't truncate long lines\n"));
+  fprintf (stderr, _("    -n     sort output by PID\n"));
+  fprintf (stderr, _("    -p     show PIDs; implies -c\n"));
+  fprintf (stderr, _("    -u     show uid transitions\n"));
 #ifdef FLASK_LINUX
-  fprintf (stderr, "    -s     show Flask SIDs\n");
-  fprintf (stderr, "    -x     show Flask security contexts\n");
+  fprintf (stderr, _("    -s     show Flask SIDs\n"));
+  fprintf (stderr, _("    -x     show Flask security contexts\n"));
 #endif /*FLASK_LINUX*/
-  fprintf (stderr,
-	   "    -U     use UTF-8 (Unicode) line drawing characters\n");
-  fprintf (stderr, "    -V     display version information\n");
-  fprintf (stderr, "    pid    start at pid, default 1 (init)\n");
-  fprintf (stderr, "    user   show only trees rooted at processes of that "
-	   "user\n\n");
+  fprintf (stderr, _("    -U     use UTF-8 (Unicode)) line drawing characters\n"));
+  fprintf (stderr, _("    -V     display version information\n"));
+  fprintf (stderr, _("    pid    start at pid, default 1 (init))\n"));
+  fprintf (stderr, _("    user   show only trees rooted at processes of that user\n\n"));
   exit (1);
 }
 
 void print_version()
 {
-  fprintf(stderr, "pstree (psmisc) %s\n", VERSION);
-  fprintf(stderr, "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n\n");
-  fprintf(stderr, "pstree comes with ABSOLUTELY NO WARRANTY.\n");
-  fprintf(stderr, "This is free software, and you are welcome to redistribute it under the terms\n");
-  fprintf(stderr, "of the GNU General Public License.\n");
-  fprintf(stderr, "For more information about these matters, see the files named COPYING.\n");
+  fprintf(stderr, _("pstree (psmisc) %s\n"), VERSION);
+  fprintf(stderr, _("Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n\n"));
+  fprintf(stderr, _("pstree comes with ABSOLUTELY NO WARRANTY.\n"));
+  fprintf(stderr, _("This is free software, and you are welcome to redistribute it under the terms\n"));
+  fprintf(stderr, _("of the GNU General Public License.\n"));
+  fprintf(stderr, _("For more information about these matters, see the files named COPYING.\n"));
 }
 
 
@@ -803,12 +800,12 @@ main (int argc, char **argv)
 	  usage ();
 	if (!getenv ("TERM"))
 	  {
-	    fprintf (stderr, "TERM is not set\n");
+	    fprintf (stderr, _("TERM is not set\n"));
 	    return 1;
 	  }
 	if (tgetent (termcap_area, getenv ("TERM")) <= 0)
 	  {
-	    fprintf (stderr, "can't get terminal capabilities\n");
+	    fprintf (stderr, _("Can't get terminal capabilities\n"));
 	    return 1;
 	  }
 	if (!(highlight = atoi (optarg)))
@@ -854,7 +851,7 @@ main (int argc, char **argv)
       }
     else if (!(pw = getpwnam (argv[optind++])))
       {
-	fprintf (stderr, "No such user name: %s\n", argv[optind - 1]);
+	fprintf (stderr, _("No such user name: %s\n"), argv[optind - 1]);
 	return 1;
       }
   }
@@ -878,12 +875,12 @@ main (int argc, char **argv)
       dump_by_user (find_proc (1), pw->pw_uid);
       if (!dumped)
 	{
-	  fprintf (stderr, "No processes found.\n");
+	  fprintf (stderr, _("No processes found.\n"));
 	  return 1;
 	}
     }
   if (wait_end == 1) {
-    fprintf(stderr, "Press return to close\n");
+    fprintf(stderr, _("Press return to close\n"));
     (void)getchar();
   }
 

@@ -17,7 +17,7 @@ pstree_LDADD = @TERMCAP_LIB@ @FLASK_LIB@
 
 BUILT_SOURCES = signames.h
 
-EXTRA_DIST = signames.c pstree.x11
+EXTRA_DIST = signames.c 
 
 CLEANFILES = signames.h
 
@@ -32,3 +32,6 @@ signames.h: signames.c
 		  { rm -f signames.h; exit 1; }
 
 Makefile:	signames.h
+
+pstree.x11:	pstree
+	ln -s pstree pstree.x11
