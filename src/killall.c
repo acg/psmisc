@@ -391,14 +391,8 @@ usage_pidof (void)
 static void
 usage_killall (void)
 {
-#ifdef FLASK_LINUX
   fprintf(stderr, _(
-    "Usage: killall [-Z CONTEXT] [ -egiqvw ] [ -SIGNAL ] NAME...\n"));
-#else  /*FLASK_LINUX*/
-  fprintf(stderr, _(
-    "Usage: killall [OPTIONS]... [--] NAME...\n"));
-#endif /*FLASK_LINUX*/
-  fprintf(stderr, _(
+    "Usage: killall [OPTIONS]... [--] NAME...\n"
     "       killall -l, --list\n"
     "       killall -V, --version\n\n"
     "  -e,--exact          require exact match for very long names\n"
