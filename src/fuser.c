@@ -164,6 +164,7 @@ parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version 
   char line[MAX_LINE + 1];
   char rmt_addr[128];
   char addr6[128];
+  unsigned long tmp_ino;
 
   if (!(file = fopen (filename, "r")))
     {
@@ -180,18 +181,24 @@ parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version 
 	  perror ("malloc");
 	  exit (1);
 	}
+      /*
+      if (sscanf (line, 
 #ifdef INO_T_IS_LONG_LONG
-      if (sscanf (line, "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %Ld", &new->lcl_port, rmt_addr, &new->rmt_port,
+        "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %Lu",
 #elif defined(INO_T_IS_INT)
-      if (sscanf (line, "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %d", &new->lcl_port, rmt_addr, &new->rmt_port,
+        "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %u",
 #else
-      if (sscanf (line, "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %d", &new->lcl_port, rmt_addr, &new->rmt_port,
+        "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %u",
 #endif
-		  &new->ino) != 4)
+        &new->lcl_port, rmt_addr, &new->rmt_port, &new->ino) != 4)*/
+    if (sscanf (line, 
+        "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %lu",
+        &new->lcl_port, rmt_addr, &new->rmt_port, &tmp_ino) != 4)
 	{
 	  free (new);
 	  continue;
 	}
+      new->ino = tmp_ino;
       if (strlen(rmt_addr) > 8) {
         sscanf(rmt_addr, "%08X%08X%08X%08X",
             &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr.s6_addr32[0],
@@ -199,7 +206,7 @@ parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version 
             &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr.s6_addr32[2],
             &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr.s6_addr32[3]);
         inet_ntop(AF_INET6, &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr, addr6, sizeof(addr6));
-        printf("address %s\n", addr6);
+        /*printf("address %s\n", addr6);*/
       } else {
         sscanf(rmt_addr, "%X",
             &((struct sockaddr_in *) &new->rmt_addr)->sin_addr.s_addr);
@@ -882,6 +889,7 @@ parse_inet (const char *spec, const char *name_space, int *lcl_port,
   address_match = 0;
   for (here = s; here; here = next ? next + 1 : NULL)
     {
+      printf("here: %s\n", here);
       next = strchr (here, ',');
       if (next)
 	*next = 0;

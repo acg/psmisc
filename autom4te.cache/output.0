@@ -1122,7 +1122,7 @@ ac_abs_top_srcdir=`cd "$ac_dir" && cd $ac_top_srcdir && pwd`
     else
       echo "$as_me: WARNING: no configuration information is in $ac_dir" >&2
     fi
-    cd $ac_popdir
+    cd "$ac_popdir"
   done
 fi
 
@@ -1451,6 +1451,7 @@ ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
 
 
 
@@ -20855,7 +20856,7 @@ _ACEOF
 
 echo "$as_me:$LINENO: checking what type ino_t is" >&5
 echo $ECHO_N "checking what type ino_t is... $ECHO_C" >&6
-if test $ac_cv_sizeof_ino_t = $ac_cv_sizeof_int; then
+if test "x$ac_cv_sizeof_ino_t" = "x$ac_cv_sizeof_int"; then
   
 cat >>confdefs.h <<\_ACEOF
 @%:@define INO_T_IS_INT 1
@@ -20864,11 +20865,11 @@ _ACEOF
   echo "$as_me:$LINENO: result: int" >&5
 echo "${ECHO_T}int" >&6
 fi
-if test $ac_cv_sizeof_ino_t = $ac_cv_sizeof_long; then
+if test "x$ac_cv_sizeof_ino_t" = "x$ac_cv_sizeof_long"; then
   echo "$as_me:$LINENO: result: long" >&5
 echo "${ECHO_T}long" >&6
 fi
-if test $ac_cv_sizeof_ino_t = $ac_cv_sizeof_long_long; then
+if test "x$ac_cv_sizeof_ino_t" = "x$ac_cv_sizeof_long_long"; then
   
 cat >>confdefs.h <<\_ACEOF
 @%:@define INO_T_IS_LONG_LONG 1
@@ -22952,6 +22953,7 @@ fi
 
 
                                         ac_config_files="$ac_config_files Makefile doc/Makefile src/Makefile po/Makefile.in"
+
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
