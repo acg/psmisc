@@ -77,6 +77,8 @@ pstree_SOURCES = pstree.c comm.h
 pstree_LDADD = @TERMCAP_LIB@
 
 BUILT_SOURCES = signames.h
+
+EXTRA_DIST = signames.c
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 

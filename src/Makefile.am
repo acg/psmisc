@@ -13,6 +13,8 @@ pstree_LDADD = @TERMCAP_LIB@
 
 BUILT_SOURCES = signames.h
 
+EXTRA_DIST = signames.c
+
 signames.h: signames.c
 		@CPP@ -dM $< |\
 		tr -s '\t ' ' ' | sort -n +2 | sed \
