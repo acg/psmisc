@@ -16,6 +16,7 @@ Changes in 21.6 (not released yet)
 	* Removed include termcap.h to fix RH include problem.
 	* Added Vietnamese translation
 	* Fixed --enable-flask logic SF#1094205
+	* Added Norwegian Bokmaal translation
 
 Changes in 21.5
 ===============
