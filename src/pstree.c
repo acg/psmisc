@@ -181,12 +181,12 @@ out_scontext ( security_id_t sid )
 
   rv = security_sid_to_context((int)sid, buf, &len);
   if ( rv ) {
-    out_string("`??'"); /* punt */
+    out_string("`??\'"); /* punt */
   }
   else {
     out_string("`");
     out_string(buf);
-    out_string("'");
+    out_string("\'");
   }
 }
 #endif /*FLASK_LINUX*/
@@ -454,7 +454,7 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
 	  len = 0;
 	  for (here = current->argv[i]; *here; here++)
 	    len += *here > ' ' && *here <= '~' ? 1 : 4;
-	  if (cur_x + len <= output_width - (i == current->argc - 1 ? 0 : 4))
+	  if (cur_x + len <= output_width - (i == current->argc - 1 ? 0 : 4) || !trunc)
 	    for (here = current->argv[i]; *here; here++)
 	      if (*here > ' ' && *here <= '~')
 		out_char (*here);
@@ -591,7 +591,7 @@ read_proc (void)
     }
   empty = 1;
   while ((de = readdir (dir)) != NULL)
-    if ((pid = atoi (de->d_name)) != 0)
+    if ((pid = (pid_t) atoi (de->d_name)) != 0)
       {
 	if (!(path = malloc (strlen (PROC_BASE) + strlen (de->d_name) + 10)))
 	  exit (2);
@@ -627,7 +627,7 @@ read_proc (void)
 	    if (fscanf
 		(file, "%d (%s) %c %d", &dummy, comm, (char *) &dummy,
 		 &ppid) == 4)
-	      */
+ */
 		if (!print_args)
 #ifdef FLASK_LINUX
 		  add_proc(comm, pid, ppid, st.st_uid, NULL, 0, sid);
@@ -840,7 +840,7 @@ main (int argc, char **argv)
   if (optind == argc - 1) {
     if (isdigit (*argv[optind]))
       {
-	if (!(pid = atoi (argv[optind++])))
+	if (!(pid = (pid_t) atoi (argv[optind++])))
 	  usage ();
       }
     else if (!(pw = getpwnam (argv[optind++])))

@@ -11,6 +11,7 @@
 #endif
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -131,7 +132,7 @@ kill_all (int signal, int names, char **namelist)
   pids = 0;
   while ( (de = readdir (dir)) != NULL)
     {
-      if (!(pid = atoi (de->d_name)) || pid == self)
+      if (!(pid = (pid_t) atoi (de->d_name)) || pid == self)
 	continue;
       if (pids == max_pids)
 	{

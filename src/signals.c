@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <signal.h>
 #include "signals.h"
 
 
@@ -52,6 +53,8 @@ get_signal (char *name, const char *cmd)
 
   if (isdigit (*name))
     return atoi (name);
+  if (!strncmp("SIG", name, 3))
+    name += 3;
   for (walk = signals; walk->name; walk++)
     if (!strcmp (walk->name, name))
       break;

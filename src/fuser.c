@@ -180,13 +180,12 @@ parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version 
 	  perror ("malloc");
 	  exit (1);
 	}
-      if (sscanf (line, "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d "
 #ifdef INO_T_IS_LONG_LONG
-		  "%Ld", &new->lcl_port, rmt_addr, &new->rmt_port,
+      if (sscanf (line, "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %Ld", &new->lcl_port, rmt_addr, &new->rmt_port,
 #elif defined(INO_T_IS_INT)
-		  "%d", &new->lcl_port, rmt_addr, &new->rmt_port,
+      if (sscanf (line, "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %d", &new->lcl_port, rmt_addr, &new->rmt_port,
 #else
-		  "%d", &new->lcl_port, rmt_addr, &new->rmt_port,
+      if (sscanf (line, "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %d", &new->lcl_port, rmt_addr, &new->rmt_port,
 #endif
 		  &new->ino) != 4)
 	{
@@ -474,7 +473,7 @@ scan_fd (void)
     }
   empty = 1;
   while ((de = readdir (dir)) != NULL)
-    if ((pid = atoi (de->d_name)) != 0)
+    if ((pid = (pid_t)atoi (de->d_name)) != 0)
       {
 	empty = 0;
 	if (asprintf (&path, "%s/%d", PROC_BASE, pid) < 0)
@@ -650,7 +649,7 @@ show_files_or_kill (void)
   const struct passwd *pw;
   const char *user, *scan;
   char tmp[10], *path, comm[COMM_LEN + 1];
-  int length, header, first, dummy;
+  int length, header, first, dummy, last_namelen = 0;
   header = 1;
   for (file = files; file; file = file->next)
     if (file->name && (file->items || all))
@@ -661,7 +660,7 @@ show_files_or_kill (void)
 	    header = 0;
 	  }
 	length = 0;
-	for (scan = file->name; *scan; scan++)
+	for (scan = file->name; scan && *scan; scan++)
 	  if (*scan == '\\')
 	    length += printf ("\\\\");
 	  else if (*scan > ' ' && *scan <= '~')
@@ -673,6 +672,12 @@ show_files_or_kill (void)
 	    length += printf ("\\%03o", *scan);
 	if (file->name_space)
 	  length += printf ("/%s", file->name_space->name);
+
+	if (length > 0)
+	  last_namelen=length;
+	else
+	  printf("\n%*.*s",last_namelen,last_namelen," ");
+
 	if (!(file->flags & FLAG_VERB))
 	  {
 	    putchar (':');

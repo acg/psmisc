@@ -1,5 +1,9 @@
 Changes in 21.3
 ===============
+2003-04-03 Craig Small <csmall@small.dropbear.id.au>
+	* More fixes for types, also some GCC 3.2 fixes, thanks to
+	  Stefan at SuSE
+
 2002-09-27 Craig Small <csmall@small.dropbear.id.au>
 	* Changed a long to a long long in pstree.
 
