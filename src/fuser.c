@@ -391,7 +391,7 @@ scan_fd (void)
     }
   empty = 1;
   while ((de = readdir (dir)) != NULL)
-    if ((pid = atoi (de->d_name)) == 0)
+    if ((pid = atoi (de->d_name)) != 0)
       {
 	empty = 0;
 	sprintf (path, "%s/%d", PROC_BASE, pid);
