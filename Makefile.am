@@ -1,5 +1,5 @@
 
-SUBDIRS = m4 doc src po 
+SUBDIRS = doc src po 
 
 EXTRA_DIST= config.rpath ABOUT-NLS 
 
