@@ -67,7 +67,8 @@ msgstr ""
 #: src/killall.c:402
 #, c-format
 msgid "usage: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n"
-msgstr "folosire: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] nume ...\n"
+msgstr ""
+"folosire: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] nume ...\n"
 
 #: src/killall.c:405
 #, c-format
@@ -245,7 +246,8 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"folosire: fuser [ -a | -s | -c ] [ -n spaþiu ] [ -signal ] [ -kimuv ] nume ...\n"
+"folosire: fuser [ -a | -s | -c ] [ -n spaþiu ] [ -signal ] [ -kimuv ] "
+"nume ...\n"
 "             [ - ] [ -n spaþiu ] [ -signal ] [ -kimuv ] nume ...\n"
 "       fuser -l\n"
 "       fuser -V\n"
@@ -344,7 +346,8 @@ msgstr ""
 "   -U      foloseºte caractere de desenare UTF-8 (Unicode)\n"
 "   -V      afiºeazã informaþii despre versiune\n"
 "   pid     începe la pid, implicit 1 (init)\n"
-"   utiliz  aratã numai arborii cu rãdacinã la procesele acestui utiliz[ator]\n"
+"   utiliz  aratã numai arborii cu rãdacinã la procesele acestui utiliz"
+"[ator]\n"
 "\n"
 
 #: src/pstree.c:741

@@ -79,7 +79,8 @@ msgstr ""
 #: src/killall.c:402
 #, c-format
 msgid "usage: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n"
-msgstr "Bruksmåte: killall [-s sid] [-c kontekst] [ -egiqvw ] [ -signal ] navn ...\n"
+msgstr ""
+"Bruksmåte: killall [-s sid] [-c kontekst] [ -egiqvw ] [ -signal ] navn ...\n"
 
 #: src/killall.c:405
 #, c-format
@@ -258,7 +259,8 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"Bruksmåte: fuser [ -a | -s | -c ] [ -n rom ] [ -signal ] [ -kimuv ] navn ...\n"
+"Bruksmåte: fuser [ -a | -s | -c ] [ -n rom ] [ -signal ] [ -kimuv ] "
+"navn ...\n"
 "                 [ - ] [ -n rom ] [ -signal ] [ -kimuv ] navn ...\n"
 "           fuser -l\n"
 "           fuser -V\n"
@@ -359,7 +361,8 @@ msgstr ""
 "    -U     tegn linjer med UTF-8-tegn (Unicode)\\n\n"
 "    -V     vis programversjon\\n\n"
 "    pid    begynn med angitt pid, standard er 1 (init)\\n\n"
-"    bruker bare vis trær med opphav fra prosesser tilhørende denne brukeren\\n\\n\n"
+"    bruker bare vis trær med opphav fra prosesser tilhørende denne brukeren"
+"\\n\\n\n"
 
 #: src/pstree.c:741
 #, c-format

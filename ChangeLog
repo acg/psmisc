@@ -1,5 +1,11 @@
-Changes in 21.6 (not released yet)
+Changes in 21.7
 ===============
+	* 
+
+Changes in 21.6
+===============
+
+2005-03-11
 	* Minor typo (specificiation) fixed
 	* Added closing bracket in fuser help
 	* Added Finnish translation
@@ -17,6 +23,7 @@ Changes in 21.6 (not released yet)
 	* Added Vietnamese translation
 	* Fixed --enable-flask logic SF#1094205
 	* Added Norwegian Bokmaal translation
+	* Fixed groff madness with fuser(1) Debian #298199
 
 Changes in 21.5
 ===============

@@ -65,7 +65,8 @@ msgstr ""
 #: src/killall.c:402
 #, c-format
 msgid "usage: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n"
-msgstr "Uso: killall [-s sid] [-c CONTESTO] [ -egiqvw ] [ -SEGNALE ] NOME ...\n"
+msgstr ""
+"Uso: killall [-s sid] [-c CONTESTO] [ -egiqvw ] [ -SEGNALE ] NOME ...\n"
 
 #: src/killall.c:405
 #, c-format
@@ -93,7 +94,8 @@ msgstr ""
 "     killall -l, --list\n"
 "     killall -V --version\n"
 "\n"
-"  -e,--exact          richiede una corrispondenza esatta per i nomi molto lunghi\n"
+"  -e,--exact          richiede una corrispondenza esatta per i nomi molto "
+"lunghi\n"
 "  -I,--ignore-case    ignora maiuscole/minuscole nei nomi\n"
 "  -g,--process-group  termina il gruppo dei processi invece del processo\n"
 "  -i,--interactive    chiede conferma prima di terminare\n"
