@@ -17,6 +17,8 @@
 #include <dirent.h>
 #include <termios.h>
 #include <termcap.h>
+#include <langinfo.h>
+#include <locale.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
@@ -29,12 +31,12 @@
 #endif
 #define PROC_BASE    "/proc"
 
-/* UTF-8 defines by Johan Myreen */
-#define UTF_V	"\342\224\202\277"	/* Vertical line drawing char */
-#define UTF_VR	"\342\224\234\277"	/* Vertical and right */
-#define UTF_H	"\342\224\200\277"	/* Horizontal */
-#define UTF_UR	"\342\224\224\277"	/* Up and right */
-#define UTF_HD	"\342\224\254\277"	/* Horizontal and down */
+/* UTF-8 defines by Johan Myreen, updated by Ben Winslow */
+#define UTF_V	"\342\224\202"	/* U+2502, Vertical line drawing char */
+#define UTF_VR	"\342\224\234"	/* U+251C, Vertical and right */
+#define UTF_H	"\342\224\200"	/* U+2500, Horizontal */
+#define UTF_UR	"\342\224\224"	/* U+2514, Up and right */
+#define UTF_HD	"\342\224\254"	/* U+252C, Horizontal and down */
 
 #define VT_BEG	"\033(0\017"	/* use graphic chars */
 #define VT_END	"\033(B"	/* back to normal char set */
@@ -654,6 +656,9 @@ main (int argc, char **argv)
   pid = 1;
   highlight = 0;
   pw = NULL;
+  
+  setlocale(LC_ALL, "");
+  
   while ((c = getopt (argc, argv, "acGhH:npluUV")) != EOF)
     switch (c)
       {
@@ -728,6 +733,14 @@ main (int argc, char **argv)
   }
   if (optind != argc)
     usage ();
+  if (sym == &sym_ascii) {
+  	/*
+  	 * If the locale's charset is UTF-8, automatically
+  	 * use the UTF-8 symbols
+  	 */
+	if (!strcmp(nl_langinfo(CODESET), "UTF-8"))
+		sym = &sym_utf;
+  }
   read_proc ();
   for (current = find_proc (highlight); current; current = current->parent)
     current->highlight = 1;
