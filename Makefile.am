@@ -1,5 +1,5 @@
 
-SUBDIRS = m4  doc src po 
+SUBDIRS = m4  doc src po icons
 
 EXTRA_DIST= config.rpath ABOUT-NLS mkinstalldirs
 

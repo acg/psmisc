@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 AC_INIT
 AC_CONFIG_SRCDIR([src/comm.h])
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(psmisc,21.4)
+AM_INIT_AUTOMAKE(psmisc,21.5cvs)
 
 dnl Checks for programs.
 AC_PROG_CC
@@ -75,5 +75,5 @@ AC_CHECK_FUNCS(strdup strerror strtoul)
 dnl Checks for Large File System
 AC_SYS_LARGEFILE
 
-AC_CONFIG_FILES([Makefile doc/Makefile src/Makefile po/Makefile.in  m4/Makefile ])
+AC_CONFIG_FILES([Makefile doc/Makefile src/Makefile po/Makefile.in  m4/Makefile  icons/Makefile])
 AC_OUTPUT
