@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 21.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-30 13:39+1000\n"
+"POT-Creation-Date: 2004-11-09 22:19+1100\n"
 "PO-Revision-Date: 2004-11-05 15:55+0100\n"
 "Last-Translator: Mikel Olasagasti <hey_neken@mundurat.net>\n"
 "Language-Team: Basque <translation-team-eu@lists.sourceforge.net>\n"
@@ -17,93 +17,182 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/killall.c:55
-#, c-format
-msgid "Kill %s(%s%d) ? (y/n) "
+#: src/killall.c:53
+#, fuzzy, c-format
+msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "%s(%s%d) hil? (y/n) "
 
-#: src/killall.c:243
+#: src/killall.c:245
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "baterakuntza partziala saltatzen %s(%d)\n"
 
-#: src/killall.c:337
+#: src/killall.c:339
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "%s(%s%d) hil da %d seinalearekin\n"
 
-#: src/killall.c:349 src/fuser.c:499 src/pstree.c:680
+#: src/killall.c:351 src/fuser.c:493 src/pstree.c:674
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s hutsik dago (muntatu gabea?)\n"
 
-#: src/killall.c:355
+#: src/killall.c:357
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: ez da prozesurik hil\n"
 
-#: src/killall.c:607
+#: src/killall.c:388
+#, c-format
+msgid ""
+"usage: pidof [ -eg ] name ...\n"
+"       pidof -V\n"
+"\n"
+"    -e      require exact match for very long names;\n"
+"            skip if the command line is unavailable\n"
+"    -g      show process group ID instead of process ID\n"
+"    -V      display version information\n"
+"\n"
+msgstr ""
+
+#: src/killall.c:402
+#, c-format
+msgid "usage: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n"
+msgstr ""
+
+#: src/killall.c:405
+#, c-format
+msgid "usage: killall [ OPTIONS ] [ -- ] name ...\n"
+msgstr ""
+
+#: src/killall.c:408
+#, c-format
+msgid ""
+"       killall -l, --list\n"
+"       killall -V --version\n"
+"\n"
+"  -e,--exact          require exact match for very long names\n"
+"  -I,--ignore-case    case insensitive process name match\n"
+"  -g,--process-group  kill process group instead of process\n"
+"  -i,--interactive    ask for confirmation before killing\n"
+"  -l,--list           list all known signal names\n"
+"  -q,--quiet          don't print complaints\n"
+"  -s,--signal         send signal instead of SIGTERM\n"
+"  -v,--verbose        report if the signal was successfully sent\n"
+"  -V,--version        display version information\n"
+"  -w,--wait           wait for processes to die\n"
+"\n"
+msgstr ""
+
+#: src/killall.c:422
+#, c-format
+msgid ""
+"  -d,--sid            kill only process(es) having sid\n"
+"  -c,--context        kill only process(es) having scontext\n"
+"   (-s, -c are mutually exclusive and must precede other arguments)\n"
+"\n"
+msgstr ""
+
+#: src/killall.c:444 src/fuser.c:993 src/pstree.c:744
+#, c-format
+msgid ""
+"Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Copyright (C) 1993-2002 Werner Almesberger eta Craig Small\n"
+"\n"
+
+#: src/killall.c:446 src/fuser.c:995 src/pstree.c:746
+#, fuzzy, c-format
+msgid ""
+"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
+"This is free software, and you are welcome to redistribute it under\n"
+"the terms of the GNU General Public License.\n"
+"For more information about these matters, see the files named COPYING.\n"
+msgstr ""
+"Copyright (C) 1993-2002 Werner Almesberger eta Craig Small\n"
+"\n"
+"PSmisc-k ez du INONGO BERMERIK.\n"
+"Software librea da, eta berriro bana daiteke GNU Lizentzia Publiko "
+"Orokorrak\n"
+"ezarritako baldintzak betez.\n"
+"Gai honi buruzko informazio gehiagorako, ikusi COPYING izena duten "
+"fitxategiak.\n"
+
+#: src/killall.c:563
+#, c-format
+msgid "%s: SID (%s) must be numeric\n"
+msgstr ""
+
+#: src/killall.c:618
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Izen kopuru gehiengoa %d da\n"
 
-#: src/fuser.c:248
+#: src/fuser.c:242
 #, c-format
 msgid "-4 flag used but proc file %s is not readable\n"
 msgstr "-4 bandera erabili da, baina %s proc fitxategia ez da irakurgarria\n"
 
-#: src/fuser.c:257
+#: src/fuser.c:251
 #, c-format
 msgid "-6 flag used but proc file %s is not readable\n"
 msgstr "-6 bandera erabili da, baina %s proc fitxategia ez da irakurgarria\n"
 
-#: src/fuser.c:597
+#: src/fuser.c:596
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "%d prozesua hil? (y/N) "
 
-#: src/fuser.c:627
+#: src/fuser.c:630
 #, c-format
 msgid "kill %d"
 msgstr "%d hil"
 
-#: src/fuser.c:631 src/fuser.c:635
+#: src/fuser.c:634 src/fuser.c:638
 #, c-format
 msgid "No automatic removal. Please use  umount %s\n"
 msgstr "Ezin da automatikoki kendu. Mesedez erabili umount %s\n"
 
-#: src/fuser.c:639
+#: src/fuser.c:642
 #, c-format
 msgid "No automatic removal. Please use  swapoff %s\n"
 msgstr "Ezin da automatikoki kendu. Mesedez erabili  swapoff %s\n"
 
-#: src/fuser.c:752
+#: src/fuser.c:665
+#, c-format
+msgid ""
+"\n"
+"%*s USER        PID ACCESS COMMAND\n"
+msgstr ""
+
+#: src/fuser.c:756
 #, c-format
 msgid "Internal error (type %d)\n"
 msgstr "barne-errorea (%d moeta)\n"
 
-#: src/fuser.c:790
+#: src/fuser.c:794
 #, c-format
 msgid "kernel mount  "
 msgstr "kernel mount  "
 
-#: src/fuser.c:793
+#: src/fuser.c:797
 #, c-format
 msgid "kernel loop   "
 msgstr "kernel loop   "
 
-#: src/fuser.c:796
+#: src/fuser.c:800
 #, c-format
 msgid "kernel swap   "
 msgstr "kernel swap   "
 
-#: src/fuser.c:952
+#: src/fuser.c:956
 #, c-format
 msgid "can't find sockets' device number"
 msgstr "ezin da socket gailu zenbakia aurkitu"
 
-#: src/fuser.c:961
-#, c-format
+#: src/fuser.c:965
+#, fuzzy, c-format
 msgid ""
 "usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -112,7 +201,7 @@ msgid ""
 "\n"
 "    -a        display unused files too\n"
 "    -c        mounted FS\n"
-"    -f        silently ignored (for POSIX compatibility\n"
+"    -f        silently ignored (for POSIX compatibility)\n"
 "    -k        kill processes accessing that file\n"
 "    -i        ask before killing (ignored without -k)\n"
 "    -l        list signal names\n"
@@ -130,7 +219,8 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"usage: fuser [ -a | -s | -c ] [ -n hutsuneak ] [ -seinalea ] [ -kimuv ] izena ...\n"
+"usage: fuser [ -a | -s | -c ] [ -n hutsuneak ] [ -seinalea ] [ -kimuv ] "
+"izena ...\n"
 "             [ - ] [ -n hutsuneak ] [ -seinalea ] [ -kimuv ] izena ...\n"
 "       fuser -l\n"
 "       fuser -V\n"
@@ -142,7 +232,8 @@ msgstr ""
 "    -i        galdetu hil baina lehenago (ignoratua -k gabe)\n"
 "    -l        zerrendatu seinale izenak\n"
 "    -m        muntatutako fitxategi sistemak\n"
-"    -n hutsuneak  bilatu hutsunean espezifikatutako izena (fitxategia, udp, edo tcp)\n"
+"    -n hutsuneak  bilatu hutsunean espezifikatutako izena (fitxategia, udp, "
+"edo tcp)\n"
 "    -s        operazio ixila\n"
 "    -signal   bidali seinalea SIGKILL beharrean\n"
 "    -u        erakutsi erabiltzaileen id-ak\n"
@@ -155,203 +246,178 @@ msgstr ""
 "  udp/tcp izenak: [ataka_lokala][,[urruneko_ostalaria][,[urruneko_ataka]]]\n"
 "\n"
 
-#: src/fuser.c:987
+#: src/fuser.c:991
 #, c-format
 msgid "fuser (psmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/fuser.c:989
-#, c-format
-msgid ""
-"Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
-"\n"
-"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
-"This is free software, and you are welcome to redistribute it under the terms\n"
-"of the GNU General Public License.\n"
-"For more information about these matters, see the files named COPYING.\n"
-msgstr ""
-"Copyright (C) 1993-2002 Werner Almesberger eta Craig Small\n"
-"\n"
-"PSmisc-k ez du INONGO BERMERIK.\n"
-"Software librea da, eta berriro bana daiteke GNU Lizentzia Publiko Orokorrak\n"
-"ezarritako baldintzak betez.\n"
-"Gai honi buruzko informazio gehiagorako, ikusi COPYING izena duten fitxategiak.\n"
-
-#: src/fuser.c:1172
+#: src/fuser.c:1177
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
 msgstr "-m ignoratzen \"%s\" izen tartean\n"
 
-#: src/fuser.c:1180
-#, c-format
-msgid "%s/%s: invalid specificiation\n"
+#: src/fuser.c:1185
+#, fuzzy, c-format
+msgid "%s/%s: invalid specification\n"
 msgstr "%s/%s: baliogabeko espezifikazioa\n"
 
-#: src/pstree.c:384
+#: src/pstree.c:378
 #, c-format
 msgid "MAX_DEPTH not big enough.\n"
 msgstr "MAX_DEPTH ez da behar bezain handia\n"
 
-#: src/pstree.c:719
-#, c-format
-msgid "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
-msgstr "erabilera: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
-
-#: src/pstree.c:720
-#, c-format
-msgid "              [ -A | -G | -U ] [ pid | user]\n"
-msgstr "              [ -A | -G | -U ] [ pid | erabiltzailea]\n"
-
-#: src/pstree.c:721
+#: src/pstree.c:714
 #, c-format
 msgid ""
+"usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+"              [ -A | -G | -U ] [ pid | user]\n"
 "       pstree -V\n"
 "\n"
+"    -a     show command line arguments\n"
+"    -A     use ASCII line drawing characters\n"
+"    -c     don't compact identical subtrees\n"
+"    -h     highlight current process and its ancestors\n"
+"    -H pid highlight process \"pid\" and its ancestors\n"
+"    -G     use VT100 line drawing characters\n"
+"    -l     don't truncate long lines\n"
+"    -n     sort output by PID\n"
+"    -p     show PIDs; implies -c\n"
+"    -u     show uid transitions\n"
 msgstr ""
-"       pstree -V\n"
-"\n"
-
-#: src/pstree.c:722
-#, c-format
-msgid "    -a     show command line arguments\n"
-msgstr "    -a     erakutsi komando lerro argumentoak\n"
-
-#: src/pstree.c:723
-#, c-format
-msgid "    -A     use ASCII line drawing characters\n"
-msgstr "    -A     erabili ASCII karaktereak lerroak marrazteko\n"
-
-#: src/pstree.c:724
-#, c-format
-msgid "    -c     don't compact identical subtrees\n"
-msgstr "    -c     ez trinkotu azpi-zuahitz berdinak\n"
-
-#: src/pstree.c:725
-#, c-format
-msgid "    -h     highlight current process and its ancestors\n"
-msgstr "    -h     nabarmendu uneko prozesuak eta honen aurrekoak\n"
-
-#: src/pstree.c:726
-#, c-format
-msgid "    -H pid highlight process \"pid\" and its ancestors\n"
-msgstr "    -H pid nabarmendu \"pid\" prozesua eta honen aurrekoak\n"
-
-#: src/pstree.c:727
-#, c-format
-msgid "    -G     use VT100 line drawing characters\n"
-msgstr "    -G     erabili VT100 karaktereak lerroak marrazteko\n"
-
-#: src/pstree.c:728
-#, c-format
-msgid "    -l     don't truncate long lines\n"
-msgstr "    -l     ez moztu lerro luzeak\n"
 
 #: src/pstree.c:729
-#, c-format
-msgid "    -n     sort output by PID\n"
-msgstr "    -n     sailkatu irteera PIDaren arabera\n"
-
-#: src/pstree.c:730
-#, c-format
-msgid "    -p     show PIDs; implies -c\n"
-msgstr "    -p     erakutsi PIDak; -c erabiltzea suposatzen du\n"
-
-#: src/pstree.c:731
-#, c-format
-msgid "    -u     show uid transitions\n"
-msgstr "    -u     erakutsi uid trantsizioak\n"
+#, fuzzy, c-format
+msgid ""
+"    -s     show Flask SIDs\n"
+"    -x     show Flask security contexts\n"
+msgstr "    -x     erakutsi seguritate testuinguru flaskoak\n"
 
 #: src/pstree.c:733
 #, c-format
-msgid "    -s     show Flask SIDs\n"
-msgstr "    -s     erakutsi  SIDs flaskoak\n"
-
-#: src/pstree.c:734
-#, c-format
-msgid "    -x     show Flask security contexts\n"
-msgstr "    -x     erakutsi seguritate testuinguru flaskoak\n"
-
-#: src/pstree.c:736
-#, c-format
-msgid "    -U     use UTF-8 (Unicode)) line drawing characters\n"
-msgstr "    -U     erabili UTF-8 (Unicode)) lerro karaktereak marrazteko\n"
-
-#: src/pstree.c:737
-#, c-format
-msgid "    -V     display version information\n"
-msgstr "    -V     bertsioari buruzko informazioa pantailaratu\n"
-
-#: src/pstree.c:738
-#, c-format
-msgid "    pid    start at pid, default 1 (init))\n"
-msgstr "    pid    hasi pid hontan, lehenetsitakoa 1 (init))\n"
-
-#: src/pstree.c:739
-#, c-format
 msgid ""
+"    -U     use UTF-8 (Unicode)) line drawing characters\n"
+"    -V     display version information\n"
+"    pid    start at pid, default 1 (init))\n"
 "    user   show only trees rooted at processes of that user\n"
 "\n"
 msgstr ""
-"    user   erakutsi erabiltzaile honen prozesuen zuahitzak\n"
-"\n"
 
-#: src/pstree.c:745
+#: src/pstree.c:742
 #, c-format
 msgid "pstree (psmisc) %s\n"
 msgstr "pstree (psmisc) %s\n"
 
-#: src/pstree.c:746
-#, c-format
-msgid ""
-"Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
-"\n"
-msgstr ""
-"Copyright (C) 1993-2002 Werner Almesberger eta Craig Small\n"
-"\n"
-
-#: src/pstree.c:747
-#, c-format
-msgid "pstree comes with ABSOLUTELY NO WARRANTY.\n"
-msgstr "pstree-k ez du INONGO BERMERIK.\n"
-
-#: src/pstree.c:748
-#, c-format
-msgid "This is free software, and you are welcome to redistribute it under the terms\n"
-msgstr ""
-"Software librea da, eta berriro bana daiteke GNU Lizentzia Publiko Orokorrak\n"
-"ezarritako baldintzak betez.\n"
-
-#: src/pstree.c:749
-#, c-format
-msgid "of the GNU General Public License.\n"
-msgstr "GNU General Public License lizentziapean.\n"
-
-#: src/pstree.c:750
-#, c-format
-msgid "For more information about these matters, see the files named COPYING.\n"
-msgstr "Gai honi buruzko informazio gehiagorako, ikusi COPYING izena duten fitxategiak.\n"
-
-#: src/pstree.c:835
+#: src/pstree.c:836
 #, c-format
 msgid "TERM is not set\n"
 msgstr "TERM ez dago ezarrita\n"
 
-#: src/pstree.c:840
+#: src/pstree.c:841
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "Ezin dira terminalaren gaitasunak lortu\n"
 
-#: src/pstree.c:884
+#: src/pstree.c:885
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "Ez dago honelako erabiltzaile izenik: %s\n"
 
-#: src/pstree.c:900
+#: src/pstree.c:901
 #, c-format
 msgid "No processes found.\n"
 msgstr "Ez da prozesurik aurkitu.\n"
 
-#: src/pstree.c:905
+#: src/pstree.c:906
 #, c-format
 msgid "Press return to close\n"
 msgstr "Sakatu 'return' itxitzeko\n"
+
+#: src/signals.c:65
+#, c-format
+msgid "%s: unknown signal; %s -l lists signals.\n"
+msgstr ""
+
+#~ msgid ""
+#~ "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+#~ msgstr ""
+#~ "erabilera: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -"
+#~ "u ]\n"
+
+#~ msgid "              [ -A | -G | -U ] [ pid | user]\n"
+#~ msgstr "              [ -A | -G | -U ] [ pid | erabiltzailea]\n"
+
+#~ msgid ""
+#~ "       pstree -V\n"
+#~ "\n"
+#~ msgstr ""
+#~ "       pstree -V\n"
+#~ "\n"
+
+#~ msgid "    -a     show command line arguments\n"
+#~ msgstr "    -a     erakutsi komando lerro argumentoak\n"
+
+#~ msgid "    -A     use ASCII line drawing characters\n"
+#~ msgstr "    -A     erabili ASCII karaktereak lerroak marrazteko\n"
+
+#~ msgid "    -c     don't compact identical subtrees\n"
+#~ msgstr "    -c     ez trinkotu azpi-zuahitz berdinak\n"
+
+#~ msgid "    -h     highlight current process and its ancestors\n"
+#~ msgstr "    -h     nabarmendu uneko prozesuak eta honen aurrekoak\n"
+
+#~ msgid "    -H pid highlight process \"pid\" and its ancestors\n"
+#~ msgstr "    -H pid nabarmendu \"pid\" prozesua eta honen aurrekoak\n"
+
+#~ msgid "    -G     use VT100 line drawing characters\n"
+#~ msgstr "    -G     erabili VT100 karaktereak lerroak marrazteko\n"
+
+#~ msgid "    -l     don't truncate long lines\n"
+#~ msgstr "    -l     ez moztu lerro luzeak\n"
+
+#~ msgid "    -n     sort output by PID\n"
+#~ msgstr "    -n     sailkatu irteera PIDaren arabera\n"
+
+#~ msgid "    -p     show PIDs; implies -c\n"
+#~ msgstr "    -p     erakutsi PIDak; -c erabiltzea suposatzen du\n"
+
+#~ msgid "    -u     show uid transitions\n"
+#~ msgstr "    -u     erakutsi uid trantsizioak\n"
+
+#~ msgid "    -s     show Flask SIDs\n"
+#~ msgstr "    -s     erakutsi  SIDs flaskoak\n"
+
+#~ msgid "    -U     use UTF-8 (Unicode)) line drawing characters\n"
+#~ msgstr "    -U     erabili UTF-8 (Unicode)) lerro karaktereak marrazteko\n"
+
+#~ msgid "    -V     display version information\n"
+#~ msgstr "    -V     bertsioari buruzko informazioa pantailaratu\n"
+
+#~ msgid "    pid    start at pid, default 1 (init))\n"
+#~ msgstr "    pid    hasi pid hontan, lehenetsitakoa 1 (init))\n"
+
+#~ msgid ""
+#~ "    user   show only trees rooted at processes of that user\n"
+#~ "\n"
+#~ msgstr ""
+#~ "    user   erakutsi erabiltzaile honen prozesuen zuahitzak\n"
+#~ "\n"
+
+#~ msgid "pstree comes with ABSOLUTELY NO WARRANTY.\n"
+#~ msgstr "pstree-k ez du INONGO BERMERIK.\n"
+
+#~ msgid ""
+#~ "This is free software, and you are welcome to redistribute it under the "
+#~ "terms\n"
+#~ msgstr ""
+#~ "Software librea da, eta berriro bana daiteke GNU Lizentzia Publiko "
+#~ "Orokorrak\n"
+#~ "ezarritako baldintzak betez.\n"
+
+#~ msgid "of the GNU General Public License.\n"
+#~ msgstr "GNU General Public License lizentziapean.\n"
+
+#~ msgid ""
+#~ "For more information about these matters, see the files named COPYING.\n"
+#~ msgstr ""
+#~ "Gai honi buruzko informazio gehiagorako, ikusi COPYING izena duten "
+#~ "fitxategiak.\n"
