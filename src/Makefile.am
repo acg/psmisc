@@ -11,8 +11,8 @@ pstree_LDADD = @TERMCAP_LIB@
 
 BUILT_SOURCES = signames.h
 
-signames.h: /usr/include/signal.h
-		@CPP@ -dM - </usr/include/signal.h | \
+signames.h: signames.c
+		@CPP@ -dM $< |\
 		tr -s '\t ' ' ' | sort -n +2 | sed \
 	's:#define SIG\([A-Z]\+[0-9]*\) \([0-9]\+\) *\(\|/\*.*\)$$:{\
 \2,"\1" },:p;d' | \
