@@ -1,4 +1,4 @@
-psmisc, version 19
+psmisc, version 20
 ==================
 
 This package contains four little utilities that use the proc FS:

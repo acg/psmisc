@@ -1,16 +1,15 @@
-To build all programs in psmisc, simply execute
+Installation instructions for psmisc package
+============================================
 
-    make
+To compile this program you will need ncurses.
 
-To install fuser, killall, pstree, and their man pages, run (as root)
+To build this, type
+	./configure
+	make
 
-    make install
+To install fuser, killall, pstree and their man pagess, type:
+	make install
 
-fuser is installed in /bin, killall and pstree are installed in /usr/bin
+To get pidof, link killall to pidof:
+	ln -s killall pidof
 
-pidof is not installed by  make install  because different versions of
-pidof exist and a different one may already be installed. If you want to
-install the pidof that comes with psmisc (and its man page), simply run
-(as root)
-
-    make install-pidof

@@ -5,3 +5,6 @@ line with other programs.  To specify signals use the -s flag.
 EG before version 20 you would do killall -HUP 123 now do
 killall -s HUP 123
 
+The license has changed to GPL for version 20 onwards with permission
+of the original authors.  People who want to use these programs under
+the previous license will have to look at psmisc 19 or below.
