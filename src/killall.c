@@ -22,8 +22,8 @@
 #include <sys/stat.h>
 #include <getopt.h>
 #ifdef FLASK_LINUX
-#include <fs_secure.h>
-#include <ss.h>
+#include <selinux/fs_secure.h>
+#include <selinux/ss.h>
 #endif /*FLASK_LINUX*/
 #include <libintl.h>
 #include <locale.h>
@@ -269,17 +269,22 @@ kill_all (int signal, int names, char **namelist)
 	      if (asprintf (&path, PROC_BASE "/%d/exe", pid_table[i]) < 0)
 		continue;
 #ifdef FLASK_LINUX
-              if (stat_secure(path,&st,&lsid) < 0) continue;
-              if (sts[j].st_dev != st.st_dev ||
-                  sts[j].st_ino != st.st_ino ||
-                  ((int) sid > 0 && (lsid != sid)) )
-                  continue;
+          if (stat_secure(path,&st,&lsid) < 0) {
+            free(path);
+            continue;
+          }
+          if (sts[j].st_dev != st.st_dev ||
+              sts[j].st_ino != st.st_ino ||
+              ((int) sid > 0 && (lsid != sid)) ) {
+            free(path);
+            continue;
+          }
 #else  /*FLASK_LINUX*/
 	      if (stat (path, &st) < 0) {
-		free (path);
-		continue;
-#endif /*FLASK_LINUX*/
+		    free (path);
+		    continue;
 	      }
+#endif /*FLASK_LINUX*/
 	      free (path);
 
 	      if (sts[j].st_dev != st.st_dev || sts[j].st_ino != st.st_ino)
@@ -394,7 +399,7 @@ usage_killall (void)
   fprintf (stderr, "  -V,--version        display version information\n");
   fprintf (stderr, "  -w,--wait           wait for processes to die\n\n");
 #ifdef FLASK_LINUX
-  fprintf (stderr, "  -S,--Sid            kill only process(es) having sid\n");
+  fprintf (stderr, "  -d,--sid            kill only process(es) having sid\n");
   fprintf (stderr, "  -c,--context        kill only process(es) having scontext\n");
   fprintf(stderr, "   (-s, -c are mutually exclusive and must precede other arguments)\n\n");
 #endif /*FLASK_LINUX*/
@@ -466,7 +471,11 @@ main (int argc, char **argv)
   textdomain(PACKAGE);
 
   opterr = 0;
-  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwS:c:V",options,NULL)) != EOF) {
+#ifdef FLASK_LINUX
+  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwd:c:V",options,NULL)) != EOF) {
+#else
+  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwV",options,NULL)) != EOF) {
+#endif
     switch (optc) {
       case 'e':
         exact = 1;
@@ -508,9 +517,10 @@ main (int argc, char **argv)
         return 0;
         break;
 #ifdef FLASK_LINUX
-      case 'S': {
+      case 'd': {
           char **buf, *calloc();
           int strlen(), rv;
+          __u32 len;
           security_id_t lsid;
 
           buf = (char **) calloc(1, strlen(optarg));
@@ -528,7 +538,8 @@ main (int argc, char **argv)
 
           sid = (security_id_t) lsid;
           /* sanity check */
-          rv = security_sid_to_context(sid, buf, strlen(optarg));
+          len = strlen(optarg);
+          rv = security_sid_to_context(sid, buf, &len);
           if ( rv < 0 && (errno != ENOSPC) ) {
               (void) fprintf(stderr, "%s: security_sid_to_context(%d) %s\n", name, (int) sid, strerror(errno));
               (void) fflush(stderr);

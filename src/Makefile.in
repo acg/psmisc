@@ -69,11 +69,14 @@ DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
 ECHO = @ECHO@
 EXEEXT = @EXEEXT@
+FLASK_LIB = @FLASK_LIB@
 FLASK_LINUX = @FLASK_LINUX@
 GENCAT = @GENCAT@
 GLIBC21 = @GLIBC21@
 GMSGFMT = @GMSGFMT@
 HAVE_LIB = @HAVE_LIB@
+INO_T_IS_INT = @INO_T_IS_INT@
+INO_T_IS_LONG_LONG = @INO_T_IS_LONG_LONG@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 INSTOBJEXT = @INSTOBJEXT@
 INTLBISON = @INTLBISON@
@@ -103,7 +106,7 @@ am__include = @am__include@
 am__quote = @am__quote@
 install_sh = @install_sh@
 
-CFLAGS = -Wall -DLOCALEDIR=\"/usr/share/locale\"
+AM_CFLAGS = -Wall -DLOCALEDIR=\"/usr/share/locale\"
 
 bin_PROGRAMS = fuser killall pstree
 
@@ -111,9 +114,11 @@ fuser_SOURCES = fuser.c comm.h signals.c signals.h signames.h loop.h
 
 killall_SOURCES = killall.c comm.h signals.c signals.h signames.h
 
+killall_LDADD = @FLASK_LIB@
+
 pstree_SOURCES = pstree.c comm.h
 
-pstree_LDADD = @TERMCAP_LIB@
+pstree_LDADD = @TERMCAP_LIB@ @FLASK_LIB@
 
 BUILT_SOURCES = signames.h
 
@@ -134,7 +139,6 @@ fuser_DEPENDENCIES =
 fuser_LDFLAGS =
 am_killall_OBJECTS = killall.$(OBJEXT) signals.$(OBJEXT)
 killall_OBJECTS = $(am_killall_OBJECTS)
-killall_LDADD = $(LDADD)
 killall_DEPENDENCIES =
 killall_LDFLAGS =
 am_pstree_OBJECTS = pstree.$(OBJEXT)
@@ -157,6 +161,7 @@ LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
+CFLAGS = @CFLAGS@
 DIST_SOURCES = $(fuser_SOURCES) $(killall_SOURCES) $(pstree_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
 SOURCES = $(fuser_SOURCES) $(killall_SOURCES) $(pstree_SOURCES)

@@ -1,5 +1,5 @@
 
-CFLAGS = -Wall -DLOCALEDIR=\"/usr/share/locale\"
+AM_CFLAGS = -Wall -DLOCALEDIR=\"/usr/share/locale\"
 
 bin_PROGRAMS = fuser killall pstree
 
@@ -7,9 +7,11 @@ fuser_SOURCES = fuser.c comm.h signals.c signals.h signames.h loop.h
 
 killall_SOURCES = killall.c comm.h signals.c signals.h signames.h
 
+killall_LDADD = @FLASK_LIB@
+
 pstree_SOURCES = pstree.c comm.h
 
-pstree_LDADD = @TERMCAP_LIB@
+pstree_LDADD = @TERMCAP_LIB@ @FLASK_LIB@
 
 BUILT_SOURCES = signames.h
 
