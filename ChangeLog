@@ -4,6 +4,7 @@ Changes in 20.2 (18-OCT-2001)
  - fuser no longer assume st_dev is 0 for sockets, needed for kernel 2.4.12
    and above, Thanks to Alexander Viro for the patch.
  - Search both IPv4 and IPv6 namespaces.
+ - Added patch for pstree -u (SF Patch: #455932 )
 
 Changes in 20.1 (31-MAR-2001)
 =============================

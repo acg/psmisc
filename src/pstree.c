@@ -508,8 +508,9 @@ read_proc (void)
 	if ((file = fopen (path, "r")) != NULL)
 	  {
 	    empty = 0;
-	    if (fstat (fileno (file), &st) < 0)
-	      {
+            sprintf (path, "%s/%d", PROC_BASE, pid);
+            if (stat (path, &st) < 0)
+	    {
 		perror (path);
 		exit (1);
 	      }
