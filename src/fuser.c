@@ -19,6 +19,7 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
+#include <sys/socket.h>
 #include <sys/stat.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -134,25 +135,22 @@ static FILE_DSC *last_named = NULL;
 static UNIX_CACHE *unix_cache = NULL;
 static pid_t self;
 static int all = 0, found_item = 0;
+static dev_t net_dev;
+static int ipv4only = 0, ipv6only = 0;
 
 
 static void
-fill_net_cache (SPACE_DSC * dsc)
+parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr )
 {
   FILE *file;
   NET_CACHE *new, *last;
-  char buffer[PATH_MAX + 1], line[MAX_LINE + 1];
-
-  if (dsc->once)
-    return;
-  dsc->once = 1;
-  sprintf (buffer, PROC_BASE "/net/%s", dsc->name);
-  if (!(file = fopen (buffer, "r")))
+  char line[MAX_LINE + 1];
+  if (!(file = fopen (filename, "r")))
     {
-      perror (buffer);
+      perror (filename);
       exit (1);
     }
-  last = NULL;
+  last = *lastptr;
   (void) fgets (line, MAX_LINE, file);
   while (fgets (line, MAX_LINE, file))
     {
@@ -182,6 +180,45 @@ fill_net_cache (SPACE_DSC * dsc)
       last = new;
     }
   (void) fclose (file);
+  *lastptr = last;
+
+}
+
+static void
+fill_net_cache (SPACE_DSC * dsc)
+{
+  char buffer[PATH_MAX + 1];
+  NET_CACHE *last;
+  struct stat statbuf;
+
+  if (dsc->once)
+    return;
+  dsc->once = 1;
+  last = NULL;
+
+  /* Check to see if we have both namespace files, if we don't then silently
+   * not use them if not flags are specified and complain if the flags
+   * were specified.
+   */
+  
+  if (!ipv6only) {
+    sprintf (buffer, PROC_BASE "/net/%s", dsc->name);
+    if (stat(buffer, &statbuf) != 0) {
+      if (ipv4only) 
+        fprintf(stderr, "-4 flag used but proc file %s is not readable/\n", buffer);
+    } else {
+      parse_net_file (dsc, buffer, &last );
+    }
+  }
+  if (!ipv4only) {
+    sprintf (buffer, PROC_BASE "/net/%s6", dsc->name);
+    if (stat(buffer, &statbuf) != 0) {
+      if (ipv6only) 
+        fprintf(stderr, "-6 flag used but proc file %s is not readable/\n", buffer);
+    } else {
+      parse_net_file (dsc, buffer, &last );
+    }
+  }
 }
 
 
@@ -816,6 +853,21 @@ parse_inet (const char *spec, const char *name_space, int *lcl_port,
   return 1;
 }
 
+static void find_net_dev(void)
+{
+  int fd = socket(PF_INET, SOCK_DGRAM,0);
+  struct stat buf;
+  if (fd >= 0 && fstat(fd, &buf) == 0) {
+    net_dev = buf.st_dev;
+    close(fd);
+    return;
+  }
+  if (fd >= 0)
+    close(fd);
+  fprintf(stderr,"can't find sockets' device number");
+}
+
+
 
 static void
 usage (void)
@@ -837,6 +889,8 @@ usage (void)
   fprintf (stderr, "    -u        display user ids\n");
   fprintf (stderr, "    -v        verbose output\n");
   fprintf (stderr, "    -V        display version information\n");
+  fprintf (stderr, "    -4        search IPv4 sockets only\n");
+  fprintf (stderr, "    -6        search IPv6 sockets only\n");
   fprintf (stderr, "    -         reset options\n\n");
   fprintf (stderr, "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]"
 	   "\n\n");
@@ -873,6 +927,7 @@ main (int argc, char **argv)
       list_signals ();
       return 0;
     }
+  find_net_dev();
   while (--argc)
     {
       argv++;
@@ -926,8 +981,17 @@ main (int argc, char **argv)
 		  break;
 		case 'V':
 		  print_version();
-
 		  return 0;
+                case '4':
+                    if (ipv6only) 
+                      usage();
+                    ipv4only = 1;
+                    break;
+                case '6':
+                    if (ipv4only)
+                      usage();
+                    ipv6only = 1;
+                    break;
 		default:
 		  if (isupper (**argv) || isdigit (**argv))
 		    {
@@ -998,8 +1062,8 @@ main (int argc, char **argv)
 		  for (walk = unix_cache; walk; walk = walk->next)
 		    if (walk->fs_dev == st.st_dev && walk->fs_ino ==
 			st.st_ino)
-		      enter_item (*argv, flags, sig_number, 0, walk->net_ino,
-				  NULL);
+		      enter_item (*argv, flags, sig_number, net_dev,
+                        walk->net_ino, NULL);
 		}
 	    }
 	  else
@@ -1026,7 +1090,7 @@ main (int argc, char **argv)
 		if ((lcl_port == -1 || walk->lcl_port == lcl_port) &&
 		    (!rmt_addr || walk->rmt_addr == rmt_addr) &&
 		    (rmt_port == -1 || walk->rmt_port == rmt_port))
-		  enter_item (*argv, flags, sig_number, 0, walk->ino,
+		  enter_item (*argv, flags, sig_number, net_dev, walk->ino,
 			      this_name_space);
 	    }
 	}

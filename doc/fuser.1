@@ -5,11 +5,7 @@ fuser \- identify processes using files or sockets
 .ad l
 .B fuser
 .RB [ \-a | \-s ]
-.RB [ \-n\ \fIspace ]
-.RB [ \-\fIsignal\fB ]
-.RB [ \-kimuv ]
-.I name ...
-.RB [ \- ]
+.RB [ \-4 | \-6 ]
 .RB [ \-n\ \fIspace ]
 .RB [ \-\fIsignal\fB ]
 .RB [ \-kimuv ]
@@ -44,7 +40,9 @@ is accessed or in case of a fatal error. If at least one access has been
 found, \fBfuser\fP returns zero.
 .PP
 In order to look up processes using TCP and UDP sockets, the corresponding
-name space has to be selected with the \fB-n\fP option. Then the socket(s) can
+name space has to be selected with the \fB-n\fP option.  By default 
+\fBfuser\fP will look in both IPv6 and IPv4 sockets.  To change the default,
+behavour, use the \fB-4\fP and \fB-6\fp options. The socket(s) can
 be specified by the local and remote port, and the remote address. All fields
 are optional, but commas in front of missing fields must be present:
 
@@ -94,6 +92,12 @@ accesses the file. If the access is by the kernel (e.g. in the case of a
 mount point, a swap file, etc.), \fBkernel\fP is shown instead of the PID.
 .IP \fB\-V\fP
 Display version information.
+.IP \fB\-4\fP
+Search only for IPv4 sockets.  This option must not be used with the
+\fB-6\fP option and only has an effect with the tcp and udp namespaces.
+.IP \fB\-6\fP
+Search only for IPv6 sockets.  This option must not be used with the \fB-4\fP
+option and only has an effect with the tcp and udp namespaces.
 .IP \fB\-\fP
 Reset all options and set the signal back to SIGKILL.
 .SH FILES
@@ -135,5 +139,5 @@ The \fB-k\fP option only works on processes. If the user is the kernel,
 .SH AUTHOR
 Werner Almesberger <Werner.Almesberger@epfl.ch>
 .SH "SEE ALSO"
-kill(1), killall(1), ps(1), kill(2)
+kill(1), killall(1), lsof(8), ps(1), kill(2)
 .\"{{{}}}
