@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 21.3\n"
-"Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2003-11-28 22:49+1100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-04-23 22:48+1000\n"
 "PO-Revision-Date: 2003-09-26 20:45+0100\n"
 "Last-Translator: Joakim Mared <joakim at bfcom dot se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -15,88 +15,93 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: src/killall.c:51
+#: src/killall.c:55
 #, c-format
 msgid "Kill %s(%s%d) ? (y/n) "
 msgstr "Avsluta %s(%s%d) ? (y/n) "
 
-#: src/killall.c:239
+#: src/killall.c:243
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "hoppar över delvis matchande process: %s(%d)\n"
 
-#: src/killall.c:325
+#: src/killall.c:329
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Avslutade %s(%s%d) med signal %d\n"
 
-#: src/killall.c:337 src/fuser.c:503 src/pstree.c:674
+#: src/killall.c:341 src/fuser.c:507 src/pstree.c:678
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s är tom (inte monterad ?)\n"
 
-#: src/killall.c:343
+#: src/killall.c:347
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: ingen process avslutad\n"
 
-#: src/killall.c:588
+#: src/killall.c:594
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Maximalt antal namn är %d\n"
 
-#: src/fuser.c:255
+#: src/fuser.c:259
 #, c-format
 msgid "-4 flag used but proc file %s is not readable\n"
 msgstr "-4 används men proc-fil %s kan inte läsas\n"
 
-#: src/fuser.c:264
+#: src/fuser.c:268
 #, c-format
 msgid "-6 flag used but proc file %s is not readable\n"
 msgstr "-6 används men proc-fil %s kan inte läsas\n"
 
-#: src/fuser.c:601
+#: src/fuser.c:605
 #, fuzzy, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Avsluta process %d ? (y/n) "
 
-#: src/fuser.c:631
+#: src/fuser.c:635
 #, c-format
 msgid "kill %d"
 msgstr "avsluta %d"
 
-#: src/fuser.c:635 src/fuser.c:639
+#: src/fuser.c:639 src/fuser.c:643
 #, c-format
 msgid "No automatic removal. Please use  umount %s\n"
 msgstr "Ingen automatisk avmontering. Använd  umount %s\n"
 
-#: src/fuser.c:643
+#: src/fuser.c:647
 #, c-format
 msgid "No automatic removal. Please use  swapoff %s\n"
 msgstr "Ingen automatisk avmontering av swap. Använd  swapoff %s\n"
 
-#: src/fuser.c:755
+#: src/fuser.c:759
 #, c-format
 msgid "Internal error (type %d)\n"
 msgstr "Internt fel (typ %d)\n"
 
-#: src/fuser.c:791
+#: src/fuser.c:795
+#, c-format
 msgid "kernel mount  "
 msgstr "monteringspunkt för kärna  "
 
-#: src/fuser.c:794
+#: src/fuser.c:798
+#, c-format
 msgid "kernel loop   "
 msgstr "loop i kärna   "
 
-#: src/fuser.c:797
+#: src/fuser.c:801
+#, c-format
 msgid "kernel swap   "
 msgstr "växlingsutrymme för kärna   "
 
-#: src/fuser.c:954
+#: src/fuser.c:958
+#, c-format
 msgid "can't find sockets' device number"
 msgstr "kunde inte hitta uttagets (socket) enhetsnummer"
 
-#: src/fuser.c:963
+#: src/fuser.c:967
+#, c-format
 msgid ""
 "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -145,13 +150,13 @@ msgstr ""
 "  udp/tcp-namn: [lokal_port][,[fjärrvärd][,[fjärrport]]]\n"
 "\n"
 
-#: src/fuser.c:987
+#: src/fuser.c:991
 #, c-format
 msgid "fuser (psmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/fuser.c:989
-#, fuzzy
+#: src/fuser.c:993
+#, fuzzy, c-format
 msgid ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
 "\n"
@@ -179,32 +184,36 @@ msgstr ""
 "program. Om inte, skriv till Free Software Foundation, Inc., 59 Temple Place "
 "- Suite 330, Boston, MA 02111-1307, USA.\n"
 
-#: src/fuser.c:1167
+#: src/fuser.c:1173
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
 msgstr "ignorerar -m i utrymme \"%s\"\n"
 
-#: src/fuser.c:1175
+#: src/fuser.c:1181
 #, c-format
 msgid "%s/%s: invalid specificiation\n"
 msgstr "%s/%s: ogiltig specifikation\n"
 
-#: src/pstree.c:378
+#: src/pstree.c:382
+#, c-format
 msgid "MAX_DEPTH not big enough.\n"
 msgstr "MAX_DEPTH inte tillräckligt stort.\n"
 
-#: src/pstree.c:713
+#: src/pstree.c:717
+#, c-format
 msgid ""
 "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 msgstr ""
 "användning: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -"
 "u ]\n"
 
-#: src/pstree.c:714
+#: src/pstree.c:718
+#, c-format
 msgid "              [ -G | -U ] [ pid | user]\n"
 msgstr "              [ -G | -U ] [ pid | användare]\n"
 
-#: src/pstree.c:715
+#: src/pstree.c:719
+#, c-format
 msgid ""
 "       pstree -V\n"
 "\n"
@@ -212,63 +221,78 @@ msgstr ""
 "       pstree -V\n"
 "\n"
 
-#: src/pstree.c:716
+#: src/pstree.c:720
+#, c-format
 msgid "    -a     show command line arguments\n"
 msgstr "    -a     visa kommandoradsargument\n"
 
-#: src/pstree.c:717
+#: src/pstree.c:721
+#, c-format
 msgid "    -c     don't compact identical subtrees\n"
 msgstr "    -c     komprimera inte identiska underträd\n"
 
-#: src/pstree.c:718
+#: src/pstree.c:722
+#, c-format
 msgid "    -h     highlight current process and its ancestors\n"
 msgstr "    -h     markera nuvarande process och dess förfäder\n"
 
-#: src/pstree.c:719
+#: src/pstree.c:723
+#, c-format
 msgid "    -H pid highlight process \"pid\" and its ancestors\n"
 msgstr "    -H pid markera processen \"pid\" och dess förfäder\n"
 
-#: src/pstree.c:720
+#: src/pstree.c:724
+#, c-format
 msgid "    -G     use VT100 line drawing characters\n"
 msgstr "    -G     använd VT100 linjeritningssymboler\n"
 
-#: src/pstree.c:721
+#: src/pstree.c:725
+#, c-format
 msgid "    -l     don't truncate long lines\n"
 msgstr "    -l     förkorta inte långa rader\n"
 
-#: src/pstree.c:722
+#: src/pstree.c:726
+#, c-format
 msgid "    -n     sort output by PID\n"
 msgstr "    -n     sortera utskrift efter PID\n"
 
-#: src/pstree.c:723
+#: src/pstree.c:727
+#, c-format
 msgid "    -p     show PIDs; implies -c\n"
 msgstr "    -p     visa PID:s; förutsätter -c\n"
 
-#: src/pstree.c:724
+#: src/pstree.c:728
+#, c-format
 msgid "    -u     show uid transitions\n"
 msgstr "    -u     visa uid-översättningar\n"
 
-#: src/pstree.c:726
+#: src/pstree.c:730
+#, c-format
 msgid "    -s     show Flask SIDs\n"
 msgstr "    -s     visa Flask-SID:s\n"
 
-#: src/pstree.c:727
+#: src/pstree.c:731
+#, c-format
 msgid "    -x     show Flask security contexts\n"
 msgstr "    -x     visa Flask säkerhetssammanhang\n"
 
-#: src/pstree.c:729
+#: src/pstree.c:733
+#, c-format
 msgid "    -U     use UTF-8 (Unicode)) line drawing characters\n"
 msgstr "    -U     använd UTF-8 (Unicode)) linjeritningssymboler\n"
 
-#: src/pstree.c:730
+#: src/pstree.c:734
+#, c-format
 msgid "    -V     display version information\n"
 msgstr "    -V     visa versionsinformation\n"
 
-#: src/pstree.c:731
+#: src/pstree.c:735
+#, c-format
 msgid "    pid    start at pid, default 1 (init))\n"
 msgstr "    pid    börja vid pid, standardvärde 1 (init))\n"
 
-#: src/pstree.c:732
+#: src/pstree.c:736
+#, c-format
 msgid ""
 "    user   show only trees rooted at processes of that user\n"
 "\n"
@@ -276,12 +300,13 @@ msgstr ""
 "    anv.   visa endast träd med sin rot bland denna användares processer\n"
 "\n"
 
-#: src/pstree.c:738
+#: src/pstree.c:742
 #, fuzzy, c-format
 msgid "pstree (psmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/pstree.c:739
+#: src/pstree.c:743
+#, c-format
 msgid ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
 "\n"
@@ -289,7 +314,8 @@ msgstr ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
 "\n"
 
-#: src/pstree.c:740
+#: src/pstree.c:744
+#, c-format
 msgid "pstree comes with ABSOLUTELY NO WARRANTY.\n"
 msgstr ""
 "Följande text är en informell översättning som enbart tillhandahålls i "
@@ -297,7 +323,8 @@ msgstr ""
 "originaltexten.\n"
 "\n"
 
-#: src/pstree.c:741
+#: src/pstree.c:745
+#, c-format
 msgid ""
 "This is free software, and you are welcome to redistribute it under the "
 "terms\n"
@@ -308,7 +335,8 @@ msgstr ""
 "version.\n"
 "\n"
 
-#: src/pstree.c:742
+#: src/pstree.c:746
+#, c-format
 msgid "of the GNU General Public License.\n"
 msgstr ""
 "Detta program distribueras i hopp om att det ska vara användbart, men UTAN "
@@ -317,7 +345,8 @@ msgstr ""
 "information.\n"
 "\n"
 
-#: src/pstree.c:743
+#: src/pstree.c:747
+#, c-format
 msgid ""
 "For more information about these matters, see the files named COPYING.\n"
 msgstr ""
@@ -325,24 +354,28 @@ msgstr ""
 "program. Om inte, skriv till Free Software Foundation, Inc., 59 Temple Place "
 "- Suite 330, Boston, MA 02111-1307, USA.\n"
 
-#: src/pstree.c:803
+#: src/pstree.c:809
+#, c-format
 msgid "TERM is not set\n"
 msgstr "TERM är inte satt\n"
 
-#: src/pstree.c:808
+#: src/pstree.c:814
+#, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "Kan inte ta reda på terminalens beskaffenhet\n"
 
-#: src/pstree.c:854
+#: src/pstree.c:860
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "Ingen sådan användare: %s\n"
 
-#: src/pstree.c:878
+#: src/pstree.c:884
+#, c-format
 msgid "No processes found.\n"
 msgstr "Inga processer funna.\n"
 
-#: src/pstree.c:883
+#: src/pstree.c:889
+#, c-format
 msgid "Press return to close\n"
 msgstr "Tryck retur för att stänga\n"
 

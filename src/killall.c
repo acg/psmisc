@@ -450,7 +450,7 @@ main (int argc, char **argv)
     {"verbose", 0, NULL, 'v'},
     {"wait", 0, NULL, 'w'},
 #ifdef FLASK_LINUX
-    {"Sid", 1, NULL, 'S'},
+    {"Sid", 1, NULL, 'd'},
     {"context", 1, NULL, 'c'},
 #endif /*FLASK_LINUX*/
     {"version", 0, NULL, 'V'},
