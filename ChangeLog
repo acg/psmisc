@@ -4,6 +4,8 @@ Changes in 21.7
 	* define rpmatch for libraries that dont have it
 	* Fixed small typos in help thanks to Benno Schulenberg
 	  fixes SF# 1150042
+	* fusernew - this will be the new fuser once it gets tested on
+	  those strange setups folks out there have
 
 Changes in 21.6
 ===============

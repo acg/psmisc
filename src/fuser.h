@@ -1,0 +1,79 @@
+
+/* Option Flags */
+typedef unsigned char opt_type;
+
+#define OPT_VERBOSE 1
+#define OPT_ALLFILES 2
+#define OPT_MOUNTS 4
+#define OPT_KILL 8
+#define OPT_INTERACTIVE 16
+#define OPT_SILENT 32
+#define OPT_USER 64
+#define OPT_MOUNTPOINT 128
+
+
+struct procs {
+	pid_t pid;
+	uid_t uid;
+	char access;
+	char *username;
+	char *command;
+	struct procs *next;
+};
+
+#define ACCESS_CWD 1
+#define ACCESS_EXE 2
+#define ACCESS_FILE 4
+#define ACCESS_ROOT 8
+#define ACCESS_MMAP 16
+
+struct names {
+	char *filename;
+	unsigned char name_space;
+	struct procs *matched_procs;
+	struct names *next;
+};
+
+struct ip_connections {
+	struct names *name;
+	unsigned long lcl_port;
+	unsigned long rmt_port;
+	struct in_addr rmt_address;
+	struct ip_connections *next;
+};
+
+struct ip6_connections {
+	struct names *name;
+	unsigned long lcl_port;
+	unsigned long rmt_port;
+	struct in6_addr rmt_address;
+	struct ip6_connections *next;
+};
+
+struct inode_list {
+	struct names *name;
+	dev_t	device;
+	ino_t	inode;
+	struct inode_list *next;
+};
+
+struct mountdev_list {
+	char *fsname;
+	char *dir;
+	dev_t	device;
+	struct mountdev_list *next;
+};
+
+
+struct device_list {
+	struct names *name;
+	dev_t	device;
+	struct device_list *next;
+};
+
+#define NAMESPACE_FILE 0
+#define NAMESPACE_TCP 1
+#define NAMESPACE_UDP 2
+
+#define MAX_PATHNAME 200
+#define MAX_CMDNAME 16

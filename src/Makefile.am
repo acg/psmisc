@@ -1,9 +1,11 @@
 
 AM_CFLAGS = -Wall -DLOCALEDIR=\"/usr/share/locale\"
 
-bin_PROGRAMS = fuser killall pstree
+bin_PROGRAMS = fuser killall pstree fusernew
 
 fuser_SOURCES = fuser.c comm.h signals.c signals.h loop.h i18n.h
+
+fusernew_SOURCES = fusernew.c comm.h signals.c signals.h i18n.h fuser.h
 
 killall_SOURCES = killall.c comm.h signals.c signals.h i18n.h
 

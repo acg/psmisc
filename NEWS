@@ -1,4 +1,5 @@
 Important NEWS for psmisc package
+=================================
 
 The command line for killall has changed significantly so it is more in
 line with other programs.  To specify signals use the -s flag.
