@@ -1,14 +1,14 @@
-#  Vietnamese translation for psmisc-21.5.
+#  Vietnamese translation for psmisc-21.6pre1.
 #  Copyright (C) 2005 Free Software Foundation, Inc.
-#  This file is distributed under the same license as the psmisc-21.5 package.
-# Clytie Siddall <clytie@riverland.net.au>, 2005.
+#  This file is distributed under the same license as the psmisc-21.6pre1 package.
+#  Clytie Siddall <clytie@riverland.net.au>, 2005.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 21.5\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-23 11:52+1100\n"
-"PO-Revision-Date: 2005-02-19 17:46+0950\n"
+"Project-Id-Version: psmisc 21.6pre1\n"
+"Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
+"POT-Creation-Date: 2005-02-23 14:46+1100\n"
+"PO-Revision-Date: 2005-02-24 13:32+0950\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/killall.c:53
-#, fuzzy, c-format
+#, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "Có buộc kết thúc %s(%s%d) không? (y/n) (có/không)"
 
@@ -52,16 +52,24 @@ msgid ""
 "    -V      display version information\n"
 "\n"
 msgstr ""
+"cách sử dụng: pidof [ -eg ] tên ...\n"
+"       pidof -V\n"
+"\n"
+"    -e      cần đến điều khớp _chính xác_ đối với mọi tên dài lắm;\n"
+"            bỏ qua nếu không có đường lệnh sẵn sàng\n"
+"    -g      hiển thị ID của _nhóm_ tiến trình thay thế ID tiến trình\n"
+"    -V      hiển thị thông tin _phiên bản_\n"
+"\n"
 
 #: src/killall.c:402
 #, c-format
 msgid "usage: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n"
-msgstr ""
+msgstr "cách sử dụng: killall [-s sid] [-c ngữ_cảnh] [ -egiqvw ] [ -tín_hiệu ] tên ...\n"
 
 #: src/killall.c:405
 #, c-format
 msgid "usage: killall [ OPTIONS ] [ -- ] name ...\n"
-msgstr ""
+msgstr "cách sử dụng: killall [ TÙY_CHỌN ] [ -- ] tên ...\n"
 
 #: src/killall.c:408
 #, c-format
@@ -81,6 +89,20 @@ msgid ""
 "  -w,--wait           wait for processes to die\n"
 "\n"
 msgstr ""
+"       killall -l, --list (_ghi danh sách_)\n"
+"       killall -V --version (_phiên bản_)\n"
+"\n"
+"  -e,--exact          cần đến điều khớp _chính xác_ đối với mọi tên dài lắm\n"
+"  -I,--ignore-case    _bỏ qua hoa/thường_ khi khớp tên tiến trình\n"
+"  -g,--process-group  buộc kết thức _nhóm tiến trình_ thay thế tiến trình\n"
+"  -i,--interactive    xin xác nhận trước khi buộc kết thức (_tương tác_)\n"
+"  -l,--list           list all known signal names\n"
+"  -q,--quiet          không hiển thị lời than phiền nào (_im_)\n"
+"  -s,--signal         gởi _tín hiệu_ thay thế SIGTERM\n"
+"  -v,--verbose        thông báo khi gởi tín hiệu ấy được (_chi tiết_)\n"
+"  -V,--version        hiển thị thông tin _phiên bản_\n"
+"  -w,--wait           _đời_ kết thức tiến trình\n"
+"\n"
 
 #: src/killall.c:422
 #, c-format
@@ -90,6 +112,10 @@ msgid ""
 "   (-s, -c are mutually exclusive and must precede other arguments)\n"
 "\n"
 msgstr ""
+"  -d,--sid            buộc kết thức chỉ tiến trình có sid ấy\n"
+"  -c,--context        buộc kết thức chỉ tiến trình có scontext (ngữ cảnh s)\n"
+"   (hai đối số -s, -c loại từ lẫn nhau và phải đi trước hết đối số khác)\n"
+"\n"
 
 #: src/killall.c:444 src/fuser.c:989 src/pstree.c:743
 #, c-format
@@ -101,15 +127,13 @@ msgstr ""
 "\n"
 
 #: src/killall.c:446 src/fuser.c:991 src/pstree.c:745
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
 "This is free software, and you are welcome to redistribute it under\n"
 "the terms of the GNU General Public License.\n"
 "For more information about these matters, see the files named COPYING.\n"
 msgstr ""
-"Bản quyền (C) 1993-2002 Werner Almesberger and Craig Small\n"
-"\n"
 "PSmisc không bảo đảm gì cả.\n"
 "Đây là phần mềm tự do thì bạn có thể phân phối nó với điều kiện của\n"
 "Quyền Công Chung Gnu (GPL)\n"
@@ -118,7 +142,7 @@ msgstr ""
 #: src/killall.c:563
 #, c-format
 msgid "%s: SID (%s) must be numeric\n"
-msgstr ""
+msgstr "%s: SID (%s) phải là thuộc số\n"
 
 #: src/killall.c:614
 #, c-format
@@ -161,6 +185,8 @@ msgid ""
 "\n"
 "%*s USER        PID ACCESS COMMAND\n"
 msgstr ""
+"\n"
+"%*s NGƯỜI_DÙNG        LỆNH TRUY CẬP PID\n"
 
 #: src/fuser.c:752
 #, c-format
@@ -170,17 +196,17 @@ msgstr "Lỗi nội bộ (loại %d)\n"
 #: src/fuser.c:790
 #, c-format
 msgid "kernel mount  "
-msgstr "lắp "
+msgstr "lắp hạt nhân  "
 
 #: src/fuser.c:793
 #, c-format
 msgid "kernel loop   "
-msgstr "vòng lặp hạt nhân"
+msgstr "vòng lặp hạt nhân   "
 
 #: src/fuser.c:796
 #, c-format
 msgid "kernel swap   "
-msgstr "trao đổi hạt nhân"
+msgstr "trao đổi hạt nhân   "
 
 #: src/fuser.c:952
 #, c-format
@@ -188,7 +214,7 @@ msgid "can't find sockets' device number"
 msgstr "không tìm được số thiết bị của ổ cắm"
 
 #: src/fuser.c:961
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -215,8 +241,7 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"cách sử dụng: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] "
-"name ...\n"
+"cách sử dụng: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] tên ...\n"
 "       fuser -l\n"
 "       fuser -V\n"
@@ -228,8 +253,7 @@ msgstr ""
 "    -i        xin trước khi buộc kết thứ (sẽ bỏ qua nếu không có -k)\n"
 "    -l        _ghi danh sách_ tên tín hiệu\n"
 "    -m      hệ thống tập tin (FS) được _lắp_\n"
-"    -n space  tìm kiếm trong _miền tên_ (namespace) ấy (tập tin, udp, hay "
-"tcp)\n"
+"    -n space  tìm kiếm trong _miền tên_ (namespace) ấy (tập tin, udp, hay tcp)\n"
 "    -s        thi hành _âm thầm_\n"
 "    -signal   gởi _tín hiệu_ thay thế lệnh SIGKILL\n"
 "    -u        trình bày ID của các _người dùng_\n"
@@ -239,8 +263,7 @@ msgstr ""
 "    -6        tìm kiếm chỉ ổ cắm loại IPv6\n"
 "    -         lập tùy chọn lại\n"
 "\n"
-"  tên udp/tcp: [local_port][,[rmt_host][,[rmt_port]]] (cổng địa phương, máy "
-"chủ từ xa, cổng từ xa)\n"
+"  tên udp/tcp: [local_port][,[rmt_host][,[rmt_port]]] (cổng địa phương, máy chủ từ xa, cổng từ xa)\n"
 "\n"
 
 #: src/fuser.c:987
@@ -254,7 +277,7 @@ msgid "ignoring -m in name space \"%s\"\n"
 msgstr "Đang bỏ qua cờ -m trong miền tên \"%s\"\n"
 
 #: src/fuser.c:1181
-#, fuzzy, c-format
+#, c-format
 msgid "%s/%s: invalid specification\n"
 msgstr "%s/%s: sự ghi rõ không hợp lệ\n"
 
@@ -281,13 +304,29 @@ msgid ""
 "    -p     show PIDs; implies -c\n"
 "    -u     show uid transitions\n"
 msgstr ""
+"cách sử dụng: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+"              [ -A | -G | -U ] [ pid | người_dùng]\n"
+"       pstree -V\n"
+"\n"
+"    -a     hiển thị các _đối_ loại đường lệnh\n"
+"    -A     sử dụng ký tự vẽ đường loại _ASCII_\n"
+"    -c     không _gọn_ phụ cây trung lập\n"
+"    -h     _nổi bật_ tiến trình hiện có và các tổ tiên của nó\n"
+"    -H pid _nổi bật_ tiến trình \"pid\" và các tổ tiên của nó\n"
+"    -G     sử dụng ký tự vẽ đường loại VT100\n"
+"    -l     không chặt cụt _đường dài_\n"
+"    -n     sắp xếp dữ liệu xuất bằng PID\n"
+"    -p     hiển thị các PID; ngụ ý đối số -c\n"
+"    -u     hiển thị mọi việc chuyển tiếp _uid_\n"
 
 #: src/pstree.c:728
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "    -s     show Flask SIDs\n"
 "    -x     show Flask security contexts\n"
-msgstr "    -x     hiển thị các ngữ cảnh bảo mật loại Flask\n"
+msgstr ""
+"    -s     hiển thị các SID loại Flask\n"
+"    -x     hiển thị các ngữ cảnh bảo mật loại Flask\n"
 
 #: src/pstree.c:732
 #, c-format
@@ -298,6 +337,11 @@ msgid ""
 "    user   show only trees rooted at processes of that user\n"
 "\n"
 msgstr ""
+"    -U     sử dụng ký tự vẽ đường loại UTF-8 (_Unicode_)\n"
+"    -V     hiển thị thông tin _phiên bản_\n"
+"    pid    bắt đầu pid, mặc định là 1 (init)\n"
+"    user   hiển thị chỉ cây có rễ trong tiến trình của người dùng ấy\n"
+"\n"
 
 #: src/pstree.c:741
 #, c-format
@@ -332,84 +376,4 @@ msgstr "Hãy bấm phím Return để đóng\n"
 #: src/signals.c:65
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
-msgstr ""
-
-#~ msgid ""
-#~ "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
-#~ msgstr ""
-#~ "cách sử dụng: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] "
-#~ "[ -u ]\n"
-
-#~ msgid "              [ -A | -G | -U ] [ pid | user]\n"
-#~ msgstr "              [ -A | -G | -U ] [ pid | user]\n"
-
-#~ msgid ""
-#~ "       pstree -V\n"
-#~ "\n"
-#~ msgstr ""
-#~ "       pstree -V\n"
-#~ "\n"
-
-#~ msgid "    -a     show command line arguments\n"
-#~ msgstr "    -a     hiển thị những _đối số_ loại đường lệnh\n"
-
-#~ msgid "    -A     use ASCII line drawing characters\n"
-#~ msgstr "    -A     sử dụng ký tự vẽ đường loại _ASCII_\n"
-
-#~ msgid "    -c     don't compact identical subtrees\n"
-#~ msgstr "    -c     không _gọn_ những phụ cây trùng lập\n"
-
-#~ msgid "    -h     highlight current process and its ancestors\n"
-#~ msgstr "    -h     _nổi bật_ tiến trình hiện có và các tổ tiên của nó\n"
-
-#~ msgid "    -H pid highlight process \"pid\" and its ancestors\n"
-#~ msgstr "    -H pid _nổi bật_ tiến trình \"pid\" và các tổ tiên của nó\n"
-
-#~ msgid "    -G     use VT100 line drawing characters\n"
-#~ msgstr "    -G     sử dụng ký tự vẽ đường loại VT100\n"
-
-#~ msgid "    -l     don't truncate long lines\n"
-#~ msgstr "    -l     không chặt cụt _đường dài_\n"
-
-#~ msgid "    -n     sort output by PID\n"
-#~ msgstr "    -n     sắp xếp dữ liệu xuất bằng PID\n"
-
-#~ msgid "    -p     show PIDs; implies -c\n"
-#~ msgstr "    -p     hiển thị các _PID_; ngụ ý -c\n"
-
-#~ msgid "    -u     show uid transitions\n"
-#~ msgstr "    -u     hiển thị mọi việc chuyển tiếp _uid_\n"
-
-#~ msgid "    -s     show Flask SIDs\n"
-#~ msgstr "    -s     hiển thị các _SID_ loạị Flask\n"
-
-#~ msgid "    -U     use UTF-8 (Unicode)) line drawing characters\n"
-#~ msgstr "    -U     sử dụng ký tự vẽ đường loại _UTF-8_ (Unicode)\n"
-
-#~ msgid "    -V     display version information\n"
-#~ msgstr "    -V     hiển thị thông tin _phiên bản_\n"
-
-#~ msgid "    pid    start at pid, default 1 (init))\n"
-#~ msgstr "    pid    bắt đầu pid, mặc định 1 (init))\n"
-
-#~ msgid ""
-#~ "    user   show only trees rooted at processes of that user\n"
-#~ "\n"
-#~ msgstr ""
-#~ "    user   hiển thị chỉ cây có rễ trong tiến trình của người dùng ấy\n"
-#~ "\n"
-
-#~ msgid "pstree comes with ABSOLUTELY NO WARRANTY.\n"
-#~ msgstr "Trình pstree không bảo đảm gì cả.\n"
-
-#~ msgid ""
-#~ "This is free software, and you are welcome to redistribute it under the "
-#~ "terms\n"
-#~ msgstr "Đây là phần mềm tự do thì bạn có thể phân phối nó với điều kiện\n"
-
-#~ msgid "of the GNU General Public License.\n"
-#~ msgstr "của Quyền Công Chung Gnu (GPL).\n"
-
-#~ msgid ""
-#~ "For more information about these matters, see the files named COPYING.\n"
-#~ msgstr "Để tìm thấy thông tin thêm thì hãy xem tập tin có tên COPYING.\n"
+msgstr "%s: tín hiệu chưa biết; lệnh %s -l ghi danh sách tín hiệu\n"
