@@ -1,14 +1,14 @@
 # Polish translations for psmisc.
-# Copyright (C) 2004 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the psmisc package.
-# Jakub Bogusz <qboosh@pld-linux.org>, 2003-2004.
+# Jakub Bogusz <qboosh@pld-linux.org>, 2003-2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 21.5\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-23 11:52+1100\n"
-"PO-Revision-Date: 2004-07-16 08:52+0200\n"
+"Project-Id-Version: psmisc 21.6pre1\n"
+"Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
+"POT-Creation-Date: 2005-02-23 14:46+1100\n"
+"PO-Revision-Date: 2005-02-23 20:40+0100\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/killall.c:53
-#, fuzzy, c-format
+#, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
-msgstr "Zabiæ %s(%s%d)? (y/n) "
+msgstr "Zabiæ %s(%s%d)? (t/N) "
 
 #: src/killall.c:245
 #, c-format
@@ -52,16 +52,24 @@ msgid ""
 "    -V      display version information\n"
 "\n"
 msgstr ""
+"sk³adnia: pidof [ -eg ] nazwa ...\n"
+"          pidof -V\n"
+"\n"
+"    -e    wymaganie dok³adnego dopasowania dla bardzo d³ugich nazw;\n"
+"            pomijane je¶li linia poleceñ nie jest dostêpna\n"
+"    -g    wy¶wietlanie ID grup procesów zamiast ID procesów\n"
+"    -V    wy¶wietlenie informacji o wersji\n"
+"\n"
 
 #: src/killall.c:402
 #, c-format
 msgid "usage: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n"
-msgstr ""
+msgstr "sk³adnia: killall [-s sid] [-c kontekst] [ -egiqvw ] [ -sygna³ ] nazwa ...\n"
 
 #: src/killall.c:405
 #, c-format
 msgid "usage: killall [ OPTIONS ] [ -- ] name ...\n"
-msgstr ""
+msgstr "sk³adnia: killall [ OPCJE ] [ -- ] nazwa ...\n"
 
 #: src/killall.c:408
 #, c-format
@@ -81,6 +89,20 @@ msgid ""
 "  -w,--wait           wait for processes to die\n"
 "\n"
 msgstr ""
+"          killall -l, --list\n"
+"          killall -V --version\n"
+"\n"
+"  -e,--exact          wymaganie dok³adnego dopasowania dla bardzo d³ugich nazw\n"
+"  -I,--ignore-case    dopasowywanie nazw procesów niewra¿liwe na wielko¶æ liter\n"
+"  -g,--process-group  zabicie grupy procesów zamiast procesu\n"
+"  -i,--interactive    pytanie o potwierdzenie przed zabiciem\n"
+"  -l,--list           wypisanie wszystkich znanych nazw sygna³ów\n"
+"  -q,--quiet          nie wy¶wietlanie narzekañ\n"
+"  -s,--signal         wys³anie podanego sygna³u zamiast SIGTERM\n"
+"  -v,--verbose        informowanie, ¿e wys³anie sygna³u siê powiod³o\n"
+"  -V,--version        wy¶wietlenie informacji o wersji\n"
+"  -w,--wait           zaczekanie na ¶mieræ procesu\n"
+"\n"
 
 #: src/killall.c:422
 #, c-format
@@ -90,6 +112,9 @@ msgid ""
 "   (-s, -c are mutually exclusive and must precede other arguments)\n"
 "\n"
 msgstr ""
+"  -d,--sid            zabicie tylko procesu(ów) maj±cych dany sid\n"
+"  -c,--context        zabicie tylko procesu(ów) maj±cych dany kontekst bezp.\n"
+"   (-s i -c wzajemnie siê wykluczaj± i musz± poprzedzaæ inne argumenty)\n"
 
 #: src/killall.c:444 src/fuser.c:989 src/pstree.c:743
 #, c-format
@@ -101,15 +126,13 @@ msgstr ""
 "\n"
 
 #: src/killall.c:446 src/fuser.c:991 src/pstree.c:745
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
 "This is free software, and you are welcome to redistribute it under\n"
 "the terms of the GNU General Public License.\n"
 "For more information about these matters, see the files named COPYING.\n"
 msgstr ""
-"Copyright (C) 1993-2002 Werner Almesberger i Craig Small\n"
-"\n"
 "PSmisc jest rozpowszechniany BEZ ¯ADNEJ GWARANCJI.\n"
 "To oprogramowanie jest darmowe i mo¿e byæ dystrybuowane na warunkach\n"
 "Powszechnej Licencji Publicznej GNU (General Public License).\n"
@@ -118,7 +141,7 @@ msgstr ""
 #: src/killall.c:563
 #, c-format
 msgid "%s: SID (%s) must be numeric\n"
-msgstr ""
+msgstr "%s: SID (%s) musi byæ liczb±\n"
 
 #: src/killall.c:614
 #, c-format
@@ -161,6 +184,8 @@ msgid ""
 "\n"
 "%*s USER        PID ACCESS COMMAND\n"
 msgstr ""
+"\n"
+"%*s U¯YTKOWNIK  PID DOSTÊP POLECENIE\n"
 
 #: src/fuser.c:752
 #, c-format
@@ -188,7 +213,7 @@ msgid "can't find sockets' device number"
 msgstr "nie mo¿na znale¼æ numeru urz±dzenia gniazd"
 
 #: src/fuser.c:961
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -215,8 +240,7 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"sk³adnia: fuser [ -a | -s | -c ] [ -n przestrzeñ ] [ -sygna³ ] [ -kimuv ] "
-"nazwa ...\n"
+"sk³adnia: fuser [ -a | -s | -c ] [ -n przestrzeñ ] [ -sygna³ ] [ -kimuv ] nazwa ...\n"
 "                [ - ] [ -n przestrzeñ ] [ -sygna³ ] [ -kimuv ] nazwa ...\n"
 "          fuser -l\n"
 "          fuser -V\n"
@@ -252,7 +276,7 @@ msgid "ignoring -m in name space \"%s\"\n"
 msgstr "zignorowano -m w przestrzeni nazw \"%s\"\n"
 
 #: src/fuser.c:1181
-#, fuzzy, c-format
+#, c-format
 msgid "%s/%s: invalid specification\n"
 msgstr "%s/%s: b³êdne okre¶lenie\n"
 
@@ -279,13 +303,29 @@ msgid ""
 "    -p     show PIDs; implies -c\n"
 "    -u     show uid transitions\n"
 msgstr ""
+"sk³adnia: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+"                 [ -A | -G | -U ] [ pid | u¿ytkownik ]\n"
+"          pstree -V\n"
+"\n"
+"    -a     wy¶wietlenie argumentów linii poleceñ\n"
+"    -A     u¿ycie znaków ramek ASCII\n"
+"    -c     nie scalanie identycznych poddrzew\n"
+"    -h     pod¶wietlenie bie¿±cego procesu i jego przodków\n"
+"    -H pid pod¶wietlenie procesu \"pid\" i jego przodków\n"
+"    -G     u¿ycie znaków ramek VT100\n"
+"    -l     nie obcinanie d³ugich linii\n"
+"    -n     sortowanie wyj¶cia wg PID-u\n"
+"    -p     wy¶wietlanie PID-ów; w³±cza tak¿e -c\n"
+"    -u     wy¶wietlanie zmian uidów\n"
 
 #: src/pstree.c:728
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "    -s     show Flask SIDs\n"
 "    -x     show Flask security contexts\n"
-msgstr "    -x     wy¶wietlanie kontekstów bezpieczeñstwa Flask\n"
+msgstr ""
+"    -s     wy¶wietlanie SID-ów Flask\n"
+"    -x     wy¶wietlanie kontekstów bezpieczeñstwa Flask\n"
 
 #: src/pstree.c:732
 #, c-format
@@ -296,6 +336,11 @@ msgid ""
 "    user   show only trees rooted at processes of that user\n"
 "\n"
 msgstr ""
+"    -U     u¿ycie znaków ramek UTF-8 (Unicode)\n"
+"    -V     wy¶wietlenie informacji o wersji\n"
+"    pid    rozpoczêcie od tego pida, domy¶lnie 1 (init)\n"
+" u¿ytkownik  tylko drzewa zaczynaj±ce siê od procesów tego u¿ytkownika\n"
+"\n"
 
 #: src/pstree.c:741
 #, c-format
@@ -330,85 +375,4 @@ msgstr "Naci¶niêcie return zamknie program\n"
 #: src/signals.c:65
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
-msgstr ""
-
-#~ msgid ""
-#~ "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
-#~ msgstr ""
-#~ "sk³adnia: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -"
-#~ "u ]\n"
-
-#~ msgid "              [ -A | -G | -U ] [ pid | user]\n"
-#~ msgstr "              [ -A | -G | -U ] [ pid | u¿ytkownik ]\n"
-
-#~ msgid ""
-#~ "       pstree -V\n"
-#~ "\n"
-#~ msgstr ""
-#~ "       pstree -V\n"
-#~ "\n"
-
-#~ msgid "    -a     show command line arguments\n"
-#~ msgstr "    -a     wy¶wietlenie argumentów linii poleceñ\n"
-
-#~ msgid "    -A     use ASCII line drawing characters\n"
-#~ msgstr "    -A     u¿ycie znaków ramek ASCII\n"
-
-#~ msgid "    -c     don't compact identical subtrees\n"
-#~ msgstr "    -c     nie scalanie identycznych poddrzew\n"
-
-#~ msgid "    -h     highlight current process and its ancestors\n"
-#~ msgstr "    -h     pod¶wietlenie aktualnego procesu i jego przodków\n"
-
-#~ msgid "    -H pid highlight process \"pid\" and its ancestors\n"
-#~ msgstr "    -H pid pod¶wietlenie procesu \"pid\" i jego przodków\n"
-
-#~ msgid "    -G     use VT100 line drawing characters\n"
-#~ msgstr "    -G     u¿ycie znaków ramek VT100\n"
-
-#~ msgid "    -l     don't truncate long lines\n"
-#~ msgstr "    -l     nie obcinanie d³ugich linii\n"
-
-#~ msgid "    -n     sort output by PID\n"
-#~ msgstr "    -n     sortowanie wyj¶cia wg PID-u\n"
-
-#~ msgid "    -p     show PIDs; implies -c\n"
-#~ msgstr "    -p     wy¶wietlanie PID-ów; w³±cza tak¿e -c\n"
-
-#~ msgid "    -u     show uid transitions\n"
-#~ msgstr "    -u     wy¶wietlanie zmian uidów\n"
-
-#~ msgid "    -s     show Flask SIDs\n"
-#~ msgstr "    -s     wy¶wietlanie SID-ów Flask\n"
-
-#~ msgid "    -U     use UTF-8 (Unicode)) line drawing characters\n"
-#~ msgstr "    -U     u¿ycie znaków ramek UTF-8 (Unicode)\n"
-
-#~ msgid "    -V     display version information\n"
-#~ msgstr "    -V     wy¶wietlenie informacji o wersji\n"
-
-#~ msgid "    pid    start at pid, default 1 (init))\n"
-#~ msgstr "    pid    rozpoczêcie od tego pida, domy¶lnie 1 (init)\n"
-
-#~ msgid ""
-#~ "    user   show only trees rooted at processes of that user\n"
-#~ "\n"
-#~ msgstr ""
-#~ " u¿ytkownik  tylko drzewa zaczynaj±ce siê od procesów tego u¿ytkownika\n"
-#~ "\n"
-
-#~ msgid "pstree comes with ABSOLUTELY NO WARRANTY.\n"
-#~ msgstr "pstree jest rozpowszechniane BEZ ¯ADNEJ GWARANCJI.\n"
-
-#~ msgid ""
-#~ "This is free software, and you are welcome to redistribute it under the "
-#~ "terms\n"
-#~ msgstr ""
-#~ "To oprogramowanie jest darmowe i mo¿e byæ dystrybuowane na warunkach\n"
-
-#~ msgid "of the GNU General Public License.\n"
-#~ msgstr "Powszechnej Licencji Publicznej GNU (General Public License).\n"
-
-#~ msgid ""
-#~ "For more information about these matters, see the files named COPYING.\n"
-#~ msgstr "Wiêcej informacji znajduje siê w pliku o nazwie COPYING.\n"
+msgstr "%s: nieznany sygna³; %s -l wypisuje sygna³y.\n"
