@@ -27,4 +27,4 @@ signames.h: signames.c
 		grep '^{ 1,"HUP" },$$' signames.h >/dev/null || \
 		  { rm -f signames.h; exit 1; }
 
-
+Makefile:	signames.h

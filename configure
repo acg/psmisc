@@ -2109,7 +2109,7 @@ EOF
 fi
 
 
-ALL_LINGUAS="de en fr it pt"
+ALL_LINGUAS="de en fr it pt sv"
 
         echo $ac_n "checking for strerror in -lcposix""... $ac_c" 1>&6
 echo "configure:2116: checking for strerror in -lcposix" >&5

@@ -1,11 +1,17 @@
+Changes in 21.1
+===============
+ - config.guess and config.sub are no longer syminks
+
+
 Changes in 21 (15-MAY-2002)
 ===========================
- - signames.h is cleaned
+ - signames.h is cleaned no more wrong signal types
  - More translatable strings
  - Added Portuguese Language (thanks to Edesio Costa e Silva)
  - Added Italian Language (thanks to Daniele Pagano)
  - Added French Language (thanks to Marc Léger)
  - Added German Language (thanks to Wolfgang Schorer)
+ - Added Swedish Language (thanks to Joakim Mared)
 
 Changes in 20.2 (18-OCT-2001)
 =============================

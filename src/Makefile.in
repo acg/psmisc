@@ -396,6 +396,8 @@ signames.h: signames.c
 		grep '^{ 1,"HUP" },$$' signames.h >/dev/null || \
 		  { rm -f signames.h; exit 1; }
 
+Makefile:	signames.h
+
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
