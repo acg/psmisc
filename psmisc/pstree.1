@@ -1,0 +1,85 @@
+.TH PSTREE 1 "May 6, 1998" "Linux" "User Commands"
+.SH NAME
+pstree \- display a tree of processes
+.SH SYNOPSIS
+.ad l
+.B pstree
+.RB [ \-a ]
+.RB [ \-c ]
+.RB [ \-h | \-H \fIpid\fB ]
+.RB [ \-l ]
+.RB [ \-n ]
+.RB [ \-p ]
+.RB [ \-u ]
+.RB [ \-G | \-U ]
+.RB [ \fIpid\fB | \fIuser\fB]
+.br
+.B pstree
+.RB \-V
+.ad b
+.SH DESCRIPTION
+.B pstree
+shows running processes as a tree. The tree is rooted at either
+\fIpid\fP or \fBinit\fP if \fIpid\fP is omitted. If a user name is specified,
+all process trees rooted at processes owned by that user are shown.
+.PP
+\fBpstree\fP visually merges identical branches by putting them in square
+brackets and prefixing them with the repetition count, e.g.
+.nf
+.sp
+    init\-+\-getty
+         |\-getty
+         |\-getty
+         `-getty
+.sp
+.fi
+becomes
+.nf
+.sp
+    init\-\-\-4*[getty]
+.sp
+.fi
+.SH OPTIONS
+.IP \fB\-a\fP
+Show command line arguments. If the command line of a process is swapped out,
+that process is shown in parentheses. \fB\-a\fP implicitly disables compaction.
+.IP \fB\-c\fP
+Disable compaction of identical subtrees. By default, subtrees are compacted
+whenever possible.
+.IP \fB\-G\fP
+Use VT100 line drawing characters.
+.IP \fB\-h\fP
+Highlight the current process and its ancestors. This is a no-op if the
+terminal doesn't support highlighting or if neither the current process
+nor any of its ancestors are in the subtree being shown.
+.IP \fB\-H\fP
+Like \fB\-h\fP, but highlight the specified process instead. Unlike with
+\fB\-h\fP, \fBpstree\fP fails when using \fB\-H\fP if highlighting is not
+available.
+.IP \fB\-l\fP
+Display long lines. By default, lines are truncated to the display width or
+132 if output is sent to a non-tty or if the display width is unknown.
+.IP \fB\-n\fP
+Sort processes with the same ancestor by PID instead of by name. (Numeric
+sort.)
+.IP \fB\-p\fP
+Show PIDs. PIDs are shown as decimal numbers in parentheses after each
+process name. \fB\-p\fP implicitly disables compaction.
+.IP \fB\-u\fP
+Show uid transitions. Whenever the uid of a process differs from the uid of
+its parent, the new uid is shown in parentheses after the process name.
+.IP \fB\-U\fP
+Use UTF-8 (Unicode) line drawing characters. Under Linux 1.1-54 and above,
+UTF-8 mode is entered on the console with \fBecho -e '\\033%8'\fP and left
+with \fBecho -e '\\033%@'\fP
+.IP \fB\-V\fP
+Display version information.
+.SH FILES
+.nf
+/proc	location of the proc file system
+.fi
+.SH AUTHOR
+Werner Almesberger <Werner.Almesberger@epfl.ch>
+.SH "SEE ALSO"
+ps(1), top(1)
+.\"{{{}}}

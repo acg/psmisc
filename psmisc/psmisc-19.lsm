@@ -1,0 +1,14 @@
+Begin3
+Title:		psmisc
+Version:	19
+Entered-date:	25OCT99
+Description:	miscellaneous proc FS tools: fuser, killall, pidof, and pstree
+Keywords:	psmisc, fuser, killall, pidof, pstree
+Author:		Werner Almesberger <Werner.Almesberger@epfl.ch>
+Maintained-by:	Werner Almesberger <Werner.Almesberger@epfl.ch>
+Primary-site:	lrcftp.epfl.ch /pub/linux/local/psmisc
+		21 kB psmisc-19.tar.gz
+Alternate-site:	sunsite.unc.edu /pub/Linux/system/status/ps
+Platforms:	Should work with most kernels. Requires /proc
+Copying-policy:	BSD-like
+End

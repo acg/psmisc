@@ -1,0 +1,7 @@
+#!/bin/sh
+VERSION=`cat ./VERSION`
+cd ..
+tar cvf - psmisc/VERSION psmisc/README psmisc/INSTALL psmisc/CHANGES \
+  psmisc/COPYING psmisc/psmisc-$VERSION.lsm \
+  psmisc/Makefile psmisc/comm.h psmisc/signals.h \
+  psmisc/*.[c1] psmisc/mkdist | gzip -9 >psmisc-$VERSION.tar.gz
