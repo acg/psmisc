@@ -8,7 +8,7 @@ fuser \- identify processes using files or sockets
 .RB [ \-4 | \-6 ]
 .RB [ \-n\ \fIspace ]
 .RB [ \-\fIsignal\fB ]
-.RB [ \-kimuv ]
+.RB [ \-kimuvf ]
 .I name ...
 .br
 .B fuser 
@@ -58,6 +58,8 @@ Show all files specified on the command line. By default, only files that are
 accessed by at least one process are shown.
 .IP \fB\-c\fP
 Same as \-m option, used for POSIX compatibility.
+.IP \fB\-f\fP
+Silently ignored, used for POSIX compatibility.
 .IP \fB\-k\fP
 Kill processes accessing the file. Unless changed with \fB-\fP\fIsignal\fP,
 SIGKILL is sent. An \fBfuser\fP process never kills itself, but may kill

@@ -34,36 +34,7 @@ dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 AC_TYPE_PID_T
 AC_TYPE_SIZE_T
-AC_DIAGNOSE([obsolete],[AC_STRUCT_ST_RDEV:
-        your code should no longer depend upon `HAVE_ST_RDEV', but
-        `HAVE_STRUCT_STAT_ST_RDEV'.  Remove this warning and
-        the `AC_DEFINE' when you adjust the code.])
-AC_CHECK_MEMBERS([struct stat.st_rdev],[AC_DEFINE(HAVE_ST_RDEV, 1,
-                            [Define to 1 if your `struct stat' has `st_rdev'.
-                             Deprecated, use `HAVE_STRUCT_STAT_ST_RDEV'
-                             instead.])])
-
 AC_TYPE_UID_T
-
-dnl Check what size is ino_t int, long or long logn
-AC_SUBST(INO_T_IS_LONG_LONG)
-AC_SUBST(INO_T_IS_INT)
-AC_CHECK_SIZEOF(ino_t)
-AC_CHECK_SIZEOF(int)
-AC_CHECK_SIZEOF(long)
-AC_CHECK_SIZEOF(long long)
-AC_MSG_CHECKING([what type ino_t is])
-if test "x$ac_cv_sizeof_ino_t" = "x$ac_cv_sizeof_int"; then
-  AC_DEFINE([INO_T_IS_INT],1,[Define to 1 if ino_t type is int])
-  AC_MSG_RESULT([int])
-fi
-if test "x$ac_cv_sizeof_ino_t" = "x$ac_cv_sizeof_long"; then
-  AC_MSG_RESULT([long])
-fi
-if test "x$ac_cv_sizeof_ino_t" = "x$ac_cv_sizeof_long_long"; then
-  AC_DEFINE([INO_T_IS_LONG_LONG],1,[Define to 1 if ino_t type is long long])
-  AC_MSG_RESULT([long long])
-fi
 
 dnl Check for language stuff
 ALL_LINGUAS="de en fr it pt sv"

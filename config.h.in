@@ -60,13 +60,6 @@
 /* Define to 1 if you have the `strtoul' function. */
 #undef HAVE_STRTOUL
 
-/* Define to 1 if `st_rdev' is member of `struct stat'. */
-#undef HAVE_STRUCT_STAT_ST_RDEV
-
-/* Define to 1 if your `struct stat' has `st_rdev'. Deprecated, use
-   `HAVE_STRUCT_STAT_ST_RDEV' instead. */
-#undef HAVE_ST_RDEV
-
 /* Define to 1 if you have the <sys/dir.h> header file, and it defines `DIR'.
    */
 #undef HAVE_SYS_DIR_H
@@ -90,12 +83,6 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
-/* Define to 1 if ino_t type is int */
-#undef INO_T_IS_INT
-
-/* Define to 1 if ino_t type is long long */
-#undef INO_T_IS_LONG_LONG
-
 /* Name of package */
 #undef PACKAGE
 
@@ -113,18 +100,6 @@
 
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
-
-/* The size of a `ino_t', as computed by sizeof. */
-#undef SIZEOF_INO_T
-
-/* The size of a `int', as computed by sizeof. */
-#undef SIZEOF_INT
-
-/* The size of a `long', as computed by sizeof. */
-#undef SIZEOF_LONG
-
-/* The size of a `long long', as computed by sizeof. */
-#undef SIZEOF_LONG_LONG
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS

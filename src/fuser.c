@@ -185,16 +185,6 @@ parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version 
 	  perror ("malloc");
 	  exit (1);
 	}
-      /*
-      if (sscanf (line, 
-#ifdef INO_T_IS_LONG_LONG
-        "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %Lu",
-#elif defined(INO_T_IS_INT)
-        "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %u",
-#else
-        "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %u",
-#endif
-        &new->lcl_port, rmt_addr, &new->rmt_port, &new->ino) != 4)*/
     if (sscanf (line, 
         "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %lu",
         &new->lcl_port, rmt_addr, &new->rmt_port, &tmp_ino) != 4)
@@ -974,6 +964,7 @@ usage (void)
     "       fuser -V\n\n"
     "    -a        display unused files too\n"
     "    -c        mounted FS\n"
+    "    -f        silently ignored (for POSIX compatibility\n"
     "    -k        kill processes accessing that file\n"
     "    -i        ask before killing (ignored without -k)\n"
     "    -l        list signal names\n"
@@ -1050,6 +1041,8 @@ main (int argc, char **argv)
 		case 'a':
 		  all = 1;
 		  break;
+        case 'f':
+          break;
 		case 'k':
 		  flags |= FLAG_KILL;
 		  do_kill = 1;
