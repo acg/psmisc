@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc version 20\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-26 23:47+1000\n"
+"POT-Creation-Date: 2003-10-21 11:05+1000\n"
 "PO-Revision-Date: 2001-10-28 18:57--700\n"
 "Last-Translator: Daniele Pagano <dan@esaurito.com>\n"
 "Language-Team: esaurito <esaurito@users.sourceforge.net>\n"
@@ -30,7 +30,7 @@ msgstr "ignorata corrispondenza parziale %s(%d)\n"
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Terminato %s(%s%d) con segnale %d\n"
 
-#: src/killall.c:337 src/fuser.c:496 src/pstree.c:674
+#: src/killall.c:337 src/fuser.c:503 src/pstree.c:674
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s è vuoto (non montato?)\n"
@@ -46,63 +46,63 @@ msgid "Maximum number of names is %d\n"
 msgstr "Il massimo numero di nomi è %d\n"
 
 # 'proc' non tradotto: termine specifico di Linux
-#: src/fuser.c:248
+#: src/fuser.c:255
 #, c-format
 msgid "-4 flag used but proc file %s is not readable\n"
 msgstr "usata opzione -4  ma file proc %s non leggibile\n"
 
-#: src/fuser.c:257
+#: src/fuser.c:264
 #, c-format
 msgid "-6 flag used but proc file %s is not readable\n"
 msgstr "usata opzione -6  ma file proc %s non leggibile\n"
 
-#: src/fuser.c:594
+#: src/fuser.c:601
 #, fuzzy, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Termina processo %d ? (y/n) "
 
-#: src/fuser.c:624
+#: src/fuser.c:631
 #, c-format
 msgid "kill %d"
 msgstr "termina %d"
 
 # nomi comandi non tradotti
-#: src/fuser.c:628 src/fuser.c:632
+#: src/fuser.c:635 src/fuser.c:639
 #, c-format
 msgid "No automatic removal. Please use  umount %s\n"
 msgstr "Impossible rimuovere automaticamente. Usare umount %s\n"
 
-#: src/fuser.c:636
+#: src/fuser.c:643
 #, c-format
 msgid "No automatic removal. Please use  swapoff %s\n"
 msgstr "Impossible rimuovere automaticamente. Usare swapoff %s\n"
 
-#: src/fuser.c:748
+#: src/fuser.c:755
 #, c-format
 msgid "Internal error (type %d)\n"
 msgstr "Errore interno (tipo %d)\n"
 
 # kernel e mount non tradotti: termini specifici
-#: src/fuser.c:784
+#: src/fuser.c:791
 msgid "kernel mount  "
 msgstr "mount del kernel"
 
-#: src/fuser.c:787
+#: src/fuser.c:794
 msgid "kernel loop   "
 msgstr "ciclo del kernel"
 
 # assunto 'swap' sta per 'swap filesystem'
-#: src/fuser.c:790
+#: src/fuser.c:797
 msgid "kernel swap   "
 msgstr "file di scambio del kernel"
 
 # socket non tradotto: termine tecnico
-#: src/fuser.c:946
+#: src/fuser.c:954
 msgid "can't find sockets' device number"
 msgstr "impossibile trovare numero della periferica del socket"
 
 # tradotto 'namespace' con 'contesto'; modificata indentazione descrizioni
-#: src/fuser.c:955
+#: src/fuser.c:963
 msgid ""
 "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -150,13 +150,13 @@ msgstr ""
 "  udp/tcp nomi: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 
-#: src/fuser.c:979
+#: src/fuser.c:987
 #, c-format
 msgid "fuser (psmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
 # Traduzione mia (non ufficiale) del messaggio GNU
-#: src/fuser.c:981
+#: src/fuser.c:989
 #, fuzzy
 msgid ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
@@ -175,12 +175,12 @@ msgstr ""
 "Per ulteriori informazioni in merito, consultare il file COPYING (in lingua "
 "inglese).\n"
 
-#: src/fuser.c:1159
+#: src/fuser.c:1167
 #, c-format
 msgid "ignoring -m in name space \"%s\"\n"
 msgstr "ignorato -m nel contesto \"%s\"\n"
 
-#: src/fuser.c:1167
+#: src/fuser.c:1175
 #, c-format
 msgid "%s/%s: invalid specificiation\n"
 msgstr "%s/%s: specificazione non valida\n"

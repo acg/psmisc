@@ -1,6 +1,6 @@
 Changes in 21.4
 ===============
-not yet released Craig Small <csmall@small.dropbear.id.au>
+2003-11-28 Craig Small <csmall@small.dropbear.id.au>
 	* Typos in killall.1 fixed Closes Debian: #198189
 	* fuser -ki now tells user default is N Closes Debian: #197356
 	* pstree -a doesn't print space at end of line Closes Debian: #182099
