@@ -48,24 +48,32 @@ static int verbose = 0, exact = 0, interactive = 0,
 static int
 ask (char *name, pid_t pid)
 {
-  int ch, c;
+  int res;
+  size_t len;
+  char *line;
 
-  do
-    {
-      printf (_("Kill %s(%s%d) ? (y/n) "), name, process_group ? "pgid " : "",
-	      pid);
-      fflush (stdout);
-      do
-	if ((ch = getchar ()) == EOF)
-	  exit (0);
-      while (ch == '\n' || ch == '\t' || ch == ' ');
-      do
-	if ((c = getchar ()) == EOF)
-	  exit (0);
-      while (c != '\n');
+  line = NULL;
+  len = 0;
+
+  do {
+    printf (_("Kill %s(%s%d) ? (y/N) "), name, process_group ? "pgid " : "",
+	    pid);
+    fflush (stdout);
+
+    if (getline (&line, &len, stdin) < 0)
+      return 0;
+    /* Check for default */
+    if (line[0] == '\n') {
+      free(line);
+      return 0;
     }
-  while (ch != 'y' && ch != 'n' && ch != 'Y' && ch != 'N');
-  return ch == 'y' || ch == 'Y';
+    res = rpmatch(line);
+    if (res >= 0) {
+      free(line);
+      return res;
+    }
+  } while(1);
+  /* Never should get here */
 }
 
 #ifdef FLASK_LINUX

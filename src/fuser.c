@@ -590,25 +590,34 @@ scan_swaps (void)
 static int
 ask (pid_t pid)
 {
-  int ch, c;
+  int res;
+  size_t len;
+  char *line;
+
+  line = NULL;
+  len = 0;
 
   fflush (stdout);
   do {
     fprintf (stderr, _("Kill process %d ? (y/N) "), pid);
     fflush (stderr);
-    do {
-      if ((ch = getchar ()) == EOF)
-        exit (0);
-      if (ch == '\n') return 0;
-    } while (ch == '\t' || ch == ' ');
-    do
-      if ((c = getchar ()) == EOF)
-	    exit (0);
-    while (c != '\n');
-  } while (ch != '\n' && ch != 'y' && ch != 'n' && ch != 'Y' && ch != 'N');
-  return ch == 'y' || ch == 'Y';
-}
 
+    if (getline (&line, &len, stdin) < 0)
+      return 0;
+    /* Check for default */
+    if (line[0] == '\n') {
+      free(line);
+      return 0;
+    }
+    res = rpmatch(line);
+    if (res >= 0) {
+      free(line);
+      return res;
+    }
+  } while(1);
+  /* Never should get here */
+  return 0;
+}
 
 static void
 kill_item (const FILE_DSC * file, const ITEM_DSC * item)
@@ -964,7 +973,7 @@ usage (void)
     "       fuser -V\n\n"
     "    -a        display unused files too\n"
     "    -c        mounted FS\n"
-    "    -f        silently ignored (for POSIX compatibility\n"
+    "    -f        silently ignored (for POSIX compatibility)\n"
     "    -k        kill processes accessing that file\n"
     "    -i        ask before killing (ignored without -k)\n"
     "    -l        list signal names\n"
@@ -1177,7 +1186,7 @@ main (int argc, char **argv)
 	      if (!parse_inet (*argv, this_name_space->name, &lcl_port,
 			       &rmt_addr, &rmt_port))
 		{
-		  fprintf (stderr, _("%s/%s: invalid specificiation\n"), *argv,
+		  fprintf (stderr, _("%s/%s: invalid specification\n"), *argv,
 			   this_name_space->name);
 		  continue;
 		}

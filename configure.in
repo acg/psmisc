@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 AC_INIT
 AC_CONFIG_SRCDIR([src/comm.h])
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(psmisc,21.5)
+AM_INIT_AUTOMAKE(psmisc,21.6cvs)
 
 dnl Checks for programs.
 AC_PROG_CC
@@ -37,7 +37,7 @@ AC_TYPE_SIZE_T
 AC_TYPE_UID_T
 
 dnl Check for language stuff
-ALL_LINGUAS="de en fr it pt sv"
+ALL_LINGUAS="de en fi fr it pt sv"
 AM_GNU_GETTEXT([external])
 
 dnl Checks for library functions.
