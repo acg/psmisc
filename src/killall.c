@@ -25,9 +25,13 @@
 #include <selinux/fs_secure.h>
 #include <selinux/ss.h>
 #endif /*FLASK_LINUX*/
+#ifdef ENABLE_NLS
 #include <libintl.h>
 #include <locale.h>
 #define _(String) gettext (String)
+#else
+#define _(String) (String)
+#endif
 
 #include "comm.h"
 #include "signals.h"
@@ -467,9 +471,11 @@ main (int argc, char **argv)
   sig_num = SIGTERM;
 
   /* Setup the i18n */
+#ifdef ENABLE_NLS
   setlocale(LC_ALL, "");
   bindtextdomain(PACKAGE, LOCALEDIR);
   textdomain(PACKAGE);
+#endif
 
   opterr = 0;
 #ifdef FLASK_LINUX

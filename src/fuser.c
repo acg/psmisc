@@ -31,9 +31,13 @@
 #include <linux/kdev_t.h>	/* for MKDEV */
 #include <linux/major.h>	/* for LOOP_MAJOR */
 #endif
+#ifdef ENABLE_NLS
 #include <libintl.h>
 #include <locale.h>
 #define _(String) gettext (String)
+#else
+#define _(String) (String)
+#endif
 
 #include "comm.h"
 #include "loop.h"         /* for loop_info */
@@ -1007,9 +1011,11 @@ main (int argc, char **argv)
   no_files = 1;
 
   /* Setup the i18n */
+#ifdef ENABLE_NLS
   setlocale(LC_ALL, "");
   bindtextdomain(PACKAGE, LOCALEDIR);
   textdomain(PACKAGE);
+#endif
 
   if (argc < 2)
     usage ();

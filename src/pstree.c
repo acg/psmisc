@@ -18,12 +18,16 @@
 #include <termios.h>
 #include <termcap.h>
 #include <langinfo.h>
-#include <locale.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
+#ifdef ENABLE_NLS
+#include <locale.h>
 #include <libintl.h>
 #define _(String) gettext (String)
+#else
+#define _(String) (String)
+#endif
 
 #include "comm.h"
 
@@ -762,7 +766,9 @@ main (int argc, char **argv)
   highlight = 0;
   pw = NULL;
   
+#ifdef ENABLE_NLS
   setlocale(LC_ALL, "");
+#endif
   
   if ( (tmpstr = strrchr(argv[0],'/'))) {
     tmpstr++;
