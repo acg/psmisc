@@ -207,7 +207,8 @@ kill_all (int signal, int names, char **namelist)
 		{
 		  int cur_size = cmd_size;
 		  cmd_size *= 2;
-		  if (!realloc(&command_buf, cmd_size))
+		  command_buf = (char *)realloc(command_buf, cmd_size);
+		  if (!command_buf)
 		    exit (1);
 		  p = command_buf + cur_size;
 		}

@@ -3,6 +3,8 @@ Changes in 21.3
 2003-04-03 Craig Small <csmall@small.dropbear.id.au>
     * SELinux SID selection uses -d instead of -S to stop the confusion of
 	  signal names, no flags with upper case letters ok?
+	  Closes Debian: #193790, #163360
+	* Doesnt segfault on long cmdnames, thanks Ben Low Closes Debian: #187241
 
 2003-04-03 Craig Small <csmall@small.dropbear.id.au>
 	* More fixes for types, also some GCC 3.2 fixes, thanks to
