@@ -1,14 +1,14 @@
 # Swedish language file for psmisc.
-# Copyright (C) 2002 Free Software Foundation, Inc.
-# Joakim Mared <joakim at bfcom dot se>, 2002.
+# Copyright (C) 2003 Free Software Foundation, Inc.
+# Joakim Mared <joakim at bfcom dot se>, 2003.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 20.1\n"
+"Project-Id-Version: psmisc 21.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2003-09-26 23:47+1000\n"
-"PO-Revision-Date: 2002-05-04 12:27+0100\n"
+"PO-Revision-Date: 2003-09-26 20:45+0100\n"
 "Last-Translator: Joakim Mared <joakim at bfcom dot se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -142,7 +142,7 @@ msgstr ""
 "    -6          sök bara bland IPv6-uttag (socket)\n"
 "    -           nollställ val\n"
 "\n"
-"  udp/tcp namn: [lokal_port][,[fjärrvärd][,[fjärrport]]]\n"
+"  udp/tcp-namn: [lokal_port][,[fjärrvärd][,[fjärrport]]]\n"
 "\n"
 
 #: src/fuser.c:979
@@ -161,12 +161,10 @@ msgid ""
 "of the GNU General Public License.\n"
 "For more information about these matters, see the files named COPYING.\n"
 msgstr ""
-"Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n"
-"\n"
-"PSmisc distribueras HELT UTAN GARANTI.\n"
-"Det här är fri programvara som får distribueras under villkoren i\n"
-"GNU General Public License\n"
-"För mer information om detta, se filen COPYING.\n"
+"Följande text är en informell översättning som enbart tillhandahålls i informativt syfte. För alla juridiska tolkningar gäller den engelska originaltexten.\n\n"
+"Detta program är fri programvara. Du kan distribuera det och/eller modifiera det under villkoren i GNU General Public License, publicerad av Free Software Foundation, antingen version 2 eller (om du så vill) någon senare version.\n\n"
+"Detta program distribueras i hopp om att det ska vara användbart, men UTAN NÅGON GARANTI, även utan underförstådd garanti vid KÖP eller LÄMPLIGHET FÖR NÅGOT SPECIELLT ÄNDAMÅL. Se GNU General Public License för ytterligare information.\n\n"
+"Du bör ha fått en kopia av GNU General Public License tillsammans med detta program. Om inte, skriv till Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
 
 #: src/fuser.c:1159
 #, c-format
@@ -180,84 +178,89 @@ msgstr "%s/%s: ogiltig specifikation\n"
 
 #: src/pstree.c:378
 msgid "MAX_DEPTH not big enough.\n"
-msgstr ""
+msgstr "MAX_DEPTH inte tillräckligt stort.\n"
 
 #: src/pstree.c:713
 msgid ""
 "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 msgstr ""
+"användning: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 
 #: src/pstree.c:714
 msgid "              [ -G | -U ] [ pid | user]\n"
-msgstr ""
+msgstr "              [ -G | -U ] [ pid | användare]\n"
 
 #: src/pstree.c:715
 msgid ""
 "       pstree -V\n"
 "\n"
 msgstr ""
+"       pstree -V\n"
+"\n"
 
 #: src/pstree.c:716
 msgid "    -a     show command line arguments\n"
-msgstr ""
+msgstr "    -a     visa kommandoradsargument\n"
 
 #: src/pstree.c:717
 msgid "    -c     don't compact identical subtrees\n"
-msgstr ""
+msgstr "    -c     komprimera inte identiska underträd\n"
 
 #: src/pstree.c:718
 msgid "    -h     highlight current process and its ancestors\n"
-msgstr ""
+msgstr "    -h     markera nuvarande process och dess förfäder\n"
 
 #: src/pstree.c:719
 msgid "    -H pid highlight process \"pid\" and its ancestors\n"
-msgstr ""
+msgstr "    -H pid markera processen \"pid\" och dess förfäder\n"
 
 #: src/pstree.c:720
 msgid "    -G     use VT100 line drawing characters\n"
-msgstr ""
+msgstr "    -G     använd VT100 linjeritningssymboler\n"
 
 #: src/pstree.c:721
 msgid "    -l     don't truncate long lines\n"
-msgstr ""
+msgstr "    -l     förkorta inte långa rader\n"
 
 #: src/pstree.c:722
 msgid "    -n     sort output by PID\n"
-msgstr ""
+msgstr "    -n     sortera utskrift efter PID\n"
 
 #: src/pstree.c:723
 msgid "    -p     show PIDs; implies -c\n"
-msgstr ""
+msgstr "    -p     visa PID:s; förutsätter -c\n"
 
 #: src/pstree.c:724
 msgid "    -u     show uid transitions\n"
-msgstr ""
+msgstr "    -u     visa uid-översättningar\n"
 
 #: src/pstree.c:726
 msgid "    -s     show Flask SIDs\n"
-msgstr ""
+msgstr "    -s     visa Flask-SID:s\n"
 
 #: src/pstree.c:727
 msgid "    -x     show Flask security contexts\n"
-msgstr ""
+msgstr "    -x     visa Flask säkerhetssammanhang\n"
 
 #: src/pstree.c:729
 msgid "    -U     use UTF-8 (Unicode)) line drawing characters\n"
-msgstr ""
+msgstr "    -U     använd UTF-8 (Unicode)) linjeritningssymboler\n"
 
 #: src/pstree.c:730
 msgid "    -V     display version information\n"
-msgstr ""
+msgstr "    -V     visa versionsinformation\n"
 
 #: src/pstree.c:731
 msgid "    pid    start at pid, default 1 (init))\n"
-msgstr ""
+msgstr "    pid    börja vid pid, standardvärde 1 (init))\n"
 
 #: src/pstree.c:732
 msgid ""
 "    user   show only trees rooted at processes of that user\n"
 "\n"
 msgstr ""
+"    anv.   visa endast träd med sin rot bland denna användares processer\n"
+"\n"
 
 #: src/pstree.c:738
 #, fuzzy, c-format
@@ -269,46 +272,52 @@ msgid ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
+"Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
+"\n"
 
 #: src/pstree.c:740
 msgid "pstree comes with ABSOLUTELY NO WARRANTY.\n"
 msgstr ""
+"Följande text är en informell översättning som enbart tillhandahålls i informativt syfte. För alla juridiska tolkningar gäller den engelska originaltexten.\n\n"
 
 #: src/pstree.c:741
 msgid ""
 "This is free software, and you are welcome to redistribute it under the "
 "terms\n"
 msgstr ""
+"Detta program är fri programvara. Du kan distribuera det och/eller modifiera det under villkoren i GNU General Public License, publicerad av Free Software Foundation, antingen version 2 eller (om du så vill) någon senare version.\n\n"
 
 #: src/pstree.c:742
 msgid "of the GNU General Public License.\n"
 msgstr ""
+"Detta program distribueras i hopp om att det ska vara användbart, men UTAN NÅGON GARANTI, även utan underförstådd garanti vid KÖP eller LÄMPLIGHET FÖR NÅGOT SPECIELLT ÄNDAMÅL. Se GNU General Public License för ytterligare information.\n\n"
 
 #: src/pstree.c:743
 msgid ""
 "For more information about these matters, see the files named COPYING.\n"
 msgstr ""
+"Du bör ha fått en kopia av GNU General Public License tillsammans med detta program. Om inte, skriv till Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
 
 #: src/pstree.c:803
 msgid "TERM is not set\n"
-msgstr ""
+msgstr "TERM är inte satt\n"
 
 #: src/pstree.c:808
 msgid "Can't get terminal capabilities\n"
-msgstr ""
+msgstr "Kan inte ta reda på terminalens beskaffenhet\n"
 
 #: src/pstree.c:854
 #, c-format
 msgid "No such user name: %s\n"
-msgstr ""
+msgstr "Ingen sådan användare: %s\n"
 
 #: src/pstree.c:878
 msgid "No processes found.\n"
-msgstr ""
+msgstr "Inga processer funna.\n"
 
 #: src/pstree.c:883
 msgid "Press return to close\n"
-msgstr ""
+msgstr "Tryck retur för att stänga\n"
 
 #~ msgid "No process references; use -v for the complete list\n"
 #~ msgstr "Processreferens saknas; använd -v för komplett lista\n"
