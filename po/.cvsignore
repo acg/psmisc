@@ -1,3 +1,4 @@
+*.gmo
 Makefile.in
 Makefile
 POTFILES

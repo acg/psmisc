@@ -1,9 +1,9 @@
-.TH PSTREE 1 "September 26, 2003" "Linux" "User Commands"
+.TH PSTREE 1 2004-11-09 "Linux" "User Commands"
 .SH NAME
 pstree \- display a tree of processes
 .SH SYNOPSIS
 .ad l
-.B pstree 
+.B pstree
 .RB [ \-a ]
 .RB [ \-c ]
 .RB [ \-h | \-H \fIpid\fB ]
@@ -30,7 +30,7 @@ brackets and prefixing them with the repetition count, e.g.
     init\-+\-getty
          |\-getty
          |\-getty
-         `-getty
+         `\-getty
 .sp
 .fi
 becomes
@@ -42,7 +42,7 @@ becomes
 .PP
 If \fBpstree\fR is called as \fBpstree.x11\fR then it will prompt the user
 at the end of the line to press return and will not return until that
-has happened.  This is useful for when \fBpstree\fR is run in a xterminal.
+has happened. This is useful for when \fBpstree\fR is run in a xterminal.
 
 .SH OPTIONS
 .IP \fB\-a\fP
@@ -77,8 +77,8 @@ Show uid transitions. Whenever the uid of a process differs from the uid of
 its parent, the new uid is shown in parentheses after the process name.
 .IP \fB\-U\fP
 Use UTF-8 (Unicode) line drawing characters. Under Linux 1.1-54 and above,
-UTF-8 mode is entered on the console with \fBecho -e '\\033%8'\fP and left
-with \fBecho -e '\\033%@'\fP
+UTF-8 mode is entered on the console with \fBecho \-e '\\033%8'\fP and left
+with \fBecho \-e '\\033%@'\fP
 .IP \fB\-V\fP
 Display version information.
 .IP \fB\-s\fP
@@ -93,5 +93,5 @@ Display version information.
 Werner Almesberger <werner@almesberger.net>
 Craig Small <csmall@small.dropbear.id.au>
 .SH "SEE ALSO"
-ps(1), top(1)
+.BR ps "(1), " top (1).
 .\"{{{}}}

@@ -1,16 +1,16 @@
-.TH KILLALL 1 "September 26, 2003" "Linux" "User Commands"
+.TH KILLALL 1 2004-11-09 "Linux" "User Commands"
 .SH NAME
 killall \- kill processes by name
 .SH SYNOPSIS
 .ad l
 .B killall
 .RB [ \-d , \-\-sid ]
-.RB [ \-c , \-\-context ] 
-.RB [ \-e , --exact ]
-.RB [ \-g , \-\-process-group ]
+.RB [ \-c , \-\-context ]
+.RB [ \-e , \-\-exact ]
+.RB [ \-g , \-\-process\-group ]
 .RB [ \-i , \-\-interactive ]
 .RB [ \-q , \-\-quiet ]
-.RB [ \-s , \-\-signal 
+.RB [ \-s , \-\-signal
 .IR signal ]
 .RB [ \-v , \-\-verbose ]
 .RB [ \-w , \-\-wait ]
@@ -30,12 +30,12 @@ sends a signal to all processes running any of the specified commands. If no
 signal name is specified, SIGTERM is sent.
 .PP
 Signals can be specified either by name (e.g. \fB\-HUP\fP) or by number
-(e.g. \fB\-1\fP). 
+(e.g. \fB\-1\fP).
 .PP
 If the command name contains a slash (\fB/\fP), processes executing that
 particular file will be selected for killing, independent of their name.
 .PP
-\fBkillall\fP returns a zero return code if at least one process has been 
+\fBkillall\fP returns a zero return code if at least one process has been
 killed for each listed command. \fBkillall\fP returns non-zero otherwise.
 .PP
 A \fBkillall\fP process never kills itself (but may kill other \fBkillall\fP
@@ -46,11 +46,11 @@ Require an exact match for very long names. If a command name is longer
 than 15 characters, the full name may be unavailable (i.e. it is swapped
 out). In this case, \fBkillall\fP will kill everything that matches within
 the first 15 characters. With \fB\-e\fP, such entries are skipped.
-\fBkillall\fP prints a message for each skipped entry 
+\fBkillall\fP prints a message for each skipped entry
 if \fB\-v\fP is specified in addition to \fB\-e\fP,
-.IP "\fB\-I\fP, \fB\-\-ignore-case\fP"
+.IP "\fB\-I\fP, \fB\-\-ignore\-case\fP"
 Do case insensitive process name match.
-.IP "\fB\-g\fP, \fB\-\-process-group\fP"
+.IP "\fB\-g\fP, \fB\-\-process\-group\fP"
 Kill the process group to which the process belongs. The kill signal is only
 sent once per group, even if multiple processes belonging to the same process
 group were found.
@@ -71,10 +71,11 @@ Note that \fBkillall\fP may wait forever if the signal was ignored, had no
 effect, or if the process stays in zombie state.
 .IP \fB\-d\fP
 (Flask only) Specify SID: kill only processes with given SID. Mutually exclusive
-with \fB-c\fP argument.  Must precede other arguments on command line.
+with \fB\-c\fP argument. Must precede other arguments on command line.
 .IP \fB\-c\fP
-(Flask only) Specify security context: kill only processes with given security context.
-Mutually exclusive with \fB-d\fP.  Must precede other arguments on the command line.
+(Flask only) Specify security context: kill only processes with given security
+context. Mutually exclusive with \fB\-d\fP. Must precede other arguments on
+the command line.
 .SH FILES
 .nf
 /proc	location of the proc file system
@@ -91,8 +92,9 @@ user.
 a new process with the same PID between scans.
 .SH AUTHORS
 Werner Almesberger <werner@almesberger.net> wrote the original version
-of psmisc.  Since version 20 Craig Small <csmall@small.dropbear.id.au> 
+of psmisc. Since version 20 Craig Small <csmall@small.dropbear.id.au>
 can be blamed.
 .SH "SEE ALSO"
-.BR kill (1), fuser (1), pgrep (1), pidof (1), pkill (1), ps (1), kill (2)
+.BR kill "(1), " fuser "(1), " pgrep "(1), " pidof "(1), " pkill "(1), "
+.BR ps "(1), " kill (2).
 .\"{{{}}}

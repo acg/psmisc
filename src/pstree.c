@@ -23,14 +23,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
-#ifdef ENABLE_NLS
-#include <locale.h>
-#include <libintl.h>
-#define _(String) gettext (String)
-#else
-#define _(String) (String)
-#endif
 
+#include "i18n.h"
 #include "comm.h"
 
 #ifdef FLASK_LINUX
@@ -716,38 +710,43 @@ read_stdin (void)
 static void
 usage (void)
 {
-  fprintf (stderr, _("usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"));
-  fprintf (stderr, _("              [ -A | -G | -U ] [ pid | user]\n"));
-  fprintf (stderr, _("       pstree -V\n\n"));
-  fprintf (stderr, _("    -a     show command line arguments\n"));
-  fprintf (stderr, _("    -A     use ASCII line drawing characters\n"));
-  fprintf (stderr, _("    -c     don't compact identical subtrees\n"));
-  fprintf (stderr, _("    -h     highlight current process and its ancestors\n"));
-  fprintf (stderr, _("    -H pid highlight process \"pid\" and its ancestors\n"));
-  fprintf (stderr, _("    -G     use VT100 line drawing characters\n"));
-  fprintf (stderr, _("    -l     don't truncate long lines\n"));
-  fprintf (stderr, _("    -n     sort output by PID\n"));
-  fprintf (stderr, _("    -p     show PIDs; implies -c\n"));
-  fprintf (stderr, _("    -u     show uid transitions\n"));
+  fprintf (stderr, _(
+    "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+    "              [ -A | -G | -U ] [ pid | user]\n"
+    "       pstree -V\n\n"
+    "    -a     show command line arguments\n"
+    "    -A     use ASCII line drawing characters\n"
+    "    -c     don't compact identical subtrees\n"
+    "    -h     highlight current process and its ancestors\n"
+    "    -H pid highlight process \"pid\" and its ancestors\n"
+    "    -G     use VT100 line drawing characters\n"
+    "    -l     don't truncate long lines\n"
+    "    -n     sort output by PID\n"
+    "    -p     show PIDs; implies -c\n"
+    "    -u     show uid transitions\n"));
 #ifdef FLASK_LINUX
-  fprintf (stderr, _("    -s     show Flask SIDs\n"));
-  fprintf (stderr, _("    -x     show Flask security contexts\n"));
+  fprintf (stderr, _(
+    "    -s     show Flask SIDs\n"
+    "    -x     show Flask security contexts\n"));
 #endif /*FLASK_LINUX*/
-  fprintf (stderr, _("    -U     use UTF-8 (Unicode) line drawing characters\n"));
-  fprintf (stderr, _("    -V     display version information\n"));
-  fprintf (stderr, _("    pid    start at pid, default 1 (init)\n"));
-  fprintf (stderr, _("    user   show only trees rooted at processes of that user\n\n"));
+  fprintf (stderr, _(
+    "    -U     use UTF-8 (Unicode)) line drawing characters\n"
+    "    -V     display version information\n"
+    "    pid    start at pid, default 1 (init))\n"
+    "    user   show only trees rooted at processes of that user\n\n"));
   exit (1);
 }
 
 void print_version()
 {
   fprintf(stderr, _("pstree (psmisc) %s\n"), VERSION);
-  fprintf(stderr, _("Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n\n"));
-  fprintf(stderr, _("pstree comes with ABSOLUTELY NO WARRANTY.\n"));
-  fprintf(stderr, _("This is free software, and you are welcome to redistribute it under the terms\n"));
-  fprintf(stderr, _("of the GNU General Public License.\n"));
-  fprintf(stderr, _("For more information about these matters, see the files named COPYING.\n"));
+  fprintf(stderr, _(
+    "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n\n"));
+  fprintf(stderr, _(
+    "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
+    "This is free software, and you are welcome to redistribute it under\n"
+    "the terms of the GNU General Public License.\n"
+    "For more information about these matters, see the files named COPYING.\n"));
 }
 
 

@@ -31,14 +31,8 @@
 #include <linux/kdev_t.h>	/* for MKDEV */
 #include <linux/major.h>	/* for LOOP_MAJOR */
 #endif
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#include <locale.h>
-#define _(String) gettext (String)
-#else
-#define _(String) (String)
-#endif
 
+#include "i18n.h"
 #include "comm.h"
 #include "loop.h"         /* for loop_info */
 #include "signals.h"
@@ -668,7 +662,8 @@ show_files_or_kill (void)
       {
 	if (header && (file->flags & FLAG_VERB))
 	  {
-	    fprintf (stderr, _("\n%*s USER        PID ACCESS COMMAND\n"), NAME_FIELD, "");
+	    fprintf (stderr, _("\n%*s USER        PID ACCESS COMMAND\n"),
+		     NAME_FIELD, "");
 	    header = 0;
 	  }
 	length = 0;
@@ -995,10 +990,11 @@ void print_version()
 {
   fprintf(stderr, _("fuser (psmisc) %s\n"), VERSION);
   fprintf(stderr, _(
-    "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n\n"
+    "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n\n"));
+  fprintf(stderr, _(
     "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
-    "This is free software, and you are welcome to redistribute it under the terms\n"
-    "of the GNU General Public License.\n"
+    "This is free software, and you are welcome to redistribute it under\n"
+    "the terms of the GNU General Public License.\n"
     "For more information about these matters, see the files named COPYING.\n"));
 }
 
