@@ -348,6 +348,7 @@ main (int argc, char **argv)
   int sig_num;
   int optc;
   int myoptind;
+  int optsig = 0;
 
   struct option options[] = {
     {"exact", 0, NULL, 'e'},
@@ -356,7 +357,7 @@ main (int argc, char **argv)
     {"list-signals", 0, NULL, 'l'},
     {"quiet", 0, NULL, 'q'},
     {"signal", 1, NULL, 's'},
-    {"verbose", 0, NULL, 's'},
+    {"verbose", 0, NULL, 'v'},
     {"wait", 0, NULL, 'w'},
     {"version", 0, NULL, 'V'},
     {0,0,0,0 }};
@@ -416,6 +417,9 @@ main (int argc, char **argv)
          * is upper case */
         if (argv[optind-1][1] >= 'A' && argv[optind-1][1] <= 'Z') 
 	  sig_num = get_signal (argv[optind-1]+1, "killall");
+        /* Might also be a -## signal too */
+        if (argv[optind-1][1] >= '0' && argv[optind-1][1] <= '9')
+          sig_num = atoi(argv[optind-1]+1);
         break;
     }
   }
@@ -438,6 +442,6 @@ main (int argc, char **argv)
       exit (1);
     }
   argv = argv + myoptind;
-  printf("sending signal %d to procs\n", sig_num);
+  /*printf("sending signal %d to procs\n", sig_num);*/
   return kill_all (sig_num, argc - myoptind, argv );
 }

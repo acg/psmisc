@@ -1,3 +1,9 @@
+Changes in 20.1
+===============
+ - command line -<num> put back in.
+ - got rid of annoying "sending signal #" debug message
+ - updated killall.1
+ 
 Changes from 19 to 20 (14-DEC-2000)
 ===================================
  - New maintainer
