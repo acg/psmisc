@@ -730,9 +730,9 @@ usage (void)
     "    -x     show Flask security contexts\n"));
 #endif /*FLASK_LINUX*/
   fprintf (stderr, _(
-    "    -U     use UTF-8 (Unicode)) line drawing characters\n"
+    "    -U     use UTF-8 (Unicode) line drawing characters\n"
     "    -V     display version information\n"
-    "    pid    start at pid, default 1 (init))\n"
+    "    pid    start at pid, default 1 (init)\n"
     "    user   show only trees rooted at processes of that user\n\n"));
   exit (1);
 }

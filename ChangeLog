@@ -6,6 +6,7 @@ Changes in 21.6 (not released yet)
 	* Localised the yes/no prompts with rpmatch()
 	* Fixed NLS problems and some double ))s - Thanks to Jakub Bogusz
 	* Added Basque translation
+	* More NLS related fixes - Thanks to Guillem Jover
 
 Changes in 21.5
 ===============

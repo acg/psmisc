@@ -37,7 +37,7 @@ AC_TYPE_SIZE_T
 AC_TYPE_UID_T
 
 dnl Check for language stuff
-ALL_LINGUAS="de en eu fi fr it pl pt sv"
+ALL_LINGUAS="de eu fi fr it pl pt sv"
 AM_GNU_GETTEXT([external])
 
 dnl Checks for library functions.

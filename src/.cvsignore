@@ -6,3 +6,4 @@ signames.h
 .deps
 .libs
 Makefile
+Makefile.in
