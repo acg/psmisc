@@ -1,0 +1,45 @@
+.TH PIDOF 1 "May 6, 1998" "Linux" "User Commands"
+.SH NAME
+pidof \- finds processes by name and lists their PIDs
+.SH SYNOPSIS
+.ad l
+.B pidif
+.RB [ \-eg ]
+.I name ...
+.br
+.B pidof
+.RB \-V
+.ad b
+.SH DESCRIPTION
+.B pidof
+lists the PIDs of all processes running any of the specified commands.
+.PP
+If the command name contains a slash (\fB/\fP), processes executing that
+particular file will be selected, independent of their name.
+.PP
+\fBpidof\fP returns a non-zero return code if no process has been found 
+for any of the listed commands. If at least one process has been found for
+each command, \fBpidof\fP returns zero.
+.SH OPTIONS
+.IP \fB\-e\fP
+Require an exact match for very long names. If a command name is longer
+than 15 characters, the full name may be unavailable (i.e. it is swapped
+out). In this case, \fBpidof\fP will list everything that matches within
+the first 15 characters. With \fB\-e\fP, such entries are silently skipped.
+.IP \fB\-g\fP
+Show process group IDs instead of process IDs. If multiple processes with
+the same process group ID were found, only the first process is shown.
+.IP \fB\-V\fP
+Display version information.
+.SH FILES
+.nf
+/proc	location of the proc file system
+.fi
+.SH "KNOWN BUGS"
+Selection by file only works for executables that are kept open during
+execution, i.e. impure executables can't be selected this way.
+.SH AUTHOR
+Werner Almesberger <Werner.Almesberger@epfl.ch>
+.SH "SEE ALSO"
+killall(1), fuser(1), ps(1)
+.\"{{{}}}
