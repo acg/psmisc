@@ -19,7 +19,7 @@ BUILT_SOURCES = signames.h
 
 EXTRA_DIST = signames.c 
 
-CLEANFILES = signames.h
+CLEANFILES = signames.h pstree.x11
 
 signames.h: signames.c
 		@CPP@ -dM $< |\

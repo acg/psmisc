@@ -134,7 +134,7 @@ BUILT_SOURCES = signames.h
 
 EXTRA_DIST = signames.c 
 
-CLEANFILES = signames.h
+CLEANFILES = signames.h pstree.x11
 subdir = src
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h

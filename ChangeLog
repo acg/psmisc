@@ -1,3 +1,9 @@
+2003-11-28  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am (SUBDIRS): Add m4.
+	(ACLOCAL_AMFLAGS): New variable.
+	* configure.in (AC_CONFIG_FILES): Add m4/Makefile.
+
 Changes in 21.4
 ===============
 2003-11-28 Craig Small <csmall@small.dropbear.id.au>
