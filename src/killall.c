@@ -243,8 +243,8 @@ kill_all (int signal, int names, char **namelist)
 	  else if (kill (process_group ? -id : id, signal) >= 0)
 	    {
 	      if (verbose)
-		fprintf (stderr, "Killed %s(%s%d)\n", got_long ? command :
-			 comm, process_group ? "pgid " : "", id);
+		fprintf (stderr, "Killed %s(%s%d) with signal %d\n", got_long ? command :
+			 comm, process_group ? "pgid " : "", id, signal);
 	      found |= 1 << j;
 	      pid_killed[pids_killed++] = id;
 	    }
@@ -304,20 +304,18 @@ usage_pidof (void)
 static void
 usage_killall (void)
 {
-  fprintf (stderr, "usage: killall [ -egiqvw ] [ -signal ] name ...\n");
-  fprintf (stderr, "       killall -l\n");
-  fprintf (stderr, "       killall -V\n\n");
-  fprintf (stderr, "    -e      require exact match for very long names;\n");
-  fprintf (stderr, "            skip if the command line is unavailable\n");
-  fprintf (stderr, "    -g      kill process group instead of process\n");
-  fprintf (stderr, "    -i      ask for confirmation before killing\n");
-  fprintf (stderr, "    -l      list all known signal names\n");
-  fprintf (stderr, "    -q      quiet; don't print complaints\n");
-  fprintf (stderr, "    -signal send signal instead of SIGTERM\n");
-  fprintf (stderr,
-	   "    -v      report if the signal was successfully sent\n");
-  fprintf (stderr, "    -V      display version information\n");
-  fprintf (stderr, "    -w      wait for processes to die\n\n");
+  fprintf (stderr, "usage: killall [ OPTIONS ] [ -- ] name ...\n");
+  fprintf (stderr, "       killall -l, --list\n");
+  fprintf (stderr, "       killall -V --version\n\n");
+  fprintf (stderr, "  -e,--exact          require exact match for very long names\n");
+  fprintf (stderr, "  -g,--process-group  kill process group instead of process\n");
+  fprintf (stderr, "  -i,--interactive    ask for confirmation before killing\n");
+  fprintf (stderr, "  -l,--list           list all known signal names\n");
+  fprintf (stderr, "  -q,--quiet          don't print complaints\n");
+  fprintf (stderr, "  -s,--signal         send signal instead of SIGTERM\n");
+  fprintf (stderr, "  -v,--verbose        report if the signal was successfully sent\n");
+  fprintf (stderr, "  -V,--version        display version information\n");
+  fprintf (stderr, "  -w,--wait           wait for processes to die\n\n");
 }
 
 
@@ -334,7 +332,7 @@ usage (void)
 void print_version()
 {
   fprintf(stderr, "%s (psmisc) %s\n", pidof ? "pidof" : "killall", VERSION);
-  fprintf(stderr, "Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n\n");
+  fprintf(stderr, "Copyright (C) 1993-2001 Werner Almesberger and Craig Small\n\n");
   fprintf(stderr, "PSmisc comes with ABSOLUTELY NO WARRANTY.\n");
   fprintf(stderr, "This is free software, and you are welcome to redistribute it under the terms\n");
   fprintf(stderr, "of the GNU General Public License.\n");
