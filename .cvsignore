@@ -5,3 +5,5 @@ config.cache
 stamp-h
 config.h
 config.log
+.deps
+libtool

@@ -2,3 +2,6 @@ fuser
 killall
 pstree
 signames.h
+.deps
+.libs
+Makefile
