@@ -111,6 +111,7 @@ out_char (char c)
   if (cur_x <= output_width || !trunc)
     putchar (c);
   if (cur_x == output_width + 1 && trunc)
+  {
     if (last_char || (c & 0x80))
       putchar ('+');
     else
@@ -119,6 +120,7 @@ out_char (char c)
 	cur_x--;
 	return;
       }
+  }
 }
 
 
@@ -327,7 +329,7 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
     }
   if (current->highlight && (tmp = tgetstr ("md", NULL)))
     tputs (tmp, 1, putchar);
-  if (swapped = print_args && current->argc < 0)
+  if ((swapped = print_args) && current->argc < 0)
     out_char ('(');
   comm_len = 0;
   for (here = current->comm; *here; here++)
@@ -467,6 +469,10 @@ dump_by_user (PROC * current, uid_t uid)
 }
 
 
+/*
+ * read_proc now uses a similar method as procps for finding the process
+ * name in the /proc filesystem. My thanks to Albert and procps authors.
+ */
 static void
 read_proc (void)
 {
@@ -476,9 +482,11 @@ read_proc (void)
   struct stat st;
   char path[PATH_MAX + 1], comm[COMM_LEN + 1];
   char *buffer;
+  char readbuf[BUFSIZ+1];
+  char *tmpptr;
   pid_t pid, ppid;
   int fd, size;
-  int empty, dummy;
+  int empty;
 
   if (!print_args)
     buffer = NULL;
@@ -493,11 +501,11 @@ read_proc (void)
       exit (1);
     }
   empty = 1;
-  while (de = readdir (dir))
-    if (pid = atoi (de->d_name))
+  while ((de = readdir (dir)) != NULL)
+    if ((pid = atoi (de->d_name)) != 0)
       {
 	sprintf (path, "%s/%d/stat", PROC_BASE, pid);
-	if (file = fopen (path, "r"))
+	if ((file = fopen (path, "r")) != NULL)
 	  {
 	    empty = 0;
 	    if (fstat (fileno (file), &st) < 0)
@@ -505,10 +513,25 @@ read_proc (void)
 		perror (path);
 		exit (1);
 	      }
+            fread(readbuf, BUFSIZ, 1, file) ;
+            if (ferror(file) == 0) 
+            {
+              memset(comm, '\0', COMM_LEN+1);
+              tmpptr = strrchr(readbuf, ')'); /* find last ) */
+              *tmpptr = '\0';
+              /* We now have readbuf with pid and cmd, and tmpptr+2
+               * with the rest */
+              /*printf("readbuf: %s\n", readbuf);*/
+              if (sscanf(readbuf, "%*d (%15c", comm) == 1)
+              {
+                /*printf("tmpptr: %s\n", tmpptr+2);*/
+                if (sscanf(tmpptr+2, "%*c %d", &ppid) == 1)
+                {
+/*
 	    if (fscanf
-		(file, "%d (%[^)]) %c %d", &dummy, comm, (char *) &dummy,
+		(file, "%d (%s) %c %d", &dummy, comm, (char *) &dummy,
 		 &ppid) == 4)
-	      {
+	      */
 		if (!print_args)
 		  add_proc (comm, pid, ppid, st.st_uid, NULL, 0);
 		else
@@ -529,7 +552,7 @@ read_proc (void)
 		      buffer[size++] = 0;
 		    add_proc (comm, pid, ppid, st.st_uid, buffer, size);
 		  }
-	      }
+	      } } }
 	    (void) fclose (file);
 	  }
       }
@@ -674,7 +697,7 @@ main (int argc, char **argv)
       default:
 	usage ();
       }
-  if (optind == argc - 1)
+  if (optind == argc - 1) {
     if (isdigit (*argv[optind]))
       {
 	if (!(pid = atoi (argv[optind++])))
@@ -685,6 +708,7 @@ main (int argc, char **argv)
 	fprintf (stderr, "No such user name: %s\n", argv[optind - 1]);
 	return 1;
       }
+  }
   if (optind != argc)
     usage ();
   read_proc ();
