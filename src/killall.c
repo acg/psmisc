@@ -395,8 +395,7 @@ usage_killall (void)
 #ifdef FLASK_LINUX
   fprintf (stderr, "  -S,--Sid            kill only process(es) having sid\n");
   fprintf (stderr, "  -c,--context        kill only process(es) having scontext\n");
-  fprintf(stderr, "   (-s, -c are mutually exclusive and must precede other
-arguments)\n\n");
+  fprintf(stderr, "   (-s, -c are mutually exclusive and must precede other arguments)\n\n");
 #endif /*FLASK_LINUX*/
 }
 
