@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-06-13 11:14+1000\n"
+"POT-Creation-Date: 2001-10-18 08:05+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,32 +14,32 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: src/killall.c:41
-#, possible-c-format
+#: src/killall.c:42
+#, c-format
 msgid "Kill %s(%s%d) ? (y/n) "
-msgstr ""
+msgstr "Kill %s(%s%d) ? (y/n) "
 
-#: src/killall.c:188
-#, possible-c-format
+#: src/killall.c:189
+#, c-format
 msgid "skipping partial match %s(%d)\n"
-msgstr ""
+msgstr "skipping partial match %s(%d)\n"
 
-#: src/killall.c:248
-#, possible-c-format
+#: src/killall.c:249
+#, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
-msgstr ""
+msgstr "Killed %s(%s%d) with signal %d\n"
 
-#: src/killall.c:260
-#, possible-c-format
+#: src/killall.c:261
+#, c-format
 msgid "%s is empty (not mounted ?)\n"
-msgstr ""
+msgstr "%s is empty (not mounted ?)\n"
 
-#: src/killall.c:266
-#, possible-c-format
+#: src/killall.c:267
+#, c-format
 msgid "%s: no process killed\n"
-msgstr ""
+msgstr "%s: no process killed\n"
 
-#: src/killall.c:446
-#, possible-c-format
+#: src/killall.c:447
+#, c-format
 msgid "Maximum number of names is %d\n"
-msgstr ""
+msgstr "Maximum number of names is %d\n"
