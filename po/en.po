@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-10-18 08:05+1000\n"
+"POT-Creation-Date: 2001-10-18 12:43+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr "skipping partial match %s(%d)\n"
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Killed %s(%s%d) with signal %d\n"
 
-#: src/killall.c:261
+#: src/fuser.c:452 src/killall.c:261
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s is empty (not mounted ?)\n"
@@ -43,3 +43,181 @@ msgstr "%s: no process killed\n"
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Maximum number of names is %d\n"
+
+#: src/fuser.c:211
+#, c-format
+msgid "-4 flag used but proc file %s is not readable\n"
+msgstr "-4 flag used but proc file %s is not readable\n"
+
+#: src/fuser.c:220
+#, c-format
+msgid "-6 flag used but proc file %s is not readable\n"
+msgstr "-6 flag used but proc file %s is not readable\n"
+
+#: src/fuser.c:536
+#, c-format
+msgid "Kill process %d ? (y/n) "
+msgstr "Kill process %d ? (y/n) "
+
+#: src/fuser.c:566
+#, c-format
+msgid "kill %d"
+msgstr "kill %d"
+
+#: src/fuser.c:570 src/fuser.c:574
+#, c-format
+msgid "No automatic removal. Please use  umount %s\n"
+msgstr "No automatic removal. Please use  umount %s\n"
+
+#: src/fuser.c:578
+#, c-format
+msgid "No automatic removal. Please use  swapoff %s\n"
+msgstr "No automatic removal. Please use  swapoff %s\n"
+
+#: src/fuser.c:680
+#, c-format
+msgid "Internal error (type %d)\n"
+msgstr "Internal error (type %d)\n"
+
+#: src/fuser.c:710
+msgid "kernel mount  "
+msgstr "kernel mount  "
+
+#: src/fuser.c:713
+msgid "kernel loop   "
+msgstr "kernel loop   "
+
+#: src/fuser.c:716
+msgid "kernel swap   "
+msgstr "kernel swap   "
+
+#: src/fuser.c:736
+msgid "No process references; use -v for the complete list\n"
+msgstr "No process references; use -v for the complete list\n"
+
+#: src/fuser.c:869
+msgid "can't find sockets' device number"
+msgstr "can't find sockets' device number"
+
+#: src/fuser.c:877
+msgid "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+msgstr "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+
+#: src/fuser.c:878
+#, c-format
+msgid "%13s[ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+msgstr ""
+
+#: src/fuser.c:879
+msgid "       fuser -l\n"
+msgstr ""
+
+#: src/fuser.c:880
+msgid ""
+"       fuser -V\n"
+"\n"
+msgstr ""
+
+#: src/fuser.c:881
+msgid "    -a        display unused files too\n"
+msgstr ""
+
+#: src/fuser.c:882
+msgid "    -k        kill processes accessing that file\n"
+msgstr ""
+
+#: src/fuser.c:883
+msgid "    -i        ask before killing (ignored without -k)\n"
+msgstr ""
+
+#: src/fuser.c:884
+msgid "    -l        list signal names\n"
+msgstr ""
+
+#: src/fuser.c:885
+msgid "    -m        mounted FS\n"
+msgstr ""
+
+#: src/fuser.c:886
+msgid "    -n space  search in the specified name space (file, udp, or tcp)\n"
+msgstr ""
+
+#: src/fuser.c:887
+msgid "    -s        silent operation\n"
+msgstr ""
+
+#: src/fuser.c:888
+msgid "    -signal   send signal instead of SIGKILL\n"
+msgstr ""
+
+#: src/fuser.c:889
+msgid "    -u        display user ids\n"
+msgstr ""
+
+#: src/fuser.c:890
+msgid "    -v        verbose output\n"
+msgstr ""
+
+#: src/fuser.c:891
+msgid "    -V        display version information\n"
+msgstr ""
+
+#: src/fuser.c:892
+msgid "    -4        search IPv4 sockets only\n"
+msgstr ""
+
+#: src/fuser.c:893
+msgid "    -6        search IPv6 sockets only\n"
+msgstr ""
+
+#: src/fuser.c:894
+msgid ""
+"    -         reset options\n"
+"\n"
+msgstr ""
+
+#: src/fuser.c:895
+msgid ""
+"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"\n"
+msgstr ""
+
+#: src/fuser.c:901
+#, c-format
+msgid "fuser (psmisc) %s\n"
+msgstr ""
+
+#: src/fuser.c:902
+msgid ""
+"Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+
+#: src/fuser.c:903
+msgid "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
+msgstr ""
+
+#: src/fuser.c:904
+msgid ""
+"This is free software, and you are welcome to redistribute it under the "
+"terms\n"
+msgstr ""
+
+#: src/fuser.c:905
+msgid "of the GNU General Public License.\n"
+msgstr ""
+
+#: src/fuser.c:906
+msgid ""
+"For more information about these matters, see the files named COPYING.\n"
+msgstr ""
+
+#: src/fuser.c:1082
+#, c-format
+msgid "ignoring -m in name space \"%s\"\n"
+msgstr ""
+
+#: src/fuser.c:1090
+#, c-format
+msgid "%1%s/%2%s: invalid specificiation\n"
+msgstr ""

@@ -25,6 +25,9 @@
 #include <arpa/inet.h>
 #include <linux/kdev_t.h>	/* for MKDEV */
 #include <linux/major.h>	/* for LOOP_MAJOR */
+#include <libintl.h>
+#include <locale.h>
+#define _(String) gettext (String)
 
 #include "comm.h"
 #include "loop.h"         /* for loop_info */
@@ -205,7 +208,7 @@ fill_net_cache (SPACE_DSC * dsc)
     sprintf (buffer, PROC_BASE "/net/%s", dsc->name);
     if (stat(buffer, &statbuf) != 0) {
       if (ipv4only) 
-        fprintf(stderr, "-4 flag used but proc file %s is not readable/\n", buffer);
+        fprintf(stderr, _("-4 flag used but proc file %s is not readable\n"), buffer);
     } else {
       parse_net_file (dsc, buffer, &last );
     }
@@ -214,7 +217,7 @@ fill_net_cache (SPACE_DSC * dsc)
     sprintf (buffer, PROC_BASE "/net/%s6", dsc->name);
     if (stat(buffer, &statbuf) != 0) {
       if (ipv6only) 
-        fprintf(stderr, "-6 flag used but proc file %s is not readable/\n", buffer);
+        fprintf(stderr, _("-6 flag used but proc file %s is not readable\n"), buffer);
     } else {
       parse_net_file (dsc, buffer, &last );
     }
@@ -446,7 +449,7 @@ scan_fd (void)
   (void) closedir (dir);
   if (empty)
     {
-      fprintf (stderr, PROC_BASE " is empty (not mounted ?)\n");
+      fprintf (stderr, _("%s is empty (not mounted ?)\n"),PROC_BASE);
       exit (1);
     }
 }
@@ -530,7 +533,7 @@ ask (pid_t pid)
   fflush (stdout);
   do
     {
-      fprintf (stderr, "Kill process %d ? (y/n) ", pid);
+      fprintf (stderr, _("Kill process %d ? (y/n) "), pid);
       fflush (stderr);
       do
 	if ((ch = getchar ()) == EOF)
@@ -560,19 +563,19 @@ kill_item (const FILE_DSC * file, const ITEM_DSC * item)
 	return;
       if (kill (item->u.proc.pid, file->sig_num) >= 0)
 	break;
-      sprintf (tmp, "kill %d", item->u.proc.pid);
+      sprintf (tmp, _("kill %d"), item->u.proc.pid);
       perror (tmp);
       break;
     case it_mount:
-      fprintf (stderr, "No automatic removal. Please use  umount %s\n",
+      fprintf (stderr, _("No automatic removal. Please use  umount %s\n"),
 	       item->u.misc.path);
       break;
     case it_loop:
-      fprintf (stderr, "No automatic removal. Please use  umount %s\n",
+      fprintf (stderr, _("No automatic removal. Please use  umount %s\n"),
 	       item->u.misc.path);
       break;
     case it_swap:
-      fprintf (stderr, "No automatic removal. Please use  swapoff %s\n",
+      fprintf (stderr, _("No automatic removal. Please use  swapoff %s\n"),
 	       file->name);
       break;
     }
@@ -674,7 +677,7 @@ show_files_or_kill (void)
 		    uid = 0;
 		    break;
 		  default:
-		    fprintf (stderr, "Internal error (type %d)\n",
+		    fprintf (stderr, _("Internal error (type %d)\n"),
 			     item->type);
 		    exit (1);
 		  }
@@ -704,13 +707,13 @@ show_files_or_kill (void)
 			    !(item->u.proc.ref_set & REF_EXE) ? 'm' : '.');
 		    break;
 		  case it_mount:
-		    printf ("kernel mount  ");
+		    printf (_("kernel mount  "));
 		    break;
 		  case it_loop:
-		    printf ("kernel loop   ");
+		    printf (_("kernel loop   "));
 		    break;
 		  case it_swap:
-		    printf ("kernel swap   ");
+		    printf (_("kernel swap   "));
 		    break;
 		  }
 		if (name)
@@ -730,8 +733,7 @@ show_files_or_kill (void)
 	if (!(file->flags & FLAG_VERB) || first)
 	  putchar ('\n');
 	if (first)
-	  fprintf (stderr, "No process references; use -v for the complete"
-		   " list\n");
+	  fprintf (stderr, _("No process references; use -v for the complete list\n"));
 	if (file->flags & FLAG_KILL)
 	  for (item = file->items; item; item = item->next)
 	    kill_item (file, item);
@@ -864,7 +866,7 @@ static void find_net_dev(void)
   }
   if (fd >= 0)
     close(fd);
-  fprintf(stderr,"can't find sockets' device number");
+  fprintf(stderr,_("can't find sockets' device number"));
 }
 
 
@@ -872,39 +874,36 @@ static void find_net_dev(void)
 static void
 usage (void)
 {
-  fprintf (stderr, "usage: fuser [ -a | -s ] [ -n space ] [ -signal ] "
-	   "[ -kimuv ] name ...\n%13s[ - ] [ -n space ] [ -signal ] [ -kimuv ] "
-	   "name ...\n", "");
-  fprintf (stderr, "       fuser -l\n");
-  fprintf (stderr, "       fuser -V\n\n");
-  fprintf (stderr, "    -a        display unused files too\n");
-  fprintf (stderr, "    -k        kill processes accessing that file\n");
-  fprintf (stderr, "    -i        ask before killing (ignored without -k)\n");
-  fprintf (stderr, "    -l        list signal names\n");
-  fprintf (stderr, "    -m        mounted FS\n");
-  fprintf (stderr, "    -n space  search in the specified name space (file, "
-	   "udp, or tcp)\n");
-  fprintf (stderr, "    -s        silent operation\n");
-  fprintf (stderr, "    -signal   send signal instead of SIGKILL\n");
-  fprintf (stderr, "    -u        display user ids\n");
-  fprintf (stderr, "    -v        verbose output\n");
-  fprintf (stderr, "    -V        display version information\n");
-  fprintf (stderr, "    -4        search IPv4 sockets only\n");
-  fprintf (stderr, "    -6        search IPv6 sockets only\n");
-  fprintf (stderr, "    -         reset options\n\n");
-  fprintf (stderr, "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]"
-	   "\n\n");
+  fprintf (stderr, _("usage: fuser [ -a | -s ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"));
+  fprintf (stderr, _("%13s[ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"), "");
+  fprintf (stderr, _("       fuser -l\n"));
+  fprintf (stderr, _("       fuser -V\n\n"));
+  fprintf (stderr, _("    -a        display unused files too\n"));
+  fprintf (stderr, _("    -k        kill processes accessing that file\n"));
+  fprintf (stderr, _("    -i        ask before killing (ignored without -k)\n"));
+  fprintf (stderr, _("    -l        list signal names\n"));
+  fprintf (stderr, _("    -m        mounted FS\n"));
+  fprintf (stderr, _("    -n space  search in the specified name space (file, udp, or tcp)\n"));
+  fprintf (stderr, _("    -s        silent operation\n"));
+  fprintf (stderr, _("    -signal   send signal instead of SIGKILL\n"));
+  fprintf (stderr, _("    -u        display user ids\n"));
+  fprintf (stderr, _("    -v        verbose output\n"));
+  fprintf (stderr, _("    -V        display version information\n"));
+  fprintf (stderr, _("    -4        search IPv4 sockets only\n"));
+  fprintf (stderr, _("    -6        search IPv6 sockets only\n"));
+  fprintf (stderr, _("    -         reset options\n\n"));
+  fprintf (stderr, _("  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n\n"));
   exit (1);
 }
 
 void print_version()
 {
-  fprintf(stderr, "fuser (psmisc) %s\n", VERSION);
-  fprintf(stderr, "Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n\n");
-  fprintf(stderr, "PSmisc comes with ABSOLUTELY NO WARRANTY.\n");
-  fprintf(stderr, "This is free software, and you are welcome to redistribute it under the terms\n");
-  fprintf(stderr, "of the GNU General Public License.\n");
-  fprintf(stderr, "For more information about these matters, see the files named COPYING.\n");
+  fprintf(stderr, _("fuser (psmisc) %s\n"), VERSION);
+  fprintf(stderr, _("Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n\n"));
+  fprintf(stderr, _("PSmisc comes with ABSOLUTELY NO WARRANTY.\n"));
+  fprintf(stderr, _("This is free software, and you are welcome to redistribute it under the terms\n"));
+  fprintf(stderr, _("of the GNU General Public License.\n"));
+  fprintf(stderr, _("For more information about these matters, see the files named COPYING.\n"));
 }
 
 
@@ -920,6 +919,12 @@ main (int argc, char **argv)
   sig_number = SIGKILL;
   name_space = name_spaces;
   no_files = 1;
+
+  /* Setup the i18n */
+  setlocale(LC_ALL, "");
+  bindtextdomain(PACKAGE, LOCALEDIR);
+  textdomain(PACKAGE);
+
   if (argc < 2)
     usage ();
   if (argc == 2 && !strcmp (argv[1], "-l"))
@@ -1074,7 +1079,7 @@ main (int argc, char **argv)
 
 	      if (flags & FLAG_DEV)
 		{
-		  fprintf (stderr, "ignoring -m in name space \"%s\"\n",
+		  fprintf (stderr, _("ignoring -m in name space \"%s\"\n"),
 			   this_name_space->name);
 		  flags &= ~FLAG_DEV;
 		}
@@ -1082,7 +1087,7 @@ main (int argc, char **argv)
 	      if (!parse_inet (*argv, this_name_space->name, &lcl_port,
 			       &rmt_addr, &rmt_port))
 		{
-		  fprintf (stderr, "%s/%s: invalid specificiation\n", *argv,
+		  fprintf (stderr, _("%1%s/%2%s: invalid specificiation\n"), *argv,
 			   this_name_space->name);
 		  continue;
 		}
