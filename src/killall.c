@@ -344,7 +344,7 @@ void print_version()
 int
 main (int argc, char **argv)
 {
-  char *name, *walk;
+  char *name;
   int sig_num;
   int optc;
   int myoptind;

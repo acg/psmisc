@@ -17,6 +17,7 @@
 #include <limits.h>
 #include <netdb.h>
 #include <fcntl.h>
+#include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <netinet/in.h>
@@ -364,7 +365,7 @@ check_dir (const char *rel, pid_t pid, int type)
 
   if (!(dir = opendir (rel)))
     return;
-  while (de = readdir (dir))
+  while ((de = readdir (dir)) != NULL)
     if (strcmp (de->d_name, ".") && strcmp (de->d_name, ".."))
       {
 	sprintf (path, "%s/%s", rel, de->d_name);
@@ -389,8 +390,8 @@ scan_fd (void)
       exit (1);
     }
   empty = 1;
-  while (de = readdir (dir))
-    if (pid = atoi (de->d_name))
+  while ((de = readdir (dir)) != NULL)
+    if ((pid = atoi (de->d_name)) == 0)
       {
 	empty = 0;
 	sprintf (path, "%s/%d", PROC_BASE, pid);
@@ -602,10 +603,13 @@ show_files_or_kill (void)
 		  printf ("%6dm", item->u.proc.pid);
 		if ((file->flags & FLAG_UID) && item->u.proc.uid !=
 		    UID_UNKNOWN)
-		  if (pw = getpwuid (item->u.proc.uid))
+                {
+		  if ((pw = getpwuid (item->u.proc.uid)) != NULL) {
 		    printf ("(%s)", pw->pw_name);
-		  else
+                  } else {
 		    printf ("(%d)", item->u.proc.uid);
+                  }
+                }
 		first = 0;
 	      }
 	    else
@@ -618,7 +622,7 @@ show_files_or_kill (void)
 		  case it_proc:
 		    sprintf (path, PROC_BASE "/%d/stat", item->u.proc.pid);
 		    strcpy (comm, "???");
-		    if (f = fopen (path, "r"))
+		    if ((f = fopen (path, "r")) != NULL)
 		      {
 			(void) fscanf (f, "%d (%[^)]", &dummy, comm);
 			(void) fclose (f);
@@ -639,7 +643,7 @@ show_files_or_kill (void)
 		  }
 		if (uid == UID_UNKNOWN)
 		  user = "???";
-		else if (pw = getpwuid (uid))
+		else if ((pw = getpwuid (uid)) != NULL)
 		  user = pw->pw_name;
 		else
 		  {
@@ -673,6 +677,7 @@ show_files_or_kill (void)
 		    break;
 		  }
 		if (name)
+                {
 		  for (scan = name; *scan; scan++)
 		    if (*scan == '\\')
 		      printf ("\\\\");
@@ -680,6 +685,7 @@ show_files_or_kill (void)
 		      putchar (*scan);
 		    else
 		      printf ("\\%03o", (unsigned char) *scan);
+                }
 		putchar ('\n');
 	      }
 	    first = 0;
@@ -967,6 +973,7 @@ main (int argc, char **argv)
 		  continue;
 		}
 	      if (flags & FLAG_DEV)
+              {
 		if (S_ISBLK (st.st_mode))
 		  st.st_dev = st.st_rdev;
 		else if (S_ISDIR (st.st_mode))
@@ -978,6 +985,7 @@ main (int argc, char **argv)
 			continue;
 		      }
 		  }
+              }
 	      if (S_ISSOCK (st.st_mode) || (flags & FLAG_DEV))
 		fill_unix_cache ();
 	      if (!S_ISSOCK (st.st_mode) || (flags & FLAG_DEV))
