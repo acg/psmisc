@@ -1,3 +1,11 @@
+2004-04-05  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am (SUBDIRS): Add m4.
+	(SUBDIRS): Remove intl.
+	(ACLOCAL_AMFLAGS): New variable.
+	(EXTRA_DIST): Add config.rpath.
+	* configure.in (AC_CONFIG_FILES): Add m4/Makefile.
+
 Changes in 21.5
 not-yet-released
 	* Sven Dahl provides a patch for using psmisc with uclibc

@@ -75,5 +75,5 @@ AC_CHECK_FUNCS(strdup strerror strtoul)
 dnl Checks for Large File System
 AC_SYS_LARGEFILE
 
-AC_CONFIG_FILES([Makefile doc/Makefile src/Makefile po/Makefile.in  m4/Makefile  icons/Makefile])
+AC_CONFIG_FILES([Makefile doc/Makefile src/Makefile po/Makefile.in  icons/Makefile m4/Makefile ])
 AC_OUTPUT
