@@ -1805,7 +1805,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=psmisc
- VERSION=21.5cvs
+ VERSION=21.5
 
 
 cat >>confdefs.h <<_ACEOF

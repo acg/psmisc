@@ -55,7 +55,7 @@ m4trace:configure.in:4: -1- _m4_warn([obsolete], [The macro `AM_CONFIG_HEADER' i
 You should run autoupdate.], [aclocal.m4:8312: AM_CONFIG_HEADER is expanded from...
 configure.in:4: the top level])
 m4trace:configure.in:4: -1- AC_CONFIG_HEADERS([config.h])
-m4trace:configure.in:5: -1- AM_INIT_AUTOMAKE([psmisc], [21.5cvs])
+m4trace:configure.in:5: -1- AM_INIT_AUTOMAKE([psmisc], [21.5])
 m4trace:configure.in:5: -1- m4_pattern_allow([^AM_[A-Z]+FLAGS$])
 m4trace:configure.in:5: -1- AM_AUTOMAKE_VERSION([1.8.4])
 m4trace:configure.in:5: -1- AC_PROG_INSTALL
@@ -64,7 +64,7 @@ m4trace:configure.in:5: -1- AC_SUBST([INSTALL_SCRIPT])
 m4trace:configure.in:5: -1- AC_SUBST([INSTALL_DATA])
 m4trace:configure.in:5: -1- AC_SUBST([CYGPATH_W])
 m4trace:configure.in:5: -1- AC_SUBST([PACKAGE], [psmisc])
-m4trace:configure.in:5: -1- AC_SUBST([VERSION], [21.5cvs])
+m4trace:configure.in:5: -1- AC_SUBST([VERSION], [21.5])
 m4trace:configure.in:5: -1- AC_DEFINE_TRACE_LITERAL([PACKAGE])
 m4trace:configure.in:5: -1- AH_OUTPUT([PACKAGE], [/* Name of package */
 #undef PACKAGE])

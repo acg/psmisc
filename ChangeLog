@@ -1,8 +1,6 @@
-**Testers, release is soon. Comments in quickly please**
-
 Changes in 21.5
 ===============
-not-yet-released
+2004-05-25 Craig Small <csmall@small.dropbear.id.au>
 	* Sven Dahl provides a patch for using psmisc with uclibc
 	* Sid flag in options is d not S. SF#791537
 	* Fixed typo in checking ss_family SF#845292
