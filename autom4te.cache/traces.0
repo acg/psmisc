@@ -655,6 +655,6 @@ m4trace:configure.in:76: -1- AH_OUTPUT([_FILE_OFFSET_BITS], [/* Number of bits i
 m4trace:configure.in:76: -1- AC_DEFINE_TRACE_LITERAL([_LARGE_FILES])
 m4trace:configure.in:76: -1- AH_OUTPUT([_LARGE_FILES], [/* Define for large files, on AIX-style hosts. */
 #undef _LARGE_FILES])
-m4trace:configure.in:78: -1- AC_CONFIG_FILES([Makefile doc/Makefile src/Makefile po/Makefile.in  icons/Makefile])
+m4trace:configure.in:78: -1- AC_CONFIG_FILES([Makefile doc/Makefile src/Makefile po/Makefile.in  icons/Makefile m4/Makefile ])
 m4trace:configure.in:79: -1- AC_SUBST([LIB@&t@OBJS], [$ac_libobjs])
 m4trace:configure.in:79: -1- AC_SUBST([LTLIBOBJS], [$ac_ltlibobjs])
