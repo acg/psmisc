@@ -1,24 +1,25 @@
-# Italian Translation of PSmisc messages.
-# "Copyright (C) 1993-2001 Werner Almesberger, Craig Small, and Daniele Pagano\n"
-# Translated by Daniele Pagano <esaurito@users.sourceforge.net>, 2001.
+# Italian messages for psmisc.
+# Copyright (C) 2001, 2005 Free Software Foundation, Inc.
+# This file is distributed under the same license as the psmisc file.
+# Marco Colombo <m.colombo@ed.ac.uk>, 2005.
+# Daniele Pagano <esaurito@users.sourceforge.net>, 2001.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc version 20\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-23 11:52+1100\n"
-"PO-Revision-Date: 2001-10-28 18:57--700\n"
-"Last-Translator: Daniele Pagano <dan@esaurito.com>\n"
-"Language-Team: esaurito <esaurito@users.sourceforge.net>\n"
+"Project-Id-Version: psmisc 21.6pre1\n"
+"Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
+"POT-Creation-Date: 2005-02-23 14:46+1100\n"
+"PO-Revision-Date: 2005-02-24 22:15+0000\n"
+"Last-Translator: Marco Colombo <m.colombo@ed.ac.uk>\n"
+"Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# "termina" usato consistentemente per "kill"
 #: src/killall.c:53
-#, fuzzy, c-format
+#, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
-msgstr "Termina %s(%s%d) ? (y/n) "
+msgstr "Terminare %s(%s%d)? (y/N) "
 
 #: src/killall.c:245
 #, c-format
@@ -52,16 +53,24 @@ msgid ""
 "    -V      display version information\n"
 "\n"
 msgstr ""
+"Uso: pidof [ -eg ] NOME ...\n"
+"     pidof -V\n"
+"\n"
+"    -e        richiede una corrispondenza esatta per i nomi molto lunghi;\n"
+"              ignora se la riga di comando non è disponibile\n"
+"    -g        mostra l'ID del gruppo invece che l'ID del processo\n"
+"    -V        mostra le informazioni sulla versione\n"
+"\n"
 
 #: src/killall.c:402
 #, c-format
 msgid "usage: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n"
-msgstr ""
+msgstr "Uso: killall [-s sid] [-c CONTESTO] [ -egiqvw ] [ -SEGNALE ] NOME ...\n"
 
 #: src/killall.c:405
 #, c-format
 msgid "usage: killall [ OPTIONS ] [ -- ] name ...\n"
-msgstr ""
+msgstr "Uso: killall [ OPZIONI ] [ -- ] NOME ...\n"
 
 #: src/killall.c:408
 #, c-format
@@ -81,6 +90,20 @@ msgid ""
 "  -w,--wait           wait for processes to die\n"
 "\n"
 msgstr ""
+"     killall -l, --list\n"
+"     killall -V --version\n"
+"\n"
+"  -e,--exact          richiede una corrispondenza esatta per i nomi molto lunghi\n"
+"  -I,--ignore-case    ignora maiuscole/minuscole nei nomi\n"
+"  -g,--process-group  termina il gruppo dei processi invece del processo\n"
+"  -i,--interactive    chiede conferma prima di terminare\n"
+"  -l,--list           elenca i nomi di segnale conosciuti\n"
+"  -q,--quiet          opera silenziosamente\n"
+"  -s,--signal         invia il segnale indicato invece di SIGTERM\n"
+"  -v,--verbose        riporta se il segnale è stato inviato con successo\n"
+"  -V,--version        mostra le informazioni sulla versione\n"
+"  -w,--wait           aspetta la terminazione del processo\n"
+"\n"
 
 #: src/killall.c:422
 #, c-format
@@ -90,6 +113,10 @@ msgid ""
 "   (-s, -c are mutually exclusive and must precede other arguments)\n"
 "\n"
 msgstr ""
+"  -d,--sid            termina solo i processi aventi sid\n"
+"  -c,--context        termina solo i processi aventi scontext\n"
+"   (-s, -c sono mutuamente esclusive e devono precedere altri argomenti)\n"
+"\n"
 
 #: src/killall.c:444 src/fuser.c:989 src/pstree.c:743
 #, c-format
@@ -97,56 +124,52 @@ msgid ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
+"Copyright (C) 1993-2002 Werner Almesberger e Craig Small\n"
+"\n"
 
-# Traduzione mia (non ufficiale) del messaggio GNU
 #: src/killall.c:446 src/fuser.c:991 src/pstree.c:745
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
 "This is free software, and you are welcome to redistribute it under\n"
 "the terms of the GNU General Public License.\n"
 "For more information about these matters, see the files named COPYING.\n"
 msgstr ""
-"Copyright (C) 1993-2000 Werner Almesberger e Craig Small\n"
-"\n"
-"PSmisc non ha ASSOLUTAMENTE NESSUNA GARANZIA D'USO.\n"
-"Questo è software gratuito, ed è possibile redistribuirlo entro i termini\n"
+"PSmisc è distribuito senza ALCUNA GARANZIA.\n"
+"Questo è software libero, ed è possibile redistribuirlo secondo i termini\n"
 "della GNU General Public License.\n"
-"Per ulteriori informazioni in merito, consultare il file COPYING (in lingua "
-"inglese).\n"
+"Si consulti il file COPYING per ulteriori informazioni.\n"
 
 #: src/killall.c:563
 #, c-format
 msgid "%s: SID (%s) must be numeric\n"
-msgstr ""
+msgstr "%s: SID (%s) deve essere numerico\n"
 
 #: src/killall.c:614
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Il massimo numero di nomi è %d\n"
 
-# 'proc' non tradotto: termine specifico di Linux
 #: src/fuser.c:243
 #, c-format
 msgid "-4 flag used but proc file %s is not readable\n"
-msgstr "usata opzione -4  ma file proc %s non leggibile\n"
+msgstr "è stata usata l'opzione -4,  ma il file proc %s non è leggibile\n"
 
 #: src/fuser.c:252
 #, c-format
 msgid "-6 flag used but proc file %s is not readable\n"
-msgstr "usata opzione -6  ma file proc %s non leggibile\n"
+msgstr "è stata usata l'opzione -6,  ma il file proc %s non è leggibile\n"
 
 #: src/fuser.c:592
-#, fuzzy, c-format
+#, c-format
 msgid "Kill process %d ? (y/N) "
-msgstr "Termina processo %d ? (y/n) "
+msgstr "Terminare il processo %d? (y/N) "
 
 #: src/fuser.c:626
 #, c-format
 msgid "kill %d"
 msgstr "termina %d"
 
-# nomi comandi non tradotti
 #: src/fuser.c:630 src/fuser.c:634
 #, c-format
 msgid "No automatic removal. Please use  umount %s\n"
@@ -163,13 +186,14 @@ msgid ""
 "\n"
 "%*s USER        PID ACCESS COMMAND\n"
 msgstr ""
+"\n"
+"%*s UTENTE      PID ACCESSO COMANDO\n"
 
 #: src/fuser.c:752
 #, c-format
 msgid "Internal error (type %d)\n"
 msgstr "Errore interno (tipo %d)\n"
 
-# kernel e mount non tradotti: termini specifici
 #: src/fuser.c:790
 #, c-format
 msgid "kernel mount  "
@@ -180,21 +204,18 @@ msgstr "mount del kernel"
 msgid "kernel loop   "
 msgstr "ciclo del kernel"
 
-# assunto 'swap' sta per 'swap filesystem'
 #: src/fuser.c:796
 #, c-format
 msgid "kernel swap   "
-msgstr "file di scambio del kernel"
+msgstr "file di swap del kernel"
 
-# socket non tradotto: termine tecnico
 #: src/fuser.c:952
 #, c-format
 msgid "can't find sockets' device number"
-msgstr "impossibile trovare numero della periferica del socket"
+msgstr "impossibile trovare numero di dispositivo del socket"
 
-# tradotto 'namespace' con 'contesto'; modificata indentazione descrizioni
 #: src/fuser.c:961
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
 "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
@@ -221,27 +242,29 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"uso: fuser [ -a | -s ] [ -n contesto] [ -signal ] [ -kimuv ] nome...\n"
-"             [ - ] [ -n contesto] [ -signal ] [ -kimuv ] nome...\n"
-"       fuser -l\n"
-"       fuser -V\n"
+"Uso: fuser [ -a | -s | -c ] [ -n CONTESTO ] [ -SEGNALE ] [ -kimuv ] NOME...\n"
+"           [ - ] [ -n CONTESTO] [ -SEGNALE ] [ -kimuv ] NOME...\n"
+"     fuser -l\n"
+"     fuser -V\n"
 "\n"
-"    -a           mostra anche files inutilizzati\n"
-"    -k           termina tutti i processi che accedono al file\n"
-"    -i           conferma prima di terminare (ignorato senza -k)\n"
-"    -l           elenca nomi dei segnali\n"
-"    -m           filesystem montato\n"
-"    -n contesto  cerca nel contesto specificato (file, udp, o tcp)\n"
-"    -s           nessun messaggio\n"
-"    -signal      invia segnale invece di SIGKILL\n"
-"    -u           mostra nomi utente\n"
-"    -v           messaggi completi\n"
-"    -V           mostra versione\n"
-"    -4           cerca solo socket IPv4\n"
-"    -6           cerca solo socket IPv6\n"
-"    -            riazzera opzioni\n"
+"    -a        mostra anche i file inutilizzati\n"
+"    -c        file system montati\n"
+"    -f        ignorata (per compatibilità POSIX)\n"
+"    -k        termina tutti i processi che accedono al file\n"
+"    -i        conferma prima di terminare (ignorato senza -k)\n"
+"    -l        elenca i nomi dei segnali\n"
+"    -m        file system montati\n"
+"    -n CONTESTO  cerca nel contesto specificato (file, udp, o tcp)\n"
+"    -s        opera silenziosamente\n"
+"    -SEGNALE  invia il segnale indicato invece di SIGKILL\n"
+"    -u        mostra i nomi utente\n"
+"    -v        output prolisso\n"
+"    -V        mostra le informazioni sulla versione\n"
+"    -4        cerca solo socket IPv4\n"
+"    -6        cerca solo socket IPv6\n"
+"    -         riazzera le opzioni\n"
 "\n"
-"  udp/tcp nomi: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"  nomi udp/tcp: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 
 #: src/fuser.c:987
@@ -255,14 +278,14 @@ msgid "ignoring -m in name space \"%s\"\n"
 msgstr "ignorato -m nel contesto \"%s\"\n"
 
 #: src/fuser.c:1181
-#, fuzzy, c-format
+#, c-format
 msgid "%s/%s: invalid specification\n"
 msgstr "%s/%s: specificazione non valida\n"
 
 #: src/pstree.c:377
 #, c-format
 msgid "MAX_DEPTH not big enough.\n"
-msgstr ""
+msgstr "MAX_DEPTH non è sufficientemente grande.\n"
 
 #: src/pstree.c:713
 #, c-format
@@ -282,6 +305,20 @@ msgid ""
 "    -p     show PIDs; implies -c\n"
 "    -u     show uid transitions\n"
 msgstr ""
+"Uso: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+"            [ -A | -G | -U ] [ PID | UTENTE]\n"
+"     pstree -V\n"
+"\n"
+"    -a        mostra gli argomenti della riga di comando\n"
+"    -A        usa caratteri grafici ASCII\n"
+"    -c        non comprime i sottoalberi identici\n"
+"    -h        evidenzia il processo corrente e i suoi antenati\n"
+"    -H pid    evidenzia il processo \"pid\" e i suoi antenati\n"
+"    -G        usa carattedi grafici VT100\n"
+"    -l        non tronca le righe lunghe\n"
+"    -n        ordina l'output in base al PID\n"
+"    -p        mostra i PID; implica -c\n"
+"    -u        mostra le transizioni di uid\n"
 
 #: src/pstree.c:728
 #, c-format
@@ -289,6 +326,8 @@ msgid ""
 "    -s     show Flask SIDs\n"
 "    -x     show Flask security contexts\n"
 msgstr ""
+"    -s        mostra i SID Flask\n"
+"    -x        mostra i contesti di sicurezza Flask\n"
 
 #: src/pstree.c:732
 #, c-format
@@ -299,41 +338,43 @@ msgid ""
 "    user   show only trees rooted at processes of that user\n"
 "\n"
 msgstr ""
+"    -U        usa caratteri grafici UTF-8 (Unicode)\n"
+"    -V        mostra le informazioni sulla versione\n"
+"    pid       comincia dal pid indicato, predefinito 1 (init)\n"
+"    user      mostra solo gli alberi con radice nei processi dell'utente\n"
+"\n"
 
 #: src/pstree.c:741
-#, fuzzy, c-format
+#, c-format
 msgid "pstree (psmisc) %s\n"
-msgstr "fuser (psmisc) %s\n"
+msgstr "pstree (psmisc) %s\n"
 
 #: src/pstree.c:835
 #, c-format
 msgid "TERM is not set\n"
-msgstr ""
+msgstr "TERM non è impostato\n"
 
 #: src/pstree.c:840
 #, c-format
 msgid "Can't get terminal capabilities\n"
-msgstr ""
+msgstr "Impossibile determinare le capacità del terminale\n"
 
 #: src/pstree.c:884
 #, c-format
 msgid "No such user name: %s\n"
-msgstr ""
+msgstr "Questo nome utente non esiste: %s\n"
 
 #: src/pstree.c:900
 #, c-format
 msgid "No processes found.\n"
-msgstr ""
+msgstr "Nessun processo trovato.\n"
 
 #: src/pstree.c:905
 #, c-format
 msgid "Press return to close\n"
-msgstr ""
+msgstr "Premere Invio per chiudere\n"
 
 #: src/signals.c:65
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
-msgstr ""
-
-#~ msgid "No process references; use -v for the complete list\n"
-#~ msgstr "Nessun riferimento al processo; usare -v per lista completa\n"
+msgstr "%s: segnale sconosciuto; usare %s -l per elencare i segnali.\n"
