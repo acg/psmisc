@@ -15,6 +15,8 @@ BUILT_SOURCES = signames.h
 
 EXTRA_DIST = signames.c
 
+CLEANFILES = signames.h
+
 signames.h: signames.c
 		@CPP@ -dM $< |\
 		tr -s '\t ' ' ' | sort -n +2 | sed \

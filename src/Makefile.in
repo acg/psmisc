@@ -99,6 +99,8 @@ pstree_LDADD = @TERMCAP_LIB@
 BUILT_SOURCES = signames.h
 
 EXTRA_DIST = signames.c
+
+CLEANFILES = signames.h
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
@@ -310,6 +312,7 @@ installdirs:
 mostlyclean-generic:
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-rm -f Makefile $(CONFIG_CLEAN_FILES)

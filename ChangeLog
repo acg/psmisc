@@ -1,3 +1,9 @@
+Changes in 20.3
+==============
+ - signames.h is cleaned
+ - More translatable strings
+
+
 Changes in 20.2 (18-OCT-2001)
 =============================
  - Added NLS/gettext

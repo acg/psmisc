@@ -61,9 +61,9 @@
 
 typedef struct _net_cache
 {
+  struct sockaddr_storage rmt_addr;
   int lcl_port;
   int rmt_port;
-  unsigned long rmt_addr;
   ino_t ino;
   struct _net_cache *next;
 }
@@ -210,7 +210,7 @@ fill_net_cache (SPACE_DSC * dsc)
       if (ipv4only) 
         fprintf(stderr, _("-4 flag used but proc file %s is not readable\n"), buffer);
     } else {
-      parse_net_file (dsc, buffer, &last );
+      parse_net_file (dsc, buffer, &last,4 );
     }
   }
   if (!ipv4only) {
@@ -219,7 +219,7 @@ fill_net_cache (SPACE_DSC * dsc)
       if (ipv6only) 
         fprintf(stderr, _("-6 flag used but proc file %s is not readable\n"), buffer);
     } else {
-      parse_net_file (dsc, buffer, &last );
+      parse_net_file (dsc, buffer, &last,6 );
     }
   }
 }
