@@ -1,5 +1,5 @@
-psmisc, version 20
-==================
+psmisc
+======
 
 This package contains four little utilities that use the proc FS:
 
@@ -16,3 +16,11 @@ They should work with most recent kernels. Man pages are included.
 src/loop.h was stolen from util-linux package which in turn stole it from
 the Linux kernel.
 
+Translations
+------------
+My thanks for the various translators who have cheerfully given me the po
+files to make psmisc speak different languages.  If your language is not
+supported then let me know, all it takes is translating one file in 
+a certain manner.
+
+  - Craig

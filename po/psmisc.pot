@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-08-26 20:06+1000\n"
+"POT-Creation-Date: 2002-09-26 09:26+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,32 +15,32 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/killall.c:46
+#: src/killall.c:50
 #, c-format
 msgid "Kill %s(%s%d) ? (y/n) "
 msgstr ""
 
-#: src/killall.c:216
+#: src/killall.c:237
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr ""
 
-#: src/killall.c:281
+#: src/killall.c:318
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr ""
 
-#: src/killall.c:293 src/fuser.c:492
+#: src/killall.c:330 src/fuser.c:492
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr ""
 
-#: src/killall.c:299
+#: src/killall.c:336
 #, c-format
 msgid "%s: no process killed\n"
 msgstr ""
 
-#: src/killall.c:479
+#: src/killall.c:576
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr ""
