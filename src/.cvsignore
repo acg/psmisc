@@ -1,6 +1,7 @@
 fuser
 killall
 pstree
+pstree.x11
 signames.h
 .deps
 .libs
