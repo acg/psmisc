@@ -19763,7 +19763,7 @@ _ACEOF
 fi
 
 
-ALL_LINGUAS="de en fi fr it pt sv"
+ALL_LINGUAS="de en eu fi fr it pl pt sv"
 
         MKINSTALLDIRS=
   if test -n "$ac_aux_dir"; then
