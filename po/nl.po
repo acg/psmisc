@@ -1,0 +1,380 @@
+# Translation of psmisc-21.6pre1 to Dutch.
+# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# This file is distributed under the same license as the PSmisc package.
+# Benno Schulenberg <benno@nietvergeten.nl>, 2004, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: psmisc 21.6pre1\n"
+"Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
+"POT-Creation-Date: 2005-02-23 14:46+1100\n"
+"PO-Revision-Date: 2005-02-23 22:43+0100\n"
+"Last-Translator: Benno Schulenberg <benno@nietvergeten.nl>\n"
+"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+
+#: src/killall.c:53
+#, c-format
+msgid "Kill %s(%s%d) ? (y/N) "
+msgstr "Proces %s(%s%d) beëindigen? (j/N)"
+
+#: src/killall.c:245
+#, c-format
+msgid "skipping partial match %s(%d)\n"
+msgstr "overgeslagen: gedeeltelijke overeenkomst %s(%d)\n"
+
+#: src/killall.c:339
+#, c-format
+msgid "Killed %s(%s%d) with signal %d\n"
+msgstr "Proces %s(%s%d) beëindigd met signaal %d\n"
+
+#: src/killall.c:351 src/fuser.c:494 src/pstree.c:673
+#, c-format
+msgid "%s is empty (not mounted ?)\n"
+msgstr "%s is leeg (niet aangekoppeld?)\n"
+
+#: src/killall.c:357
+#, c-format
+msgid "%s: no process killed\n"
+msgstr "%s: geen proces beëindigd\n"
+
+#: src/killall.c:388
+#, c-format
+msgid ""
+"usage: pidof [ -eg ] name ...\n"
+"       pidof -V\n"
+"\n"
+"    -e      require exact match for very long names;\n"
+"            skip if the command line is unavailable\n"
+"    -g      show process group ID instead of process ID\n"
+"    -V      display version information\n"
+"\n"
+msgstr ""
+"Gebruik: pidof [ -eg ] naam ...\n"
+"         pidof -V\n"
+"\n"
+"    -e      zeer lange namen moeten exact overeenkomen\n"
+"            (genegeerd als de commandoregel niet beschikbaar is)\n"
+"    -g      toon procesgroeps-ID in plaats van proces-ID\n"
+"    -V      toon de programmaversie\n"
+"\n"
+
+#: src/killall.c:402
+#, c-format
+msgid "usage: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n"
+msgstr "Gebruik:  killall [-s SID] [-c CONTEXT] [-egiqvw] [-SIGNAAL] NAAM...\n"
+
+#: src/killall.c:405
+#, c-format
+msgid "usage: killall [ OPTIONS ] [ -- ] name ...\n"
+msgstr "Gebruik:  killall [OPTIE]... [--] NAAM...\n"
+
+#: src/killall.c:408
+#, c-format
+msgid ""
+"       killall -l, --list\n"
+"       killall -V --version\n"
+"\n"
+"  -e,--exact          require exact match for very long names\n"
+"  -I,--ignore-case    case insensitive process name match\n"
+"  -g,--process-group  kill process group instead of process\n"
+"  -i,--interactive    ask for confirmation before killing\n"
+"  -l,--list           list all known signal names\n"
+"  -q,--quiet          don't print complaints\n"
+"  -s,--signal         send signal instead of SIGTERM\n"
+"  -v,--verbose        report if the signal was successfully sent\n"
+"  -V,--version        display version information\n"
+"  -w,--wait           wait for processes to die\n"
+"\n"
+msgstr ""
+"       killall -l, --list\n"
+"       killall -V, --version\n"
+"\n"
+"  -e,--exact          zeer lange namen moeten exact overeenkomen\n"
+"  -I,--ignore-case    negeer verschil tussen hoofd- en kleine letters\n"
+"  -g,--process-group  beëindig een procesgroep in plaats van een proces\n"
+"  -i,--interactive    vraag om bevestiging alvorens te beëindigen\n"
+"  -l,--list           toon lijst van bekende signalen\n"
+"  -q,--quiet          geef geen foutmeldingen\n"
+"  -s,--signal SIGNAAL stuur dit signaal in plaats van TERM\n"
+"  -v,--verbose        toon of het signaal succesvol verstuurd is\n"
+"  -V,--version        toon de programmaversie\n"
+"  -w,--wait           wacht tot processen ook werkelijk beëindigd zijn\n"
+"\n"
+
+#: src/killall.c:422
+#, c-format
+msgid ""
+"  -d,--sid            kill only process(es) having sid\n"
+"  -c,--context        kill only process(es) having scontext\n"
+"   (-s, -c are mutually exclusive and must precede other arguments)\n"
+"\n"
+msgstr ""
+"  -d,--sid SID          beëindig alleen proces(sen) met deze sid\n"
+"  -c,--context CONTEXT  beëindig alleen proces(sen) met deze context\n"
+"   (-d en -c sluiten elkaar uit en moeten aan andere argumenten voorafgaan)\n"
+"\n"
+
+#: src/killall.c:444 src/fuser.c:989 src/pstree.c:743
+#, c-format
+msgid ""
+"Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Auteursrecht (C) 1993-2002 Werner Almesberger and Craig Small\n"
+"\n"
+
+#: src/killall.c:446 src/fuser.c:991 src/pstree.c:745
+#, c-format
+msgid ""
+"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
+"This is free software, and you are welcome to redistribute it under\n"
+"the terms of the GNU General Public License.\n"
+"For more information about these matters, see the files named COPYING.\n"
+msgstr ""
+"PSmisc kent GEEN ENKELE GARANTIE.\n"
+"Dit is vrije programmatuur en mag vrijelijk verspreid worden onder\n"
+"de voorwaarden van de GNU General Public License.\n"
+"Zie voor meer informatie hierover het bestand genaamd COPYING.\n"
+
+#: src/killall.c:563
+#, c-format
+msgid "%s: SID (%s) must be numeric\n"
+msgstr "%s: SID (%s) moet een getal zijn\n"
+
+#: src/killall.c:614
+#, c-format
+msgid "Maximum number of names is %d\n"
+msgstr "Het maximum aantal namen is %d\n"
+
+#: src/fuser.c:243
+#, c-format
+msgid "-4 flag used but proc file %s is not readable\n"
+msgstr "De vlag -4 is gebruikt maar proc-bestand %s is niet leesbaar\n"
+
+#: src/fuser.c:252
+#, c-format
+msgid "-6 flag used but proc file %s is not readable\n"
+msgstr "De vlag -6 is gebruikt maar proc-bestand %s is niet leesbaar\n"
+
+#: src/fuser.c:592
+#, c-format
+msgid "Kill process %d ? (y/N) "
+msgstr "Proces %d beëindigen? (j/N)"
+
+#: src/fuser.c:626
+#, c-format
+msgid "kill %d"
+msgstr "%d beëindigen"
+
+#: src/fuser.c:630 src/fuser.c:634
+#, c-format
+msgid "No automatic removal. Please use  umount %s\n"
+msgstr "Geen automatische verwijdering.  Gebruik:  umount %s\n"
+
+#: src/fuser.c:638
+#, c-format
+msgid "No automatic removal. Please use  swapoff %s\n"
+msgstr "Geen automatische verwijdering.  Gebruik:  swapoff %s\n"
+
+#: src/fuser.c:661
+#, c-format
+msgid ""
+"\n"
+"%*s USER        PID ACCESS COMMAND\n"
+msgstr ""
+"\n"
+"%*s GEBRUIKER   PID TOEGANGSOPDRACHT\n"
+
+#: src/fuser.c:752
+#, c-format
+msgid "Internal error (type %d)\n"
+msgstr "Interne fout (type %d)\n"
+
+#: src/fuser.c:790
+#, c-format
+msgid "kernel mount  "
+msgstr "kernel mount  "
+
+#: src/fuser.c:793
+#, c-format
+msgid "kernel loop   "
+msgstr "kernel loop   "
+
+#: src/fuser.c:796
+#, c-format
+msgid "kernel swap   "
+msgstr "kernel swap   "
+
+#: src/fuser.c:952
+#, c-format
+msgid "can't find sockets' device number"
+msgstr "kan apparaatnummer van sockets niet vinden"
+
+#: src/fuser.c:961
+#, c-format
+msgid ""
+"usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+"             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+"       fuser -l\n"
+"       fuser -V\n"
+"\n"
+"    -a        display unused files too\n"
+"    -c        mounted FS\n"
+"    -f        silently ignored (for POSIX compatibility)\n"
+"    -k        kill processes accessing that file\n"
+"    -i        ask before killing (ignored without -k)\n"
+"    -l        list signal names\n"
+"    -m        mounted FS\n"
+"    -n space  search in the specified name space (file, udp, or tcp)\n"
+"    -s        silent operation\n"
+"    -signal   send signal instead of SIGKILL\n"
+"    -u        display user ids\n"
+"    -v        verbose output\n"
+"    -V        display version information\n"
+"    -4        search IPv4 sockets only\n"
+"    -6        search IPv6 sockets only\n"
+"    -         reset options\n"
+"\n"
+"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"\n"
+msgstr ""
+"Gebruik:  fuser [ -a | -s | -c ] [ -n RUIMTE ] [ -SIGNAAL ] [ -kimuv ] NAAM...\n"
+"                [ - ] [ -n RUIMTE ] [ -SIGNAAL ] [ -kimuv ] NAAM...\n"
+"          fuser -l\n"
+"          fuser -V\n"
+"\n"
+"    -a         toon ook de ongebruikte bestanden\n"
+"    -c         (hetzelfde als -m)\n"
+"    -f         (genegeerd, herkend voor POSIX-compatibiliteit)\n"
+"    -i         vraag om bevestiging (genegeerd zonder -k)\n"
+"    -k         beëindig processen die het gegeven bestand gebruiken\n"
+"    -l         toon lijst van beschikbare signalen\n"
+"    -m         toon processen die het gegeven bestandssysteem gebruiken\n"
+"    -n RUIMTE  zoek in de gegeven naamsruimte ('file', 'udp', of 'tcp')\n"
+"    -s         produceer geen uitvoer\n"
+"    -SIGNAAL   stuur dit signaal in plaats van KILL (zie -l)\n"
+"    -u         toon de gebruiker-IDs\n"
+"    -v         produceer breedsprakige uitvoer\n"
+"    -V         toon de programmaversie\n"
+"    -4         zoek alleen naar IPv4-sockets\n"
+"    -6         zoek alleen naar IPv6-sockets\n"
+"    -          herinitialiseer alle opties\n"
+"\n"
+"  udp/tcp namen: [lokale_poort][,[gindse_host][,[gindse_poort]]]\n"
+"\n"
+
+#: src/fuser.c:987
+#, c-format
+msgid "fuser (psmisc) %s\n"
+msgstr "fuser (PSmisc) %s\n"
+
+#: src/fuser.c:1173
+#, c-format
+msgid "ignoring -m in name space \"%s\"\n"
+msgstr "genegeerd: -m in naamruimte \"%s\"\n"
+
+#: src/fuser.c:1181
+#, c-format
+msgid "%s/%s: invalid specification\n"
+msgstr "%s/%s: ongeldige specificatie\n"
+
+#: src/pstree.c:377
+#, c-format
+msgid "MAX_DEPTH not big enough.\n"
+msgstr "Maximumdiepte MAX_DEPTH is niet groot genoeg.\n"
+
+#: src/pstree.c:713
+#, c-format
+msgid ""
+"usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+"              [ -A | -G | -U ] [ pid | user]\n"
+"       pstree -V\n"
+"\n"
+"    -a     show command line arguments\n"
+"    -A     use ASCII line drawing characters\n"
+"    -c     don't compact identical subtrees\n"
+"    -h     highlight current process and its ancestors\n"
+"    -H pid highlight process \"pid\" and its ancestors\n"
+"    -G     use VT100 line drawing characters\n"
+"    -l     don't truncate long lines\n"
+"    -n     sort output by PID\n"
+"    -p     show PIDs; implies -c\n"
+"    -u     show uid transitions\n"
+msgstr ""
+"Gebruik:  pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+"                 [ -A | -G | -U ] [ PID | USER ]\n"
+"          pstree -V\n"
+"\n"
+"    -a      toon argumenten van de commandoregel\n"
+"    -A      gebruik ASCII-tekens voor lijntjes\n"
+"    -c      identieke subbomen niet compacteren\n"
+"    -h      accentueer huidig proces en zijn voorouders\n"
+"    -H PID  accentueer dit proces en diens voorouders\n"
+"    -G      gebruik VT100-tekens voor lijntjes\n"
+"    -l      lange regels niet afkappen\n"
+"    -n      sorteer uitvoer naar PID\n"
+"    -p      toon PIDs; dit impliceert -c\n"
+"    -u      toon UID-overgangen\n"
+
+#: src/pstree.c:728
+#, c-format
+msgid ""
+"    -s     show Flask SIDs\n"
+"    -x     show Flask security contexts\n"
+msgstr ""
+"    -s     toon Flask SIDs\n"
+"    -x     toon Flask veiligheidscontext\n"
+
+#: src/pstree.c:732
+#, c-format
+msgid ""
+"    -U     use UTF-8 (Unicode) line drawing characters\n"
+"    -V     display version information\n"
+"    pid    start at pid, default 1 (init)\n"
+"    user   show only trees rooted at processes of that user\n"
+"\n"
+msgstr ""
+"    -U     gebruik Unicode-tekens (UTF-8) voor lijntjes\n"
+"    -V     toon de programmaversie en stop\n"
+"    PID    begin bij dit proces-ID; standaard is 1 (init)\n"
+"    USER   toon alleen bomen beginnend bij processen van deze gebruiker\n"
+"\n"
+
+#: src/pstree.c:741
+#, c-format
+msgid "pstree (psmisc) %s\n"
+msgstr "pstree (PSmisc) %s\n"
+
+#: src/pstree.c:835
+#, c-format
+msgid "TERM is not set\n"
+msgstr "TERM is niet ingesteld\n"
+
+#: src/pstree.c:840
+#, c-format
+msgid "Can't get terminal capabilities\n"
+msgstr "Kan terminalcapaciteiten niet bepalen\n"
+
+#: src/pstree.c:884
+#, c-format
+msgid "No such user name: %s\n"
+msgstr "Geen bestaande gebruikersnaam: %s\n"
+
+#: src/pstree.c:900
+#, c-format
+msgid "No processes found.\n"
+msgstr "Geen processen gevonden.\n"
+
+#: src/pstree.c:905
+#, c-format
+msgid "Press return to close\n"
+msgstr "Druk op Enter om te sluiten\n"
+
+#: src/signals.c:65
+#, c-format
+msgid "%s: unknown signal; %s -l lists signals.\n"
+msgstr "%s: onbekend signaal; %s -l toont lijst van signalen\n"
