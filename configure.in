@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT([psmisc],[21.6cvs])
+AC_INIT([psmisc],[21.6pre1])
 AC_PREREQ(2.59)
 AC_CONFIG_SRCDIR([src/comm.h])
 AC_CONFIG_HEADER([config.h])
@@ -14,10 +14,13 @@ dnl checks for options
 AC_SUBST([FLASK_LINUX])
 AC_ARG_ENABLE([flask],
   [AS_HELP_STRING([--enable-flask], [Enable Security-Enhanced Linux features])],
-  [AC_DEFINE([FLASK_LINUX], [1], [Use Security-Enhanced Linux features])
-   AC_CHECK_LIB([secure], [avc_toggle], [FLASK_LIB=-lsecure], [
-     AC_MSG_ERROR([Cannot find selinux/ secure static library]) ]) ],
-  [])
+  [enable_flask=$enableval],
+  [enable_flask="no"])
+if test "$enable_flask" = "yes"; then
+  AC_DEFINE([FLASK_LINUX], [1], [Use Security-Enhanced Linux features])
+  AC_CHECK_LIB([secure], [avc_toggle], [FLASK_LIB=-lsecure], [
+     AC_MSG_ERROR([Cannot find selinux/ secure static library]) ])
+fi
 AC_SUBST([FLASK_LIB])
 
 dnl Checks for libraries.

@@ -1,8 +1,3 @@
-2005-02-23  gettextize  <bug-gnu-gettext@gnu.org>
-
-	* Makefile.am (ACLOCAL_AMFLAGS): New variable.
-	* configure.in (AC_CONFIG_FILES): Add m4/Makefile.
-
 Changes in 21.6 (not released yet)
 ===============
 	* Minor typo (specificiation) fixed
@@ -20,6 +15,7 @@ Changes in 21.6 (not released yet)
 	* Warning in killall.1 about process changing names Debian #187941
 	* Removed include termcap.h to fix RH include problem.
 	* Added Vietnamese translation
+	* Fixed --enable-flask logic SF#1094205
 
 Changes in 21.5
 ===============
