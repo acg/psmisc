@@ -5,7 +5,8 @@ Changes from 19 to 20 (14-DEC-2000)
  - License changed to GPL
  - signames.h generated better (suggested by Grant Erickson)
  - uses getopt() for better command line stuff
- - makes less assumptions about pcess name, closes Debian Bug #53337
+ - makes less assumptions about process name, closes Debian Bug #53337
+ - Doesn't use losetup for loop deivces in fuser.
 
 Changes from version 18 to 19 (25-OCT-1999)
 =============================

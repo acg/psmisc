@@ -12,3 +12,7 @@ This package contains four little utilities that use the proc FS:
 They should work with most recent kernels. Man pages are included.
 
 - Werner Almesberger <Werner.Almesberger@epfl.ch>
+
+src/loop.h was stolen from util-linux package which in turn stole it from
+the Linux kernel.
+

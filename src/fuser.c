@@ -16,6 +16,7 @@
 #include <signal.h>
 #include <limits.h>
 #include <netdb.h>
+#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <netinet/in.h>
@@ -24,6 +25,7 @@
 #include <linux/major.h>	/* for LOOP_MAJOR */
 
 #include "comm.h"
+#include "loop.h"         /* for loop_info */
 #include "signals.h"
 
 
@@ -418,7 +420,6 @@ scan_mounts (void)
   FILE *file;
   struct stat st_dev, st_parent, st_mounted;
   char line[MAX_LINE + 1], path[PATH_MAX + 1], mounted[PATH_MAX + 3];
-  char tmp[MAX_LINE + 1];
   char *end;
 
   if (!(file = fopen (PROC_BASE "/mounts", "r")))
@@ -432,19 +433,15 @@ scan_mounts (void)
 	continue;		/* might be NFS or such */
       if (S_ISBLK (st_dev.st_mode) && MAJOR (st_dev.st_rdev) == LOOP_MAJOR)
 	{
-	  FILE *pipe;
+          struct loop_info loopinfo;
+          int fd;
 
-	  sprintf (tmp, "losetup %s", path);
-	  if (!(pipe = popen (tmp, "r")))
-	    fprintf (stderr, "popen(%s) failed\n", tmp);
-	  else
-	    {
-	      int dev, ino;
-
-	      if (fscanf (pipe, "%*s [%x]:%d", &dev, &ino) == 2)
-		add_other (it_loop, dev, dev, ino, path);
-	      (void) fclose (pipe);
-	    }
+          if ((fd = open(path, O_RDWR)) > 0) {
+            if (ioctl(fd, LOOP_GET_STATUS, &loopinfo) >= 0) {
+              add_other(it_loop,loopinfo.lo_device,loopinfo.lo_device,loopinfo.lo_inode,path);
+            }
+            (void) close(fd);
+                }
 	}
       if (stat (mounted, &st_mounted) < 0)
 	{
