@@ -409,8 +409,14 @@ usage_pidof (void)
 static void
 usage_killall (void)
 {
+#ifdef WITH_SELINUX
+   fprintf(stderr, _(
+     "Usage: killall [-Z CONTEXT] [ -egiqvw ] [ -SIGNAL ] NAME...\n"));
+#else  /*WITH_SELINUX*/
   fprintf(stderr, _(
-    "Usage: killall [OPTIONS]... [--] NAME...\n"
+    "Usage: killall [OPTIONS]... [--] NAME...\n"));
+#endif /*WITH_SELINUX*/
+  fprintf(stderr, _(
     "       killall -l, --list\n"
     "       killall -V, --version\n\n"
     "  -e,--exact          require exact match for very long names\n"
