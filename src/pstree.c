@@ -684,14 +684,15 @@ static void
 usage (void)
 {
   fprintf (stderr, _(
-    "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
-    "              [ -A | -G | -U ] [ pid | user]\n"
-    "       pstree -V\n\n"
+    "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+    "              [ -A | -G | -U ] [ PID | USER ]\n"
+    "       pstree -V\n"
+    "Display a tree of processes.\n\n"
     "    -a     show command line arguments\n"
     "    -A     use ASCII line drawing characters\n"
     "    -c     don't compact identical subtrees\n"
     "    -h     highlight current process and its ancestors\n"
-    "    -H pid highlight process \"pid\" and its ancestors\n"
+    "    -H PID highlight this process and its ancestors\n"
     "    -G     use VT100 line drawing characters\n"
     "    -l     don't truncate long lines\n"
     "    -n     sort output by PID\n"
@@ -704,14 +705,14 @@ usage (void)
   fprintf (stderr, _(
     "    -U     use UTF-8 (Unicode) line drawing characters\n"
     "    -V     display version information\n"
-    "    pid    start at pid, default 1 (init)\n"
-    "    user   show only trees rooted at processes of that user\n\n"));
+    "    PID    start at this PID; default is 1 (init)\n"
+    "    USER   show only trees rooted at processes of this user\n\n"));
   exit (1);
 }
 
 void print_version()
 {
-  fprintf(stderr, _("pstree (psmisc) %s\n"), VERSION);
+  fprintf(stderr, _("pstree (PSmisc) %s\n"), VERSION);
   fprintf(stderr, _(
     "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n\n"));
   fprintf(stderr, _(

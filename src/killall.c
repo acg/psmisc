@@ -379,7 +379,7 @@ static void
 usage_pidof (void)
 {
   fprintf (stderr, _(
-    "usage: pidof [ -eg ] name ...\n"
+    "Usage: pidof [ -eg ] NAME...\n"
     "       pidof -V\n\n"
     "    -e      require exact match for very long names;\n"
     "            skip if the command line is unavailable\n"
@@ -391,24 +391,29 @@ usage_pidof (void)
 static void
 usage_killall (void)
 {
+#ifdef FLASK_LINUX
   fprintf(stderr, _(
-    "usage: killall [ OPTIONS ] [ -- ] name ...\n"));
+    "Usage: killall [-Z CONTEXT] [ -egiqvw ] [ -SIGNAL ] NAME...\n"));
+#else  /*FLASK_LINUX*/
+  fprintf(stderr, _(
+    "Usage: killall [OPTIONS]... [--] NAME...\n"));
+#endif /*FLASK_LINUX*/
   fprintf(stderr, _(
     "       killall -l, --list\n"
-    "       killall -V --version\n\n"
+    "       killall -V, --version\n\n"
     "  -e,--exact          require exact match for very long names\n"
     "  -I,--ignore-case    case insensitive process name match\n"
     "  -g,--process-group  kill process group instead of process\n"
     "  -i,--interactive    ask for confirmation before killing\n"
     "  -l,--list           list all known signal names\n"
     "  -q,--quiet          don't print complaints\n"
-    "  -s,--signal         send signal instead of SIGTERM\n"
+    "  -s,--signal SIGNAL  send this signal instead of SIGTERM\n"
     "  -v,--verbose        report if the signal was successfully sent\n"
     "  -V,--version        display version information\n"
     "  -w,--wait           wait for processes to die\n\n"));
 #ifdef WITH_SELINUX
   fprintf(stderr, _(
-    "  -Z,--context        kill only process(es) having context\n"
+    "  -Z,--context CONTEXT kill only process(es) having context\n"
     "                      (must precede other arguments)"));
 #endif /*WITH_SELINUX*/
 }
@@ -426,7 +431,7 @@ usage (void)
 
 void print_version()
 {
-  fprintf(stderr, "%s (psmisc) %s\n", pidof ? "pidof" : "killall", VERSION);
+  fprintf(stderr, "%s (PSmisc) %s\n", pidof ? "pidof" : "killall", VERSION);
   fprintf(stderr, _(
     "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n\n"));
   fprintf(stderr, _(

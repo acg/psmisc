@@ -2,6 +2,8 @@ Changes in 21.7
 ===============
 	* Upgraded SELinux code to new api, thanks to Chris PeBenito
 	* define rpmatch for libraries that dont have it
+	* Fixed small typos in help thanks to Benno Schulenberg
+	  fixes SF# 1150042
 
 Changes in 21.6
 ===============

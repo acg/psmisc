@@ -958,21 +958,22 @@ static void
 usage (void)
 {
   fprintf (stderr, _(
-    "usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
-    "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+    "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
+    "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
     "       fuser -l\n"
-    "       fuser -V\n\n"
+    "       fuser -V\n"
+    "Show which processes use the named files, sockets, or filesystems.\n\n "
     "    -a        display unused files too\n"
     "    -c        mounted FS\n"
     "    -f        silently ignored (for POSIX compatibility)\n"
-    "    -k        kill processes accessing that file\n"
     "    -i        ask before killing (ignored without -k)\n"
-    "    -l        list signal names\n"
-    "    -m        mounted FS\n"
-    "    -n space  search in the specified name space (file, udp, or tcp)\n"
+    "    -k        kill processes accessing the named file\n"
+    "    -l        list available signal names\n"
+    "    -m        show all processes using the named filesystems\n"
+    "    -n SPACE  search in this name space (file, udp, or tcp)\n"
     "    -s        silent operation\n"
-    "    -signal   send signal instead of SIGKILL\n"
-    "    -u        display user ids\n"
+    "    -SIGNAL   send this signal instead of SIGKILL\n"
+    "    -u        display user IDs\n"
     "    -v        verbose output\n"
     "    -V        display version information\n"
     "    -4        search IPv4 sockets only\n"
@@ -984,7 +985,7 @@ usage (void)
 
 void print_version()
 {
-  fprintf(stderr, _("fuser (psmisc) %s\n"), VERSION);
+  fprintf(stderr, _("fuser (PSmisc) %s\n"), VERSION);
   fprintf(stderr, _(
     "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n\n"));
   fprintf(stderr, _(
