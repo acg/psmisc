@@ -12,17 +12,17 @@ AC_PROG_CPP
 AC_PROG_LN_S
 
 dnl checks for options
-AC_SUBST([FLASK_LINUX])
-AC_ARG_ENABLE([flask],
-  [AS_HELP_STRING([--enable-flask], [Enable Security-Enhanced Linux features])],
-  [enable_flask=$enableval],
-  [enable_flask="no"])
-if test "$enable_flask" = "yes"; then
-  AC_DEFINE([FLASK_LINUX], [1], [Use Security-Enhanced Linux features])
-  AC_CHECK_LIB([secure], [avc_toggle], [FLASK_LIB=-lsecure], [
-     AC_MSG_ERROR([Cannot find selinux/ secure static library]) ])
+AC_SUBST([WITH_SELINUX])
+AC_ARG_ENABLE([selinux],
+  [AS_HELP_STRING([--enable-selinux], [Enable Security-Enhanced Linux features])],
+  [enable_selinux=$enableval],
+  [enable_selinux="no"])
+if test "$enable_selinux" = "yes"; then
+  AC_DEFINE([WITH_SELINUX], [1], [Use Security-Enhanced Linux features])
+  AC_CHECK_LIB([selinux], [getfilecon], [SELINUX_LIB=-lselinux], [
+     AC_MSG_ERROR([Cannot find selinux static library]) ])
 fi
-AC_SUBST([FLASK_LIB])
+AC_SUBST([SELINUX_LIB])
 
 dnl Checks for libraries.
 AC_CHECK_LIB([ncurses], [tgetent], [TERMCAP_LIB=-lncurses], [

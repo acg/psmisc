@@ -21,10 +21,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <getopt.h>
-#ifdef FLASK_LINUX
-#include <selinux/fs_secure.h>
-#include <selinux/ss.h>
-#endif /*FLASK_LINUX*/
+
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#endif /*WITH_SELINUX*/
 
 #include "i18n.h"
 #include "comm.h"
@@ -70,13 +70,13 @@ ask (char *name, pid_t pid)
   /* Never should get here */
 }
 
-#ifdef FLASK_LINUX
+#ifdef WITH_SELINUX
 static int
-kill_all(int signal, int names, char **namelist, security_id_t sid )
-#else  /*FLASK_LINUX*/
+kill_all(int signal, int names, char **namelist, security_context_t scontext )
+#else  /*WITH_SELINUX*/
 static int
 kill_all (int signal, int names, char **namelist)
-#endif /*FLASK_LINUX*/
+#endif /*WITH_SELINUX*/
 {
   DIR *dir;
   struct dirent *de;
@@ -91,11 +91,11 @@ kill_all (int signal, int names, char **namelist)
   int empty, i, j, okay, length, got_long, error;
   int pids, max_pids, pids_killed;
   unsigned long found;
-#ifdef FLASK_LINUX
-  security_id_t lsid;
+#ifdef WITH_SELINUX
+  security_context_t lcontext=NULL;
 
   if ( names == 0 || ! namelist ) exit( 1 ); /* do the obvious thing...*/
-#endif /*FLASK_LINUX*/
+#endif /*WITH_SELINUX*/
 
   if (!(name_len = malloc (sizeof (int) * names)))
     {
@@ -108,18 +108,11 @@ kill_all (int signal, int names, char **namelist)
 	sts[i].st_dev = 0;
 	name_len[i] = strlen (namelist[i]);
       }
-#ifdef FLASK_LINUX
-      else if (stat_secure(namelist[i],&sts[i], &lsid) < 0) {
-              perror(namelist[i]);
-              exit(1);
-          }
-#else  /*FLASK_LINUX*/
     else if (stat (namelist[i], &sts[i]) < 0)
       {
 	perror (namelist[i]);
 	exit (1);
       }
-#endif /*FLASK_LINUX*/
    } 
   self = getpid ();
   found = 0;
@@ -270,38 +263,39 @@ kill_all (int signal, int names, char **namelist)
 	      else if (got_long ? strcmp (namelist[j], command) :
 		       strncmp (namelist[j], comm, COMM_LEN - 1))
 		continue;
-#ifdef FLASK_LINUX
-              if ( (int) sid > 0 ) {
-                if ( stat_secure(path, &st, &lsid) < 0 )
+#ifdef WITH_SELINUX
+              if ( scontext != NULL ) {
+                if ( getpidcon(pid_table[i], &lcontext) < 0 )
                   continue;
-                if ( lsid != sid )
+                if (strcmp(lcontext,scontext)!=0) {
+		  freecon(lcontext);
                   continue;
+		}
+		freecon(lcontext);
               }
-#endif /*FLASK_LINUX*/
+#endif /*WITH_SELINUX*/
 	    }
 	  else
 	    {
 	      if (asprintf (&path, PROC_BASE "/%d/exe", pid_table[i]) < 0)
 		continue;
-#ifdef FLASK_LINUX
-          if (stat_secure(path,&st,&lsid) < 0) {
-            free(path);
-            continue;
-          }
-          if (sts[j].st_dev != st.st_dev ||
-              sts[j].st_ino != st.st_ino ||
-              ((int) sid > 0 && (lsid != sid)) ) {
-            free(path);
-            continue;
-          }
-#else  /*FLASK_LINUX*/
+
 	      if (stat (path, &st) < 0) {
 		    free (path);
 		    continue;
 	      }
-#endif /*FLASK_LINUX*/
 	      free (path);
-
+#ifdef WITH_SELINUX
+              if ( scontext != NULL ) {
+                if ( getpidcon(pid_table[i], &lcontext) < 0 )
+                  continue;
+                if (strcmp(lcontext,scontext)!=0) {
+		  freecon(lcontext);
+                  continue;
+		}
+		freecon(lcontext);
+              }
+#endif /*WITH_SELINUX*/
 	      if (sts[j].st_dev != st.st_dev || sts[j].st_ino != st.st_ino)
 		continue;
 	    }
@@ -397,13 +391,8 @@ usage_pidof (void)
 static void
 usage_killall (void)
 {
-#ifdef FLASK_LINUX
-  fprintf(stderr, _(
-    "usage: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n"));
-#else  /*FLASK_LINUX*/
   fprintf(stderr, _(
     "usage: killall [ OPTIONS ] [ -- ] name ...\n"));
-#endif /*FLASK_LINUX*/
   fprintf(stderr, _(
     "       killall -l, --list\n"
     "       killall -V --version\n\n"
@@ -417,13 +406,11 @@ usage_killall (void)
     "  -v,--verbose        report if the signal was successfully sent\n"
     "  -V,--version        display version information\n"
     "  -w,--wait           wait for processes to die\n\n"));
-#ifdef FLASK_LINUX
+#ifdef WITH_SELINUX
   fprintf(stderr, _(
-    "  -d,--sid            kill only process(es) having sid\n"
-    "  -c,--context        kill only process(es) having scontext\n"
-    "   (-s, -c are mutually exclusive and must precede other arguments)\n\n"
-    ));
-#endif /*FLASK_LINUX*/
+    "  -Z,--context        kill only process(es) having context\n"
+    "                      (must precede other arguments)"));
+#endif /*WITH_SELINUX*/
 }
 
 
@@ -468,18 +455,17 @@ main (int argc, char **argv)
     {"signal", 1, NULL, 's'},
     {"verbose", 0, NULL, 'v'},
     {"wait", 0, NULL, 'w'},
-#ifdef FLASK_LINUX
-    {"Sid", 1, NULL, 'd'},
-    {"context", 1, NULL, 'c'},
-#endif /*FLASK_LINUX*/
+#ifdef WITH_SELINUX
+    {"context", 1, NULL, 'Z'},
+#endif /*WITH_SELINUX*/
     {"version", 0, NULL, 'V'},
     {0,0,0,0 }};
 
-#ifdef FLASK_LINUX
-  security_id_t sid = -1;
+#ifdef WITH_SELINUX
+  security_context_t scontext = NULL;
 
   if ( argc < 2 ) usage(); /* do the obvious thing... */
-#endif /*FLASK_LINUX*/
+#endif /*WITH_SELINUX*/
 
   name = strrchr (*argv, '/');
   if (name)
@@ -497,8 +483,8 @@ main (int argc, char **argv)
 #endif
 
   opterr = 0;
-#ifdef FLASK_LINUX
-  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwd:c:VI",options,NULL)) != EOF) {
+#ifdef WITH_SELINUX
+  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwZ:VI",options,NULL)) != EOF) {
 #else
   while ( (optc = getopt_long_only(argc,argv,"egilqs:vwVI",options,NULL)) != EOF) {
 #endif
@@ -545,50 +531,14 @@ main (int argc, char **argv)
         print_version();
         return 0;
         break;
-#ifdef FLASK_LINUX
-      case 'd': {
-          char **buf, *calloc();
-          int strlen(), rv;
-          __u32 len;
-          security_id_t lsid;
-
-          buf = (char **) calloc(1, strlen(optarg));
-          if ( ! buf ) {
-             (void) fprintf(stderr, "%s: %s\n", name, strerror(errno));
-             return( 1 );
-          }
-
-	  lsid = strtol(optarg, buf, 0);
-          if ( **buf ) {
-              (void) fprintf(stderr, _("%s: SID (%s) must be numeric\n"),
-			     name, *argv);
-              (void) fflush(stderr);
-              return( 1 );
-          }
-
-          sid = (security_id_t) lsid;
-          /* sanity check */
-          len = strlen(optarg);
-          rv = security_sid_to_context(sid, buf, &len);
-          if ( rv < 0 && (errno != ENOSPC) ) {
-              (void) fprintf(stderr, "%s: security_sid_to_context(%d) %s\n",
-			     name, (int) sid, strerror(errno));
-              (void) fflush(stderr);
-              free(buf);
-              return( 1 );
-          }
-          free(buf);
-          break;
-      }
-      case 'c': {
-          if ( security_context_to_sid(optarg, strlen(optarg)+1, &sid) ) {
-              (void) fprintf(stderr, "%s: security_context_to_sid(%s): %s\n",
-                     name, optarg, strerror(errno));
-              (void) fflush(stderr);
-              return( 1 );
-          }
-      }
-#endif /*FLASK_LINUX*/
+#ifdef WITH_SELINUX
+      case 'Z': 
+        if (is_selinux_enabled()>0) 
+           scontext=optarg;
+        else 
+           fprintf(stderr, "Warning: -Z (--context) ignored. Requires an SELinux enabled kernel\n");
+        break;
+#endif /*WITH_SELINUX*/
       case '?':
         /* Signal names are in uppercase, so check to see if the argv
          * is upper case */
@@ -616,9 +566,9 @@ main (int argc, char **argv)
     }
   argv = argv + myoptind;
   /*printf("sending signal %d to procs\n", sig_num);*/
-#ifdef FLASK_LINUX
-  return kill_all(sig_num,argc - myoptind, argv, sid);
-#else  /*FLASK_LINUX*/
+#ifdef WITH_SELINUX
+  return kill_all(sig_num,argc - myoptind, argv, scontext);
+#else  /*WITH_SELINUX*/
   return kill_all(sig_num,argc - myoptind, argv );
-#endif /*FLASK_LINUX*/
+#endif /*WITH_SELINUX*/
 }

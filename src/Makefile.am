@@ -7,11 +7,11 @@ fuser_SOURCES = fuser.c comm.h signals.c signals.h loop.h i18n.h
 
 killall_SOURCES = killall.c comm.h signals.c signals.h i18n.h
 
-killall_LDADD = @FLASK_LIB@
+killall_LDADD = @SELINUX_LIB@
 
 pstree_SOURCES = pstree.c comm.h i18n.h
 
-pstree_LDADD = @TERMCAP_LIB@ @FLASK_LIB@
+pstree_LDADD = @TERMCAP_LIB@ @SELINUX_LIB@
 
 BUILT_SOURCES = signames.h
 

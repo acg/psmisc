@@ -1,6 +1,6 @@
 Changes in 21.7
 ===============
-	* 
+	* Upgraded SELinux code to new api, thanks to Chris PeBenito
 
 Changes in 21.6
 ===============

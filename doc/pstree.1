@@ -11,6 +11,7 @@ pstree \- display a tree of processes
 .RB [ \-n ]
 .RB [ \-p ]
 .RB [ \-u ]
+.RB [ \-Z ]
 .RB [ \-A | \-G | \-U ]
 .RB [ \fIpid\fB | \fIuser\fB]
 .br
@@ -81,10 +82,8 @@ UTF-8 mode is entered on the console with \fBecho \-e '\\033%8'\fP and left
 with \fBecho \-e '\\033%@'\fP
 .IP \fB\-V\fP
 Display version information.
-.IP \fB\-s\fP
-(Flask) Show Security ID (SID) for each process.
-.IP \fB\-x\fP
-(Flask) Show security context for each process.
+.IP \fB\-Z\fP
+(SELinux) Show security context for each process.
 .SH FILES
 .nf
 /proc	location of the proc file system
