@@ -481,7 +481,7 @@ read_proc (void)
   struct dirent *de;
   FILE *file;
   struct stat st;
-  char path[PATH_MAX + 1], comm[COMM_LEN + 1];
+  char *path, comm[COMM_LEN + 1];
   char *buffer;
   char readbuf[BUFSIZ+1];
   char *tmpptr;
@@ -505,11 +505,13 @@ read_proc (void)
   while ((de = readdir (dir)) != NULL)
     if ((pid = atoi (de->d_name)) != 0)
       {
+	if (!(path = malloc (strlen (PROC_BASE) + strlen (de->d_name) + 10)))
+	  exit (2);
 	sprintf (path, "%s/%d/stat", PROC_BASE, pid);
 	if ((file = fopen (path, "r")) != NULL)
 	  {
 	    empty = 0;
-            sprintf (path, "%s/%d", PROC_BASE, pid);
+	    sprintf (path, "%s/%d", PROC_BASE, pid);
             if (stat (path, &st) < 0)
 	    {
 		perror (path);
@@ -554,9 +556,12 @@ read_proc (void)
 		      buffer[size++] = 0;
 		    add_proc (comm, pid, ppid, st.st_uid, buffer, size);
 		  }
-	      } } }
+		}
+	      }
+	    }
 	    (void) fclose (file);
 	  }
+	free (path);
       }
   (void) closedir (dir);
   if (print_args)

@@ -2,6 +2,10 @@
 
 /* Copyright 1993-1999 Werner Almesberger. See file COPYING for details. */
 
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
+#endif
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -23,8 +27,10 @@
 #include <sys/stat.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#ifdef __linux__
 #include <linux/kdev_t.h>	/* for MKDEV */
 #include <linux/major.h>	/* for LOOP_MAJOR */
+#endif
 #include <libintl.h>
 #include <locale.h>
 #define _(String) gettext (String)
@@ -43,6 +49,14 @@
 
 #ifndef LOOP_MAJOR		/* don't count on the headers too much ... */
 #define LOOP_MAJOR 7
+#endif
+
+#ifndef MAJOR
+#define MAJOR(arg) 6           /* something that doesn't = LOOP_MAJOR */
+#endif
+
+#ifndef MKDEV
+#define MKDEV(arg1, arg2) mknod("/dev/Isuck", arg1, arg2) /* this is wrong */
 #endif
 
 
@@ -207,9 +221,11 @@ parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version 
 static void
 fill_net_cache (SPACE_DSC * dsc)
 {
-  char buffer[PATH_MAX + 1];
   NET_CACHE *last;
   struct stat statbuf;
+  char *buffer = malloc (strlen (PROC_BASE) + strlen (dsc->name) + 8);
+  if (!buffer)
+    return;
 
   if (dsc->once)
     return;
@@ -249,7 +265,7 @@ fill_unix_cache (void)
   FILE *file;
   UNIX_CACHE *new, *last;
   struct stat st;
-  char path[PATH_MAX + 1], line[MAX_LINE + 1];
+  char *path = NULL, line[MAX_LINE + 1];
   int ino;
 
   if (once)
@@ -264,10 +280,14 @@ fill_unix_cache (void)
   (void) fgets (line, MAX_LINE, file);
   while (fgets (line, MAX_LINE, file))
     {
-      if (sscanf (line, "%*x: %*x %*x %*x %*x %*x %d %s", &ino, path) != 2)
+      if (sscanf (line, "%*x: %*x %*x %*x %*x %*x %d %as", &ino, &path) != 2)
 	continue;
-      if (stat (path, &st) < 0)
+      if (stat (path, &st) < 0) {
+	free (path);
 	continue;
+      }
+      free (path);
+
       new = malloc (sizeof (UNIX_CACHE));
       new->fs_dev = st.st_dev;
       new->fs_ino = st.st_ino;
@@ -418,15 +438,16 @@ check_dir (const char *rel, pid_t pid, int type)
 {
   DIR *dir;
   struct dirent *de;
-  char path[PATH_MAX + 1];
+  char *path;
 
   if (!(dir = opendir (rel)))
     return;
   while ((de = readdir (dir)) != NULL)
     if (strcmp (de->d_name, ".") && strcmp (de->d_name, ".."))
       {
-	sprintf (path, "%s/%s", rel, de->d_name);
+	asprintf (&path, "%s/%s", rel, de->d_name);
 	check_link (path, pid, type);
+	free (path);
       }
   (void) closedir (dir);
 }
@@ -437,7 +458,7 @@ scan_fd (void)
 {
   DIR *dir;
   struct dirent *de;
-  char path[PATH_MAX + 1];
+  char *path;
   pid_t pid;
   int empty;
 
@@ -451,7 +472,8 @@ scan_fd (void)
     if ((pid = atoi (de->d_name)) != 0)
       {
 	empty = 0;
-	sprintf (path, "%s/%d", PROC_BASE, pid);
+	if (asprintf (&path, "%s/%d", PROC_BASE, pid) < 0)
+	  continue;
 	if (chdir (path) >= 0)
 	  {
 	    check_link ("root", pid, REF_ROOT);
@@ -462,6 +484,7 @@ scan_fd (void)
 	    check_map ("maps", pid, REF_MMAP);
 	    check_dir ("fd", pid, REF_FILE);
 	  }
+	free (path);
       }
   (void) closedir (dir);
   if (empty)
@@ -477,18 +500,21 @@ scan_mounts (void)
 {
   FILE *file;
   struct stat st_dev, st_parent, st_mounted;
-  char line[MAX_LINE + 1], path[PATH_MAX + 1], mounted[PATH_MAX + 3];
+  char line[MAX_LINE + 1], *path = NULL, *mounted = NULL;
   char *end;
 
   if (!(file = fopen (PROC_BASE "/mounts", "r")))
     return;			/* old kernel */
   while (fgets (line, MAX_LINE, file))
     {
-      if (sscanf (line, "%s %s", path, mounted) != 2)
+      if (sscanf (line, "%as %as", &path, &mounted) != 2)
 	continue;
       /* new kernel :-) */
-      if (stat (path, &st_dev) < 0)
-	continue;		/* might be NFS or such */
+      if (stat (path, &st_dev) < 0) {
+	free (path);            /* might be NFS or such */
+	free (mounted);
+	continue;		
+      }
       if (S_ISBLK (st_dev.st_mode) && MAJOR (st_dev.st_rdev) == LOOP_MAJOR)
 	{
           struct loop_info loopinfo;
@@ -504,16 +530,25 @@ scan_mounts (void)
       if (stat (mounted, &st_mounted) < 0)
 	{
 	  perror (mounted);
+	  free (path);
+	  free (mounted);
 	  continue;
 	}
-      end = strchr (mounted, 0);
-      strcpy (end, "/..");
-      if (stat (mounted, &st_parent) >= 0)
+      if (asprintf (&end, "%s/..", mounted) < 0)
 	{
-	  *end = 0;
+	  free (path);
+	  free (mounted);
+	  continue;
+	}
+
+      if (stat (end, &st_parent) >= 0)
+	{
 	  add_other (it_mount, st_parent.st_dev, st_mounted.st_dev,
 		     st_mounted.st_ino, mounted);
 	}
+      free (end);
+      free (path);
+      free (mounted);
     }
   (void) fclose (file);
 }
@@ -524,19 +559,22 @@ scan_swaps (void)
 {
   FILE *file;
   struct stat st;
-  char line[MAX_LINE + 1], path[PATH_MAX + 1], type[MAX_LINE + 1];
+  char line[MAX_LINE + 1], *path, type[MAX_LINE + 1];
 
   if (!(file = fopen (PROC_BASE "/swaps", "r")))
     return;			/* old kernel */
   (void) fgets (line, MAX_LINE, file);
   while (fgets (line, MAX_LINE, file))
     {
-      if (sscanf (line, "%s %s", path, type) != 2)
+      if (sscanf (line, "%as %s", &path, type) != 2)
 	continue;		/* new kernel :-) */
-      if (strcmp (type, "file"))
+      if (strcmp (type, "file")) {
+	free (path);
 	continue;
+      }
       if (stat (path, &st) >= 0)
 	add_other (it_swap, st.st_dev, st.st_dev, st.st_ino, path);
+      free (path);
     }
   (void) fclose (file);
 }
@@ -607,7 +645,7 @@ show_files_or_kill (void)
   FILE *f;
   const struct passwd *pw;
   const char *user, *scan;
-  char tmp[10], path[PATH_MAX + 1], comm[COMM_LEN + 1];
+  char tmp[10], *path, comm[COMM_LEN + 1];
   int length, header, first, dummy;
   header = 1;
   for (file = files; file; file = file->next)
@@ -677,13 +715,14 @@ show_files_or_kill (void)
 		switch (item->type)
 		  {
 		  case it_proc:
-		    sprintf (path, PROC_BASE "/%d/stat", item->u.proc.pid);
+		    asprintf (&path, PROC_BASE "/%d/stat", item->u.proc.pid);
 		    strcpy (comm, "???");
 		    if ((f = fopen (path, "r")) != NULL)
 		      {
 			(void) fscanf (f, "%d (%[^)]", &dummy, comm);
 			(void) fclose (f);
 		      }
+		    free (path);
 		    name = comm;
 		    uid = item->u.proc.uid;
 		    break;
@@ -936,7 +975,6 @@ int
 main (int argc, char **argv)
 {
   SPACE_DSC *name_space;
-  char path[PATH_MAX + 1];
   int flags, silent, do_kill, sig_number, no_files;
 
   flags = silent = do_kill = 0;
@@ -1071,7 +1109,6 @@ main (int argc, char **argv)
 		  st.st_dev = st.st_rdev;
 		else if (S_ISDIR (st.st_mode))
 		  {
-		    sprintf (path, "%s/.", *argv);
 		    if (stat (*argv, &st) < 0)
 		      {
 			perror (*argv);

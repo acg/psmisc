@@ -2,6 +2,10 @@
 
 /* Copyright 1993-1998 Werner Almesberger. See file COPYING for details. */
 
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
+#endif
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -64,8 +68,8 @@ kill_all (int signal, int names, char **namelist)
   FILE *file;
   struct stat st, sts[MAX_NAMES];
   int *name_len;
-  char path[PATH_MAX + 1], comm[COMM_LEN];
-  char command_buf[PATH_MAX + 1];
+  char *path, comm[COMM_LEN];
+  char *command_buf;
   char *command;
   pid_t *pid_table, pid, self, *pid_killed;
   pid_t *pgids;
@@ -141,9 +145,14 @@ kill_all (int signal, int names, char **namelist)
     }
   for (i = 0; i < pids; i++)
     {
-      sprintf (path, PROC_BASE "/%d/stat", pid_table[i]);
-      if (!(file = fopen (path, "r")))
+      if (asprintf (&path, PROC_BASE "/%d/stat", pid_table[i]) < 0)
 	continue;
+      if (!(file = fopen (path, "r"))) 
+	{
+	  free (path);
+	  continue;
+	}
+      free (path);
       empty = 0;
       okay = fscanf (file, "%*d (%[^)]", comm) == 1;
       (void) fclose (file);
@@ -154,15 +163,33 @@ kill_all (int signal, int names, char **namelist)
       length = strlen (comm);
       if (length == COMM_LEN - 1)
 	{
-	  sprintf (path, PROC_BASE "/%d/cmdline", pid_table[i]);
-	  if (!(file = fopen (path, "r")))
+	  if (asprintf (&path, PROC_BASE "/%d/cmdline", pid_table[i]) < 0)
 	    continue;
+	  if (!(file = fopen (path, "r"))) {
+	    free (path);
+	    continue;
+	  }
+	  free (path);
           while (1) {
             /* look for actual command so we skip over initial "sh" if any */
             char *p;
+	    int cmd_size = 128;
+	    command_buf = (char *)malloc (cmd_size);
+	    if (!command_buf)
+	      exit (1);
+
             /* 'cmdline' has arguments separated by nulls */
-            for (p=command_buf; p<command_buf+PATH_MAX; p++) {
-              int c = fgetc(file);
+            for (p=command_buf; ; p++) {
+              int c;
+	      if (p == (command_buf + cmd_size)) 
+		{
+		  int cur_size = cmd_size;
+		  cmd_size *= 2;
+		  if (!realloc(&command_buf, cmd_size))
+		    exit (1);
+		  p = command_buf + cur_size;
+		}
+              c = fgetc(file);
               if (c == EOF || c == '\0') {
                 *p = '\0';
                 break;
@@ -209,9 +236,14 @@ kill_all (int signal, int names, char **namelist)
 	    }
 	  else
 	    {
-	      sprintf (path, PROC_BASE "/%d/exe", pid_table[i]);
-	      if (stat (path, &st) < 0)
+	      if (asprintf (&path, PROC_BASE "/%d/exe", pid_table[i]) < 0)
 		continue;
+	      if (stat (path, &st) < 0) {
+		free (path);
+		continue;
+	      }
+	      free (path);
+
 	      if (sts[j].st_dev != st.st_dev || sts[j].st_ino != st.st_ino)
 		continue;
 	    }
