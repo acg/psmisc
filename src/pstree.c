@@ -621,6 +621,16 @@ usage (void)
   exit (1);
 }
 
+void print_version()
+{
+  fprintf(stderr, "pstree (psmisc) %s\n", VERSION);
+  fprintf(stderr, "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n\n");
+  fprintf(stderr, "pstree comes with ABSOLUTELY NO WARRANTY.\n");
+  fprintf(stderr, "This is free software, and you are welcome to redistribute it under the terms\n");
+  fprintf(stderr, "of the GNU General Public License.\n");
+  fprintf(stderr, "For more information about these matters, see the files named COPYING.\n");
+}
+
 
 int
 main (int argc, char **argv)
@@ -693,7 +703,7 @@ main (int argc, char **argv)
 	sym = &sym_utf;
 	break;
       case 'V':
-	fprintf (stderr, "pstree from psmisc version %s\n", VERSION);
+      print_version();
 	return 0;
       default:
 	usage ();

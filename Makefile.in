@@ -98,7 +98,7 @@ USE_INCLUDED_LIBINTL = @USE_INCLUDED_LIBINTL@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 
-SUBDIRS = m4 doc src po intl
+SUBDIRS = m4 doc src po 
 
 EXTRA_DIST = config.rpath ABOUT-NLS 
 

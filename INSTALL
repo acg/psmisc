@@ -3,6 +3,16 @@ Installation instructions for psmisc package
 
 To compile this program you will need ncurses.
 
+I built it with this:
+	autoconf 2.53
+	automake 1.5
+	libtool 1.4.2a
+	gcc 2.95.4
+	make 3.77
+	glibc 2.2.5
+
+All on a Debian GNU/Linux system.
+
 To build this, type
 	./configure
 	make

@@ -335,7 +335,7 @@ usage (void)
 void print_version()
 {
   fprintf(stderr, "%s (psmisc) %s\n", pidof ? "pidof" : "killall", VERSION);
-  fprintf(stderr, "Copyright (C) 1993-2001 Werner Almesberger and Craig Small\n\n");
+  fprintf(stderr, "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n\n");
   fprintf(stderr, "PSmisc comes with ABSOLUTELY NO WARRANTY.\n");
   fprintf(stderr, "This is free software, and you are welcome to redistribute it under the terms\n");
   fprintf(stderr, "of the GNU General Public License.\n");
