@@ -7,6 +7,7 @@ Changes in 21.7
 	* fusernew - this will be the new fuser once it gets tested on
 	  those strange setups folks out there have
 	* Completed change from Flask to SELinux, thanks to Benno Schulenberg
+	* pstree works better with uClibc, thanks Mike Frysinger
 
 Changes in 21.6
 ===============

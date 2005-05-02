@@ -531,6 +531,9 @@ dump_by_user (PROC * current, uid_t uid)
 {
   const CHILD *walk;
 
+  if (!current)
+    return;
+
   if (current->uid == uid)
     {
       if (dumped)
@@ -608,11 +611,10 @@ read_proc (void)
             {
               memset(comm, '\0', COMM_LEN+1);
               tmpptr = strrchr(readbuf, ')'); /* find last ) */
-              *tmpptr = '\0';
               /* We now have readbuf with pid and cmd, and tmpptr+2
                * with the rest */
               /*printf("readbuf: %s\n", readbuf);*/
-              if (sscanf(readbuf, "%*d (%15c", comm) == 1)
+              if (sscanf(readbuf, "%*d (%15[^)]", comm) == 1)
               {
                 /*printf("tmpptr: %s\n", tmpptr+2);*/
                 if (sscanf(tmpptr+2, "%*c %d", &ppid) == 1)
