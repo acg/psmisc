@@ -56,6 +56,7 @@ static void check_map(const pid_t pid, const char *filename, struct device_list 
 static struct stat *get_pidstat(const pid_t pid, const char *filename);
 static uid_t getpiduid(const pid_t pid);
 static void print_matches(struct names *names_head, const opt_type opts);
+static void kill_matched_proc(struct procs *pptr, const opt_type opts);
 
 static dev_t get_netdev(void);
 int parse_mount(struct names *this_name, struct device_list **dev_list);
@@ -702,6 +703,8 @@ int main(int argc, char *argv[])
 					break;
 			}
 		} /* for */
+	} else {
+		usage(_("No process specification given"));
 	}
 	/* Check conflicting operations */
 	if (opts & OPT_MOUNTPOINT) {
@@ -808,8 +811,10 @@ static void print_matches(struct names *names_head, const opt_type opts)
 		}
 		if (nptr->matched_procs == NULL || !(opts & OPT_VERBOSE))
 			putc('\n', stderr);
+		if (opts & OPT_KILL)
+			kill_matched_proc(nptr->matched_procs,  opts);
 
-	}
+	} /* next name */
 
 }
 
@@ -977,5 +982,41 @@ static void debug_match_lists(struct names *names_head, struct inode_list *ino_h
 	{
 		fprintf(stderr, "\tDev:%0lx\n",
 				(unsigned long)dptr->device);
+	}
+}
+
+/* 0 = no, 1=yes */
+static int ask(const pid_t pid)
+{
+	int c, res;
+	size_t len = 0;
+	char *line = NULL;
+
+	fflush(stdout);
+	while(1) {
+		fprintf(stderr, _("Kill process %d ? (y/N) "), pid);
+		fflush(stderr);
+		if (getline(&line, &len, stdin) < 0)
+			return 0;
+		if (line[0] == '\n') {
+			free(line);
+			return 0;
+		}
+		res = rpmatch(line);
+		if (res >= 0) {
+			free(line);
+			return res;
+		}
+	} /* while */
+}
+
+static void kill_matched_proc(struct procs *proc_head, const opt_type opts)
+{
+	struct procs *pptr;
+
+	for (pptr = proc_head ; pptr != NULL ; pptr = pptr->next ) {
+		if ( (opts & OPT_INTERACTIVE) && (ask(pptr->pid) == 0))
+			continue;
+		fprintf(stderr, "debug killing proc %d\n", pptr->pid);
 	}
 }
