@@ -1,8 +1,10 @@
 /*
  * fuser.c - identify processes using files
  *
- * Copyright (C) 1993-2002 Werner Almesberger
- * Copyright (C) 2002-2005 Craig Small
+ * Based on fuser.c Copyright (C) 1993-2005 Werner Almesberger and Craig Small
+ *
+ * Completely re-written
+ * Copyright (C) 2005 Craig Small
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,969 +28,63 @@
 #include <config.h>
 #endif
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
-#include <unistd.h>
-#include <dirent.h>
-#include <pwd.h>
-#include <signal.h>
-#include <limits.h>
-#include <netdb.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <sys/stat.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#ifdef __linux__
-#include <linux/kdev_t.h>	/* for MKDEV */
-#include <linux/major.h>	/* for LOOP_MAJOR */
-#endif
 #include <errno.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <pwd.h>
+#include <netdb.h>
+#include <getopt.h>
+#include <dirent.h>
+#include <unistd.h>
+#include <ctype.h>
+#include <mntent.h>
 
+#include "fuser.h"
 #include "i18n.h"
-#include "comm.h"
-#include "loop.h"         /* for loop_info */
-#include "signals.h"
 
-
-#define PROC_BASE  "/proc"
-#define UID_UNKNOWN -1
 #define NAME_FIELD 20		/* space reserved for file name */
+/* Function defines */
+static void add_matched_proc(struct names *name_list, const pid_t pid, const uid_t uid, const char access);
+static void check_dir(const pid_t pid, const char *dirname, struct device_list *dev_head, struct inode_list *ino_head, const uid_t uid, const char access);
+static void check_map(const pid_t pid, const char *filename, struct device_list *dev_head, struct inode_list *ino_head, const uid_t uid, const char access);
+static struct stat *get_pidstat(const pid_t pid, const char *filename);
+static uid_t getpiduid(const pid_t pid);
+static void print_matches(struct names *names_head, const opt_type opts);
+static void kill_matched_proc(struct procs *pptr, const opt_type opts);
 
-#define MAX_LINE 256		/* longest line we may ever find in /proc */
+static dev_t get_netdev(void);
+int parse_mount(struct names *this_name, struct device_list **dev_list);
+static void add_device(struct device_list **dev_list, struct names  *this_name, dev_t device);
+void scan_mount_devices(const opt_type opts, struct mountdev_list **mount_devices);
+static void debug_match_lists(struct names *names_head, struct inode_list *ino_head, struct device_list *dev_head);
 
-
-#ifndef LOOP_MAJOR		/* don't count on the headers too much ... */
-#define LOOP_MAJOR 7
-#endif
-
-#ifndef MAJOR
-#define MAJOR(arg) 6           /* something that doesn't = LOOP_MAJOR */
-#endif
-
-#ifndef MKDEV
-#define MKDEV(arg1, arg2) mknod("/dev/Isuck", arg1, arg2) /* this is wrong */
-#endif
-
-
-#define REF_FILE   1		/* an open file */
-#define REF_ROOT   2		/* current root */
-#define REF_CWD    4		/* current directory */
-#define REF_EXE    8		/* executable */
-#define REF_MMAP  16		/* mmap'ed file or library */
-
-#define FLAG_KILL  1		/* kill process */
-#define FLAG_UID   2		/* show uid */
-#define FLAG_VERB  4		/* show verbose output */
-#define FLAG_DEV   8		/* show all processes using this device */
-#define FLAG_ASK  16		/* ask before killing a process */
-
-
-typedef struct _net_cache
+static void usage (const char *errormsg)
 {
-  struct sockaddr_storage rmt_addr;
-  int lcl_port;
-  int rmt_port;
-  ino_t ino;
-  struct _net_cache *next;
-}
-NET_CACHE;
+	if (errormsg != NULL)
+		fprintf(stderr, "%s\n", errormsg);
 
-typedef struct _unix_cache
-{
-  dev_t fs_dev;
-  ino_t fs_ino;
-  ino_t net_ino;
-  struct _unix_cache *next;
-}
-UNIX_CACHE;
-
-typedef struct
-{
-  const char *name;
-  NET_CACHE *cache;
-  int once;
-}
-SPACE_DSC;
-
-typedef enum
-{ it_proc, it_mount, it_loop, it_swap }
-ITEM_TYPE;
-
-typedef struct item_dsc
-{
-  ITEM_TYPE type;
-  union
-  {
-    struct
-    {
-      pid_t pid;
-      int uid;			/* must also accept UID_UNKNOWN */
-      int ref_set;
-    }
-    proc;
-    struct
-    {
-      const char *path;
-    }
-    misc;
-  }
-  u;
-  struct item_dsc *next;
-}
-ITEM_DSC;
-
-typedef struct file_dsc
-{
-  const char *name;		/* NULL if previous entry has name */
-  dev_t dev;
-  ino_t ino;
-  int flags, sig_num;
-  SPACE_DSC *name_space;	/* or NULL if no indication */
-  ITEM_DSC *items;
-  struct file_dsc *named, *next;
-}
-FILE_DSC;
-
-static SPACE_DSC name_spaces[] = {
-  {"file", NULL, 0},		/* must be first */
-  {"tcp", NULL, 0},
-  {"udp", NULL, 0},
-  {NULL, NULL, 0}
-};
-
-
-static FILE_DSC *files = NULL;
-static FILE_DSC *last_named = NULL;
-static UNIX_CACHE *unix_cache = NULL;
-static pid_t self;
-static int all = 0, found_item = 0;
-static dev_t net_dev;
-static int ipv4only = 0, ipv6only = 0;
-
-
-static void
-parse_net_file (SPACE_DSC * dsc,char *filename, NET_CACHE **lastptr,int version )
-{
-  FILE *file;
-  NET_CACHE *new, *last;
-  char line[MAX_LINE + 1];
-  char rmt_addr[128];
-  char addr6[128];
-  unsigned long tmp_ino;
-
-  if (!(file = fopen (filename, "r")))
-    {
-      perror (filename);
-      exit (1);
-    }
-  last = *lastptr;
-  (void) fgets (line, MAX_LINE, file);
-  while (fgets (line, MAX_LINE, file))
-    {
-      new = malloc (sizeof (NET_CACHE));
-      if (!new)
-	{
-	  perror ("malloc");
-	  exit (1);
-	}
-    if (sscanf (line, 
-        "%*d: %*x:%x %64[0-9A-Fa-f]:%x %*x %*x:%*x %*x:%*x %*x %*d %*d %lu",
-        &new->lcl_port, rmt_addr, &new->rmt_port, &tmp_ino) != 4)
-	{
-	  free (new);
-	  continue;
-	}
-      new->ino = tmp_ino;
-      if (strlen(rmt_addr) > 8) {
-        sscanf(rmt_addr, "%08X%08X%08X%08X",
-            &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr.s6_addr32[0],
-            &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr.s6_addr32[1],
-            &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr.s6_addr32[2],
-            &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr.s6_addr32[3]);
-        inet_ntop(AF_INET6, &((struct sockaddr_in6 *)&new->rmt_addr)->sin6_addr, addr6, sizeof(addr6));
-      } else {
-        sscanf(rmt_addr, "%X",
-            &((struct sockaddr_in *) &new->rmt_addr)->sin_addr.s_addr);
-            ((struct sockaddr *) &new->rmt_addr)->sa_family = AF_INET;
-      }
-      if (!new->ino)
-	{
-	  free (new);
-	  continue;
-	}
-      new->next = NULL;
-      if (last)
-	last->next = new;
-      else
-	dsc->cache = new;
-      last = new;
-    }
-  (void) fclose (file);
-  *lastptr = last;
-
-}
-
-static void
-fill_net_cache (SPACE_DSC * dsc)
-{
-  NET_CACHE *last;
-  struct stat statbuf;
-  char *buffer = malloc (strlen (PROC_BASE) + strlen (dsc->name) + 8);
-  if (!buffer)
-    return;
-
-  if (dsc->once)
-    return;
-  dsc->once = 1;
-  last = NULL;
-
-  /* Check to see if we have both namespace files, if we don't then silently
-   * not use them if not flags are specified and complain if the flags
-   * were specified.
-   */
-  
-  if (!ipv6only) {
-    sprintf (buffer, PROC_BASE "/net/%s", dsc->name);
-    if (stat(buffer, &statbuf) != 0) {
-      if (ipv4only) 
-        fprintf(stderr, _("-4 flag used but proc file %s is not readable\n"), buffer);
-    } else {
-      parse_net_file (dsc, buffer, &last,4 );
-    }
-  }
-  if (!ipv4only) {
-    sprintf (buffer, PROC_BASE "/net/%s6", dsc->name);
-    if (stat(buffer, &statbuf) != 0) {
-      if (ipv6only) 
-        fprintf(stderr, _("-6 flag used but proc file %s is not readable\n"), buffer);
-    } else {
-      parse_net_file (dsc, buffer, &last,6 );
-    }
-  }
-}
-
-
-static void
-fill_unix_cache (void)
-{
-  static int once;
-  FILE *file;
-  UNIX_CACHE *new, *last;
-  struct stat st;
-  char *path = NULL, line[MAX_LINE + 1];
-  int ino;
-
-  if (once)
-    return;
-  once = 1;
-  if (!(file = fopen (PROC_BASE "/net/unix", "r")))
-    {
-      perror (PROC_BASE "/net/unix");
-      exit (1);
-    }
-  last = NULL;
-  (void) fgets (line, MAX_LINE, file);
-  while (fgets (line, MAX_LINE, file))
-    {
-      if (sscanf (line, "%*x: %*x %*x %*x %*x %*x %d %as", &ino, &path) != 2)
-	continue;
-      if (stat (path, &st) < 0) {
-	free (path);
-	continue;
-      }
-      free (path);
-
-      new = malloc (sizeof (UNIX_CACHE));
-      new->fs_dev = st.st_dev;
-      new->fs_ino = st.st_ino;
-      new->net_ino = ino;
-      new->next = NULL;
-      if (last)
-	last->next = new;
-      else
-	unix_cache = new;
-      last = new;
-    }
-  (void) fclose (file);
-
-}
-
-
-static unsigned long
-try_to_find_unix_dev (ino_t inode)
-{
-  UNIX_CACHE *walk;
-
-  for (walk = unix_cache; walk; walk = walk->next)
-    if (walk->net_ino == inode)
-      return walk->fs_dev;
-  return 0;
-}
-
-
-static void
-add_file (const char *path, dev_t device, ino_t inode,
-	  pid_t pid, int ref)
-{
-  struct stat st;
-  FILE_DSC *file, *next;
-  ITEM_DSC **item, *this;
-  dev_t mount_dev;
-
-  if (device)
-    mount_dev = device;
-  else
-    mount_dev = try_to_find_unix_dev (inode);
-  for (file = files; file; file = next)
-    {
-      next = file->next;
-      if (file->flags & FLAG_DEV ? mount_dev && mount_dev == file->dev :
-	  device == file->dev && inode == file->ino)
-	{
-	  if (!file->name)
-	    file = file->named;
-	  for (item = &file->items; *item; item = &(*item)->next)
-	    if ((*item)->type == it_proc && (*item)->u.proc.pid >= pid)
-	      break;
-	  if (*item && (*item)->u.proc.pid == pid)
-	    this = *item;
-	  else
-	    {
-	      if (!(this = malloc (sizeof (ITEM_DSC))))
-		{
-		  perror ("malloc");
-		  exit (1);
-		}
-	      this->type = it_proc;
-	      this->u.proc.pid = pid;
-	      this->u.proc.uid = UID_UNKNOWN;
-	      this->u.proc.ref_set = 0;
-	      this->next = *item;
-	      *item = this;
-	      found_item = 1;
-	    }
-	  this->u.proc.ref_set |= ref;
-	  if ((file->flags & (FLAG_UID | FLAG_VERB)) && this->u.proc.uid ==
-	      UID_UNKNOWN && lstat (path, &st) >= 0)
-	    this->u.proc.uid = st.st_uid;
-	}
-    }
-}
-
-
-static void
-add_other (ITEM_TYPE type, dev_t mount_dev,
-	   dev_t device, ino_t inode, const char *path)
-{
-  FILE_DSC *file, *next;
-  ITEM_DSC **item, *this;
-
-  for (file = files; file; file = next)
-    {
-      next = file->next;
-      if (file->flags & FLAG_DEV ? mount_dev == file->dev :
-	  device == file->dev && inode == file->ino)
-	{
-	  if (!file->name)
-	    file = file->named;
-	  for (item = &file->items; *item; item = &(*item)->next);
-	  /* there's no easy way to suppress duplicates, so we don't */
-	  if (!(this = malloc (sizeof (ITEM_DSC))))
-	    {
-	      perror ("malloc");
-	      exit (1);
-	    }
-	  this->type = type;
-	  if (!(this->u.misc.path = strdup (path)))
-	    {
-	      perror ("strdup");
-	      exit (1);
-	    }
-	  this->next = *item;
-	  *item = this;
-	  found_item = 1;
-	}
-    }
-}
-
-
-static void
-check_link (const char *path, pid_t pid, int type)
-{
-  struct stat st;
-
-  if (stat (path, &st) >= 0)
-    add_file (path, st.st_dev, st.st_ino, pid, type);
-}
-
-
-static void
-check_map (const char *rel, pid_t pid, int type)
-{
-  FILE *file;
-  char line[MAX_LINE + 1];
-  int major, minor;
-  ino_t inode;
-  unsigned long long tmp_inode;
-
-  if (!(file = fopen (rel, "r")))
-    return;
-  while (fgets (line, MAX_LINE, file))
-    {
-      if (sscanf (line, "%*s %*s %*s %x:%x %lld", &major, &minor, &tmp_inode) != 3)
-	continue;
-      if (major || minor || tmp_inode) {
-        inode = (ino_t)(tmp_inode);
-	    add_file (rel, MKDEV (major, minor), inode, pid, type);
-      }
-    }
-  fclose (file);
-}
-
-
-static void
-check_dir (const char *rel, pid_t pid, int type)
-{
-  DIR *dir;
-  struct dirent *de;
-  char *path;
-
-  if (!(dir = opendir (rel)))
-    return;
-  while ((de = readdir (dir)) != NULL)
-    if (strcmp (de->d_name, ".") && strcmp (de->d_name, ".."))
-      {
-	asprintf (&path, "%s/%s", rel, de->d_name);
-	check_link (path, pid, type);
-	free (path);
-      }
-  (void) closedir (dir);
-}
-
-
-static void
-scan_fd (void)
-{
-  DIR *dir;
-  struct dirent *de;
-  char *path;
-  pid_t pid;
-  int empty;
-
-  if (!(dir = opendir (PROC_BASE)))
-    {
-      perror (PROC_BASE);
-      exit (1);
-    }
-  empty = 1;
-  while ((de = readdir (dir)) != NULL)
-    if ((pid = (pid_t)atoi (de->d_name)) != 0)
-      {
-	empty = 0;
-	if (asprintf (&path, "%s/%d", PROC_BASE, pid) < 0)
-	  continue;
-	if (chdir (path) >= 0)
-	  {
-	    check_link ("root", pid, REF_ROOT);
-	    check_link ("cwd", pid, REF_CWD);
-	    check_link ("exe", pid, REF_EXE);
-	    check_dir ("lib", pid, REF_MMAP);
-	    check_dir ("mmap", pid, REF_MMAP);
-	    check_map ("maps", pid, REF_MMAP);
-	    check_dir ("fd", pid, REF_FILE);
-	  }
-	free (path);
-      }
-  (void) closedir (dir);
-  if (empty)
-    {
-      fprintf (stderr, _("%s is empty (not mounted ?)\n"),PROC_BASE);
-      exit (1);
-    }
-}
-
-
-static void
-scan_mounts (void)
-{
-  FILE *file;
-  struct stat st_dev, st_parent, st_mounted;
-  char line[MAX_LINE + 1], *path = NULL, *mounted = NULL;
-  char *end;
-
-  if (!(file = fopen (PROC_BASE "/mounts", "r")))
-    return;			/* old kernel */
-  while (fgets (line, MAX_LINE, file))
-    {
-      if (sscanf (line, "%as %as", &path, &mounted) != 2)
-	continue;
-      if ( stat (path, &st_dev) == 0) {
-      	if (S_ISBLK (st_dev.st_mode) && MAJOR (st_dev.st_rdev) == LOOP_MAJOR) {
-          	struct loop_info loopinfo;
-        	int fd;
-
-          	if ((fd = open(path, O_RDWR)) > 0) {
-            		if (ioctl(fd, LOOP_GET_STATUS, &loopinfo) >= 0) {
-              			add_other(it_loop,loopinfo.lo_device,loopinfo.lo_device,loopinfo.lo_inode,path);
-            		}
-            		(void) close(fd);
-                }
-	}
-      }
-      if (stat (mounted, &st_mounted) < 0)
-	{
-	  free (path);
-	  free (mounted);
-	  continue;
-	}
-      if (asprintf (&end, "%s/..", mounted) < 0)
-	{
-	  free (path);
-	  free (mounted);
-	  continue;
-	}
-
-      if (stat (end, &st_parent) >= 0)
-	{
-	  add_other (it_mount, st_parent.st_dev, st_mounted.st_dev,
-		     st_mounted.st_ino, mounted);
-	}
-      free (end);
-      free (path);
-      free (mounted);
-    }
-  (void) fclose (file);
-}
-
-
-static void
-scan_swaps (void)
-{
-  FILE *file;
-  struct stat st;
-  char line[MAX_LINE + 1], *path, type[MAX_LINE + 1];
-
-  if (!(file = fopen (PROC_BASE "/swaps", "r")))
-    return;			/* old kernel */
-  (void) fgets (line, MAX_LINE, file);
-  while (fgets (line, MAX_LINE, file))
-    {
-      if (sscanf (line, "%as %s", &path, type) != 2)
-	continue;		/* new kernel :-) */
-      if (strcmp (type, "file")) {
-	free (path);
-	continue;
-      }
-      if (stat (path, &st) >= 0)
-	add_other (it_swap, st.st_dev, st.st_dev, st.st_ino, path);
-      free (path);
-    }
-  (void) fclose (file);
-}
-
-
-static int
-ask (pid_t pid)
-{
-  int res;
-  size_t len;
-  char *line;
-
-  line = NULL;
-  len = 0;
-
-  fflush (stdout);
-  do {
-    fprintf (stderr, _("Kill process %d ? (y/N) "), pid);
-    fflush (stderr);
-
-    if (getline (&line, &len, stdin) < 0)
-      return 0;
-    /* Check for default */
-    if (line[0] == '\n') {
-      free(line);
-      return 0;
-    }
-    res = rpmatch(line);
-    if (res >= 0) {
-      free(line);
-      return res;
-    }
-  } while(1);
-  /* Never should get here */
-  return 0;
-}
-
-static void
-kill_item (const FILE_DSC * file, const ITEM_DSC * item)
-{
-  char tmp[10];
-
-  switch (item->type)
-    {
-    case it_proc:
-      if (item->u.proc.pid == self)
-	return;
-      if ((file->flags & FLAG_ASK) && !ask (item->u.proc.pid))
-	return;
-      if (kill (item->u.proc.pid, file->sig_num) >= 0)
-	break;
-      sprintf (tmp, _("kill %d"), item->u.proc.pid);
-      perror (tmp);
-      break;
-    case it_mount:
-      fprintf (stderr, _("No automatic removal. Please use  umount %s\n"),
-	       item->u.misc.path);
-      break;
-    case it_loop:
-      fprintf (stderr, _("No automatic removal. Please use  umount %s\n"),
-	       item->u.misc.path);
-      break;
-    case it_swap:
-      fprintf (stderr, _("No automatic removal. Please use  swapoff %s\n"),
-	       file->name);
-      break;
-    }
-}
-
-
-static void
-show_files_or_kill (void)
-{
-  const FILE_DSC *file;
-  const ITEM_DSC *item;
-  FILE *f;
-  const struct passwd *pw;
-  const char *user, *scan;
-  char tmp[10], *path, comm[COMM_LEN + 1];
-  int length, header, first, dummy, last_namelen = 0;
-  header = 1;
-  for (file = files; file; file = file->next)
-    if (file->name && (file->items || all))
-      {
-	if (header && (file->flags & FLAG_VERB))
-	  {
-	    fprintf (stderr, _("\n%*s USER        PID ACCESS COMMAND\n"),
-		     NAME_FIELD, "");
-	    header = 0;
-	  }
-	length = 0;
-	for (scan = file->name; scan && *scan; scan++)
-	  if (*scan == '\\')
-	    length += fprintf (stderr, "\\\\");
-	  else if (*scan > ' ' && *scan <= '~')
-	    {
-	      putc(*scan,stderr);
-	      length++;
-	    }
-	  else
-	    length += fprintf (stderr, "\\%03o", *scan);
-	if (file->name_space)
-	  length += fprintf (stderr, "/%s", file->name_space->name);
-
-	if (length > 0)
-	  last_namelen=length;
-	else
-	  fprintf(stderr, "\n%*.*s",last_namelen,last_namelen," ");
-
-	if (!(file->flags & FLAG_VERB))
-	  {
-	    putc (':',stderr);
-	    length++;
-	  }
-
-	first = 1;
-	for (item = file->items; item; item = item->next)
-	  {
-	    if (!(file->flags & FLAG_VERB))
-	      {
-		if (item->type != it_proc)
-		  continue;
-        if ((first==1) && (item->u.proc.ref_set & (REF_FILE|REF_ROOT|REF_CWD|REF_EXE|REF_MMAP))) {
-    while (length < NAME_FIELD)
-    {
-      putc(' ',stderr);
-      length++;
-    }
-        }
-		printf ("%6d", item->u.proc.pid);
-        fflush(stdout);
-		/* if (item->u.proc.ref_set & REF_FILE)*/
-		if (item->u.proc.ref_set & REF_ROOT)
-		  putc ('r', stderr);
-		if (item->u.proc.ref_set & REF_CWD)
-		  putc ('c', stderr);
-		if (item->u.proc.ref_set & REF_EXE)
-		  putc ('e', stderr);
-		else if (item->u.proc.ref_set & REF_MMAP)
-		  putc ('m', stderr);
-		if ((file->flags & FLAG_UID) && item->u.proc.uid !=
-		    UID_UNKNOWN)
-                {
-		  if ((pw = getpwuid (item->u.proc.uid)) != NULL) {
-		    fprintf (stderr, "(%s)", pw->pw_name);
-                  } else {
-		    fprintf (stderr, "(%d)", item->u.proc.uid);
-                  }
-                }
-		first = 0;
-	      }
-	    else
-	      {
-		const char *name;
-		int uid;
-
-		switch (item->type)
-		  {
-		  case it_proc:
-		    asprintf (&path, PROC_BASE "/%d/stat", item->u.proc.pid);
-		    strcpy (comm, "???");
-		    if ((f = fopen (path, "r")) != NULL)
-		      {
-			(void) fscanf (f, "%d (%[^)]", &dummy, comm);
-			(void) fclose (f);
-		      }
-		    free (path);
-		    name = comm;
-		    uid = item->u.proc.uid;
-		    break;
-		  case it_mount:
-		  case it_loop:
-		  case it_swap:
-		    name = item->u.misc.path;
-		    uid = 0;
-		    break;
-		  default:
-		    fprintf (stderr, _("Internal error (type %d)\n"),
-			     item->type);
-		    exit (1);
-		  }
-		if (uid == UID_UNKNOWN)
-		  user = "???";
-		else if ((pw = getpwuid (uid)) != NULL)
-		  user = pw->pw_name;
-		else
-		  {
-		    sprintf (tmp, "%d", uid);
-		    user = tmp;
-		  }
-		if (!first)
-		  fprintf (stderr, "%*s", NAME_FIELD, "");
-		else if (length > NAME_FIELD)
-		  fprintf (stderr, "\n%*s", NAME_FIELD, "");
-        else
-          while (length < NAME_FIELD)
-          {
-            putc(' ', stderr);
-            length++;
-          }
-		fprintf (stderr, " %-8s ", user);
-		switch (item->type)
-		  {
-		  case it_proc:
-		    printf ("%6d", item->u.proc.pid);
-            fflush(stdout);
-            fprintf (stderr, " %c%c%c%c%c  ",
-			    item->u.proc.ref_set & REF_FILE ? 'f' : '.',
-			    item->u.proc.ref_set & REF_ROOT ? 'r' : '.',
-			    item->u.proc.ref_set & REF_CWD ? 'c' : '.',
-			    item->u.proc.ref_set & REF_EXE ? 'e' : '.',
-			    (item->u.proc.ref_set & REF_MMAP) &&
-			    !(item->u.proc.ref_set & REF_EXE) ? 'm' : '.');
-		    break;
-		  case it_mount:
-		    fprintf (stderr, _("kernel mount  "));
-		    break;
-		  case it_loop:
-		    fprintf (stderr, _("kernel loop   "));
-		    break;
-		  case it_swap:
-		    fprintf (stderr, _("kernel swap   "));
-		    break;
-		  }
-		if (name)
-                {
-		  for (scan = name; *scan; scan++)
-		    if (*scan == '\\')
-		      fprintf (stderr, "\\\\");
-		    else if (*scan > ' ' && *scan <= '~')
-		      putc (*scan,stderr);
-		    else
-		      fprintf (stderr, "\\%03o", (unsigned char) *scan);
-                }
-		putc ('\n',stderr);
-	      }
-	    first = 0;
-	  }
-	if (!(file->flags & FLAG_VERB) || first)
-	  putc('\n',stderr);
-	if (file->flags & FLAG_KILL)
-	  for (item = file->items; item; item = item->next)
-	    kill_item (file, item);
-      }
-}
-
-
-static void
-kill_files (void)
-{
-  const FILE_DSC *file;
-  const ITEM_DSC *item;
-
-  for (file = files; file; file = file->next)
-    if (file->flags & FLAG_KILL)
-      for (item = file->items; item; item = item->next)
-	kill_item (file, item);
-}
-
-
-static void
-enter_item (const char *name, int flags, int sig_number, dev_t dev,
-	    ino_t ino, SPACE_DSC * name_space)
-{
-  static FILE_DSC *last = NULL;
-  FILE_DSC *new;
-
-  if (!(new = malloc (sizeof (FILE_DSC))))
-    {
-      perror ("malloc");
-      exit (1);
-    }
-  if (last_named && !strcmp (last_named->name, name) &&
-      last_named->name_space == name_space)
-    new->name = NULL;
-  else if (!(new->name = strdup (name)))
-    {
-      perror ("strdup");
-      exit (1);
-    }
-  new->flags = flags;
-  new->sig_num = sig_number;
-  new->items = NULL;
-  new->next = NULL;
-  new->dev = dev;
-  new->ino = ino;
-  new->name_space = name_space;
-  if (last)
-    last->next = new;
-  else
-    files = new;
-  last = new;
-  new->named = last_named;
-  if (new->name)
-    last_named = new;
-}
-
-
-static int
-parse_inet (const char *spec, const char *name_space, int *lcl_port,
-	    struct sockaddr_storage *rmt_addr, int *rmt_port)
-{
-  char *s, *here, *next, *end;
-  int port, field, address_match;
-
-  if (!(s = strdup (spec)))
-    {
-      perror ("strdup");
-      exit (1);
-    }
-  *lcl_port = *rmt_port = -1;
-  memset(rmt_addr, 0, sizeof(struct sockaddr_storage));
-  field = 0;
-  address_match = 0;
-  for (here = s; here; here = next ? next + 1 : NULL)
-    {
-      next = strchr (here, ',');
-      if (next)
-	*next = 0;
-      switch (field)
-	{
-	case 0:
-	  /* fall through */
-	case 2:
-	  if (!*here)
-	    break;
-	  port = strtoul (here, &end, 0);
-	  if (*end)
-	    {
-	      struct servent *se;
-
-	      if (!(se = getservbyname (here, name_space)))
-		return 0;
-	      port = ntohs (se->s_port);
-	    }
-	  if (field)
-	    *rmt_port = port;
-	  else
-	    *lcl_port = port;
-	  break;
-	case 1:
-	  if (!*here)
-	    break;
-          if (!ipv4only) {
-
-            if (inet_pton(AF_INET6, here, &((struct sockaddr_in6*)rmt_addr)->sin6_addr) > 0) {
-              address_match = 1;
-              rmt_addr->ss_family = AF_INET6;
-             }
-          }
-          if (!ipv6only && !address_match) {
-            if (inet_pton(AF_INET, here, &((struct sockaddr_in*)rmt_addr)->sin_addr) > 0) {
-              address_match = 1;
-              rmt_addr->ss_family = AF_INET6;
-            }
-          }
-            
-	  break;
-	default:
-	  return 0;
-	}
-      field++;
-    }
-  return 1;
-}
-
-static void find_net_dev(void)
-{
-  int fd = socket(PF_INET, SOCK_DGRAM,0);
-  struct stat buf;
-  if (fd >= 0 && fstat(fd, &buf) == 0) {
-    net_dev = buf.st_dev;
-    close(fd);
-    return;
-  }
-  if (fd >= 0)
-    close(fd);
-  fprintf(stderr,_("can't find sockets' device number"));
-}
-
-
-
-static void
-usage (void)
-{
   fprintf (stderr, _(
-    "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
-    "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
+    "usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+    "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
     "       fuser -l\n"
-    "       fuser -V\n"
-    "Show which processes use the named files, sockets, or filesystems.\n\n "
+    "       fuser -V\n\n"
     "    -a        display unused files too\n"
     "    -c        mounted FS\n"
     "    -f        silently ignored (for POSIX compatibility)\n"
+    "    -k        kill processes accessing that file\n"
     "    -i        ask before killing (ignored without -k)\n"
-    "    -k        kill processes accessing the named file\n"
-    "    -l        list available signal names\n"
-    "    -m        show all processes using the named filesystems\n"
-    "    -n SPACE  search in this name space (file, udp, or tcp)\n"
+    "    -l        list signal names\n"
+    "    -m        mounted FS\n"
+    "    -n space  search in the specified name space (file, udp, or tcp)\n"
     "    -s        silent operation\n"
-    "    -SIGNAL   send this signal instead of SIGKILL\n"
-    "    -u        display user IDs\n"
+    "    -signal   send signal instead of SIGKILL\n"
+    "    -u        display user ids\n"
     "    -v        verbose output\n"
     "    -V        display version information\n"
     "    -4        search IPv4 sockets only\n"
@@ -1000,7 +96,7 @@ usage (void)
 
 void print_version()
 {
-  fprintf(stderr, _("fuser (PSmisc) %s\n"), VERSION);
+  fprintf(stderr, _("fuser (psmisc) %s\n"), VERSION);
   fprintf(stderr, _(
     "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n\n"));
   fprintf(stderr, _(
@@ -1010,220 +106,917 @@ void print_version()
     "For more information about these matters, see the files named COPYING.\n"));
 }
 
-
-
-int
-main (int argc, char **argv)
+static void scan_procs(struct names *names_head, struct inode_list *ino_head, struct device_list *dev_head)
 {
-  SPACE_DSC *name_space;
-  int flags, silent, do_kill, sig_number, no_files;
+	DIR *topproc_dir;
+	struct dirent *topproc_dent;
+	char *fd_dirpath, *fd_pathname;
+	struct inode_list *ino_tmp;
+	struct device_list *dev_tmp;
+	pid_t pid, my_pid;
+	uid_t uid;
+	struct stat *cwd_stat, *exe_stat, *root_stat;
 
-  flags = silent = do_kill = 0;
-  sig_number = SIGKILL;
-  name_space = name_spaces;
-  no_files = 1;
+	if ( (fd_dirpath = malloc(MAX_PATHNAME)) == NULL)
+		return;
+	if ( (fd_pathname = malloc(MAX_PATHNAME)) == NULL)
+		return;
 
-  /* Setup the i18n */
-#ifdef ENABLE_NLS
-  setlocale(LC_ALL, "");
-  bindtextdomain(PACKAGE, LOCALEDIR);
-  textdomain(PACKAGE);
-#endif
-
-  if (argc < 2)
-    usage ();
-  if (argc == 2 && !strcmp (argv[1], "-l"))
-    {
-      list_signals ();
-      return 0;
-    }
-  find_net_dev();
-  while (--argc)
-    {
-      argv++;
-      if (**argv == '-')
-	if (!argv[0][1])
-	  {
-	    flags = 0;
-	    sig_number = SIGKILL;
-	  }
-	else
-	  while (*++*argv)
-	    {
-	      int end;
-
-	      end = 0;
-	      switch (**argv)
-		{
-		case 'a':
-		  all = 1;
-		  break;
-        case 'f':
-          break;
-		case 'k':
-		  flags |= FLAG_KILL;
-		  do_kill = 1;
-		  break;
-		case 'i':
-		  flags |= FLAG_ASK;
-		  break;
-		case 'm':
-		case 'c':
-		  flags |= FLAG_DEV;
-		  break;
-		case 'n':
-		  if (!--argc)
-		    usage ();
-		  argv++;
-		  for (name_space = name_spaces; name_space->name;
-		       name_space++)
-		    if (!strcmp (*argv, name_space->name))
-		      break;
-		  if (!name_space->name)
-		    usage ();
-		  end = 1;
-		  break;
-		case 's':
-		  silent = 1;
-		  break;
-		case 'u':
-		  flags |= FLAG_UID;
-		  break;
-		case 'v':
-		  flags |= FLAG_VERB;
-		  break;
-		case 'V':
-		  print_version();
-		  return 0;
-                case '4':
-                    if (ipv6only) 
-                      usage();
-                    ipv4only = 1;
-                    break;
-                case '6':
-                    if (ipv4only)
-                      usage();
-                    ipv6only = 1;
-                    break;
-		default:
-		  if (isupper (**argv) || isdigit (**argv))
-		    {
-		      sig_number = get_signal (*argv, "fuser");
-		      argv[0][1] = 0;
-		      break;
-		    }
-		  usage ();
-		}
-	      if (end)
-		break;
-	    }
-      else
-	{
-	  SPACE_DSC *this_name_space;
-	  struct stat st;
-	  char *here;
-
-	  no_files = 0;
-	  last_named = NULL;
-	  this_name_space = name_space;
-	  if (name_space != name_spaces || stat (*argv, &st) < 0)
-	    {
-	      here = strchr (*argv, '/');
-	      if (here && here != *argv)
-		{
-		  for (this_name_space = name_spaces; this_name_space->name;
-		       this_name_space++)
-		    if (!strcmp (here + 1, this_name_space->name))
-		      {
-			*here = 0;
-			break;
-		      }
-		  if (!this_name_space->name)
-		    this_name_space = name_spaces;
-		}
-	    }
-	  if (this_name_space == name_spaces)
-	    {
-	      if (stat (*argv, &st) < 0)
-		{
-		  perror (*argv);
-		  continue;
-		}
-	      if (flags & FLAG_DEV)
-              {
-		if (S_ISBLK (st.st_mode))
-		  st.st_dev = st.st_rdev;
-		else if (S_ISDIR (st.st_mode))
-		  {
-		    if (stat (*argv, &st) < 0)
-		      {
-			perror (*argv);
-			continue;
-		      }
-		  }
-              }
-	      if (S_ISSOCK (st.st_mode) || (flags & FLAG_DEV))
-		fill_unix_cache ();
-	      if (!S_ISSOCK (st.st_mode) || (flags & FLAG_DEV))
-		enter_item (*argv, flags, sig_number, st.st_dev, st.st_ino,
-			    NULL);
-	      else
-		{
-		  UNIX_CACHE *walk;
-
-		  for (walk = unix_cache; walk; walk = walk->next)
-		    if (walk->fs_dev == st.st_dev && walk->fs_ino ==
-			st.st_ino)
-		      enter_item (*argv, flags, sig_number, net_dev,
-                        walk->net_ino, NULL);
-		}
-	    }
-	  else
-	    {
-	      NET_CACHE *walk;
-	      struct sockaddr_storage rmt_addr;
-	      int lcl_port, rmt_port;
-
-	      if (flags & FLAG_DEV)
-		{
-		  fprintf (stderr, _("ignoring -m in name space \"%s\"\n"),
-			   this_name_space->name);
-		  flags &= ~FLAG_DEV;
-		}
-	      fill_net_cache (this_name_space);
-	      if (!parse_inet (*argv, this_name_space->name, &lcl_port,
-			       &rmt_addr, &rmt_port))
-		{
-		  fprintf (stderr, _("%s/%s: invalid specification\n"), *argv,
-			   this_name_space->name);
-		  continue;
-		}
-	      for (walk = this_name_space->cache; walk; walk = walk->next)
-		if ((lcl_port == -1 || walk->lcl_port == lcl_port) &&
-		    (rmt_addr.ss_family == 0 || ( memcmp(
-                     &((struct sockaddr_in6*)&walk->rmt_addr)->sin6_addr,
-                     &((struct sockaddr_in6*)&rmt_addr)->sin6_addr,
-                     sizeof(struct in6_addr)) == 0) ) &&
-		    (rmt_port == -1 || walk->rmt_port == rmt_port))
-		  enter_item (*argv, flags, sig_number, net_dev, walk->ino,
-			      this_name_space);
-	    }
+	if ( (topproc_dir = opendir("/proc")) == NULL) {
+		fprintf(stderr, "Cannot open /proc directory: %s\n", strerror(errno));
+		exit(1);
 	}
-    }
-  if (no_files || (all && silent))
-    usage ();
-  scan_fd ();
-  scan_mounts ();
-  scan_swaps ();
-  if (do_kill && seteuid (getuid ()) < 0)
-    {
-      perror ("seteuid");
-      return 1;
-    }
-  self = getpid ();
-  if (silent)
-    kill_files ();
-  else
-    show_files_or_kill ();
-  return found_item ? 0 : 1;
+	my_pid = getpid();
+	while ( (topproc_dent = readdir(topproc_dir)) != NULL) {
+		if (topproc_dent->d_name[0] < '0' || topproc_dent->d_name[0] > '9') /* Not a process */
+			continue;
+		pid = atoi(topproc_dent->d_name);
+		/* Dont print myself */
+		if (pid == my_pid)
+			continue;
+		uid = getpiduid(pid);
+
+		root_stat = get_pidstat(pid, "root");
+		cwd_stat = get_pidstat(pid, "cwd");
+		exe_stat = get_pidstat(pid, "exe");
+		/* Scan the devices */
+		for (dev_tmp = dev_head ; dev_tmp != NULL ; dev_tmp = dev_tmp->next) {
+			if (exe_stat != NULL && exe_stat->st_dev == dev_tmp->device) 
+				add_matched_proc(dev_tmp->name, pid, uid, ACCESS_EXE);
+			if (root_stat != NULL && root_stat->st_dev == dev_tmp->device) 
+				add_matched_proc(dev_tmp->name, pid, uid, ACCESS_ROOT);
+			if (cwd_stat != NULL && cwd_stat->st_dev == dev_tmp->device) 
+				add_matched_proc(dev_tmp->name, pid, uid, ACCESS_CWD);
+		}
+		for (ino_tmp = ino_head ; ino_tmp != NULL ; ino_tmp = ino_tmp->next) {
+			if (exe_stat != NULL) {
+				if (exe_stat->st_dev == ino_tmp->device && exe_stat->st_ino == ino_tmp->inode) {
+					add_matched_proc(ino_tmp->name, pid, uid, ACCESS_EXE);
+				}
+			}
+			if (root_stat != NULL) {
+				if (root_stat->st_dev == ino_tmp->device && root_stat->st_ino == ino_tmp->inode){
+					add_matched_proc(ino_tmp->name, pid, uid, ACCESS_ROOT);
+				}
+
+			}
+			if (cwd_stat != NULL){
+				if (cwd_stat->st_dev == ino_tmp->device && cwd_stat->st_ino == ino_tmp->inode) {
+					add_matched_proc(ino_tmp->name, pid, uid, ACCESS_CWD);
+				}
+			}
+		}
+		check_dir(pid, "lib", dev_head, ino_head, uid, ACCESS_MMAP);
+		check_dir(pid, "mmap", dev_head, ino_head, uid, ACCESS_MMAP);
+		check_dir(pid, "fd", dev_head, ino_head, uid, ACCESS_FILE);
+		check_map(pid, "maps", dev_head, ino_head, uid, ACCESS_MMAP);
+
+	} /* while topproc_dent */
+	closedir(topproc_dir);
+}
+static void add_inode(struct inode_list **ino_list, struct names  *this_name, dev_t device, ino_t inode)
+{
+	struct inode_list *ino_tmp, *ino_head;
+
+	ino_head = *ino_list;
+
+	if ( (ino_tmp = malloc(sizeof(struct inode_list))) == NULL)
+		return;
+	ino_tmp->name = this_name;
+	ino_tmp->device = device;
+	ino_tmp->inode = inode;
+	ino_tmp->next = ino_head;
+	*ino_list = ino_tmp;
+}
+
+static void add_device(struct device_list **dev_list, struct names  *this_name, dev_t device)
+{
+	struct device_list *dev_tmp, *dev_head;
+
+	/*printf("Adding device %s %d\n", this_name->filename, device);*/
+	dev_head = *dev_list;
+
+	if ( (dev_tmp = malloc(sizeof(struct device_list))) == NULL)
+		return;
+	dev_tmp->name = this_name;
+	dev_tmp->device = device;
+	dev_tmp->next = dev_head;
+	*dev_list = dev_tmp;
+}
+
+static void add_ip_conn(struct ip_connections **ip_list, const char *protocol, struct names *this_name, const int lcl_port, const int rmt_port, unsigned long rmt_address)
+{
+	struct ip_connections *ip_tmp, *ip_head;
+
+	ip_head = *ip_list;
+
+	if ( (ip_tmp = malloc(sizeof(struct ip_connections))) == NULL)
+		return;
+	ip_tmp->name = this_name;
+	ip_tmp->lcl_port = lcl_port;
+	ip_tmp->rmt_port = rmt_port;
+	ip_tmp->rmt_address.s_addr = rmt_address;
+	ip_tmp->next = ip_head;
+
+	*ip_list = ip_tmp;
+}
+
+static void add_ip6_conn(struct ip6_connections **ip_list, const char *protocol, struct names *this_name, const int lcl_port, const int rmt_port, struct in6_addr rmt_address)
+{
+	struct ip6_connections *ip_tmp, *ip_head;
+
+	ip_head = *ip_list;
+
+	if ( (ip_tmp = malloc(sizeof(struct ip6_connections))) == NULL)
+		return;
+	ip_tmp->name = this_name;
+	ip_tmp->lcl_port = lcl_port;
+	ip_tmp->rmt_port = rmt_port;
+	memcpy(&(ip_tmp->rmt_port),&(rmt_port),sizeof(struct in6_addr));
+	ip_tmp->next = ip_head;
+
+	*ip_list = ip_tmp;
+}
+
+static void add_matched_proc(struct names *name_list, const pid_t pid, const uid_t uid, const char access)
+{
+	struct procs *pptr, *last_proc;
+	char *pathname;
+	char cmdname[101], *cptr;
+	int cmdlen;
+	FILE *fp;
+
+	last_proc = NULL;
+	for (pptr = name_list->matched_procs; pptr != NULL ; pptr = pptr->next)
+	{
+		last_proc = pptr;
+		if (pptr->pid == pid) {
+			pptr->access |= access;
+			return;
+		}
+	}
+	/* Not found */
+	if ( (pptr = malloc(sizeof (struct procs))) == NULL) {
+		fprintf(stderr,_("Cannot allocate memory for matched proc: %s\n"), strerror(errno));
+		return;
+	}
+	pptr->pid = pid;
+	pptr->uid = uid;
+	pptr->access = access;
+	pptr->next = NULL;
+	/* set command name */
+	pptr->command = NULL;
+	if ( (asprintf(&pathname, "/proc/%d/stat", pid) > 0) &&
+			( (fp = fopen(pathname, "r")) != NULL) &&
+			( fscanf(fp, "%*d (%100[^)]", cmdname) == 1)) 
+		if ( (pptr->command = malloc(MAX_CMDNAME+1)) != NULL) {
+			cmdlen = 0;
+			for (cptr = cmdname; cmdlen < MAX_CMDNAME && *cptr ; cptr++) {
+				if (isprint(*cptr))
+					pptr->command[cmdlen++] = *cptr;
+				else if(cmdlen < (MAX_CMDNAME-4))
+					cmdlen += sprintf(&(pptr->command[cmdlen]), "\\%03o", *cptr);
+			}
+			pptr->command[cmdlen] = '\0';
+		}
+	if (last_proc == NULL)
+		name_list->matched_procs = pptr;
+	else
+		last_proc->next = pptr;
+}
+
+int parse_mount(struct names *this_name, struct device_list **dev_list)
+{
+	struct stat st;
+
+	if (stat(this_name->filename, &st) != 0) {
+		fprintf(stderr, "Cannot stat mount point %s: %s\n", 
+				this_name->filename,
+				strerror(errno));
+		exit(1);
+	}
+	/*printf("Debug: parse_mount() adding %s\n", this_name->filename);*/
+	add_device(dev_list, this_name, st.st_dev);
+	return 0;
+}
+
+int parse_file(struct names *this_name, struct inode_list **ino_list)
+{
+	struct stat st;
+
+	if (stat(this_name->filename, &st) != 0) {
+		fprintf(stderr,"Cannot stat %s: %s\n", this_name->filename,
+				strerror(errno));
+		return -1;
+	}
+	/*printf("adding file %s %lX %lX\n", this_name->filename,
+			(unsigned long)st.st_dev, (unsigned long)st.st_ino);*/
+	add_inode(ino_list, this_name, st.st_dev, st.st_ino);
+	return 0;
+}
+
+int parse_mounts(struct names *this_name, struct mountdev_list *mounts, struct device_list **dev_list, const char opts) 
+{
+	struct stat st;
+	struct mountdev_list *mountptr;
+	dev_t match_device;
+
+	if (stat(this_name->filename, &st) != 0) {
+		fprintf(stderr,"Cannot stat %s: %s\n", this_name->filename,
+				strerror(errno));
+		return -1;
+	}
+	if (S_ISBLK(st.st_mode))
+		match_device = st.st_rdev;
+	else
+		match_device = st.st_dev;
+	for (mountptr = mounts ; mountptr != NULL ; mountptr = mountptr->next) {
+		if (mountptr->device == match_device) {
+			/*printf("Debug: adding parse_mounts() adding %s\n", 
+					this_name->filename);*/
+			add_device(dev_list, this_name, match_device);
+		}
+	}
+	return 0;
+}
+
+int parse_inet(struct names *this_name, const int ipv6_only, const int ipv4_only, struct ip_connections **ip_list, struct ip6_connections **ip6_list)
+{
+	struct addrinfo *res, *resptr;
+	struct addrinfo hints;
+	int errcode;
+	char *lcl_port_str, *rmt_addr_str, *rmt_port_str, *tmpstr, *tmpstr2;
+	in_port_t lcl_port;
+	struct sockaddr_in *sin;
+	struct sockaddr_in6 *sin6;
+	char hostspec[100];
+	char *protocol;
+	int i;
+	
+	if ( (protocol = strchr(this_name->filename, '/')) == NULL)
+		return -1;
+	protocol++;
+	if (protocol[0] == '\0')
+		return -1;
+	for (i=0; i < 99 && this_name->filename[i] != '\0' && this_name->filename[i] != '/'; i++)
+		hostspec[i] = this_name->filename[i];
+	hostspec[i] = '\0';
+
+	lcl_port_str = rmt_addr_str = rmt_port_str = NULL;
+	/* Split out the names */
+	if ( (tmpstr = strchr(hostspec, ',')) == NULL) {
+		/* Single option */
+		lcl_port_str = strdup(hostspec);
+	} else {
+		if (tmpstr == hostspec)
+			lcl_port_str = NULL;
+		else {
+			lcl_port_str = strdup(hostspec);
+			*tmpstr = '\0';
+		}
+		tmpstr++;
+		if (*tmpstr != '\0') {
+			if ( (tmpstr2 = strchr(tmpstr, ',')) == NULL) {
+				/* Only 2 options */
+				rmt_addr_str = tmpstr;
+			} else {
+				if (tmpstr2 == tmpstr)
+					rmt_addr_str = NULL;
+				else {
+					rmt_addr_str = tmpstr;
+					*tmpstr2 = '\0';
+				}
+				tmpstr2++;
+				if (*tmpstr2 != '\0')
+					rmt_port_str = tmpstr2;
+			}
+		}
+	}
+	/*printf("parsed to lp %s rh %s rp %s\n", lcl_port_str, rmt_addr_str, rmt_port_str);*/
+
+	memset(&hints, 0, sizeof(hints));
+	if (ipv6_only) {
+		hints.ai_family = PF_INET6;
+	} else if (ipv4_only) {
+			hints.ai_family = PF_INET;
+		} else 
+			hints.ai_family = PF_UNSPEC;
+	if (strcmp(protocol, "tcp") == 0)
+		hints.ai_socktype = SOCK_STREAM;
+	else
+		hints.ai_socktype = SOCK_DGRAM;
+
+	if (lcl_port_str == NULL) {
+		lcl_port = 0;
+	} else {
+		/* Resolve local port first */
+		if ( (errcode = getaddrinfo(NULL, lcl_port_str, &hints, &res)) != 0) {
+			fprintf(stderr, "Cannot resolve local port %s: %s\n",
+					lcl_port_str, gai_strerror(errcode));
+			return -1;
+		}
+		if (res == NULL)
+			return -1;
+		switch(res->ai_family) {
+			case AF_INET:
+				lcl_port = ((struct sockaddr_in*)(res->ai_addr))->sin_port;
+				break;
+			case AF_INET6:
+				lcl_port = ((struct sockaddr_in6*)(res->ai_addr))->sin6_port;
+				break;
+			default:
+				fprintf(stderr, "Uknown local port AF %d\n", res->ai_family);
+				freeaddrinfo(res);
+				return -1;
+		}
+		freeaddrinfo(res);
+	}
+	free(lcl_port_str);
+	res = NULL;
+	if (rmt_addr_str == NULL && rmt_port_str == NULL) {
+		add_ip_conn(ip_list, protocol, this_name, ntohs(lcl_port), 0, INADDR_ANY);
+		add_ip6_conn(ip6_list, protocol,this_name, ntohs(lcl_port), 0, in6addr_any);
+		return 0;
+	} else {
+		/* Resolve remote address and port */
+		if (getaddrinfo(rmt_addr_str, rmt_port_str, &hints, &res) == 0) {
+			for(resptr = res ; resptr != NULL ; resptr = resptr->ai_next ) {
+				switch(resptr->ai_family) {
+					case AF_INET:
+						sin = (struct sockaddr_in*)resptr->ai_addr;
+						add_ip_conn(ip_list, protocol, this_name, ntohs(lcl_port), ntohs(sin->sin_port), sin->sin_addr.s_addr);
+					break;
+				case AF_INET6:
+					sin6 = (struct sockaddr_in6*)resptr->ai_addr;
+						add_ip6_conn(ip6_list, protocol, this_name, ntohs(lcl_port), ntohs(sin6->sin6_port), sin6->sin6_addr);
+					break;
+				}
+			} /*while */
+			return 0;
+		}
+	}
+	return 1;
+}
+
+
+
+
+void find_net_sockets(struct inode_list **ino_list, struct ip_connections *conn_list, const char *protocol, dev_t netdev)
+{
+	FILE *fp;
+	char pathname[200], line[BUFSIZ];
+	unsigned long loc_port, rmt_port;
+	unsigned long rmt_addr;
+	ino_t inode;
+	struct ip_connections *conn_tmp;
+
+	if (snprintf(pathname,200, "/proc/net/%s", protocol) < 0) 
+		return ;
+
+	if ( (fp = fopen(pathname, "r")) == NULL) {
+		fprintf(stderr, "Cannot open protocol file: %s", strerror(errno));
+		return;
+	}
+	while (fgets(line, BUFSIZ, fp) != NULL) {
+		if (sscanf(line, "%*u: %*x:%lx %08lx:%lx %*x %*x:%*x %*x:%*x %*x %*d %*d %lu",
+			&loc_port,
+			&rmt_addr,
+			&rmt_port,
+			&inode) != 4)
+			continue;
+		/*printf("Found *:%lu with %s:%lu\n", loc_port, inet_ntoa(*((struct in_addr*)&rmt_addr)), rmt_port);*/
+		for(conn_tmp = conn_list ; conn_tmp != NULL ; conn_tmp = conn_tmp->next) {
+			/*printf("Comparing with *.%lu %s:%lu ...", 
+					conn_tmp->lcl_port,
+					inet_ntoa(conn_tmp->rmt_address),
+					conn_tmp->rmt_port);*/
+			if (conn_tmp->lcl_port == loc_port &&
+					conn_tmp->rmt_port == rmt_port &&
+					(memcmp(&(conn_tmp->rmt_address), &(rmt_addr),4) ==0)
+			   ) {
+				/* add inode to list */
+				add_inode(ino_list, conn_tmp->name, netdev, inode);
+			}
+		}
+			
+
+	}
+	return ;
+}
+
+void find_net6_sockets(struct inode_list **ino_list, struct ip6_connections *conn_list, const char *protocol, const dev_t netdev)
+{
+	FILE *fp;
+	char pathname[200], line[BUFSIZ];
+	unsigned long loc_port, rmt_port;
+	struct in6_addr rmt_addr;
+	unsigned int tmp_addr[4];
+	char rmt_addr6str[INET6_ADDRSTRLEN];
+	struct ip6_connections *head, *tmpptr, *tail;
+	struct ip6_connections *conn_tmp;
+	ino_t inode;
+
+	head = tmpptr = tail = NULL;
+
+	if (snprintf(pathname,200, "/proc/net/%s6", protocol) < 0) 
+		return ;
+
+	if ( (fp = fopen(pathname, "r")) == NULL) {
+		fprintf(stderr, "Cannot open protocol file: %s", strerror(errno));
+		return ;
+	}
+	while (fgets(line, BUFSIZ, fp) != NULL) {
+		if (sscanf(line, "%*u: %*x:%lx %08x%08x%08x%08x:%lx %*x %*x:%*x %*x:%*x %*x %*d %*d %lu",
+			&loc_port, 
+			&(tmp_addr[0]),
+			&(tmp_addr[1]),
+			&(tmp_addr[2]),
+			&(tmp_addr[3]),
+			&rmt_port, &inode) != 7)
+			continue;
+		rmt_addr.s6_addr32[0] = tmp_addr[0];
+		rmt_addr.s6_addr32[1] = tmp_addr[1];
+		rmt_addr.s6_addr32[2] = tmp_addr[2];
+		rmt_addr.s6_addr32[3] = tmp_addr[3];
+		inet_ntop(AF_INET6, &rmt_addr, rmt_addr6str, INET6_ADDRSTRLEN);
+		/*printf("Found %ld with %s:%ld\n", loc_port, rmt_addr6str, rmt_port);*/
+		for(conn_tmp = conn_list ; conn_tmp != NULL ; conn_tmp = conn_tmp->next) {
+			inet_ntop(AF_INET6, &conn_tmp->rmt_address, rmt_addr6str, INET6_ADDRSTRLEN);
+		/*	printf("Comparing with *.%lu %s:%lu ...", 
+					conn_tmp->lcl_port,
+					rmt_addr6str,
+					conn_tmp->rmt_port);*/
+			if (conn_tmp->lcl_port == loc_port &&
+					conn_tmp->rmt_port == rmt_port &&
+					(memcmp(&(conn_tmp->rmt_address), &(rmt_addr),16) ==0)
+			   ) {
+				add_inode(ino_list, conn_tmp->name, netdev, inode);
+			}
+		}
+	}
+}
+
+int main(int argc, char *argv[])
+{
+	static struct option long_options[] = {
+		{"all", 0, 0, 'a'},
+		{"mountpoint", 0, 0, 'c'},
+		{"help", 0, 0, 'h'},
+		{"interactive", 0, 0, 'i'},
+		{"kill", 0, 0, 'k'},
+		{"list", 0, 0, 'l'},
+		{"mounted", 0, 0, 'm'},
+		{"name-space", 1, 0, 'n'},
+		{"silent", 0, 0, 's'},
+		{"show-user", 0, 0, 'u'},
+		{"verbose", 0, 0, 'v'},
+		{"version", 0, 0, 'V'},
+		{0, 0, 0, 0}
+	};
+	opt_type opts;
+	int ipv4_only, ipv6_only;
+	unsigned char default_namespace = NAMESPACE_FILE;
+	struct mountdev_list *mount_devices = NULL;
+	struct device_list *match_devices = NULL;
+
+	dev_t netdev;
+	struct ip_connections *tcp_connection_list = NULL;
+	struct ip_connections *udp_connection_list = NULL;
+	struct ip6_connections *tcp6_connection_list = NULL;
+	struct ip6_connections *udp6_connection_list = NULL;
+	struct inode_list *match_inodes = NULL;
+	struct names *names_head, *this_name, *names_tail;
+	int optc, opti;
+	char *nsptr;
+
+	ipv4_only = ipv6_only = 0;
+	names_head = this_name = names_tail = NULL;
+	opts = 0;
+
+	netdev = get_netdev();
+	scan_mount_devices(opts, &mount_devices);
+
+	while ( (optc = getopt_long(argc, argv, "46acfhiklmn:suvV",
+					long_options, &opti)) != -1) {
+		switch(optc) {
+			case '4':
+				ipv4_only = 1;
+				break;
+			case '6':
+				ipv6_only = 1;
+				break;
+			case 'a':
+				opts |= OPT_ALLFILES;
+				break;
+			case 'c':
+				opts |= OPT_MOUNTPOINT;
+				break;
+			case 'f':
+				/* ignored */
+				break;
+			case 'h':
+				usage(NULL);
+				break;
+			case 'i':
+				opts |= OPT_INTERACTIVE;
+				break;
+			case 'k':
+				opts |= OPT_KILL;
+				break;
+			case 'l':
+				list_signals();
+				return 0;
+			case 'm':
+				opts |= OPT_MOUNTS;
+				break;
+			case 'n':
+				if (strcmp(optarg, "tcp") == 0)
+					default_namespace = NAMESPACE_TCP;
+				else if (strcmp(optarg, "udp") == 0)
+					default_namespace = NAMESPACE_UDP;
+				else if (strcmp(optarg, "file") == 0)
+					default_namespace = NAMESPACE_FILE;
+				else 
+					usage(_("Invalid namespace name"));
+				break;
+			case 's':
+				opts |= OPT_SILENT;
+				break;
+			case 'u':
+				opts |= OPT_USER;
+				break;
+			case 'v':
+				opts |= OPT_VERBOSE;
+				break;
+			case 'V':
+				print_version();
+				return 0;
+			case '?':
+				usage(NULL);
+				break;
+		}
+
+	}
+	if (optind < argc) {
+		/* File specifications */
+		for( ; optind < argc ; optind++) {
+			if ( (this_name = malloc(sizeof(struct names))) == NULL)
+				continue;
+			this_name->next = NULL;
+			if (names_head == NULL)
+				names_head = this_name;
+			if (names_tail != NULL)
+				names_tail->next = this_name;
+			names_tail = this_name;
+			/* try to find namespace spec */
+			this_name->name_space = default_namespace;
+			if ( ((nsptr = strchr(argv[optind], '/')) != NULL )
+					&& ( nsptr != argv[optind] )) {
+				if (strcmp(nsptr+1, "tcp") == 0) {
+					this_name->name_space = NAMESPACE_TCP;
+					*nsptr = '\0';
+				} else if (strcmp(nsptr+1, "udp") == 0) {
+					this_name->name_space = NAMESPACE_UDP;
+					*nsptr = '\0';
+				} else if (strcmp(nsptr+1, "file") == 0) {
+					this_name->name_space = NAMESPACE_FILE;
+					*nsptr = '\0';
+				}
+			}
+			this_name->matched_procs = NULL;
+			if ((opts & OPT_MOUNTPOINT) && this_name->name_space != NAMESPACE_FILE)
+				usage(_("You can only use files with mountpoint option"));
+			switch(this_name->name_space) {
+				case NAMESPACE_TCP:
+					asprintf(&(this_name->filename), "%s/tcp", argv[optind]);
+					parse_inet(this_name, ipv4_only, ipv6_only, &tcp_connection_list, &tcp6_connection_list);
+					break;
+				case NAMESPACE_UDP:
+					asprintf(&(this_name->filename), "%s/udp", argv[optind]);
+					parse_inet(this_name, ipv4_only, ipv6_only, &tcp_connection_list, &tcp6_connection_list);
+					break;
+				default: /* FILE */
+					this_name->filename = strdup(argv[optind]);
+					parse_file(this_name, &match_inodes);
+					if (opts & OPT_MOUNTPOINT || opts & OPT_MOUNTS)
+					parse_mounts(this_name, mount_devices, &match_devices, opts);
+					break;
+			}
+		} /* for */
+	} else {
+		usage(_("No process specification given"));
+	}
+	/* Check conflicting operations */
+	if (opts & OPT_MOUNTPOINT) {
+		if (opts & OPT_MOUNTS)
+			usage(_("You cannot use the mounted and mountpoint flags together"));
+	}
+	if (opts & OPT_SILENT) 
+	{
+		opts &= ~OPT_VERBOSE;
+		opts &= ~OPT_USER;
+		if (opts & OPT_ALLFILES)
+			usage(_("all option cannot be used with silent option."));
+	}
+	if (ipv4_only && ipv6_only)
+		usage(_("You cannot search for only IPv4 and only IPv6 sockets a the same time"));
+	if (!ipv4_only) {
+		if (tcp_connection_list != NULL)
+			find_net_sockets(&match_inodes, tcp_connection_list, "tcp",netdev);
+		if (udp_connection_list != NULL)
+			find_net_sockets(&match_inodes, udp_connection_list, "udp",netdev);
+	}
+	if (!ipv6_only) {
+		if (tcp6_connection_list != NULL)
+			find_net6_sockets(&match_inodes, tcp6_connection_list, "tcp",netdev);
+		if (udp6_connection_list != NULL)
+			find_net6_sockets(&match_inodes,  udp6_connection_list, "udp",netdev);
+	}
+	/*debug_match_lists(names_head, match_inodes, match_devices);*/
+	scan_procs(names_head, match_inodes, match_devices);
+	print_matches(names_head,opts);
+	return 0;
+}
+
+static void print_matches(struct names *names_head, const opt_type opts)
+{
+	struct names *nptr;
+	struct procs *pptr;
+	char first;
+	int len;
+	struct passwd *pwent = NULL;
+	
+	if (opts & OPT_VERBOSE)
+		fprintf(stderr, _("\n%*s USER        PID ACCESS COMMAND\n"),
+				NAME_FIELD, "");
+	for (nptr = names_head; nptr != NULL ; nptr = nptr->next) {
+		fprintf(stderr, "%s", nptr->filename);
+		first = 1;
+		len = strlen(nptr->filename);
+		if (!(opts & OPT_VERBOSE)) {
+			putc(':', stderr);
+			len++;
+		}
+		for (pptr = nptr->matched_procs; pptr != NULL ; pptr = pptr->next) {
+			if (opts & (OPT_VERBOSE|OPT_USER)) {
+				if (pwent == NULL || pwent->pw_uid != pptr->uid)
+					pwent = getpwuid(pptr->uid);
+			}
+			if (len > NAME_FIELD && (opts & OPT_VERBOSE)) {
+				putc('\n', stderr);
+				len=0;
+			}
+			if ((opts & OPT_VERBOSE) || first) 
+				while (len++ < NAME_FIELD)
+					putc(' ', stderr);
+			if (opts & OPT_VERBOSE) {
+				if (pwent == NULL)
+					fprintf(stderr, " %-8s ", _("(unknown)"));
+				else
+					fprintf(stderr, " %-8s ", pwent->pw_name);
+			}
+			printf("%6d", pptr->pid);
+			fflush(stdout);
+			if (opts & OPT_VERBOSE) {
+				fprintf(stderr, " %c%c%c%c%c ",
+						pptr->access & ACCESS_FILE ? 'f' : '.',
+						pptr->access & ACCESS_ROOT ? 'r' : '.',
+						pptr->access & ACCESS_CWD ? 'c' : '.',
+						pptr->access & ACCESS_EXE ? 'e' : '.',
+						(pptr->access & ACCESS_MMAP) && !(pptr->access & ACCESS_EXE) ? 'm' : '.');
+			} else {
+				if (pptr->access & ACCESS_ROOT)
+					putc('r', stderr);
+				if (pptr->access & ACCESS_CWD)
+					putc('c', stderr);
+				if (pptr->access & ACCESS_EXE)
+					putc('e', stderr);
+				else if (pptr->access & ACCESS_MMAP)
+					putc('m', stderr);
+			}
+			if (opts & OPT_USER) {
+				if (pwent == NULL)
+					fprintf(stderr, " %-8s ", _("(unknown)"));
+				else
+					fprintf(stderr, "(%s)", pwent->pw_name);
+			}
+			if (opts & OPT_VERBOSE) {
+				if (pptr->command == NULL)
+					fprintf(stderr, "???\n");
+				else 
+					fprintf(stderr, "%s\n", pptr->command);
+			}
+			len = 0;
+			first = 0;
+		}
+		if (nptr->matched_procs == NULL || !(opts & OPT_VERBOSE))
+			putc('\n', stderr);
+		if (opts & OPT_KILL)
+			kill_matched_proc(nptr->matched_procs,  opts);
+
+	} /* next name */
+
+}
+
+static struct stat *get_pidstat(const pid_t pid, const char *filename)
+{
+	char pathname[256];
+	struct stat *st;
+
+	if ( (st = malloc(sizeof(struct stat))) == NULL)
+		return NULL;
+	snprintf(pathname, 256, "/proc/%d/%s", pid, filename);
+	if (stat(pathname, st) != 0) 
+		return NULL;
+	else
+		return st;
+}
+
+static void check_dir(const pid_t pid, const char *dirname, struct device_list *dev_head, struct inode_list *ino_head, const uid_t uid, const char access)
+{
+	char *dirpath, *filepath;
+	DIR *dirp;
+	struct dirent *direntry;
+	struct inode_list *ino_tmp;
+	struct device_list *dev_tmp;
+	struct stat st;
+
+	if ( (dirpath = malloc(MAX_PATHNAME)) == NULL)
+		return;
+	if ( (filepath = malloc(MAX_PATHNAME)) == NULL)
+		return;
+
+	snprintf(dirpath, MAX_PATHNAME, "/proc/%d/%s", pid, dirname);
+	if ( (dirp = opendir(dirpath)) == NULL)
+		return;
+	while ( (direntry = readdir(dirp)) != NULL) {
+		if (direntry->d_name[0] < '0' || direntry->d_name[0] > '9')
+			continue;
+
+		snprintf(filepath, MAX_PATHNAME, "/proc/%d/%s/%s",
+			pid, dirname, direntry->d_name);
+		if (stat(filepath, &st) != 0) {
+			fprintf(stderr, "Cannot stat file %s: %s\n",filepath, strerror(errno));
+		} else {
+			for (dev_tmp = dev_head ; dev_tmp != NULL ; dev_tmp = dev_tmp->next) {
+				if (st.st_dev == dev_tmp->device)
+					add_matched_proc(dev_tmp->name, pid,uid, access);
+			}
+			for (ino_tmp = ino_head ; ino_tmp != NULL ; ino_tmp = ino_tmp->next) {
+				if (st.st_dev == ino_tmp->device && st.st_ino == ino_tmp->inode)
+					add_matched_proc(ino_tmp->name, pid,uid, access);
+			}
+		}
+	} /* while fd_dent */
+	closedir(dirp);
+}
+
+static void check_map(const pid_t pid, const char *filename, struct device_list *dev_head, struct inode_list *ino_head, const uid_t uid, const char access)
+{
+	char pathname[MAX_PATHNAME];
+	char line[BUFSIZ];
+	struct inode_list *ino_tmp;
+	struct device_list *dev_tmp;
+	FILE *fp;
+	unsigned long long tmp_inode;
+	unsigned int tmp_maj, tmp_min;
+	dev_t tmp_device;
+
+	snprintf(pathname, MAX_PATHNAME, "/proc/%d/%s", pid, filename);
+	if ( (fp = fopen(pathname, "r")) == NULL)
+		return;
+	while (fgets(line,BUFSIZ, fp)) {
+		if (sscanf(line, "%*s %*s %*s %x:%x %lld", 
+					&tmp_maj, &tmp_min, &tmp_inode) == 3) {
+			tmp_device = tmp_maj * 256 + tmp_min;
+			for(dev_tmp = dev_head ; dev_tmp != NULL ; dev_tmp = dev_tmp->next)
+				if (dev_tmp->device == tmp_device)
+					add_matched_proc(dev_tmp->name, pid, uid, access);
+			for(ino_tmp = ino_head ; ino_tmp != NULL ; ino_tmp = ino_tmp->next)
+				if (ino_tmp->device == tmp_device && ino_tmp->inode == tmp_inode)
+					add_matched_proc(ino_tmp->name, pid, uid, access);
+		}
+	}
+	fclose(fp);
+}
+
+static uid_t getpiduid(const pid_t pid)
+{
+	char pathname[MAX_PATHNAME];
+	struct stat st;
+
+	if (snprintf(pathname, MAX_PATHNAME, "/proc/%d", pid) < 0) 
+		return 0;
+	if (stat(pathname, &st) != 0)
+		return 0;
+	return st.st_uid;
+}
+
+void add_mount_device(struct mountdev_list **mount_head,const char *fsname, const char *dir, dev_t device)
+{
+	struct mountdev_list *newmount;
+	/*printf("Adding mount Path: %s Dir:%s dev:%0x\n",dir, fsname, device);*/
+
+	if ( (newmount = malloc(sizeof(struct mountdev_list))) == NULL)
+		return;
+	newmount->fsname = strdup(fsname);
+	newmount->dir = strdup(dir);
+	newmount->device = device;
+	newmount->next = *mount_head;
+	*mount_head = newmount;
+}
+
+/*
+ * scan_mount_devices : Create a list of mount points and devices
+ *   This list is used later for matching purposes
+ */
+void scan_mount_devices(const opt_type opts, struct mountdev_list **mount_devices)
+{
+	FILE *mntfp;
+	struct mntent *mnt_ptr;
+	struct stat st;
+	
+	if ( (mntfp = setmntent("/etc/mtab","r")) == NULL) {
+		fprintf(stderr, "Cannot open /etc/mtab: %s\n",
+				strerror(errno));
+		return;
+	}
+	while ( (mnt_ptr = getmntent(mntfp)) != NULL) {
+		if (stat(mnt_ptr->mnt_dir, &st) == 0) {
+			add_mount_device(mount_devices, mnt_ptr->mnt_fsname, mnt_ptr->mnt_dir, st.st_dev);
+		}
+	}
+}
+
+static dev_t get_netdev(void)
+{
+	int skt;
+	struct stat st;
+
+	if ( (skt = socket(PF_INET,SOCK_DGRAM,0)) < 0)
+		return -1;
+	if ( fstat(skt, &st) != 0) 
+		return -1;
+	return st.st_dev;
+}
+
+static void debug_match_lists(struct names *names_head, struct inode_list *ino_head, struct device_list *dev_head)
+{
+	struct names *nptr;
+	struct inode_list *iptr;
+	struct device_list *dptr;
+
+	fprintf(stderr,"Names:\n");
+	for (nptr=names_head; nptr!= NULL; nptr=nptr->next) 
+	{
+		fprintf(stderr, "\t%s %c\n", nptr->filename, nptr->name_space);
+	}
+	fprintf(stderr,"\nInodes:\n");
+	for (iptr=ino_head; iptr!=NULL; iptr=iptr->next)
+	{
+		fprintf(stderr, "\tDev:%0lx Inode:%0lx\n",
+				(unsigned long)iptr->device, (unsigned long)iptr->inode);
+	}
+	fprintf(stderr,"\nDevices:\n");
+	for (dptr=dev_head; dptr!=NULL; dptr=dptr->next)
+	{
+		fprintf(stderr, "\tDev:%0lx\n",
+				(unsigned long)dptr->device);
+	}
+}
+
+/* 0 = no, 1=yes */
+static int ask(const pid_t pid)
+{
+	int c, res;
+	size_t len = 0;
+	char *line = NULL;
+
+	fflush(stdout);
+	while(1) {
+		fprintf(stderr, _("Kill process %d ? (y/N) "), pid);
+		fflush(stderr);
+		if (getline(&line, &len, stdin) < 0)
+			return 0;
+		if (line[0] == '\n') {
+			free(line);
+			return 0;
+		}
+		res = rpmatch(line);
+		if (res >= 0) {
+			free(line);
+			return res;
+		}
+	} /* while */
+}
+
+static void kill_matched_proc(struct procs *proc_head, const opt_type opts)
+{
+	struct procs *pptr;
+
+	for (pptr = proc_head ; pptr != NULL ; pptr = pptr->next ) {
+		if ( (opts & OPT_INTERACTIVE) && (ask(pptr->pid) == 0))
+			continue;
+		fprintf(stderr, "debug killing proc %d\n", pptr->pid);
+	}
 }
