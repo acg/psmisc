@@ -39,14 +39,18 @@
 #include <netinet/in.h>
 #include <pwd.h>
 #include <netdb.h>
-#include <getopt.h>
 #include <dirent.h>
 #include <unistd.h>
 #include <ctype.h>
 #include <mntent.h>
+#include <signal.h>
+#include <getopt.h>
 
 #include "fuser.h"
+#include "signals.h"
 #include "i18n.h"
+
+#undef DEBUG
 
 #define NAME_FIELD 20		/* space reserved for file name */
 /* Function defines */
@@ -55,14 +59,16 @@ static void check_dir(const pid_t pid, const char *dirname, struct device_list *
 static void check_map(const pid_t pid, const char *filename, struct device_list *dev_head, struct inode_list *ino_head, const uid_t uid, const char access);
 static struct stat *get_pidstat(const pid_t pid, const char *filename);
 static uid_t getpiduid(const pid_t pid);
-static void print_matches(struct names *names_head, const opt_type opts);
-static void kill_matched_proc(struct procs *pptr, const opt_type opts);
+static void print_matches(struct names *names_head, const opt_type opts, const int sig_number);
+static void kill_matched_proc(struct procs *pptr, const opt_type opts, const int sig_number);
 
 static dev_t get_netdev(void);
 int parse_mount(struct names *this_name, struct device_list **dev_list);
 static void add_device(struct device_list **dev_list, struct names  *this_name, dev_t device);
 void scan_mount_devices(const opt_type opts, struct mountdev_list **mount_devices);
+#ifdef DEBUG
 static void debug_match_lists(struct names *names_head, struct inode_list *ino_head, struct device_list *dev_head);
+#endif
 
 static void usage (const char *errormsg)
 {
@@ -123,7 +129,7 @@ static void scan_procs(struct names *names_head, struct inode_list *ino_head, st
 		return;
 
 	if ( (topproc_dir = opendir("/proc")) == NULL) {
-		fprintf(stderr, "Cannot open /proc directory: %s\n", strerror(errno));
+		fprintf(stderr, _("Cannot open /proc directory: %s\n"), strerror(errno));
 		exit(1);
 	}
 	my_pid = getpid();
@@ -290,7 +296,7 @@ int parse_mount(struct names *this_name, struct device_list **dev_list)
 	struct stat st;
 
 	if (stat(this_name->filename, &st) != 0) {
-		fprintf(stderr, "Cannot stat mount point %s: %s\n", 
+		fprintf(stderr, _("Cannot stat mount point %s: %s\n"), 
 				this_name->filename,
 				strerror(errno));
 		exit(1);
@@ -305,7 +311,7 @@ int parse_file(struct names *this_name, struct inode_list **ino_list)
 	struct stat st;
 
 	if (stat(this_name->filename, &st) != 0) {
-		fprintf(stderr,"Cannot stat %s: %s\n", this_name->filename,
+		fprintf(stderr,_("Cannot stat %s: %s\n"), this_name->filename,
 				strerror(errno));
 		return -1;
 	}
@@ -322,7 +328,7 @@ int parse_mounts(struct names *this_name, struct mountdev_list *mounts, struct d
 	dev_t match_device;
 
 	if (stat(this_name->filename, &st) != 0) {
-		fprintf(stderr,"Cannot stat %s: %s\n", this_name->filename,
+		fprintf(stderr,_("Cannot stat %s: %s\n"), this_name->filename,
 				strerror(errno));
 		return -1;
 	}
@@ -411,7 +417,7 @@ int parse_inet(struct names *this_name, const int ipv6_only, const int ipv4_only
 	} else {
 		/* Resolve local port first */
 		if ( (errcode = getaddrinfo(NULL, lcl_port_str, &hints, &res)) != 0) {
-			fprintf(stderr, "Cannot resolve local port %s: %s\n",
+			fprintf(stderr, _("Cannot resolve local port %s: %s\n"),
 					lcl_port_str, gai_strerror(errcode));
 			return -1;
 		}
@@ -425,7 +431,7 @@ int parse_inet(struct names *this_name, const int ipv6_only, const int ipv4_only
 				lcl_port = ((struct sockaddr_in6*)(res->ai_addr))->sin6_port;
 				break;
 			default:
-				fprintf(stderr, "Uknown local port AF %d\n", res->ai_family);
+				fprintf(stderr, _("Uknown local port AF %d\n"), res->ai_family);
 				freeaddrinfo(res);
 				return -1;
 		}
@@ -466,7 +472,7 @@ void find_net_sockets(struct inode_list **ino_list, struct ip_connections *conn_
 	FILE *fp;
 	char pathname[200], line[BUFSIZ];
 	unsigned long loc_port, rmt_port;
-	unsigned long rmt_addr;
+	unsigned long rmt_addr, scanned_inode;
 	ino_t inode;
 	struct ip_connections *conn_tmp;
 
@@ -474,7 +480,7 @@ void find_net_sockets(struct inode_list **ino_list, struct ip_connections *conn_
 		return ;
 
 	if ( (fp = fopen(pathname, "r")) == NULL) {
-		fprintf(stderr, "Cannot open protocol file: %s", strerror(errno));
+		fprintf(stderr, _("Cannot open protocol file: %s"), strerror(errno));
 		return;
 	}
 	while (fgets(line, BUFSIZ, fp) != NULL) {
@@ -482,9 +488,10 @@ void find_net_sockets(struct inode_list **ino_list, struct ip_connections *conn_
 			&loc_port,
 			&rmt_addr,
 			&rmt_port,
-			&inode) != 4)
+			&scanned_inode) != 4)
 			continue;
 		/*printf("Found *:%lu with %s:%lu\n", loc_port, inet_ntoa(*((struct in_addr*)&rmt_addr)), rmt_port);*/
+		inode = scanned_inode;
 		for(conn_tmp = conn_list ; conn_tmp != NULL ; conn_tmp = conn_tmp->next) {
 			/*printf("Comparing with *.%lu %s:%lu ...", 
 					conn_tmp->lcl_port,
@@ -514,6 +521,7 @@ void find_net6_sockets(struct inode_list **ino_list, struct ip6_connections *con
 	char rmt_addr6str[INET6_ADDRSTRLEN];
 	struct ip6_connections *head, *tmpptr, *tail;
 	struct ip6_connections *conn_tmp;
+	unsigned long scanned_inode;
 	ino_t inode;
 
 	head = tmpptr = tail = NULL;
@@ -522,7 +530,7 @@ void find_net6_sockets(struct inode_list **ino_list, struct ip6_connections *con
 		return ;
 
 	if ( (fp = fopen(pathname, "r")) == NULL) {
-		fprintf(stderr, "Cannot open protocol file: %s", strerror(errno));
+		fprintf(stderr, _("Cannot open protocol file: %s"), strerror(errno));
 		return ;
 	}
 	while (fgets(line, BUFSIZ, fp) != NULL) {
@@ -532,8 +540,9 @@ void find_net6_sockets(struct inode_list **ino_list, struct ip6_connections *con
 			&(tmp_addr[1]),
 			&(tmp_addr[2]),
 			&(tmp_addr[3]),
-			&rmt_port, &inode) != 7)
+			&rmt_port, &scanned_inode) != 7)
 			continue;
+		inode = scanned_inode;
 		rmt_addr.s6_addr32[0] = tmp_addr[0];
 		rmt_addr.s6_addr32[1] = tmp_addr[1];
 		rmt_addr.s6_addr32[2] = tmp_addr[2];
@@ -573,7 +582,9 @@ int main(int argc, char *argv[])
 		{"version", 0, 0, 'V'},
 		{0, 0, 0, 0}
 	};
-	opt_type opts;
+	opt_type opts; 
+	struct option *opt_ptr;
+	int sig_number;
 	int ipv4_only, ipv6_only;
 	unsigned char default_namespace = NAMESPACE_FILE;
 	struct mountdev_list *mount_devices = NULL;
@@ -586,124 +597,143 @@ int main(int argc, char *argv[])
 	struct ip6_connections *udp6_connection_list = NULL;
 	struct inode_list *match_inodes = NULL;
 	struct names *names_head, *this_name, *names_tail;
-	int optc, opti;
+	int optc, option;
 	char *nsptr;
 
 	ipv4_only = ipv6_only = 0;
 	names_head = this_name = names_tail = NULL;
 	opts = 0;
+	sig_number = SIGKILL;
 
 	netdev = get_netdev();
 	scan_mount_devices(opts, &mount_devices);
 
-	while ( (optc = getopt_long(argc, argv, "46acfhiklmn:suvV",
-					long_options, &opti)) != -1) {
-		switch(optc) {
-			case '4':
-				ipv4_only = 1;
+	/* getopt doesnt like things like -SIGBLAH */
+	for(optc = 1; optc < argc; optc++) {
+		if (argv[optc][0] == '-') { /* its an option */
+			option=argv[optc][1];
+			if (argv[optc][1] == '-') { /* its a long option */
+				if (argv[optc][2] == '\0') {
+					continue;
+				}
+				/* FIXME longopts */
+				continue;
+			}
+			switch(argv[optc][1]) {
+				case '4':
+					ipv4_only = 1;
+					break;
+				case '6':
+					ipv6_only = 1;
+					break;
+				case 'a':
+					opts |= OPT_ALLFILES;
+					break;
+				case 'c':
+					opts |= OPT_MOUNTPOINT;
+					break;
+				case 'f':
+					/* ignored */
+					break;
+				case 'h':
+					usage(NULL);
+					break;
+				case 'i':
+					opts |= OPT_INTERACTIVE;
+					break;
+				case 'k':
+					opts |= OPT_KILL;
+					break;
+				case 'l':
+					list_signals();
+					break;
+				case 'm':
+					opts |= OPT_MOUNTS;
+					break;
+				case 'n':
+					optc++;
+					if (optc >= argc) {
+						usage(_("Namespace option requires an argument."));
+					}
+					if (strcmp(argv[optc], "tcp") == 0)
+						default_namespace = NAMESPACE_TCP;
+					else if (strcmp(argv[optc], "udp") == 0)
+						default_namespace = NAMESPACE_UDP;
+					else if (strcmp(argv[optc], "file") == 0)
+						default_namespace = NAMESPACE_FILE;
+					else 
+						usage(_("Invalid namespace name"));
+					break;
+				case 's':
+					opts |= OPT_SILENT;
+					break;
+				case 'u':
+					opts |= OPT_USER;
+					break;
+				case 'v':
+					opts |= OPT_VERBOSE;
+					break;
+				case 'V':
+					print_version();
+					return 0;
+				default:
+					if ( isupper(argv[optc][1]) || isdigit(argv[optc][1])) {
+						sig_number = get_signal(argv[optc]+1,"fuser");
+						break;
+					}
+					fprintf(stderr,"%s: Invalid option %c\n",argv[0] , argv[optc][1]);
+
+					usage(NULL);
+					break;
+			} /* switch */
+			continue;
+		}
+		/* File specifications */
+		if ( (this_name = malloc(sizeof(struct names))) == NULL)
+			continue;
+		this_name->next = NULL;
+		if (names_head == NULL)
+			names_head = this_name;
+		if (names_tail != NULL)
+			names_tail->next = this_name;
+		names_tail = this_name;
+		/* try to find namespace spec */
+		this_name->name_space = default_namespace;
+		if ( ((nsptr = strchr(argv[optc], '/')) != NULL )
+			&& ( nsptr != argv[optc] )) {
+			if (strcmp(nsptr+1, "tcp") == 0) {
+				this_name->name_space = NAMESPACE_TCP;
+				*nsptr = '\0';
+			} else if (strcmp(nsptr+1, "udp") == 0) {
+				this_name->name_space = NAMESPACE_UDP;
+				*nsptr = '\0';
+			} else if (strcmp(nsptr+1, "file") == 0) {
+				this_name->name_space = NAMESPACE_FILE;
+				*nsptr = '\0';
+			}
+		}
+		this_name->matched_procs = NULL;
+		if ((opts & OPT_MOUNTPOINT) && this_name->name_space != NAMESPACE_FILE)
+			usage(_("You can only use files with mountpoint option"));
+		switch(this_name->name_space) {
+			case NAMESPACE_TCP:
+				asprintf(&(this_name->filename), "%s/tcp", argv[optc]);
+				parse_inet(this_name, ipv4_only, ipv6_only, &tcp_connection_list, &tcp6_connection_list);
 				break;
-			case '6':
-				ipv6_only = 1;
+			case NAMESPACE_UDP:
+				asprintf(&(this_name->filename), "%s/udp", argv[optc]);
+				parse_inet(this_name, ipv4_only, ipv6_only, &tcp_connection_list, &tcp6_connection_list);
 				break;
-			case 'a':
-				opts |= OPT_ALLFILES;
-				break;
-			case 'c':
-				opts |= OPT_MOUNTPOINT;
-				break;
-			case 'f':
-				/* ignored */
-				break;
-			case 'h':
-				usage(NULL);
-				break;
-			case 'i':
-				opts |= OPT_INTERACTIVE;
-				break;
-			case 'k':
-				opts |= OPT_KILL;
-				break;
-			case 'l':
-				list_signals();
-				return 0;
-			case 'm':
-				opts |= OPT_MOUNTS;
-				break;
-			case 'n':
-				if (strcmp(optarg, "tcp") == 0)
-					default_namespace = NAMESPACE_TCP;
-				else if (strcmp(optarg, "udp") == 0)
-					default_namespace = NAMESPACE_UDP;
-				else if (strcmp(optarg, "file") == 0)
-					default_namespace = NAMESPACE_FILE;
-				else 
-					usage(_("Invalid namespace name"));
-				break;
-			case 's':
-				opts |= OPT_SILENT;
-				break;
-			case 'u':
-				opts |= OPT_USER;
-				break;
-			case 'v':
-				opts |= OPT_VERBOSE;
-				break;
-			case 'V':
-				print_version();
-				return 0;
-			case '?':
-				usage(NULL);
+			default: /* FILE */
+				this_name->filename = strdup(argv[optc]);
+					parse_file(this_name, &match_inodes);
+				if (opts & OPT_MOUNTPOINT || opts & OPT_MOUNTS)
+					parse_mounts(this_name, mount_devices, &match_devices, opts);
 				break;
 		}
 
-	}
-	if (optind < argc) {
-		/* File specifications */
-		for( ; optind < argc ; optind++) {
-			if ( (this_name = malloc(sizeof(struct names))) == NULL)
-				continue;
-			this_name->next = NULL;
-			if (names_head == NULL)
-				names_head = this_name;
-			if (names_tail != NULL)
-				names_tail->next = this_name;
-			names_tail = this_name;
-			/* try to find namespace spec */
-			this_name->name_space = default_namespace;
-			if ( ((nsptr = strchr(argv[optind], '/')) != NULL )
-					&& ( nsptr != argv[optind] )) {
-				if (strcmp(nsptr+1, "tcp") == 0) {
-					this_name->name_space = NAMESPACE_TCP;
-					*nsptr = '\0';
-				} else if (strcmp(nsptr+1, "udp") == 0) {
-					this_name->name_space = NAMESPACE_UDP;
-					*nsptr = '\0';
-				} else if (strcmp(nsptr+1, "file") == 0) {
-					this_name->name_space = NAMESPACE_FILE;
-					*nsptr = '\0';
-				}
-			}
-			this_name->matched_procs = NULL;
-			if ((opts & OPT_MOUNTPOINT) && this_name->name_space != NAMESPACE_FILE)
-				usage(_("You can only use files with mountpoint option"));
-			switch(this_name->name_space) {
-				case NAMESPACE_TCP:
-					asprintf(&(this_name->filename), "%s/tcp", argv[optind]);
-					parse_inet(this_name, ipv4_only, ipv6_only, &tcp_connection_list, &tcp6_connection_list);
-					break;
-				case NAMESPACE_UDP:
-					asprintf(&(this_name->filename), "%s/udp", argv[optind]);
-					parse_inet(this_name, ipv4_only, ipv6_only, &tcp_connection_list, &tcp6_connection_list);
-					break;
-				default: /* FILE */
-					this_name->filename = strdup(argv[optind]);
-					parse_file(this_name, &match_inodes);
-					if (opts & OPT_MOUNTPOINT || opts & OPT_MOUNTS)
-					parse_mounts(this_name, mount_devices, &match_devices, opts);
-					break;
-			}
-		} /* for */
-	} else {
+	} /* for optc */
+	if (names_head == NULL) {
 		usage(_("No process specification given"));
 	}
 	/* Check conflicting operations */
@@ -732,13 +762,15 @@ int main(int argc, char *argv[])
 		if (udp6_connection_list != NULL)
 			find_net6_sockets(&match_inodes,  udp6_connection_list, "udp",netdev);
 	}
-	/*debug_match_lists(names_head, match_inodes, match_devices);*/
+#ifdef DEBUG
+	debug_match_lists(names_head, match_inodes, match_devices);
+#endif
 	scan_procs(names_head, match_inodes, match_devices);
-	print_matches(names_head,opts);
+	print_matches(names_head,opts, sig_number);
 	return 0;
 }
 
-static void print_matches(struct names *names_head, const opt_type opts)
+static void print_matches(struct names *names_head, const opt_type opts, const int sig_number)
 {
 	struct names *nptr;
 	struct procs *pptr;
@@ -812,7 +844,7 @@ static void print_matches(struct names *names_head, const opt_type opts)
 		if (nptr->matched_procs == NULL || !(opts & OPT_VERBOSE))
 			putc('\n', stderr);
 		if (opts & OPT_KILL)
-			kill_matched_proc(nptr->matched_procs,  opts);
+			kill_matched_proc(nptr->matched_procs,  opts, sig_number);
 
 	} /* next name */
 
@@ -856,7 +888,7 @@ static void check_dir(const pid_t pid, const char *dirname, struct device_list *
 		snprintf(filepath, MAX_PATHNAME, "/proc/%d/%s/%s",
 			pid, dirname, direntry->d_name);
 		if (stat(filepath, &st) != 0) {
-			fprintf(stderr, "Cannot stat file %s: %s\n",filepath, strerror(errno));
+			fprintf(stderr, _("Cannot stat file %s: %s\n"),filepath, strerror(errno));
 		} else {
 			for (dev_tmp = dev_head ; dev_tmp != NULL ; dev_tmp = dev_tmp->next) {
 				if (st.st_dev == dev_tmp->device)
@@ -937,7 +969,7 @@ void scan_mount_devices(const opt_type opts, struct mountdev_list **mount_device
 	struct stat st;
 	
 	if ( (mntfp = setmntent("/etc/mtab","r")) == NULL) {
-		fprintf(stderr, "Cannot open /etc/mtab: %s\n",
+		fprintf(stderr, _("Cannot open /etc/mtab: %s\n"),
 				strerror(errno));
 		return;
 	}
@@ -960,6 +992,8 @@ static dev_t get_netdev(void)
 	return st.st_dev;
 }
 
+#ifdef DEBUG
+/* often not used, doesnt need translation */
 static void debug_match_lists(struct names *names_head, struct inode_list *ino_head, struct device_list *dev_head)
 {
 	struct names *nptr;
@@ -985,10 +1019,12 @@ static void debug_match_lists(struct names *names_head, struct inode_list *ino_h
 	}
 }
 
+#endif
+
 /* 0 = no, 1=yes */
 static int ask(const pid_t pid)
 {
-	int c, res;
+	int res;
 	size_t len = 0;
 	char *line = NULL;
 
@@ -1010,13 +1046,13 @@ static int ask(const pid_t pid)
 	} /* while */
 }
 
-static void kill_matched_proc(struct procs *proc_head, const opt_type opts)
+static void kill_matched_proc(struct procs *proc_head, const opt_type opts, const int sig_number)
 {
 	struct procs *pptr;
 
 	for (pptr = proc_head ; pptr != NULL ; pptr = pptr->next ) {
 		if ( (opts & OPT_INTERACTIVE) && (ask(pptr->pid) == 0))
 			continue;
-		fprintf(stderr, "debug killing proc %d\n", pptr->pid);
+		kill (pptr->pid, sig_number);
 	}
 }
