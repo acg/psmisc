@@ -26,6 +26,7 @@ struct procs {
 #define ACCESS_FILE 4
 #define ACCESS_ROOT 8
 #define ACCESS_MMAP 16
+#define ACCESS_FILEWR 32
 
 struct names {
 	char *filename;

@@ -811,7 +811,7 @@ static void print_matches(struct names *names_head, const opt_type opts, const i
 			fflush(stdout);
 			if (opts & OPT_VERBOSE) {
 				fprintf(stderr, " %c%c%c%c%c ",
-						pptr->access & ACCESS_FILE ? 'f' : '.',
+						pptr->access & ACCESS_FILE ? (pptr->access & ACCESS_FILEWR ? 'F' : 'f' ) : '.',
 						pptr->access & ACCESS_ROOT ? 'r' : '.',
 						pptr->access & ACCESS_CWD ? 'c' : '.',
 						pptr->access & ACCESS_EXE ? 'e' : '.',
@@ -871,7 +871,7 @@ static void check_dir(const pid_t pid, const char *dirname, struct device_list *
 	struct dirent *direntry;
 	struct inode_list *ino_tmp;
 	struct device_list *dev_tmp;
-	struct stat st;
+	struct stat st, lst;
 
 	if ( (dirpath = malloc(MAX_PATHNAME)) == NULL)
 		return;
@@ -891,12 +891,22 @@ static void check_dir(const pid_t pid, const char *dirname, struct device_list *
 			fprintf(stderr, _("Cannot stat file %s: %s\n"),filepath, strerror(errno));
 		} else {
 			for (dev_tmp = dev_head ; dev_tmp != NULL ; dev_tmp = dev_tmp->next) {
-				if (st.st_dev == dev_tmp->device)
-					add_matched_proc(dev_tmp->name, pid,uid, access);
+				if (st.st_dev == dev_tmp->device) {
+					if (access == ACCESS_FILE && (lstat(filepath, &lst)==0) && (lst.st_mode & S_IWUSR)) {
+						add_matched_proc(dev_tmp->name, pid,uid, ACCESS_FILEWR|access);
+					} else  {
+						add_matched_proc(dev_tmp->name, pid,uid, access);
+					}
+				}
 			}
 			for (ino_tmp = ino_head ; ino_tmp != NULL ; ino_tmp = ino_tmp->next) {
-				if (st.st_dev == ino_tmp->device && st.st_ino == ino_tmp->inode)
-					add_matched_proc(ino_tmp->name, pid,uid, access);
+				if (st.st_dev == ino_tmp->device && st.st_ino == ino_tmp->inode) {
+					if (access == ACCESS_FILE && (lstat(filepath, &lst)==0) && (lst.st_mode & S_IWUSR)) {
+						add_matched_proc(ino_tmp->name, pid,uid, ACCESS_FILEWR|access);
+					} else {
+						add_matched_proc(ino_tmp->name, pid,uid, access);
+					}
+				}
 			}
 		}
 	} /* while fd_dent */

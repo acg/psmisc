@@ -4,10 +4,10 @@ Changes in 21.7
 	* define rpmatch for libraries that dont have it
 	* Fixed small typos in help, thanks to Benno Schulenberg
 	  fixes SF# 1150042
-	* fusernew - this will be the new fuser once it gets tested on
-	  those strange setups folks out there have
 	* Completed change from Flask to SELinux, thanks to Benno Schulenberg
 	* pstree works better with uClibc, thanks Mike Frysinger
+	* fuser rewritten: possibly fixes Debian #312560
+	* fuser prints F instead of f is access is write, thanks to Tet.
 
 Changes in 21.6
 ===============
