@@ -624,6 +624,41 @@ read_proc (void)
 		(file, "%d (%s) %c %d", &dummy, comm, (char *) &dummy,
 		 &ppid) == 4)
  */
+		{
+		   DIR *taskdir;
+		   struct dirent *dt;
+		   char *taskpath;
+		   char *threadname;
+		   int thread;
+		   
+		   if (!(taskpath = malloc(strlen(path) + 10))) {
+		      exit (2);
+		   }
+		   sprintf (taskpath, "%s/task", path);
+		   
+		   if ((taskdir=opendir(taskpath))!=0) {
+		      /* if we have this dir, we're on 2.6 */
+		      if (!(threadname = malloc(strlen(comm) + 3))) {
+			 exit (2);
+		      }
+		      sprintf(threadname,"{%s}",comm);
+		      while ((dt = readdir(taskdir)) != NULL) {
+			 if ((thread=atoi(dt->d_name)) !=0) {
+			    if (thread != pid) {
+#ifdef FLASK_LINUX
+			       add_proc(threadname, thread, pid, st.st_uid, NULL, 0, sid);
+#else  /*FLASK_LINUX*/
+			       add_proc(threadname, thread, pid, st.st_uid, NULL, 0);
+#endif /*FLASK_LINUX*/
+			    }
+			 }
+		      }
+		      free(threadname);
+		      (void) closedir(taskdir);
+		   }
+		   free(taskpath);
+		}
+
 		if (!print_args)
 #ifdef WITH_SELINUX
 		  add_proc(comm, pid, ppid, st.st_uid, NULL, 0, scontext);
@@ -779,10 +814,10 @@ main (int argc, char **argv)
    * command-line options, if given.
    */
 
-  if (!strcmp(nl_langinfo(CODESET), "UTF-8")) {
+  if (isatty(1) && !strcmp(nl_langinfo(CODESET), "UTF-8")) {
     /* Use UTF-8 symbols if the locale's character set is UTF-8. */
     sym = &sym_utf;
-  } else if ((termname = getenv ("TERM")) && \
+  } else if (isatty (1) && (termname = getenv ("TERM")) && \
              (strlen (termname) > 0) && \
              (setupterm (NULL, 1 /* stdout */, NULL) == OK) && \
              (tigetstr ("acsc") > 0)) {

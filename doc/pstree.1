@@ -41,6 +41,15 @@ becomes
 .sp
 .fi
 .PP
+.PP
+Child threads of a process are found under the parent process and are shown
+with the process name in curly braces, e.g.
+.nf
+.sp
+    icecast2\-\-\-13*[{icecast2}]
+.sp
+.fi
+.PP
 If \fBpstree\fR is called as \fBpstree.x11\fR then it will prompt the user
 at the end of the line to press return and will not return until that
 has happened. This is useful for when \fBpstree\fR is run in a xterminal.

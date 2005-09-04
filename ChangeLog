@@ -8,6 +8,8 @@ Changes in 21.7
 	* pstree works better with uClibc, thanks Mike Frysinger
 	* fuser rewritten: possibly fixes Debian #312560
 	* fuser prints F instead of f is access is write, thanks to Tet.
+	* pstree checks to see it is a real tty Debian #326500
+	* pstree shows child threads with {commandname} Debian #230924
 
 Changes in 21.6
 ===============
