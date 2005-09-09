@@ -25,9 +25,10 @@ fi
 AC_SUBST([SELINUX_LIB])
 
 dnl Checks for libraries.
-AC_CHECK_LIB([ncurses], [tgetent], [TERMCAP_LIB=-lncurses], [
-  AC_CHECK_LIB([termcap], [tgetent], [TERMCAP_LIB=-ltermcap], [
-    AC_MSG_ERROR([Cannot find ncurses or termcap libraries]) ]) ])
+AC_CHECK_LIB(tinfo, tgetent, TERMCAP_LIB=-ltinfo,
+  AC_CHECK_LIB(ncurses, tgetent, TERMCAP_LIB=-lncurses,
+    AC_CHECK_LIB(termcap, tgetent, TERMCAP_LIB=-ltermcap, 
+      AC_MSG_ERROR(Cannot find tinfo, ncurses or termcap libraries) ) ) )
 AC_SUBST([TERMCAP_LIB])
 
 dnl Checks for header files.

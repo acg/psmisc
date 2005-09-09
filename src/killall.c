@@ -414,7 +414,7 @@ usage_killall (void)
      "Usage: killall [-Z CONTEXT] [ -egiqvw ] [ -SIGNAL ] NAME...\n"));
 #else  /*WITH_SELINUX*/
   fprintf(stderr, _(
-    "Usage: killall [OPTIONS]... [--] NAME...\n"));
+    "Usage: killall [OPTION]... [--] NAME...\n"));
 #endif /*WITH_SELINUX*/
   fprintf(stderr, _(
     "       killall -l, --list\n"

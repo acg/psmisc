@@ -48,6 +48,8 @@
 #include <selinux/selinux.h>
 #endif /*WITH_SELINUX*/
 
+extern const char *__progname;
+
 #ifndef MAX_DEPTH
 #define MAX_DEPTH    100
 #endif
@@ -803,11 +805,8 @@ main (int argc, char **argv)
   textdomain(PACKAGE);
 #endif
   
-  if ( (tmpstr = strrchr(argv[0],'/'))) {
-    tmpstr++;
-    if (strcmp(tmpstr, "pstree.x11") ==0)
-      wait_end=1;
-  }
+  if (!strcmp(__progname, "pstree.x11"))
+    wait_end=1;
 
   /*
    * Attempt to figure out a good default symbol set.  Will be overriden by

@@ -10,6 +10,13 @@ Changes in 21.7
 	* fuser prints F instead of f is access is write, thanks to Tet.
 	* pstree checks to see it is a real tty Debian #326500
 	* pstree shows child threads with {commandname} Debian #230924
+	* better capitalisation with usage SF# 1150042
+
+	* Applied psmisc-21.4-alt-progname to find pstrees name
+	* configure.in checks for tinfo library
+	* both above fixes from ALTLinux
+
+
 
 Changes in 21.6
 ===============
