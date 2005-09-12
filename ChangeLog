@@ -12,6 +12,8 @@ Changes in 21.7
 	* pstree shows child threads with {commandname} Debian #230924
 	* better capitalisation with usage SF# 1150042
 	* Added warning about fuser and tcp/udp access Debian #327813
+	* pstree defaults to ASCII not VT100 until problems with terminals
+	  are fixed Debian #288856
 
 	* Applied psmisc-21.4-alt-progname to find pstrees name
 	* configure.in checks for tinfo library

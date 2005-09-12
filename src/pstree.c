@@ -824,7 +824,10 @@ main (int argc, char **argv)
      * Failing that, if TERM is defined, a non-null value, and the terminal
      * has the VT100 graphics charset, use it.
      */
-    sym = &sym_vt100;
+	  /* problems with VT100 on some terminals, making this ascci
+	   * for now
+	   */
+    sym = &sym_ascii;
   } else {
     /* Otherwise, fall back to ASCII. */
     sym = &sym_ascii;
