@@ -11,6 +11,7 @@ Changes in 21.7
 	* pstree checks to see it is a real tty Debian #326500
 	* pstree shows child threads with {commandname} Debian #230924
 	* better capitalisation with usage SF# 1150042
+	* Added warning about fuser and tcp/udp access Debian #327813
 
 	* Applied psmisc-21.4-alt-progname to find pstrees name
 	* configure.in checks for tinfo library

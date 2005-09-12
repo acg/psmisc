@@ -1,4 +1,4 @@
-.TH FUSER 1 2004-11-09 "Linux" "User Commands"
+.TH FUSER 1 2005-09-13 "Linux" "User Commands"
 .SH NAME
 fuser \- identify processes using files or sockets
 .SH SYNOPSIS
@@ -6,13 +6,16 @@ fuser \- identify processes using files or sockets
 .B fuser
 .RB [ \-a | \-s | \-c ]
 .RB [ \-4 | \-6 ]
-.RB [ \-n\ \fIspace ]
+.RB [ \-n\ 
+.IR space\  ]
 .RB [ \-k
 .RB [ \-i ]
-.RB [ \-\fIsignal\fR ]
+.RB [ \-
+.IR signal\  ]
 ]
 .RB [ \-muvf ]
-.I name ...
+.I name
+...
 .br
 .B fuser
 .RB \-l
@@ -154,6 +157,15 @@ The \fB\-k\fP option only works on processes. If the user is the kernel,
 fuser \-m /dev/sgX will show (or kill with the \-k flag) all processes, even
 if you don't have that device configured. There may be other devices it
 does this for too.
+.PP
+.B fuser
+cannot report on any processes that it doesn't have permission to look at
+the file descriptor table for.  The most common time this problem occurs
+is when looking for TCP or UDP sockets when running
+.B fuser
+as a non-root user. In this case 
+.B fuser
+will report no access
 .SH AUTHORS
 .PP
 Werner Almesberger <werner@almesberger.net>
