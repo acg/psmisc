@@ -4,13 +4,17 @@ killall \- kill processes by name
 .SH SYNOPSIS
 .ad l
 .B killall
-.RB [ \-Z , \-\-context ]
+.RB [ \-Z , \-\-context 
+.IR pattern ]
 .RB [ \-e , \-\-exact ]
 .RB [ \-g , \-\-process\-group ]
 .RB [ \-i , \-\-interactive ]
 .RB [ \-q , \-\-quiet ]
+.RB [ \-r , \-\-regexp ]
 .RB [ \-s , \-\-signal
 .IR signal ]
+.RB [ \-u , \-\-user 
+.IR user ]
 .RB [ \-v , \-\-verbose ]
 .RB [ \-w , \-\-wait ]
 .RB [ \-I , \-\-ignore-case ]
@@ -30,9 +34,10 @@ sends a signal to all processes running any of the specified commands. If no
 signal name is specified, SIGTERM is sent.
 .PP
 Signals can be specified either by name (e.g. \fB\-HUP\fP) or by number
-(e.g. \fB\-1\fP).
+(e.g. \fB\-1\fP) or by option \fB-s\fP.
 .PP
-If the command name contains a slash (\fB/\fP), processes executing that
+If the command name is not regular expression (option \fB-r\fP)
+and contains a slash (\fB/\fP), processes executing that
 particular file will be selected for killing, independent of their name.
 .PP
 \fBkillall\fP returns a zero return code if at least one process has been

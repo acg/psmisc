@@ -647,11 +647,11 @@ read_proc (void)
 		      while ((dt = readdir(taskdir)) != NULL) {
 			 if ((thread=atoi(dt->d_name)) !=0) {
 			    if (thread != pid) {
-#ifdef FLASK_LINUX
-			       add_proc(threadname, thread, pid, st.st_uid, NULL, 0, sid);
-#else  /*FLASK_LINUX*/
+#ifdef WITH_SELINUX
+			       add_proc(threadname, thread, pid, st.st_uid, NULL, 0, scontext);
+#else  /*WITH_SELINUX*/
 			       add_proc(threadname, thread, pid, st.st_uid, NULL, 0);
-#endif /*FLASK_LINUX*/
+#endif /*WITH_SELINUX*/
 			    }
 			 }
 		      }
@@ -790,7 +790,6 @@ main (int argc, char **argv)
   char termcap_area[1024];
   char *termname;
   int c;
-  char *tmpstr;
 
   if (ioctl (1, TIOCGWINSZ, &winsz) >= 0)
     if (winsz.ws_col)

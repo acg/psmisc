@@ -19,6 +19,8 @@ Changes in 21.7
 	* configure.in checks for tinfo library
 	* both above fixes from ALTLinux
 
+	* Removed old FLASK_LINUX define in pstree
+
 
 
 Changes in 21.6
