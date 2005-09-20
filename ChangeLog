@@ -14,12 +14,17 @@ Changes in 21.7
 	* Added warning about fuser and tcp/udp access Debian #327813
 	* pstree defaults to ASCII not VT100 until problems with terminals
 	  are fixed Debian #288856
+	* fuser doesnt complain if it cannot scan some mount points Debian
+	  #299153
 
 	* Applied psmisc-21.4-alt-progname to find pstrees name
 	* configure.in checks for tinfo library
 	* both above fixes from ALTLinux
 
+	* Added -u option for killall to kill process by user
 	* Removed old FLASK_LINUX define in pstree
+	* Added -r for to killall  for regex matching for proc names
+	* Thanks to Karel Zak from RedHat for the patches
 
 
 

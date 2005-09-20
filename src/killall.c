@@ -39,6 +39,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <getopt.h>
+#include <pwd.h>
+#include <regex.h>
 
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
@@ -53,7 +55,7 @@
 #define MAX_NAMES (int)(sizeof(unsigned long)*8)
 
 
-static int verbose = 0, exact = 0, interactive = 0,
+static int verbose = 0, exact = 0, interactive = 0, reg = 0,
            quiet = 0, wait_until_dead = 0, process_group = 0,
            ignore_case = 0, pidof;
 
@@ -88,50 +90,112 @@ ask (char *name, pid_t pid)
   /* Never should get here */
 }
 
+static int
+match_process_uid(pid_t pid, uid_t uid)
+{
+	char buf[128];
+	uid_t puid;
+	FILE *f;
+	int re = -1;
+	
+	snprintf (buf, sizeof buf, PROC_BASE "/%d/status", pid);
+	if (!(f = fopen (buf, "r")))
+		return 0;
+	
+	while (fgets(buf, sizeof buf, f))
+	{
+		if (sscanf (buf, "Uid:\t%d", &puid))
+		{
+			re = uid==puid;
+			break;
+		}
+	}
+	fclose(f);
+	if (re==-1)
+	{
+		fprintf(stderr, _("Cannot get UID from process status\n"));
+		exit(1);
+	}
+	return re;
+}
+
+static regex_t *
+build_regexp_list(int names, char **namelist)
+{
+	int i;
+	regex_t *reglist;
+	int flag = REG_EXTENDED|REG_NOSUB;
+	
+	if (!(reglist = malloc (sizeof (regex_t) * names)))
+	{
+		perror ("malloc");
+		exit (1);
+	}
+
+	if (ignore_case)
+		flag |= REG_ICASE;
+	
+	for (i = 0; i < names; i++)
+	{
+		if (regcomp(&reglist[i], namelist[i], flag) != 0) 
+		{
+			fprintf(stderr, _("Bad regular expression: %s\n"), namelist[i]);
+			exit (1);
+		}
+	}
+	return reglist;
+}
+
 #ifdef WITH_SELINUX
 static int
-kill_all(int signal, int names, char **namelist, security_context_t scontext )
+kill_all(int signal, int names, char **namelist, struct passwd *pwent, 
+					regex_t *scontext )
 #else  /*WITH_SELINUX*/
 static int
-kill_all (int signal, int names, char **namelist)
+kill_all (int signal, int names, char **namelist, struct passwd *pwent)
 #endif /*WITH_SELINUX*/
 {
   DIR *dir;
   struct dirent *de;
   FILE *file;
   struct stat st, sts[MAX_NAMES];
-  int *name_len;
+  int *name_len = NULL;
   char *path, comm[COMM_LEN];
   char *command_buf;
   char *command;
   pid_t *pid_table, pid, self, *pid_killed;
   pid_t *pgids;
-  int empty, i, j, okay, length, got_long, error;
+  int i, j, okay, length, got_long, error;
   int pids, max_pids, pids_killed;
   unsigned long found;
+  regex_t *reglist = NULL;;
 #ifdef WITH_SELINUX
   security_context_t lcontext=NULL;
-
-  if ( names == 0 || ! namelist ) exit( 1 ); /* do the obvious thing...*/
 #endif /*WITH_SELINUX*/
 
-  if (!(name_len = malloc (sizeof (int) * names)))
-    {
-      perror ("malloc");
-      exit (1);
-    }
-  for (i = 0; i < names; i++) {
-    if (!strchr (namelist[i], '/'))
-      {
-	sts[i].st_dev = 0;
-	name_len[i] = strlen (namelist[i]);
-      }
-    else if (stat (namelist[i], &sts[i]) < 0)
-      {
-	perror (namelist[i]);
-	exit (1);
-      }
-   } 
+  if (names && reg) 
+      reglist = build_regexp_list(names, namelist);
+  else if (names)
+   {
+      if (!(name_len = malloc (sizeof (int) * names)))
+        {
+          perror ("malloc");
+          exit (1);
+        }
+      for (i = 0; i < names; i++) 
+        {
+          if (!strchr (namelist[i], '/'))
+            {
+	      sts[i].st_dev = 0;
+	      name_len[i] = strlen (namelist[i]);
+            }
+          else if (stat (namelist[i], &sts[i]) < 0)
+            {
+	      perror (namelist[i]);
+	      exit (1);
+            }
+        }
+    } 
   self = getpid ();
   found = 0;
   if (!(dir = opendir (PROC_BASE)))
@@ -163,7 +227,6 @@ kill_all (int signal, int names, char **namelist)
       pid_table[pids++] = pid;
     }
   (void) closedir (dir);
-  empty = 1;
   pids_killed = 0;
   pid_killed = malloc (max_pids * sizeof (pid_t));
   if (!pid_killed)
@@ -184,6 +247,26 @@ kill_all (int signal, int names, char **namelist)
     }
   for (i = 0; i < pids; i++)
     {
+      pid_t id;
+      int found_name = -1;
+
+      /* match by UID */
+      if (pwent && match_process_uid(pid_table[i], pwent->pw_uid)==0)
+	continue;
+#ifdef WITH_SELINUX
+      /* match by SELinux context */
+      if (scontext) 
+        {
+          if (getpidcon(pid_table[i], &lcontext) < 0)
+            continue;
+	  if (regexec(scontext, lcontext, 0, NULL, 0) != 0) {
+            freecon(lcontext);
+            continue;
+          }
+          freecon(lcontext);
+        }
+#endif /*WITH_SELINUX*/
+      /* load process name */
       if (asprintf (&path, PROC_BASE "/%d/stat", pid_table[i]) < 0)
 	continue;
       if (!(file = fopen (path, "r"))) 
@@ -192,7 +275,6 @@ kill_all (int signal, int names, char **namelist)
 	  continue;
 	}
       free (path);
-      empty = 0;
       okay = fscanf (file, "%*d (%[^)]", comm) == 1;
       (void) fclose (file);
       if (!okay)
@@ -259,109 +341,99 @@ kill_all (int signal, int names, char **namelist)
 	    }
 	  got_long = okay;
 	}
+      /* mach by process name */
       for (j = 0; j < names; j++)
 	{
-	  pid_t id;
-
-	  if (!sts[j].st_dev)
+	  if (reg)
 	    {
-	      if (length != COMM_LEN - 1 || name_len[j] < COMM_LEN - 1)
-		{
-		  if (ignore_case == 1)
-		  {
-		    if (strcasecmp (namelist[j], comm))
-		    continue;
-		  }
-		  else
-		  {
-		    if (strcmp(namelist[j], comm))
-		    continue;
-		  }
-		}
-	      else if (got_long ? strcmp (namelist[j], command) :
-		       strncmp (namelist[j], comm, COMM_LEN - 1))
-		continue;
-#ifdef WITH_SELINUX
-              if ( scontext != NULL ) {
-                if ( getpidcon(pid_table[i], &lcontext) < 0 )
-                  continue;
-                if (strcmp(lcontext,scontext)!=0) {
-		  freecon(lcontext);
-                  continue;
-		}
-		freecon(lcontext);
-              }
-#endif /*WITH_SELINUX*/
+	      if (regexec (&reglist[j], got_long ? command : comm, 0, NULL, 0) != 0)
+		      continue;
 	    }
-	  else
+	  else /* non-regex */
 	    {
-	      if (asprintf (&path, PROC_BASE "/%d/exe", pid_table[i]) < 0)
-		continue;
-
-	      if (stat (path, &st) < 0) {
-		    free (path);
+ 	      if (!sts[j].st_dev)
+	        {
+	          if (length != COMM_LEN - 1 || name_len[j] < COMM_LEN - 1)
+	  	    {
+		      if (ignore_case == 1)
+		        {
+		          if (strcasecmp (namelist[j], comm))
+		             continue;
+		        }
+		      else
+		        {
+		          if (strcmp(namelist[j], comm))
+		             continue;
+		        }
+		    }
+	          else if (got_long ? strcmp (namelist[j], command) :
+		                      strncmp (namelist[j], comm, COMM_LEN - 1))
 		    continue;
+	        }
+	      else
+	        {
+	          if (asprintf (&path, PROC_BASE "/%d/exe", pid_table[i]) < 0)
+		    continue;
+
+	          if (stat (path, &st) < 0) 
+		    {
+		      free (path);
+		      continue;
+	            }
+	          free (path);
+	          if (sts[j].st_dev != st.st_dev || sts[j].st_ino != st.st_ino)
+		    continue;
+	        }
+	    } /* non-regex */
+	  found_name = j;
+	  break;
+	}  
+        
+        if (names && found_name==-1)
+	  continue;  /* match by process name faild */
+	
+        /* check for process group */
+	if (!process_group)
+	  id = pid_table[i];
+	else
+	  {
+	    int j;
+
+	    id = getpgid (pid_table[i]);
+	    pgids[i] = id;
+	    if (id < 0)
+	      {
+	        fprintf (stderr, "getpgid(%d): %s\n", pid_table[i],
+		   strerror (errno));
 	      }
-	      free (path);
-#ifdef WITH_SELINUX
-              if ( scontext != NULL ) {
-                if ( getpidcon(pid_table[i], &lcontext) < 0 )
-                  continue;
-                if (strcmp(lcontext,scontext)!=0) {
-		  freecon(lcontext);
-                  continue;
-		}
-		freecon(lcontext);
-              }
-#endif /*WITH_SELINUX*/
-	      if (sts[j].st_dev != st.st_dev || sts[j].st_ino != st.st_ino)
-		continue;
-	    }
-	  if (!process_group)
-	    id = pid_table[i];
-	  else
-	    {
-	      int j;
-
-	      id = getpgid (pid_table[i]);
-	      pgids[i] = id;
-	      if (id < 0)
-		{
-		  fprintf (stderr, "getpgid(%d): %s\n", pid_table[i],
-			   strerror (errno));
-		}
-	      for (j = 0; j < i; j++)
-		if (pgids[j] == id)
-		  break;
-	      if (j < i)
-		continue;
-	    }
-	  if (interactive && !ask (comm, id))
-	    continue;
-	  if (pidof)
-	    {
-	      if (found)
-		putchar (' ');
-	      printf ("%d", id);
-	      found |= 1 << j;
-	    }
-	  else if (kill (process_group ? -id : id, signal) >= 0)
-	    {
-	      if (verbose)
-		fprintf (stderr, _("Killed %s(%s%d) with signal %d\n"), got_long ? command :
+	    for (j = 0; j < i; j++)
+	      if (pgids[j] == id)
+	        break;
+	    if (j < i)
+	      continue;
+	  }	
+	if (interactive && !ask (comm, id))
+	  continue;
+	if (pidof)
+	  {
+	    if (found)
+	       putchar (' ');
+	    printf ("%d", id);
+	    found |= 1 << (found_name >= 0 ? found_name : 0);
+	  }
+	else if (kill (process_group ? -id : id, signal) >= 0)
+	  {
+	    if (verbose)
+	      fprintf (stderr, _("Killed %s(%s%d) with signal %d\n"), got_long ? command :
 			 comm, process_group ? "pgid " : "", id, signal);
-	      found |= 1 << j;
-	      pid_killed[pids_killed++] = id;
-	    }
-	  else if (errno != ESRCH || interactive)
-	    fprintf (stderr, "%s(%d): %s\n", got_long ? command :
-		     comm, id, strerror (errno));
-	}
-    }
-  if (empty)
-    {
-      fprintf (stderr, _("%s is empty (not mounted ?)\n"), PROC_BASE);
-      exit (1);
+	    if (found_name >= 0)
+		    /* mark item of namelist */
+		    found |= 1 << found_name;
+	    pid_killed[pids_killed++] = id;
+	  }
+	else if (errno != ESRCH || interactive)
+	  fprintf (stderr, "%s(%d): %s\n", got_long ? command :
+	    	comm, id, strerror (errno));
     }
   if (!quiet && !pidof)
     for (i = 0; i < names; i++)
@@ -369,7 +441,14 @@ kill_all (int signal, int names, char **namelist)
 	fprintf (stderr, _("%s: no process killed\n"), namelist[i]);
   if (pidof)
     putchar ('\n');
-  error = found == ((1 << (names - 1)) | ((1 << (names - 1)) - 1)) ? 0 : 1;
+  if (names)
+    /* killall returns a zero return code if at least one process has 
+     * been killed for each listed command. */
+    error = found == ((1 << (names - 1)) | ((1 << (names - 1)) - 1)) ? 0 : 1;
+  else
+    /* in nameless mode killall returns a zero return code if at least 
+     * one process has killed */
+    error = pids_killed ? 0 : 1;
   /*
    * We scan all (supposedly) killed processes every second to detect dead
    * processes as soon as possible in order to limit problems of race with
@@ -411,7 +490,7 @@ usage_killall (void)
 {
 #ifdef WITH_SELINUX
    fprintf(stderr, _(
-     "Usage: killall [-Z CONTEXT] [ -egiqvw ] [ -SIGNAL ] NAME...\n"));
+     "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"));
 #else  /*WITH_SELINUX*/
   fprintf(stderr, _(
     "Usage: killall [OPTION]... [--] NAME...\n"));
@@ -425,15 +504,18 @@ usage_killall (void)
     "  -i,--interactive    ask for confirmation before killing\n"
     "  -l,--list           list all known signal names\n"
     "  -q,--quiet          don't print complaints\n"
+    "  -r,--regexp         interpret NAME as an extended regular expression\n"
     "  -s,--signal SIGNAL  send this signal instead of SIGTERM\n"
+    "  -u,--user USER      kill only process(es) running as USER\n"
     "  -v,--verbose        report if the signal was successfully sent\n"
     "  -V,--version        display version information\n"
-    "  -w,--wait           wait for processes to die\n\n"));
+    "  -w,--wait           wait for processes to die\n"));
 #ifdef WITH_SELINUX
   fprintf(stderr, _(
-    "  -Z,--context CONTEXT kill only process(es) having context\n"
-    "                      (must precede other arguments)"));
+    "  -Z,--context REGEXP kill only process(es) having context\n"
+    "                      (must precede other arguments)\n"));
 #endif /*WITH_SELINUX*/
+  fputc('\n', stderr);
 }
 
 
@@ -466,6 +548,9 @@ main (int argc, char **argv)
   int sig_num;
   int optc;
   int myoptind;
+  struct passwd *pwent = NULL;
+  struct stat isproc;
+  
   //int optsig = 0;
 
   struct option options[] = {
@@ -475,7 +560,9 @@ main (int argc, char **argv)
     {"interactive", 0, NULL, 'i'},
     {"list-signals", 0, NULL, 'l'},
     {"quiet", 0, NULL, 'q'},
+    {"regexp", 0, NULL, 'r'},
     {"signal", 1, NULL, 's'},
+    {"user", 1, NULL, 'u'},
     {"verbose", 0, NULL, 'v'},
     {"wait", 0, NULL, 'w'},
 #ifdef WITH_SELINUX
@@ -486,6 +573,7 @@ main (int argc, char **argv)
 
 #ifdef WITH_SELINUX
   security_context_t scontext = NULL;
+  regex_t scontext_reg;
 
   if ( argc < 2 ) usage(); /* do the obvious thing... */
 #endif /*WITH_SELINUX*/
@@ -507,9 +595,9 @@ main (int argc, char **argv)
 
   opterr = 0;
 #ifdef WITH_SELINUX
-  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwZ:VI",options,NULL)) != EOF) {
+  while ( (optc = getopt_long_only(argc,argv,"egilqrs:u:vwZ:VI",options,NULL)) != EOF) {
 #else
-  while ( (optc = getopt_long_only(argc,argv,"egilqs:vwVI",options,NULL)) != EOF) {
+  while ( (optc = getopt_long_only(argc,argv,"egilqrs:u:vwVI",options,NULL)) != EOF) {
 #endif
     switch (optc) {
       case 'e':
@@ -534,8 +622,22 @@ main (int argc, char **argv)
           usage();
         quiet = 1;
         break;
+      case 'r':
+	if (pidof)
+	  usage();
+	reg = 1;
+	break;
       case 's':
 	sig_num = get_signal (optarg, "killall");
+        break;
+      case 'u':
+	if (pidof)
+	  usage();
+        if (!(pwent = getpwnam(optarg)))
+	  {
+            fprintf (stderr, _("Cannot find user %s\n"), optarg);
+            exit (1);
+          }
         break;
       case 'v':
         if (pidof)
@@ -556,9 +658,13 @@ main (int argc, char **argv)
         break;
 #ifdef WITH_SELINUX
       case 'Z': 
-        if (is_selinux_enabled()>0) 
-           scontext=optarg;
-        else 
+        if (is_selinux_enabled()>0) {
+	  scontext=optarg;
+          if (regcomp(&scontext_reg, scontext, REG_EXTENDED|REG_NOSUB) != 0) {
+            fprintf(stderr, _("Bad regular expression: %s\n"), scontext);
+            exit (1);
+	  }
+        } else 
            fprintf(stderr, "Warning: -Z (--context) ignored. Requires an SELinux enabled kernel\n");
         break;
 #endif /*WITH_SELINUX*/
@@ -579,7 +685,11 @@ main (int argc, char **argv)
     }
   }
   myoptind = optind;
-  if (argc - myoptind < 1) 
+#ifdef WITH_SELINUX
+  if ((argc - myoptind < 1) && pwent==NULL && scontext==NULL) 
+#else
+  if ((argc - myoptind < 1) && pwent==NULL)	  
+#endif
     usage();
 
   if (argc - myoptind > MAX_NAMES + 1)
@@ -587,11 +697,17 @@ main (int argc, char **argv)
       fprintf (stderr, _("Maximum number of names is %d\n"), MAX_NAMES);
       exit (1);
     }
+  if (stat("/proc/self/stat", &isproc)==-1)
+    {
+      fprintf (stderr, _("%s is empty (not mounted ?)\n"), PROC_BASE);
+      exit (1);
+    }
   argv = argv + myoptind;
   /*printf("sending signal %d to procs\n", sig_num);*/
 #ifdef WITH_SELINUX
-  return kill_all(sig_num,argc - myoptind, argv, scontext);
+  return kill_all(sig_num,argc - myoptind, argv, pwent, 
+		  		scontext ? &scontext_reg : NULL);
 #else  /*WITH_SELINUX*/
-  return kill_all(sig_num,argc - myoptind, argv );
+  return kill_all(sig_num,argc - myoptind, argv, pwent);
 #endif /*WITH_SELINUX*/
 }

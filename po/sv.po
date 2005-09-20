@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 21.3\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2005-02-23 14:46+1100\n"
+"POT-Creation-Date: 2005-09-20 13:19+1000\n"
 "PO-Revision-Date: 2004-11-02 13:37-0500\n"
 "Last-Translator: Joakim Mared <joakim at bfcom dot se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -14,35 +14,35 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: src/killall.c:53
+#: src/killall.c:71
 #, fuzzy, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "Avsluta %s(%s%d) ? (y/n) "
 
-#: src/killall.c:245
+#: src/killall.c:256
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "hoppar över delvis matchande process: %s(%d)\n"
 
-#: src/killall.c:339
+#: src/killall.c:351
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Avslutade %s(%s%d) med signal %d\n"
 
-#: src/killall.c:351 src/fuser.c:494 src/pstree.c:673
+#: src/killall.c:363 src/pstree.c:704
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s är tom (inte monterad ?)\n"
 
-#: src/killall.c:357
+#: src/killall.c:369
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: ingen process avslutad\n"
 
-#: src/killall.c:388
+#: src/killall.c:400
 #, c-format
 msgid ""
-"usage: pidof [ -eg ] name ...\n"
+"Usage: pidof [ -eg ] NAME...\n"
 "       pidof -V\n"
 "\n"
 "    -e      require exact match for very long names;\n"
@@ -52,21 +52,21 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/killall.c:402
+#: src/killall.c:414
 #, c-format
-msgid "usage: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n"
+msgid "Usage: killall [-Z CONTEXT] [ -egiqvw ] [ -SIGNAL ] NAME...\n"
 msgstr ""
 
-#: src/killall.c:405
+#: src/killall.c:417
 #, c-format
-msgid "usage: killall [ OPTIONS ] [ -- ] name ...\n"
+msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr ""
 
-#: src/killall.c:408
+#: src/killall.c:420
 #, c-format
 msgid ""
 "       killall -l, --list\n"
-"       killall -V --version\n"
+"       killall -V, --version\n"
 "\n"
 "  -e,--exact          require exact match for very long names\n"
 "  -I,--ignore-case    case insensitive process name match\n"
@@ -74,32 +74,30 @@ msgid ""
 "  -i,--interactive    ask for confirmation before killing\n"
 "  -l,--list           list all known signal names\n"
 "  -q,--quiet          don't print complaints\n"
-"  -s,--signal         send signal instead of SIGTERM\n"
+"  -s,--signal SIGNAL  send this signal instead of SIGTERM\n"
 "  -v,--verbose        report if the signal was successfully sent\n"
 "  -V,--version        display version information\n"
 "  -w,--wait           wait for processes to die\n"
 "\n"
 msgstr ""
 
-#: src/killall.c:422
+#: src/killall.c:434
 #, c-format
 msgid ""
-"  -d,--sid            kill only process(es) having sid\n"
-"  -c,--context        kill only process(es) having scontext\n"
-"   (-s, -c are mutually exclusive and must precede other arguments)\n"
-"\n"
+"  -Z,--context CONTEXT kill only process(es) having context\n"
+"                      (must precede other arguments)"
 msgstr ""
 
-#: src/killall.c:444 src/fuser.c:989 src/pstree.c:743
-#, c-format
+#: src/killall.c:454 src/fuser.c:108 src/pstree.c:774
+#, fuzzy, c-format
 msgid ""
-"Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
+"Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
 "\n"
 
-#: src/killall.c:446 src/fuser.c:991 src/pstree.c:745
+#: src/killall.c:456 src/fuser.c:110 src/pstree.c:776
 #, fuzzy, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -125,97 +123,31 @@ msgstr ""
 "program. Om inte, skriv till Free Software Foundation, Inc., 59 Temple Place "
 "- Suite 330, Boston, MA 02111-1307, USA.\n"
 
-#: src/killall.c:563
-#, c-format
-msgid "%s: SID (%s) must be numeric\n"
-msgstr ""
-
-#: src/killall.c:614
+#: src/killall.c:587
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Maximalt antal namn är %d\n"
 
-#: src/fuser.c:243
-#, c-format
-msgid "-4 flag used but proc file %s is not readable\n"
-msgstr "-4 används men proc-fil %s kan inte läsas\n"
-
-#: src/fuser.c:252
-#, c-format
-msgid "-6 flag used but proc file %s is not readable\n"
-msgstr "-6 används men proc-fil %s kan inte läsas\n"
-
-#: src/fuser.c:592
-#, fuzzy, c-format
-msgid "Kill process %d ? (y/N) "
-msgstr "Avsluta process %d ? (y/n) "
-
-#: src/fuser.c:626
-#, c-format
-msgid "kill %d"
-msgstr "avsluta %d"
-
-#: src/fuser.c:630 src/fuser.c:634
-#, c-format
-msgid "No automatic removal. Please use  umount %s\n"
-msgstr "Ingen automatisk avmontering. Använd  umount %s\n"
-
-#: src/fuser.c:638
-#, c-format
-msgid "No automatic removal. Please use  swapoff %s\n"
-msgstr "Ingen automatisk avmontering av swap. Använd  swapoff %s\n"
-
-#: src/fuser.c:661
-#, c-format
-msgid ""
-"\n"
-"%*s USER        PID ACCESS COMMAND\n"
-msgstr ""
-
-#: src/fuser.c:752
-#, c-format
-msgid "Internal error (type %d)\n"
-msgstr "Internt fel (typ %d)\n"
-
-#: src/fuser.c:790
-#, c-format
-msgid "kernel mount  "
-msgstr "monteringspunkt för kärna  "
-
-#: src/fuser.c:793
-#, c-format
-msgid "kernel loop   "
-msgstr "loop i kärna   "
-
-#: src/fuser.c:796
-#, c-format
-msgid "kernel swap   "
-msgstr "växlingsutrymme för kärna   "
-
-#: src/fuser.c:952
-#, c-format
-msgid "can't find sockets' device number"
-msgstr "kunde inte hitta uttagets (socket) enhetsnummer"
-
-#: src/fuser.c:961
+#: src/fuser.c:79
 #, fuzzy, c-format
 msgid ""
-"usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
-"             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+"Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
+"             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "       fuser -l\n"
 "       fuser -V\n"
+"Show which processes use the named files, sockets, or filesystems.\n"
 "\n"
-"    -a        display unused files too\n"
+"     -a        display unused files too\n"
 "    -c        mounted FS\n"
 "    -f        silently ignored (for POSIX compatibility)\n"
-"    -k        kill processes accessing that file\n"
 "    -i        ask before killing (ignored without -k)\n"
-"    -l        list signal names\n"
-"    -m        mounted FS\n"
-"    -n space  search in the specified name space (file, udp, or tcp)\n"
+"    -k        kill processes accessing the named file\n"
+"    -l        list available signal names\n"
+"    -m        show all processes using the named filesystems\n"
+"    -n SPACE  search in this name space (file, udp, or tcp)\n"
 "    -s        silent operation\n"
-"    -signal   send signal instead of SIGKILL\n"
-"    -u        display user ids\n"
+"    -SIGNAL   send this signal instead of SIGKILL\n"
+"    -u        display user IDs\n"
 "    -v        verbose output\n"
 "    -V        display version information\n"
 "    -4        search IPv4 sockets only\n"
@@ -249,38 +181,118 @@ msgstr ""
 "  udp/tcp-namn: [lokal_port][,[fjärrvärd][,[fjärrport]]]\n"
 "\n"
 
-#: src/fuser.c:987
-#, c-format
-msgid "fuser (psmisc) %s\n"
+#: src/fuser.c:106
+#, fuzzy, c-format
+msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/fuser.c:1173
+#: src/fuser.c:133
 #, c-format
-msgid "ignoring -m in name space \"%s\"\n"
-msgstr "ignorerar -m i utrymme \"%s\"\n"
+msgid "Cannot open /proc directory: %s\n"
+msgstr ""
 
-#: src/fuser.c:1181
+#: src/fuser.c:267
+#, c-format
+msgid "Cannot allocate memory for matched proc: %s\n"
+msgstr ""
+
+#: src/fuser.c:300
+#, c-format
+msgid "Cannot stat mount point %s: %s\n"
+msgstr ""
+
+#: src/fuser.c:315 src/fuser.c:332
+#, c-format
+msgid "Cannot stat %s: %s\n"
+msgstr ""
+
+#: src/fuser.c:421
+#, c-format
+msgid "Cannot resolve local port %s: %s\n"
+msgstr ""
+
+#: src/fuser.c:435
+#, c-format
+msgid "Uknown local port AF %d\n"
+msgstr ""
+
+#: src/fuser.c:484 src/fuser.c:534
+#, c-format
+msgid "Cannot open protocol file: %s"
+msgstr ""
+
+#: src/fuser.c:657
+msgid "Namespace option requires an argument."
+msgstr ""
+
+#: src/fuser.c:666
+msgid "Invalid namespace name"
+msgstr ""
+
+#: src/fuser.c:718
+msgid "You can only use files with mountpoint option"
+msgstr ""
+
+#: src/fuser.c:738
+msgid "No process specification given"
+msgstr ""
+
+#: src/fuser.c:743
+msgid "You cannot use the mounted and mountpoint flags together"
+msgstr ""
+
+#: src/fuser.c:750
+msgid "all option cannot be used with silent option."
+msgstr ""
+
+#: src/fuser.c:753
+msgid "You cannot search for only IPv4 and only IPv6 sockets a the same time"
+msgstr ""
+
+#: src/fuser.c:783
+#, c-format
+msgid ""
+"\n"
+"%*s USER        PID ACCESS COMMAND\n"
+msgstr ""
+
+#: src/fuser.c:807 src/fuser.c:832
+msgid "(unknown)"
+msgstr ""
+
+#: src/fuser.c:892
+#, c-format
+msgid "Cannot stat file %s: %s\n"
+msgstr ""
+
+#: src/fuser.c:983
+#, c-format
+msgid "Cannot open /etc/mtab: %s\n"
+msgstr ""
+
+#: src/fuser.c:1044
 #, fuzzy, c-format
-msgid "%s/%s: invalid specification\n"
-msgstr "%s/%s: ogiltig specifikation\n"
+msgid "Kill process %d ? (y/N) "
+msgstr "Avsluta process %d ? (y/n) "
 
-#: src/pstree.c:377
+#: src/pstree.c:374
 #, c-format
 msgid "MAX_DEPTH not big enough.\n"
 msgstr "MAX_DEPTH inte tillräckligt stort.\n"
 
-#: src/pstree.c:713
+#: src/pstree.c:744
 #, c-format
 msgid ""
-"usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
-"              [ -A | -G | -U ] [ pid | user]\n"
+"Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+"              [ -A | -G | -U ] [ PID | USER ]\n"
 "       pstree -V\n"
+"Display a tree of processes.\n"
 "\n"
 "    -a     show command line arguments\n"
 "    -A     use ASCII line drawing characters\n"
 "    -c     don't compact identical subtrees\n"
 "    -h     highlight current process and its ancestors\n"
-"    -H pid highlight process \"pid\" and its ancestors\n"
+"    -H PID highlight this process and its ancestors\n"
 "    -G     use VT100 line drawing characters\n"
 "    -l     don't truncate long lines\n"
 "    -n     sort output by PID\n"
@@ -288,57 +300,92 @@ msgid ""
 "    -u     show uid transitions\n"
 msgstr ""
 
-#: src/pstree.c:728
+#: src/pstree.c:760
 #, fuzzy, c-format
-msgid ""
-"    -s     show Flask SIDs\n"
-"    -x     show Flask security contexts\n"
+msgid "    -Z     show SELinux security contexts\n"
 msgstr "    -x     visa Flask säkerhetssammanhang\n"
 
-#: src/pstree.c:732
+#: src/pstree.c:763
 #, c-format
 msgid ""
 "    -U     use UTF-8 (Unicode) line drawing characters\n"
 "    -V     display version information\n"
-"    pid    start at pid, default 1 (init)\n"
-"    user   show only trees rooted at processes of that user\n"
+"    PID    start at this PID; default is 1 (init)\n"
+"    USER   show only trees rooted at processes of this user\n"
 "\n"
 msgstr ""
 
-#: src/pstree.c:741
+#: src/pstree.c:772
 #, fuzzy, c-format
-msgid "pstree (psmisc) %s\n"
+msgid "pstree (PSmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/pstree.c:835
+#: src/pstree.c:865
 #, c-format
 msgid "TERM is not set\n"
 msgstr "TERM är inte satt\n"
 
-#: src/pstree.c:840
+#: src/pstree.c:870
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "Kan inte ta reda på terminalens beskaffenhet\n"
 
-#: src/pstree.c:884
+#: src/pstree.c:914
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "Ingen sådan användare: %s\n"
 
-#: src/pstree.c:900
+#: src/pstree.c:930
 #, c-format
 msgid "No processes found.\n"
 msgstr "Inga processer funna.\n"
 
-#: src/pstree.c:905
+#: src/pstree.c:935
 #, c-format
 msgid "Press return to close\n"
 msgstr "Tryck retur för att stänga\n"
 
-#: src/signals.c:65
+#: src/signals.c:84
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
 msgstr ""
+
+#~ msgid "-4 flag used but proc file %s is not readable\n"
+#~ msgstr "-4 används men proc-fil %s kan inte läsas\n"
+
+#~ msgid "-6 flag used but proc file %s is not readable\n"
+#~ msgstr "-6 används men proc-fil %s kan inte läsas\n"
+
+#~ msgid "kill %d"
+#~ msgstr "avsluta %d"
+
+#~ msgid "No automatic removal. Please use  umount %s\n"
+#~ msgstr "Ingen automatisk avmontering. Använd  umount %s\n"
+
+#~ msgid "No automatic removal. Please use  swapoff %s\n"
+#~ msgstr "Ingen automatisk avmontering av swap. Använd  swapoff %s\n"
+
+#~ msgid "Internal error (type %d)\n"
+#~ msgstr "Internt fel (typ %d)\n"
+
+#~ msgid "kernel mount  "
+#~ msgstr "monteringspunkt för kärna  "
+
+#~ msgid "kernel loop   "
+#~ msgstr "loop i kärna   "
+
+#~ msgid "kernel swap   "
+#~ msgstr "växlingsutrymme för kärna   "
+
+#~ msgid "can't find sockets' device number"
+#~ msgstr "kunde inte hitta uttagets (socket) enhetsnummer"
+
+#~ msgid "ignoring -m in name space \"%s\"\n"
+#~ msgstr "ignorerar -m i utrymme \"%s\"\n"
+
+#, fuzzy
+#~ msgid "%s/%s: invalid specification\n"
+#~ msgstr "%s/%s: ogiltig specifikation\n"
 
 #~ msgid ""
 #~ "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
