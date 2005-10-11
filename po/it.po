@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 21.6pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2005-09-20 13:19+1000\n"
+"POT-Creation-Date: 2005-10-07 17:24+1000\n"
 "PO-Revision-Date: 2005-02-24 22:15+0000\n"
 "Last-Translator: Marco Colombo <m.colombo@ed.ac.uk>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -16,32 +16,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/killall.c:71
+#: src/killall.c:73
 #, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "Terminare %s(%s%d)? (y/N) "
 
-#: src/killall.c:256
+#: src/killall.c:116
+#, c-format
+msgid "Cannot get UID from process status\n"
+msgstr ""
+
+#: src/killall.c:142 src/killall.c:664
+#, c-format
+msgid "Bad regular expression: %s\n"
+msgstr ""
+
+#: src/killall.c:338
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "ignorata corrispondenza parziale %s(%d)\n"
 
-#: src/killall.c:351
+#: src/killall.c:427
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Terminato %s(%s%d) con segnale %d\n"
 
-#: src/killall.c:363 src/pstree.c:704
-#, c-format
-msgid "%s is empty (not mounted ?)\n"
-msgstr "%s è vuoto (non montato?)\n"
-
-#: src/killall.c:369
+#: src/killall.c:441
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: nessun processo terminato\n"
 
-#: src/killall.c:400
+#: src/killall.c:479
 #, fuzzy, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -62,18 +67,19 @@ msgstr ""
 "    -V        mostra le informazioni sulla versione\n"
 "\n"
 
-#: src/killall.c:414
+#: src/killall.c:493
 #, fuzzy, c-format
-msgid "Usage: killall [-Z CONTEXT] [ -egiqvw ] [ -SIGNAL ] NAME...\n"
+msgid ""
+"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
 msgstr ""
 "Uso: killall [-s sid] [-c CONTESTO] [ -egiqvw ] [ -SEGNALE ] NOME ...\n"
 
-#: src/killall.c:417
+#: src/killall.c:496
 #, fuzzy, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "Uso: killall [ OPZIONI ] [ -- ] NOME ...\n"
 
-#: src/killall.c:420
+#: src/killall.c:499
 #, fuzzy, c-format
 msgid ""
 "       killall -l, --list\n"
@@ -85,11 +91,12 @@ msgid ""
 "  -i,--interactive    ask for confirmation before killing\n"
 "  -l,--list           list all known signal names\n"
 "  -q,--quiet          don't print complaints\n"
+"  -r,--regexp         interpret NAME as an extended regular expression\n"
 "  -s,--signal SIGNAL  send this signal instead of SIGTERM\n"
+"  -u,--user USER      kill only process(es) running as USER\n"
 "  -v,--verbose        report if the signal was successfully sent\n"
 "  -V,--version        display version information\n"
 "  -w,--wait           wait for processes to die\n"
-"\n"
 msgstr ""
 "     killall -l, --list\n"
 "     killall -V --version\n"
@@ -107,18 +114,18 @@ msgstr ""
 "  -w,--wait           aspetta la terminazione del processo\n"
 "\n"
 
-#: src/killall.c:434
+#: src/killall.c:515
 #, fuzzy, c-format
 msgid ""
-"  -Z,--context CONTEXT kill only process(es) having context\n"
-"                      (must precede other arguments)"
+"  -Z,--context REGEXP kill only process(es) having context\n"
+"                      (must precede other arguments)\n"
 msgstr ""
 "  -d,--sid            termina solo i processi aventi sid\n"
 "  -c,--context        termina solo i processi aventi scontext\n"
 "   (-s, -c sono mutuamente esclusive e devono precedere altri argomenti)\n"
 "\n"
 
-#: src/killall.c:454 src/fuser.c:108 src/pstree.c:774
+#: src/killall.c:536 src/fuser.c:108 src/pstree.c:774
 #, fuzzy, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -127,7 +134,7 @@ msgstr ""
 "Copyright (C) 1993-2002 Werner Almesberger e Craig Small\n"
 "\n"
 
-#: src/killall.c:456 src/fuser.c:110 src/pstree.c:776
+#: src/killall.c:538 src/fuser.c:110 src/pstree.c:776
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -140,10 +147,20 @@ msgstr ""
 "della GNU General Public License.\n"
 "Si consulti il file COPYING per ulteriori informazioni.\n"
 
-#: src/killall.c:587
+#: src/killall.c:638
+#, c-format
+msgid "Cannot find user %s\n"
+msgstr ""
+
+#: src/killall.c:697
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Il massimo numero di nomi è %d\n"
+
+#: src/killall.c:702 src/pstree.c:704
+#, c-format
+msgid "%s is empty (not mounted ?)\n"
+msgstr "%s è vuoto (non montato?)\n"
 
 #: src/fuser.c:79
 #, fuzzy, c-format

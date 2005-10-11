@@ -80,7 +80,7 @@ static void usage (const char *errormsg)
     "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
     "       fuser -l\n"
     "       fuser -V\n"
-    "Show which processes use the named files, sockets, or filesystems.\n\n "
+    "Show which processes use the named files, sockets, or filesystems.\n\n"
     "    -a        display unused files too\n"
     "    -c        mounted FS\n"
     "    -f        silently ignored (for POSIX compatibility)\n"
@@ -432,7 +432,7 @@ int parse_inet(struct names *this_name, const int ipv6_only, const int ipv4_only
 				lcl_port = ((struct sockaddr_in6*)(res->ai_addr))->sin6_port;
 				break;
 			default:
-				fprintf(stderr, _("Uknown local port AF %d\n"), res->ai_family);
+				fprintf(stderr, _("Unknown local port AF %d\n"), res->ai_family);
 				freeaddrinfo(res);
 				return -1;
 		}
@@ -714,7 +714,7 @@ int main(int argc, char *argv[])
 			}
 		}
 		this_name->matched_procs = NULL;
-		if ((opts & OPT_MOUNTPOINT) && this_name->name_space != NAMESPACE_FILE)
+		if ((opts & OPT_MOUNTS || opts & OPT_MOUNTPOINT) && this_name->name_space != NAMESPACE_FILE)
 			usage(_("You can only use files with mountpoint option"));
 		switch(this_name->name_space) {
 			case NAMESPACE_TCP:
@@ -750,7 +750,7 @@ int main(int argc, char *argv[])
 			usage(_("all option cannot be used with silent option."));
 	}
 	if (ipv4_only && ipv6_only)
-		usage(_("You cannot search for only IPv4 and only IPv6 sockets a the same time"));
+		usage(_("You cannot search for only IPv4 and only IPv6 sockets at the same time"));
 	if (!ipv4_only) {
 		if (tcp_connection_list != NULL)
 			find_net_sockets(&match_inodes, tcp_connection_list, "tcp",netdev);

@@ -1,62 +1,67 @@
-# Norwegian bokmål translation of psmisc 21.6pre1.
+# Norwegian bokmål translation of psmisc 21.7-pre1.
 # Copyright (C) 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the psmisc package.
-# Trond Endrestøl <Trond.Endrestol@gtf.ol.no>, 2005.
+# Trond Endrestøl <Trond.Endrestol@fagskolen.gjovik.no>, 2005.
 #
 # Send this file as an gzipped attachment to:
 # translation@iro.umontreal.ca
 # with the subject:
 # TP-Robot PACKAGE-VERSION.TEAM.po
 #
-# The subject for the Norwegian bokmål translation of psmisc 21.6pre1
+# The subject for the Norwegian bokmål translation of psmisc 21.7-pre1
 # would then be:
-# TP-Robot psmisc-21.6pre1.nb.po
+# TP-Robot psmisc-21.7-pre1.nb.po
 #
-# Here's the URL for the Norwegian translation team:
-# http://www.iro.umontreal.ca/~pinard/po/registry.cgi?team=no
+# Here's the URL for the Norwegian bokmål translation team:
+# http://www.iro.umontreal.ca/translation/registry.cgi?team=nb
 #
 # Here's the URL for the current translations of GNU bison:
-# http://www.iro.umontreal.ca/~pinard/po/registry.cgi?domain=psmisc
+# http://www.iro.umontreal.ca/translation/registry.cgi?domain=psmisc
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 21.6pre1\n"
+"Project-Id-Version: psmisc 21.7-pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2005-09-20 13:19+1000\n"
-"PO-Revision-Date: 2005-03-01 22:28+0100\n"
-"Last-Translator: Trond Endrestøl <Trond.Endrestol@gtf.ol.no>\n"
+"POT-Creation-Date: 2005-10-07 17:24+1000\n"
+"PO-Revision-Date: 2005-10-10 18:05+0200\n"
+"Last-Translator: Trond Endrestøl <Trond.Endrestol@fagskolen.gjovik.no>\n"
 "Language-Team: Norwegian Bokmaal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/killall.c:71
+#: src/killall.c:73
 #, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "Drepe %s(%s%d) ? (j/n) "
 
-#: src/killall.c:256
+#: src/killall.c:116
+#, c-format
+msgid "Cannot get UID from process status\n"
+msgstr "Kan ikke finne UID fra prosesstatus\n"
+
+#: src/killall.c:142 src/killall.c:664
+#, c-format
+msgid "Bad regular expression: %s\n"
+msgstr "Ugyldig regulært uttrykk: %s\n"
+
+#: src/killall.c:338
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "hopper over delvis treff %s(%d)\n"
 
-#: src/killall.c:351
+#: src/killall.c:427
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Drepte %s(%s%d) med signalet %d\n"
 
-#: src/killall.c:363 src/pstree.c:704
-#, c-format
-msgid "%s is empty (not mounted ?)\n"
-msgstr "%s er tom (ikke montert?)\n"
-
-#: src/killall.c:369
+#: src/killall.c:441
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: drepte ingen prosess\n"
 
-#: src/killall.c:400
-#, fuzzy, c-format
+#: src/killall.c:479
+#, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
 "       pidof -V\n"
@@ -76,19 +81,18 @@ msgstr ""
 "    -V      vis programversjon\n"
 "\n"
 
-#: src/killall.c:414
-#, fuzzy, c-format
-msgid "Usage: killall [-Z CONTEXT] [ -egiqvw ] [ -SIGNAL ] NAME...\n"
-msgstr ""
-"Bruksmåte: killall [-s sid] [-c kontekst] [ -egiqvw ] [ -signal ] navn ...\n"
+#: src/killall.c:493
+#, c-format
+msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr "Bruksmåte: killall [-Z kontekst] [-u bruker] [ -egiqvw ] [ -signal ] navn ...\n"
 
-#: src/killall.c:417
-#, fuzzy, c-format
+#: src/killall.c:496
+#, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
-msgstr "Bruksmåte: killall [ VALG ] [ -- ] navn ...\n"
+msgstr "Bruksmåte: killall [VALG]... [--] navn...\n"
 
-#: src/killall.c:420
-#, fuzzy, c-format
+#: src/killall.c:499
+#, c-format
 msgid ""
 "       killall -l, --list\n"
 "       killall -V, --version\n"
@@ -99,11 +103,12 @@ msgid ""
 "  -i,--interactive    ask for confirmation before killing\n"
 "  -l,--list           list all known signal names\n"
 "  -q,--quiet          don't print complaints\n"
+"  -r,--regexp         interpret NAME as an extended regular expression\n"
 "  -s,--signal SIGNAL  send this signal instead of SIGTERM\n"
+"  -u,--user USER      kill only process(es) running as USER\n"
 "  -v,--verbose        report if the signal was successfully sent\n"
 "  -V,--version        display version information\n"
 "  -w,--wait           wait for processes to die\n"
-"\n"
 msgstr ""
 "       killall -l, --list\n"
 "       killall -V, --version\n"
@@ -114,33 +119,31 @@ msgstr ""
 "  -i,--interactive    spør om bekreftelse før dreping\n"
 "  -l,--list           vis alle kjente signalnavn\n"
 "  -q,--quiet          ikke syt dersom det ikke går bra\n"
+"  -r,--regexp         tolk NAVN som et utvidet regulært uttrykk\n"
 "  -s,--signal         send signal i stedet for SIGTERM\n"
 "  -v,--verbose        rapporter dersom signalet ble vellykket sendt\n"
 "  -V,--version        vis programinformasjon\n"
 "  -w,--wait           vent til prosessen er død\n"
-"\n"
 
-#: src/killall.c:434
-#, fuzzy, c-format
+#: src/killall.c:515
+#, c-format
 msgid ""
-"  -Z,--context CONTEXT kill only process(es) having context\n"
-"                      (must precede other arguments)"
+"  -Z,--context REGEXP kill only process(es) having context\n"
+"                      (must precede other arguments)\n"
 msgstr ""
-"  -d,--sid            bare drep prosesser med sid\n"
-"  -c,--context        bare drep prosesser med skontekst\n"
-"   (-s, -c er utelukker hverandre og må komme foran andre argumenter)\n"
-"\n"
+"  -Z,--context REGEXP bare drep prosesser med kontekst\n"
+"                      (må komme foran andre argumenter)\n"
 
-#: src/killall.c:454 src/fuser.c:108 src/pstree.c:774
-#, fuzzy, c-format
+#: src/killall.c:536 src/fuser.c:108 src/pstree.c:774
+#, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
-"Copyright (C) 1993-2002 Werner Almesberger og Craig Small\n"
+"Copyright (C) 1993-2005 Werner Almesberger og Craig Small\n"
 "\n"
 
-#: src/killall.c:456 src/fuser.c:110 src/pstree.c:776
+#: src/killall.c:538 src/fuser.c:110 src/pstree.c:776
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -153,13 +156,23 @@ msgstr ""
 "under betingelsene i GNU General Public License.\n"
 "For mer informasjon om dette, les filene som heter COPYING.\n"
 
-#: src/killall.c:587
+#: src/killall.c:638
+#, c-format
+msgid "Cannot find user %s\n"
+msgstr "Kan ikke finne brukeren %s\n"
+
+#: src/killall.c:697
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Maksimalt antall navn er %d\n"
 
+#: src/killall.c:702 src/pstree.c:704
+#, c-format
+msgid "%s is empty (not mounted ?)\n"
+msgstr "%s er tom (ikke montert?)\n"
+
 #: src/fuser.c:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -187,24 +200,23 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"Bruksmåte: fuser [ -a | -s | -c ] [ -n rom ] [ -signal ] [ -kimuv ] "
-"navn ...\n"
+"Bruksmåte: fuser [ -a | -s | -c ] [ -n rom ] [ -signal ] [ -kimuv ] navn ...\n"
 "                 [ - ] [ -n rom ] [ -signal ] [ -kimuv ] navn ...\n"
 "           fuser -l\n"
 "           fuser -V\n"
 "\n"
-"Valg:\n"
+"Vise hvilke prosesser som bruker de angitte filene, socketer eller filsystemer.\n"
 "\n"
 "    -a        også vise ubrukte filer\n"
 "    -c        monterte filsystemer\n"
 "    -f        ignorert i det stille for POSIX-kompatibilitet\n"
-"    -k        drep prosesser som akserer filen\n"
+"    -k        drep prosesser som akserer den navngitte filen\n"
 "    -i        spør før dreping (ignorert uten -k)\n"
-"    -l        vis liste over signalnavn\n"
-"    -m        monterte filesystemer\n"
-"    -n rom    søk i det angitte navnerommet (file, udp, or tcp)\n"
+"    -l        vis liste over tilgjengelige signalnavn\n"
+"    -m        vis alle prosesser som bruker de angitte monterte filesystemene\n"
+"    -n rom    søk i det angitte navnerommet (file, udp, eller tcp)\n"
 "    -s        stille utførelse\n"
-"    -signal   send signal i stedet for SIGKILL\n"
+"    -signal   send dette signalet i stedet for SIGKILL\n"
 "    -u        vis bruker-IDer\n"
 "    -v        ordrik output\n"
 "    -V        vis programversjon\n"
@@ -216,72 +228,72 @@ msgstr ""
 "\n"
 
 #: src/fuser.c:106
-#, fuzzy, c-format
+#, c-format
 msgid "fuser (PSmisc) %s\n"
-msgstr "fuser (psmisc) %s\n"
+msgstr "fuser (PSmisc) %s\n"
 
 #: src/fuser.c:133
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
-msgstr ""
+msgstr "Kan ikke åpne /proc-katalogen: %s\n"
 
 #: src/fuser.c:267
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
-msgstr ""
+msgstr "Kan ikke allokere minne for funnet prosess: %s\n"
 
 #: src/fuser.c:300
 #, c-format
 msgid "Cannot stat mount point %s: %s\n"
-msgstr ""
+msgstr "Kan ikke kjøre stat på monteringspunktet %s: %s\n"
 
 #: src/fuser.c:315 src/fuser.c:332
 #, c-format
 msgid "Cannot stat %s: %s\n"
-msgstr ""
+msgstr "Kan ikke kjøre stat på %s: %s\n"
 
 #: src/fuser.c:421
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
-msgstr ""
+msgstr "Kan ikke løse lokalport %s: %s\n"
 
 #: src/fuser.c:435
 #, c-format
 msgid "Uknown local port AF %d\n"
-msgstr ""
+msgstr "Ukjent lokalport AF %d\n"
 
 #: src/fuser.c:484 src/fuser.c:534
 #, c-format
 msgid "Cannot open protocol file: %s"
-msgstr ""
+msgstr "Kan ikke åpne protokollfil: %s"
 
 #: src/fuser.c:657
 msgid "Namespace option requires an argument."
-msgstr ""
+msgstr "Navneromvalget krever et argument."
 
 #: src/fuser.c:666
 msgid "Invalid namespace name"
-msgstr ""
+msgstr "Ugyldig navn på navnerom"
 
 #: src/fuser.c:718
 msgid "You can only use files with mountpoint option"
-msgstr ""
+msgstr "Du kan bare bruke filer med monteringspunktvalget"
 
 #: src/fuser.c:738
 msgid "No process specification given"
-msgstr ""
+msgstr "Ingen prosesspesifikasjon ble gitt"
 
 #: src/fuser.c:743
 msgid "You cannot use the mounted and mountpoint flags together"
-msgstr ""
+msgstr "Du kan ikke bruke montert- og monteringspunktvalgene samtidig"
 
 #: src/fuser.c:750
 msgid "all option cannot be used with silent option."
-msgstr ""
+msgstr "alle valg kan ikke bli brukt med stillevalget."
 
 #: src/fuser.c:753
 msgid "You cannot search for only IPv4 and only IPv6 sockets a the same time"
-msgstr ""
+msgstr "Du kan ikke søke etter bare IPv4- og bare IPv6-socketer samtidig."
 
 # Oversettelsen av denne strengen er noe vanskelig da dette er en
 # tabelloverskrift som skal passe med selve tabellen. [TE, 2005-03-01]
@@ -296,17 +308,17 @@ msgstr ""
 
 #: src/fuser.c:807 src/fuser.c:832
 msgid "(unknown)"
-msgstr ""
+msgstr "(ukjent)"
 
 #: src/fuser.c:892
 #, c-format
 msgid "Cannot stat file %s: %s\n"
-msgstr ""
+msgstr "Kan ikke kjøre stat på fila %s: %s\n"
 
 #: src/fuser.c:983
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
-msgstr ""
+msgstr "Kan ikke åpne /etc/mtab: %s\n"
 
 #: src/fuser.c:1044
 #, c-format
@@ -319,7 +331,7 @@ msgid "MAX_DEPTH not big enough.\n"
 msgstr "MAX_DEPTH er ikke stor nok.\n"
 
 #: src/pstree.c:744
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 "              [ -A | -G | -U ] [ PID | USER ]\n"
@@ -341,6 +353,8 @@ msgstr ""
 "                  [ -A | -G | -U ] [ pid | bruker]\n"
 "           pstree -V\n"
 "\n"
+"Vis et prosesstre.\n"
+"\n"
 "    -a     vis argumentene fra kommandolinjen\n"
 "    -A     tegn linjer med ASCII-tegn\n"
 "    -c     ikke komprimer identiske undertrær\n"
@@ -353,14 +367,12 @@ msgstr ""
 "    -u     vis uid-overganger\n"
 
 #: src/pstree.c:760
-#, fuzzy, c-format
+#, c-format
 msgid "    -Z     show SELinux security contexts\n"
-msgstr ""
-"    -s     vis Flask SIDer\n"
-"    -x     vis Flask sikkerhetskontekster\n"
+msgstr "    -Z     vis SELinux sikkerhetskontekster\n"
 
 #: src/pstree.c:763
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "    -U     use UTF-8 (Unicode) line drawing characters\n"
 "    -V     display version information\n"
@@ -368,14 +380,13 @@ msgid ""
 "    USER   show only trees rooted at processes of this user\n"
 "\n"
 msgstr ""
-"    -U     tegn linjer med UTF-8-tegn (Unicode)\\n\n"
-"    -V     vis programversjon\\n\n"
-"    pid    begynn med angitt pid, standard er 1 (init)\\n\n"
-"    bruker bare vis trær med opphav fra prosesser tilhørende denne brukeren"
-"\\n\\n\n"
+"    -U     tegn linjer med UTF-8-tegn (Unicode)\n"
+"    -V     vis programversjon\n"
+"    pid    begynn med angitt pid, standard er 1 (init)\n"
+"    bruker bare vis trær med opphav fra prosesser tilhørende denne brukeren\n"
 
 #: src/pstree.c:772
-#, fuzzy, c-format
+#, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (psmisc) %s\n"
 
@@ -408,42 +419,3 @@ msgstr "Trykk på enter for å lukke.\n"
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
 msgstr "%s: ukjent signal; %s -l angir kjente signaler.\n"
-
-#~ msgid "%s: SID (%s) must be numeric\n"
-#~ msgstr "%s: SID (%s) må være numerisk\n"
-
-#~ msgid "-4 flag used but proc file %s is not readable\n"
-#~ msgstr "-4-flagget ble brukt, men procfilen %s er ikke lesbar\n"
-
-#~ msgid "-6 flag used but proc file %s is not readable\n"
-#~ msgstr "-6-flagget ble brukt, men procfilen %s er ikke lesbar\n"
-
-#~ msgid "kill %d"
-#~ msgstr "drepe %d"
-
-#~ msgid "No automatic removal. Please use  umount %s\n"
-#~ msgstr "Ingen automatisk fjerning.  Vennligst bruk «umount %s».\n"
-
-#~ msgid "No automatic removal. Please use  swapoff %s\n"
-#~ msgstr "Ingen automatisk fjerning.  Vennligst bruk «swapoff %s».\n"
-
-#~ msgid "Internal error (type %d)\n"
-#~ msgstr "Intern feil (type %d)\n"
-
-#~ msgid "kernel mount  "
-#~ msgstr "kjernemontering"
-
-#~ msgid "kernel loop   "
-#~ msgstr "kjernesløyfe"
-
-#~ msgid "kernel swap   "
-#~ msgstr "kjerneswap"
-
-#~ msgid "can't find sockets' device number"
-#~ msgstr "kan ikke finne socketens enhetsnummer"
-
-#~ msgid "ignoring -m in name space \"%s\"\n"
-#~ msgstr "ignorerer -m i navnerommet «%s»\n"
-
-#~ msgid "%s/%s: invalid specification\n"
-#~ msgstr "%s/%s: ugyldig spesifikasjon\n"

@@ -755,13 +755,13 @@ usage (void)
     "    -n     sort output by PID\n"
     "    -p     show PIDs; implies -c\n"
     "    -u     show uid transitions\n"));
+    "    -U     use UTF-8 (Unicode) line drawing characters\n"
+    "    -V     display version information\n"
 #ifdef WITH_SELINUX
   fprintf (stderr, _(
     "    -Z     show SELinux security contexts\n"));
 #endif /*WITH_SELINUX*/
   fprintf (stderr, _(
-    "    -U     use UTF-8 (Unicode) line drawing characters\n"
-    "    -V     display version information\n"
     "    PID    start at this PID; default is 1 (init)\n"
     "    USER   show only trees rooted at processes of this user\n\n"));
   exit (1);

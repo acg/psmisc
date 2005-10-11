@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 21.5\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2005-09-20 13:19+1000\n"
+"POT-Creation-Date: 2005-10-07 17:24+1000\n"
 "PO-Revision-Date: 2004-10-29 15:14+0300\n"
 "Last-Translator: Lars Wirzenius <liw@iki.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -16,32 +16,37 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/killall.c:71
+#: src/killall.c:73
 #, fuzzy, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "Lopeta prosessi %s(%s%d)? (y=kyllä, n=ei) "
 
-#: src/killall.c:256
+#: src/killall.c:116
+#, c-format
+msgid "Cannot get UID from process status\n"
+msgstr ""
+
+#: src/killall.c:142 src/killall.c:664
+#, c-format
+msgid "Bad regular expression: %s\n"
+msgstr ""
+
+#: src/killall.c:338
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "ohitan osittaisen osuman %s(%d)\n"
 
-#: src/killall.c:351
+#: src/killall.c:427
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Prosessi %s(%s%d) lopetettu signaalilla %d\n"
 
-#: src/killall.c:363 src/pstree.c:704
-#, c-format
-msgid "%s is empty (not mounted ?)\n"
-msgstr "%s on tyhjä (ei liitetty?)\n"
-
-#: src/killall.c:369
+#: src/killall.c:441
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: ei lopetettuja prosesseja\n"
 
-#: src/killall.c:400
+#: src/killall.c:479
 #, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -54,17 +59,18 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/killall.c:414
+#: src/killall.c:493
 #, c-format
-msgid "Usage: killall [-Z CONTEXT] [ -egiqvw ] [ -SIGNAL ] NAME...\n"
+msgid ""
+"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
 msgstr ""
 
-#: src/killall.c:417
+#: src/killall.c:496
 #, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr ""
 
-#: src/killall.c:420
+#: src/killall.c:499
 #, c-format
 msgid ""
 "       killall -l, --list\n"
@@ -76,21 +82,22 @@ msgid ""
 "  -i,--interactive    ask for confirmation before killing\n"
 "  -l,--list           list all known signal names\n"
 "  -q,--quiet          don't print complaints\n"
+"  -r,--regexp         interpret NAME as an extended regular expression\n"
 "  -s,--signal SIGNAL  send this signal instead of SIGTERM\n"
+"  -u,--user USER      kill only process(es) running as USER\n"
 "  -v,--verbose        report if the signal was successfully sent\n"
 "  -V,--version        display version information\n"
 "  -w,--wait           wait for processes to die\n"
-"\n"
 msgstr ""
 
-#: src/killall.c:434
+#: src/killall.c:515
 #, c-format
 msgid ""
-"  -Z,--context CONTEXT kill only process(es) having context\n"
-"                      (must precede other arguments)"
+"  -Z,--context REGEXP kill only process(es) having context\n"
+"                      (must precede other arguments)\n"
 msgstr ""
 
-#: src/killall.c:454 src/fuser.c:108 src/pstree.c:774
+#: src/killall.c:536 src/fuser.c:108 src/pstree.c:774
 #, fuzzy, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -99,7 +106,7 @@ msgstr ""
 "Copyright (C) 1993-2002 Werner Almesberger and Craig Small\n"
 "\n"
 
-#: src/killall.c:456 src/fuser.c:110 src/pstree.c:776
+#: src/killall.c:538 src/fuser.c:110 src/pstree.c:776
 #, fuzzy, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -116,10 +123,20 @@ msgstr ""
 "Tämä vapaa ohjelmisto ja saat kopioida ja levittää sitä GNU General Public\n"
 "License -lisenssin mukaisesti. Tiedostossa COPYING on tarkemmat tiedot.\n"
 
-#: src/killall.c:587
+#: src/killall.c:638
+#, c-format
+msgid "Cannot find user %s\n"
+msgstr ""
+
+#: src/killall.c:697
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Suurin sallittu määrä nimiä on %d\n"
+
+#: src/killall.c:702 src/pstree.c:704
+#, c-format
+msgid "%s is empty (not mounted ?)\n"
+msgstr "%s on tyhjä (ei liitetty?)\n"
 
 #: src/fuser.c:79
 #, fuzzy, c-format
