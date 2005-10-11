@@ -754,9 +754,9 @@ usage (void)
     "    -l     don't truncate long lines\n"
     "    -n     sort output by PID\n"
     "    -p     show PIDs; implies -c\n"
-    "    -u     show uid transitions\n"));
+    "    -u     show uid transitions\n"
     "    -U     use UTF-8 (Unicode) line drawing characters\n"
-    "    -V     display version information\n"
+    "    -V     display version information\n"));
 #ifdef WITH_SELINUX
   fprintf (stderr, _(
     "    -Z     show SELinux security contexts\n"));
