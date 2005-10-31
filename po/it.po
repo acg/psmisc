@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 21.6pre1\n"
+"Project-Id-Version: psmisc 21.7-pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
 "POT-Creation-Date: 2005-10-07 17:24+1000\n"
-"PO-Revision-Date: 2005-02-24 22:15+0000\n"
+"PO-Revision-Date: 2005-10-31 10:13+0000\n"
 "Last-Translator: Marco Colombo <m.colombo@ed.ac.uk>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -24,12 +24,12 @@ msgstr "Terminare %s(%s%d)? (y/N) "
 #: src/killall.c:116
 #, c-format
 msgid "Cannot get UID from process status\n"
-msgstr ""
+msgstr "Impossibile ottenere l'UID dallo stato del processo\n"
 
 #: src/killall.c:142 src/killall.c:664
 #, c-format
 msgid "Bad regular expression: %s\n"
-msgstr ""
+msgstr "Espressione regolare non valida: %s\n"
 
 #: src/killall.c:338
 #, c-format
@@ -47,7 +47,7 @@ msgid "%s: no process killed\n"
 msgstr "%s: nessun processo terminato\n"
 
 #: src/killall.c:479
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
 "       pidof -V\n"
@@ -58,29 +58,27 @@ msgid ""
 "    -V      display version information\n"
 "\n"
 msgstr ""
-"Uso: pidof [ -eg ] NOME ...\n"
+"Uso: pidof [ -eg ] NOME...\n"
 "     pidof -V\n"
 "\n"
-"    -e        richiede una corrispondenza esatta per i nomi molto lunghi;\n"
-"              ignora se la riga di comando non è disponibile\n"
-"    -g        mostra l'ID del gruppo invece che l'ID del processo\n"
-"    -V        mostra le informazioni sulla versione\n"
+"    -e      richiede una corrispondenza esatta per i nomi molto lunghi;\n"
+"            ignora se la riga di comando non è disponibile\n"
+"    -g      mostra l'ID del gruppo invece che l'ID del processo\n"
+"    -V      mostra le informazioni sulla versione\n"
 "\n"
 
 #: src/killall.c:493
-#, fuzzy, c-format
-msgid ""
-"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr ""
-"Uso: killall [-s sid] [-c CONTESTO] [ -egiqvw ] [ -SEGNALE ] NOME ...\n"
+#, c-format
+msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr "Uso: killall [-Z CONTESTO] [-u UTENTE] [ -eIgiqrvw ] [ -SEGNALE ] NOME...\n"
 
 #: src/killall.c:496
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
-msgstr "Uso: killall [ OPZIONI ] [ -- ] NOME ...\n"
+msgstr "Uso: killall [OPZIONE]... [--] NOME...\n"
 
 #: src/killall.c:499
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "       killall -l, --list\n"
 "       killall -V, --version\n"
@@ -101,37 +99,36 @@ msgstr ""
 "     killall -l, --list\n"
 "     killall -V --version\n"
 "\n"
-"  -e,--exact          richiede una corrispondenza esatta per i nomi molto "
-"lunghi\n"
+"  -e,--exact          richiede una corrispondenza esatta per i nomi molto lunghi\n"
 "  -I,--ignore-case    ignora maiuscole/minuscole nei nomi\n"
-"  -g,--process-group  termina il gruppo dei processi invece del processo\n"
+"  -g,--process-group  termina il gruppo di processi invece del processo\n"
 "  -i,--interactive    chiede conferma prima di terminare\n"
 "  -l,--list           elenca i nomi di segnale conosciuti\n"
 "  -q,--quiet          opera silenziosamente\n"
-"  -s,--signal         invia il segnale indicato invece di SIGTERM\n"
+"  -r,--regexp         interpreta NOME come un'espressione regolare estesa\n"
+"  -s,--signal SEGNALE invia il segnale indicato invece di SIGTERM\n"
+"  -u,--user UTENTE    termina solo i processi eseguiti dall'UTENTE\n"
 "  -v,--verbose        riporta se il segnale è stato inviato con successo\n"
 "  -V,--version        mostra le informazioni sulla versione\n"
 "  -w,--wait           aspetta la terminazione del processo\n"
 "\n"
 
 #: src/killall.c:515
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
 "                      (must precede other arguments)\n"
 msgstr ""
-"  -d,--sid            termina solo i processi aventi sid\n"
-"  -c,--context        termina solo i processi aventi scontext\n"
-"   (-s, -c sono mutuamente esclusive e devono precedere altri argomenti)\n"
-"\n"
+"  -Z,--context REGEXP termina solo i processi aventi context\n"
+"                      (deve precedere altri argomenti)\n"
 
 #: src/killall.c:536 src/fuser.c:108 src/pstree.c:774
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
-"Copyright (C) 1993-2002 Werner Almesberger e Craig Small\n"
+"Copyright (C) 1993-2005 Werner Almesberger e Craig Small\n"
 "\n"
 
 #: src/killall.c:538 src/fuser.c:110 src/pstree.c:776
@@ -150,7 +147,7 @@ msgstr ""
 #: src/killall.c:638
 #, c-format
 msgid "Cannot find user %s\n"
-msgstr ""
+msgstr "Impossibile trovare l'utente %s\n"
 
 #: src/killall.c:697
 #, c-format
@@ -163,7 +160,7 @@ msgid "%s is empty (not mounted ?)\n"
 msgstr "%s è vuoto (non montato?)\n"
 
 #: src/fuser.c:79
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -195,14 +192,15 @@ msgstr ""
 "           [ - ] [ -n CONTESTO] [ -SEGNALE ] [ -kimuv ] NOME...\n"
 "     fuser -l\n"
 "     fuser -V\n"
+"Mostra quali processi stanno usando un certo file, socket o filesystem.\n"
 "\n"
 "    -a        mostra anche i file inutilizzati\n"
 "    -c        file system montati\n"
 "    -f        ignorata (per compatibilità POSIX)\n"
-"    -k        termina tutti i processi che accedono al file\n"
 "    -i        conferma prima di terminare (ignorato senza -k)\n"
+"    -k        termina tutti i processi che accedono al file\n"
 "    -l        elenca i nomi dei segnali\n"
-"    -m        file system montati\n"
+"    -m        mostra tutti i processi che usano il filesystem specificato\n"
 "    -n CONTESTO  cerca nel contesto specificato (file, udp, o tcp)\n"
 "    -s        opera silenziosamente\n"
 "    -SEGNALE  invia il segnale indicato invece di SIGKILL\n"
@@ -217,52 +215,54 @@ msgstr ""
 "\n"
 
 #: src/fuser.c:106
-#, fuzzy, c-format
+#, c-format
 msgid "fuser (PSmisc) %s\n"
-msgstr "fuser (psmisc) %s\n"
+msgstr "fuser (PSmisc) %s\n"
 
 #: src/fuser.c:133
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
-msgstr ""
+msgstr "Impossibile aprire la directory /proc: %s\n"
 
+# FIXME
 #: src/fuser.c:267
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
-msgstr ""
+msgstr "Impossibile allocare memoria per il processo: %s\n"
 
 #: src/fuser.c:300
 #, c-format
 msgid "Cannot stat mount point %s: %s\n"
-msgstr ""
+msgstr "Impossibile fare stat del mount point %s: %s\n"
 
 #: src/fuser.c:315 src/fuser.c:332
 #, c-format
 msgid "Cannot stat %s: %s\n"
-msgstr ""
+msgstr "Impossibile fare stat di %s: %s\n"
 
 #: src/fuser.c:421
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
-msgstr ""
+msgstr "Impossibile risolvere la porta locale %s: %s\n"
 
+# FIXME UPSTREAM: Unknown
 #: src/fuser.c:435
 #, c-format
 msgid "Uknown local port AF %d\n"
-msgstr ""
+msgstr "Porta locale AF %d sconosciuta\n"
 
 #: src/fuser.c:484 src/fuser.c:534
 #, c-format
 msgid "Cannot open protocol file: %s"
-msgstr ""
+msgstr "Impossibile aprire il file di protocollo: %s"
 
 #: src/fuser.c:657
 msgid "Namespace option requires an argument."
-msgstr ""
+msgstr "L'opzione namespace richiede un argomento."
 
 #: src/fuser.c:666
 msgid "Invalid namespace name"
-msgstr ""
+msgstr "Namespace non valido"
 
 #: src/fuser.c:718
 msgid "You can only use files with mountpoint option"
@@ -270,7 +270,7 @@ msgstr ""
 
 #: src/fuser.c:738
 msgid "No process specification given"
-msgstr ""
+msgstr "Nessun tipo di processo specificato"
 
 #: src/fuser.c:743
 msgid "You cannot use the mounted and mountpoint flags together"
@@ -282,7 +282,7 @@ msgstr ""
 
 #: src/fuser.c:753
 msgid "You cannot search for only IPv4 and only IPv6 sockets a the same time"
-msgstr ""
+msgstr "Impossibile cercare solo socket IPv4 e solo socket IPv6 allo stesso tempo"
 
 #: src/fuser.c:783
 #, c-format
@@ -295,17 +295,17 @@ msgstr ""
 
 #: src/fuser.c:807 src/fuser.c:832
 msgid "(unknown)"
-msgstr ""
+msgstr "(sconosciuto)"
 
 #: src/fuser.c:892
 #, c-format
 msgid "Cannot stat file %s: %s\n"
-msgstr ""
+msgstr "Impossibile fare stat del file %s: %s\n"
 
 #: src/fuser.c:983
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
-msgstr ""
+msgstr "Impossibile aprire /etc/mtab: %s\n"
 
 #: src/fuser.c:1044
 #, c-format
@@ -318,7 +318,7 @@ msgid "MAX_DEPTH not big enough.\n"
 msgstr "MAX_DEPTH non è sufficientemente grande.\n"
 
 #: src/pstree.c:744
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 "              [ -A | -G | -U ] [ PID | USER ]\n"
@@ -339,12 +339,13 @@ msgstr ""
 "Uso: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 "            [ -A | -G | -U ] [ PID | UTENTE]\n"
 "     pstree -V\n"
+"Mostra l'albero dei processi.\n"
 "\n"
 "    -a        mostra gli argomenti della riga di comando\n"
 "    -A        usa caratteri grafici ASCII\n"
 "    -c        non comprime i sottoalberi identici\n"
 "    -h        evidenzia il processo corrente e i suoi antenati\n"
-"    -H pid    evidenzia il processo \"pid\" e i suoi antenati\n"
+"    -H PID    evidenzia il processo PID e i suoi antenati\n"
 "    -G        usa carattedi grafici VT100\n"
 "    -l        non tronca le righe lunghe\n"
 "    -n        ordina l'output in base al PID\n"
@@ -352,14 +353,12 @@ msgstr ""
 "    -u        mostra le transizioni di uid\n"
 
 #: src/pstree.c:760
-#, fuzzy, c-format
+#, c-format
 msgid "    -Z     show SELinux security contexts\n"
-msgstr ""
-"    -s        mostra i SID Flask\n"
-"    -x        mostra i contesti di sicurezza Flask\n"
+msgstr "    -Z     mostra i contesti di sicurezza SELinux\n"
 
 #: src/pstree.c:763
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "    -U     use UTF-8 (Unicode) line drawing characters\n"
 "    -V     display version information\n"
@@ -369,14 +368,14 @@ msgid ""
 msgstr ""
 "    -U        usa caratteri grafici UTF-8 (Unicode)\n"
 "    -V        mostra le informazioni sulla versione\n"
-"    pid       comincia dal pid indicato, predefinito 1 (init)\n"
-"    user      mostra solo gli alberi con radice nei processi dell'utente\n"
+"    PID       comincia dal pid indicato, predefinito 1 (init)\n"
+"    UTENTE    mostra solo gli alberi con radice nei processi dell'utente\n"
 "\n"
 
 #: src/pstree.c:772
-#, fuzzy, c-format
+#, c-format
 msgid "pstree (PSmisc) %s\n"
-msgstr "pstree (psmisc) %s\n"
+msgstr "pstree (PSmisc) %s\n"
 
 #: src/pstree.c:865
 #, c-format
