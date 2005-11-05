@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 1.0\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2005-10-07 17:24+1000\n"
+"POT-Creation-Date: 2005-11-05 15:19+1100\n"
 "PO-Revision-Date: 2001-10-28 22:14-0200\n"
 "Last-Translator: Edesio Costa e Silva <edesio+psmisc@ieee.org>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
@@ -142,7 +142,7 @@ msgid ""
 "       fuser -V\n"
 "Show which processes use the named files, sockets, or filesystems.\n"
 "\n"
-"     -a        display unused files too\n"
+"    -a        display unused files too\n"
 "    -c        mounted FS\n"
 "    -f        silently ignored (for POSIX compatibility)\n"
 "    -i        ask before killing (ignored without -k)\n"
@@ -221,7 +221,7 @@ msgstr ""
 
 #: src/fuser.c:435
 #, c-format
-msgid "Uknown local port AF %d\n"
+msgid "Unknown local port AF %d\n"
 msgstr ""
 
 #: src/fuser.c:484 src/fuser.c:534
@@ -229,56 +229,56 @@ msgstr ""
 msgid "Cannot open protocol file: %s"
 msgstr ""
 
-#: src/fuser.c:657
+#: src/fuser.c:641
 msgid "Namespace option requires an argument."
 msgstr ""
 
-#: src/fuser.c:666
+#: src/fuser.c:650
 msgid "Invalid namespace name"
 msgstr ""
 
-#: src/fuser.c:718
+#: src/fuser.c:702
 msgid "You can only use files with mountpoint option"
 msgstr ""
 
-#: src/fuser.c:738
+#: src/fuser.c:722
 msgid "No process specification given"
 msgstr ""
 
-#: src/fuser.c:743
+#: src/fuser.c:727
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr ""
 
-#: src/fuser.c:750
+#: src/fuser.c:734
 msgid "all option cannot be used with silent option."
 msgstr ""
 
-#: src/fuser.c:753
-msgid "You cannot search for only IPv4 and only IPv6 sockets a the same time"
+#: src/fuser.c:737
+msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr ""
 
-#: src/fuser.c:783
+#: src/fuser.c:771
 #, c-format
 msgid ""
 "\n"
 "%*s USER        PID ACCESS COMMAND\n"
 msgstr ""
 
-#: src/fuser.c:807 src/fuser.c:832
+#: src/fuser.c:796 src/fuser.c:821
 msgid "(unknown)"
 msgstr ""
 
-#: src/fuser.c:892
+#: src/fuser.c:882
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:983
+#: src/fuser.c:973
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr ""
 
-#: src/fuser.c:1044
+#: src/fuser.c:1034
 #, fuzzy, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Aborta processo %d ? (y/n) "
@@ -306,18 +306,18 @@ msgid ""
 "    -n     sort output by PID\n"
 "    -p     show PIDs; implies -c\n"
 "    -u     show uid transitions\n"
+"    -U     use UTF-8 (Unicode) line drawing characters\n"
+"    -V     display version information\n"
 msgstr ""
 
-#: src/pstree.c:760
+#: src/pstree.c:762
 #, c-format
 msgid "    -Z     show SELinux security contexts\n"
 msgstr ""
 
-#: src/pstree.c:763
+#: src/pstree.c:765
 #, c-format
 msgid ""
-"    -U     use UTF-8 (Unicode) line drawing characters\n"
-"    -V     display version information\n"
 "    PID    start at this PID; default is 1 (init)\n"
 "    USER   show only trees rooted at processes of this user\n"
 "\n"

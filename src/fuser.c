@@ -59,7 +59,7 @@ static void check_dir(const pid_t pid, const char *dirname, struct device_list *
 static void check_map(const pid_t pid, const char *filename, struct device_list *dev_head, struct inode_list *ino_head, const uid_t uid, const char access);
 static struct stat *get_pidstat(const pid_t pid, const char *filename);
 static uid_t getpiduid(const pid_t pid);
-static void print_matches(struct names *names_head, const opt_type opts, const int sig_number);
+static int print_matches(struct names *names_head, const opt_type opts, const int sig_number);
 static void kill_matched_proc(struct procs *pptr, const opt_type opts, const int sig_number);
 
 static dev_t get_netdev(void);
@@ -568,23 +568,7 @@ void find_net6_sockets(struct inode_list **ino_list, struct ip6_connections *con
 
 int main(int argc, char *argv[])
 {
-	static struct option long_options[] = {
-		{"all", 0, 0, 'a'},
-		{"mountpoint", 0, 0, 'c'},
-		{"help", 0, 0, 'h'},
-		{"interactive", 0, 0, 'i'},
-		{"kill", 0, 0, 'k'},
-		{"list", 0, 0, 'l'},
-		{"mounted", 0, 0, 'm'},
-		{"name-space", 1, 0, 'n'},
-		{"silent", 0, 0, 's'},
-		{"show-user", 0, 0, 'u'},
-		{"verbose", 0, 0, 'v'},
-		{"version", 0, 0, 'V'},
-		{0, 0, 0, 0}
-	};
 	opt_type opts; 
-	struct option *opt_ptr;
 	int sig_number;
 	int ipv4_only, ipv6_only;
 	unsigned char default_namespace = NAMESPACE_FILE;
@@ -767,17 +751,21 @@ int main(int argc, char *argv[])
 	debug_match_lists(names_head, match_inodes, match_devices);
 #endif
 	scan_procs(names_head, match_inodes, match_devices);
-	print_matches(names_head,opts, sig_number);
-	return 0;
+	return print_matches(names_head,opts, sig_number);
 }
 
-static void print_matches(struct names *names_head, const opt_type opts, const int sig_number)
+/* 
+ * returns 0 if match, 1 if no match
+ */
+static int print_matches(struct names *names_head, const opt_type opts, const int sig_number)
 {
 	struct names *nptr;
 	struct procs *pptr;
 	char first;
 	int len;
 	struct passwd *pwent = NULL;
+	int have_match = 1;
+	
 	
 	if (opts & OPT_VERBOSE)
 		fprintf(stderr, _("\n%*s USER        PID ACCESS COMMAND\n"),
@@ -791,6 +779,7 @@ static void print_matches(struct names *names_head, const opt_type opts, const i
 			len++;
 		}
 		for (pptr = nptr->matched_procs; pptr != NULL ; pptr = pptr->next) {
+			have_match = 0;
 			if (opts & (OPT_VERBOSE|OPT_USER)) {
 				if (pwent == NULL || pwent->pw_uid != pptr->uid)
 					pwent = getpwuid(pptr->uid);
@@ -848,6 +837,7 @@ static void print_matches(struct names *names_head, const opt_type opts, const i
 			kill_matched_proc(nptr->matched_procs,  opts, sig_number);
 
 	} /* next name */
+	return have_match;
 
 }
 

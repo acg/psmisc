@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 21.7-pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2005-10-07 17:24+1000\n"
+"POT-Creation-Date: 2005-11-05 15:19+1100\n"
 "PO-Revision-Date: 2005-10-10 18:05+0200\n"
 "Last-Translator: Trond Endrestøl <Trond.Endrestol@fagskolen.gjovik.no>\n"
 "Language-Team: Norwegian Bokmaal <i18n-nb@lister.ping.uio.no>\n"
@@ -83,8 +83,11 @@ msgstr ""
 
 #: src/killall.c:493
 #, c-format
-msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr "Bruksmåte: killall [-Z kontekst] [-u bruker] [ -egiqvw ] [ -signal ] navn ...\n"
+msgid ""
+"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr ""
+"Bruksmåte: killall [-Z kontekst] [-u bruker] [ -egiqvw ] [ -signal ] "
+"navn ...\n"
 
 #: src/killall.c:496
 #, c-format
@@ -172,7 +175,7 @@ msgid "%s is empty (not mounted ?)\n"
 msgstr "%s er tom (ikke montert?)\n"
 
 #: src/fuser.c:79
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -180,7 +183,7 @@ msgid ""
 "       fuser -V\n"
 "Show which processes use the named files, sockets, or filesystems.\n"
 "\n"
-"     -a        display unused files too\n"
+"    -a        display unused files too\n"
 "    -c        mounted FS\n"
 "    -f        silently ignored (for POSIX compatibility)\n"
 "    -i        ask before killing (ignored without -k)\n"
@@ -200,12 +203,14 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"Bruksmåte: fuser [ -a | -s | -c ] [ -n rom ] [ -signal ] [ -kimuv ] navn ...\n"
+"Bruksmåte: fuser [ -a | -s | -c ] [ -n rom ] [ -signal ] [ -kimuv ] "
+"navn ...\n"
 "                 [ - ] [ -n rom ] [ -signal ] [ -kimuv ] navn ...\n"
 "           fuser -l\n"
 "           fuser -V\n"
 "\n"
-"Vise hvilke prosesser som bruker de angitte filene, socketer eller filsystemer.\n"
+"Vise hvilke prosesser som bruker de angitte filene, socketer eller "
+"filsystemer.\n"
 "\n"
 "    -a        også vise ubrukte filer\n"
 "    -c        monterte filsystemer\n"
@@ -213,7 +218,8 @@ msgstr ""
 "    -k        drep prosesser som akserer den navngitte filen\n"
 "    -i        spør før dreping (ignorert uten -k)\n"
 "    -l        vis liste over tilgjengelige signalnavn\n"
-"    -m        vis alle prosesser som bruker de angitte monterte filesystemene\n"
+"    -m        vis alle prosesser som bruker de angitte monterte "
+"filesystemene\n"
 "    -n rom    søk i det angitte navnerommet (file, udp, eller tcp)\n"
 "    -s        stille utførelse\n"
 "    -signal   send dette signalet i stedet for SIGKILL\n"
@@ -258,8 +264,8 @@ msgid "Cannot resolve local port %s: %s\n"
 msgstr "Kan ikke løse lokalport %s: %s\n"
 
 #: src/fuser.c:435
-#, c-format
-msgid "Uknown local port AF %d\n"
+#, fuzzy, c-format
+msgid "Unknown local port AF %d\n"
 msgstr "Ukjent lokalport AF %d\n"
 
 #: src/fuser.c:484 src/fuser.c:534
@@ -267,37 +273,38 @@ msgstr "Ukjent lokalport AF %d\n"
 msgid "Cannot open protocol file: %s"
 msgstr "Kan ikke åpne protokollfil: %s"
 
-#: src/fuser.c:657
+#: src/fuser.c:641
 msgid "Namespace option requires an argument."
 msgstr "Navneromvalget krever et argument."
 
-#: src/fuser.c:666
+#: src/fuser.c:650
 msgid "Invalid namespace name"
 msgstr "Ugyldig navn på navnerom"
 
-#: src/fuser.c:718
+#: src/fuser.c:702
 msgid "You can only use files with mountpoint option"
 msgstr "Du kan bare bruke filer med monteringspunktvalget"
 
-#: src/fuser.c:738
+#: src/fuser.c:722
 msgid "No process specification given"
 msgstr "Ingen prosesspesifikasjon ble gitt"
 
-#: src/fuser.c:743
+#: src/fuser.c:727
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr "Du kan ikke bruke montert- og monteringspunktvalgene samtidig"
 
-#: src/fuser.c:750
+#: src/fuser.c:734
 msgid "all option cannot be used with silent option."
 msgstr "alle valg kan ikke bli brukt med stillevalget."
 
-#: src/fuser.c:753
-msgid "You cannot search for only IPv4 and only IPv6 sockets a the same time"
+#: src/fuser.c:737
+#, fuzzy
+msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "Du kan ikke søke etter bare IPv4- og bare IPv6-socketer samtidig."
 
 # Oversettelsen av denne strengen er noe vanskelig da dette er en
 # tabelloverskrift som skal passe med selve tabellen. [TE, 2005-03-01]
-#: src/fuser.c:783
+#: src/fuser.c:771
 #, c-format
 msgid ""
 "\n"
@@ -306,21 +313,21 @@ msgstr ""
 "\n"
 "%*s BRUKER      PID ACCESS KOMMANDO\n"
 
-#: src/fuser.c:807 src/fuser.c:832
+#: src/fuser.c:796 src/fuser.c:821
 msgid "(unknown)"
 msgstr "(ukjent)"
 
-#: src/fuser.c:892
+#: src/fuser.c:882
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "Kan ikke kjøre stat på fila %s: %s\n"
 
-#: src/fuser.c:983
+#: src/fuser.c:973
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr "Kan ikke åpne /etc/mtab: %s\n"
 
-#: src/fuser.c:1044
+#: src/fuser.c:1034
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Drepe prosess %d ? (j/N) "
@@ -331,7 +338,7 @@ msgid "MAX_DEPTH not big enough.\n"
 msgstr "MAX_DEPTH er ikke stor nok.\n"
 
 #: src/pstree.c:744
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 "              [ -A | -G | -U ] [ PID | USER ]\n"
@@ -348,6 +355,8 @@ msgid ""
 "    -n     sort output by PID\n"
 "    -p     show PIDs; implies -c\n"
 "    -u     show uid transitions\n"
+"    -U     use UTF-8 (Unicode) line drawing characters\n"
+"    -V     display version information\n"
 msgstr ""
 "Bruksmåte: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 "                  [ -A | -G | -U ] [ pid | bruker]\n"
@@ -366,16 +375,14 @@ msgstr ""
 "    -p     vis PIDs; medfører -c\n"
 "    -u     vis uid-overganger\n"
 
-#: src/pstree.c:760
+#: src/pstree.c:762
 #, c-format
 msgid "    -Z     show SELinux security contexts\n"
 msgstr "    -Z     vis SELinux sikkerhetskontekster\n"
 
-#: src/pstree.c:763
-#, c-format
+#: src/pstree.c:765
+#, fuzzy, c-format
 msgid ""
-"    -U     use UTF-8 (Unicode) line drawing characters\n"
-"    -V     display version information\n"
 "    PID    start at this PID; default is 1 (init)\n"
 "    USER   show only trees rooted at processes of this user\n"
 "\n"

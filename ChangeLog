@@ -1,3 +1,9 @@
+Changes in 21.8
+===============
+	* fuser returns 1 if no match found like before.
+	* fuser.1 spells behavior correctly Debian: #337190
+
+
 Changes in 21.7
 ===============
 	* Upgraded SELinux code to new api, thanks to Chris PeBenito
