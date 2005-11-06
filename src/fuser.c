@@ -582,7 +582,8 @@ int main(int argc, char *argv[])
 	struct ip6_connections *udp6_connection_list = NULL;
 	struct inode_list *match_inodes = NULL;
 	struct names *names_head, *this_name, *names_tail;
-	int optc, option;
+	int optc;
+	char *option;
 	char *nsptr;
 
 	ipv4_only = ipv6_only = 0;
@@ -596,7 +597,7 @@ int main(int argc, char *argv[])
 	/* getopt doesnt like things like -SIGBLAH */
 	for(optc = 1; optc < argc; optc++) {
 		if (argv[optc][0] == '-') { /* its an option */
-			option=argv[optc][1];
+			option=argv[optc] + 1;
 			if (argv[optc][1] == '-') { /* its a long option */
 				if (argv[optc][2] == '\0') {
 					continue;
@@ -604,7 +605,7 @@ int main(int argc, char *argv[])
 				/* FIXME longopts */
 				continue;
 			}
-			switch(argv[optc][1]) {
+			while (*option) switch(*option++) {
 				case '4':
 					ipv4_only = 1;
 					break;
@@ -662,8 +663,8 @@ int main(int argc, char *argv[])
 					print_version();
 					return 0;
 				default:
-					if ( isupper(argv[optc][1]) || isdigit(argv[optc][1])) {
-						sig_number = get_signal(argv[optc]+1,"fuser");
+					if ( isupper(*option) || isdigit(*option) ) {
+						sig_number = get_signal(option,"fuser");
 						break;
 					}
 					fprintf(stderr,"%s: Invalid option %c\n",argv[0] , argv[optc][1]);
@@ -761,25 +762,27 @@ static int print_matches(struct names *names_head, const opt_type opts, const in
 {
 	struct names *nptr;
 	struct procs *pptr;
-	char first;
+	char head = 0;
+	char first = 1;
 	int len;
 	struct passwd *pwent = NULL;
-	int have_match = 1;
+	int have_match = 0;
 	
-	
-	if (opts & OPT_VERBOSE)
-		fprintf(stderr, _("\n%*s USER        PID ACCESS COMMAND\n"),
-				NAME_FIELD, "");
 	for (nptr = names_head; nptr != NULL ; nptr = nptr->next) {
-		fprintf(stderr, "%s", nptr->filename);
-		first = 1;
-		len = strlen(nptr->filename);
-		if (!(opts & OPT_VERBOSE)) {
-			putc(':', stderr);
-			len++;
+		if (nptr->matched_procs != NULL || opts & OPT_ALLFILES) {
+			if (head == 0 && opts & OPT_VERBOSE) {
+				fprintf(stderr, _("\n%*s USER        PID ACCESS COMMAND\n"),
+				        NAME_FIELD, "");
+				head = 1;
+			}
+
+			fprintf(stderr, "%s:", nptr->filename);
+			len = strlen(nptr->filename) + 1;
 		}
+
+		first = 1;
 		for (pptr = nptr->matched_procs; pptr != NULL ; pptr = pptr->next) {
-			have_match = 0;
+			have_match = 1;
 			if (opts & (OPT_VERBOSE|OPT_USER)) {
 				if (pwent == NULL || pwent->pw_uid != pptr->uid)
 					pwent = getpwuid(pptr->uid);
@@ -831,13 +834,13 @@ static int print_matches(struct names *names_head, const opt_type opts, const in
 			len = 0;
 			first = 0;
 		}
-		if (nptr->matched_procs == NULL || !(opts & OPT_VERBOSE))
+		if (nptr->matched_procs != NULL || opts & OPT_ALLFILES)
 			putc('\n', stderr);
 		if (opts & OPT_KILL)
 			kill_matched_proc(nptr->matched_procs,  opts, sig_number);
 
 	} /* next name */
-	return have_match;
+	return !have_match;
 
 }
 

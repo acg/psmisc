@@ -1,3 +1,11 @@
+
+Changes in 21.9
+===============
+2005-11-05 Rene Rebe <rene@exactcode.de>
+	* fixed print_matches to only print unmatched objects if -a is
+	  specified and to output the header for -v
+	* fixed argument parsing to handle groups like -av again
+
 Changes in 21.8
 ===============
 	* fuser returns 1 if no match found like before.
