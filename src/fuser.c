@@ -50,7 +50,7 @@
 #include "signals.h"
 #include "i18n.h"
 
-#undef DEBUG
+/*#define DEBUG 1*/
 
 #define NAME_FIELD 20		/* space reserved for file name */
 /* Function defines */
@@ -66,6 +66,7 @@ static dev_t get_netdev(void);
 int parse_mount(struct names *this_name, struct device_list **dev_list);
 static void add_device(struct device_list **dev_list, struct names  *this_name, dev_t device);
 void scan_mount_devices(const opt_type opts, struct mountdev_list **mount_devices);
+void scan_unixsockets(struct unixsocket_list **unixsocket_head);
 #ifdef DEBUG
 static void debug_match_lists(struct names *names_head, struct inode_list *ino_head, struct device_list *dev_head);
 #endif
@@ -302,7 +303,9 @@ int parse_mount(struct names *this_name, struct device_list **dev_list)
 				strerror(errno));
 		exit(1);
 	}
-	/*printf("Debug: parse_mount() adding %s\n", this_name->filename);*/
+#ifdef DEBUG
+	printf("Debug: parse_mount() adding %s\n", this_name->filename);
+#endif /* DEBUG */
 	add_device(dev_list, this_name, st.st_dev);
 	return 0;
 }
@@ -316,10 +319,24 @@ int parse_file(struct names *this_name, struct inode_list **ino_list)
 				strerror(errno));
 		return -1;
 	}
-	/*printf("adding file %s %lX %lX\n", this_name->filename,
-			(unsigned long)st.st_dev, (unsigned long)st.st_ino);*/
+#ifdef DEBUG
+	printf("adding file %s %lX %lX\n", this_name->filename,
+			(unsigned long)st.st_dev, (unsigned long)st.st_ino);
+#endif /* DEBUG */
 	add_inode(ino_list, this_name, st.st_dev, st.st_ino);
 	return 0;
+}
+
+int parse_unixsockets(struct names *this_name, struct inode_list **ino_list, struct unixsocket_list *sun_head)
+{
+	struct unixsocket_list *sun_tmp;
+
+	for (sun_tmp = sun_head; sun_tmp != NULL ; sun_tmp = sun_tmp->next)
+	{
+		if (strcmp(this_name->filename, sun_tmp->sun_name) == 0) {
+			add_inode(ino_list, this_name, sun_tmp->dev, sun_tmp->inode);
+		}
+	}
 }
 
 int parse_mounts(struct names *this_name, struct mountdev_list *mounts, struct device_list **dev_list, const char opts) 
@@ -481,7 +498,7 @@ void find_net_sockets(struct inode_list **ino_list, struct ip_connections *conn_
 		return ;
 
 	if ( (fp = fopen(pathname, "r")) == NULL) {
-		fprintf(stderr, _("Cannot open protocol file: %s"), strerror(errno));
+		fprintf(stderr, _("Cannot open protocol file \"%s\": %s"), pathname,strerror(errno));
 		return;
 	}
 	while (fgets(line, BUFSIZ, fp) != NULL) {
@@ -531,7 +548,9 @@ void find_net6_sockets(struct inode_list **ino_list, struct ip6_connections *con
 		return ;
 
 	if ( (fp = fopen(pathname, "r")) == NULL) {
-		fprintf(stderr, _("Cannot open protocol file: %s"), strerror(errno));
+#ifdef DEBUG
+		fprintf(stderr, _("Cannot open protocol file \"%s\": %s\n"), pathname, strerror(errno));
+#endif /* DEBUG */
 		return ;
 	}
 	while (fgets(line, BUFSIZ, fp) != NULL) {
@@ -574,6 +593,7 @@ int main(int argc, char *argv[])
 	unsigned char default_namespace = NAMESPACE_FILE;
 	struct mountdev_list *mount_devices = NULL;
 	struct device_list *match_devices = NULL;
+	struct unixsocket_list *unixsockets = NULL;
 
 	dev_t netdev;
 	struct ip_connections *tcp_connection_list = NULL;
@@ -593,6 +613,7 @@ int main(int argc, char *argv[])
 
 	netdev = get_netdev();
 	scan_mount_devices(opts, &mount_devices);
+	scan_unixsockets(&unixsockets);
 
 	/* getopt doesnt like things like -SIGBLAH */
 	for(optc = 1; optc < argc; optc++) {
@@ -713,6 +734,7 @@ int main(int argc, char *argv[])
 			default: /* FILE */
 				this_name->filename = strdup(argv[optc]);
 					parse_file(this_name, &match_inodes);
+					parse_unixsockets(this_name, &match_inodes, unixsockets);
 				if (opts & OPT_MOUNTPOINT || opts & OPT_MOUNTS)
 					parse_mounts(this_name, mount_devices, &match_devices, opts);
 				break;
@@ -963,6 +985,44 @@ void add_mount_device(struct mountdev_list **mount_head,const char *fsname, cons
 }
 
 /*
+ * scan_unixsockets : Create a list of Unix sockets
+ *   This list is used later for matching purposes
+ */
+void scan_unixsockets(struct unixsocket_list **unixsocket_head)
+{
+	FILE *fp;
+	char line[BUFSIZ];
+	char *scanned_path;
+	int scanned_inode;
+	struct stat st;
+	struct unixsocket_list *newsocket;
+	
+	if ( (fp = fopen("/proc/net/unix","r")) == NULL) {
+		fprintf(stderr, _("Cannot open /proc/net/unix: %s\n"),
+				strerror(errno));
+		return;
+	}
+	while (fgets(line, BUFSIZ, fp) != NULL) {
+		if (sscanf(line, "%*x: %*x %*x %*x %*x %*d %d %as",
+			&scanned_inode,
+			&scanned_path) != 2) 
+			continue;
+		if (stat(scanned_path, &st) < 0) {
+			free(scanned_path);
+			continue;
+		}
+		if ( (newsocket = malloc(sizeof(struct unixsocket_list))) == NULL)
+			continue;
+		newsocket->sun_name = strdup(scanned_path);
+		newsocket->inode = scanned_inode; /* st.st_ino;*/
+		newsocket->dev = 0; /* st.st_dev;*/
+		newsocket->next = *unixsocket_head;
+		*unixsocket_head = newsocket;
+	} /* while */
+
+}
+
+/*
  * scan_mount_devices : Create a list of mount points and devices
  *   This list is used later for matching purposes
  */
@@ -1004,7 +1064,7 @@ static void debug_match_lists(struct names *names_head, struct inode_list *ino_h
 	struct inode_list *iptr;
 	struct device_list *dptr;
 
-	fprintf(stderr,"Names:\n");
+	fprintf(stderr,"Specified Names:\n");
 	for (nptr=names_head; nptr!= NULL; nptr=nptr->next) 
 	{
 		fprintf(stderr, "\t%s %c\n", nptr->filename, nptr->name_space);
@@ -1012,8 +1072,8 @@ static void debug_match_lists(struct names *names_head, struct inode_list *ino_h
 	fprintf(stderr,"\nInodes:\n");
 	for (iptr=ino_head; iptr!=NULL; iptr=iptr->next)
 	{
-		fprintf(stderr, "\tDev:%0lx Inode:%0lx\n",
-				(unsigned long)iptr->device, (unsigned long)iptr->inode);
+		fprintf(stderr, "  Dev:%0lx Inode:(%0ld) 0x%0lx => %s\n",
+				(unsigned long)iptr->device, (unsigned long)iptr->inode, (unsigned long)iptr->inode, iptr->name->filename);
 	}
 	fprintf(stderr,"\nDevices:\n");
 	for (dptr=dev_head; dptr!=NULL; dptr=dptr->next)

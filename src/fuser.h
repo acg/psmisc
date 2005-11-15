@@ -72,6 +72,13 @@ struct device_list {
 	struct device_list *next;
 };
 
+struct unixsocket_list {
+	char *sun_name;
+	ino_t	inode;
+	dev_t	dev;
+	struct unixsocket_list *next;
+};
+
 #define NAMESPACE_FILE 0
 #define NAMESPACE_TCP 1
 #define NAMESPACE_UDP 2

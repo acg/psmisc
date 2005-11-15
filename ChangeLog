@@ -1,6 +1,9 @@
 
 Changes in 21.9
 ===============
+2005-11-15 Craig Small
+	* fuser finds unix sockets.
+
 2005-11-05 Rene Rebe <rene@exactcode.de>
 	* fixed print_matches to only print unmatched objects if -a is
 	  specified and to output the header for -v
