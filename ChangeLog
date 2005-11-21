@@ -1,6 +1,10 @@
 
 Changes in 21.9
 ===============
+2005-11-22 Craig Small
+	* fuser can not use IPv6, for things like uClibc
+	* configure has --disable-ipv6 for above
+
 2005-11-15 Craig Small
 	* fuser finds unix sockets.
 

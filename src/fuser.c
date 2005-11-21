@@ -95,8 +95,10 @@ static void usage (const char *errormsg)
     "    -u        display user IDs\n"
     "    -v        verbose output\n"
     "    -V        display version information\n"
+#ifdef WITH_IPV6
     "    -4        search IPv4 sockets only\n"
     "    -6        search IPv6 sockets only\n"
+#endif
     "    -         reset options\n\n"
     "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n\n"));
   exit (1);
@@ -229,6 +231,7 @@ static void add_ip_conn(struct ip_connections **ip_list, const char *protocol, s
 	*ip_list = ip_tmp;
 }
 
+#ifdef WITH_IPV6
 static void add_ip6_conn(struct ip6_connections **ip_list, const char *protocol, struct names *this_name, const int lcl_port, const int rmt_port, struct in6_addr rmt_address)
 {
 	struct ip6_connections *ip_tmp, *ip_head;
@@ -245,6 +248,7 @@ static void add_ip6_conn(struct ip6_connections **ip_list, const char *protocol,
 
 	*ip_list = ip_tmp;
 }
+#endif
 
 static void add_matched_proc(struct names *name_list, const pid_t pid, const uid_t uid, const char access)
 {
@@ -337,6 +341,7 @@ int parse_unixsockets(struct names *this_name, struct inode_list **ino_list, str
 			add_inode(ino_list, this_name, sun_tmp->dev, sun_tmp->inode);
 		}
 	}
+	return 0;
 }
 
 int parse_mounts(struct names *this_name, struct mountdev_list *mounts, struct device_list **dev_list, const char opts) 
@@ -364,7 +369,11 @@ int parse_mounts(struct names *this_name, struct mountdev_list *mounts, struct d
 	return 0;
 }
 
+#ifdef WITH_IPV6
 int parse_inet(struct names *this_name, const int ipv6_only, const int ipv4_only, struct ip_connections **ip_list, struct ip6_connections **ip6_list)
+#else
+int parse_inet(struct names *this_name, struct ip_connections **ip_list)
+#endif
 {
 	struct addrinfo *res, *resptr;
 	struct addrinfo hints;
@@ -372,7 +381,9 @@ int parse_inet(struct names *this_name, const int ipv6_only, const int ipv4_only
 	char *lcl_port_str, *rmt_addr_str, *rmt_port_str, *tmpstr, *tmpstr2;
 	in_port_t lcl_port;
 	struct sockaddr_in *sin;
+#ifdef WITH_IPV6
 	struct sockaddr_in6 *sin6;
+#endif
 	char hostspec[100];
 	char *protocol;
 	int i;
@@ -419,12 +430,16 @@ int parse_inet(struct names *this_name, const int ipv6_only, const int ipv4_only
 	/*printf("parsed to lp %s rh %s rp %s\n", lcl_port_str, rmt_addr_str, rmt_port_str);*/
 
 	memset(&hints, 0, sizeof(hints));
+#ifdef WITH_IPV6
 	if (ipv6_only) {
 		hints.ai_family = PF_INET6;
 	} else if (ipv4_only) {
 			hints.ai_family = PF_INET;
 		} else 
 			hints.ai_family = PF_UNSPEC;
+#else
+	hints.ai_family = PF_INET;
+#endif
 	if (strcmp(protocol, "tcp") == 0)
 		hints.ai_socktype = SOCK_STREAM;
 	else
@@ -445,9 +460,11 @@ int parse_inet(struct names *this_name, const int ipv6_only, const int ipv4_only
 			case AF_INET:
 				lcl_port = ((struct sockaddr_in*)(res->ai_addr))->sin_port;
 				break;
+#ifdef WITH_IPV6
 			case AF_INET6:
 				lcl_port = ((struct sockaddr_in6*)(res->ai_addr))->sin6_port;
 				break;
+#endif
 			default:
 				fprintf(stderr, _("Unknown local port AF %d\n"), res->ai_family);
 				freeaddrinfo(res);
@@ -459,7 +476,9 @@ int parse_inet(struct names *this_name, const int ipv6_only, const int ipv4_only
 	res = NULL;
 	if (rmt_addr_str == NULL && rmt_port_str == NULL) {
 		add_ip_conn(ip_list, protocol, this_name, ntohs(lcl_port), 0, INADDR_ANY);
+#ifdef WITH_IPV6
 		add_ip6_conn(ip6_list, protocol,this_name, ntohs(lcl_port), 0, in6addr_any);
+#endif
 		return 0;
 	} else {
 		/* Resolve remote address and port */
@@ -470,10 +489,12 @@ int parse_inet(struct names *this_name, const int ipv6_only, const int ipv4_only
 						sin = (struct sockaddr_in*)resptr->ai_addr;
 						add_ip_conn(ip_list, protocol, this_name, ntohs(lcl_port), ntohs(sin->sin_port), sin->sin_addr.s_addr);
 					break;
+#ifdef WITH_IPV6
 				case AF_INET6:
 					sin6 = (struct sockaddr_in6*)resptr->ai_addr;
 						add_ip6_conn(ip6_list, protocol, this_name, ntohs(lcl_port), ntohs(sin6->sin6_port), sin6->sin6_addr);
 					break;
+#endif
 				}
 			} /*while */
 			return 0;
@@ -529,6 +550,7 @@ void find_net_sockets(struct inode_list **ino_list, struct ip_connections *conn_
 	return ;
 }
 
+#ifdef WITH_IPV6
 void find_net6_sockets(struct inode_list **ino_list, struct ip6_connections *conn_list, const char *protocol, const dev_t netdev)
 {
 	FILE *fp;
@@ -584,12 +606,15 @@ void find_net6_sockets(struct inode_list **ino_list, struct ip6_connections *con
 		}
 	}
 }
+#endif
 
 int main(int argc, char *argv[])
 {
 	opt_type opts; 
 	int sig_number;
+#ifdef WITH_IPV6
 	int ipv4_only, ipv6_only;
+#endif
 	unsigned char default_namespace = NAMESPACE_FILE;
 	struct mountdev_list *mount_devices = NULL;
 	struct device_list *match_devices = NULL;
@@ -598,15 +623,19 @@ int main(int argc, char *argv[])
 	dev_t netdev;
 	struct ip_connections *tcp_connection_list = NULL;
 	struct ip_connections *udp_connection_list = NULL;
+#ifdef WITH_IPV6
 	struct ip6_connections *tcp6_connection_list = NULL;
 	struct ip6_connections *udp6_connection_list = NULL;
+#endif
 	struct inode_list *match_inodes = NULL;
 	struct names *names_head, *this_name, *names_tail;
 	int optc;
 	char *option;
 	char *nsptr;
 
+#ifdef WITH_IPV6
 	ipv4_only = ipv6_only = 0;
+#endif
 	names_head = this_name = names_tail = NULL;
 	opts = 0;
 	sig_number = SIGKILL;
@@ -627,12 +656,14 @@ int main(int argc, char *argv[])
 				continue;
 			}
 			while (*option) switch(*option++) {
+#ifdef WITH_IPV6
 				case '4':
 					ipv4_only = 1;
 					break;
 				case '6':
 					ipv6_only = 1;
 					break;
+#endif
 				case 'a':
 					opts |= OPT_ALLFILES;
 					break;
@@ -725,11 +756,19 @@ int main(int argc, char *argv[])
 		switch(this_name->name_space) {
 			case NAMESPACE_TCP:
 				asprintf(&(this_name->filename), "%s/tcp", argv[optc]);
+#ifdef WITH_IPV6
 				parse_inet(this_name, ipv4_only, ipv6_only, &tcp_connection_list, &tcp6_connection_list);
+#else
+				parse_inet(this_name, &tcp_connection_list);
+#endif
 				break;
 			case NAMESPACE_UDP:
 				asprintf(&(this_name->filename), "%s/udp", argv[optc]);
+#ifdef WITH_IPV6
 				parse_inet(this_name, ipv4_only, ipv6_only, &tcp_connection_list, &tcp6_connection_list);
+#else
+				parse_inet(this_name, &tcp_connection_list);
+#endif
 				break;
 			default: /* FILE */
 				this_name->filename = strdup(argv[optc]);
@@ -756,13 +795,16 @@ int main(int argc, char *argv[])
 		if (opts & OPT_ALLFILES)
 			usage(_("all option cannot be used with silent option."));
 	}
+#ifdef WITH_IPV6
 	if (ipv4_only && ipv6_only)
 		usage(_("You cannot search for only IPv4 and only IPv6 sockets at the same time"));
 	if (!ipv4_only) {
+#endif
 		if (tcp_connection_list != NULL)
 			find_net_sockets(&match_inodes, tcp_connection_list, "tcp",netdev);
 		if (udp_connection_list != NULL)
 			find_net_sockets(&match_inodes, udp_connection_list, "udp",netdev);
+#ifdef WITH_IPV6
 	}
 	if (!ipv6_only) {
 		if (tcp6_connection_list != NULL)
@@ -770,6 +812,7 @@ int main(int argc, char *argv[])
 		if (udp6_connection_list != NULL)
 			find_net6_sockets(&match_inodes,  udp6_connection_list, "udp",netdev);
 	}
+#endif
 #ifdef DEBUG
 	debug_match_lists(names_head, match_inodes, match_devices);
 #endif
@@ -786,7 +829,7 @@ static int print_matches(struct names *names_head, const opt_type opts, const in
 	struct procs *pptr;
 	char head = 0;
 	char first = 1;
-	int len;
+	int len = 0;
 	struct passwd *pwent = NULL;
 	int have_match = 0;
 	
