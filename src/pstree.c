@@ -648,9 +648,15 @@ read_proc (void)
 			 if ((thread=atoi(dt->d_name)) !=0) {
 			    if (thread != pid) {
 #ifdef WITH_SELINUX
-			       add_proc(threadname, thread, pid, st.st_uid, NULL, 0, scontext);
+			       if (print_args)
+				 add_proc(threadname, thread, pid, st.st_uid, threadname, strlen(threadname)+1, scontext);
+			       else 
+				 add_proc(threadname, thread, pid, st.st_uid, NULL, 0, scontext);
 #else  /*WITH_SELINUX*/
-			       add_proc(threadname, thread, pid, st.st_uid, NULL, 0);
+			       if (print_args)
+				 add_proc(threadname, thread, pid, st.st_uid, threadname, strlen(threadname)+1);
+			       else
+				 add_proc(threadname, thread, pid, st.st_uid, NULL, 0);
 #endif /*WITH_SELINUX*/
 			    }
 			 }

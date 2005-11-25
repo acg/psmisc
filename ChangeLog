@@ -1,12 +1,15 @@
 
 Changes in 21.9
 ===============
+2005-11-26 Paul Martin
+	* Fxied segfault in pstree -a Debian #338108
+
 2005-11-22 Craig Small
 	* fuser can not use IPv6, for things like uClibc
 	* configure has --disable-ipv6 for above
 
 2005-11-15 Craig Small
-	* fuser finds unix sockets.
+	* fuser finds unix sockets. Closes: #338868
 
 2005-11-05 Rene Rebe <rene@exactcode.de>
 	* fixed print_matches to only print unmatched objects if -a is
