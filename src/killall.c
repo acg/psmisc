@@ -275,7 +275,7 @@ kill_all (int signal, int names, char **namelist, struct passwd *pwent)
 	  continue;
 	}
       free (path);
-      okay = fscanf (file, "%*d (%[^)]", comm) == 1;
+      okay = fscanf (file, "%*d (%15[^)]", comm) == 1;
       (void) fclose (file);
       if (!okay)
 	continue;
