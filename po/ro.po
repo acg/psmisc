@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc-21.6pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2005-11-05 15:19+1100\n"
+"POT-Creation-Date: 2005-12-16 22:32+1100\n"
 "PO-Revision-Date: 2005-02-24 12:00-0500\n"
 "Last-Translator: Laurentiu Buzdugan <lbuz@rolix.org>\n"
 "Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
@@ -126,7 +126,7 @@ msgstr ""
 "   (-s, -c sunt mutual exlusive ºi trebuie sã preceadã celelalte argumente\n"
 "\n"
 
-#: src/killall.c:536 src/fuser.c:108 src/pstree.c:774
+#: src/killall.c:536 src/fuser.c:111 src/pstree.c:780
 #, fuzzy, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -135,7 +135,7 @@ msgstr ""
 "Copyright (C) 1993-2002 Werner Almesberger ºi Craig Small\n"
 "\n"
 
-#: src/killall.c:538 src/fuser.c:110 src/pstree.c:776
+#: src/killall.c:538 src/fuser.c:113 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -159,12 +159,12 @@ msgstr ""
 msgid "Maximum number of names is %d\n"
 msgstr "Numãr maxim de nume este %d\n"
 
-#: src/killall.c:702 src/pstree.c:704
+#: src/killall.c:702 src/pstree.c:710
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s este gol (nu este montat ?)\n"
 
-#: src/fuser.c:79
+#: src/fuser.c:80
 #, fuzzy, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -219,75 +219,80 @@ msgstr ""
 "  nume udp/tcp: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 
-#: src/fuser.c:106
+#: src/fuser.c:109
 #, fuzzy, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/fuser.c:133
+#: src/fuser.c:136
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr ""
 
-#: src/fuser.c:267
+#: src/fuser.c:272
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr ""
 
-#: src/fuser.c:300
+#: src/fuser.c:305
 #, c-format
 msgid "Cannot stat mount point %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:315 src/fuser.c:332
+#: src/fuser.c:322 src/fuser.c:354
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:421
+#: src/fuser.c:453
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:435
+#: src/fuser.c:469
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr ""
 
-#: src/fuser.c:484 src/fuser.c:534
+#: src/fuser.c:522
 #, c-format
-msgid "Cannot open protocol file: %s"
+msgid "Cannot open protocol file \"%s\": %s"
 msgstr ""
 
-#: src/fuser.c:641
+#: src/fuser.c:574
+#, c-format
+msgid "Cannot open protocol file \"%s\": %s\n"
+msgstr ""
+
+#: src/fuser.c:694
 msgid "Namespace option requires an argument."
 msgstr ""
 
-#: src/fuser.c:650
+#: src/fuser.c:703
 msgid "Invalid namespace name"
 msgstr ""
 
-#: src/fuser.c:702
+#: src/fuser.c:755
 msgid "You can only use files with mountpoint option"
 msgstr ""
 
-#: src/fuser.c:722
+#: src/fuser.c:784
 msgid "No process specification given"
 msgstr ""
 
-#: src/fuser.c:727
+#: src/fuser.c:789
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr ""
 
-#: src/fuser.c:734
+#: src/fuser.c:796
 msgid "all option cannot be used with silent option."
 msgstr ""
 
-#: src/fuser.c:737
+#: src/fuser.c:800
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr ""
 
-#: src/fuser.c:771
+#: src/fuser.c:839
 #, c-format
 msgid ""
 "\n"
@@ -296,21 +301,26 @@ msgstr ""
 "\n"
 "%*s UTILIZATOR  PID ACCES  COMANDÃ\n"
 
-#: src/fuser.c:796 src/fuser.c:821
+#: src/fuser.c:864 src/fuser.c:889
 msgid "(unknown)"
 msgstr ""
 
-#: src/fuser.c:882
+#: src/fuser.c:950
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:973
+#: src/fuser.c:1044
+#, c-format
+msgid "Cannot open /proc/net/unix: %s\n"
+msgstr ""
+
+#: src/fuser.c:1079
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr ""
 
-#: src/fuser.c:1034
+#: src/fuser.c:1140
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Terminã process %d ? (y/N) "
@@ -320,7 +330,7 @@ msgstr "Terminã process %d ? (y/N) "
 msgid "MAX_DEPTH not big enough.\n"
 msgstr "MAX_DEPTH nu este suficient de mare.\n"
 
-#: src/pstree.c:744
+#: src/pstree.c:750
 #, fuzzy, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -356,14 +366,14 @@ msgstr ""
 "    -p     afiºeazã PID-urile; implicã -c\n"
 "    -u     afiºeazã tranziþiilr uid\n"
 
-#: src/pstree.c:762
+#: src/pstree.c:768
 #, fuzzy, c-format
 msgid "    -Z     show SELinux security contexts\n"
 msgstr ""
 "    -s     aratã SID-urile Flask\n"
 "    -x     aratã contextele de securitate Flask\n"
 
-#: src/pstree.c:765
+#: src/pstree.c:771
 #, fuzzy, c-format
 msgid ""
 "    PID    start at this PID; default is 1 (init)\n"
@@ -377,32 +387,32 @@ msgstr ""
 "[ator]\n"
 "\n"
 
-#: src/pstree.c:772
+#: src/pstree.c:778
 #, fuzzy, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (psmisc) %s\n"
 
-#: src/pstree.c:865
+#: src/pstree.c:871
 #, c-format
 msgid "TERM is not set\n"
 msgstr "TERM nu este setat\n"
 
-#: src/pstree.c:870
+#: src/pstree.c:876
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "Nu pot obþine capabilitãþile terminalului\n"
 
-#: src/pstree.c:914
+#: src/pstree.c:920
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "Nici un utilizator cu acest nume: %s\n"
 
-#: src/pstree.c:930
+#: src/pstree.c:936
 #, c-format
 msgid "No processes found.\n"
 msgstr "Nu a fost gãsit nici un proces.\n"
 
-#: src/pstree.c:935
+#: src/pstree.c:941
 #, c-format
 msgid "Press return to close\n"
 msgstr "Apãsaþi tasta return pentru a închide\n"

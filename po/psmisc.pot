@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2005-11-05 15:19+1100\n"
+"POT-Creation-Date: 2005-12-16 22:32+1100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,14 +97,14 @@ msgid ""
 "                      (must precede other arguments)\n"
 msgstr ""
 
-#: src/killall.c:536 src/fuser.c:108 src/pstree.c:774
+#: src/killall.c:536 src/fuser.c:111 src/pstree.c:780
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
 
-#: src/killall.c:538 src/fuser.c:110 src/pstree.c:776
+#: src/killall.c:538 src/fuser.c:113 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -123,12 +123,12 @@ msgstr ""
 msgid "Maximum number of names is %d\n"
 msgstr ""
 
-#: src/killall.c:702 src/pstree.c:704
+#: src/killall.c:702 src/pstree.c:710
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr ""
 
-#: src/fuser.c:79
+#: src/fuser.c:80
 #, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -158,96 +158,106 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/fuser.c:106
+#: src/fuser.c:109
 #, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr ""
 
-#: src/fuser.c:133
+#: src/fuser.c:136
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr ""
 
-#: src/fuser.c:267
+#: src/fuser.c:272
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr ""
 
-#: src/fuser.c:300
+#: src/fuser.c:305
 #, c-format
 msgid "Cannot stat mount point %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:315 src/fuser.c:332
+#: src/fuser.c:322 src/fuser.c:354
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:421
+#: src/fuser.c:453
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:435
+#: src/fuser.c:469
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr ""
 
-#: src/fuser.c:484 src/fuser.c:534
+#: src/fuser.c:522
 #, c-format
-msgid "Cannot open protocol file: %s"
+msgid "Cannot open protocol file \"%s\": %s"
 msgstr ""
 
-#: src/fuser.c:641
+#: src/fuser.c:574
+#, c-format
+msgid "Cannot open protocol file \"%s\": %s\n"
+msgstr ""
+
+#: src/fuser.c:694
 msgid "Namespace option requires an argument."
 msgstr ""
 
-#: src/fuser.c:650
+#: src/fuser.c:703
 msgid "Invalid namespace name"
 msgstr ""
 
-#: src/fuser.c:702
+#: src/fuser.c:755
 msgid "You can only use files with mountpoint option"
 msgstr ""
 
-#: src/fuser.c:722
+#: src/fuser.c:784
 msgid "No process specification given"
 msgstr ""
 
-#: src/fuser.c:727
+#: src/fuser.c:789
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr ""
 
-#: src/fuser.c:734
+#: src/fuser.c:796
 msgid "all option cannot be used with silent option."
 msgstr ""
 
-#: src/fuser.c:737
+#: src/fuser.c:800
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr ""
 
-#: src/fuser.c:771
+#: src/fuser.c:839
 #, c-format
 msgid ""
 "\n"
 "%*s USER        PID ACCESS COMMAND\n"
 msgstr ""
 
-#: src/fuser.c:796 src/fuser.c:821
+#: src/fuser.c:864 src/fuser.c:889
 msgid "(unknown)"
 msgstr ""
 
-#: src/fuser.c:882
+#: src/fuser.c:950
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:973
+#: src/fuser.c:1044
+#, c-format
+msgid "Cannot open /proc/net/unix: %s\n"
+msgstr ""
+
+#: src/fuser.c:1079
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr ""
 
-#: src/fuser.c:1034
+#: src/fuser.c:1140
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr ""
@@ -257,7 +267,7 @@ msgstr ""
 msgid "MAX_DEPTH not big enough.\n"
 msgstr ""
 
-#: src/pstree.c:744
+#: src/pstree.c:750
 #, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -279,12 +289,12 @@ msgid ""
 "    -V     display version information\n"
 msgstr ""
 
-#: src/pstree.c:762
+#: src/pstree.c:768
 #, c-format
 msgid "    -Z     show SELinux security contexts\n"
 msgstr ""
 
-#: src/pstree.c:765
+#: src/pstree.c:771
 #, c-format
 msgid ""
 "    PID    start at this PID; default is 1 (init)\n"
@@ -292,32 +302,32 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/pstree.c:772
+#: src/pstree.c:778
 #, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr ""
 
-#: src/pstree.c:865
+#: src/pstree.c:871
 #, c-format
 msgid "TERM is not set\n"
 msgstr ""
 
-#: src/pstree.c:870
+#: src/pstree.c:876
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr ""
 
-#: src/pstree.c:914
+#: src/pstree.c:920
 #, c-format
 msgid "No such user name: %s\n"
 msgstr ""
 
-#: src/pstree.c:930
+#: src/pstree.c:936
 #, c-format
 msgid "No processes found.\n"
 msgstr ""
 
-#: src/pstree.c:935
+#: src/pstree.c:941
 #, c-format
 msgid "Press return to close\n"
 msgstr ""

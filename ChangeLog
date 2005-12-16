@@ -1,19 +1,28 @@
 
 Changes in 21.9
 ===============
+2005-12-16 Craig Small <csmall@small.dropbear.id.au>
+	* Fixed install-exec-hook so only symlink pstree.x11 if file does not
+	exist already.
+	* Updated Vietnamese PO file
+
+2005-12-02 Karel Zak
+	* buffer overflow in killall scanf removed
+
 2005-11-26 Paul Martin
-	* Fxied segfault in pstree -a Debian #338108
+	* Fixed segfault in pstree -a Debian #338108
 
 2005-11-22 Craig Small
 	* fuser can not use IPv6, for things like uClibc
 	* configure has --disable-ipv6 for above
 
 2005-11-15 Craig Small
-	* fuser finds unix sockets. Closes: #338868
+	* fuser finds unix sockets. Debian #338868
 
 2005-11-05 Rene Rebe <rene@exactcode.de>
 	* fixed print_matches to only print unmatched objects if -a is
 	  specified and to output the header for -v
+	* Above patch fixes Debian #342765
 	* fixed argument parsing to handle groups like -av again
 
 Changes in 21.8

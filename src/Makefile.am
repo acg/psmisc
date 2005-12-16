@@ -33,4 +33,4 @@ signames.h: signames.c Makefile
 
 install-exec-hook:
 		cd $(DESTDIR)$(bindir) && \
-			$(LN_S) pstree pstree.x11
+			( [ -h pstree.x11 ]  || $(LN_S) pstree pstree.x11)
