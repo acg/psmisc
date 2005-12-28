@@ -833,76 +833,78 @@ static int print_matches(struct names *names_head, const opt_type opts, const in
 	struct passwd *pwent = NULL;
 	int have_match = 0;
 	
-	for (nptr = names_head; nptr != NULL ; nptr = nptr->next) {
-		if (nptr->matched_procs != NULL || opts & OPT_ALLFILES) {
-			if (head == 0 && opts & OPT_VERBOSE) {
-				fprintf(stderr, _("\n%*s USER        PID ACCESS COMMAND\n"),
-				        NAME_FIELD, "");
-				head = 1;
-			}
-
-			fprintf(stderr, "%s:", nptr->filename);
-			len = strlen(nptr->filename) + 1;
-		}
-
-		first = 1;
-		for (pptr = nptr->matched_procs; pptr != NULL ; pptr = pptr->next) {
-			have_match = 1;
-			if (opts & (OPT_VERBOSE|OPT_USER)) {
-				if (pwent == NULL || pwent->pw_uid != pptr->uid)
-					pwent = getpwuid(pptr->uid);
-			}
-			if (len > NAME_FIELD && (opts & OPT_VERBOSE)) {
-				putc('\n', stderr);
-				len=0;
-			}
-			if ((opts & OPT_VERBOSE) || first) 
-				while (len++ < NAME_FIELD)
-					putc(' ', stderr);
-			if (opts & OPT_VERBOSE) {
-				if (pwent == NULL)
-					fprintf(stderr, " %-8s ", _("(unknown)"));
-				else
-					fprintf(stderr, " %-8s ", pwent->pw_name);
-			}
-			printf("%6d", pptr->pid);
-			fflush(stdout);
-			if (opts & OPT_VERBOSE) {
-				fprintf(stderr, " %c%c%c%c%c ",
-						pptr->access & ACCESS_FILE ? (pptr->access & ACCESS_FILEWR ? 'F' : 'f' ) : '.',
-						pptr->access & ACCESS_ROOT ? 'r' : '.',
-						pptr->access & ACCESS_CWD ? 'c' : '.',
-						pptr->access & ACCESS_EXE ? 'e' : '.',
-						(pptr->access & ACCESS_MMAP) && !(pptr->access & ACCESS_EXE) ? 'm' : '.');
-			} else {
-				if (pptr->access & ACCESS_ROOT)
-					putc('r', stderr);
-				if (pptr->access & ACCESS_CWD)
-					putc('c', stderr);
-				if (pptr->access & ACCESS_EXE)
-					putc('e', stderr);
-				else if (pptr->access & ACCESS_MMAP)
-					putc('m', stderr);
-			}
-			if (opts & OPT_USER) {
-				if (pwent == NULL)
-					fprintf(stderr, " %-8s ", _("(unknown)"));
-				else
-					fprintf(stderr, "(%s)", pwent->pw_name);
-			}
-			if (opts & OPT_VERBOSE) {
-				if (pptr->command == NULL)
-					fprintf(stderr, "???\n");
-				else 
-					fprintf(stderr, "%s\n", pptr->command);
-			}
-			len = 0;
-			first = 0;
-		}
-		if (nptr->matched_procs != NULL || opts & OPT_ALLFILES)
-			putc('\n', stderr);
+    	for (nptr = names_head; nptr != NULL ; nptr = nptr->next) {
+		if (! (opts & OPT_SILENT)) { /* We're not silent */
+    			if (nptr->matched_procs != NULL || opts & OPT_ALLFILES) {
+    				if (head == 0 && opts & OPT_VERBOSE) {
+    					fprintf(stderr, _("\n%*s USER        PID ACCESS COMMAND\n"),
+    				        	NAME_FIELD, "");
+    					head = 1;
+    				}
+    
+    				fprintf(stderr, "%s:", nptr->filename);
+    				len = strlen(nptr->filename) + 1;
+    			}
+    
+    			first = 1;
+    			for (pptr = nptr->matched_procs; pptr != NULL ; pptr = pptr->next) {
+    				have_match = 1;
+    				if (opts & (OPT_VERBOSE|OPT_USER)) {
+    					if (pwent == NULL || pwent->pw_uid != pptr->uid)
+    						pwent = getpwuid(pptr->uid);
+    				}
+    				if (len > NAME_FIELD && (opts & OPT_VERBOSE)) {
+    					putc('\n', stderr);
+    					len=0;
+    				}
+    				if ((opts & OPT_VERBOSE) || first) 
+    					while (len++ < NAME_FIELD)
+    						putc(' ', stderr);
+    				if (opts & OPT_VERBOSE) {
+    					if (pwent == NULL)
+    						fprintf(stderr, " %-8s ", _("(unknown)"));
+    					else
+    						fprintf(stderr, " %-8s ", pwent->pw_name);
+    				}
+    				printf("%6d", pptr->pid);
+    				fflush(stdout);
+    				if (opts & OPT_VERBOSE) {
+    					fprintf(stderr, " %c%c%c%c%c ",
+    						pptr->access & ACCESS_FILE ? (pptr->access & ACCESS_FILEWR ? 'F' : 'f' ) : '.',
+    						pptr->access & ACCESS_ROOT ? 'r' : '.',
+    						pptr->access & ACCESS_CWD ? 'c' : '.',
+    						pptr->access & ACCESS_EXE ? 'e' : '.',
+    						(pptr->access & ACCESS_MMAP) && !(pptr->access & ACCESS_EXE) ? 'm' : '.');
+    				} else {
+    					if (pptr->access & ACCESS_ROOT)
+    						putc('r', stderr);
+    					if (pptr->access & ACCESS_CWD)
+    						putc('c', stderr);
+    					if (pptr->access & ACCESS_EXE)
+    						putc('e', stderr);
+    					else if (pptr->access & ACCESS_MMAP)
+    						putc('m', stderr);
+    				}
+    				if (opts & OPT_USER) {
+    					if (pwent == NULL)
+    						fprintf(stderr, " %-8s ", _("(unknown)"));
+    					else
+    						fprintf(stderr, "(%s)", pwent->pw_name);
+    				}
+    				if (opts & OPT_VERBOSE) {
+    					if (pptr->command == NULL)
+    						fprintf(stderr, "???\n");
+    					else 
+    						fprintf(stderr, "%s\n", pptr->command);
+    				}
+    				len = 0;
+    				first = 0;
+    			}
+    			if (nptr->matched_procs != NULL || opts & OPT_ALLFILES)
+    				putc('\n', stderr);
+		} /* be silent */
 		if (opts & OPT_KILL)
-			kill_matched_proc(nptr->matched_procs,  opts, sig_number);
+		kill_matched_proc(nptr->matched_procs,  opts, sig_number);
 
 	} /* next name */
 	return !have_match;

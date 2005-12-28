@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT([psmisc],[21.9cvs])
+AC_INIT([psmisc],[22.1])
 AC_PREREQ(2.59)
 AC_CONFIG_SRCDIR([src/comm.h])
 AC_CONFIG_HEADER([config.h])
