@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 21.7-pre1\n"
+"Project-Id-Version: psmisc 21.9\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
 "POT-Creation-Date: 2005-12-16 22:32+1100\n"
-"PO-Revision-Date: 2005-10-10 18:09+0100\n"
+"PO-Revision-Date: 2005-12-21 19:14+0100\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -165,7 +165,7 @@ msgid "%s is empty (not mounted ?)\n"
 msgstr "%s jest pusty (nie podmontowany?)\n"
 
 #: src/fuser.c:80
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -252,19 +252,19 @@ msgid "Cannot resolve local port %s: %s\n"
 msgstr "Nie mo¿na rozwi±zaæ portu lokalnego %s: %s\n"
 
 #: src/fuser.c:469
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "Nieznana rodzina adresów portu lokalnego %d\n"
 
 #: src/fuser.c:522
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open protocol file \"%s\": %s"
-msgstr "Nie mo¿na otworzyæ pliku protoko³u: %s"
+msgstr "Nie mo¿na otworzyæ pliku protoko³u \"%s\": %s"
 
 #: src/fuser.c:574
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
-msgstr "Nie mo¿na otworzyæ pliku protoko³u: %s"
+msgstr "Nie mo¿na otworzyæ pliku protoko³u \"%s\": %s\n"
 
 #: src/fuser.c:694
 msgid "Namespace option requires an argument."
@@ -291,7 +291,6 @@ msgid "all option cannot be used with silent option."
 msgstr "opcja wszystkich plików nie mo¿e byæ u¿yta z opcj± ciszy."
 
 #: src/fuser.c:800
-#, fuzzy
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "Nie mo¿na naraz szukaæ gniazd wy³±cznie IPv4 i wy³±cznie IPv6"
 
@@ -314,9 +313,9 @@ msgid "Cannot stat file %s: %s\n"
 msgstr "Nie mo¿na wykonaæ stat na pliku %s: %s\n"
 
 #: src/fuser.c:1044
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
-msgstr "Nie mo¿na otworzyæ katalogu /proc: %s\n"
+msgstr "Nie mo¿na otworzyæ /proc/net/unix: %s\n"
 
 #: src/fuser.c:1079
 #, c-format
@@ -334,7 +333,7 @@ msgid "MAX_DEPTH not big enough.\n"
 msgstr "MAX_DEPTH jest zbyt ma³e.\n"
 
 #: src/pstree.c:750
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 "              [ -A | -G | -U ] [ PID | USER ]\n"
@@ -369,6 +368,8 @@ msgstr ""
 "    -n     sortowanie wyj¶cia wg PID-u\n"
 "    -p     wy¶wietlanie PID-ów; w³±cza tak¿e -c\n"
 "    -u     wy¶wietlanie zmian uidów\n"
+"    -U     u¿ycie znaków ramek UTF-8 (Unicode)\n"
+"    -V     wy¶wietlenie informacji o wersji\n"
 
 #: src/pstree.c:768
 #, c-format
@@ -376,14 +377,12 @@ msgid "    -Z     show SELinux security contexts\n"
 msgstr "    -Z     wy¶wietlanie kontekstów bezpieczeñstwa SELinuksa\n"
 
 #: src/pstree.c:771
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "    PID    start at this PID; default is 1 (init)\n"
 "    USER   show only trees rooted at processes of this user\n"
 "\n"
 msgstr ""
-"    -U     u¿ycie znaków ramek UTF-8 (Unicode)\n"
-"    -V     wy¶wietlenie informacji o wersji\n"
 "    PID    rozpoczêcie od tego PID-u, domy¶lnie 1 (init)\n"
 " U¯YTKOWNIK  tylko drzewa zaczynaj±ce siê od procesów tego u¿ytkownika\n"
 "\n"
