@@ -1,5 +1,8 @@
 Changes in 22.1
 ===============
+2006-01-04 Craig Small
+	* fuser signals eg -INT work better
+
 2005-12-16 Craig Small
 	* fuser -s flag works Debian #344901
 	* fix grep lines in Makefile for i386 arches Debian #344172

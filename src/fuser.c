@@ -655,7 +655,8 @@ int main(int argc, char *argv[])
 				/* FIXME longopts */
 				continue;
 			}
-			while (*option) switch(*option++) {
+			while (*option) {
+				switch(*option) {
 #ifdef WITH_IPV6
 				case '4':
 					ipv4_only = 1;
@@ -717,13 +718,17 @@ int main(int argc, char *argv[])
 				default:
 					if ( isupper(*option) || isdigit(*option) ) {
 						sig_number = get_signal(option,"fuser");
+						option[1]='\0';
+
 						break;
 					}
 					fprintf(stderr,"%s: Invalid option %c\n",argv[0] , argv[optc][1]);
-
 					usage(NULL);
+
 					break;
-			} /* switch */
+				} /* switch */
+				option++;
+			}
 			continue;
 		}
 		/* File specifications */
