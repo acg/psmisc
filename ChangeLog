@@ -1,5 +1,9 @@
 Changes in 22.1
 ===============
+2006-01-12 Craig Small
+	* Updated German PO file Debian #313934
+	* Updated Swedish PO file
+
 2006-01-04 Craig Small
 	* fuser signals eg -INT work better
 	* removed space out of fuser man page for -signal

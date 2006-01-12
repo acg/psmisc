@@ -11,14 +11,14 @@ msgstr ""
 "Last-Translator: Wolfgang Schorer <wcc@wolfgangs.com>\n"
 "Language-Team: woolfy <woolfy@users.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-# "abbrechen" wird fuer "kill" verwendet
+# "abbrechen" wird für "kill" verwendet
 #: src/killall.c:73
-#, fuzzy, c-format
+#, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
-msgstr "%s(%s%d) abbrechen? (y/n) "
+msgstr "%s(%s%d) abbrechen? (y/N) "
 
 #: src/killall.c:116
 #, c-format
@@ -33,7 +33,7 @@ msgstr ""
 #: src/killall.c:338
 #, c-format
 msgid "skipping partial match %s(%d)\n"
-msgstr "ueberspringe teilweise Uebereinstimmung von %s(%d)\n"
+msgstr "überspringe teilweise Übereinstimmung von %s(%d)\n"
 
 #: src/killall.c:427
 #, c-format
@@ -102,21 +102,21 @@ msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
+"Copyright (C) 1993-2002 Werner Almesberger und Craig Small\n"
+"\n"
 
 #: src/killall.c:538 src/fuser.c:113 src/pstree.c:782
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
 "This is free software, and you are welcome to redistribute it under\n"
 "the terms of the GNU General Public License.\n"
 "For more information about these matters, see the files named COPYING.\n"
 msgstr ""
-"Copyright (C) 1993-2000 Werner Almesberger and Craig Small\n"
-"\n"
 "PSmisc kommt mit KEINERLEI GARANTIE.\n"
-"Dies ist freie Software, und Sie koennen sie gerne unter den GNU-Terms\n"
-" (General Public License) weitervertreiben\n"
-"Fuer weitere Informationen ueber diese Angelegenheit sehen Sie bitte in die "
+"Dies ist freie Software, und Sie können sie gerne unter den GNU-Termen\n"
+" (General Public License) weitervertreiben.\n"
+"Für weitere Informationen über diese Angelegenheit sehen Sie bitte in die "
 "Dateien, die\n"
 " COPYING genannt werden.\n"
 
@@ -133,7 +133,7 @@ msgstr "Die maximale Anzahl der Namen ist %d\n"
 #: src/killall.c:702 src/pstree.c:710
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
-msgstr "%s ist leer (nicht gemountet ?)\n"
+msgstr "%s ist leer (nicht gemountet?)\n"
 
 #: src/fuser.c:80
 #, fuzzy, c-format
@@ -178,11 +178,11 @@ msgstr ""
 "    -s        Stille Operation\n"
 "    -signal   Sende 'signal' anstatt SIGKILL\n"
 "    -u        Zeige die Benutzer IDs an\n"
-"    -v        Ausfuehrliche Ausgabe\n"
+"    -v        Ausführliche Ausgabe\n"
 "    -V        Zeige Versionsinformationen an\n"
 "    -4        Suche nur IPv4 sockets\n"
 "    -6        Suche nur IPv6 sockets\n"
-"    -         Ruecksetzen der Optionen\n"
+"    -         Rücksetzen der Optionen\n"
 "\n"
 "  udp/tcp Namen: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
@@ -287,9 +287,9 @@ msgid "Cannot open /etc/mtab: %s\n"
 msgstr ""
 
 #: src/fuser.c:1140
-#, fuzzy, c-format
+#, c-format
 msgid "Kill process %d ? (y/N) "
-msgstr "Prozess %d abbrechen? (y/n) "
+msgstr "Prozess %d abbrechen? (y/N) "
 
 #: src/pstree.c:374
 #, c-format
@@ -376,10 +376,10 @@ msgstr ""
 #~ msgstr "Abbruch von %d"
 
 #~ msgid "No automatic removal. Please use  umount %s\n"
-#~ msgstr "Keine automatische Loeschung. Bitte verwenden Sie  umount %s\n"
+#~ msgstr "Keine automatische Löschung. Bitte verwenden Sie umount %s\n"
 
 #~ msgid "No automatic removal. Please use  swapoff %s\n"
-#~ msgstr "Keine automatische Loeschung. Bitte verwenden Sie  swapoff %s\n"
+#~ msgstr "Keine automatische Löschung. Bitte verwenden Sie swapoff %s\n"
 
 #~ msgid "Internal error (type %d)\n"
 #~ msgstr "Interner Fehler (Typ %d)\n"
@@ -388,13 +388,13 @@ msgstr ""
 #~ msgstr "Kernel mount  "
 
 #~ msgid "kernel loop   "
-#~ msgstr "Kernel Schleife (loop)   "
+#~ msgstr "Kernel-Schleife (loop)   "
 
 #~ msgid "kernel swap   "
 #~ msgstr "Kernel swap   "
 
 #~ msgid "can't find sockets' device number"
-#~ msgstr "Kann die Geraetenummer der Sockets nicht finden"
+#~ msgstr "Kann die Gerätenummer der Sockets nicht finden"
 
 #~ msgid "ignoring -m in name space \"%s\"\n"
 #~ msgstr "-m wird ignoriert im Namensraum \"%s\"\n"
@@ -405,4 +405,4 @@ msgstr ""
 
 #~ msgid "No process references; use -v for the complete list\n"
 #~ msgstr ""
-#~ "Keine Prozess Referenzen; verwenden Sie -v fuer die komplette Liste\n"
+#~ "Keine Prozess Referenzen; verwenden Sie -v für die komplette Liste\n"
