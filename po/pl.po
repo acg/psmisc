@@ -71,7 +71,7 @@ msgstr ""
 msgid ""
 "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
 msgstr ""
-"Sk³adnia: killall [-Z kontekst] [-u U¯YTKOWNIK] [ -eIgiqrvw ] [ -SYGNA£ ] "
+"Sk³adnia: killall [-Z KONTEKST] [-u U¯YTKOWNIK] [ -eIgiqrvw ] [ -SYGNA£ ] "
 "NAZWA...\n"
 
 #: src/killall.c:496

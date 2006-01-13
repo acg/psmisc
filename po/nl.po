@@ -1,20 +1,20 @@
-# Translation of psmisc-21.7-pre1 to Dutch.
-# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# Translation of psmisc-21.9 to Dutch.
+# Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the PSmisc package.
-# Benno Schulenberg <benno@nietvergeten.nl>, 2004, 2005.
+# Benno Schulenberg <benno@nietvergeten.nl>, 2004, 2005, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 21.7-pre1\n"
+"Project-Id-Version: psmisc 21.9\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
 "POT-Creation-Date: 2006-01-12 18:43+1100\n"
-"PO-Revision-Date: 2005-10-10 23:49+0200\n"
+"PO-Revision-Date: 2006-01-12 21:08+0100\n"
 "Last-Translator: Benno Schulenberg <benno@nietvergeten.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11\n"
 
 #: src/killall.c:73
 #, c-format
@@ -64,7 +64,7 @@ msgstr ""
 "    -e    zeer lange namen moeten exact overeenkomen\n"
 "          (genegeerd als de commandoregel niet beschikbaar is)\n"
 "    -g    procesgroeps-ID tonen in plaats van proces-ID\n"
-"    -V    de programmaversie tonen \n"
+"    -V    de programmaversie tonen\n"
 "\n"
 
 #: src/killall.c:493
@@ -162,7 +162,7 @@ msgid "%s is empty (not mounted ?)\n"
 msgstr "%s is leeg -- niet aangekoppeld?\n"
 
 #: src/fuser.c:80
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -195,8 +195,8 @@ msgstr ""
 "          fuser -l\n"
 "          fuser -V\n"
 "\n"
-"De processen tonen die de genoemde bestanden, sockets of bestandssystemen\n"
-"gebruiken.\n"
+"De processen tonen die gebruik maken van de genoemde bestanden,\n"
+"sockets of bestandssystemen\n"
 "\n"
 "    -a         de ongebruikte bestanden ook noemen\n"
 "    -c         (hetzelfde als -m)\n"
@@ -249,19 +249,19 @@ msgid "Cannot resolve local port %s: %s\n"
 msgstr "Kan lokale poort %s nergens toe herleiden: %s\n"
 
 #: src/fuser.c:469
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "Onbekende lokale poort AF %d\n"
 
 #: src/fuser.c:522
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open protocol file \"%s\": %s"
-msgstr "Kan protocolbestand niet openen: %s"
+msgstr "Kan protocolbestand '%s' niet openen: %s"
 
 #: src/fuser.c:574
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
-msgstr "Kan protocolbestand niet openen: %s"
+msgstr "Kan protocolbestand '%s' niet openen: %s\n"
 
 #: src/fuser.c:695
 msgid "Namespace option requires an argument."
@@ -288,7 +288,6 @@ msgid "all option cannot be used with silent option."
 msgstr "Opties -a en -s gaan niet samen"
 
 #: src/fuser.c:805
-#, fuzzy
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "De opties -4 en -6 gaan niet samen"
 
@@ -311,9 +310,9 @@ msgid "Cannot stat file %s: %s\n"
 msgstr "Kan status van bestand %s niet bepalen: %s\n"
 
 #: src/fuser.c:1051
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
-msgstr "Kan /proc niet openen: %s\n"
+msgstr "Kan /proc/net/unix niet openen: %s\n"
 
 #: src/fuser.c:1086
 #, c-format
@@ -333,10 +332,10 @@ msgstr ""
 #: src/pstree.c:374
 #, c-format
 msgid "MAX_DEPTH not big enough.\n"
-msgstr "Maximumdiepte MAX_DEPTH is niet groot genoeg.\n"
+msgstr "Interne fout: maximum diepte MAX_DEPTH is niet groot genoeg.\n"
 
 #: src/pstree.c:750
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 "              [ -A | -G | -U ] [ PID | USER ]\n"
@@ -360,7 +359,7 @@ msgstr ""
 "                 [ -A | -G | -U ]  [ PID | USER ]\n"
 "          pstree -V\n"
 "\n"
-"Huidige processen in een boomstructuur tonen.\n"
+"Huidige processen tonen in een boomstructuur.\n"
 "\n"
 "    -a      argumenten van de commandoregel tonen\n"
 "    -A      ASCII-tekens gebruiken voor lijntjes\n"
@@ -372,6 +371,8 @@ msgstr ""
 "    -n      uitvoer sorteren naar PID\n"
 "    -p      PIDs tonen (dit impliceert -c)\n"
 "    -u      UID-overgangen tonen\n"
+"    -U      Unicode-tekens (UTF-8) gebruiken voor lijntjes\n"
+"    -V      de programmaversie tonen\n"
 
 #: src/pstree.c:768
 #, c-format
@@ -379,14 +380,12 @@ msgid "    -Z     show SELinux security contexts\n"
 msgstr "    -Z      SELinux-veiligheidscontexten tonen\n"
 
 #: src/pstree.c:771
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "    PID    start at this PID; default is 1 (init)\n"
 "    USER   show only trees rooted at processes of this user\n"
 "\n"
 msgstr ""
-"    -U      Unicode-tekens (UTF-8) gebruiken voor lijntjes\n"
-"    -V      de programmaversie tonen\n"
 "    PID     bij dit proces-ID beginnen; standaard is 1 (init)\n"
 "    USER    alleen bomen tonen beginnend bij processen van deze gebruiker\n"
 "\n"
