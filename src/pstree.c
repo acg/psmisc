@@ -371,7 +371,7 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
     return;
   if (level >= MAX_DEPTH - 1)
     {
-      fprintf (stderr, _("MAX_DEPTH not big enough.\n"));
+      fprintf (stderr, _("Internal error: MAX_DEPTH not big enough.\n"));
       exit (1);
     }
   if (!leaf)

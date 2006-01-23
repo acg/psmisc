@@ -519,7 +519,7 @@ void find_net_sockets(struct inode_list **ino_list, struct ip_connections *conn_
 		return ;
 
 	if ( (fp = fopen(pathname, "r")) == NULL) {
-		fprintf(stderr, _("Cannot open protocol file \"%s\": %s"), pathname,strerror(errno));
+		fprintf(stderr, _("Cannot open protocol file \"%s\": %s\n"), pathname,strerror(errno));
 		return;
 	}
 	while (fgets(line, BUFSIZ, fp) != NULL) {
