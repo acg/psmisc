@@ -1,5 +1,11 @@
 Changes in
 =================
+2006-01-27 Craig Small
+	* Unix sockets work on all hosts now, including ones that don't have
+	network device set to 0.
+	* TCP/UDP6 sockets are found a bit better.
+
+
 2006-01-23 Craig Small
 	* Updated Swedish, Vietnamese and Italian PO files
 	* Minor fixes for some error messages, thanks to Benno.

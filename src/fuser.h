@@ -75,6 +75,7 @@ struct device_list {
 struct unixsocket_list {
 	char *sun_name;
 	ino_t	inode;
+	ino_t	net_inode;
 	dev_t	dev;
 	struct unixsocket_list *next;
 };

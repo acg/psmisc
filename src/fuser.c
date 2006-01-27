@@ -62,11 +62,11 @@ static uid_t getpiduid(const pid_t pid);
 static int print_matches(struct names *names_head, const opt_type opts, const int sig_number);
 static void kill_matched_proc(struct procs *pptr, const opt_type opts, const int sig_number);
 
-static dev_t get_netdev(void);
 int parse_mount(struct names *this_name, struct device_list **dev_list);
 static void add_device(struct device_list **dev_list, struct names  *this_name, dev_t device);
 void scan_mount_devices(const opt_type opts, struct mountdev_list **mount_devices);
-void scan_unixsockets(struct unixsocket_list **unixsocket_head);
+void fill_unix_cache(struct unixsocket_list **unixsocket_head);
+static dev_t find_net_dev(void);
 #ifdef DEBUG
 static void debug_match_lists(struct names *names_head, struct inode_list *ino_head, struct device_list *dev_head);
 #endif
@@ -334,11 +334,21 @@ int parse_file(struct names *this_name, struct inode_list **ino_list)
 int parse_unixsockets(struct names *this_name, struct inode_list **ino_list, struct unixsocket_list *sun_head)
 {
 	struct unixsocket_list *sun_tmp;
+	struct stat st;
+    dev_t net_dev;
+    
+	if (stat(this_name->filename, &st) != 0) {
+		fprintf(stderr,_("Cannot stat %s: %s\n"), this_name->filename,
+				strerror(errno));
+		return -1;
+	}
+    net_dev = find_net_dev();
 
 	for (sun_tmp = sun_head; sun_tmp != NULL ; sun_tmp = sun_tmp->next)
 	{
-		if (strcmp(this_name->filename, sun_tmp->sun_name) == 0) {
-			add_inode(ino_list, this_name, sun_tmp->dev, sun_tmp->inode);
+      if (sun_tmp->dev == st.st_dev && sun_tmp->inode == st.st_ino) {
+			add_inode(ino_list, this_name, net_dev, sun_tmp->net_inode);
+            return 0;
 		}
 	}
 	return 0;
@@ -593,7 +603,7 @@ void find_net6_sockets(struct inode_list **ino_list, struct ip6_connections *con
 		/*printf("Found %ld with %s:%ld\n", loc_port, rmt_addr6str, rmt_port);*/
 		for(conn_tmp = conn_list ; conn_tmp != NULL ; conn_tmp = conn_tmp->next) {
 			inet_ntop(AF_INET6, &conn_tmp->rmt_address, rmt_addr6str, INET6_ADDRSTRLEN);
-		/*	printf("Comparing with *.%lu %s:%lu ...", 
+			/*printf("Comparing with *.%lu %s:%lu ...\n\n", 
 					conn_tmp->lcl_port,
 					rmt_addr6str,
 					conn_tmp->rmt_port);*/
@@ -640,9 +650,9 @@ int main(int argc, char *argv[])
 	opts = 0;
 	sig_number = SIGKILL;
 
-	netdev = get_netdev();
+	netdev = find_net_dev();
 	scan_mount_devices(opts, &mount_devices);
-	scan_unixsockets(&unixsockets);
+	fill_unix_cache(&unixsockets);
 
 	/* getopt doesnt like things like -SIGBLAH */
 	for(optc = 1; optc < argc; optc++) {
@@ -836,7 +846,7 @@ static int print_matches(struct names *names_head, const opt_type opts, const in
 	char first = 1;
 	int len = 0;
 	struct passwd *pwent = NULL;
-	int have_match = 0;
+	int have_match = 1;
 	
     	for (nptr = names_head; nptr != NULL ; nptr = nptr->next) {
 		if (! (opts & OPT_SILENT)) { /* We're not silent */
@@ -912,7 +922,7 @@ static int print_matches(struct names *names_head, const opt_type opts, const in
 		kill_matched_proc(nptr->matched_procs,  opts, sig_number);
 
 	} /* next name */
-	return !have_match;
+	return (have_match==1?0:1);
 
 }
 
@@ -1035,10 +1045,10 @@ void add_mount_device(struct mountdev_list **mount_head,const char *fsname, cons
 }
 
 /*
- * scan_unixsockets : Create a list of Unix sockets
+ * fill_unix_cache : Create a list of Unix sockets
  *   This list is used later for matching purposes
  */
-void scan_unixsockets(struct unixsocket_list **unixsocket_head)
+void fill_unix_cache(struct unixsocket_list **unixsocket_head)
 {
 	FILE *fp;
 	char line[BUFSIZ];
@@ -1064,8 +1074,9 @@ void scan_unixsockets(struct unixsocket_list **unixsocket_head)
 		if ( (newsocket = malloc(sizeof(struct unixsocket_list))) == NULL)
 			continue;
 		newsocket->sun_name = strdup(scanned_path);
-		newsocket->inode = scanned_inode; /* st.st_ino;*/
-		newsocket->dev = 0; /* st.st_dev;*/
+		newsocket->inode = st.st_ino;
+		newsocket->dev = st.st_dev;
+        newsocket->net_inode = scanned_inode;
 		newsocket->next = *unixsocket_head;
 		*unixsocket_head = newsocket;
 	} /* while */
@@ -1092,18 +1103,6 @@ void scan_mount_devices(const opt_type opts, struct mountdev_list **mount_device
 			add_mount_device(mount_devices, mnt_ptr->mnt_fsname, mnt_ptr->mnt_dir, st.st_dev);
 		}
 	}
-}
-
-static dev_t get_netdev(void)
-{
-	int skt;
-	struct stat st;
-
-	if ( (skt = socket(PF_INET,SOCK_DGRAM,0)) < 0)
-		return -1;
-	if ( fstat(skt, &st) != 0) 
-		return -1;
-	return st.st_dev;
 }
 
 #ifdef DEBUG
@@ -1176,3 +1175,23 @@ static void kill_matched_proc(struct procs *proc_head, const opt_type opts, cons
 					
 	}
 }
+
+static dev_t find_net_dev(void)
+{
+  int skt;
+  struct stat st;
+
+  if ( (skt = socket(PF_INET, SOCK_DGRAM, 0)) < 0) {
+    fprintf(stderr,_("Cannot open a network socket.\n"));
+    return -1;
+  }
+  if ( fstat(skt, &st) != 0) {
+    fprintf(stderr,_("Cannot find socket's device number.\n"));
+    close(skt);
+    return -1;
+  }
+  close(skt);
+  return st.st_dev;
+}
+
+
