@@ -22,6 +22,7 @@ EXTRA_DIST = signames.c
 CLEANFILES = signames.h
 
 signames.h: signames.c Makefile
+		export LC_ALL=C ; \
 		@CPP@ -dM $< |\
 		tr -s '\t ' ' ' | sort -n -k 3 | sed \
 	's:#define SIG\([A-Z]\+[0-9]*\) \([0-9]\+\) *\(\|/\*.*\)$$:{\ \2,"\1" },:p;d' | \

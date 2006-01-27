@@ -4,6 +4,8 @@ Changes in
 	* Unix sockets work on all hosts now, including ones that don't have
 	network device set to 0.
 	* TCP/UDP6 sockets are found a bit better.
+	* Makefile changed so signames builds in all locales. Thanks to Mike
+	  Frysinger for the patch.
 
 
 2006-01-23 Craig Small
