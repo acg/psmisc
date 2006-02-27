@@ -6,6 +6,7 @@ Changes in
 	* TCP/UDP6 sockets are found a bit better.
 	* Makefile changed so signames builds in all locales. Thanks to Mike
 	  Frysinger for the patch.
+	* Return code works
 
 
 2006-01-23 Craig Small

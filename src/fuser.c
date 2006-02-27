@@ -846,7 +846,7 @@ static int print_matches(struct names *names_head, const opt_type opts, const in
 	char first = 1;
 	int len = 0;
 	struct passwd *pwent = NULL;
-	int have_match = 1;
+	int have_match = 0;
 	
     	for (nptr = names_head; nptr != NULL ; nptr = nptr->next) {
 		if (! (opts & OPT_SILENT)) { /* We're not silent */
