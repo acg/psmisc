@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 21.5\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2006-01-12 18:43+1100\n"
+"POT-Creation-Date: 2006-02-27 18:12+1100\n"
 "PO-Revision-Date: 2004-10-29 15:14+0300\n"
 "Last-Translator: Lars Wirzenius <liw@iki.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -213,98 +213,103 @@ msgstr ""
 msgid "Cannot stat mount point %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:322 src/fuser.c:354
+#: src/fuser.c:322 src/fuser.c:341 src/fuser.c:364
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:453
+#: src/fuser.c:463
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:469
+#: src/fuser.c:479
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr ""
 
-#: src/fuser.c:522
-#, c-format
-msgid "Cannot open protocol file \"%s\": %s"
-msgstr ""
-
-#: src/fuser.c:574
+#: src/fuser.c:532 src/fuser.c:584
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr ""
 
-#: src/fuser.c:695
+#: src/fuser.c:705
 msgid "Namespace option requires an argument."
 msgstr ""
 
-#: src/fuser.c:704
+#: src/fuser.c:714
 msgid "Invalid namespace name"
 msgstr ""
 
-#: src/fuser.c:760
+#: src/fuser.c:770
 msgid "You can only use files with mountpoint option"
 msgstr ""
 
-#: src/fuser.c:789
+#: src/fuser.c:799
 msgid "No process specification given"
 msgstr ""
 
-#: src/fuser.c:794
+#: src/fuser.c:804
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr ""
 
-#: src/fuser.c:801
+#: src/fuser.c:811
 msgid "all option cannot be used with silent option."
 msgstr ""
 
-#: src/fuser.c:805
+#: src/fuser.c:815
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr ""
 
-#: src/fuser.c:845
+#: src/fuser.c:855
 #, c-format
 msgid ""
 "\n"
 "%*s USER        PID ACCESS COMMAND\n"
 msgstr ""
 
-#: src/fuser.c:870 src/fuser.c:895
+#: src/fuser.c:880 src/fuser.c:905
 msgid "(unknown)"
 msgstr ""
 
-#: src/fuser.c:957
+#: src/fuser.c:967
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:1051
+#: src/fuser.c:1061
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr ""
 
-#: src/fuser.c:1086
+#: src/fuser.c:1097
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr ""
 
-#: src/fuser.c:1147
+#: src/fuser.c:1146
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Lopeta prosess %d? (y=kyllä, N=ei) "
 
-#: src/fuser.c:1171
+#: src/fuser.c:1170
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr ""
 
-#: src/pstree.c:374
+#: src/fuser.c:1185
 #, c-format
-msgid "MAX_DEPTH not big enough.\n"
+msgid "Cannot open a network socket.\n"
+msgstr ""
+
+#: src/fuser.c:1189
+#, fuzzy, c-format
+msgid "Cannot find socket's device number.\n"
+msgstr "pistokkeen laitenumeroa ei löydy"
+
+#: src/pstree.c:374
+#, fuzzy, c-format
+msgid "Internal error: MAX_DEPTH not big enough.\n"
 msgstr "MAX_DEPTH-vakio on liian pieni.\n"
 
 #: src/pstree.c:750
@@ -405,9 +410,6 @@ msgstr ""
 
 #~ msgid "kernel swap   "
 #~ msgstr "kernel swap   "
-
-#~ msgid "can't find sockets' device number"
-#~ msgstr "pistokkeen laitenumeroa ei löydy"
 
 #~ msgid "ignoring -m in name space \"%s\"\n"
 #~ msgstr "optio -m merkityksetön nimiavaruudessa \"%s\"\n"

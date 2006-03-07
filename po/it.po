@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 21.9\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2005-12-16 22:32+1100\n"
+"POT-Creation-Date: 2006-02-27 18:12+1100\n"
 "PO-Revision-Date: 2006-01-20 13:33+0000\n"
 "Last-Translator: Marco Colombo <m.colombo@ed.ac.uk>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -69,8 +69,10 @@ msgstr ""
 
 #: src/killall.c:493
 #, c-format
-msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr "Uso: killall [-Z CONTESTO] [-u UTENTE] [ -eIgiqrvw ] [ -SEGNALE ] NOME...\n"
+msgid ""
+"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr ""
+"Uso: killall [-Z CONTESTO] [-u UTENTE] [ -eIgiqrvw ] [ -SEGNALE ] NOME...\n"
 
 #: src/killall.c:496
 #, c-format
@@ -99,7 +101,8 @@ msgstr ""
 "     killall -l, --list\n"
 "     killall -V --version\n"
 "\n"
-"  -e,--exact          richiede una corrispondenza esatta per i nomi molto lunghi\n"
+"  -e,--exact          richiede una corrispondenza esatta per i nomi molto "
+"lunghi\n"
 "  -I,--ignore-case    ignora maiuscole/minuscole nei nomi\n"
 "  -g,--process-group  termina il gruppo di processi invece del processo\n"
 "  -i,--interactive    chiede conferma prima di terminare\n"
@@ -234,62 +237,58 @@ msgstr "Impossibile allocare memoria per il processo corrispondente: %s\n"
 msgid "Cannot stat mount point %s: %s\n"
 msgstr "Impossibile fare stat del mount point %s: %s\n"
 
-#: src/fuser.c:322 src/fuser.c:354
+#: src/fuser.c:322 src/fuser.c:341 src/fuser.c:364
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr "Impossibile fare stat di %s: %s\n"
 
-#: src/fuser.c:453
+#: src/fuser.c:463
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr "Impossibile risolvere la porta locale %s: %s\n"
 
-#: src/fuser.c:469
+#: src/fuser.c:479
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "Porta locale AF %d sconosciuta\n"
 
-#: src/fuser.c:522
-#, c-format
-msgid "Cannot open protocol file \"%s\": %s"
-msgstr "Impossibile aprire il file di protocollo \"%s\": %s"
-
-#: src/fuser.c:574
+#: src/fuser.c:532 src/fuser.c:584
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "Impossibile aprire il file di protocollo \"%s\": %s\n"
 
-#: src/fuser.c:694
+#: src/fuser.c:705
 msgid "Namespace option requires an argument."
 msgstr "L'opzione di contesto richiede un argomento."
 
-#: src/fuser.c:703
+#: src/fuser.c:714
 msgid "Invalid namespace name"
 msgstr "Nome di contesto non valido"
 
 # NdT: dato che non so come tradurre "mounpoint option", uso -m
-#: src/fuser.c:755
+#: src/fuser.c:770
 msgid "You can only use files with mountpoint option"
 msgstr "Con l'opzione -m si possono specificare solo file"
 
-#: src/fuser.c:784
+#: src/fuser.c:799
 msgid "No process specification given"
 msgstr "Nessun tipo di processo specificato"
 
-#: src/fuser.c:789
+#: src/fuser.c:804
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr "Impossibile usare le opzioni -c e -m allo stesso tempo"
 
-#: src/fuser.c:796
+#: src/fuser.c:811
 msgid "all option cannot be used with silent option."
 msgstr "L'opzione -a non può essere usata con l'opzione -s."
 
-#: src/fuser.c:800
+#: src/fuser.c:815
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
-msgstr "Impossibile cercare solo socket IPv4 e solo socket IPv6 allo stesso tempo"
+msgstr ""
+"Impossibile cercare solo socket IPv4 e solo socket IPv6 allo stesso tempo"
 
 # FIXME: COMANDO DI ACCESSO ?
-#: src/fuser.c:839
+#: src/fuser.c:855
 #, c-format
 msgid ""
 "\n"
@@ -298,33 +297,48 @@ msgstr ""
 "\n"
 "%*s UTENTE      PID ACCESSO COMANDO\n"
 
-#: src/fuser.c:864 src/fuser.c:889
+#: src/fuser.c:880 src/fuser.c:905
 msgid "(unknown)"
 msgstr "(sconosciuto)"
 
-#: src/fuser.c:950
+#: src/fuser.c:967
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "Impossibile fare stat del file %s: %s\n"
 
-#: src/fuser.c:1044
+#: src/fuser.c:1061
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "Impossibile aprire /proc/net/unix: %s\n"
 
-#: src/fuser.c:1079
+#: src/fuser.c:1097
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr "Impossibile aprire /etc/mtab: %s\n"
 
-#: src/fuser.c:1140
+#: src/fuser.c:1146
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Terminare il processo %d? (y/N) "
 
-#: src/pstree.c:374
+#: src/fuser.c:1170
 #, c-format
-msgid "MAX_DEPTH not big enough.\n"
+msgid "Could not kill process %d: %s\n"
+msgstr ""
+
+#: src/fuser.c:1185
+#, fuzzy, c-format
+msgid "Cannot open a network socket.\n"
+msgstr "Impossibile aprire la directory /proc: %s\n"
+
+#: src/fuser.c:1189
+#, fuzzy, c-format
+msgid "Cannot find socket's device number.\n"
+msgstr "impossibile trovare numero di dispositivo del socket"
+
+#: src/pstree.c:374
+#, fuzzy, c-format
+msgid "Internal error: MAX_DEPTH not big enough.\n"
 msgstr "MAX_DEPTH non è sufficientemente grande.\n"
 
 #: src/pstree.c:750
@@ -417,6 +431,9 @@ msgstr "Premere Invio per chiudere\n"
 msgid "%s: unknown signal; %s -l lists signals.\n"
 msgstr "%s: segnale sconosciuto; usare %s -l per elencare i segnali.\n"
 
+#~ msgid "Cannot open protocol file \"%s\": %s"
+#~ msgstr "Impossibile aprire il file di protocollo \"%s\": %s"
+
 #~ msgid "%s: SID (%s) must be numeric\n"
 #~ msgstr "%s: SID (%s) deve essere numerico\n"
 
@@ -446,9 +463,6 @@ msgstr "%s: segnale sconosciuto; usare %s -l per elencare i segnali.\n"
 
 #~ msgid "kernel swap   "
 #~ msgstr "file di swap del kernel"
-
-#~ msgid "can't find sockets' device number"
-#~ msgstr "impossibile trovare numero di dispositivo del socket"
 
 #~ msgid "ignoring -m in name space \"%s\"\n"
 #~ msgstr "ignorato -m nel contesto \"%s\"\n"
