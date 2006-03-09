@@ -1,21 +1,20 @@
 # Vietnamese translation for PSmisc.
 # Copyright © 2005, 2006 Free Software Foundation, Inc.
-# This file is distributed under the same license as the psmisc-21.9 package.
 # Clytie Siddall <clytie@riverland.net.au>, 2005, 2006.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 21.9\n"
+"Project-Id-Version: psmisc-22.2pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
 "POT-Creation-Date: 2006-02-27 18:12+1100\n"
-"PO-Revision-Date: 2006-01-13 17:13+1030\n"
+"PO-Revision-Date: 2006-03-08 19:06+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: LocFactoryEditor 1.6b23\n"
+"X-Generator: LocFactoryEditor 1.6b36\n"
 
 #: src/killall.c:73
 #, c-format
@@ -70,11 +69,8 @@ msgstr ""
 
 #: src/killall.c:493
 #, c-format
-msgid ""
-"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr ""
-"Cách sử dụng: killall [-Z NGỮ_CẢNH] [-u NGƯỜI_DÙNG] [ -eIgiqrvw ] [ -"
-"TÍN_HIỆU ] TÊN...\n"
+msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr "Cách sử dụng: killall [-Z NGỮ_CẢNH] [-u NGƯỜI_DÙNG] [ -eIgiqrvw ] [ -TÍN_HIỆU ] TÊN...\n"
 
 #: src/killall.c:496
 #, c-format
@@ -106,8 +102,7 @@ msgstr ""
 "  -e,--exact          \t\tcần đến điều khớp _chính xác_ với mọi tên rất dài\n"
 "  -I,--ignore-case    \t_bỏ qua _chữ hoa/thường_ khi khớp tên tiến trình\n"
 "  -g,--process-group  \tbuộc kết thúc _nhóm tiến trình_ thay thế tiến trình\n"
-"  -i,--interactive    \t\txin xác nhận trước khi buộc kết thúc (_tương "
-"tác_)\n"
+"  -i,--interactive    \t\txin xác nhận trước khi buộc kết thúc (_tương tác_)\n"
 "  -l,--list           \t\t_liệt kê_ mọi tên tín hiệu đã biết\n"
 "  -q,--quiet          \t\tkhông hiển thị lời than phiền (_im_)\n"
 "  -r,--regexp        \t\tgiải thích TÊN là _biểu thức chính quy_ nối dài\n"
@@ -195,8 +190,7 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"Cách sử dụng: fuser [ -a | -s | -c ] [ -n MIỀN ] [ -KÝ_HIỆU ] [ -kimuv ] "
-"TÊN...\n"
+"Cách sử dụng: fuser [ -a | -s | -c ] [ -n MIỀN ] [ -KÝ_HIỆU ] [ -kimuv ] TÊN...\n"
 "             [ - ] [ -n MIỀN ] [ -KÝ_HIỆU ] [ -kimuv ] TÊN...\n"
 "       fuser -l\n"
 "       fuser -V\n"
@@ -282,8 +276,7 @@ msgstr "Chưa nhập đặc tả tiến trình"
 
 #: src/fuser.c:804
 msgid "You cannot use the mounted and mountpoint flags together"
-msgstr ""
-"Không cho phép bạn sử dụng cờ kiểu cả « được lắp » lẫn « điểm lắp » đều"
+msgstr "Không cho phép bạn sử dụng cờ kiểu cả « được lắp » lẫn « điểm lắp » đều"
 
 #: src/fuser.c:811
 msgid "all option cannot be used with silent option."
@@ -329,22 +322,22 @@ msgstr "Có buốc kết thúc tiến trình %d không? (y/N) (có/không) "
 #: src/fuser.c:1170
 #, c-format
 msgid "Could not kill process %d: %s\n"
-msgstr ""
+msgstr "Không thể buộc kết thúc tiến trình %d: %s\n"
 
 #: src/fuser.c:1185
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open a network socket.\n"
-msgstr "Không thể mở thư mục </proc>: %s\n"
+msgstr "Không thể mở một ổ cắm mạng.\n"
 
 #: src/fuser.c:1189
 #, c-format
 msgid "Cannot find socket's device number.\n"
-msgstr ""
+msgstr "Không tìm thấy số hiệu thiết bị ổ cắm.\n"
 
 #: src/pstree.c:374
-#, fuzzy, c-format
+#, c-format
 msgid "Internal error: MAX_DEPTH not big enough.\n"
-msgstr "MAX_DEPTH (độ sâu tối đa) chưa đủ.\n"
+msgstr "Lỗi nội bộ : « MAX_DEPTH » (độ sâu tối đa) chưa đủ.\n"
 
 #: src/pstree.c:750
 #, c-format
@@ -367,8 +360,7 @@ msgid ""
 "    -U     use UTF-8 (Unicode) line drawing characters\n"
 "    -V     display version information\n"
 msgstr ""
-"Cách sử dụng: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -"
-"u ]\n"
+"Cách sử dụng: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 "              [ -A | -G | -U ] [ PID | NGƯỜI_DÙNG]\n"
 "       pstree -V\n"
 "\n"

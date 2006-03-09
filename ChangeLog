@@ -1,7 +1,10 @@
 Changes in
 =================
+2006-03-09 Craig Small
+	* Updated Nowegian and Vietnamese PO files
+
 2006-03-07 Craig Small
-	* Updated Polich and Dutch PO files
+	* Updated Polish and Dutch PO files
 
 2006-01-27 Craig Small
 	* Unix sockets work on all hosts now, including ones that don't have
