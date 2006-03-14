@@ -69,8 +69,10 @@ msgstr ""
 
 #: src/killall.c:493
 #, c-format
-msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr "Gebruik:  killall [-Z CONTEXT] [-u USER] [ -egiIqrvw ] [-SIGNAAL] NAAM...\n"
+msgid ""
+"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr ""
+"Gebruik:  killall [-Z CONTEXT] [-u USER] [ -egiIqrvw ] [-SIGNAAL] NAAM...\n"
 
 #: src/killall.c:496
 #, c-format

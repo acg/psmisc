@@ -69,8 +69,11 @@ msgstr ""
 
 #: src/killall.c:493
 #, c-format
-msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr "Cách sử dụng: killall [-Z NGỮ_CẢNH] [-u NGƯỜI_DÙNG] [ -eIgiqrvw ] [ -TÍN_HIỆU ] TÊN...\n"
+msgid ""
+"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr ""
+"Cách sử dụng: killall [-Z NGỮ_CẢNH] [-u NGƯỜI_DÙNG] [ -eIgiqrvw ] [ -"
+"TÍN_HIỆU ] TÊN...\n"
 
 #: src/killall.c:496
 #, c-format
@@ -102,7 +105,8 @@ msgstr ""
 "  -e,--exact          \t\tcần đến điều khớp _chính xác_ với mọi tên rất dài\n"
 "  -I,--ignore-case    \t_bỏ qua _chữ hoa/thường_ khi khớp tên tiến trình\n"
 "  -g,--process-group  \tbuộc kết thúc _nhóm tiến trình_ thay thế tiến trình\n"
-"  -i,--interactive    \t\txin xác nhận trước khi buộc kết thúc (_tương tác_)\n"
+"  -i,--interactive    \t\txin xác nhận trước khi buộc kết thúc (_tương "
+"tác_)\n"
 "  -l,--list           \t\t_liệt kê_ mọi tên tín hiệu đã biết\n"
 "  -q,--quiet          \t\tkhông hiển thị lời than phiền (_im_)\n"
 "  -r,--regexp        \t\tgiải thích TÊN là _biểu thức chính quy_ nối dài\n"
@@ -190,7 +194,8 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"Cách sử dụng: fuser [ -a | -s | -c ] [ -n MIỀN ] [ -KÝ_HIỆU ] [ -kimuv ] TÊN...\n"
+"Cách sử dụng: fuser [ -a | -s | -c ] [ -n MIỀN ] [ -KÝ_HIỆU ] [ -kimuv ] "
+"TÊN...\n"
 "             [ - ] [ -n MIỀN ] [ -KÝ_HIỆU ] [ -kimuv ] TÊN...\n"
 "       fuser -l\n"
 "       fuser -V\n"
@@ -276,7 +281,8 @@ msgstr "Chưa nhập đặc tả tiến trình"
 
 #: src/fuser.c:804
 msgid "You cannot use the mounted and mountpoint flags together"
-msgstr "Không cho phép bạn sử dụng cờ kiểu cả « được lắp » lẫn « điểm lắp » đều"
+msgstr ""
+"Không cho phép bạn sử dụng cờ kiểu cả « được lắp » lẫn « điểm lắp » đều"
 
 #: src/fuser.c:811
 msgid "all option cannot be used with silent option."
@@ -360,7 +366,8 @@ msgid ""
 "    -U     use UTF-8 (Unicode) line drawing characters\n"
 "    -V     display version information\n"
 msgstr ""
-"Cách sử dụng: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+"Cách sử dụng: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -"
+"u ]\n"
 "              [ -A | -G | -U ] [ PID | NGƯỜI_DÙNG]\n"
 "       pstree -V\n"
 "\n"
