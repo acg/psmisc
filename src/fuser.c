@@ -416,8 +416,8 @@ int parse_inet(struct names *this_name, struct ip_connections **ip_list)
 		if (tmpstr == hostspec)
 			lcl_port_str = NULL;
 		else {
-			lcl_port_str = strdup(hostspec);
 			*tmpstr = '\0';
+			lcl_port_str = strdup(hostspec);
 		}
 		tmpstr++;
 		if (*tmpstr != '\0') {

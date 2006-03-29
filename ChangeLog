@@ -1,3 +1,12 @@
+Changes in 22.3
+================
+2006-03-24 Craig Small
+	* Updated Bulgarian and Italian PO files
+	* Added Japanese and Hungarian PO files
+	* Moved some NEWS into README
+	* Removed killall flag from NEWS, its really OLDS
+	* fuser -n tcp port,host,host2 parses correctly
+
 Changes in 22.2
 ===============
 2006-03-09 Craig Small

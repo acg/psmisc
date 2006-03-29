@@ -4,13 +4,13 @@
 # Anton Zinoviev <zinoviev@debian.org>, 2006
 #
 # This file should be sent to translation@iro.umontreal.ca with the
-# following subject line: TP-Robot psmisc-21.9.bg.po
+# following subject line: TP-Robot psmisc-22.2pre1.bg.po
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 21.9\n"
+"Project-Id-Version: psmisc 22.2pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
 "POT-Creation-Date: 2006-02-27 18:12+1100\n"
-"PO-Revision-Date: 2006-01-12 20:02+0200\n"
+"PO-Revision-Date: 2006-03-07 11:49+0200\n"
 "Last-Translator: Anton Zinoviev <zinoviev@debian.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -26,9 +26,7 @@ msgstr "Да се убие ли %s(%s%d) ? (д/Н) "
 #: src/killall.c:116
 #, c-format
 msgid "Cannot get UID from process status\n"
-msgstr ""
-"Въз основа на състоянието на процеса не може да се установи потребителят "
-"собственик\n"
+msgstr "Въз основа на състоянието на процеса не може да се установи потребителят собственик\n"
 
 #: src/killall.c:142 src/killall.c:664
 #, c-format
@@ -73,11 +71,8 @@ msgstr ""
 
 #: src/killall.c:493
 #, c-format
-msgid ""
-"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr ""
-"Използване: killall [-Z КОНТЕКСТ] [-u ПОТРЕБ] [ -eIgiqrvw ] [ -СИГНАЛ ] "
-"ИМЕ...\n"
+msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr "Използване: killall [-Z КОНТЕКСТ] [-u ПОТРЕБ] [ -eIgiqrvw ] [ -СИГНАЛ ] ИМЕ...\n"
 
 #: src/killall.c:496
 #, c-format
@@ -107,13 +102,11 @@ msgstr ""
 "       killall -V, --version\n"
 "\n"
 "  -e,--exact          изисква точно съвпадение при много дълги имена\n"
-"  -I,--ignore-case    нечувствително към малки/големи букви сравнение с "
-"името\n"
+"  -I,--ignore-case    нечувствително към малки/големи букви сравнение с името\n"
 "  -g,--process-group  убива групата на процеса вместо самия процес\n"
 "  -i,--interactive    пита за потвърждение преди да убие\n"
 "  -l,--list           извежда всички познати имена на сигнали\n"
-"  -q,--quiet          да не протестира (например ако никой процес не е "
-"убит)\n"
+"  -q,--quiet          да не протестира (например ако никой процес не е убит)\n"
 "  -r,--regexp         използва ИМЕ като разширен регулярен израз\n"
 "  -s,--signal СИГНАЛ  изпраща този сигнал вместо SIGTERM\n"
 "  -u,--user ПОТРЕБ    убива само процес(и), изпълнявани от ПОТРЕБителя\n"
@@ -127,8 +120,7 @@ msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
 "                      (must precede other arguments)\n"
 msgstr ""
-"  -Z,--context РЕГИЗР убива само процес(и) от посочения контекст на "
-"сигурност\n"
+"  -Z,--context РЕГИЗР убива само процес(и) от посочения контекст на сигурност\n"
 "                      (трябва да предхожда останалите аргументи)\n"
 
 #: src/killall.c:536 src/fuser.c:111 src/pstree.c:780
@@ -198,13 +190,11 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"Използване: fuser [ -a | -s | -c ] [ -n ВИДИМЕ ] [ -СИГНАЛ ] [ -kimuv ] "
-"ИМЕ...\n"
+"Използване: fuser [ -a | -s | -c ] [ -n ВИДИМЕ ] [ -СИГНАЛ ] [ -kimuv ] ИМЕ...\n"
 "                  [ - ] [ -n ВИДИМЕ ] [ -СИГНАЛ ] [ -kimuv ] ИМЕ...\n"
 "            fuser -l\n"
 "            fuser -V\n"
-"Показва кои процеси използват посочените файлове, гнезда или файлови "
-"системи.\n"
+"Показва кои процеси използват посочените файлове, гнезда или файлови системи.\n"
 "\n"
 "    -a        извежда също и неизползваните файлове\n"
 "    -c        монтирана файлова система (същото като -m)\n"
@@ -223,8 +213,7 @@ msgstr ""
 "    -6        търси само IPv6-гнезда\n"
 "    -         отменя всички опции\n"
 "\n"
-"Имената от вид udp/tcp са: [локален_порт][,[отдалечен_хост][,"
-"[отдалечен_порт]]]\n"
+"Имената от вид udp/tcp са: [локален_порт][,[отдалечен_хост][,[отдалечен_порт]]]\n"
 "\n"
 
 #: src/fuser.c:109
@@ -331,22 +320,22 @@ msgstr "Да се убие ли процесът %d? (д/Н) "
 #: src/fuser.c:1170
 #, c-format
 msgid "Could not kill process %d: %s\n"
-msgstr ""
+msgstr "Процесът %d не може да бъде убит: %s\n"
 
 #: src/fuser.c:1185
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open a network socket.\n"
-msgstr "Каталогът /proc не може да се отвори: %s\n"
+msgstr "Не може да се отвори мрежово гнездо.\n"
 
 #: src/fuser.c:1189
 #, c-format
 msgid "Cannot find socket's device number.\n"
-msgstr ""
+msgstr "Не може да бъде намерен номерът на устройството на гнездото.\n"
 
 #: src/pstree.c:374
-#, fuzzy, c-format
+#, c-format
 msgid "Internal error: MAX_DEPTH not big enough.\n"
-msgstr "стойността на MAX_DEPTH не е достатъчно голяма.\n"
+msgstr "Вътрешна грешка: стойността на MAX_DEPTH не е достатъчно голяма.\n"
 
 #: src/pstree.c:750
 #, c-format
@@ -369,8 +358,7 @@ msgid ""
 "    -U     use UTF-8 (Unicode) line drawing characters\n"
 "    -V     display version information\n"
 msgstr ""
-"Използване: pstree [ -a ] [ -c ] [ -h | -H ПРОЦЕС ] [ -l ] [ -n ] [ -p ] [ -"
-"u ]\n"
+"Използване: pstree [ -a ] [ -c ] [ -h | -H ПРОЦЕС ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 "                   [ -A | -G | -U ] [ ПРОЦЕС | ПОТРЕБ ]\n"
 "            pstree -V\n"
 "Извежда дървото на процесите.\n"
