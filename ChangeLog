@@ -1,5 +1,9 @@
 Changes in 22.3
 ================
+2006-04-05 Karel Zak
+	* fuser return code set correcly in silent mode
+	* fuser -l doesnt complain but list signal names only
+
 2006-03-24 Craig Small
 	* Updated Bulgarian and Italian PO files
 	* Added Japanese and Hungarian PO files

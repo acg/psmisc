@@ -695,7 +695,7 @@ int main(int argc, char *argv[])
 					break;
 				case 'l':
 					list_signals();
-					break;
+					return 0;
 				case 'm':
 					opts |= OPT_MOUNTS;
 					break;
@@ -849,7 +849,9 @@ static int print_matches(struct names *names_head, const opt_type opts, const in
 	int have_match = 0;
 	
     	for (nptr = names_head; nptr != NULL ; nptr = nptr->next) {
-		if (! (opts & OPT_SILENT)) { /* We're not silent */
+		if (opts & OPT_SILENT) {
+			have_match = nptr->matched_procs ? 1 : have_match;
+		} else { /* We're not silent */
     			if (nptr->matched_procs != NULL || opts & OPT_ALLFILES) {
     				if (head == 0 && opts & OPT_VERBOSE) {
     					fprintf(stderr, _("\n%*s USER        PID ACCESS COMMAND\n"),
@@ -919,7 +921,7 @@ static int print_matches(struct names *names_head, const opt_type opts, const in
     				putc('\n', stderr);
 		} /* be silent */
 		if (opts & OPT_KILL)
-		kill_matched_proc(nptr->matched_procs,  opts, sig_number);
+			kill_matched_proc(nptr->matched_procs,  opts, sig_number);
 
 	} /* next name */
 	return (have_match==1?0:1);
