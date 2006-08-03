@@ -86,3 +86,5 @@ struct unixsocket_list {
 
 #define MAX_PATHNAME 200
 #define MAX_CMDNAME 16
+
+#define KNFSD_EXPORTS "/proc/fs/nfs/exports"

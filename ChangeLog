@@ -1,7 +1,11 @@
 Changes in 22.3
 ================
+2006-05-25 Craig Small
+	* Updated Swedish PO file
+	* Fixed fuser man page ... Debian #358880
+
 2006-04-05 Karel Zak
-	* fuser return code set correcly in silent mode
+	* fuser return code set correcly in silent mode Debian #361639
 	* fuser -l doesnt complain but list signal names only
 
 2006-03-24 Craig Small

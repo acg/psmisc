@@ -50,7 +50,9 @@
 #include "signals.h"
 #include "i18n.h"
 
-/*#define DEBUG 1*/
+/*#define DEBUG 1
+#define NFS_CHECKS 
+*/
 
 #define NAME_FIELD 20		/* space reserved for file name */
 /* Function defines */
@@ -67,6 +69,10 @@ static void add_device(struct device_list **dev_list, struct names  *this_name, 
 void scan_mount_devices(const opt_type opts, struct mountdev_list **mount_devices);
 void fill_unix_cache(struct unixsocket_list **unixsocket_head);
 static dev_t find_net_dev(void);
+static void scan_procs(struct names *names_head, struct inode_list *ino_head, struct device_list *dev_head);
+#ifdef NFS_CHECKS
+static void scan_knfsd(struct names *names_head, struct device_list *dev_head);
+#endif /* NFS_CHECKS */
 #ifdef DEBUG
 static void debug_match_lists(struct names *names_head, struct inode_list *ino_head, struct device_list *dev_head);
 #endif
@@ -832,6 +838,9 @@ int main(int argc, char *argv[])
 	debug_match_lists(names_head, match_inodes, match_devices);
 #endif
 	scan_procs(names_head, match_inodes, match_devices);
+#ifdef NFS_CHECKS
+    scan_knfsd(names_head, match_devices);
+#endif /* NFS_CHECKS */
 	return print_matches(names_head,opts, sig_number);
 }
 
@@ -1196,4 +1205,37 @@ static dev_t find_net_dev(void)
   return st.st_dev;
 }
 
+#ifdef NFS_CHECKS
+static void scan_knfsd(struct names *names_head, struct device_list *dev_head)
+{
+	struct device_list *dev_tmp;
+	FILE *fp;
+	char line[BUFSIZ];
+    char *find_space;
+    struct stat st;
 
+    if ( (fp = fopen(KNFSD_EXPORTS, "r")) == NULL) {
+#ifdef DEBUG
+      fprintf(stderr, "Cannot open %s\n", KNFSD_EXPORTS);
+#endif
+      return;
+    }
+	while (fgets(line, BUFSIZ, fp) != NULL) {
+      if (line[0] == '#') { continue; }
+      if ( (find_space=strpbrk(line," \t")) == NULL) {
+        continue;
+      }
+      *find_space = '\0';
+      if ( stat(line, &st) != 0) {
+    printf("hello %s\n", line);
+        continue;
+      }
+      printf("looking for dev %0x\n", st.st_dev);
+      /* Scan the devices */
+	  for (dev_tmp = dev_head ; dev_tmp != NULL ; dev_tmp = dev_tmp->next) {
+         printf("dev %d\n", dev_tmp->device);
+       }
+
+    }
+}
+#endif /* NFSCHECKS */
