@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc-21.6pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2006-02-27 18:12+1100\n"
+"POT-Creation-Date: 2006-08-09 21:28+1000\n"
 "PO-Revision-Date: 2005-02-24 12:00-0500\n"
 "Last-Translator: Laurentiu Buzdugan <lbuz@rolix.org>\n"
 "Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
@@ -126,7 +126,7 @@ msgstr ""
 "   (-s, -c sunt mutual exlusive ºi trebuie sã preceadã celelalte argumente\n"
 "\n"
 
-#: src/killall.c:536 src/fuser.c:111 src/pstree.c:780
+#: src/killall.c:536 src/fuser.c:117 src/pstree.c:780
 #, fuzzy, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -135,7 +135,7 @@ msgstr ""
 "Copyright (C) 1993-2002 Werner Almesberger ºi Craig Small\n"
 "\n"
 
-#: src/killall.c:538 src/fuser.c:113 src/pstree.c:782
+#: src/killall.c:538 src/fuser.c:119 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -164,7 +164,7 @@ msgstr "Numãr maxim de nume este %d\n"
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s este gol (nu este montat ?)\n"
 
-#: src/fuser.c:80
+#: src/fuser.c:86
 #, fuzzy, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -219,75 +219,75 @@ msgstr ""
 "  nume udp/tcp: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 
-#: src/fuser.c:109
+#: src/fuser.c:115
 #, fuzzy, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/fuser.c:136
+#: src/fuser.c:142
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr ""
 
-#: src/fuser.c:272
+#: src/fuser.c:278
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr ""
 
-#: src/fuser.c:305
+#: src/fuser.c:311
 #, c-format
 msgid "Cannot stat mount point %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:322 src/fuser.c:341 src/fuser.c:364
+#: src/fuser.c:328 src/fuser.c:347 src/fuser.c:370
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:463
+#: src/fuser.c:469
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:479
+#: src/fuser.c:485
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr ""
 
-#: src/fuser.c:532 src/fuser.c:584
+#: src/fuser.c:538 src/fuser.c:590
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr ""
 
-#: src/fuser.c:705
+#: src/fuser.c:711
 msgid "Namespace option requires an argument."
 msgstr ""
 
-#: src/fuser.c:714
+#: src/fuser.c:720
 msgid "Invalid namespace name"
 msgstr ""
 
-#: src/fuser.c:770
+#: src/fuser.c:776
 msgid "You can only use files with mountpoint option"
 msgstr ""
 
-#: src/fuser.c:799
+#: src/fuser.c:805
 msgid "No process specification given"
 msgstr ""
 
-#: src/fuser.c:804
+#: src/fuser.c:810
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr ""
 
-#: src/fuser.c:811
+#: src/fuser.c:817
 msgid "all option cannot be used with silent option."
 msgstr ""
 
-#: src/fuser.c:815
+#: src/fuser.c:821
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr ""
 
-#: src/fuser.c:855
+#: src/fuser.c:866
 #, c-format
 msgid ""
 "\n"
@@ -296,41 +296,41 @@ msgstr ""
 "\n"
 "%*s UTILIZATOR  PID ACCES  COMANDÃ\n"
 
-#: src/fuser.c:880 src/fuser.c:905
+#: src/fuser.c:891 src/fuser.c:916
 msgid "(unknown)"
 msgstr ""
 
-#: src/fuser.c:967
+#: src/fuser.c:978
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:1061
+#: src/fuser.c:1072
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr ""
 
-#: src/fuser.c:1097
+#: src/fuser.c:1108
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr ""
 
-#: src/fuser.c:1146
+#: src/fuser.c:1157
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Terminã process %d ? (y/N) "
 
-#: src/fuser.c:1170
+#: src/fuser.c:1181
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr ""
 
-#: src/fuser.c:1185
+#: src/fuser.c:1196
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr ""
 
-#: src/fuser.c:1189
+#: src/fuser.c:1200
 #, fuzzy, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "nu pot gãsi numerele dispozitivelor socket-urilor"

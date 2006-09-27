@@ -249,7 +249,7 @@ static void add_ip6_conn(struct ip6_connections **ip_list, const char *protocol,
 	ip_tmp->name = this_name;
 	ip_tmp->lcl_port = lcl_port;
 	ip_tmp->rmt_port = rmt_port;
-	memcpy(&(ip_tmp->rmt_port),&(rmt_port),sizeof(struct in6_addr));
+	memcpy(&(ip_tmp->rmt_address),&(rmt_address),sizeof(struct in6_addr));
 	ip_tmp->next = ip_head;
 
 	*ip_list = ip_tmp;
