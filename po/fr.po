@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 20.1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2006-08-09 21:28+1000\n"
+"POT-Creation-Date: 2007-03-02 09:44+1100\n"
 "PO-Revision-Date: 2002-04-12 21:33+1000\n"
 "Last-Translator: Marc Léger <sorata@users.sourceforge.net>\n"
 "Language-Team: French <fr@li.org>\n"
@@ -102,7 +102,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/killall.c:538 src/fuser.c:119 src/pstree.c:782
+#: src/killall.c:538 src/fuser.c:119 src/peekfd.c:61 src/pstree.c:782
 #, fuzzy, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -300,6 +300,37 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "ne peut pas trouver le numéro du périphérique des sockets"
+
+#: src/peekfd.c:49
+#, c-format
+msgid "error attaching to pid %i\n"
+msgstr ""
+
+#: src/peekfd.c:57
+#, fuzzy, c-format
+msgid "peekfd (PSmisc) %s\n"
+msgstr "fuser (psmisc) %s\n"
+
+#: src/peekfd.c:59
+#, c-format
+msgid ""
+"Copyright (C) 2007 Trent Waddington\n"
+"\n"
+msgstr ""
+
+#: src/peekfd.c:69
+#, c-format
+msgid ""
+"Usage: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
+"    -8 output 8 bit clean streams.\n"
+"    -n don't display read/write from fd headers.\n"
+"    -c peek at any new child processes too.\n"
+"    -d remove duplicate read/writes from the output.\n"
+"    -V prints version info.\n"
+"    -h prints this help.\n"
+"\n"
+"  Press CTRL-C to end output.\n"
+msgstr ""
 
 #: src/pstree.c:374
 #, c-format

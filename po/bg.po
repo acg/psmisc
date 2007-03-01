@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.2pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2006-08-09 21:28+1000\n"
+"POT-Creation-Date: 2007-03-02 09:44+1100\n"
 "PO-Revision-Date: 2006-03-07 11:49+0200\n"
 "Last-Translator: Anton Zinoviev <zinoviev@debian.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -140,7 +140,7 @@ msgstr ""
 "Copyright © 1993-2005 Werner Almesberger и Craig Small\n"
 "\n"
 
-#: src/killall.c:538 src/fuser.c:119 src/pstree.c:782
+#: src/killall.c:538 src/fuser.c:119 src/peekfd.c:61 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -342,6 +342,37 @@ msgstr "Не може да се отвори мрежово гнездо.\n"
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Не може да бъде намерен номерът на устройството на гнездото.\n"
+
+#: src/peekfd.c:49
+#, c-format
+msgid "error attaching to pid %i\n"
+msgstr ""
+
+#: src/peekfd.c:57
+#, fuzzy, c-format
+msgid "peekfd (PSmisc) %s\n"
+msgstr "pstree (PSmisc) %s\n"
+
+#: src/peekfd.c:59
+#, c-format
+msgid ""
+"Copyright (C) 2007 Trent Waddington\n"
+"\n"
+msgstr ""
+
+#: src/peekfd.c:69
+#, c-format
+msgid ""
+"Usage: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
+"    -8 output 8 bit clean streams.\n"
+"    -n don't display read/write from fd headers.\n"
+"    -c peek at any new child processes too.\n"
+"    -d remove duplicate read/writes from the output.\n"
+"    -V prints version info.\n"
+"    -h prints this help.\n"
+"\n"
+"  Press CTRL-C to end output.\n"
+msgstr ""
 
 #: src/pstree.c:374
 #, c-format

@@ -1,4 +1,5 @@
 src/killall.c
 src/fuser.c
+src/peekfd.c
 src/pstree.c
 src/signals.c

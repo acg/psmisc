@@ -1,7 +1,7 @@
 
 AM_CFLAGS = -Wall -DLOCALEDIR=\"/usr/share/locale\"
 
-bin_PROGRAMS = fuser killall pstree oldfuser
+bin_PROGRAMS = fuser killall pstree oldfuser peekfd
 
 oldfuser_SOURCES = oldfuser.c comm.h signals.c signals.h loop.h i18n.h
 
@@ -10,6 +10,8 @@ fuser_SOURCES = fuser.c comm.h signals.c signals.h i18n.h fuser.h
 killall_SOURCES = killall.c comm.h signals.c signals.h i18n.h
 
 killall_LDADD = @SELINUX_LIB@
+
+peekfd_SOURCES = peekfd.c
 
 pstree_SOURCES = pstree.c comm.h i18n.h
 
