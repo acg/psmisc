@@ -9,6 +9,10 @@ This package contains four little utilities that use the proc FS:
   pidof	    like killall, buts lists PIDs instead of killing processes
   pstree    shows the currently running processes as a tree
 
+and
+
+  peekfd    shows the data travelling over a file descriptor
+
 They should work with most recent kernels. Man pages are included.
 
 - Werner Almesberger <Werner.Almesberger@epfl.ch>
