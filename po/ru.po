@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 20.6\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-03-02 09:44+1100\n"
+"POT-Creation-Date: 2007-04-08 17:33+1000\n"
 "PO-Revision-Date: 2005-03-15 02:53+0300\n"
 "Last-Translator: Ilya Evseev <evseev@altlinux.ru>\n"
 "Language-Team: woolfy <woolfy@users.sourceforge.net>\n"
@@ -24,7 +24,7 @@ msgstr "%s(%s%d) завершить? (y/N) "
 msgid "Cannot get UID from process status\n"
 msgstr ""
 
-#: src/killall.c:142 src/killall.c:664
+#: src/killall.c:142 src/killall.c:677
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr ""
@@ -34,17 +34,17 @@ msgstr ""
 msgid "skipping partial match %s(%d)\n"
 msgstr "игнорирую неполное совпадение %s(%d)\n"
 
-#: src/killall.c:427
+#: src/killall.c:440
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "%s(%s%d) завершён сигналом %d\n"
 
-#: src/killall.c:441
+#: src/killall.c:454
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: не завершён ни один процесс\n"
 
-#: src/killall.c:479
+#: src/killall.c:492
 #, fuzzy, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -66,19 +66,19 @@ msgstr ""
 "   -V   показать версию программы\n"
 "\n"
 
-#: src/killall.c:493
+#: src/killall.c:506
 #, fuzzy, c-format
 msgid ""
 "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
 msgstr ""
 "Синтаксис: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] name ...\n"
 
-#: src/killall.c:496
+#: src/killall.c:509
 #, fuzzy, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "Синтаксис: killall [ OPTIONS ] [ -- ] name ...\n"
 
-#: src/killall.c:499
+#: src/killall.c:512
 #, fuzzy, c-format
 msgid ""
 "       killall -l, --list\n"
@@ -113,7 +113,7 @@ msgstr ""
 "  -w,--wait           ожидать завершения процессов\n"
 "\n"
 
-#: src/killall.c:515
+#: src/killall.c:528
 #, fuzzy, c-format
 msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
@@ -124,14 +124,14 @@ msgstr ""
 "   (-s, -c взаимно исключают друг друга и должны быть первым аргументом)\n"
 "\n"
 
-#: src/killall.c:536 src/fuser.c:117 src/pstree.c:780
+#: src/killall.c:549 src/fuser.c:117 src/pstree.c:780
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
 
-#: src/killall.c:538 src/fuser.c:119 src/peekfd.c:61 src/pstree.c:782
+#: src/killall.c:551 src/fuser.c:119 src/peekfd.c:61 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -140,17 +140,17 @@ msgid ""
 "For more information about these matters, see the files named COPYING.\n"
 msgstr ""
 
-#: src/killall.c:638
+#: src/killall.c:651
 #, c-format
 msgid "Cannot find user %s\n"
 msgstr ""
 
-#: src/killall.c:697
+#: src/killall.c:710
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Количество имён не может превышать %d\n"
 
-#: src/killall.c:702 src/pstree.c:710
+#: src/killall.c:715 src/pstree.c:710
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s пуст (не смонтирован ?)\n"
@@ -324,7 +324,7 @@ msgstr "не могу найти номер устройства сокета"
 
 #: src/peekfd.c:49
 #, c-format
-msgid "error attaching to pid %i\n"
+msgid "Error attaching to pid %i\n"
 msgstr ""
 
 #: src/peekfd.c:57

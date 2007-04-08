@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc-21.6pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-03-02 09:44+1100\n"
+"POT-Creation-Date: 2007-04-08 17:33+1000\n"
 "PO-Revision-Date: 2005-02-24 12:00-0500\n"
 "Last-Translator: Laurentiu Buzdugan <lbuz@rolix.org>\n"
 "Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
@@ -28,7 +28,7 @@ msgstr "Terminã %s(%s%d) ? (y/N) "
 msgid "Cannot get UID from process status\n"
 msgstr ""
 
-#: src/killall.c:142 src/killall.c:664
+#: src/killall.c:142 src/killall.c:677
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr ""
@@ -38,17 +38,17 @@ msgstr ""
 msgid "skipping partial match %s(%d)\n"
 msgstr "am ignorat potrivirea parþialã %s(%d)\n"
 
-#: src/killall.c:427
+#: src/killall.c:440
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Am terminat %s(%s%d) cu semnalul %d\n"
 
-#: src/killall.c:441
+#: src/killall.c:454
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: nici un proces nu a fost terminat\n"
 
-#: src/killall.c:479
+#: src/killall.c:492
 #, fuzzy, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -69,19 +69,19 @@ msgstr ""
 "    -V      afiºeazã informaþii despre versiune\n"
 "\n"
 
-#: src/killall.c:493
+#: src/killall.c:506
 #, fuzzy, c-format
 msgid ""
 "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
 msgstr ""
 "folosire: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] nume ...\n"
 
-#: src/killall.c:496
+#: src/killall.c:509
 #, fuzzy, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "folosire: killall [ OPÞIUNI ] [ -- ] nume ...\n"
 
-#: src/killall.c:499
+#: src/killall.c:512
 #, fuzzy, c-format
 msgid ""
 "       killall -l, --list\n"
@@ -115,7 +115,7 @@ msgstr ""
 "  -w,--wait           aºteaptã ca procesele sã termine\n"
 "\n"
 
-#: src/killall.c:515
+#: src/killall.c:528
 #, fuzzy, c-format
 msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
@@ -126,7 +126,7 @@ msgstr ""
 "   (-s, -c sunt mutual exlusive ºi trebuie sã preceadã celelalte argumente\n"
 "\n"
 
-#: src/killall.c:536 src/fuser.c:117 src/pstree.c:780
+#: src/killall.c:549 src/fuser.c:117 src/pstree.c:780
 #, fuzzy, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -135,7 +135,7 @@ msgstr ""
 "Copyright (C) 1993-2002 Werner Almesberger ºi Craig Small\n"
 "\n"
 
-#: src/killall.c:538 src/fuser.c:119 src/peekfd.c:61 src/pstree.c:782
+#: src/killall.c:551 src/fuser.c:119 src/peekfd.c:61 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -149,17 +149,17 @@ msgstr ""
 "Pentru informaþii suplimentare referitoare la aceste chestiuni,\n"
 "vedeþi fiºierele numite COPYING.\n"
 
-#: src/killall.c:638
+#: src/killall.c:651
 #, c-format
 msgid "Cannot find user %s\n"
 msgstr ""
 
-#: src/killall.c:697
+#: src/killall.c:710
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Numãr maxim de nume este %d\n"
 
-#: src/killall.c:702 src/pstree.c:710
+#: src/killall.c:715 src/pstree.c:710
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s este gol (nu este montat ?)\n"
@@ -337,7 +337,7 @@ msgstr "nu pot gãsi numerele dispozitivelor socket-urilor"
 
 #: src/peekfd.c:49
 #, c-format
-msgid "error attaching to pid %i\n"
+msgid "Error attaching to pid %i\n"
 msgstr ""
 
 #: src/peekfd.c:57

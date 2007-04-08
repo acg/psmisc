@@ -46,7 +46,7 @@ void detach(void) {
 void attach(pid_t pid) {
 	attached_pids[0] = pid;
 	if (ptrace(PTRACE_ATTACH, pid, 0, 0) == -1) {
-		fprintf(stderr, _("error attaching to pid %i\n"), pid);
+		fprintf(stderr, _("Error attaching to pid %i\n"), pid);
 		return;
 	}
 	num_attached_pids++;
@@ -87,19 +87,39 @@ int bufdiff(int pid, unsigned char *lastbuf, unsigned int addr, unsigned int len
 
 int main(int argc, char **argv)
 {
+	int eight_bit_clean = 0;
+	int no_headers = 0;
+	int follow_forks = 0;
+	int remove_duplicates = 0;
+	int optc;
+    int target_pid = 0;
+    int numfds = 0;
+    int *fds = NULL;
+    int i;
+
+    struct option options[] = {
+      {"eight-bit-clean", 0, NULL, '8'},
+      {"no-headers", 0, NULL, 'n'},
+      {"follow", 0, NULL, 'f'},
+      {"duplicates-removed", 0, NULL, 'd'},
+      {"help", 0, NULL, 'h'},
+      {"version", 0, NULL, 'V'},
+    };
+
 	if (argc < 2) {
 		usage();
 		return 1;
 	}
 
-	int eight_bit_clean = 0;
-	int no_headers = 0;
-	int follow_forks = 0;
-	int remove_duplicates = 0;
+  /* Setup the i18n */
+#ifdef ENABLE_NLS
+    setlocale(LC_ALL, "");
+    bindtextdomain(PACKAGE, LOCALEDIR);
+    textdomain(PACKAGE);
+#endif
 
-	int opt;
-	while ((opt = getopt(argc, argv, "8ncdvh")) != -1) {
-		switch(opt) {
+	while ((optc = getopt_long(argc, argv, "8nfdhV",options, NULL)) != -1) {
+		switch(optc) {
 			case '8':
 				eight_bit_clean = 1;
 				break;
@@ -116,18 +136,26 @@ int main(int argc, char **argv)
 				print_version();
 				return 1;
 			case 'h':
+			case '?':
 				usage();
 				return 1;
 		}
 	}
+    /* First arg off the options is the PID to see */
+    if (optind >= argc) {
+      usage();
+      return -1;
+    }
+    target_pid = atoi(argv[optind++]);
 
-	int numfds = argc - optind - 1;
-	int *fds = malloc(sizeof(int) * numfds);
-	int i;
-	for (i = 0; i < numfds; i++)
+    if (optind < argc) {
+      numfds = argc - optind;
+      fds = malloc(sizeof(int) * numfds);
+	  for (i = 0; i < numfds; i++)
 		fds[i] = atoi(argv[optind + 1 + i]);
+    }
 
-	attach(atoi(argv[optind]));
+	attach(target_pid);
 	if (num_attached_pids == 0)
 		return 1;
 

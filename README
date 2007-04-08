@@ -1,16 +1,13 @@
 psmisc
 ======
 
-This package contains four little utilities that use the proc FS:
+This package contains five little utilities that use the proc FS:
 
   fuser     identifies processes using files or sockets (similar to Sun's
 	    or SGI's fuser)
   killall   kills processes by name, e.g. killall -HUP named
   pidof	    like killall, buts lists PIDs instead of killing processes
   pstree    shows the currently running processes as a tree
-
-and
-
   peekfd    shows the data travelling over a file descriptor
 
 They should work with most recent kernels. Man pages are included.

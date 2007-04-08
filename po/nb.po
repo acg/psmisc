@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.2pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-03-02 09:44+1100\n"
+"POT-Creation-Date: 2007-04-08 17:33+1000\n"
 "PO-Revision-Date: 2006-03-07 12:01+0100\n"
 "Last-Translator: Trond Endrestøl <Trond.Endrestol@fagskolen.gjovik.no>\n"
 "Language-Team: Norwegian Bokmaal <i18n-nb@lister.ping.uio.no>\n"
@@ -40,7 +40,7 @@ msgstr "Drepe %s(%s%d) ? (j/n) "
 msgid "Cannot get UID from process status\n"
 msgstr "Kan ikke finne UID fra prosesstatus\n"
 
-#: src/killall.c:142 src/killall.c:664
+#: src/killall.c:142 src/killall.c:677
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr "Ugyldig regulært uttrykk: %s\n"
@@ -50,17 +50,17 @@ msgstr "Ugyldig regulært uttrykk: %s\n"
 msgid "skipping partial match %s(%d)\n"
 msgstr "hopper over delvis treff %s(%d)\n"
 
-#: src/killall.c:427
+#: src/killall.c:440
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Drepte %s(%s%d) med signalet %d\n"
 
-#: src/killall.c:441
+#: src/killall.c:454
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: drepte ingen prosess\n"
 
-#: src/killall.c:479
+#: src/killall.c:492
 #, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -81,7 +81,7 @@ msgstr ""
 "    -V      vis programversjon\n"
 "\n"
 
-#: src/killall.c:493
+#: src/killall.c:506
 #, c-format
 msgid ""
 "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
@@ -89,12 +89,12 @@ msgstr ""
 "Bruksmåte: killall [-Z kontekst] [-u bruker] [ -egiqvw ] [ -signal ] "
 "navn ...\n"
 
-#: src/killall.c:496
+#: src/killall.c:509
 #, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "Bruksmåte: killall [VALG]... [--] navn...\n"
 
-#: src/killall.c:499
+#: src/killall.c:512
 #, c-format
 msgid ""
 "       killall -l, --list\n"
@@ -128,7 +128,7 @@ msgstr ""
 "  -V,--version        vis programinformasjon\n"
 "  -w,--wait           vent til prosessen er død\n"
 
-#: src/killall.c:515
+#: src/killall.c:528
 #, c-format
 msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
@@ -137,7 +137,7 @@ msgstr ""
 "  -Z,--context REGEXP bare drep prosesser med kontekst\n"
 "                      (må komme foran andre argumenter)\n"
 
-#: src/killall.c:536 src/fuser.c:117 src/pstree.c:780
+#: src/killall.c:549 src/fuser.c:117 src/pstree.c:780
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -146,7 +146,7 @@ msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger og Craig Small\n"
 "\n"
 
-#: src/killall.c:538 src/fuser.c:119 src/peekfd.c:61 src/pstree.c:782
+#: src/killall.c:551 src/fuser.c:119 src/peekfd.c:61 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -159,17 +159,17 @@ msgstr ""
 "under betingelsene i GNU General Public License.\n"
 "For mer informasjon om dette, les filene som heter COPYING.\n"
 
-#: src/killall.c:638
+#: src/killall.c:651
 #, c-format
 msgid "Cannot find user %s\n"
 msgstr "Kan ikke finne brukeren %s\n"
 
-#: src/killall.c:697
+#: src/killall.c:710
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Maksimalt antall navn er %d\n"
 
-#: src/killall.c:702 src/pstree.c:710
+#: src/killall.c:715 src/pstree.c:710
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s er tom (ikke montert?)\n"
@@ -353,7 +353,7 @@ msgstr "Kan ikke finne socketens enhetsnummer.\n"
 
 #: src/peekfd.c:49
 #, c-format
-msgid "error attaching to pid %i\n"
+msgid "Error attaching to pid %i\n"
 msgstr ""
 
 #: src/peekfd.c:57

@@ -1,5 +1,12 @@
 Changes in 22.4
 ===============
+2007-03-02  Karel Zak
+	* killall <path> does textual path comparision with value of the
+	  /proc/<pid>/exe link when a comparision with inode number failed.
+	  The old algorithme based on inode numbers doesn't work if since
+	  the process was started, the file at <path> has been replaced
+	  (e.g due prelink process).
+
 2007-03-02 Craig Small
 	* Added peekfd
 

@@ -372,16 +372,29 @@ kill_all (int signal, int names, char **namelist, struct passwd *pwent)
 	        }
 	      else
 	        {
+		  int ok = 1;
+
 	          if (asprintf (&path, PROC_BASE "/%d/exe", pid_table[i]) < 0)
 		    continue;
 
 	          if (stat (path, &st) < 0) 
+		      ok = 0;
+
+		  else if (sts[j].st_dev != st.st_dev ||
+			   sts[j].st_ino != st.st_ino)
 		    {
-		      free (path);
-		      continue;
-	            }
-	          free (path);
-	          if (sts[j].st_dev != st.st_dev || sts[j].st_ino != st.st_ino)
+		      /* maybe the binary has been modified and std[j].st_ino
+		       * is not reliable anymore. We need to compare paths.
+		       */
+		      char linkbuf[PATH_MAX];
+
+		      if (readlink(path, linkbuf, sizeof(linkbuf)) <= 0 ||
+					  strcmp(namelist[j], linkbuf))
+			ok = 0;
+		    }
+
+		  free(path);
+		  if (!ok)
 		    continue;
 	        }
 	    } /* non-regex */

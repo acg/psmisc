@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.2pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-03-02 09:44+1100\n"
+"POT-Creation-Date: 2007-04-08 17:33+1000\n"
 "PO-Revision-Date: 2006-03-06 21:12+0100\n"
 "Last-Translator: Benno Schulenberg <benno@nietvergeten.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -26,7 +26,7 @@ msgstr "Proces %s(%s%d) afbreken? (j/N) "
 msgid "Cannot get UID from process status\n"
 msgstr "Kan uit processtatus geen UID bepalen\n"
 
-#: src/killall.c:142 src/killall.c:664
+#: src/killall.c:142 src/killall.c:677
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr "Ongeldige reguliere expressie: %s\n"
@@ -36,17 +36,17 @@ msgstr "Ongeldige reguliere expressie: %s\n"
 msgid "skipping partial match %s(%d)\n"
 msgstr "overgeslagen: gedeeltelijke overeenkomst %s(%d)\n"
 
-#: src/killall.c:427
+#: src/killall.c:440
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Proces %s(%s%d) is afgebroken met signaal %d\n"
 
-#: src/killall.c:441
+#: src/killall.c:454
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: geen proces afgebroken\n"
 
-#: src/killall.c:479
+#: src/killall.c:492
 #, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -67,19 +67,19 @@ msgstr ""
 "    -V    de programmaversie tonen\n"
 "\n"
 
-#: src/killall.c:493
+#: src/killall.c:506
 #, c-format
 msgid ""
 "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
 msgstr ""
 "Gebruik:  killall [-Z CONTEXT] [-u USER] [ -egiIqrvw ] [-SIGNAAL] NAAM...\n"
 
-#: src/killall.c:496
+#: src/killall.c:509
 #, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "Gebruik:  killall [OPTIE]... [--] NAAM...\n"
 
-#: src/killall.c:499
+#: src/killall.c:512
 #, c-format
 msgid ""
 "       killall -l, --list\n"
@@ -115,7 +115,7 @@ msgstr ""
 "  -w,--wait           wachten tot processen ook werkelijk afgebroken zijn\n"
 "\n"
 
-#: src/killall.c:515
+#: src/killall.c:528
 #, c-format
 msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
@@ -124,7 +124,7 @@ msgstr ""
 "  -Z,--context REGEXP alleen proces(sen) met deze context afbreken\n"
 "                      (dient aan andere argumenten vooraf te gaan)\n"
 
-#: src/killall.c:536 src/fuser.c:117 src/pstree.c:780
+#: src/killall.c:549 src/fuser.c:117 src/pstree.c:780
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -133,7 +133,7 @@ msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 
-#: src/killall.c:538 src/fuser.c:119 src/peekfd.c:61 src/pstree.c:782
+#: src/killall.c:551 src/fuser.c:119 src/peekfd.c:61 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -146,17 +146,17 @@ msgstr ""
 "de voorwaarden van de GNU General Public License.\n"
 "Zie voor meer informatie hierover het bestand genaamd COPYING.\n"
 
-#: src/killall.c:638
+#: src/killall.c:651
 #, c-format
 msgid "Cannot find user %s\n"
 msgstr "Kan gebruiker %s niet vinden\n"
 
-#: src/killall.c:697
+#: src/killall.c:710
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Het maximum aantal namen is %d\n"
 
-#: src/killall.c:702 src/pstree.c:710
+#: src/killall.c:715 src/pstree.c:710
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s is leeg -- niet aangekoppeld?\n"
@@ -336,7 +336,7 @@ msgstr "Kan apparaatnummer van socket niet vinden.\n"
 
 #: src/peekfd.c:49
 #, c-format
-msgid "error attaching to pid %i\n"
+msgid "Error attaching to pid %i\n"
 msgstr ""
 
 #: src/peekfd.c:57
