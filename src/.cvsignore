@@ -1,5 +1,6 @@
 fuser
 oldfuser
+peekfd
 killall
 pstree
 pstree.x11
@@ -8,3 +9,4 @@ signames.h
 .libs
 Makefile
 Makefile.in
+*.swp
