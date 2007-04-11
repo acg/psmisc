@@ -640,7 +640,8 @@ void find_net6_sockets(struct inode_list **ino_list, struct ip6_connections *con
 #endif /* DEBUG */
 			if ( (conn_tmp->lcl_port == 0 || conn_tmp->lcl_port == loc_port) &&
 				  (conn_tmp->rmt_port == 0 || conn_tmp->rmt_port == rmt_port) &&
-					(memcmp(&(conn_tmp->rmt_address), &(rmt_addr),16) ==0)
+                  (memcmp(&(conn_tmp->rmt_address), &in6addr_any,16) == 0 ||
+					(memcmp(&(conn_tmp->rmt_address), &(rmt_addr),16) ==0))
 			   ) {
 				add_inode(ino_list, conn_tmp->name, netdev, inode);
 			}
@@ -888,7 +889,7 @@ static int print_matches(struct names *names_head, const opt_type opts, const in
 		} else { /* We're not silent */
     			if (nptr->matched_procs != NULL || opts & OPT_ALLFILES) {
     				if (head == 0 && opts & OPT_VERBOSE) {
-    					fprintf(stderr, _("\n%*s USER        PID ACCESS COMMAND\n"),
+    					fprintf(stderr, _("%*s USER        PID ACCESS COMMAND\n"),
     				        	NAME_FIELD, "");
     					head = 1;
     				}
@@ -951,8 +952,14 @@ static int print_matches(struct names *names_head, const opt_type opts, const in
     				len = 0;
     				first = 0;
     			}
-    			if (nptr->matched_procs != NULL || opts & OPT_ALLFILES)
+                if (opts & OPT_VERBOSE) {
+                  /* put a newline if showing all files and no procs*/
+                  if (nptr->matched_procs == NULL && (opts & OPT_ALLFILES))
+                    putc('\n', stderr);
+                } else {
+    			  if (nptr->matched_procs != NULL || (opts & OPT_ALLFILES))
     				putc('\n', stderr);
+                }
 		} /* be silent */
 		if (opts & OPT_KILL)
 			kill_matched_proc(nptr->matched_procs,  opts, sig_number);

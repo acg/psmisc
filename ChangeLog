@@ -1,5 +1,9 @@
 Changes in 22.4
 ===============
+2007-04-11 Craig Small
+	* fuser correctly parses remote tcp ports Debian #397033
+	* Removed extra blank lines in fuser Debian #386564
+
 2007-03-02  Karel Zak
 	* killall <path> does textual path comparision with value of the
 	  /proc/<pid>/exe link when a comparision with inode number failed.
