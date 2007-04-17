@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.2pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-04-08 17:33+1000\n"
+"POT-Creation-Date: 2007-04-12 15:03+1000\n"
 "PO-Revision-Date: 2006-03-06 21:12+0100\n"
 "Last-Translator: Benno Schulenberg <benno@nietvergeten.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -124,7 +124,7 @@ msgstr ""
 "  -Z,--context REGEXP alleen proces(sen) met deze context afbreken\n"
 "                      (dient aan andere argumenten vooraf te gaan)\n"
 
-#: src/killall.c:549 src/fuser.c:117 src/pstree.c:780
+#: src/killall.c:549 src/fuser.c:120 src/pstree.c:780
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -133,7 +133,7 @@ msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 
-#: src/killall.c:551 src/fuser.c:119 src/peekfd.c:61 src/pstree.c:782
+#: src/killall.c:551 src/fuser.c:122 src/peekfd.c:61 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -161,7 +161,7 @@ msgstr "Het maximum aantal namen is %d\n"
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s is leeg -- niet aangekoppeld?\n"
 
-#: src/fuser.c:86
+#: src/fuser.c:89
 #, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -218,118 +218,116 @@ msgstr ""
 "  tcp/udp-namen: [lokale_poort][,[gindse_host][,[gindse_poort]]]\n"
 "\n"
 
-#: src/fuser.c:115
+#: src/fuser.c:118
 #, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
 
-#: src/fuser.c:142
+#: src/fuser.c:145
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr "Kan /proc niet openen: %s\n"
 
-#: src/fuser.c:278
+#: src/fuser.c:281
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr "Onvoldoende geheugen om gevonden proces te verwerken: %s\n"
 
-#: src/fuser.c:311
+#: src/fuser.c:314
 #, c-format
 msgid "Cannot stat mount point %s: %s\n"
 msgstr "Kan status van aankoppelingspunt %s niet bepalen: %s\n"
 
-#: src/fuser.c:328 src/fuser.c:347 src/fuser.c:370
+#: src/fuser.c:331 src/fuser.c:350 src/fuser.c:373
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr "Kan status van %s niet bepalen: %s\n"
 
-#: src/fuser.c:469
+#: src/fuser.c:474
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr "Kan lokale poort %s nergens toe herleiden: %s\n"
 
-#: src/fuser.c:485
+#: src/fuser.c:490
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "Onbekende lokale poort AF %d\n"
 
-#: src/fuser.c:538 src/fuser.c:590
+#: src/fuser.c:551
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "Kan protocolbestand '%s' niet openen: %s\n"
 
-#: src/fuser.c:711
+#: src/fuser.c:737
 msgid "Namespace option requires an argument."
 msgstr "De naamsruimte-optie -n vereist een argument."
 
-#: src/fuser.c:720
+#: src/fuser.c:746
 msgid "Invalid namespace name"
 msgstr "Ongeldige naamsruimte"
 
-#: src/fuser.c:776
+#: src/fuser.c:802
 msgid "You can only use files with mountpoint option"
 msgstr "Bij opties -c of -m mogen alleen bestandsnamen gegeven worden"
 
-#: src/fuser.c:805
+#: src/fuser.c:831
 msgid "No process specification given"
 msgstr "Geen naam van bestand of socket opgegeven"
 
-#: src/fuser.c:810
+#: src/fuser.c:836
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr "Opties -c en -m mogen niet allebei gebruikt worden"
 
-#: src/fuser.c:817
+#: src/fuser.c:843
 msgid "all option cannot be used with silent option."
 msgstr "Opties -a en -s gaan niet samen"
 
-#: src/fuser.c:821
+#: src/fuser.c:847
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "De opties -4 en -6 gaan niet samen"
 
-#: src/fuser.c:866
-#, c-format
-msgid ""
-"\n"
-"%*s USER        PID ACCESS COMMAND\n"
+#: src/fuser.c:892
+#, fuzzy, c-format
+msgid "%*s USER        PID ACCESS COMMAND\n"
 msgstr ""
 "\n"
 "%*s GEBRUIKER   PID TOEGANGSOPDRACHT\n"
 
-#: src/fuser.c:891 src/fuser.c:916
+#: src/fuser.c:917 src/fuser.c:942
 msgid "(unknown)"
 msgstr "(onbekend)"
 
-#: src/fuser.c:978
+#: src/fuser.c:1010
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "Kan status van bestand %s niet bepalen: %s\n"
 
-#: src/fuser.c:1072
+#: src/fuser.c:1104
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "Kan /proc/net/unix niet openen: %s\n"
 
-#: src/fuser.c:1108
+#: src/fuser.c:1140
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr "Kan /etc/mtab niet openen: %s\n"
 
-#: src/fuser.c:1157
+#: src/fuser.c:1189
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Proces %d afbreken? (j/N) "
 
-#: src/fuser.c:1181
+#: src/fuser.c:1213
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Kan proces %d niet afbreken: %s\n"
 
-#: src/fuser.c:1196
+#: src/fuser.c:1228
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Kan netwerk-socket niet openen.\n"
 
-#: src/fuser.c:1200
+#: src/fuser.c:1232
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Kan apparaatnummer van socket niet vinden.\n"

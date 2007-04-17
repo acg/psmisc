@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.2pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-04-08 17:33+1000\n"
+"POT-Creation-Date: 2007-04-12 15:03+1000\n"
 "PO-Revision-Date: 2006-03-07 11:49+0200\n"
 "Last-Translator: Anton Zinoviev <zinoviev@debian.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -131,7 +131,7 @@ msgstr ""
 "сигурност\n"
 "                      (трябва да предхожда останалите аргументи)\n"
 
-#: src/killall.c:549 src/fuser.c:117 src/pstree.c:780
+#: src/killall.c:549 src/fuser.c:120 src/pstree.c:780
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -140,7 +140,7 @@ msgstr ""
 "Copyright © 1993-2005 Werner Almesberger и Craig Small\n"
 "\n"
 
-#: src/killall.c:551 src/fuser.c:119 src/peekfd.c:61 src/pstree.c:782
+#: src/killall.c:551 src/fuser.c:122 src/peekfd.c:61 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -169,7 +169,7 @@ msgstr "Максималният брой имена е %d\n"
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s е празна (не е монтирана?)\n"
 
-#: src/fuser.c:86
+#: src/fuser.c:89
 #, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -227,118 +227,116 @@ msgstr ""
 "[отдалечен_порт]]]\n"
 "\n"
 
-#: src/fuser.c:115
+#: src/fuser.c:118
 #, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
 
-#: src/fuser.c:142
+#: src/fuser.c:145
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr "Каталогът /proc не може да се отвори: %s\n"
 
-#: src/fuser.c:278
+#: src/fuser.c:281
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr "Не може да се задели памет за съответстващ процес: %s\n"
 
-#: src/fuser.c:311
+#: src/fuser.c:314
 #, c-format
 msgid "Cannot stat mount point %s: %s\n"
 msgstr "Не може да се достигне мястото на монтиране %s: %s\n"
 
-#: src/fuser.c:328 src/fuser.c:347 src/fuser.c:370
+#: src/fuser.c:331 src/fuser.c:350 src/fuser.c:373
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr "Не може да се достигне %s: %s\n"
 
-#: src/fuser.c:469
+#: src/fuser.c:474
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr "Не може да се определи локалният порт %s: %s\n"
 
-#: src/fuser.c:485
+#: src/fuser.c:490
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "Непознат вид адрес на локалния порт %d (unknown local port AF)\n"
 
-#: src/fuser.c:538 src/fuser.c:590
+#: src/fuser.c:551
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "Не може да се отвори файлът за протокол „%s“: %s\n"
 
-#: src/fuser.c:711
+#: src/fuser.c:737
 msgid "Namespace option requires an argument."
 msgstr "Опцията за вид име изисква аргумент."
 
-#: src/fuser.c:720
+#: src/fuser.c:746
 msgid "Invalid namespace name"
 msgstr "Неправилен вид имена"
 
-#: src/fuser.c:776
+#: src/fuser.c:802
 msgid "You can only use files with mountpoint option"
 msgstr "При опцията за файлова система може да се посочват само файлове"
 
-#: src/fuser.c:805
+#: src/fuser.c:831
 msgid "No process specification given"
 msgstr "Не е зададена спецификация на процес"
 
-#: src/fuser.c:810
+#: src/fuser.c:836
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr "Не може да използвате едновременно опциите -m и -c"
 
-#: src/fuser.c:817
+#: src/fuser.c:843
 msgid "all option cannot be used with silent option."
 msgstr "опцията -a не може да се използва едновременно с -q"
 
-#: src/fuser.c:821
+#: src/fuser.c:847
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "Не може да търсите само IPv4-гнезда и в същото време само IPv6-гнезда"
 
-#: src/fuser.c:866
-#, c-format
-msgid ""
-"\n"
-"%*s USER        PID ACCESS COMMAND\n"
+#: src/fuser.c:892
+#, fuzzy, c-format
+msgid "%*s USER        PID ACCESS COMMAND\n"
 msgstr ""
 "\n"
 "%*s ПОТРЕБИТЕЛ Пот№ ДОСТЪП КОМАНДА\n"
 
-#: src/fuser.c:891 src/fuser.c:916
+#: src/fuser.c:917 src/fuser.c:942
 msgid "(unknown)"
 msgstr "(неизвест)"
 
-#: src/fuser.c:978
+#: src/fuser.c:1010
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "Файлът %s не може да се достигне: %s\n"
 
-#: src/fuser.c:1072
+#: src/fuser.c:1104
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "Не може да се отвори /proc/net/unix: %s\n"
 
-#: src/fuser.c:1108
+#: src/fuser.c:1140
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr "Не може да се отвори /etc/mtab: %s\n"
 
-#: src/fuser.c:1157
+#: src/fuser.c:1189
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Да се убие ли процесът %d? (д/Н) "
 
-#: src/fuser.c:1181
+#: src/fuser.c:1213
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Процесът %d не може да бъде убит: %s\n"
 
-#: src/fuser.c:1196
+#: src/fuser.c:1228
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Не може да се отвори мрежово гнездо.\n"
 
-#: src/fuser.c:1200
+#: src/fuser.c:1232
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Не може да бъде намерен номерът на устройството на гнездото.\n"

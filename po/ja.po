@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.2pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-04-08 17:33+1000\n"
+"POT-Creation-Date: 2007-04-12 15:03+1000\n"
 "PO-Revision-Date: 2006-03-20 10:31+0900\n"
 "Last-Translator: GOTO Masanori <gotom@debian.or.jp>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
@@ -123,7 +123,7 @@ msgstr ""
 "  -Z,--context 正規表現 コンテキストを持つプロセスのみkillする\n"
 "                        (他の引数よりも前に指定されていなければならない)\n"
 
-#: src/killall.c:549 src/fuser.c:117 src/pstree.c:780
+#: src/killall.c:549 src/fuser.c:120 src/pstree.c:780
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -132,7 +132,7 @@ msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 
-#: src/killall.c:551 src/fuser.c:119 src/peekfd.c:61 src/pstree.c:782
+#: src/killall.c:551 src/fuser.c:122 src/peekfd.c:61 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -160,7 +160,7 @@ msgstr "名前の最大指定可能数は %d\n"
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s は空ディレクトリ (マウントされていない?)\n"
 
-#: src/fuser.c:86
+#: src/fuser.c:89
 #, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -219,119 +219,117 @@ msgstr ""
 "  udp/tcp 名前: [ローカルポート][,[リモートホスト][,[リモートポート]]]\n"
 "\n"
 
-#: src/fuser.c:115
+#: src/fuser.c:118
 #, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
 
-#: src/fuser.c:142
+#: src/fuser.c:145
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr "/proc ディレクトリを開けません: %s\n"
 
-#: src/fuser.c:278
+#: src/fuser.c:281
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr "一致したプロセスに対するメモリが獲得できません: %s\n"
 
-#: src/fuser.c:311
+#: src/fuser.c:314
 #, c-format
 msgid "Cannot stat mount point %s: %s\n"
 msgstr "マウントポイント %s をstatできません: %s\n"
 
-#: src/fuser.c:328 src/fuser.c:347 src/fuser.c:370
+#: src/fuser.c:331 src/fuser.c:350 src/fuser.c:373
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr "%s をstatできません: %s\n"
 
-#: src/fuser.c:469
+#: src/fuser.c:474
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr "ローカルポート %s を解決できません: %s\n"
 
-#: src/fuser.c:485
+#: src/fuser.c:490
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "未知のローカルポート AF %d\n"
 
-#: src/fuser.c:538 src/fuser.c:590
+#: src/fuser.c:551
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "プロトコルファイル \"%s\" が開けません: %s\n"
 
-#: src/fuser.c:711
+#: src/fuser.c:737
 msgid "Namespace option requires an argument."
 msgstr "名前空間オプションは引数が必要です"
 
-#: src/fuser.c:720
+#: src/fuser.c:746
 msgid "Invalid namespace name"
 msgstr "不正な名前空間名"
 
-#: src/fuser.c:776
+#: src/fuser.c:802
 msgid "You can only use files with mountpoint option"
 msgstr ""
 "マウントポイントオプション(-mまたは-c)と一緒に使えるのはfile名前空間のみです"
 
-#: src/fuser.c:805
+#: src/fuser.c:831
 msgid "No process specification given"
 msgstr "引数が与えられていません"
 
-#: src/fuser.c:810
+#: src/fuser.c:836
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr "-mオプションと-cオプションは同時には使えません"
 
-#: src/fuser.c:817
+#: src/fuser.c:843
 msgid "all option cannot be used with silent option."
 msgstr "-aオプションは-sオプションと一緒には使用できません"
 
-#: src/fuser.c:821
+#: src/fuser.c:847
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "-4オプションと-6オプションは同時に指定できません"
 
-#: src/fuser.c:866
-#, c-format
-msgid ""
-"\n"
-"%*s USER        PID ACCESS COMMAND\n"
+#: src/fuser.c:892
+#, fuzzy, c-format
+msgid "%*s USER        PID ACCESS COMMAND\n"
 msgstr ""
 "\n"
 "%*s ユーザ     PID アクセス コマンド\n"
 
-#: src/fuser.c:891 src/fuser.c:916
+#: src/fuser.c:917 src/fuser.c:942
 msgid "(unknown)"
 msgstr "(不明)"
 
-#: src/fuser.c:978
+#: src/fuser.c:1010
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "ファイルをstatできません %s: %s\n"
 
-#: src/fuser.c:1072
+#: src/fuser.c:1104
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "/proc/net/unix が開けません: %s\n"
 
-#: src/fuser.c:1108
+#: src/fuser.c:1140
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr "/etc/mtab が開けません: %s\n"
 
-#: src/fuser.c:1157
+#: src/fuser.c:1189
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "プロセス %d をkillしますか? (y/N) "
 
-#: src/fuser.c:1181
+#: src/fuser.c:1213
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "プロセス %d を kill できません: %s\n"
 
-#: src/fuser.c:1196
+#: src/fuser.c:1228
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "ネットワークソケットが開けません.\n"
 
-#: src/fuser.c:1200
+#: src/fuser.c:1232
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "ソケットのデバイス番号が見つかりません.\n"
