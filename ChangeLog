@@ -1,6 +1,7 @@
 Changes in 22.5
 ===============
-
+2007-04-18 Craig Small
+	* Conditonally compile peekfd if the right registers are found
 
 Changes in 22.4
 ===============
