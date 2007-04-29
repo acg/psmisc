@@ -2,7 +2,7 @@
  * killall.c - kill processes by name or list PIDs
  *
  * Copyright (C) 1993-2002 Werner Almesberger
- * Copyright (C) 2002-2005 Craig Small
+ * Copyright (C) 2002-2007 Craig Small
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ static int verbose = 0, exact = 0, interactive = 0, reg = 0,
            ignore_case = 0, pidof;
 
 static int
-ask (char *name, pid_t pid)
+ask (char *name, pid_t pid, const int signal)
 {
   int res;
   size_t len;
@@ -70,8 +70,13 @@ ask (char *name, pid_t pid)
   len = 0;
 
   do {
-    printf (_("Kill %s(%s%d) ? (y/N) "), name, process_group ? "pgid " : "",
-	    pid);
+    if (signal == SIGTERM)
+        printf (_("Kill %s(%s%d) ? (y/N) "), name, process_group ? "pgid " : "",
+	        pid);
+    else
+        printf (_("Signal %s(%s%d) ? (y/N) "), name, process_group ? "pgid " : "",
+	        pid);
+
     fflush (stdout);
 
     if (getline (&line, &len, stdin) < 0)
@@ -425,7 +430,7 @@ kill_all (int signal, int names, char **namelist, struct passwd *pwent)
 	    if (j < i)
 	      continue;
 	  }	
-	if (interactive && !ask (comm, id))
+	if (interactive && !ask (comm, id, signal))
 	  continue;
 	if (pidof)
 	  {

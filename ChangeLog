@@ -1,7 +1,8 @@
 Changes in ??
 =============
-2007-04-30 Benno Schulenberg
-	* Fixed up NLS for fuser
+2007-04-30 Craig Small
+	* Fixed up NLS for fuser, patch from Benno Schulenberg
+	* killall asks for Signal (procname) if not SIGTERM
 
 Changes in 22.5
 ===============
