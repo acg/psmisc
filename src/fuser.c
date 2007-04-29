@@ -4,7 +4,7 @@
  * Based on fuser.c Copyright (C) 1993-2005 Werner Almesberger and Craig Small
  *
  * Completely re-written
- * Copyright (C) 2005 Craig Small
+ * Copyright (C) 2005-2007 Craig Small
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -103,11 +103,13 @@ static void usage (const char *errormsg)
     "    -SIGNAL   send this signal instead of SIGKILL\n"
     "    -u        display user IDs\n"
     "    -v        verbose output\n"
-    "    -V        display version information\n"
+    "    -V        display version information\n"));
 #ifdef WITH_IPV6
+  fprintf (stderr, _(
     "    -4        search IPv4 sockets only\n"
-    "    -6        search IPv6 sockets only\n"
+    "    -6        search IPv6 sockets only\n"));
 #endif
+  fprintf (stderr, _(
     "    -         reset options\n\n"
     "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n\n"));
   exit (1);
@@ -681,6 +683,13 @@ int main(int argc, char *argv[])
 	names_head = this_name = names_tail = NULL;
 	opts = 0;
 	sig_number = SIGKILL;
+
+#ifdef ENABLE_NLS
+	/* Set up the i18n */
+	setlocale(LC_ALL, "");
+	bindtextdomain(PACKAGE, LOCALEDIR);
+	textdomain(PACKAGE);
+#endif
 
 	netdev = find_net_dev();
 	scan_mount_devices(opts, &mount_devices);
