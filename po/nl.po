@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.2pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-04-12 15:03+1000\n"
+"POT-Creation-Date: 2007-05-31 08:31+1000\n"
 "PO-Revision-Date: 2006-03-06 21:12+0100\n"
 "Last-Translator: Benno Schulenberg <benno@nietvergeten.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -16,37 +16,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.1\n"
 
-#: src/killall.c:73
+#: src/killall.c:74
 #, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "Proces %s(%s%d) afbreken? (j/N) "
 
-#: src/killall.c:116
+#: src/killall.c:77
+#, fuzzy, c-format
+msgid "Signal %s(%s%d) ? (y/N) "
+msgstr "Proces %s(%s%d) afbreken? (j/N) "
+
+#: src/killall.c:121
 #, c-format
 msgid "Cannot get UID from process status\n"
 msgstr "Kan uit processtatus geen UID bepalen\n"
 
-#: src/killall.c:142 src/killall.c:677
+#: src/killall.c:147 src/killall.c:682
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr "Ongeldige reguliere expressie: %s\n"
 
-#: src/killall.c:338
+#: src/killall.c:343
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "overgeslagen: gedeeltelijke overeenkomst %s(%d)\n"
 
-#: src/killall.c:440
+#: src/killall.c:445
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Proces %s(%s%d) is afgebroken met signaal %d\n"
 
-#: src/killall.c:454
+#: src/killall.c:459
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: geen proces afgebroken\n"
 
-#: src/killall.c:492
+#: src/killall.c:497
 #, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -67,19 +72,19 @@ msgstr ""
 "    -V    de programmaversie tonen\n"
 "\n"
 
-#: src/killall.c:506
+#: src/killall.c:511
 #, c-format
 msgid ""
 "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
 msgstr ""
 "Gebruik:  killall [-Z CONTEXT] [-u USER] [ -egiIqrvw ] [-SIGNAAL] NAAM...\n"
 
-#: src/killall.c:509
+#: src/killall.c:514
 #, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "Gebruik:  killall [OPTIE]... [--] NAAM...\n"
 
-#: src/killall.c:512
+#: src/killall.c:517
 #, c-format
 msgid ""
 "       killall -l, --list\n"
@@ -115,7 +120,7 @@ msgstr ""
 "  -w,--wait           wachten tot processen ook werkelijk afgebroken zijn\n"
 "\n"
 
-#: src/killall.c:528
+#: src/killall.c:533
 #, c-format
 msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
@@ -124,7 +129,7 @@ msgstr ""
 "  -Z,--context REGEXP alleen proces(sen) met deze context afbreken\n"
 "                      (dient aan andere argumenten vooraf te gaan)\n"
 
-#: src/killall.c:549 src/fuser.c:120 src/pstree.c:780
+#: src/killall.c:554 src/fuser.c:122 src/pstree.c:780
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -133,7 +138,7 @@ msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 
-#: src/killall.c:551 src/fuser.c:122 src/peekfd.c:61 src/pstree.c:782
+#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:61 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -146,23 +151,23 @@ msgstr ""
 "de voorwaarden van de GNU General Public License.\n"
 "Zie voor meer informatie hierover het bestand genaamd COPYING.\n"
 
-#: src/killall.c:651
+#: src/killall.c:656
 #, c-format
 msgid "Cannot find user %s\n"
 msgstr "Kan gebruiker %s niet vinden\n"
 
-#: src/killall.c:710
+#: src/killall.c:715
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Het maximum aantal namen is %d\n"
 
-#: src/killall.c:715 src/pstree.c:710
+#: src/killall.c:720 src/pstree.c:710
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s is leeg -- niet aangekoppeld?\n"
 
 #: src/fuser.c:89
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -183,12 +188,6 @@ msgid ""
 "    -u        display user IDs\n"
 "    -v        verbose output\n"
 "    -V        display version information\n"
-"    -4        search IPv4 sockets only\n"
-"    -6        search IPv6 sockets only\n"
-"    -         reset options\n"
-"\n"
-"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
-"\n"
 msgstr ""
 "Gebruik:  fuser [-a|-s|-c] [-n RUIMTE] [-SIGNAAL] [ -kimuv ] NAAM...\n"
 "                [ - ] [-n RUIMTE] [-SIGNAAL] [ -kimuv ] NAAM...\n"
@@ -218,116 +217,132 @@ msgstr ""
 "  tcp/udp-namen: [lokale_poort][,[gindse_host][,[gindse_poort]]]\n"
 "\n"
 
-#: src/fuser.c:118
+#: src/fuser.c:109
+#, c-format
+msgid ""
+"    -4        search IPv4 sockets only\n"
+"    -6        search IPv6 sockets only\n"
+msgstr ""
+
+#: src/fuser.c:113
+#, c-format
+msgid ""
+"    -         reset options\n"
+"\n"
+"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"\n"
+msgstr ""
+
+#: src/fuser.c:120
 #, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
 
-#: src/fuser.c:145
+#: src/fuser.c:147
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr "Kan /proc niet openen: %s\n"
 
-#: src/fuser.c:281
+#: src/fuser.c:283
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr "Onvoldoende geheugen om gevonden proces te verwerken: %s\n"
 
-#: src/fuser.c:314
+#: src/fuser.c:316
 #, c-format
 msgid "Cannot stat mount point %s: %s\n"
 msgstr "Kan status van aankoppelingspunt %s niet bepalen: %s\n"
 
-#: src/fuser.c:331 src/fuser.c:350 src/fuser.c:373
+#: src/fuser.c:333 src/fuser.c:352 src/fuser.c:375
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr "Kan status van %s niet bepalen: %s\n"
 
-#: src/fuser.c:474
+#: src/fuser.c:476
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr "Kan lokale poort %s nergens toe herleiden: %s\n"
 
-#: src/fuser.c:490
+#: src/fuser.c:492
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "Onbekende lokale poort AF %d\n"
 
-#: src/fuser.c:551
+#: src/fuser.c:553
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "Kan protocolbestand '%s' niet openen: %s\n"
 
-#: src/fuser.c:737
+#: src/fuser.c:746
 msgid "Namespace option requires an argument."
 msgstr "De naamsruimte-optie -n vereist een argument."
 
-#: src/fuser.c:746
+#: src/fuser.c:755
 msgid "Invalid namespace name"
 msgstr "Ongeldige naamsruimte"
 
-#: src/fuser.c:802
+#: src/fuser.c:811
 msgid "You can only use files with mountpoint option"
 msgstr "Bij opties -c of -m mogen alleen bestandsnamen gegeven worden"
 
-#: src/fuser.c:831
+#: src/fuser.c:840
 msgid "No process specification given"
 msgstr "Geen naam van bestand of socket opgegeven"
 
-#: src/fuser.c:836
+#: src/fuser.c:845
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr "Opties -c en -m mogen niet allebei gebruikt worden"
 
-#: src/fuser.c:843
+#: src/fuser.c:852
 msgid "all option cannot be used with silent option."
 msgstr "Opties -a en -s gaan niet samen"
 
-#: src/fuser.c:847
+#: src/fuser.c:856
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "De opties -4 en -6 gaan niet samen"
 
-#: src/fuser.c:892
+#: src/fuser.c:901
 #, fuzzy, c-format
 msgid "%*s USER        PID ACCESS COMMAND\n"
 msgstr ""
 "\n"
 "%*s GEBRUIKER   PID TOEGANGSOPDRACHT\n"
 
-#: src/fuser.c:917 src/fuser.c:942
+#: src/fuser.c:926 src/fuser.c:951
 msgid "(unknown)"
 msgstr "(onbekend)"
 
-#: src/fuser.c:1010
+#: src/fuser.c:1019
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "Kan status van bestand %s niet bepalen: %s\n"
 
-#: src/fuser.c:1104
+#: src/fuser.c:1113
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "Kan /proc/net/unix niet openen: %s\n"
 
-#: src/fuser.c:1140
+#: src/fuser.c:1149
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr "Kan /etc/mtab niet openen: %s\n"
 
-#: src/fuser.c:1189
+#: src/fuser.c:1198
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Proces %d afbreken? (j/N) "
 
-#: src/fuser.c:1213
+#: src/fuser.c:1222
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Kan proces %d niet afbreken: %s\n"
 
-#: src/fuser.c:1228
+#: src/fuser.c:1237
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Kan netwerk-socket niet openen.\n"
 
-#: src/fuser.c:1232
+#: src/fuser.c:1241
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Kan apparaatnummer van socket niet vinden.\n"

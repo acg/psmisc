@@ -1,52 +1,57 @@
 # Italian messages for psmisc.
-# Copyright (C) 2001, 2005, 2006 Free Software Foundation, Inc.
+# Copyright (C) 2001, 2005, 2006, 2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the psmisc file.
-# Marco Colombo <m.colombo@ed.ac.uk>, 2005, 2006.
+# Marco Colombo <m.colombo@ed.ac.uk>, 2005, 2006, 2007.
 # Daniele Pagano <esaurito@users.sourceforge.net>, 2001.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 22.2pre1\n"
+"Project-Id-Version: psmisc 22.5\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-04-12 15:03+1000\n"
-"PO-Revision-Date: 2006-03-13 14:16+0000\n"
+"POT-Creation-Date: 2007-05-31 08:31+1000\n"
+"PO-Revision-Date: 2007-05-30 17:17+0100\n"
 "Last-Translator: Marco Colombo <m.colombo@ed.ac.uk>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/killall.c:73
+#: src/killall.c:74
 #, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "Terminare %s(%s%d)? (y/N) "
 
-#: src/killall.c:116
+#: src/killall.c:77
+#, fuzzy, c-format
+msgid "Signal %s(%s%d) ? (y/N) "
+msgstr "Terminare %s(%s%d)? (y/N) "
+
+#: src/killall.c:121
 #, c-format
 msgid "Cannot get UID from process status\n"
 msgstr "Impossibile ottenere l'UID dallo stato del processo\n"
 
-#: src/killall.c:142 src/killall.c:677
+#: src/killall.c:147 src/killall.c:682
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr "Espressione regolare non valida: %s\n"
 
-#: src/killall.c:338
+#: src/killall.c:343
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "ignorata corrispondenza parziale %s(%d)\n"
 
-#: src/killall.c:440
+#: src/killall.c:445
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Terminato %s(%s%d) con segnale %d\n"
 
-#: src/killall.c:454
+#: src/killall.c:459
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: nessun processo terminato\n"
 
-#: src/killall.c:492
+#: src/killall.c:497
 #, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -67,19 +72,19 @@ msgstr ""
 "    -V      mostra le informazioni sulla versione\n"
 "\n"
 
-#: src/killall.c:506
+#: src/killall.c:511
 #, c-format
 msgid ""
 "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
 msgstr ""
 "Uso: killall [-Z CONTESTO] [-u UTENTE] [ -eIgiqrvw ] [ -SEGNALE ] NOME...\n"
 
-#: src/killall.c:509
+#: src/killall.c:514
 #, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "Uso: killall [OPZIONE]... [--] NOME...\n"
 
-#: src/killall.c:512
+#: src/killall.c:517
 #, c-format
 msgid ""
 "       killall -l, --list\n"
@@ -116,7 +121,7 @@ msgstr ""
 "  -w,--wait           aspetta la terminazione del processo\n"
 "\n"
 
-#: src/killall.c:528
+#: src/killall.c:533
 #, c-format
 msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
@@ -125,7 +130,7 @@ msgstr ""
 "  -Z,--context REGEXP termina solo i processi aventi context\n"
 "                      (deve precedere altri argomenti)\n"
 
-#: src/killall.c:549 src/fuser.c:120 src/pstree.c:780
+#: src/killall.c:554 src/fuser.c:122 src/pstree.c:780
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -134,7 +139,7 @@ msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger e Craig Small\n"
 "\n"
 
-#: src/killall.c:551 src/fuser.c:122 src/peekfd.c:61 src/pstree.c:782
+#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:61 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -147,23 +152,23 @@ msgstr ""
 "della GNU General Public License.\n"
 "Si consulti il file COPYING per ulteriori informazioni.\n"
 
-#: src/killall.c:651
+#: src/killall.c:656
 #, c-format
 msgid "Cannot find user %s\n"
 msgstr "Impossibile trovare l'utente %s\n"
 
-#: src/killall.c:710
+#: src/killall.c:715
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Il massimo numero di nomi è %d\n"
 
-#: src/killall.c:715 src/pstree.c:710
+#: src/killall.c:720 src/pstree.c:710
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s è vuoto (non montato?)\n"
 
 #: src/fuser.c:89
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -184,12 +189,6 @@ msgid ""
 "    -u        display user IDs\n"
 "    -v        verbose output\n"
 "    -V        display version information\n"
-"    -4        search IPv4 sockets only\n"
-"    -6        search IPv6 sockets only\n"
-"    -         reset options\n"
-"\n"
-"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
-"\n"
 msgstr ""
 "Uso: fuser [ -a | -s | -c ] [ -n CONTESTO ] [ -SEGNALE ] [ -kimuv ] NOME...\n"
 "           [ - ] [ -n CONTESTO] [ -SEGNALE ] [ -kimuv ] NOME...\n"
@@ -217,121 +216,135 @@ msgstr ""
 "  nomi udp/tcp: [porta locale][,[host remoto][,[porta remota]]]\n"
 "\n"
 
-#: src/fuser.c:118
+#: src/fuser.c:109
+#, c-format
+msgid ""
+"    -4        search IPv4 sockets only\n"
+"    -6        search IPv6 sockets only\n"
+msgstr ""
+
+#: src/fuser.c:113
+#, c-format
+msgid ""
+"    -         reset options\n"
+"\n"
+"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"\n"
+msgstr ""
+
+#: src/fuser.c:120
 #, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
 
-#: src/fuser.c:145
+#: src/fuser.c:147
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr "Impossibile aprire la directory /proc: %s\n"
 
-#: src/fuser.c:281
+#: src/fuser.c:283
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr "Impossibile allocare memoria per il processo corrispondente: %s\n"
 
-#: src/fuser.c:314
+#: src/fuser.c:316
 #, c-format
 msgid "Cannot stat mount point %s: %s\n"
 msgstr "Impossibile fare stat del mount point %s: %s\n"
 
-#: src/fuser.c:331 src/fuser.c:350 src/fuser.c:373
+#: src/fuser.c:333 src/fuser.c:352 src/fuser.c:375
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr "Impossibile fare stat di %s: %s\n"
 
-#: src/fuser.c:474
+#: src/fuser.c:476
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr "Impossibile risolvere la porta locale %s: %s\n"
 
-#: src/fuser.c:490
+#: src/fuser.c:492
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "Porta locale AF %d sconosciuta\n"
 
-#: src/fuser.c:551
+#: src/fuser.c:553
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "Impossibile aprire il file di protocollo \"%s\": %s\n"
 
-#: src/fuser.c:737
+#: src/fuser.c:746
 msgid "Namespace option requires an argument."
 msgstr "L'opzione di contesto richiede un argomento."
 
-#: src/fuser.c:746
+#: src/fuser.c:755
 msgid "Invalid namespace name"
 msgstr "Nome di contesto non valido"
 
 # NdT: dato che non so come tradurre "mounpoint option", uso -m
-#: src/fuser.c:802
+#: src/fuser.c:811
 msgid "You can only use files with mountpoint option"
 msgstr "Con l'opzione -m si possono specificare solo file"
 
-#: src/fuser.c:831
+#: src/fuser.c:840
 msgid "No process specification given"
 msgstr "Nessun tipo di processo specificato"
 
-#: src/fuser.c:836
+#: src/fuser.c:845
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr "Impossibile usare le opzioni -c e -m allo stesso tempo"
 
-#: src/fuser.c:843
+#: src/fuser.c:852
 msgid "all option cannot be used with silent option."
 msgstr "L'opzione -a non può essere usata con l'opzione -s."
 
-#: src/fuser.c:847
+#: src/fuser.c:856
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr ""
 "Impossibile cercare solo socket IPv4 e solo socket IPv6 allo stesso tempo"
 
 # FIXME: COMANDO DI ACCESSO ?
-#: src/fuser.c:892
-#, fuzzy, c-format
+#: src/fuser.c:901
+#, c-format
 msgid "%*s USER        PID ACCESS COMMAND\n"
-msgstr ""
-"\n"
-"%*s UTENTE      PID ACCESSO COMANDO\n"
+msgstr "%*s UTENTE      PID ACCESSO COMANDO\n"
 
-#: src/fuser.c:917 src/fuser.c:942
+#: src/fuser.c:926 src/fuser.c:951
 msgid "(unknown)"
 msgstr "(sconosciuto)"
 
-#: src/fuser.c:1010
+#: src/fuser.c:1019
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "Impossibile fare stat del file %s: %s\n"
 
-#: src/fuser.c:1104
+#: src/fuser.c:1113
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "Impossibile aprire /proc/net/unix: %s\n"
 
-#: src/fuser.c:1140
+#: src/fuser.c:1149
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr "Impossibile aprire /etc/mtab: %s\n"
 
-#: src/fuser.c:1189
+#: src/fuser.c:1198
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Terminare il processo %d? (y/N) "
 
-#: src/fuser.c:1213
+#: src/fuser.c:1222
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Impossibile terminare il processo %d: %s\n"
 
 # FIXME
-#: src/fuser.c:1228
+#: src/fuser.c:1237
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Impossibile aprire un socket di rete.\n"
 
 # FIXME
-#: src/fuser.c:1232
+#: src/fuser.c:1241
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Impossibile trovare il numero di dispositivo del socket.\n"
@@ -339,12 +352,12 @@ msgstr "Impossibile trovare il numero di dispositivo del socket.\n"
 #: src/peekfd.c:49
 #, c-format
 msgid "Error attaching to pid %i\n"
-msgstr ""
+msgstr "Errore nel collegarsi al pid %i\n"
 
 #: src/peekfd.c:57
-#, fuzzy, c-format
+#, c-format
 msgid "peekfd (PSmisc) %s\n"
-msgstr "pstree (PSmisc) %s\n"
+msgstr "peekfd (PSmisc) %s\n"
 
 #: src/peekfd.c:59
 #, c-format
@@ -352,7 +365,10 @@ msgid ""
 "Copyright (C) 2007 Trent Waddington\n"
 "\n"
 msgstr ""
+"Copyright (C) 2007 Trent Waddington\n"
+"\n"
 
+# FIXME
 #: src/peekfd.c:69
 #, c-format
 msgid ""
@@ -366,6 +382,15 @@ msgid ""
 "\n"
 "  Press CTRL-C to end output.\n"
 msgstr ""
+"Uso: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
+"    -8 emetti output pulito a 8 bit\n"
+"    -n non mostrare letture/scritture dalle intestazioni del fd\n"
+"    -c peek anche i processi figli\n"
+"    -d rimuove dall'output le letture/scritture duplicate\n"
+"    -V stampa le informazioni sulla versione\n"
+"    -h stampa questo aiuto\n"
+"\n"
+"  Premere CTRL-C per terminare l'output.\n"
 
 #: src/pstree.c:374
 #, c-format

@@ -4,6 +4,9 @@ Changes in ??
 	* Fixed up NLS for fuser, patch from Benno Schulenberg
 	* killall asks for Signal (procname) if not SIGTERM
 
+2007-05-31 Craig Small
+	* Updated Polish and Italian translations
+
 Changes in 22.5
 ===============
 2007-04-18 Craig Small

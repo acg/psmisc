@@ -1,51 +1,56 @@
 # Polish translations for psmisc.
-# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2005, 2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the psmisc package.
-# Jakub Bogusz <qboosh@pld-linux.org>, 2003-2005.
+# Jakub Bogusz <qboosh@pld-linux.org>, 2003-2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 22.2pre1\n"
+"Project-Id-Version: psmisc 22.5\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-04-12 15:03+1000\n"
-"PO-Revision-Date: 2006-03-06 18:01+0100\n"
+"POT-Creation-Date: 2007-05-31 08:31+1000\n"
+"PO-Revision-Date: 2007-05-30 17:34+0200\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/killall.c:73
+#: src/killall.c:74
 #, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "Zabiæ %s(%s%d)? (t/N) "
 
-#: src/killall.c:116
+#: src/killall.c:77
+#, fuzzy, c-format
+msgid "Signal %s(%s%d) ? (y/N) "
+msgstr "Zabiæ %s(%s%d)? (t/N) "
+
+#: src/killall.c:121
 #, c-format
 msgid "Cannot get UID from process status\n"
 msgstr "Nie mo¿na pobraæ UID-a ze stanu procesu\n"
 
-#: src/killall.c:142 src/killall.c:677
+#: src/killall.c:147 src/killall.c:682
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr "B³êdne wyra¿enie regularne: %s\n"
 
-#: src/killall.c:338
+#: src/killall.c:343
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "pominiêto czê¶ciowe dopasowanie %s(%d)\n"
 
-#: src/killall.c:440
+#: src/killall.c:445
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Zabito %s(%s%d) sygna³em %d\n"
 
-#: src/killall.c:454
+#: src/killall.c:459
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: nie zabito ¿adnego procesu\n"
 
-#: src/killall.c:492
+#: src/killall.c:497
 #, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -66,7 +71,7 @@ msgstr ""
 "    -V    wy¶wietlenie informacji o wersji\n"
 "\n"
 
-#: src/killall.c:506
+#: src/killall.c:511
 #, c-format
 msgid ""
 "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
@@ -74,12 +79,12 @@ msgstr ""
 "Sk³adnia: killall [-Z KONTEKST] [-u U¯YTKOWNIK] [ -eIgiqrvw ] [ -SYGNA£ ] "
 "NAZWA...\n"
 
-#: src/killall.c:509
+#: src/killall.c:514
 #, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "Sk³adnia: killall [OPCJE]... [--] NAZWA...\n"
 
-#: src/killall.c:512
+#: src/killall.c:517
 #, c-format
 msgid ""
 "       killall -l, --list\n"
@@ -117,7 +122,7 @@ msgstr ""
 "  -V,--version        wy¶wietlenie informacji o wersji\n"
 "  -w,--wait           zaczekanie na ¶mieræ procesów\n"
 
-#: src/killall.c:528
+#: src/killall.c:533
 #, c-format
 msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
@@ -127,7 +132,7 @@ msgstr ""
 "bezp.\n"
 "                        (musi poprzedzaæ inne argumenty)\n"
 
-#: src/killall.c:549 src/fuser.c:120 src/pstree.c:780
+#: src/killall.c:554 src/fuser.c:122 src/pstree.c:780
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -136,7 +141,7 @@ msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger i Craig Small\n"
 "\n"
 
-#: src/killall.c:551 src/fuser.c:122 src/peekfd.c:61 src/pstree.c:782
+#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:61 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -149,23 +154,23 @@ msgstr ""
 "Powszechnej Licencji Publicznej GNU (General Public License).\n"
 "Wiêcej informacji znajduje siê w pliku o nazwie COPYING.\n"
 
-#: src/killall.c:651
+#: src/killall.c:656
 #, c-format
 msgid "Cannot find user %s\n"
 msgstr "Nie mo¿na odnale¼æ u¿ytkownika %s\n"
 
-#: src/killall.c:710
+#: src/killall.c:715
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Maksymalna liczba nazw to %d\n"
 
-#: src/killall.c:715 src/pstree.c:710
+#: src/killall.c:720 src/pstree.c:710
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s jest pusty (nie podmontowany?)\n"
 
 #: src/fuser.c:89
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -186,12 +191,6 @@ msgid ""
 "    -u        display user IDs\n"
 "    -v        verbose output\n"
 "    -V        display version information\n"
-"    -4        search IPv4 sockets only\n"
-"    -6        search IPv6 sockets only\n"
-"    -         reset options\n"
-"\n"
-"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
-"\n"
 msgstr ""
 "Sk³adnia: fuser [ -a | -s | -c ] [ -n PRZESTRZEÑ ] [ -SYGNA£ ] [ -kimuv ] "
 "NAZWA...\n"
@@ -221,116 +220,130 @@ msgstr ""
 "  nazwy tcp/udp: [port_lokalny][,[zdalny_host][,[port_zdalny]]]\n"
 "\n"
 
-#: src/fuser.c:118
+#: src/fuser.c:109
+#, c-format
+msgid ""
+"    -4        search IPv4 sockets only\n"
+"    -6        search IPv6 sockets only\n"
+msgstr ""
+
+#: src/fuser.c:113
+#, c-format
+msgid ""
+"    -         reset options\n"
+"\n"
+"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"\n"
+msgstr ""
+
+#: src/fuser.c:120
 #, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
 
-#: src/fuser.c:145
+#: src/fuser.c:147
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr "Nie mo¿na otworzyæ katalogu /proc: %s\n"
 
-#: src/fuser.c:281
+#: src/fuser.c:283
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr "Nie mo¿na przydzieliæ pamiêci dla dopasowanego procesu: %s\n"
 
-#: src/fuser.c:314
+#: src/fuser.c:316
 #, c-format
 msgid "Cannot stat mount point %s: %s\n"
 msgstr "Nie mo¿na wykonaæ stat na punkcie montowania %s: %s\n"
 
-#: src/fuser.c:331 src/fuser.c:350 src/fuser.c:373
+#: src/fuser.c:333 src/fuser.c:352 src/fuser.c:375
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr "Nie mo¿na wykonaæ stat na %s: %s\n"
 
-#: src/fuser.c:474
+#: src/fuser.c:476
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr "Nie mo¿na rozwi±zaæ portu lokalnego %s: %s\n"
 
-#: src/fuser.c:490
+#: src/fuser.c:492
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "Nieznana rodzina adresów portu lokalnego %d\n"
 
-#: src/fuser.c:551
+#: src/fuser.c:553
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "Nie mo¿na otworzyæ pliku protoko³u \"%s\": %s\n"
 
-#: src/fuser.c:737
+#: src/fuser.c:746
 msgid "Namespace option requires an argument."
 msgstr "Opcja przestrzeni nazw wymaga argumentu."
 
-#: src/fuser.c:746
+#: src/fuser.c:755
 msgid "Invalid namespace name"
 msgstr "Niepoprawna nazwa przestrzeni nazw"
 
-#: src/fuser.c:802
+#: src/fuser.c:811
 msgid "You can only use files with mountpoint option"
 msgstr "Z opcj± punktu montowania mo¿na u¿ywaæ tylko plików"
 
-#: src/fuser.c:831
+#: src/fuser.c:840
 msgid "No process specification given"
 msgstr "Nie podano okre¶lenia procesów"
 
-#: src/fuser.c:836
+#: src/fuser.c:845
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr "Nie mo¿na u¿yæ jednocze¶nie flag podmontowanego i punktu montowania"
 
-#: src/fuser.c:843
+#: src/fuser.c:852
 msgid "all option cannot be used with silent option."
 msgstr "opcja wszystkich plików nie mo¿e byæ u¿yta z opcj± ciszy."
 
-#: src/fuser.c:847
+#: src/fuser.c:856
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "Nie mo¿na naraz szukaæ gniazd wy³±cznie IPv4 i wy³±cznie IPv6"
 
-#: src/fuser.c:892
-#, fuzzy, c-format
+#: src/fuser.c:901
+#, c-format
 msgid "%*s USER        PID ACCESS COMMAND\n"
-msgstr ""
-"\n"
-"%*s U¯YTKOWNIK  PID DOSTÊP POLECENIE\n"
+msgstr "%*s U¯YTKOWNIK  PID DOSTÊP POLECENIE\n"
 
-#: src/fuser.c:917 src/fuser.c:942
+#: src/fuser.c:926 src/fuser.c:951
 msgid "(unknown)"
 msgstr "(nieznany)"
 
-#: src/fuser.c:1010
+#: src/fuser.c:1019
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "Nie mo¿na wykonaæ stat na pliku %s: %s\n"
 
-#: src/fuser.c:1104
+#: src/fuser.c:1113
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "Nie mo¿na otworzyæ /proc/net/unix: %s\n"
 
-#: src/fuser.c:1140
+#: src/fuser.c:1149
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr "Nie mo¿na otworzyæ /etc/mtab: %s\n"
 
-#: src/fuser.c:1189
+#: src/fuser.c:1198
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Zabiæ proces %d? (y/N) "
 
-#: src/fuser.c:1213
+#: src/fuser.c:1222
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Nie uda³o siê zabiæ procesu %d: %s\n"
 
-#: src/fuser.c:1228
+#: src/fuser.c:1237
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Nie mo¿na otworzyæ gniazda sieciowego.\n"
 
-#: src/fuser.c:1232
+#: src/fuser.c:1241
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Nie mo¿na odnale¼æ numeru urz±dzenia gniazda.\n"
@@ -338,12 +351,12 @@ msgstr "Nie mo¿na odnale¼æ numeru urz±dzenia gniazda.\n"
 #: src/peekfd.c:49
 #, c-format
 msgid "Error attaching to pid %i\n"
-msgstr ""
+msgstr "B³±d podczas pod³±czania do procesu %i\n"
 
 #: src/peekfd.c:57
-#, fuzzy, c-format
+#, c-format
 msgid "peekfd (PSmisc) %s\n"
-msgstr "pstree (PSmisc) %s\n"
+msgstr "peekfd (PSmisc) %s\n"
 
 #: src/peekfd.c:59
 #, c-format
@@ -351,6 +364,8 @@ msgid ""
 "Copyright (C) 2007 Trent Waddington\n"
 "\n"
 msgstr ""
+"Copyright (C) 2007 Trent Waddington\n"
+"\n"
 
 #: src/peekfd.c:69
 #, c-format
@@ -365,6 +380,15 @@ msgid ""
 "\n"
 "  Press CTRL-C to end output.\n"
 msgstr ""
+"Sk³adnia: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
+"    -8 wypisywanie strumieni czysto 8-bitowych.\n"
+"    -n nie wy¶wietlanie nag³ówków odczytu/zapisu z deskryptora.\n"
+"    -c podgl±danie tak¿e nowych procesów potomnych.\n"
+"    -d usuwanie z wyj¶cia powtórzonych odczytów/zapisów.\n"
+"    -V wypisanie informacji o wersji.\n"
+"    -h wypisanie tego opisu.\n"
+"\n"
+"  Ctrl-C koñczy wyj¶cie.\n"
 
 #: src/pstree.c:374
 #, c-format
