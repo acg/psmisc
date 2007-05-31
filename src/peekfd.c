@@ -106,11 +106,6 @@ int main(int argc, char **argv)
       {"version", 0, NULL, 'V'},
     };
 
-	if (argc < 2) {
-		usage();
-		return 1;
-	}
-
   /* Setup the i18n */
 #ifdef ENABLE_NLS
     setlocale(LC_ALL, "");
@@ -118,7 +113,12 @@ int main(int argc, char **argv)
     textdomain(PACKAGE);
 #endif
 
-	while ((optc = getopt_long(argc, argv, "8nfdhV",options, NULL)) != -1) {
+	if (argc < 2) {
+		usage();
+		return 1;
+	}
+
+	while ((optc = getopt_long(argc, argv, "8ncdhV",options, NULL)) != -1) {
 		switch(optc) {
 			case '8':
 				eight_bit_clean = 1;
