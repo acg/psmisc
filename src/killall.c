@@ -589,6 +589,12 @@ main (int argc, char **argv)
     {"version", 0, NULL, 'V'},
     {0,0,0,0 }};
 
+  /* Setup the i18n */
+#ifdef ENABLE_NLS
+  setlocale(LC_ALL, "");
+  bindtextdomain(PACKAGE, LOCALEDIR);
+  textdomain(PACKAGE);
+#endif
 #ifdef WITH_SELINUX
   security_context_t scontext = NULL;
   regex_t scontext_reg;
@@ -604,12 +610,6 @@ main (int argc, char **argv)
   pidof = strcmp (name, "killall");
   sig_num = SIGTERM;
 
-  /* Setup the i18n */
-#ifdef ENABLE_NLS
-  setlocale(LC_ALL, "");
-  bindtextdomain(PACKAGE, LOCALEDIR);
-  textdomain(PACKAGE);
-#endif
 
   opterr = 0;
 #ifdef WITH_SELINUX

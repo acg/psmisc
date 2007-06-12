@@ -1,55 +1,56 @@
-# Vietnamese translation for PSmisc.
-# Copyright © 2007 Free Software Foundation, Inc.
-# Clytie Siddall <clytie@riverland.net.au>, 2005, 2006, 2007.
-# 
+# Chinese translations for psmisc package
+# psmisc 软件包的简体中文翻译.
+# Copyright (C) 2007 Free Software Foundation, Inc.
+# This file is distributed under the same license as the psmisc package.
+# LI Daobing <lidaobing@gmail.com>, 2007.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.5\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
 "POT-Creation-Date: 2007-05-31 08:31+1000\n"
-"PO-Revision-Date: 2007-05-31 18:04+0930\n"
-"Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
-"Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
+"PO-Revision-Date: 2007-06-13 03:56+0800\n"
+"Last-Translator: LI Daobing <lidaobing@gmail.com>\n"
+"Language-Team: Chinese (simplified) <translation-team-zh-cn@lists."
+"sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: LocFactoryEditor 1.6.3b1\n"
 
 #: src/killall.c:74
 #, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
-msgstr "Có buộc kết thúc %s(%s%d) không? (y/n) (có/không) "
+msgstr "杀死 %s(%s%d) ? (y/N) "
 
 #: src/killall.c:77
 #, fuzzy, c-format
 msgid "Signal %s(%s%d) ? (y/N) "
-msgstr "Có buộc kết thúc %s(%s%d) không? (y/n) (có/không) "
+msgstr "杀死 %s(%s%d) ? (y/N) "
 
 #: src/killall.c:121
 #, c-format
 msgid "Cannot get UID from process status\n"
-msgstr "Không thể lấy UID từ trạng thái của tiến trình\n"
+msgstr "无法从进程状态获取用户ID(UID)\n"
 
 #: src/killall.c:147 src/killall.c:682
 #, c-format
 msgid "Bad regular expression: %s\n"
-msgstr "Biểu thức chính quy sai: %s\n"
+msgstr "错误的正则表达式: %s\n"
 
 #: src/killall.c:343
 #, c-format
 msgid "skipping partial match %s(%d)\n"
-msgstr "đang bỏ qua điều khớp bộ phần %s(%d)\n"
+msgstr "跳过部分符合的部分 %s(%d)\n"
 
 #: src/killall.c:445
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
-msgstr "Mới buộc kết thúc %s(%s%d) với tín hiệu %d\n"
+msgstr "%s(%s%d) 被信号 %d 杀死\n"
 
 #: src/killall.c:459
 #, c-format
 msgid "%s: no process killed\n"
-msgstr "%s: chưa buộc kết thúc tiến trình\n"
+msgstr "%s: 没有进程被杀死\n"
 
 #: src/killall.c:497
 #, c-format
@@ -63,13 +64,13 @@ msgid ""
 "    -V      display version information\n"
 "\n"
 msgstr ""
-"Cách sử dụng: pidof [ -eg ] TÊN ...\n"
-"       pidof -V\n"
+"用法: pidof [ -eg ] 程序名...\n"
+"      pidof -V\n"
 "\n"
-"    -e      cần đến điều khớp _chính xác_ với mọi tên rất dài\n"
-"\tbỏ qua nếu không có dòng lệnh sẵn sàng\n"
-"    -g      hiện ID của _nhóm_ tiến trình thay thế ID tiến trình\n"
-"    -V      hiện thông tin _phiên bản_\n"
+"    -e      对长程序名需要严格匹配\n"
+"            如果命令行不可用则忽略该选项\n"
+"    -g      显示进程组ID而不是进程ID\n"
+"    -V      显示版本信息\n"
 "\n"
 
 #: src/killall.c:511
@@ -77,13 +78,12 @@ msgstr ""
 msgid ""
 "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
 msgstr ""
-"Cách sử dụng: killall [-Z NGỮ_CẢNH] [-u NGƯỜI_DÙNG] [ -eIgiqrvw ] [ -"
-"TÍN_HIỆU ] TÊN...\n"
+"Usage: killall [-Z 上下文] [-u 用户名] [ -eIgiqrvw ] [ -信号 ] 程序名...\n"
 
 #: src/killall.c:514
 #, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
-msgstr "Cách sử dụng: killall [ TÙY_CHỌN ]... [--] TÊN...\n"
+msgstr "用法: killall [选项]... [--] 进程名...\n"
 
 #: src/killall.c:517
 #, c-format
@@ -104,24 +104,21 @@ msgid ""
 "  -V,--version        display version information\n"
 "  -w,--wait           wait for processes to die\n"
 msgstr ""
-"       killall -l, --list \t\t(_liệt kê_)\n"
-"       killall -V --version \t\t(_phiên bản_)\n"
+"      killall -l, --list\n"
+"      killall -V, --version\n"
 "\n"
-"  -e,--exact          \t\tcần đến điều khớp _chính xác_ với mọi tên rất dài\n"
-"  -I,--ignore-case    \t_bỏ qua _chữ hoa/thường_ khi khớp tên tiến trình\n"
-"  -g,--process-group  \tbuộc kết thúc _nhóm tiến trình_ thay thế tiến trình\n"
-"  -i,--interactive    \t\txin xác nhận trước khi buộc kết thúc (_tương "
-"tác_)\n"
-"  -l,--list           \t\t_liệt kê_ mọi tên tín hiệu đã biết\n"
-"  -q,--quiet          \t\tkhông hiển thị lời than phiền (_im_)\n"
-"  -r,--regexp        \t\tgiải thích TÊN là _biểu thức chính quy_ nối dài\n"
-"  -s,--signal TÍN_HIỆU\t\tgởi tín hiệu này thay thế SIGTERM\n"
-"  -u,--user NG_DÙNG      \tbuộc kết thúc chỉ những tiến trình đang chạy\n"
-"\t\t\t\t\t\t\tvới tư cách _người dùng_ này\n"
-"  -v,--verbose        \tthông báo khi đã gởi tín hiệu\n"
-"  -V,--version        \thiện thông tin _phiên bản_\n"
-"  -w,--wait           \t\t_đợi_ tiến trình kết thúc\n"
-"\n"
+"  -e,--exact          对长名字需要严格匹配\n"
+"  -I,--ignore-case    匹配进程名时忽略大小写\n"
+"  -g,--process-group  杀死进程组而不是进程\n"
+"  -i,--interactive    在杀死进程前要求确认\n"
+"  -l,--list           显示所有的信号名\n"
+"  -q,--quiet          不要打印抱怨信息\n"
+"  -r,--regexp         将 \"进程名\" 视为扩展正则表达式\n"
+"  -s,--signal 信号    发送 \"信号\" 而不是 SIGTERM\n"
+"  -u,--user 用户      仅杀死 \"用户\" 的进程\n"
+"  -v,--verbose        信号成功送出时打印信息\n"
+"  -V,--version        显示版本信息\n"
+"  -w,--wait           等待进程死亡\n"
 
 #: src/killall.c:533
 #, c-format
@@ -129,9 +126,8 @@ msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
 "                      (must precede other arguments)\n"
 msgstr ""
-"  -Z,--context BIỂU_THỨC_CHÍNH _QUY\n"
-"\t\tbuộc kết thúc chỉ những tiến trình có ngữ cảnh\n"
-"\t\t\t(phải đi trước các đối số khác)\n"
+"  -Z,--context 正则表达式 仅杀死含有指定上下文的进程\n"
+"                          (必须在其他参数前使用)\n"
 
 #: src/killall.c:554 src/fuser.c:122 src/pstree.c:780
 #, c-format
@@ -139,7 +135,7 @@ msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
-"Bản quyền © 1993-2005 Werner Almesberger và Craig Small\n"
+"版权所有 © 1993-2005 Werner Almesberger 和 Craig Small\n"
 "\n"
 
 #: src/killall.c:556 src/fuser.c:124 src/peekfd.c:61 src/pstree.c:782
@@ -150,25 +146,24 @@ msgid ""
 "the terms of the GNU General Public License.\n"
 "For more information about these matters, see the files named COPYING.\n"
 msgstr ""
-"PSmisc không bảo đảm gì cả.\n"
-"Đây là phần mềm tự do thì bạn có thể phân phối nó với điều kiện của\n"
-"Quyền Công Chung Gnu (GPL).\n"
-"Để tìm thấy thông tin thêm thì hãy xem tập tin có tên COPYING (cách chép)\n"
+"PSmisc 无任何保证。\n"
+"该程序为自由软件，欢迎你在 GNU 通用公共许可证(GPL) 下重新发布。\n"
+"详情可参阅 COPYING 文件。\n"
 
 #: src/killall.c:656
 #, c-format
 msgid "Cannot find user %s\n"
-msgstr "Không tìm thấy người dùng %s\n"
+msgstr "无法找到用户 %s\n"
 
 #: src/killall.c:715
 #, c-format
 msgid "Maximum number of names is %d\n"
-msgstr "Số tên tối đa là %d\n"
+msgstr "最大名字数量是 %d\n"
 
 #: src/killall.c:720 src/pstree.c:710
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
-msgstr "%s trống (lắp chưa?)\n"
+msgstr "%s 是空的 (未挂载?)\n"
 
 #: src/fuser.c:89
 #, fuzzy, c-format
@@ -193,33 +188,30 @@ msgid ""
 "    -v        verbose output\n"
 "    -V        display version information\n"
 msgstr ""
-"Cách sử dụng: fuser [ -a | -s | -c ] [ -n MIỀN ] [ -KÝ_HIỆU ] [ -kimuv ] "
-"TÊN...\n"
-"             [ - ] [ -n MIỀN ] [ -KÝ_HIỆU ] [ -kimuv ] TÊN...\n"
+"Usage: fuser [ -a | -s | -c ] [ -n 名字空间 ] [ -信号 ] [ -kimuv ] 名字...\n"
+"             [ - ] [ -n 名字空间 ] [ -信号 ] [ -kimuv ] 名字...\n"
 "       fuser -l\n"
 "       fuser -V\n"
-"Hiển thị tiến trình nào có dùng những tập tin, ổ cắm\n"
-"hay hệ thống tập tin có tên này.\n"
+"显示哪些进程使用指定的文件，端口或文件系统。\n"
 "\n"
-"    -a   \tcũng hiện các tập tin không được dùng\n"
-"    -c     \thệ thống tập tin đã lắp\n"
-"    -f     \tbị bỏ qua im (để tương thích với POSIX)\n"
-"    -i     \thỏi trước khi buộc kết thúc\n"
-"\t\t\t(bị bỏ qua nếu không có tùy chọn « -k »)\n"
-"    -k     \t_buộc kết thúc_ các tiến trình đang truy cập tập tin tên này\n"
-"    -l   \t_liệt kê_ các tên ký hiệu sẵn sàng\n"
-"    -m     \thiện các tiến trình đang dùng những hệ thống tập tin c\n"
-"    -n MIỀN  \ttìm kiếm trong miền _tên_ này (file, udp, hay tcp)\n"
-"    -s        thao tác _im_ (không xuất chi tiết)\n"
-"    -TÍN_HIỆU   \tgởi tín hiệu này thay vào SIGKILL\n"
-"    -u        hiện các ID của _người dùng_ (UID)\n"
-"    -v        xuất _chi tiết_\n"
-"    -V        hiện thông tin phiên bản\n"
-"    -4        chỉ tìm kiếm ổ cắm kiểu IPv4\n"
-"    -6        chỉ tìm kiếm ổ cắm kiểu IPv6\n"
-"    -       \tđặt lại các tùy chọn\n"
+"    -a          也显示未使用的文件\n"
+"    -c          已挂载的文件系统\n"
+"    -f          被悄悄忽略的选项(为了 POSIX 兼容性)\n"
+"    -i          杀死程序前询问 (未指定 -k 选项时被忽略)\n"
+"    -k          杀死访问指定文件的进程\n"
+"    -l          显示可用的信号名\n"
+"    -m          显示所有使用指定文件系统的进程\n"
+"    -n 名字空间 在指定名字空间中查找(file, udp 或 tcp)\n"
+"    -s          不输出信息\n"
+"    -信号       输出 \"信号\" 而不是 SIGKILL\n"
+"    -u          显示用户 ID\n"
+"    -v          输出更多信息\n"
+"    -V          显示版本信息\n"
+"    -4          仅查找 IPv4 端口\n"
+"    -6          仅查找 IPv6 端口\n"
+"    -           重置选项\n"
 "\n"
-"  Các tên udp/tcp: [cổng_cục_bộ][,[máy_từ_xa][,[cổng_từ_xa]]]\n"
+"  udp/tcp 名字格式: [本地端口][,[远程主机][,[远程端口]]]\n"
 "\n"
 
 #: src/fuser.c:109
@@ -246,115 +238,114 @@ msgstr "fuser (PSmisc) %s\n"
 #: src/fuser.c:147
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
-msgstr "Không thể mở thư mục </proc>: %s\n"
+msgstr "无法打开 /proc 目录: %s\n"
 
 #: src/fuser.c:283
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
-msgstr "Không thể cấp phát bộ nhớ cho tiến trình được khớp: %s\n"
+msgstr "无法为已找到的进程分配内存: %s\n"
 
 #: src/fuser.c:316
 #, c-format
 msgid "Cannot stat mount point %s: %s\n"
-msgstr "Không thể lấy các thông tin về điểm lắp %s: %s\n"
+msgstr "无法分析挂载点 %s: %s\n"
 
 #: src/fuser.c:333 src/fuser.c:352 src/fuser.c:375
 #, c-format
 msgid "Cannot stat %s: %s\n"
-msgstr "Không thể lấy các thông tin về %s: %s\n"
+msgstr "无法分析 %s: %s\n"
 
 #: src/fuser.c:476
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
-msgstr "Không tìm thấy tên cổng cục bộ %s: %s\n"
+msgstr "无法解析本地端口 %s: %s\n"
 
 #: src/fuser.c:492
 #, c-format
 msgid "Unknown local port AF %d\n"
-msgstr "Không biết cổng cục bộ AF %d\n"
+msgstr "未知本地端口 AF %d\n"
 
 #: src/fuser.c:553
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
-msgstr "Không thể mở tập tin giao thức « %s »: %s\n"
+msgstr "无法打开协议文件 \"%s\": %s\n"
 
 #: src/fuser.c:746
 msgid "Namespace option requires an argument."
-msgstr "Tùy chọn miền tên cần đến một đối số."
+msgstr "名字空间选项需要一个参数"
 
 #: src/fuser.c:755
 msgid "Invalid namespace name"
-msgstr "Tên miền tên không hợp lệ"
+msgstr "无效的名字空间名"
 
 #: src/fuser.c:811
 msgid "You can only use files with mountpoint option"
-msgstr "Bạn có thể sử dụng chỉ tập tin với tùy chọn điểm lắp"
+msgstr "你只能使用有挂载选项的文件。"
 
 #: src/fuser.c:840
 msgid "No process specification given"
-msgstr "Chưa nhập đặc tả tiến trình"
+msgstr "未指定进程"
 
 #: src/fuser.c:845
 msgid "You cannot use the mounted and mountpoint flags together"
-msgstr ""
-"Không cho phép bạn sử dụng cờ kiểu cả « được lắp » lẫn « điểm lắp » đều"
+msgstr "你不能同时是用已挂载和挂载点选项"
 
 #: src/fuser.c:852
 msgid "all option cannot be used with silent option."
-msgstr "không cho phép bạn sử dụng chọn « tất cả » với tùy chọn « im »."
+msgstr "所有选项都不能与不输出信息选项同时使用。"
 
 #: src/fuser.c:856
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
-msgstr "Không cho phép bạn tìm kiếm ổ cắm kiểu cả IPv4 lẫn IPv6 đều đồng thời"
+msgstr "你无法同时搜索 IPv4 和 IPv6 端口"
 
 #: src/fuser.c:901
 #, c-format
 msgid "%*s USER        PID ACCESS COMMAND\n"
-msgstr "%*s NGƯỜI_DÙNG        PID TRUY CẬP LỆNH\n"
+msgstr "%*s 用户     进程号 权限   命令\n"
 
 #: src/fuser.c:926 src/fuser.c:951
 msgid "(unknown)"
-msgstr "(không biết)"
+msgstr "(未知)"
 
 #: src/fuser.c:1019
 #, c-format
 msgid "Cannot stat file %s: %s\n"
-msgstr "Không thể lấy các thông tin về tập tin %s: %s\n"
+msgstr "无法获取 %s 的文件状态: %s\n"
 
 #: src/fuser.c:1113
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
-msgstr "Không thể mở thư mục </proc/net/unix>: %s\n"
+msgstr "无法打开 /proc/net/unix: %s\n"
 
 #: src/fuser.c:1149
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
-msgstr "Không thể mở </etc/mtab>: %s\n"
+msgstr "无法打开 /etc/mtab: %s\n"
 
 #: src/fuser.c:1198
 #, c-format
 msgid "Kill process %d ? (y/N) "
-msgstr "Có buốc kết thúc tiến trình %d không? (y/N) (có/không) "
+msgstr "杀死进程 %d ? (y/N) "
 
 #: src/fuser.c:1222
 #, c-format
 msgid "Could not kill process %d: %s\n"
-msgstr "Không thể buộc kết thúc tiến trình %d: %s\n"
+msgstr "无法杀死进程 %d: %s\n"
 
 #: src/fuser.c:1237
 #, c-format
 msgid "Cannot open a network socket.\n"
-msgstr "Không thể mở một ổ cắm mạng.\n"
+msgstr "无法打开网络端口。\n"
 
 #: src/fuser.c:1241
 #, c-format
 msgid "Cannot find socket's device number.\n"
-msgstr "Không tìm thấy số hiệu thiết bị ổ cắm.\n"
+msgstr "无法找到 socket 的设备号。\n"
 
 #: src/peekfd.c:49
 #, c-format
 msgid "Error attaching to pid %i\n"
-msgstr "Gặp lỗi khi đính kèm đến PID %i\n"
+msgstr "帮定%i号进程时发生错误\n"
 
 #: src/peekfd.c:57
 #, c-format
@@ -367,7 +358,7 @@ msgid ""
 "Copyright (C) 2007 Trent Waddington\n"
 "\n"
 msgstr ""
-"Tác quyền © năm 2007 của Trent Waddington\n"
+"版权所有 © 2007 Trent Waddington\n"
 "\n"
 
 #: src/peekfd.c:69
@@ -383,20 +374,20 @@ msgid ""
 "\n"
 "  Press CTRL-C to end output.\n"
 msgstr ""
-"Cách sử dụng: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
-"    -8 \txuất luồng sạch 8-bit.\n"
-"    -n \tkhôNg hiển thị đọc/viết từ phần đầu fd.\n"
-"    -c \tCũng hé nhìn tiến trình con mới nào.\n"
-"    -d \tgỡ bỏ đọc/viết trùng ra Dữ liệu xuất.\n"
-"    -V \thiển thị thông tin Về phiên bản.\n"
-"    -h \tHiển thị trợ giúp này.\n"
+"用发: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <进程号> [<文件号> ..]\n"
+"    -8 输出流使用第8位(首位)。\n"
+"    -n 不显示读写信息。\n"
+"    -c 也检测新的子进程。\n"
+"    -d 从输出中删除重复的读写信息。\n"
+"    -V 输出版本信息。\n"
+"    -h 输出帮助。\n"
 "\n"
-"  Bấm tổ hợp phím CTRL-C để thôi xuất.\n"
+"  输入 CTRL-C 来终止输出。\n"
 
 #: src/pstree.c:374
 #, c-format
 msgid "Internal error: MAX_DEPTH not big enough.\n"
-msgstr "Lỗi nội bộ : « MAX_DEPTH » (độ sâu tối đa) chưa đủ.\n"
+msgstr "内部错误: MAX_DEPTH 不够大。\n"
 
 #: src/pstree.c:750
 #, c-format
@@ -419,30 +410,28 @@ msgid ""
 "    -U     use UTF-8 (Unicode) line drawing characters\n"
 "    -V     display version information\n"
 msgstr ""
-"Cách sử dụng: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -"
-"u ]\n"
-"              [ -A | -G | -U ] [ PID | NGƯỜI_DÙNG]\n"
-"       pstree -V\n"
+"用法: pstree [ -a ] [ -c ] [ -h | -H 进程号 ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+"             [ -A | -G | -U ] [ 进程号 | 用户 ]\n"
+"      pstree -V\n"
+"显示进程树。\n"
 "\n"
-"Hiện một cây tiến trình.\n"
-"\n"
-"    -a     \thiện các _đối số_ dòng lệnh\n"
-"    -A   \tsử dụng các ký tự vẽ đờng kiểu _ASCII_\n"
-"    -c     \tkhông _gọn_ phụ cây trùng\n"
-"    -h     \t_nổi bật_ tiến trình hiện có và các tổ tiên của nó\n"
-"    -H PID\t\t_nổi bật_ tiến trình này và các tổ tiên của nó\n"
-"     -G     \tsử dụng các ký tự vẽ dòng kiểu VT100\n"
-"    -l     \tkhông chặt cụt _dòng dài_\n"
-"    -n     \tsắp xếp kết xuất theo PID\n"
-"    -p     \thiện các PID; ngụ ý  tùy chọn « -c »\n"
-"    -u\thiện các việc chuyển tiếp _UID\n"
-"    -U\tsử dụng các ký tự vẽ dòng UTF-8\n"
-"    -V\thiện thông tin _phiên bản_\n"
+"    -a        显示命令行参数\n"
+"    -A        使用 ASCII 画线符\n"
+"    -c        不压缩雷同的子树\n"
+"    -h        高量当前进程及其祖先\n"
+"    -H 进程号 高量 \"进程号\" 指定的进程当及其祖先\n"
+"    -G        使用 VT100 划线符\n"
+"    -l        不截断长行\n"
+"    -n        输出按进程号排序\n"
+"    -p        显示进程号；隐含 -c\n"
+"    -u        显示用户名变换\n"
+"    -U        使用 UTF-8 (Unicode) 划线符\n"
+"    -V        显示版本信息\n"
 
 #: src/pstree.c:768
 #, c-format
 msgid "    -Z     show SELinux security contexts\n"
-msgstr "    -Z     hiện các ngữ cảnh bảo mật kiểu SELinux\n"
+msgstr "    -Z     显示 SELinux 安全环境\n"
 
 #: src/pstree.c:771
 #, c-format
@@ -451,8 +440,8 @@ msgid ""
 "    USER   show only trees rooted at processes of this user\n"
 "\n"
 msgstr ""
-"    PID    \tbắt đầu tại PID này; mặc định là 1 (init)\n"
-"    USER   hiện chỉ các cây có gốc là tiến trình của _người dùng_ này\n"
+"    进程号    从 \"进程号\" 开始，缺省是1(init)\n"
+"    用户      仅显示从该 \"用户\" 的进程开始的进程树\n"
 "\n"
 
 #: src/pstree.c:778
@@ -463,29 +452,29 @@ msgstr "pstree (PSmisc) %s\n"
 #: src/pstree.c:871
 #, c-format
 msgid "TERM is not set\n"
-msgstr "Chưa lặp TERM\n"
+msgstr "未设置环境变量TERM\n"
 
 #: src/pstree.c:876
 #, c-format
 msgid "Can't get terminal capabilities\n"
-msgstr "Không thể gọi khả năng thiết bị cuối\n"
+msgstr "无法获取终端大小\n"
 
 #: src/pstree.c:920
 #, c-format
 msgid "No such user name: %s\n"
-msgstr "Không có tên người dùng như vậy: %s\n"
+msgstr "无用户名: %s\n"
 
 #: src/pstree.c:936
 #, c-format
 msgid "No processes found.\n"
-msgstr "Không tìm thấy tiến trình.\n"
+msgstr "未发现进程。\n"
 
 #: src/pstree.c:941
 #, c-format
 msgid "Press return to close\n"
-msgstr "Hãy bấm phím Return để đóng\n"
+msgstr "按回车后关闭\n"
 
 #: src/signals.c:84
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
-msgstr "%s: không biết tín hiệu; lệnh « %s -l » liệt kê các tín hiệu\n"
+msgstr "%s: 未知的信号; %s -l 显示信号列表。\n"

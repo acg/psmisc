@@ -1,5 +1,8 @@
 Changes in ??
 =============
+2007-06-13 Craig Small
+	* Added Chinese simplified po file
+
 2007-05-31 Craig Small
 	* Updated Dutch, Vietnamese, Polish and Italian translations
 	* Patch for peekfd from Benno Schulenberg
