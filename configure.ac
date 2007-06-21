@@ -58,13 +58,28 @@ AC_TYPE_PID_T
 AC_TYPE_SIZE_T
 AC_CHECK_MEMBERS([struct stat.st_rdev])
 AC_TYPE_UID_T
-AC_CHECK_MEMBERS([struct user_regs_struct.orig_eax, struct user_regs_struct.eax, struct user_regs_struct.ebx, struct user_regs_struct.ecx, struct user_regs_struct.edx], [],[], [#include <linux/user.h>])
-AM_CONDITIONAL(WANT_PEEKFD,
+AC_CHECK_MEMBERS([struct user_regs_struct.orig_eax,
+		struct user_regs_struct.eax,
+		struct user_regs_struct.ebx,
+		struct user_regs_struct.ecx,
+		struct user_regs_struct.edx,
+		struct user_regs_struct.orig_rax,
+		struct user_regs_struct.rax,
+		struct user_regs_struct.rdi,
+		struct user_regs_struct.rsi,
+		struct user_regs_struct.rdx], [],[], [#include <linux/user.h>])
+AM_CONDITIONAL(WANT_PEEKFD_I386,
  test $ac_cv_member_struct_user_regs_struct_orig_eax = yes &&
    test $ac_cv_member_struct_user_regs_struct_eax = yes &&
    test $ac_cv_member_struct_user_regs_struct_ebx = yes &&
    test $ac_cv_member_struct_user_regs_struct_ecx = yes &&
    test $ac_cv_member_struct_user_regs_struct_edx = yes )
+AM_CONDITIONAL(WANT_PEEKFD_X86_64,
+ test $ac_cv_member_struct_user_regs_struct_orig_rax = yes &&
+   test $ac_cv_member_struct_user_regs_struct_rax = yes &&
+   test $ac_cv_member_struct_user_regs_struct_rdi = yes &&
+   test $ac_cv_member_struct_user_regs_struct_rsi = yes &&
+   test $ac_cv_member_struct_user_regs_struct_rdx = yes )
 
 dnl Check for language stuff
 AM_GNU_GETTEXT([external])

@@ -1,5 +1,8 @@
 Changes in ??
 =============
+2007-06-21 Tomas Smetana
+	* Added support for x86_64 architecture for peekfd
+
 2007-06-13 Craig Small
 	* Added Chinese simplified po file
 
