@@ -23,8 +23,7 @@ ltmain.sh
 missing
 mkinstalldirs
 psmisc-*.tar.gz
-stamp-h
-stamp-h.in 
+stamp-*
 m4
 configure.scan
 config
