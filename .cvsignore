@@ -25,3 +25,10 @@ mkinstalldirs
 psmisc-*.tar.gz
 stamp-h
 stamp-h.in 
+autom4te.cache
+m4
+configure.scan
+config
+autoscan.log
+ABOUT-NLS
+
