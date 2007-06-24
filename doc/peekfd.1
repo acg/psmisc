@@ -1,14 +1,20 @@
 .\" Process this file with
 .\" groff -man -Tascii foo.1
 .\"
-.TH PEEKFD 1 "FEBRUARY 2007" Linux "User Manuals"
+.TH PEEKFD 1 "APRIL 2007" Linux "User Commands"
 .SH NAME
 peekfd \- peek at file descriptors of running processes
 .SH SYNOPSIS
-.B peekfd [-8] [-n] [-c] [-d] [-v] [-h]
+.B peekfd 
+.RB [ \-8 , \-\-eight\-bit\-clean ]
+.RB [ \-n , \-\-no\-headers ]
+.RB [ \-f , \-\-follow ]
+.RB [ \-d , \-\-duplicates\-removed ]
+.RB [ \-V , \-\-version ]
+.RB [ \-h , \-\-help ]
 .I pid
-.I [fd]
-.I [fd]
+.RI [ fd ]
+.RI [ fd ]
 .B ...
 .SH DESCRIPTION
 .B peekfd
@@ -43,8 +49,6 @@ Error attaching to pid ...
 An unknown error occured while attempted to attach to a process.. you may need to be root.
 .SH BUGS
 Probably lots.  Don't be surprised if the process you are monitoring dies.
-
-No long options are implemented.
 .SH AUTHOR
 Trent Waddington <trent.waddington@gmail.com>
 .SH "SEE ALSO"
