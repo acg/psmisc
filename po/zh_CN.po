@@ -8,51 +8,45 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.5\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-06-21 10:12+1000\n"
-"PO-Revision-Date: 2007-06-13 03:56+0800\n"
+"POT-Creation-Date: 2007-04-12 15:03+1000\n"
+"PO-Revision-Date: 2007-06-21 14:33+0800\n"
 "Last-Translator: LI Daobing <lidaobing@gmail.com>\n"
-"Language-Team: Chinese (simplified) <translation-team-zh-cn@lists."
-"sourceforge.net>\n"
+"Language-Team: Chinese (simplified) <translation-team-zh-cn@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/killall.c:74
+#: src/killall.c:73
 #, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "杀死 %s(%s%d) ? (y/N) "
 
-#: src/killall.c:77
-#, fuzzy, c-format
-msgid "Signal %s(%s%d) ? (y/N) "
-msgstr "杀死 %s(%s%d) ? (y/N) "
-
-#: src/killall.c:121
+#: src/killall.c:116
 #, c-format
 msgid "Cannot get UID from process status\n"
 msgstr "无法从进程状态获取用户ID(UID)\n"
 
-#: src/killall.c:147 src/killall.c:682
+#: src/killall.c:142 src/killall.c:677
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr "错误的正则表达式: %s\n"
 
-#: src/killall.c:343
+#: src/killall.c:338
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "跳过部分符合的部分 %s(%d)\n"
 
-#: src/killall.c:445
+#: src/killall.c:440
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "%s(%s%d) 被信号 %d 杀死\n"
 
-#: src/killall.c:459
+#: src/killall.c:454
 #, c-format
 msgid "%s: no process killed\n"
 msgstr "%s: 没有进程被杀死\n"
 
-#: src/killall.c:497
+#: src/killall.c:492
 #, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -73,19 +67,17 @@ msgstr ""
 "    -V      显示版本信息\n"
 "\n"
 
-#: src/killall.c:511
+#: src/killall.c:506
 #, c-format
-msgid ""
-"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr ""
-"Usage: killall [-Z 上下文] [-u 用户名] [ -eIgiqrvw ] [ -信号 ] 程序名...\n"
+msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr "Usage: killall [-Z 上下文] [-u 用户名] [ -eIgiqrvw ] [ -信号 ] 程序名...\n"
 
-#: src/killall.c:514
+#: src/killall.c:509
 #, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "用法: killall [选项]... [--] 进程名...\n"
 
-#: src/killall.c:517
+#: src/killall.c:512
 #, c-format
 msgid ""
 "       killall -l, --list\n"
@@ -120,7 +112,7 @@ msgstr ""
 "  -V,--version        显示版本信息\n"
 "  -w,--wait           等待进程死亡\n"
 
-#: src/killall.c:533
+#: src/killall.c:528
 #, c-format
 msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
@@ -129,7 +121,7 @@ msgstr ""
 "  -Z,--context 正则表达式 仅杀死含有指定上下文的进程\n"
 "                          (必须在其他参数前使用)\n"
 
-#: src/killall.c:554 src/fuser.c:122 src/pstree.c:780
+#: src/killall.c:549 src/fuser.c:120 src/pstree.c:780
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -138,7 +130,7 @@ msgstr ""
 "版权所有 © 1993-2005 Werner Almesberger 和 Craig Small\n"
 "\n"
 
-#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:76 src/pstree.c:782
+#: src/killall.c:551 src/fuser.c:122 src/peekfd.c:61 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -150,23 +142,23 @@ msgstr ""
 "该程序为自由软件，欢迎你在 GNU 通用公共许可证(GPL) 下重新发布。\n"
 "详情可参阅 COPYING 文件。\n"
 
-#: src/killall.c:656
+#: src/killall.c:651
 #, c-format
 msgid "Cannot find user %s\n"
 msgstr "无法找到用户 %s\n"
 
-#: src/killall.c:715
+#: src/killall.c:710
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "最大名字数量是 %d\n"
 
-#: src/killall.c:720 src/pstree.c:710
+#: src/killall.c:715 src/pstree.c:710
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s 是空的 (未挂载?)\n"
 
 #: src/fuser.c:89
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -187,6 +179,12 @@ msgid ""
 "    -u        display user IDs\n"
 "    -v        verbose output\n"
 "    -V        display version information\n"
+"    -4        search IPv4 sockets only\n"
+"    -6        search IPv6 sockets only\n"
+"    -         reset options\n"
+"\n"
+"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"\n"
 msgstr ""
 "Usage: fuser [ -a | -s | -c ] [ -n 名字空间 ] [ -信号 ] [ -kimuv ] 名字...\n"
 "             [ - ] [ -n 名字空间 ] [ -信号 ] [ -kimuv ] 名字...\n"
@@ -214,145 +212,129 @@ msgstr ""
 "  udp/tcp 名字格式: [本地端口][,[远程主机][,[远程端口]]]\n"
 "\n"
 
-#: src/fuser.c:109
-#, c-format
-msgid ""
-"    -4        search IPv4 sockets only\n"
-"    -6        search IPv6 sockets only\n"
-msgstr ""
-
-#: src/fuser.c:113
-#, c-format
-msgid ""
-"    -         reset options\n"
-"\n"
-"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
-"\n"
-msgstr ""
-
-#: src/fuser.c:120
+#: src/fuser.c:118
 #, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
 
-#: src/fuser.c:147
+#: src/fuser.c:145
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr "无法打开 /proc 目录: %s\n"
 
-#: src/fuser.c:283
+#: src/fuser.c:281
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr "无法为已找到的进程分配内存: %s\n"
 
-#: src/fuser.c:316
+#: src/fuser.c:314
 #, c-format
 msgid "Cannot stat mount point %s: %s\n"
 msgstr "无法分析挂载点 %s: %s\n"
 
-#: src/fuser.c:333 src/fuser.c:352 src/fuser.c:375
+#: src/fuser.c:331 src/fuser.c:350 src/fuser.c:373
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr "无法分析 %s: %s\n"
 
-#: src/fuser.c:476
+#: src/fuser.c:474
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr "无法解析本地端口 %s: %s\n"
 
-#: src/fuser.c:492
+#: src/fuser.c:490
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "未知本地端口 AF %d\n"
 
-#: src/fuser.c:553
+#: src/fuser.c:551
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "无法打开协议文件 \"%s\": %s\n"
 
-#: src/fuser.c:746
+#: src/fuser.c:737
 msgid "Namespace option requires an argument."
 msgstr "名字空间选项需要一个参数"
 
-#: src/fuser.c:755
+#: src/fuser.c:746
 msgid "Invalid namespace name"
 msgstr "无效的名字空间名"
 
-#: src/fuser.c:811
+#: src/fuser.c:802
 msgid "You can only use files with mountpoint option"
 msgstr "你只能使用有挂载选项的文件。"
 
-#: src/fuser.c:840
+#: src/fuser.c:831
 msgid "No process specification given"
 msgstr "未指定进程"
 
-#: src/fuser.c:845
+#: src/fuser.c:836
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr "你不能同时是用已挂载和挂载点选项"
 
-#: src/fuser.c:852
+#: src/fuser.c:843
 msgid "all option cannot be used with silent option."
 msgstr "所有选项都不能与不输出信息选项同时使用。"
 
-#: src/fuser.c:856
+#: src/fuser.c:847
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "你无法同时搜索 IPv4 和 IPv6 端口"
 
-#: src/fuser.c:901
+#: src/fuser.c:892
 #, c-format
 msgid "%*s USER        PID ACCESS COMMAND\n"
 msgstr "%*s 用户     进程号 权限   命令\n"
 
-#: src/fuser.c:926 src/fuser.c:951
+#: src/fuser.c:917 src/fuser.c:942
 msgid "(unknown)"
 msgstr "(未知)"
 
-#: src/fuser.c:1019
+#: src/fuser.c:1010
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "无法获取 %s 的文件状态: %s\n"
 
-#: src/fuser.c:1113
+#: src/fuser.c:1104
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "无法打开 /proc/net/unix: %s\n"
 
-#: src/fuser.c:1149
+#: src/fuser.c:1140
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr "无法打开 /etc/mtab: %s\n"
 
-#: src/fuser.c:1198
+#: src/fuser.c:1189
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "杀死进程 %d ? (y/N) "
 
-#: src/fuser.c:1222
+#: src/fuser.c:1213
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "无法杀死进程 %d: %s\n"
 
-#: src/fuser.c:1237
+#: src/fuser.c:1228
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "无法打开网络端口。\n"
 
-#: src/fuser.c:1241
+#: src/fuser.c:1232
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "无法找到 socket 的设备号。\n"
 
-#: src/peekfd.c:64
+#: src/peekfd.c:49
 #, c-format
 msgid "Error attaching to pid %i\n"
 msgstr "帮定%i号进程时发生错误\n"
 
-#: src/peekfd.c:72
+#: src/peekfd.c:57
 #, c-format
 msgid "peekfd (PSmisc) %s\n"
 msgstr "peekfd (PSmisc) %s\n"
 
-#: src/peekfd.c:74
+#: src/peekfd.c:59
 #, c-format
 msgid ""
 "Copyright (C) 2007 Trent Waddington\n"
@@ -361,7 +343,7 @@ msgstr ""
 "版权所有 © 2007 Trent Waddington\n"
 "\n"
 
-#: src/peekfd.c:84
+#: src/peekfd.c:69
 #, c-format
 msgid ""
 "Usage: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
@@ -418,8 +400,8 @@ msgstr ""
 "    -a        显示命令行参数\n"
 "    -A        使用 ASCII 画线符\n"
 "    -c        不压缩雷同的子树\n"
-"    -h        高量当前进程及其祖先\n"
-"    -H 进程号 高量 \"进程号\" 指定的进程当及其祖先\n"
+"    -h        高亮显示当前进程及其祖先\n"
+"    -H 进程号 高亮显示 \"进程号\" 指定的进程当及其祖先\n"
 "    -G        使用 VT100 划线符\n"
 "    -l        不截断长行\n"
 "    -n        输出按进程号排序\n"
