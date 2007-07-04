@@ -1,5 +1,8 @@
 Changes in ??
 =============
+2007-07-04 Tomas Smetana
+	* Added support for PPC architecture for peekfd
+
 2007-06-25 Craig Small
 	* Updated the Chinese simplified po file
 

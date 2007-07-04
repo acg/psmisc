@@ -68,6 +68,8 @@ AC_CHECK_MEMBERS([struct user_regs_struct.orig_eax,
 		struct user_regs_struct.rdi,
 		struct user_regs_struct.rsi,
 		struct user_regs_struct.rdx], [],[], [#include <linux/user.h>])
+AC_CHECK_MEMBERS([struct pt_regs.orig_gpr3,
+		struct pt_regs.gpr], [],[], [#include <linux/ptrace.h>])
 AM_CONDITIONAL(WANT_PEEKFD_I386,
  test $ac_cv_member_struct_user_regs_struct_orig_eax = yes &&
    test $ac_cv_member_struct_user_regs_struct_eax = yes &&
@@ -80,6 +82,9 @@ AM_CONDITIONAL(WANT_PEEKFD_X86_64,
    test $ac_cv_member_struct_user_regs_struct_rdi = yes &&
    test $ac_cv_member_struct_user_regs_struct_rsi = yes &&
    test $ac_cv_member_struct_user_regs_struct_rdx = yes )
+AM_CONDITIONAL(WANT_PEEKFD_PPC,
+   test $ac_cv_member_struct_pt_regs_orig_gpr3 = yes &&
+   test $ac_cv_member_struct_pt_regs_gpr = yes )
 
 dnl Check for language stuff
 AM_GNU_GETTEXT([external])

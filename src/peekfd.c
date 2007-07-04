@@ -27,6 +27,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/syscall.h>
+#include <byteswap.h>
+#include <endian.h>
 #include <linux/user.h>
 #include <stdlib.h>
 #include <getopt.h>
@@ -46,6 +48,15 @@
 	#define REG_PARAM1 rdi
 	#define REG_PARAM2 rsi
 	#define REG_PARAM3 rdx
+#elif PPC
+	#define REG_ORIG_ACCUM gpr[0]
+	#define REG_ACCUM gpr[3]
+	#define REG_PARAM1 orig_gpr3
+	#define REG_PARAM2 gpr[4]
+	#define REG_PARAM3 gpr[5]
+#ifndef PT_ORIG_R3
+	#define PT_ORIG_R3 34
+#endif
 #endif
 
 #define MAX_ATTACHED_PIDS 1024
@@ -188,9 +199,17 @@ int main(int argc, char **argv)
 		int status;
 		int pid = wait(&status);
 		if (WIFSTOPPED(status)) {
+#ifdef PPC
+			struct pt_regs regs;
+			regs.gpr[0] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R0, 0);
+			regs.gpr[3] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R3, 0);
+			regs.gpr[4] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R4, 0);
+			regs.gpr[5] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R5, 0);
+			regs.orig_gpr3 = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_ORIG_R3, 0);
+#else
 			struct user_regs_struct regs;
 			ptrace(PTRACE_GETREGS, pid, 0, &regs);
-		
+#endif		
 			/*unsigned int b = ptrace(PTRACE_PEEKTEXT, pid, regs.eip, 0);*/
 			if (follow_forks && (regs.REG_ORIG_ACCUM == SYS_fork || regs.REG_ORIG_ACCUM == SYS_clone)) {
 				if (regs.REG_ACCUM > 0)
@@ -219,7 +238,11 @@ int main(int argc, char **argv)
 						}
 
 						for (i = 0; i < regs.REG_PARAM3; i++) {
+#ifdef _BIG_ENDIAN
+							unsigned int a = bswap_32(ptrace(PTRACE_PEEKTEXT, pid, regs.REG_PARAM2 + i, 0));
+#else
 							unsigned int a = ptrace(PTRACE_PEEKTEXT, pid, regs.REG_PARAM2 + i, 0);
+#endif
 							if (remove_duplicates)
 								lastbuf[i] = a & 0xff;
 
