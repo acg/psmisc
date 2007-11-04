@@ -29,7 +29,7 @@
 #include <sys/syscall.h>
 #include <byteswap.h>
 #include <endian.h>
-#include <linux/user.h>
+#include <sys/user.h>
 #include <stdlib.h>
 #include <getopt.h>
 #include <ctype.h>

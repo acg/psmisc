@@ -1,5 +1,9 @@
 Changes in ??
 =============
+2007-08-09 Craig Small
+	* killall.1 mentions you can use -SIGxxx as well as just -XXX for signal
+	  Debian #431082
+
 2007-07-04 Tomas Smetana
 	* Added support for PPC architecture for peekfd
 
