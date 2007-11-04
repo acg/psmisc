@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.61)
-AC_INIT([psmisc],[22.6cvs])
+AC_INIT([psmisc],[22.6])
 AC_CONFIG_SRCDIR([src/comm.h])
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_AUX_DIR([config])
@@ -67,7 +67,7 @@ AC_CHECK_MEMBERS([struct user_regs_struct.orig_eax,
 		struct user_regs_struct.rax,
 		struct user_regs_struct.rdi,
 		struct user_regs_struct.rsi,
-		struct user_regs_struct.rdx], [],[], [#include <linux/user.h>])
+		struct user_regs_struct.rdx], [],[], [#include <sys/user.h>])
 AC_CHECK_MEMBERS([struct pt_regs.orig_gpr3,
 		struct pt_regs.gpr], [],[], [#include <linux/ptrace.h>])
 AM_CONDITIONAL(WANT_PEEKFD_I386,

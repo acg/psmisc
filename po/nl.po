@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.5\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-06-21 10:12+1000\n"
+"POT-Creation-Date: 2007-11-04 17:27+1100\n"
 "PO-Revision-Date: 2007-05-31 14:03+0200\n"
 "Last-Translator: Benno Schulenberg <benno@vertaalt.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -139,7 +139,7 @@ msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 
-#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:76 src/pstree.c:782
+#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:87 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -347,17 +347,17 @@ msgstr "Kan netwerk-socket niet openen.\n"
 msgid "Cannot find socket's device number.\n"
 msgstr "Kan apparaatnummer van socket niet vinden.\n"
 
-#: src/peekfd.c:64
+#: src/peekfd.c:75
 #, c-format
 msgid "Error attaching to pid %i\n"
 msgstr "Fout tijdens aanhechten aan PID %i\n"
 
-#: src/peekfd.c:72
+#: src/peekfd.c:83
 #, c-format
 msgid "peekfd (PSmisc) %s\n"
 msgstr "peekfd (PSmisc) %s\n"
 
-#: src/peekfd.c:74
+#: src/peekfd.c:85
 #, c-format
 msgid ""
 "Copyright (C) 2007 Trent Waddington\n"
@@ -366,7 +366,7 @@ msgstr ""
 "Copyright (C) 2007 Trent Waddington\n"
 "\n"
 
-#: src/peekfd.c:84
+#: src/peekfd.c:95
 #, c-format
 msgid ""
 "Usage: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"

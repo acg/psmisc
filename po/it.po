@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.5\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-06-21 10:12+1000\n"
+"POT-Creation-Date: 2007-11-04 17:27+1100\n"
 "PO-Revision-Date: 2007-05-30 17:17+0100\n"
 "Last-Translator: Marco Colombo <m.colombo@ed.ac.uk>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -139,7 +139,7 @@ msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger e Craig Small\n"
 "\n"
 
-#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:76 src/pstree.c:782
+#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:87 src/pstree.c:782
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -349,17 +349,17 @@ msgstr "Impossibile aprire un socket di rete.\n"
 msgid "Cannot find socket's device number.\n"
 msgstr "Impossibile trovare il numero di dispositivo del socket.\n"
 
-#: src/peekfd.c:64
+#: src/peekfd.c:75
 #, c-format
 msgid "Error attaching to pid %i\n"
 msgstr "Errore nel collegarsi al pid %i\n"
 
-#: src/peekfd.c:72
+#: src/peekfd.c:83
 #, c-format
 msgid "peekfd (PSmisc) %s\n"
 msgstr "peekfd (PSmisc) %s\n"
 
-#: src/peekfd.c:74
+#: src/peekfd.c:85
 #, c-format
 msgid ""
 "Copyright (C) 2007 Trent Waddington\n"
@@ -369,7 +369,7 @@ msgstr ""
 "\n"
 
 # FIXME
-#: src/peekfd.c:84
+#: src/peekfd.c:95
 #, c-format
 msgid ""
 "Usage: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
