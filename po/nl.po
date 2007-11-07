@@ -1,14 +1,14 @@
-# Translation of psmisc-22.5 to Dutch.
+# Translation of psmisc-22.6 to Dutch.
 # Copyright (C) 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the PSmisc package.
-# Benno Schulenberg <benno@vertaalt.nl>, 2004, 2005, 2006, 2007.
 #
+# Benno Schulenberg <benno@vertaalt.nl>, 2004, 2005, 2006, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 22.5\n"
+"Project-Id-Version: psmisc-22.6\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
 "POT-Creation-Date: 2007-11-04 17:27+1100\n"
-"PO-Revision-Date: 2007-05-31 14:03+0200\n"
+"PO-Revision-Date: 2007-11-06 14:36+0100\n"
 "Last-Translator: Benno Schulenberg <benno@vertaalt.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,9 +22,9 @@ msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "Proces %s(%s%d) afbreken? (j/N) "
 
 #: src/killall.c:77
-#, fuzzy, c-format
+#, c-format
 msgid "Signal %s(%s%d) ? (y/N) "
-msgstr "Proces %s(%s%d) afbreken? (j/N) "
+msgstr "Proces %s(%s%d) een signaal sturen? (j/N) "
 
 #: src/killall.c:121
 #, c-format
@@ -74,11 +74,8 @@ msgstr ""
 
 #: src/killall.c:511
 #, c-format
-msgid ""
-"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr ""
-"Gebruik:  killall [-Z CONTEXT] [-egIiqrvw] [-SIGNAAL] [-u GEBRUIKER] "
-"NAAM...\n"
+msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr "Gebruik:  killall [-Z CONTEXT] [-egIiqrvw] [-SIGNAAL] [-u GEBRUIKER] NAAM...\n"
 
 #: src/killall.c:514
 #, c-format
@@ -168,7 +165,7 @@ msgid "%s is empty (not mounted ?)\n"
 msgstr "%s is leeg -- niet aangekoppeld?\n"
 
 #: src/fuser.c:89
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -210,14 +207,7 @@ msgstr ""
 "    -u         de gebruiker-IDs tonen\n"
 "    -V         de programmaversie tonen\n"
 "    -v         breedsprakige uitvoer produceren\n"
-"    -SIGNAAL   dit signaal sturen in plaats van KILL (zie -l voor een "
-"lijst)\n"
-"    -4         alleen naar IPv4-sockets zoeken\n"
-"    -6         alleen naar IPv6-sockets zoeken\n"
-"    -          alle opties herinitialiseren\n"
-"\n"
-"  tcp/udp-namen: [lokale_poort][,[gindse_host][,[gindse_poort]]]\n"
-"\n"
+"    -SIGNAAL   dit signaal sturen in plaats van KILL (zie -l voor een lijst)\n"
 
 #: src/fuser.c:109
 #, c-format
@@ -225,6 +215,8 @@ msgid ""
 "    -4        search IPv4 sockets only\n"
 "    -6        search IPv6 sockets only\n"
 msgstr ""
+"    -4         alleen naar IPv4-sockets zoeken\n"
+"    -6         alleen naar IPv6-sockets zoeken\n"
 
 #: src/fuser.c:113
 #, c-format
@@ -234,6 +226,10 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
+"    -          alle opties terugzetten op standaardwaarden\n"
+"\n"
+"  tcp/udp-namen: [lokale_poort][,[gindse_host][,[gindse_poort]]]\n"
+"\n"
 
 #: src/fuser.c:120
 #, c-format
@@ -248,7 +244,7 @@ msgstr "Kan /proc niet openen: %s\n"
 #: src/fuser.c:283
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
-msgstr "Onvoldoende geheugen om gevonden proces te verwerken: %s\n"
+msgstr "Onvoldoende geheugen beschikbaar om gevonden proces te verwerken: %s\n"
 
 #: src/fuser.c:316
 #, c-format
@@ -447,8 +443,7 @@ msgid ""
 "\n"
 msgstr ""
 "    PID     bij dit proces-ID beginnen; standaard is 1 (init)\n"
-"    NAAM    alleen de bomen tonen die beginnen bij processen van deze "
-"gebruiker\n"
+"    NAAM    alleen de bomen tonen die beginnen bij processen van deze gebruiker\n"
 "\n"
 
 #: src/pstree.c:778
@@ -484,4 +479,4 @@ msgstr "Druk op Enter om af te sluiten\n"
 #: src/signals.c:84
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
-msgstr "Onbekend signaal: %s -- '%s -l' toont lijst van mogelijke signalen\n"
+msgstr "Onbekend signaal: %s -- '%s -l' toont een lijst van mogelijke signalen\n"

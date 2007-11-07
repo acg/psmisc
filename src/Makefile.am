@@ -1,7 +1,7 @@
 
 AM_CFLAGS = -Wall -DLOCALEDIR=\"/usr/share/locale\"
 
-bin_PROGRAMS = fuser killall pstree oldfuser 
+bin_PROGRAMS = fuser killall pstree 
 if WANT_PEEKFD_I386
   bin_PROGRAMS += peekfd
   AM_CFLAGS += -DI386
@@ -14,8 +14,6 @@ if WANT_PEEKFD_PPC
   bin_PROGRAMS += peekfd
   AM_CFLAGS += -DPPC
 endif
-
-oldfuser_SOURCES = oldfuser.c comm.h signals.c signals.h loop.h i18n.h
 
 fuser_SOURCES = fuser.c comm.h signals.c signals.h i18n.h fuser.h
 

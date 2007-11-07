@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 22.5\n"
+"Project-Id-Version: psmisc 22.6\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
 "POT-Creation-Date: 2007-11-04 17:27+1100\n"
-"PO-Revision-Date: 2007-05-30 17:34+0200\n"
+"PO-Revision-Date: 2007-11-06 17:35+0100\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -21,9 +21,9 @@ msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "Zabiæ %s(%s%d)? (t/N) "
 
 #: src/killall.c:77
-#, fuzzy, c-format
+#, c-format
 msgid "Signal %s(%s%d) ? (y/N) "
-msgstr "Zabiæ %s(%s%d)? (t/N) "
+msgstr "Wys³aæ sygna³ do %s(%s%d)? (t/N) "
 
 #: src/killall.c:121
 #, c-format
@@ -73,11 +73,8 @@ msgstr ""
 
 #: src/killall.c:511
 #, c-format
-msgid ""
-"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr ""
-"Sk³adnia: killall [-Z KONTEKST] [-u U¯YTKOWNIK] [ -eIgiqrvw ] [ -SYGNA£ ] "
-"NAZWA...\n"
+msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr "Sk³adnia: killall [-Z KONTEKST] [-u U¯YTKOWNIK] [ -eIgiqrvw ] [ -SYGNA£ ] NAZWA...\n"
 
 #: src/killall.c:514
 #, c-format
@@ -106,18 +103,15 @@ msgstr ""
 "          killall -l, --list\n"
 "          killall -V --version\n"
 "\n"
-"  -e,--exact          wymaganie dok³adnego dopasowania dla bardzo d³ugich "
-"nazw\n"
-"  -I,--ignore-case    dopasowywanie nazw procesów niewra¿liwe na wielko¶æ "
-"liter\n"
+"  -e,--exact          wymaganie dok³adnego dopasowania dla bardzo d³ugich nazw\n"
+"  -I,--ignore-case    dopasowywanie nazw procesów niewra¿liwe na wielko¶æ liter\n"
 "  -g,--process-group  zabicie grupy procesów zamiast procesu\n"
 "  -i,--interactive    pytanie o potwierdzenie przed zabiciem\n"
 "  -l,--list           wypisanie wszystkich znanych nazw sygna³ów\n"
 "  -q,--quiet          nie wy¶wietlanie narzekañ\n"
 "  -r,--regexp         u¿ycie NAZWY jako rozszerzonego wyra¿enia regularnego\n"
 "  -s,--signal SYGNA£  wys³anie podanego sygna³u zamiast SIGTERM\n"
-"  -u, --user U¯YTK    zabicie tylko procesów dzia³aj±cych jako podany "
-"u¿ytkownik\n"
+"  -u, --user U¯YTK    zabicie tylko procesów dzia³aj±cych jako podany u¿ytkownik\n"
 "  -v,--verbose        informowanie czy wys³anie sygna³u siê powiod³o\n"
 "  -V,--version        wy¶wietlenie informacji o wersji\n"
 "  -w,--wait           zaczekanie na ¶mieræ procesów\n"
@@ -128,8 +122,7 @@ msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
 "                      (must precede other arguments)\n"
 msgstr ""
-"  -Z,--context REGEXP zabicie tylko procesu(ów) maj±cych dany kontekst "
-"bezp.\n"
+"  -Z,--context REGEXP zabicie tylko procesu(ów) maj±cych dany kontekst bezp.\n"
 "                        (musi poprzedzaæ inne argumenty)\n"
 
 #: src/killall.c:554 src/fuser.c:122 src/pstree.c:780
@@ -170,7 +163,7 @@ msgid "%s is empty (not mounted ?)\n"
 msgstr "%s jest pusty (nie podmontowany?)\n"
 
 #: src/fuser.c:89
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -192,8 +185,7 @@ msgid ""
 "    -v        verbose output\n"
 "    -V        display version information\n"
 msgstr ""
-"Sk³adnia: fuser [ -a | -s | -c ] [ -n PRZESTRZEÑ ] [ -SYGNA£ ] [ -kimuv ] "
-"NAZWA...\n"
+"Sk³adnia: fuser [ -a | -s | -c ] [ -n PRZESTRZEÑ ] [ -SYGNA£ ] [ -kimuv ] NAZWA...\n"
 "                [ - ] [ -n PRZESTRZEÑ ] [ -SYGNA£ ] [ -kimuv ] NAZWA...\n"
 "          fuser -l\n"
 "          fuser -V\n"
@@ -213,12 +205,6 @@ msgstr ""
 "    -u             wy¶wietlenie identyfikatorów u¿ytkowników\n"
 "    -v             podanie wiêkszej ilo¶ci informacji\n"
 "    -V             wy¶wietlenie informacji o wersji\n"
-"    -4             szukanie tylko gniazd IPv4\n"
-"    -6             szukanie tylko gniazd IPv6\n"
-"    -              wyzerowanie opcji\n"
-"\n"
-"  nazwy tcp/udp: [port_lokalny][,[zdalny_host][,[port_zdalny]]]\n"
-"\n"
 
 #: src/fuser.c:109
 #, c-format
@@ -226,6 +212,8 @@ msgid ""
 "    -4        search IPv4 sockets only\n"
 "    -6        search IPv6 sockets only\n"
 msgstr ""
+"    -4             szukanie tylko gniazd IPv4\n"
+"    -6             szukanie tylko gniazd IPv6\n"
 
 #: src/fuser.c:113
 #, c-format
@@ -235,6 +223,10 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
+"    -              wyzerowanie opcji\n"
+"\n"
+"  nazwy tcp/udp: [port_lokalny][,[zdalny_host][,[port_zdalny]]]\n"
+"\n"
 
 #: src/fuser.c:120
 #, c-format

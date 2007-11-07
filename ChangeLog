@@ -1,5 +1,11 @@
 Changes in ??
-=============
+==============
+2007-11-07 Craig Small
+	* Updated Italian, Chinese simplified, Dutch, Swedish and Polish po files
+	* Removed old fuser
+
+Changes in 22.6
+===============
 2007-08-09 Craig Small
 	* killall.1 mentions you can use -SIGxxx as well as just -XXX for signal
 	  Debian #431082

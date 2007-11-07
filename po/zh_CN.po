@@ -6,13 +6,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 22.5\n"
+"Project-Id-Version: psmisc 22.6\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
 "POT-Creation-Date: 2007-11-04 17:27+1100\n"
-"PO-Revision-Date: 2007-06-21 14:33+0800\n"
+"PO-Revision-Date: 2007-11-06 21:28+0800\n"
 "Last-Translator: LI Daobing <lidaobing@gmail.com>\n"
-"Language-Team: Chinese (simplified) <translation-team-zh-cn@lists."
-"sourceforge.net>\n"
+"Language-Team: Chinese (simplified) <translation-team-zh-cn@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,9 +22,9 @@ msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "杀死 %s(%s%d) ? (y/N) "
 
 #: src/killall.c:77
-#, fuzzy, c-format
+#, c-format
 msgid "Signal %s(%s%d) ? (y/N) "
-msgstr "杀死 %s(%s%d) ? (y/N) "
+msgstr "信号 %s(%s%d) ? (y/N) "
 
 #: src/killall.c:121
 #, c-format
@@ -75,10 +74,8 @@ msgstr ""
 
 #: src/killall.c:511
 #, c-format
-msgid ""
-"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr ""
-"Usage: killall [-Z 上下文] [-u 用户名] [ -eIgiqrvw ] [ -信号 ] 程序名...\n"
+msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr "Usage: killall [-Z 上下文] [-u 用户名] [ -eIgiqrvw ] [ -信号 ] 程序名...\n"
 
 #: src/killall.c:514
 #, c-format
@@ -166,7 +163,7 @@ msgid "%s is empty (not mounted ?)\n"
 msgstr "%s 是空的 (未挂载?)\n"
 
 #: src/fuser.c:89
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -207,12 +204,6 @@ msgstr ""
 "    -u          显示用户 ID\n"
 "    -v          输出更多信息\n"
 "    -V          显示版本信息\n"
-"    -4          仅查找 IPv4 端口\n"
-"    -6          仅查找 IPv6 端口\n"
-"    -           重置选项\n"
-"\n"
-"  udp/tcp 名字格式: [本地端口][,[远程主机][,[远程端口]]]\n"
-"\n"
 
 #: src/fuser.c:109
 #, c-format
@@ -220,6 +211,8 @@ msgid ""
 "    -4        search IPv4 sockets only\n"
 "    -6        search IPv6 sockets only\n"
 msgstr ""
+"    -4          仅查找 IPv4 端口\n"
+"    -6          仅查找 IPv6 端口\n"
 
 #: src/fuser.c:113
 #, c-format
@@ -229,6 +222,10 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
+"    -           重置选项\n"
+"\n"
+"  udp/tcp 名字格式: [本地端口][,[远程主机][,[远程端口]]]\n"
+"\n"
 
 #: src/fuser.c:120
 #, c-format

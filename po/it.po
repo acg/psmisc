@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 22.5\n"
+"Project-Id-Version: psmisc 22.6\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
 "POT-Creation-Date: 2007-11-04 17:27+1100\n"
-"PO-Revision-Date: 2007-05-30 17:17+0100\n"
+"PO-Revision-Date: 2007-11-06 13:22+0000\n"
 "Last-Translator: Marco Colombo <m.colombo@ed.ac.uk>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -22,9 +22,9 @@ msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "Terminare %s(%s%d)? (y/N) "
 
 #: src/killall.c:77
-#, fuzzy, c-format
+#, c-format
 msgid "Signal %s(%s%d) ? (y/N) "
-msgstr "Terminare %s(%s%d)? (y/N) "
+msgstr "Segnale %s(%s%d)? (y/N) "
 
 #: src/killall.c:121
 #, c-format
@@ -74,10 +74,8 @@ msgstr ""
 
 #: src/killall.c:511
 #, c-format
-msgid ""
-"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr ""
-"Uso: killall [-Z CONTESTO] [-u UTENTE] [ -eIgiqrvw ] [ -SEGNALE ] NOME...\n"
+msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr "Uso: killall [-Z CONTESTO] [-u UTENTE] [ -eIgiqrvw ] [ -SEGNALE ] NOME...\n"
 
 #: src/killall.c:514
 #, c-format
@@ -106,8 +104,7 @@ msgstr ""
 "     killall -l, --list\n"
 "     killall -V --version\n"
 "\n"
-"  -e,--exact          richiede una corrispondenza esatta per i nomi molto "
-"lunghi\n"
+"  -e,--exact          richiede una corrispondenza esatta per i nomi molto lunghi\n"
 "  -I,--ignore-case    ignora maiuscole/minuscole nei nomi\n"
 "  -g,--process-group  termina il gruppo di processi invece del processo\n"
 "  -i,--interactive    chiede conferma prima di terminare\n"
@@ -168,7 +165,7 @@ msgid "%s is empty (not mounted ?)\n"
 msgstr "%s è vuoto (non montato?)\n"
 
 #: src/fuser.c:89
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
 "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
@@ -200,7 +197,7 @@ msgstr ""
 "    -c        file system montati\n"
 "    -f        ignorata (per compatibilità POSIX)\n"
 "    -i        conferma prima di terminare (ignorato senza -k)\n"
-"    -k        termina tutti i processi che accedono al file specificato\n"
+"    -k        termina i processi che accedono al file specificato\n"
 "    -l        elenca i nomi dei segnali\n"
 "    -m        mostra tutti i processi che usano il filesystem specificato\n"
 "    -n CONTESTO  cerca nel contesto specificato (file, udp, o tcp)\n"
@@ -209,12 +206,6 @@ msgstr ""
 "    -u        mostra i nomi utente\n"
 "    -v        output prolisso\n"
 "    -V        mostra le informazioni sulla versione\n"
-"    -4        cerca solo socket IPv4\n"
-"    -6        cerca solo socket IPv6\n"
-"    -         riazzera le opzioni\n"
-"\n"
-"  nomi udp/tcp: [porta locale][,[host remoto][,[porta remota]]]\n"
-"\n"
 
 #: src/fuser.c:109
 #, c-format
@@ -222,6 +213,8 @@ msgid ""
 "    -4        search IPv4 sockets only\n"
 "    -6        search IPv6 sockets only\n"
 msgstr ""
+"    -4        cerca solo socket IPv4\n"
+"    -6        cerca solo socket IPv6\n"
 
 #: src/fuser.c:113
 #, c-format
@@ -231,6 +224,9 @@ msgid ""
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
+"    -         riazzera le opzioni\n"
+"\n"
+"  nomi udp/tcp: [porta locale][,[host remoto][,[porta remota]]]\n"
 
 #: src/fuser.c:120
 #, c-format
@@ -299,8 +295,7 @@ msgstr "L'opzione -a non può essere usata con l'opzione -s."
 
 #: src/fuser.c:856
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
-msgstr ""
-"Impossibile cercare solo socket IPv4 e solo socket IPv6 allo stesso tempo"
+msgstr "Impossibile cercare solo socket IPv4 e solo socket IPv6 allo stesso tempo"
 
 # FIXME: COMANDO DI ACCESSO ?
 #: src/fuser.c:901
@@ -490,26 +485,14 @@ msgstr "%s: segnale sconosciuto; usare %s -l per elencare i segnali.\n"
 #~ msgid "Cannot open protocol file \"%s\": %s"
 #~ msgstr "Impossibile aprire il file di protocollo \"%s\": %s"
 
-#~ msgid "%s: SID (%s) must be numeric\n"
-#~ msgstr "%s: SID (%s) deve essere numerico\n"
-
 #~ msgid "-4 flag used but proc file %s is not readable\n"
 #~ msgstr "è stata usata l'opzione -4,  ma il file proc %s non è leggibile\n"
-
-#~ msgid "-6 flag used but proc file %s is not readable\n"
-#~ msgstr "è stata usata l'opzione -6,  ma il file proc %s non è leggibile\n"
-
-#~ msgid "kill %d"
-#~ msgstr "termina %d"
 
 #~ msgid "No automatic removal. Please use  umount %s\n"
 #~ msgstr "Impossible rimuovere automaticamente. Usare umount %s\n"
 
 #~ msgid "No automatic removal. Please use  swapoff %s\n"
 #~ msgstr "Impossible rimuovere automaticamente. Usare swapoff %s\n"
-
-#~ msgid "Internal error (type %d)\n"
-#~ msgstr "Errore interno (tipo %d)\n"
 
 #~ msgid "kernel mount  "
 #~ msgstr "mount del kernel"
@@ -522,6 +505,3 @@ msgstr "%s: segnale sconosciuto; usare %s -l per elencare i segnali.\n"
 
 #~ msgid "ignoring -m in name space \"%s\"\n"
 #~ msgstr "ignorato -m nel contesto \"%s\"\n"
-
-#~ msgid "%s/%s: invalid specification\n"
-#~ msgstr "%s/%s: specificazione non valida\n"
