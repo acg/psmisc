@@ -2,6 +2,7 @@ Changes in ??
 ==============
 2007-11-13 Craig Small
 	* Updated French and German po files
+	* Fuser -m detects more open sockets SF patch #1728412 Thnks marienz
 
 2007-11-07 Craig Small
 	* Updated Italian, Chinese simplified, Dutch, Swedish and Polish po files
