@@ -1,5 +1,8 @@
 Changes in ??
 ==============
+2007-11-19 Craig Small
+	* Patch from Marcus Watts for better comm handling in pstree
+
 2007-11-13 Craig Small
 	* Updated French and German po files
 	* Fuser -m detects more open sockets SF patch #1728412 Thnks marienz

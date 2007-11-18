@@ -560,7 +560,7 @@ read_proc (void)
   struct dirent *de;
   FILE *file;
   struct stat st;
-  char *path, comm[COMM_LEN + 1];
+  char *path, *comm;
   char *buffer;
   char readbuf[BUFSIZ+1];
   char *tmpptr;
@@ -608,16 +608,18 @@ read_proc (void)
 		perror (path);
 		exit (1);
 	      }
-            fread(readbuf, BUFSIZ, 1, file) ;
+            size = fread(readbuf, 1, BUFSIZ, file) ;
             if (ferror(file) == 0) 
             {
-              memset(comm, '\0', COMM_LEN+1);
-              tmpptr = strrchr(readbuf, ')'); /* find last ) */
+	      readbuf[size] = 0;
+              /*printf("readbuf: %s\n", readbuf);*/
+		/* commands may have spaces or ) in them.
+		 * so don't trust anything from the ( to the last ) */
+	      if ((comm = strchr(readbuf, '('))
+		&& (tmpptr = strrchr(comm, ')'))) {
+		++comm; *tmpptr = 0;
               /* We now have readbuf with pid and cmd, and tmpptr+2
                * with the rest */
-              /*printf("readbuf: %s\n", readbuf);*/
-              if (sscanf(readbuf, "%*d (%15[^)]", comm) == 1)
-              {
                 /*printf("tmpptr: %s\n", tmpptr+2);*/
                 if (sscanf(tmpptr+2, "%*c %d", &ppid) == 1)
                 {
