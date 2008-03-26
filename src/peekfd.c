@@ -126,7 +126,7 @@ int main(int argc, char **argv)
     struct option options[] = {
       {"eight-bit-clean", 0, NULL, '8'},
       {"no-headers", 0, NULL, 'n'},
-      {"follow", 0, NULL, 'f'},
+      {"follow", 0, NULL, 'c'},
       {"duplicates-removed", 0, NULL, 'd'},
       {"help", 0, NULL, 'h'},
       {"version", 0, NULL, 'V'},
