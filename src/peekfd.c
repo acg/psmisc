@@ -105,7 +105,7 @@ void usage() {
 	  "  Press CTRL-C to end output.\n"));
 }
 
-int bufdiff(int pid, unsigned char *lastbuf, unsigned int addr, unsigned int len) {
+int bufdiff(pid_t pid, unsigned char *lastbuf, unsigned int addr, unsigned int len) {
 	int i;
 	for (i = 0; i < len; i++)
 		if (lastbuf[i] != (ptrace(PTRACE_PEEKTEXT, pid, addr + i, 0) & 0xff))
@@ -199,7 +199,7 @@ int main(int argc, char **argv)
 
 	for(;;) {
 		int status;
-		int pid = wait(&status);
+		pid_t pid = wait(&status);
 		if (WIFSTOPPED(status)) {
 #ifdef PPC
 			struct pt_regs regs;
