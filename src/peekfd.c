@@ -178,7 +178,7 @@ int main(int argc, char **argv)
       numfds = argc - optind;
       fds = malloc(sizeof(int) * numfds);
 	  for (i = 0; i < numfds; i++)
-		fds[i] = atoi(argv[optind + 1 + i]);
+		fds[i] = atoi(argv[optind + i]);
     }
 
 	attach(target_pid);
