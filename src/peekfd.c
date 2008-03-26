@@ -70,7 +70,9 @@ void detach(void) {
 }
 
 void attach(pid_t pid) {
-	attached_pids[0] = pid;
+	if (num_attached_pids >= MAX_ATTACHED_PIDS)
+		return;
+	attached_pids[num_attached_pids] = pid;
 	if (ptrace(PTRACE_ATTACH, pid, 0, 0) == -1) {
 		fprintf(stderr, _("Error attaching to pid %i\n"), pid);
 		return;
