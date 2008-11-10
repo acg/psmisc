@@ -1,5 +1,11 @@
 Changes in ??
-==============
+= =============
+2008-11-11 Craig Small
+	* Updated Indonesian PO file
+
+2008-08-09 Craig Small
+	* peekfd off by one problem in fds Debian #460530
+
 2007-11-19 Craig Small
 	* Patch from Marcus Watts for better comm handling in pstree
 	* Updated Hungarian po file
