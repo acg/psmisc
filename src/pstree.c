@@ -50,9 +50,6 @@
 
 extern const char *__progname;
 
-#ifndef MAX_DEPTH
-#define MAX_DEPTH    100
-#endif
 #define PROC_BASE    "/proc"
 
 /* UTF-8 defines by Johan Myreen, updated by Ben Winslow */
@@ -124,7 +121,12 @@ sym_ascii =
 , *sym = &sym_ascii;
 
 static PROC *list = NULL;
-static int width[MAX_DEPTH], more[MAX_DEPTH];
+
+/* The buffers will be dynamically increased in size as needed. */
+static int capacity = 0;
+static int *width = NULL;
+static int *more = NULL;
+
 static int print_args = 0, compact = 1, user_change = 0, pids = 0, by_pid = 0,
   trunc = 1, wait_end = 0;
 #ifdef WITH_SELINUX
@@ -135,6 +137,48 @@ static int cur_x = 1;
 static char last_char = 0;
 static int dumped = 0;		/* used by dump_by_user */
 
+/*
+ * Allocates additional buffer space for width and more as needed.
+ * The first call will allocate the first buffer.
+ *
+ * index  the index that will be used after the call
+ *        to this function.
+ */
+static void ensure_buffer_capacity(int index) {
+  if (index >= capacity) {
+    if (capacity == 0)
+      capacity = 100;
+    else
+      capacity *= 2;
+    if (!(width = realloc(width, capacity * sizeof(int))))
+      {
+        perror ("realloc");
+        exit (1);
+      }
+    if (!(more = realloc(more, capacity * sizeof(int))))
+      {
+        perror ("realloc");
+        exit (1);
+      }
+  }
+}
+
+/*
+ * Frees any buffers allocated by ensure_buffer_capacity.
+ */
+static void free_buffers() {
+  if (width != NULL)
+    {
+      free(width);
+      width = NULL;
+    }
+  if (more != NULL)
+    {
+      free(more);
+      more = NULL;
+    }
+  capacity = 0;
+}
 
 static void
 out_char (char c)
@@ -369,11 +413,6 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
 
   if (!current)
     return;
-  if (level >= MAX_DEPTH - 1)
-    {
-      fprintf (stderr, _("Internal error: MAX_DEPTH not big enough.\n"));
-      exit (1);
-    }
   if (!leaf)
     for (lvl = 0; lvl < level; lvl++)
       {
@@ -476,6 +515,7 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
       if (print_args)
 #endif /*WITH_SELINUX*/
 	{
+          ensure_buffer_capacity(level);
 	  more[level] = !last;
 	  width[level] = swapped + (comm_len > 1 ? 0 : -1);
 	  for (walk = current->children; walk; walk = walk->next)
@@ -485,6 +525,7 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
     }
   else
     {
+      ensure_buffer_capacity(level);
       more[level] = !last;
       width[level] = comm_len + cur_x - offset + add;
       if (cur_x >= output_width && trunc)
@@ -939,6 +980,7 @@ main (int argc, char **argv)
 	  return 1;
 	}
     }
+  free_buffers();
   if (wait_end == 1) {
     fprintf(stderr, _("Press return to close\n"));
     (void)getchar();

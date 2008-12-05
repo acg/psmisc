@@ -1,5 +1,8 @@
 Changes in ??
 = =============
+2008-12-05 Craig Small
+	* Dynamically reallocate buffer for fuser patch from Don Armstrong
+
 2008-11-11 Craig Small
 	* Updated Indonesian PO file
 
