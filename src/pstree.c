@@ -2,7 +2,7 @@
  * pstree.c - display process tree
  *
  * Copyright (C) 1993-2002 Werner Almesberger
- * Copyright (C) 2002-2005 Craig Small
+ * Copyright (C) 2002-2008 Craig Small
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -136,6 +136,7 @@ static int output_width = 132;
 static int cur_x = 1;
 static char last_char = 0;
 static int dumped = 0;		/* used by dump_by_user */
+static int charlen = 0;     /* length of character */
 
 /*
  * Allocates additional buffer space for width and more as needed.
@@ -183,19 +184,31 @@ static void free_buffers() {
 static void
 out_char (char c)
 {
-  cur_x += (c & 0xc0) != 0x80;	/* only count first UTF-8 char */
-  if (cur_x <= output_width || !trunc)
-    putchar (c);
-  if (cur_x == output_width + 1 && trunc && ((c & 0xc0) != 0x80))
+  if (charlen == 0)  /* "new" character */
   {
-    if (last_char || (c & 0x80))
-      putchar ('+');
-    else
-      {
-	last_char = c;
-	cur_x--;
-	return;
-      }
+    if ( (c & 0x80) == 0)
+    {
+      charlen = 1; /* ASCII */
+    } else if ( (c & 0xe0) == 0xc0) /* 110.. 2 bytes */
+    {
+      charlen = 2;
+    } else if ( (c & 0xf0) == 0xe0) /* 1110.. 3 bytes */
+    {
+      charlen = 3;
+    } else if ( (c & 0xf8) == 0xf0) /* 11110.. 4 bytes */
+    {
+      charlen = 4;
+    } else {
+      charlen = 1;
+    }
+    cur_x++; /* count first byte of whatever it is only */
+  }
+  charlen--;
+  if (!trunc || cur_x <= output_width)
+    putchar (c);
+  else {
+    if (trunc && (cur_x == output_width + 1))
+      putchar('+');
   }
 }
 
@@ -476,7 +489,7 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
   if (current->highlight && (tmp = tgetstr ("me", NULL)))
     tputs (tmp, 1, putchar);
   if (print_args)
-    {
+  {
       for (i = 0; i < current->argc; i++)
 	{
       if (i < current->argc-1) /* Space between words but not at the end of last */
@@ -499,7 +512,7 @@ dump_tree (PROC * current, int level, int rep, int leaf, int last,
 	      break;
 	    }
 	}
-    }
+  }
 #ifdef WITH_SELINUX
   if ( show_scontext || print_args || ! current->children )
 #else  /*WITH_SELINUX*/
@@ -603,6 +616,7 @@ read_proc (void)
   struct stat st;
   char *path, *comm;
   char *buffer;
+  size_t buffer_size;
   char readbuf[BUFSIZ+1];
   char *tmpptr;
   pid_t pid, ppid;
@@ -613,9 +627,14 @@ read_proc (void)
   int selinux_enabled=is_selinux_enabled()>0;
 #endif /*WITH_SELINUX*/
 
+  if (trunc)
+    buffer_size = output_width+1;
+  else
+    buffer_size = BUFSIZ+1;
+
   if (!print_args)
     buffer = NULL;
-  else if (!(buffer = malloc ((size_t) (output_width + 1))))
+  else if (!(buffer = malloc (buffer_size)))
     {
       perror ("malloc");
       exit (1);
@@ -724,7 +743,7 @@ read_proc (void)
 			perror (path);
 			exit (1);
 		      }
-		    if ((size = read (fd, buffer, (size_t) output_width)) < 0)
+		    if ((size = read (fd, buffer, buffer_size)) < 0)
 		      {
 			perror (path);
 			exit (1);

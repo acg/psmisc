@@ -456,7 +456,7 @@ kill_all (int signal, int names, char **namelist, struct passwd *pwent)
   if (!quiet && !pidof)
     for (i = 0; i < names; i++)
       if (!(found & (1 << i)))
-	fprintf (stderr, _("%s: no process killed\n"), namelist[i]);
+	fprintf (stderr, _("%s: no process found\n"), namelist[i]);
   if (pidof)
     putchar ('\n');
   if (names)

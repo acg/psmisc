@@ -1,5 +1,12 @@
 Changes in ??
 = =============
+2008-12-16 Craig Small
+	* Patch from Arnaud Giersch to fix udp ports in fuser Debian #502208
+	* pstree man page mentions -Z may not be available Debian #478327
+	* pstree handles UTF-8 lengths much better Debian #413503
+	* killall says no process found when process not found Debian #500097
+	* pstree makes a bigger buffer for -al flags Debian #352603
+
 2008-12-05 Craig Small
 	* Dynamically reallocate buffer for fuser patch from Don Armstrong
 

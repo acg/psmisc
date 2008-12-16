@@ -4,7 +4,7 @@
  * Based on fuser.c Copyright (C) 1993-2005 Werner Almesberger and Craig Small
  *
  * Completely re-written
- * Copyright (C) 2005-2007 Craig Small
+ * Copyright (C) 2005-2008 Craig Small
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -822,9 +822,9 @@ int main(int argc, char *argv[])
 			case NAMESPACE_UDP:
 				asprintf(&(this_name->filename), "%s/udp", argv[optc]);
 #ifdef WITH_IPV6
-				parse_inet(this_name, ipv4_only, ipv6_only, &tcp_connection_list, &tcp6_connection_list);
+				parse_inet(this_name, ipv4_only, ipv6_only, &udp_connection_list, &udp6_connection_list);
 #else
-				parse_inet(this_name, &tcp_connection_list);
+				parse_inet(this_name, &udp_connection_list);
 #endif
 				break;
 			default: /* FILE */
