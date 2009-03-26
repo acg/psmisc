@@ -4,7 +4,7 @@
  * Based on fuser.c Copyright (C) 1993-2005 Werner Almesberger and Craig Small
  *
  * Completely re-written
- * Copyright (C) 2005-2008 Craig Small
+ * Copyright (C) 2005-2009 Craig Small
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -87,18 +87,17 @@ static void usage (const char *errormsg)
 		fprintf(stderr, "%s\n", errormsg);
 
   fprintf (stderr, _(
-    "Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
-    "             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
+    "Usage: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n SPACE ] [ -k [ -i ] [ -SIGNAL ]] NAME...\n"
     "       fuser -l\n"
     "       fuser -V\n"
     "Show which processes use the named files, sockets, or filesystems.\n\n"
     "    -a        display unused files too\n"
-    "    -c        mounted FS\n"
+    "    -c        Same as \-m (for POSIX compatibility)\n"
     "    -f        silently ignored (for POSIX compatibility)\n"
     "    -i        ask before killing (ignored without -k)\n"
     "    -k        kill processes accessing the named file\n"
     "    -l        list available signal names\n"
-    "    -m        show all processes using the named filesystems\n"
+    "    -m        show all processes using the named filesystems or block device\n"
     "    -n SPACE  search in this name space (file, udp, or tcp)\n"
     "    -s        silent operation\n"
     "    -SIGNAL   send this signal instead of SIGKILL\n"
@@ -120,7 +119,7 @@ void print_version()
 {
   fprintf(stderr, _("fuser (PSmisc) %s\n"), VERSION);
   fprintf(stderr, _(
-    "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n\n"));
+    "Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n\n"));
   fprintf(stderr, _(
     "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
     "This is free software, and you are welcome to redistribute it under\n"
