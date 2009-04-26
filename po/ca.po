@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 21.6cvs\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-11-04 17:27+1100\n"
+"POT-Creation-Date: 2009-04-26 10:22+1000\n"
 "PO-Revision-Date: 2004-12-08 12:46+0100\n"
 "Last-Translator: Guillem Jover <guillem@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -46,8 +46,8 @@ msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "S'ha matat %s(%s%d) amb el senyal %d\n"
 
 #: src/killall.c:459
-#, c-format
-msgid "%s: no process killed\n"
+#, fuzzy, c-format
+msgid "%s: no process found\n"
 msgstr "%s: no s'ha matat cap procés\n"
 
 #: src/killall.c:497
@@ -128,7 +128,7 @@ msgstr ""
 "   (-s, -c són mútuament excloents i han de precedir altres arguments)\n"
 "\n"
 
-#: src/killall.c:554 src/fuser.c:122 src/pstree.c:780
+#: src/killall.c:554 src/pstree.c:842
 #, fuzzy, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -137,7 +137,7 @@ msgstr ""
 "Copyright (C) 1993-2002 Werner Almesberger i Craig Small\n"
 "\n"
 
-#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:87 src/pstree.c:782
+#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:89 src/pstree.c:844
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -161,27 +161,28 @@ msgstr ""
 msgid "Maximum number of names is %d\n"
 msgstr "El nombre màxim de noms és %d\n"
 
-#: src/killall.c:720 src/pstree.c:710
+#: src/killall.c:720 src/pstree.c:772
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s és buit (no s'ha muntat?)\n"
 
-#: src/fuser.c:89
+#: src/fuser.c:90
 #, fuzzy, c-format
 msgid ""
-"Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
-"             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
+"Usage: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n SPACE ] [ -k [ -"
+"i ] [ -SIGNAL ]] NAME...\n"
 "       fuser -l\n"
 "       fuser -V\n"
 "Show which processes use the named files, sockets, or filesystems.\n"
 "\n"
 "    -a        display unused files too\n"
-"    -c        mounted FS\n"
+"    -c        Same as \\-m (for POSIX compatibility)\n"
 "    -f        silently ignored (for POSIX compatibility)\n"
 "    -i        ask before killing (ignored without -k)\n"
 "    -k        kill processes accessing the named file\n"
 "    -l        list available signal names\n"
-"    -m        show all processes using the named filesystems\n"
+"    -m        show all processes using the named filesystems or block "
+"device\n"
 "    -n SPACE  search in this name space (file, udp, or tcp)\n"
 "    -s        silent operation\n"
 "    -SIGNAL   send this signal instead of SIGKILL\n"
@@ -235,6 +236,15 @@ msgstr ""
 #, fuzzy, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
+
+#: src/fuser.c:122
+#, fuzzy, c-format
+msgid ""
+"Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Copyright (C) 1993-2002 Werner Almesberger i Craig Small\n"
+"\n"
 
 #: src/fuser.c:147
 #, c-format
@@ -310,59 +320,59 @@ msgstr ""
 msgid "(unknown)"
 msgstr ""
 
-#: src/fuser.c:1019
+#: src/fuser.c:1021
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:1113
+#: src/fuser.c:1124
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr ""
 
-#: src/fuser.c:1149
+#: src/fuser.c:1160
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr ""
 
-#: src/fuser.c:1198
+#: src/fuser.c:1209
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Voleu matar el procés %d? (s/N)"
 
-#: src/fuser.c:1222
+#: src/fuser.c:1233
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr ""
 
-#: src/fuser.c:1237
+#: src/fuser.c:1248
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr ""
 
-#: src/fuser.c:1241
+#: src/fuser.c:1252
 #, fuzzy, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "no s'ha pogut trobar el nombre de dispositiu del sòcol"
 
-#: src/peekfd.c:75
+#: src/peekfd.c:77
 #, c-format
 msgid "Error attaching to pid %i\n"
 msgstr ""
 
-#: src/peekfd.c:83
+#: src/peekfd.c:85
 #, fuzzy, c-format
 msgid "peekfd (PSmisc) %s\n"
 msgstr "pstree (psmisc) %s\n"
 
-#: src/peekfd.c:85
+#: src/peekfd.c:87
 #, c-format
 msgid ""
 "Copyright (C) 2007 Trent Waddington\n"
 "\n"
 msgstr ""
 
-#: src/peekfd.c:95
+#: src/peekfd.c:97
 #, c-format
 msgid ""
 "Usage: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
@@ -376,12 +386,7 @@ msgid ""
 "  Press CTRL-C to end output.\n"
 msgstr ""
 
-#: src/pstree.c:374
-#, fuzzy, c-format
-msgid "Internal error: MAX_DEPTH not big enough.\n"
-msgstr "MAX_DEPTH no és prou gran.\n"
-
-#: src/pstree.c:750
+#: src/pstree.c:812
 #, fuzzy, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -418,14 +423,14 @@ msgstr ""
 "    -p     mostra els PID; implica -c\n"
 "    -u     mostra transicions de uid\n"
 
-#: src/pstree.c:768
+#: src/pstree.c:830
 #, fuzzy, c-format
 msgid "    -Z     show SELinux security contexts\n"
 msgstr ""
 "    -s     mostra els SID de Flask\n"
 "    -x     mostra els contextes de seguretat de Flask\n"
 
-#: src/pstree.c:771
+#: src/pstree.c:833
 #, fuzzy, c-format
 msgid ""
 "    PID    start at this PID; default is 1 (init)\n"
@@ -438,32 +443,32 @@ msgstr ""
 "    user   només mostra arbres amb arrel en processos d'aquest usuari\n"
 "\n"
 
-#: src/pstree.c:778
+#: src/pstree.c:840
 #, fuzzy, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (psmisc) %s\n"
 
-#: src/pstree.c:871
+#: src/pstree.c:933
 #, c-format
 msgid "TERM is not set\n"
 msgstr "TERM no està especificada\n"
 
-#: src/pstree.c:876
+#: src/pstree.c:938
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "No s'han pogut obtenir les capacitats\n"
 
-#: src/pstree.c:920
+#: src/pstree.c:982
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "No existeix aquest nom d'usuari: %s\n"
 
-#: src/pstree.c:936
+#: src/pstree.c:998
 #, c-format
 msgid "No processes found.\n"
 msgstr "No s'han trobat processos.\n"
 
-#: src/pstree.c:941
+#: src/pstree.c:1004
 #, c-format
 msgid "Press return to close\n"
 msgstr "Premeu retorn per a tancar\n"
@@ -472,6 +477,10 @@ msgstr "Premeu retorn per a tancar\n"
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
 msgstr "%s: senyal desconegut. «%s -l» llista els senyals.\n"
+
+#, fuzzy
+#~ msgid "Internal error: MAX_DEPTH not big enough.\n"
+#~ msgstr "MAX_DEPTH no és prou gran.\n"
 
 #~ msgid "%s: SID (%s) must be numeric\n"
 #~ msgstr "%s: el SID (%s) ha de ser numèric\n"

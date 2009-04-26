@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.6\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-11-04 17:27+1100\n"
+"POT-Creation-Date: 2009-04-26 10:22+1000\n"
 "PO-Revision-Date: 2007-11-06 17:35+0100\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -46,8 +46,8 @@ msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Zabito %s(%s%d) sygna³em %d\n"
 
 #: src/killall.c:459
-#, c-format
-msgid "%s: no process killed\n"
+#, fuzzy, c-format
+msgid "%s: no process found\n"
 msgstr "%s: nie zabito ¿adnego procesu\n"
 
 #: src/killall.c:497
@@ -73,8 +73,11 @@ msgstr ""
 
 #: src/killall.c:511
 #, c-format
-msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr "Sk³adnia: killall [-Z KONTEKST] [-u U¯YTKOWNIK] [ -eIgiqrvw ] [ -SYGNA£ ] NAZWA...\n"
+msgid ""
+"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr ""
+"Sk³adnia: killall [-Z KONTEKST] [-u U¯YTKOWNIK] [ -eIgiqrvw ] [ -SYGNA£ ] "
+"NAZWA...\n"
 
 #: src/killall.c:514
 #, c-format
@@ -103,15 +106,18 @@ msgstr ""
 "          killall -l, --list\n"
 "          killall -V --version\n"
 "\n"
-"  -e,--exact          wymaganie dok³adnego dopasowania dla bardzo d³ugich nazw\n"
-"  -I,--ignore-case    dopasowywanie nazw procesów niewra¿liwe na wielko¶æ liter\n"
+"  -e,--exact          wymaganie dok³adnego dopasowania dla bardzo d³ugich "
+"nazw\n"
+"  -I,--ignore-case    dopasowywanie nazw procesów niewra¿liwe na wielko¶æ "
+"liter\n"
 "  -g,--process-group  zabicie grupy procesów zamiast procesu\n"
 "  -i,--interactive    pytanie o potwierdzenie przed zabiciem\n"
 "  -l,--list           wypisanie wszystkich znanych nazw sygna³ów\n"
 "  -q,--quiet          nie wy¶wietlanie narzekañ\n"
 "  -r,--regexp         u¿ycie NAZWY jako rozszerzonego wyra¿enia regularnego\n"
 "  -s,--signal SYGNA£  wys³anie podanego sygna³u zamiast SIGTERM\n"
-"  -u, --user U¯YTK    zabicie tylko procesów dzia³aj±cych jako podany u¿ytkownik\n"
+"  -u, --user U¯YTK    zabicie tylko procesów dzia³aj±cych jako podany "
+"u¿ytkownik\n"
 "  -v,--verbose        informowanie czy wys³anie sygna³u siê powiod³o\n"
 "  -V,--version        wy¶wietlenie informacji o wersji\n"
 "  -w,--wait           zaczekanie na ¶mieræ procesów\n"
@@ -122,10 +128,11 @@ msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
 "                      (must precede other arguments)\n"
 msgstr ""
-"  -Z,--context REGEXP zabicie tylko procesu(ów) maj±cych dany kontekst bezp.\n"
+"  -Z,--context REGEXP zabicie tylko procesu(ów) maj±cych dany kontekst "
+"bezp.\n"
 "                        (musi poprzedzaæ inne argumenty)\n"
 
-#: src/killall.c:554 src/fuser.c:122 src/pstree.c:780
+#: src/killall.c:554 src/pstree.c:842
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -134,7 +141,7 @@ msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger i Craig Small\n"
 "\n"
 
-#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:87 src/pstree.c:782
+#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:89 src/pstree.c:844
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -157,27 +164,28 @@ msgstr "Nie mo¿na odnale¼æ u¿ytkownika %s\n"
 msgid "Maximum number of names is %d\n"
 msgstr "Maksymalna liczba nazw to %d\n"
 
-#: src/killall.c:720 src/pstree.c:710
+#: src/killall.c:720 src/pstree.c:772
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s jest pusty (nie podmontowany?)\n"
 
-#: src/fuser.c:89
-#, c-format
+#: src/fuser.c:90
+#, fuzzy, c-format
 msgid ""
-"Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
-"             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
+"Usage: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n SPACE ] [ -k [ -"
+"i ] [ -SIGNAL ]] NAME...\n"
 "       fuser -l\n"
 "       fuser -V\n"
 "Show which processes use the named files, sockets, or filesystems.\n"
 "\n"
 "    -a        display unused files too\n"
-"    -c        mounted FS\n"
+"    -c        Same as \\-m (for POSIX compatibility)\n"
 "    -f        silently ignored (for POSIX compatibility)\n"
 "    -i        ask before killing (ignored without -k)\n"
 "    -k        kill processes accessing the named file\n"
 "    -l        list available signal names\n"
-"    -m        show all processes using the named filesystems\n"
+"    -m        show all processes using the named filesystems or block "
+"device\n"
 "    -n SPACE  search in this name space (file, udp, or tcp)\n"
 "    -s        silent operation\n"
 "    -SIGNAL   send this signal instead of SIGKILL\n"
@@ -185,7 +193,8 @@ msgid ""
 "    -v        verbose output\n"
 "    -V        display version information\n"
 msgstr ""
-"Sk³adnia: fuser [ -a | -s | -c ] [ -n PRZESTRZEÑ ] [ -SYGNA£ ] [ -kimuv ] NAZWA...\n"
+"Sk³adnia: fuser [ -a | -s | -c ] [ -n PRZESTRZEÑ ] [ -SYGNA£ ] [ -kimuv ] "
+"NAZWA...\n"
 "                [ - ] [ -n PRZESTRZEÑ ] [ -SYGNA£ ] [ -kimuv ] NAZWA...\n"
 "          fuser -l\n"
 "          fuser -V\n"
@@ -232,6 +241,15 @@ msgstr ""
 #, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
+
+#: src/fuser.c:122
+#, fuzzy, c-format
+msgid ""
+"Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Copyright (C) 1993-2005 Werner Almesberger i Craig Small\n"
+"\n"
 
 #: src/fuser.c:147
 #, c-format
@@ -305,52 +323,52 @@ msgstr "%*s U¯YTKOWNIK  PID DOSTÊP POLECENIE\n"
 msgid "(unknown)"
 msgstr "(nieznany)"
 
-#: src/fuser.c:1019
+#: src/fuser.c:1021
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "Nie mo¿na wykonaæ stat na pliku %s: %s\n"
 
-#: src/fuser.c:1113
+#: src/fuser.c:1124
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "Nie mo¿na otworzyæ /proc/net/unix: %s\n"
 
-#: src/fuser.c:1149
+#: src/fuser.c:1160
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr "Nie mo¿na otworzyæ /etc/mtab: %s\n"
 
-#: src/fuser.c:1198
+#: src/fuser.c:1209
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Zabiæ proces %d? (y/N) "
 
-#: src/fuser.c:1222
+#: src/fuser.c:1233
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Nie uda³o siê zabiæ procesu %d: %s\n"
 
-#: src/fuser.c:1237
+#: src/fuser.c:1248
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Nie mo¿na otworzyæ gniazda sieciowego.\n"
 
-#: src/fuser.c:1241
+#: src/fuser.c:1252
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Nie mo¿na odnale¼æ numeru urz±dzenia gniazda.\n"
 
-#: src/peekfd.c:75
+#: src/peekfd.c:77
 #, c-format
 msgid "Error attaching to pid %i\n"
 msgstr "B³±d podczas pod³±czania do procesu %i\n"
 
-#: src/peekfd.c:83
+#: src/peekfd.c:85
 #, c-format
 msgid "peekfd (PSmisc) %s\n"
 msgstr "peekfd (PSmisc) %s\n"
 
-#: src/peekfd.c:85
+#: src/peekfd.c:87
 #, c-format
 msgid ""
 "Copyright (C) 2007 Trent Waddington\n"
@@ -359,7 +377,7 @@ msgstr ""
 "Copyright (C) 2007 Trent Waddington\n"
 "\n"
 
-#: src/peekfd.c:95
+#: src/peekfd.c:97
 #, c-format
 msgid ""
 "Usage: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
@@ -382,12 +400,7 @@ msgstr ""
 "\n"
 "  Ctrl-C koñczy wyj¶cie.\n"
 
-#: src/pstree.c:374
-#, c-format
-msgid "Internal error: MAX_DEPTH not big enough.\n"
-msgstr "B³±d wewnêtrzny: MAX_DEPTH jest zbyt ma³e.\n"
-
-#: src/pstree.c:750
+#: src/pstree.c:812
 #, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -426,12 +439,12 @@ msgstr ""
 "    -U     u¿ycie znaków ramek UTF-8 (Unicode)\n"
 "    -V     wy¶wietlenie informacji o wersji\n"
 
-#: src/pstree.c:768
+#: src/pstree.c:830
 #, c-format
 msgid "    -Z     show SELinux security contexts\n"
 msgstr "    -Z     wy¶wietlanie kontekstów bezpieczeñstwa SELinuksa\n"
 
-#: src/pstree.c:771
+#: src/pstree.c:833
 #, c-format
 msgid ""
 "    PID    start at this PID; default is 1 (init)\n"
@@ -442,32 +455,32 @@ msgstr ""
 " U¯YTKOWNIK  tylko drzewa zaczynaj±ce siê od procesów tego u¿ytkownika\n"
 "\n"
 
-#: src/pstree.c:778
+#: src/pstree.c:840
 #, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (PSmisc) %s\n"
 
-#: src/pstree.c:871
+#: src/pstree.c:933
 #, c-format
 msgid "TERM is not set\n"
 msgstr "TERM nie ustawiony\n"
 
-#: src/pstree.c:876
+#: src/pstree.c:938
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "Nie mo¿na odczytaæ mo¿liwo¶ci terminala\n"
 
-#: src/pstree.c:920
+#: src/pstree.c:982
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "Nie ma u¿ytkownika o takiej nazwie: %s\n"
 
-#: src/pstree.c:936
+#: src/pstree.c:998
 #, c-format
 msgid "No processes found.\n"
 msgstr "Nie znaleziono procesów.\n"
 
-#: src/pstree.c:941
+#: src/pstree.c:1004
 #, c-format
 msgid "Press return to close\n"
 msgstr "Naci¶niêcie return zamknie program\n"
@@ -476,3 +489,6 @@ msgstr "Naci¶niêcie return zamknie program\n"
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
 msgstr "%s: nieznany sygna³; %s -l wypisuje sygna³y.\n"
+
+#~ msgid "Internal error: MAX_DEPTH not big enough.\n"
+#~ msgstr "B³±d wewnêtrzny: MAX_DEPTH jest zbyt ma³e.\n"

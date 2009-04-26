@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.6\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-11-04 17:27+1100\n"
+"POT-Creation-Date: 2009-04-26 10:22+1000\n"
 "PO-Revision-Date: 2007-11-06 21:28+0800\n"
 "Last-Translator: LI Daobing <lidaobing@gmail.com>\n"
-"Language-Team: Chinese (simplified) <translation-team-zh-cn@lists.sourceforge.net>\n"
+"Language-Team: Chinese (simplified) <translation-team-zh-cn@lists."
+"sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,8 +48,8 @@ msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "%s(%s%d) 被信号 %d 杀死\n"
 
 #: src/killall.c:459
-#, c-format
-msgid "%s: no process killed\n"
+#, fuzzy, c-format
+msgid "%s: no process found\n"
 msgstr "%s: 没有进程被杀死\n"
 
 #: src/killall.c:497
@@ -74,8 +75,10 @@ msgstr ""
 
 #: src/killall.c:511
 #, c-format
-msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr "Usage: killall [-Z 上下文] [-u 用户名] [ -eIgiqrvw ] [ -信号 ] 程序名...\n"
+msgid ""
+"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr ""
+"Usage: killall [-Z 上下文] [-u 用户名] [ -eIgiqrvw ] [ -信号 ] 程序名...\n"
 
 #: src/killall.c:514
 #, c-format
@@ -126,7 +129,7 @@ msgstr ""
 "  -Z,--context 正则表达式 仅杀死含有指定上下文的进程\n"
 "                          (必须在其他参数前使用)\n"
 
-#: src/killall.c:554 src/fuser.c:122 src/pstree.c:780
+#: src/killall.c:554 src/pstree.c:842
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -135,7 +138,7 @@ msgstr ""
 "版权所有 © 1993-2005 Werner Almesberger 和 Craig Small\n"
 "\n"
 
-#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:87 src/pstree.c:782
+#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:89 src/pstree.c:844
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -157,27 +160,28 @@ msgstr "无法找到用户 %s\n"
 msgid "Maximum number of names is %d\n"
 msgstr "最大名字数量是 %d\n"
 
-#: src/killall.c:720 src/pstree.c:710
+#: src/killall.c:720 src/pstree.c:772
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s 是空的 (未挂载?)\n"
 
-#: src/fuser.c:89
-#, c-format
+#: src/fuser.c:90
+#, fuzzy, c-format
 msgid ""
-"Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
-"             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
+"Usage: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n SPACE ] [ -k [ -"
+"i ] [ -SIGNAL ]] NAME...\n"
 "       fuser -l\n"
 "       fuser -V\n"
 "Show which processes use the named files, sockets, or filesystems.\n"
 "\n"
 "    -a        display unused files too\n"
-"    -c        mounted FS\n"
+"    -c        Same as \\-m (for POSIX compatibility)\n"
 "    -f        silently ignored (for POSIX compatibility)\n"
 "    -i        ask before killing (ignored without -k)\n"
 "    -k        kill processes accessing the named file\n"
 "    -l        list available signal names\n"
-"    -m        show all processes using the named filesystems\n"
+"    -m        show all processes using the named filesystems or block "
+"device\n"
 "    -n SPACE  search in this name space (file, udp, or tcp)\n"
 "    -s        silent operation\n"
 "    -SIGNAL   send this signal instead of SIGKILL\n"
@@ -231,6 +235,15 @@ msgstr ""
 #, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
+
+#: src/fuser.c:122
+#, fuzzy, c-format
+msgid ""
+"Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"版权所有 © 1993-2005 Werner Almesberger 和 Craig Small\n"
+"\n"
 
 #: src/fuser.c:147
 #, c-format
@@ -304,52 +317,52 @@ msgstr "%*s 用户     进程号 权限   命令\n"
 msgid "(unknown)"
 msgstr "(未知)"
 
-#: src/fuser.c:1019
+#: src/fuser.c:1021
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "无法获取 %s 的文件状态: %s\n"
 
-#: src/fuser.c:1113
+#: src/fuser.c:1124
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "无法打开 /proc/net/unix: %s\n"
 
-#: src/fuser.c:1149
+#: src/fuser.c:1160
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr "无法打开 /etc/mtab: %s\n"
 
-#: src/fuser.c:1198
+#: src/fuser.c:1209
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "杀死进程 %d ? (y/N) "
 
-#: src/fuser.c:1222
+#: src/fuser.c:1233
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "无法杀死进程 %d: %s\n"
 
-#: src/fuser.c:1237
+#: src/fuser.c:1248
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "无法打开网络端口。\n"
 
-#: src/fuser.c:1241
+#: src/fuser.c:1252
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "无法找到 socket 的设备号。\n"
 
-#: src/peekfd.c:75
+#: src/peekfd.c:77
 #, c-format
 msgid "Error attaching to pid %i\n"
 msgstr "帮定%i号进程时发生错误\n"
 
-#: src/peekfd.c:83
+#: src/peekfd.c:85
 #, c-format
 msgid "peekfd (PSmisc) %s\n"
 msgstr "peekfd (PSmisc) %s\n"
 
-#: src/peekfd.c:85
+#: src/peekfd.c:87
 #, c-format
 msgid ""
 "Copyright (C) 2007 Trent Waddington\n"
@@ -358,7 +371,7 @@ msgstr ""
 "版权所有 © 2007 Trent Waddington\n"
 "\n"
 
-#: src/peekfd.c:95
+#: src/peekfd.c:97
 #, c-format
 msgid ""
 "Usage: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
@@ -381,12 +394,7 @@ msgstr ""
 "\n"
 "  输入 CTRL-C 来终止输出。\n"
 
-#: src/pstree.c:374
-#, c-format
-msgid "Internal error: MAX_DEPTH not big enough.\n"
-msgstr "内部错误: MAX_DEPTH 不够大。\n"
-
-#: src/pstree.c:750
+#: src/pstree.c:812
 #, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -425,12 +433,12 @@ msgstr ""
 "    -U        使用 UTF-8 (Unicode) 划线符\n"
 "    -V        显示版本信息\n"
 
-#: src/pstree.c:768
+#: src/pstree.c:830
 #, c-format
 msgid "    -Z     show SELinux security contexts\n"
 msgstr "    -Z     显示 SELinux 安全环境\n"
 
-#: src/pstree.c:771
+#: src/pstree.c:833
 #, c-format
 msgid ""
 "    PID    start at this PID; default is 1 (init)\n"
@@ -441,32 +449,32 @@ msgstr ""
 "    用户      仅显示从该 \"用户\" 的进程开始的进程树\n"
 "\n"
 
-#: src/pstree.c:778
+#: src/pstree.c:840
 #, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (PSmisc) %s\n"
 
-#: src/pstree.c:871
+#: src/pstree.c:933
 #, c-format
 msgid "TERM is not set\n"
 msgstr "未设置环境变量TERM\n"
 
-#: src/pstree.c:876
+#: src/pstree.c:938
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "无法获取终端大小\n"
 
-#: src/pstree.c:920
+#: src/pstree.c:982
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "无用户名: %s\n"
 
-#: src/pstree.c:936
+#: src/pstree.c:998
 #, c-format
 msgid "No processes found.\n"
 msgstr "未发现进程。\n"
 
-#: src/pstree.c:941
+#: src/pstree.c:1004
 #, c-format
 msgid "Press return to close\n"
 msgstr "按回车后关闭\n"
@@ -475,3 +483,6 @@ msgstr "按回车后关闭\n"
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
 msgstr "%s: 未知的信号; %s -l 显示信号列表。\n"
+
+#~ msgid "Internal error: MAX_DEPTH not big enough.\n"
+#~ msgstr "内部错误: MAX_DEPTH 不够大。\n"

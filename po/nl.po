@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc-22.6\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-11-04 17:27+1100\n"
+"POT-Creation-Date: 2009-04-26 10:22+1000\n"
 "PO-Revision-Date: 2007-11-06 14:36+0100\n"
 "Last-Translator: Benno Schulenberg <benno@vertaalt.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -47,8 +47,8 @@ msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Proces %s(%s%d) is afgebroken met signaal %d\n"
 
 #: src/killall.c:459
-#, c-format
-msgid "%s: no process killed\n"
+#, fuzzy, c-format
+msgid "%s: no process found\n"
 msgstr "%s: er is geen proces afgebroken\n"
 
 #: src/killall.c:497
@@ -74,8 +74,11 @@ msgstr ""
 
 #: src/killall.c:511
 #, c-format
-msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr "Gebruik:  killall [-Z CONTEXT] [-egIiqrvw] [-SIGNAAL] [-u GEBRUIKER] NAAM...\n"
+msgid ""
+"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr ""
+"Gebruik:  killall [-Z CONTEXT] [-egIiqrvw] [-SIGNAAL] [-u GEBRUIKER] "
+"NAAM...\n"
 
 #: src/killall.c:514
 #, c-format
@@ -127,7 +130,7 @@ msgstr ""
 "  -Z,--context REGEXP alleen processen met deze context afbreken\n"
 "                      (dient aan andere argumenten vooraf te gaan)\n"
 
-#: src/killall.c:554 src/fuser.c:122 src/pstree.c:780
+#: src/killall.c:554 src/pstree.c:842
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -136,7 +139,7 @@ msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 
-#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:87 src/pstree.c:782
+#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:89 src/pstree.c:844
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -159,27 +162,28 @@ msgstr "Kan gebruiker %s niet vinden\n"
 msgid "Maximum number of names is %d\n"
 msgstr "Het maximum aantal namen is %d\n"
 
-#: src/killall.c:720 src/pstree.c:710
+#: src/killall.c:720 src/pstree.c:772
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s is leeg -- niet aangekoppeld?\n"
 
-#: src/fuser.c:89
-#, c-format
+#: src/fuser.c:90
+#, fuzzy, c-format
 msgid ""
-"Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
-"             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
+"Usage: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n SPACE ] [ -k [ -"
+"i ] [ -SIGNAL ]] NAME...\n"
 "       fuser -l\n"
 "       fuser -V\n"
 "Show which processes use the named files, sockets, or filesystems.\n"
 "\n"
 "    -a        display unused files too\n"
-"    -c        mounted FS\n"
+"    -c        Same as \\-m (for POSIX compatibility)\n"
 "    -f        silently ignored (for POSIX compatibility)\n"
 "    -i        ask before killing (ignored without -k)\n"
 "    -k        kill processes accessing the named file\n"
 "    -l        list available signal names\n"
-"    -m        show all processes using the named filesystems\n"
+"    -m        show all processes using the named filesystems or block "
+"device\n"
 "    -n SPACE  search in this name space (file, udp, or tcp)\n"
 "    -s        silent operation\n"
 "    -SIGNAL   send this signal instead of SIGKILL\n"
@@ -207,7 +211,8 @@ msgstr ""
 "    -u         de gebruiker-IDs tonen\n"
 "    -V         de programmaversie tonen\n"
 "    -v         breedsprakige uitvoer produceren\n"
-"    -SIGNAAL   dit signaal sturen in plaats van KILL (zie -l voor een lijst)\n"
+"    -SIGNAAL   dit signaal sturen in plaats van KILL (zie -l voor een "
+"lijst)\n"
 
 #: src/fuser.c:109
 #, c-format
@@ -235,6 +240,15 @@ msgstr ""
 #, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
+
+#: src/fuser.c:122
+#, fuzzy, c-format
+msgid ""
+"Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
+"\n"
 
 #: src/fuser.c:147
 #, c-format
@@ -308,52 +322,52 @@ msgstr "%*s GEBRUIKER   PID SOORT PROGRAMMA\n"
 msgid "(unknown)"
 msgstr "(onbekend)"
 
-#: src/fuser.c:1019
+#: src/fuser.c:1021
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "Kan status van bestand %s niet bepalen: %s\n"
 
-#: src/fuser.c:1113
+#: src/fuser.c:1124
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "Kan /proc/net/unix niet openen: %s\n"
 
-#: src/fuser.c:1149
+#: src/fuser.c:1160
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr "Kan /etc/mtab niet openen: %s\n"
 
-#: src/fuser.c:1198
+#: src/fuser.c:1209
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Proces %d afbreken? (j/N) "
 
-#: src/fuser.c:1222
+#: src/fuser.c:1233
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Kan proces %d niet afbreken: %s\n"
 
-#: src/fuser.c:1237
+#: src/fuser.c:1248
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Kan netwerk-socket niet openen.\n"
 
-#: src/fuser.c:1241
+#: src/fuser.c:1252
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Kan apparaatnummer van socket niet vinden.\n"
 
-#: src/peekfd.c:75
+#: src/peekfd.c:77
 #, c-format
 msgid "Error attaching to pid %i\n"
 msgstr "Fout tijdens aanhechten aan PID %i\n"
 
-#: src/peekfd.c:83
+#: src/peekfd.c:85
 #, c-format
 msgid "peekfd (PSmisc) %s\n"
 msgstr "peekfd (PSmisc) %s\n"
 
-#: src/peekfd.c:85
+#: src/peekfd.c:87
 #, c-format
 msgid ""
 "Copyright (C) 2007 Trent Waddington\n"
@@ -362,7 +376,7 @@ msgstr ""
 "Copyright (C) 2007 Trent Waddington\n"
 "\n"
 
-#: src/peekfd.c:95
+#: src/peekfd.c:97
 #, c-format
 msgid ""
 "Usage: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
@@ -386,12 +400,7 @@ msgstr ""
 "\n"
 "Typ Ctrl-C om het programma te stoppen.\n"
 
-#: src/pstree.c:374
-#, c-format
-msgid "Internal error: MAX_DEPTH not big enough.\n"
-msgstr "**Interne fout**: MAX_DEPTH is niet groot genoeg.\n"
-
-#: src/pstree.c:750
+#: src/pstree.c:812
 #, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -430,12 +439,12 @@ msgstr ""
 "    -u      UID-overgangen tonen\n"
 "    -V      de programmaversie tonen\n"
 
-#: src/pstree.c:768
+#: src/pstree.c:830
 #, c-format
 msgid "    -Z     show SELinux security contexts\n"
 msgstr "    -Z      SELinux-veiligheidscontexten tonen\n"
 
-#: src/pstree.c:771
+#: src/pstree.c:833
 #, c-format
 msgid ""
 "    PID    start at this PID; default is 1 (init)\n"
@@ -443,35 +452,36 @@ msgid ""
 "\n"
 msgstr ""
 "    PID     bij dit proces-ID beginnen; standaard is 1 (init)\n"
-"    NAAM    alleen de bomen tonen die beginnen bij processen van deze gebruiker\n"
+"    NAAM    alleen de bomen tonen die beginnen bij processen van deze "
+"gebruiker\n"
 "\n"
 
-#: src/pstree.c:778
+#: src/pstree.c:840
 #, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (PSmisc) %s\n"
 
-#: src/pstree.c:871
+#: src/pstree.c:933
 #, c-format
 msgid "TERM is not set\n"
 msgstr "omgevingsvariabele TERM heeft geen waarde\n"
 
-#: src/pstree.c:876
+#: src/pstree.c:938
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "Kan terminalcapaciteiten niet bepalen\n"
 
-#: src/pstree.c:920
+#: src/pstree.c:982
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "Geen bestaande gebruikersnaam: %s\n"
 
-#: src/pstree.c:936
+#: src/pstree.c:998
 #, c-format
 msgid "No processes found.\n"
 msgstr "Geen processen gevonden.\n"
 
-#: src/pstree.c:941
+#: src/pstree.c:1004
 #, c-format
 msgid "Press return to close\n"
 msgstr "Druk op Enter om af te sluiten\n"
@@ -479,4 +489,8 @@ msgstr "Druk op Enter om af te sluiten\n"
 #: src/signals.c:84
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
-msgstr "Onbekend signaal: %s -- '%s -l' toont een lijst van mogelijke signalen\n"
+msgstr ""
+"Onbekend signaal: %s -- '%s -l' toont een lijst van mogelijke signalen\n"
+
+#~ msgid "Internal error: MAX_DEPTH not big enough.\n"
+#~ msgstr "**Interne fout**: MAX_DEPTH is niet groot genoeg.\n"

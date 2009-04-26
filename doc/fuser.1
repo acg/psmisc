@@ -1,4 +1,4 @@
-.TH FUSER 1 2009-01-14 "Linux" "User Commands"
+.TH FUSER 1 2009-04-26 "Linux" "User Commands"
 .SH NAME
 fuser \- identify processes using files or sockets
 .SH SYNOPSIS
@@ -11,7 +11,7 @@ fuser \- identify processes using files or sockets
 .IR space\  ]
 .RB [ \-k
 .RB [ \-i ]
-.RB [ \- \fIsignal
+.RB [ \- \fISIGNAL
 ] ]
 .IR name " ..."
 .br
@@ -67,7 +67,7 @@ Same as \-m option, used for POSIX compatibility.
 .IP \fB\-f\fP
 Silently ignored, used for POSIX compatibility.
 .IP \fB\-k\fP
-Kill processes accessing the file. Unless changed with \fB\-\fP\fIsignal\fP,
+Kill processes accessing the file. Unless changed with \fB\-\fP\fISIGNAL\fP,
 SIGKILL is sent. An \fBfuser\fP process never kills itself, but may kill
 other \fBfuser\fP processes. The effective user ID of the process executing
 \fBfuser\fP is set to its real user ID before attempting to kill.
@@ -91,7 +91,7 @@ specified. If there is no ambiguity, the shortcut notation
 .IP \fB\-s\fP
 Silent operation. \fB\-u\fP and \fB\-v\fP are ignored in this mode.
 \fB\-a\fP must not be used with \fB\-s\fP.
-.IP \fB\-\fIsignal\fP
+.IP \fB\-\fISIGNAL\fP
 Use the specified signal instead of SIGKILL when killing processes. Signals
 can be specified either by name (e.g. \fB\-HUP\fP) or by number
 (e.g. \fB\-1\fP). This option is silently ignored if the \fB\-k\fP option
@@ -170,5 +170,5 @@ Werner Almesberger <werner@almesberger.net>
 .PP
 Craig Small <csmall@small.dropbear.id.au>
 .SH "SEE ALSO"
-.BR kill "(1), " killall "(1), " lsof "(8), " ps "(1), " kill (2).
+.BR kill "(1), " killall "(1), " lsof "(8), " pkill "(1), " ps "(1), " kill (2).
 .\"{{{}}}
