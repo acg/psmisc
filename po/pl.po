@@ -1,14 +1,14 @@
 # Polish translations for psmisc.
-# Copyright (C) 2004, 2005, 2007 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2005, 2007, 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the psmisc package.
-# Jakub Bogusz <qboosh@pld-linux.org>, 2003-2007.
+# Jakub Bogusz <qboosh@pld-linux.org>, 2003-2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 22.6\n"
+"Project-Id-Version: psmisc 22.7rc1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
 "POT-Creation-Date: 2009-04-26 10:22+1000\n"
-"PO-Revision-Date: 2007-11-06 17:35+0100\n"
+"PO-Revision-Date: 2009-04-27 17:51+0200\n"
 "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -46,9 +46,9 @@ msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Zabito %s(%s%d) sygna³em %d\n"
 
 #: src/killall.c:459
-#, fuzzy, c-format
+#, c-format
 msgid "%s: no process found\n"
-msgstr "%s: nie zabito ¿adnego procesu\n"
+msgstr "%s: nie znaleziono ¿adnego procesu\n"
 
 #: src/killall.c:497
 #, c-format
@@ -73,11 +73,8 @@ msgstr ""
 
 #: src/killall.c:511
 #, c-format
-msgid ""
-"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr ""
-"Sk³adnia: killall [-Z KONTEKST] [-u U¯YTKOWNIK] [ -eIgiqrvw ] [ -SYGNA£ ] "
-"NAZWA...\n"
+msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr "Sk³adnia: killall [-Z KONTEKST] [-u U¯YTKOWNIK] [ -eIgiqrvw ] [ -SYGNA£ ] NAZWA...\n"
 
 #: src/killall.c:514
 #, c-format
@@ -106,18 +103,15 @@ msgstr ""
 "          killall -l, --list\n"
 "          killall -V --version\n"
 "\n"
-"  -e,--exact          wymaganie dok³adnego dopasowania dla bardzo d³ugich "
-"nazw\n"
-"  -I,--ignore-case    dopasowywanie nazw procesów niewra¿liwe na wielko¶æ "
-"liter\n"
+"  -e,--exact          wymaganie dok³adnego dopasowania dla bardzo d³ugich nazw\n"
+"  -I,--ignore-case    dopasowywanie nazw procesów niewra¿liwe na wielko¶æ liter\n"
 "  -g,--process-group  zabicie grupy procesów zamiast procesu\n"
 "  -i,--interactive    pytanie o potwierdzenie przed zabiciem\n"
 "  -l,--list           wypisanie wszystkich znanych nazw sygna³ów\n"
 "  -q,--quiet          nie wy¶wietlanie narzekañ\n"
 "  -r,--regexp         u¿ycie NAZWY jako rozszerzonego wyra¿enia regularnego\n"
 "  -s,--signal SYGNA£  wys³anie podanego sygna³u zamiast SIGTERM\n"
-"  -u, --user U¯YTK    zabicie tylko procesów dzia³aj±cych jako podany "
-"u¿ytkownik\n"
+"  -u, --user U¯YTK    zabicie tylko procesów dzia³aj±cych jako podany u¿ytkownik\n"
 "  -v,--verbose        informowanie czy wys³anie sygna³u siê powiod³o\n"
 "  -V,--version        wy¶wietlenie informacji o wersji\n"
 "  -w,--wait           zaczekanie na ¶mieræ procesów\n"
@@ -128,8 +122,7 @@ msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
 "                      (must precede other arguments)\n"
 msgstr ""
-"  -Z,--context REGEXP zabicie tylko procesu(ów) maj±cych dany kontekst "
-"bezp.\n"
+"  -Z,--context REGEXP zabicie tylko procesu(ów) maj±cych dany kontekst bezp.\n"
 "                        (musi poprzedzaæ inne argumenty)\n"
 
 #: src/killall.c:554 src/pstree.c:842
@@ -170,10 +163,9 @@ msgid "%s is empty (not mounted ?)\n"
 msgstr "%s jest pusty (nie podmontowany?)\n"
 
 #: src/fuser.c:90
-#, fuzzy, c-format
+#, c-format
 msgid ""
-"Usage: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n SPACE ] [ -k [ -"
-"i ] [ -SIGNAL ]] NAME...\n"
+"Usage: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n SPACE ] [ -k [ -i ] [ -SIGNAL ]] NAME...\n"
 "       fuser -l\n"
 "       fuser -V\n"
 "Show which processes use the named files, sockets, or filesystems.\n"
@@ -184,8 +176,7 @@ msgid ""
 "    -i        ask before killing (ignored without -k)\n"
 "    -k        kill processes accessing the named file\n"
 "    -l        list available signal names\n"
-"    -m        show all processes using the named filesystems or block "
-"device\n"
+"    -m        show all processes using the named filesystems or block device\n"
 "    -n SPACE  search in this name space (file, udp, or tcp)\n"
 "    -s        silent operation\n"
 "    -SIGNAL   send this signal instead of SIGKILL\n"
@@ -193,9 +184,7 @@ msgid ""
 "    -v        verbose output\n"
 "    -V        display version information\n"
 msgstr ""
-"Sk³adnia: fuser [ -a | -s | -c ] [ -n PRZESTRZEÑ ] [ -SYGNA£ ] [ -kimuv ] "
-"NAZWA...\n"
-"                [ - ] [ -n PRZESTRZEÑ ] [ -SYGNA£ ] [ -kimuv ] NAZWA...\n"
+"Sk³adnia: fuser [-fuv] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n PRZESTRZEÑ ] [ -k [ -i ] [ -SYGNA£ ]] NAZWA...\n"
 "          fuser -l\n"
 "          fuser -V\n"
 "Pokazywanie, które procesy u¿ywaj± plików, gniazd lub systemów plików\n"
@@ -243,12 +232,12 @@ msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
 
 #: src/fuser.c:122
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
-"Copyright (C) 1993-2005 Werner Almesberger i Craig Small\n"
+"Copyright (C) 1993-2009 Werner Almesberger i Craig Small\n"
 "\n"
 
 #: src/fuser.c:147
@@ -489,6 +478,3 @@ msgstr "Naci¶niêcie return zamknie program\n"
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
 msgstr "%s: nieznany sygna³; %s -l wypisuje sygna³y.\n"
-
-#~ msgid "Internal error: MAX_DEPTH not big enough.\n"
-#~ msgstr "B³±d wewnêtrzny: MAX_DEPTH jest zbyt ma³e.\n"

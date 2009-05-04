@@ -1,14 +1,14 @@
 # Pesan bahasa indonesia untuk psmisc.
 # Copyright (C) 2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the psmisc package.
-# Arif E. Nugroho <arif_endro@yahoo.com>, 2008.
+# Arif E. Nugroho <arif_endro@yahoo.com>, 2008, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 22.6\n"
+"Project-Id-Version: psmisc 22.7rc1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2007-11-04 17:27+1100\n"
-"PO-Revision-Date: 2008-11-10 08:30+0700\n"
+"POT-Creation-Date: 2009-04-26 10:22+1000\n"
+"PO-Revision-Date: 2009-04-29 12:00+0700\n"
 "Last-Translator: Arif E. Nugroho <arif_endro@yahoo.com>\n"
 "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -47,8 +47,8 @@ msgstr "Terbunuh %s(%s%d) dengan sinyal %d\n"
 
 #: src/killall.c:459
 #, c-format
-msgid "%s: no process killed\n"
-msgstr "%s: tidak ada proses terbunuh\n"
+msgid "%s: no process found\n"
+msgstr "%s: tidak ada proses yang ditemukan\n"
 
 #: src/killall.c:497
 #, c-format
@@ -125,7 +125,7 @@ msgstr ""
 "  -Z,--context REGEXP hanya bunuh proses yang memiliki konteks\n"
 "                      (harus diawali dengan argumen lain)\n"
 
-#: src/killall.c:554 src/fuser.c:122 src/pstree.c:780
+#: src/killall.c:554 src/pstree.c:842
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -134,7 +134,7 @@ msgstr ""
 "Hak Cipta (C) 1993-2005 Werner Almesberger dan Craid Small\n"
 "\n"
 
-#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:87 src/pstree.c:782
+#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:89 src/pstree.c:844
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -157,27 +157,26 @@ msgstr "Tidak dapat menemukan pengguna %s\n"
 msgid "Maximum number of names is %d\n"
 msgstr "Jumlah maksimal dari nama adalah %d\n"
 
-#: src/killall.c:720 src/pstree.c:710
+#: src/killall.c:720 src/pstree.c:772
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s adalah kosong (belum dimount ?)\n"
 
-#: src/fuser.c:89
+#: src/fuser.c:90
 #, c-format
 msgid ""
-"Usage: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
-"             [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAME...\n"
+"Usage: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n SPACE ] [ -k [ -i ] [ -SIGNAL ]] NAME...\n"
 "       fuser -l\n"
 "       fuser -V\n"
 "Show which processes use the named files, sockets, or filesystems.\n"
 "\n"
 "    -a        display unused files too\n"
-"    -c        mounted FS\n"
+"    -c        Same as \\-m (for POSIX compatibility)\n"
 "    -f        silently ignored (for POSIX compatibility)\n"
 "    -i        ask before killing (ignored without -k)\n"
 "    -k        kill processes accessing the named file\n"
 "    -l        list available signal names\n"
-"    -m        show all processes using the named filesystems\n"
+"    -m        show all processes using the named filesystems or block device\n"
 "    -n SPACE  search in this name space (file, udp, or tcp)\n"
 "    -s        silent operation\n"
 "    -SIGNAL   send this signal instead of SIGKILL\n"
@@ -185,24 +184,23 @@ msgid ""
 "    -v        verbose output\n"
 "    -V        display version information\n"
 msgstr ""
-"Penggunaan: fuser [ -a | -s | -c ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAMA...\n"
-"                  [ - ] [ -n SPACE ] [ -SIGNAL ] [ -kimuv ] NAMA...\n"
+"Penggunaan: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n RUANG ] [ -k [ -i ] [ -SIGNAL ]] NAMA...\n"
 "            fuser -l\n"
 "            fuser -V\n"
 "Tampilkan proses yang menggunakan nama berkas, socket, atau sistem berkas.\n"
 "\n"
 "    -a        tampilkan berkas yang tidak digunakan juga\n"
-"    -c        mounted FS\n"
+"    -c        sama seperti \\-m (untuk kompabilitas POSIX)\n"
 "    -f        secara diam diabaikan (untuk kompabilitas POSIX)\n"
 "    -i        tanya sebelum membunuh (abaikan tanpa -k)\n"
 "    -k        bunuh proses yang mengakses berkas bernama\n"
 "    -l        daftar nama sinyal yang tersedia\n"
 "    -m        tampilkan seluruh proses menggunakan sistem berkas bernama\n"
-"    -n SPACE  cari di ruang nama ini (berkas, udp, atau tcp)\n"
+"    -n RUANG  cari di ruang nama ini (berkas, udp, atau tcp)\n"
 "    -s        beroperasi secara sunyi\n"
 "    -SIGNAL   kirim sinyal ini daripada SIGKILL\n"
 "    -u        tampilkan ID pengguna\n"
-"    -v        keluaran verbose\n"
+"    -v        keluaran ramai\n"
 "    -V        tampilkan informasi versi\n"
 
 #: src/fuser.c:109
@@ -231,6 +229,15 @@ msgstr ""
 #, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
+
+#: src/fuser.c:122
+#, c-format
+msgid ""
+"Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Hak Cipta (C) 1993-2009 Werner Almesberger dan Craid Small\n"
+"\n"
 
 #: src/fuser.c:147
 #, c-format
@@ -304,52 +311,52 @@ msgstr "%*s PENGGUNA    PID AKSES  PERINTAH\n"
 msgid "(unknown)"
 msgstr "(tidak diketahui)"
 
-#: src/fuser.c:1019
+#: src/fuser.c:1021
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "Tidak dapat memperoleh statistik berkas %s: %s\n"
 
-#: src/fuser.c:1113
+#: src/fuser.c:1124
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "Tidak dapat membuka /proc/net/unix: %s\n"
 
-#: src/fuser.c:1149
+#: src/fuser.c:1160
 #, c-format
 msgid "Cannot open /etc/mtab: %s\n"
 msgstr "Tidak dapat membuka /etc/mtab: %s\n"
 
-#: src/fuser.c:1198
+#: src/fuser.c:1209
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Bunuh proses %d ? (y/N) "
 
-#: src/fuser.c:1222
+#: src/fuser.c:1233
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Tidak dapat membunuh proses %d: %s\n"
 
-#: src/fuser.c:1237
+#: src/fuser.c:1248
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Tidak dapat membuka sebuah socket network.\n"
 
-#: src/fuser.c:1241
+#: src/fuser.c:1252
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Tidak dapat menemukan nomor perangkat socket.\n"
 
-#: src/peekfd.c:75
+#: src/peekfd.c:77
 #, c-format
 msgid "Error attaching to pid %i\n"
 msgstr "Error mengattach ke pid %i\n"
 
-#: src/peekfd.c:83
+#: src/peekfd.c:85
 #, c-format
 msgid "peekfd (PSmisc) %s\n"
 msgstr "peekfd (PSmisc) %s\n"
 
-#: src/peekfd.c:85
+#: src/peekfd.c:87
 #, c-format
 msgid ""
 "Copyright (C) 2007 Trent Waddington\n"
@@ -358,7 +365,7 @@ msgstr ""
 "Hak Cipta (C) 2008 Trent Waddington\n"
 "\n"
 
-#: src/peekfd.c:95
+#: src/peekfd.c:97
 #, c-format
 msgid ""
 "Usage: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
@@ -381,12 +388,7 @@ msgstr ""
 "\n"
 "  Tekan CTRL-C untuk mengakhiri keluaran.\n"
 
-#: src/pstree.c:374
-#, c-format
-msgid "Internal error: MAX_DEPTH not big enough.\n"
-msgstr "Internal error: MAX_DEPTH tidak cukup besar.\n"
-
-#: src/pstree.c:750
+#: src/pstree.c:812
 #, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -425,12 +427,12 @@ msgstr ""
 "    -U     gunakan UTF-8 (Unicode) baris karakter gambar\n"
 "    -V     tampilkan informasi versi\n"
 
-#: src/pstree.c:768
+#: src/pstree.c:830
 #, c-format
 msgid "    -Z     show SELinux security contexts\n"
 msgstr "    -Z     tampilkan konteks keamanan SELinux\n"
 
-#: src/pstree.c:771
+#: src/pstree.c:833
 #, c-format
 msgid ""
 "    PID    start at this PID; default is 1 (init)\n"
@@ -441,32 +443,32 @@ msgstr ""
 "    PENGGUNA tampilkan hanya pohon yang berakar dari proses pengguna ini\n"
 "\n"
 
-#: src/pstree.c:778
+#: src/pstree.c:840
 #, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (PSmisc) %s\n"
 
-#: src/pstree.c:871
+#: src/pstree.c:933
 #, c-format
 msgid "TERM is not set\n"
 msgstr "TERM tidak diset\n"
 
-#: src/pstree.c:876
+#: src/pstree.c:938
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "Tidka dapat memperoleh kapabilitas terminal\n"
 
-#: src/pstree.c:920
+#: src/pstree.c:982
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "Tidak ada nama pengguna seperti itu: %s\n"
 
-#: src/pstree.c:936
+#: src/pstree.c:998
 #, c-format
 msgid "No processes found.\n"
 msgstr "Tidak ada proses yang ditemukan.\n"
 
-#: src/pstree.c:941
+#: src/pstree.c:1004
 #, c-format
 msgid "Press return to close\n"
 msgstr "Tekan Enter untuk menutup\n"
@@ -475,3 +477,6 @@ msgstr "Tekan Enter untuk menutup\n"
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
 msgstr "%s: sinyal tidak diketahui; %s -l daftar sinyal.\n"
+
+#~ msgid "Internal error: MAX_DEPTH not big enough.\n"
+#~ msgstr "Internal error: MAX_DEPTH tidak cukup besar.\n"

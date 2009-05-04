@@ -1,5 +1,8 @@
 Changes in ??
 = =============
+2009-05-04 Craig Small
+	* Updated Polish, Russian, Swedish and Indonesian PO files
+
 2009-04-26 Craig Small
 	* Changed fuser.1 so signal is SIGNAL to reduce confusion about wether
 	  or not it is a parameter Debian #517413
