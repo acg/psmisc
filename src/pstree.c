@@ -749,6 +749,9 @@ read_proc (void)
 			exit (1);
 		      }
 		    (void) close (fd);
+			/* If we have read the maximum screen length of args, bring it back by one to stop overflow */
+			if (size >= buffer_size)
+			  size--;
 		    if (size)
 		      buffer[size++] = 0;
 #ifdef WITH_SELINUX

@@ -1,3 +1,8 @@
+Changes in 22.8
+===============
+2009-06-09 Craig Small
+	* Fixed pstree -a off-by-one error in buffer, Debian #536243
+
 Changes in 22.7
 ===============
 2009-05-04 Craig Small
