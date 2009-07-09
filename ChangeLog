@@ -2,6 +2,7 @@ Changes in 22.8
 ===============
 2009-06-09 Craig Small
 	* Fixed pstree -a off-by-one error in buffer, Debian #536243
+	* Changed configure.ac to not use CXX SF# 2789801
 
 Changes in 22.7
 ===============

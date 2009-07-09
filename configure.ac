@@ -7,9 +7,7 @@ AC_CONFIG_AUX_DIR([config])
 AM_INIT_AUTOMAKE([1.10])
 
 dnl Checks for programs.
-AC_PROG_CXX
 AC_PROG_CC
-#AC_PROG_CPP
 AC_PROG_MAKE_SET
 AC_PROG_LN_S
 
