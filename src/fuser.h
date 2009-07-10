@@ -11,22 +11,29 @@ typedef unsigned char opt_type;
 #define OPT_USER 64
 #define OPT_MOUNTPOINT 128
 
-
 struct procs {
 	pid_t pid;
 	uid_t uid;
 	char access;
+	char proc_type;
 	char *username;
 	char *command;
 	struct procs *next;
 };
 
+/* For the access field above */
 #define ACCESS_CWD 1
 #define ACCESS_EXE 2
 #define ACCESS_FILE 4
 #define ACCESS_ROOT 8
 #define ACCESS_MMAP 16
 #define ACCESS_FILEWR 32
+
+/* For the proc_type field above */
+#define PTYPE_NORMAL 0
+#define PTYPE_MOUNT 1
+#define PTYPE_KNFSD 2
+#define PTYPE_SWAP 3
 
 struct names {
 	char *filename;
@@ -58,14 +65,6 @@ struct inode_list {
 	struct inode_list *next;
 };
 
-struct mountdev_list {
-	char *fsname;
-	char *dir;
-	dev_t	device;
-	struct mountdev_list *next;
-};
-
-
 struct device_list {
 	struct names *name;
 	dev_t	device;
@@ -88,3 +87,5 @@ struct unixsocket_list {
 #define MAX_CMDNAME 16
 
 #define KNFSD_EXPORTS "/proc/fs/nfs/exports"
+#define PROC_MOUNTS "/proc/mounts"
+#define PROC_SWAPS "/proc/swaps"

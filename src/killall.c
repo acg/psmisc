@@ -371,9 +371,21 @@ kill_all (int signal, int names, char **namelist, struct passwd *pwent)
 		             continue;
 		        }
 		    }
-	          else if (got_long ? strcmp (namelist[j], command) :
-		                      strncmp (namelist[j], comm, COMM_LEN - 1))
-		    continue;
+	          else
+	            {
+	              if (ignore_case == 1)
+	                {
+	                  if (got_long ? strcasecmp (namelist[j], command) :
+	                                 strncasecmp (namelist[j], comm, COMM_LEN - 1))
+	                     continue;
+	                }
+	              else
+	                {
+	                  if (got_long ? strcmp (namelist[j], command) :
+	                                 strncmp (namelist[j], comm, COMM_LEN - 1))
+	                     continue;
+	                }
+	            }
 	        }
 	      else
 	        {

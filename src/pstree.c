@@ -2,7 +2,7 @@
  * pstree.c - display process tree
  *
  * Copyright (C) 1993-2002 Werner Almesberger
- * Copyright (C) 2002-2008 Craig Small
+ * Copyright (C) 2002-2009 Craig Small
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -816,25 +816,26 @@ usage (void)
     "              [ -A | -G | -U ] [ PID | USER ]\n"
     "       pstree -V\n"
     "Display a tree of processes.\n\n"
-    "    -a     show command line arguments\n"
-    "    -A     use ASCII line drawing characters\n"
-    "    -c     don't compact identical subtrees\n"
-    "    -h     highlight current process and its ancestors\n"
-    "    -H PID highlight this process and its ancestors\n"
-    "    -G     use VT100 line drawing characters\n"
-    "    -l     don't truncate long lines\n"
-    "    -n     sort output by PID\n"
-    "    -p     show PIDs; implies -c\n"
-    "    -u     show uid transitions\n"
-    "    -U     use UTF-8 (Unicode) line drawing characters\n"
-    "    -V     display version information\n"));
+    "  -a, --arguments     show command line arguments\n"
+    "  -A, --ascii         use ASCII line drawing characters\n"
+    "  -c, --compact       don't compact identical subtrees\n"
+    "  -h, --highlight-all highlight current process and its ancestors\n"
+    "  -H PID,\n"
+    "  --highlight-pid=PID highlight this process and its ancestors\n"
+    "  -G, --vt100         use VT100 line drawing characters\n"
+    "  -l, --long          don't truncate long lines\n"
+    "  -n, --numeric-sort  sort output by PID\n"
+    "  -p, --show-pids     show PIDs; implies -c\n"
+    "  -u, --uid-changes   show uid transitions\n"
+    "  -U, --unicode       use UTF-8 (Unicode) line drawing characters\n"
+    "  -V, --version       display version information\n"));
 #ifdef WITH_SELINUX
   fprintf (stderr, _(
-    "    -Z     show SELinux security contexts\n"));
+    "  -Z     show         SELinux security contexts\n"));
 #endif /*WITH_SELINUX*/
   fprintf (stderr, _(
-    "    PID    start at this PID; default is 1 (init)\n"
-    "    USER   show only trees rooted at processes of this user\n\n"));
+    "  PID    start at this PID; default is 1 (init)\n"
+    "  USER   show only trees rooted at processes of this user\n\n"));
   exit (1);
 }
 
@@ -842,7 +843,7 @@ void print_version()
 {
   fprintf(stderr, _("pstree (PSmisc) %s\n"), VERSION);
   fprintf(stderr, _(
-    "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n\n"));
+    "Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n\n"));
   fprintf(stderr, _(
     "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
     "This is free software, and you are welcome to redistribute it under\n"
@@ -861,6 +862,24 @@ main (int argc, char **argv)
   char termcap_area[1024];
   char *termname;
   int c;
+
+  struct option options[] = {
+	{"arguments", 0, NULL, 'a'},
+	{"ascii", 0, NULL, 'A'},
+	{"compact", 0, NULL, 'c'},
+	{"vt100", 0, NULL, 'G'},
+	{"highlight-all", 0, NULL, 'h'},
+	{"highlight-pid", 1, NULL, 'H'},
+	{"numeric-sort", 0, NULL, 'n'},
+	{"show-pids", 0, NULL, 'p'},
+	{"long", 0, NULL, 'l'},
+	{"uid-changes", 0, NULL, 'u'},
+	{"unicode", 0, NULL, 'U'},
+	{"version", 0, NULL, 'V'},
+#ifdef WITH_SELINUX
+	{"security-context", 0, NULL, 'Z'},
+#endif /*WITH_SELINUX*/
+  };
 
   if (ioctl (1, TIOCGWINSZ, &winsz) >= 0)
     if (winsz.ws_col)
@@ -904,9 +923,9 @@ main (int argc, char **argv)
   }
 
 #ifdef WITH_SELINUX
-  while ((c = getopt (argc, argv, "aAcGhH:npluUVZ")) != EOF)
+  while ((c = getopt_long (argc, argv, "aAcGhH:npluUVZ", options, NULL)) != -1)
 #else  /*WITH_SELINUX*/
-  while ((c = getopt (argc, argv, "aAcGhH:npluUV")) != EOF)
+  while ((c = getopt_long (argc, argv, "aAcGhH:npluUV", options, NULL)) != -1)
 #endif /*WITH_SELINUX*/
     switch (c)
       {

@@ -101,8 +101,9 @@ Append the user name of the process owner to each PID.
 .IP \fB\-v\fP
 Verbose mode. Processes are shown in a \fBps\fP-like style. The fields PID,
 USER and COMMAND are similar to \fBps\fP. ACCESS shows how the process
-accesses the file. If the access is by the kernel (e.g. in the case of a
-mount point, a swap file, etc.), \fBkernel\fP is shown instead of the PID.
+accesses the file. Verbose mode will also show when a particular file
+is being access as a mount point, knfs export or swap file. In this case
+\fBkernel\fP is shown instead of the PID.
 .IP \fB\-V\fP
 Display version information.
 .IP \fB\-4\fP
