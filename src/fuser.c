@@ -788,7 +788,6 @@ int main(int argc, char *argv[])
 	struct inode_list *match_inodes = NULL;
 	struct names *names_head, *this_name, *names_tail;
 	int optc;
-	char *option;
 	char *nsptr;
 	int ignore_options;
 	char *sig_aname;
@@ -892,9 +891,10 @@ int main(int argc, char *argv[])
 		case 'S':
 			{
 			  char *signame;
-			  asprintf(&signame, "S%s",optarg);
-			  sig_number = get_signal(signame,argv[0]);
-			  free(signame);
+			  if (asprintf(&signame, "S%s",optarg) > 0) {
+				sig_number = get_signal(signame,argv[0]);
+			    free(signame);
+			  }
 			  break;
 			}
 		case 'u':
@@ -966,22 +966,24 @@ int main(int argc, char *argv[])
 			      ("You can only use files with mountpoint option"));
 		switch (this_name->name_space) {
 		case NAMESPACE_TCP:
-			asprintf(&(this_name->filename), "%s/tcp", argv[optc]);
+			if (asprintf(&(this_name->filename), "%s/tcp", argv[optc]) > 0) {
 #ifdef WITH_IPV6
-			parse_inet(this_name, ipv4_only, ipv6_only,
+			  parse_inet(this_name, ipv4_only, ipv6_only,
 				   &tcp_connection_list, &tcp6_connection_list);
 #else
-			parse_inet(this_name, &tcp_connection_list);
+			  parse_inet(this_name, &tcp_connection_list);
 #endif
+			}
 			break;
 		case NAMESPACE_UDP:
-			asprintf(&(this_name->filename), "%s/udp", argv[optc]);
+			if (asprintf(&(this_name->filename), "%s/udp", argv[optc]) > 0) {
 #ifdef WITH_IPV6
-			parse_inet(this_name, ipv4_only, ipv6_only,
+			  parse_inet(this_name, ipv4_only, ipv6_only,
 				   &udp_connection_list, &udp6_connection_list);
 #else
-			parse_inet(this_name, &udp_connection_list);
+			  parse_inet(this_name, &udp_connection_list);
 #endif
+			}
 			break;
 		default:	/* FILE */
 			this_name->filename = strdup(argv[optc]);
