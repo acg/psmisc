@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc-21.6pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2009-04-26 10:22+1000\n"
+"POT-Creation-Date: 2009-07-15 10:53+1000\n"
 "PO-Revision-Date: 2005-02-24 12:00-0500\n"
 "Last-Translator: Laurentiu Buzdugan <lbuz@rolix.org>\n"
 "Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
@@ -33,7 +33,7 @@ msgstr "Terminã %s(%s%d) ? (y/N) "
 msgid "Cannot get UID from process status\n"
 msgstr ""
 
-#: src/killall.c:147 src/killall.c:682
+#: src/killall.c:147 src/killall.c:694
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr ""
@@ -43,17 +43,17 @@ msgstr ""
 msgid "skipping partial match %s(%d)\n"
 msgstr "am ignorat potrivirea parþialã %s(%d)\n"
 
-#: src/killall.c:445
+#: src/killall.c:457
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "Am terminat %s(%s%d) cu semnalul %d\n"
 
-#: src/killall.c:459
+#: src/killall.c:471
 #, fuzzy, c-format
 msgid "%s: no process found\n"
 msgstr "%s: nici un proces nu a fost terminat\n"
 
-#: src/killall.c:497
+#: src/killall.c:509
 #, fuzzy, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -74,19 +74,19 @@ msgstr ""
 "    -V      afiºeazã informaþii despre versiune\n"
 "\n"
 
-#: src/killall.c:511
+#: src/killall.c:523
 #, fuzzy, c-format
 msgid ""
 "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
 msgstr ""
 "folosire: killall [-s sid] [-c context] [ -egiqvw ] [ -signal ] nume ...\n"
 
-#: src/killall.c:514
+#: src/killall.c:526
 #, fuzzy, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "folosire: killall [ OPÞIUNI ] [ -- ] nume ...\n"
 
-#: src/killall.c:517
+#: src/killall.c:529
 #, fuzzy, c-format
 msgid ""
 "       killall -l, --list\n"
@@ -120,7 +120,7 @@ msgstr ""
 "  -w,--wait           aºteaptã ca procesele sã termine\n"
 "\n"
 
-#: src/killall.c:533
+#: src/killall.c:545
 #, fuzzy, c-format
 msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
@@ -131,7 +131,7 @@ msgstr ""
 "   (-s, -c sunt mutual exlusive ºi trebuie sã preceadã celelalte argumente\n"
 "\n"
 
-#: src/killall.c:554 src/pstree.c:842
+#: src/killall.c:566
 #, fuzzy, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -140,7 +140,7 @@ msgstr ""
 "Copyright (C) 1993-2002 Werner Almesberger ºi Craig Small\n"
 "\n"
 
-#: src/killall.c:556 src/fuser.c:124 src/peekfd.c:89 src/pstree.c:844
+#: src/killall.c:568 src/fuser.c:137 src/peekfd.c:89 src/pstree.c:848
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -154,22 +154,22 @@ msgstr ""
 "Pentru informaþii suplimentare referitoare la aceste chestiuni,\n"
 "vedeþi fiºierele numite COPYING.\n"
 
-#: src/killall.c:656
+#: src/killall.c:668
 #, c-format
 msgid "Cannot find user %s\n"
 msgstr ""
 
-#: src/killall.c:715
+#: src/killall.c:727
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Numãr maxim de nume este %d\n"
 
-#: src/killall.c:720 src/pstree.c:772
+#: src/killall.c:732 src/pstree.c:775
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s este gol (nu este montat ?)\n"
 
-#: src/fuser.c:90
+#: src/fuser.c:105
 #, fuzzy, c-format
 msgid ""
 "Usage: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n SPACE ] [ -k [ -"
@@ -179,7 +179,7 @@ msgid ""
 "Show which processes use the named files, sockets, or filesystems.\n"
 "\n"
 "    -a        display unused files too\n"
-"    -c        Same as \\-m (for POSIX compatibility)\n"
+"    -c        Same as -m (for POSIX compatibility)\n"
 "    -f        silently ignored (for POSIX compatibility)\n"
 "    -i        ask before killing (ignored without -k)\n"
 "    -k        kill processes accessing the named file\n"
@@ -219,14 +219,14 @@ msgstr ""
 "  nume udp/tcp: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 
-#: src/fuser.c:109
+#: src/fuser.c:122
 #, c-format
 msgid ""
 "    -4        search IPv4 sockets only\n"
 "    -6        search IPv6 sockets only\n"
 msgstr ""
 
-#: src/fuser.c:113
+#: src/fuser.c:125
 #, c-format
 msgid ""
 "    -         reset options\n"
@@ -235,12 +235,12 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/fuser.c:120
+#: src/fuser.c:132
 #, fuzzy, c-format
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (psmisc) %s\n"
 
-#: src/fuser.c:122
+#: src/fuser.c:135 src/pstree.c:846
 #, fuzzy, c-format
 msgid ""
 "Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
@@ -249,111 +249,101 @@ msgstr ""
 "Copyright (C) 1993-2002 Werner Almesberger ºi Craig Small\n"
 "\n"
 
-#: src/fuser.c:147
+#: src/fuser.c:163
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr ""
 
-#: src/fuser.c:283
+#: src/fuser.c:330 src/fuser.c:378
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr ""
 
-#: src/fuser.c:316
-#, c-format
-msgid "Cannot stat mount point %s: %s\n"
-msgstr ""
-
-#: src/fuser.c:333 src/fuser.c:352 src/fuser.c:375
+#: src/fuser.c:398 src/fuser.c:419 src/fuser.c:443
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:476
+#: src/fuser.c:544
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:492
+#: src/fuser.c:562
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr ""
 
-#: src/fuser.c:553
+#: src/fuser.c:652
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr ""
 
-#: src/fuser.c:746
-msgid "Namespace option requires an argument."
-msgstr ""
-
-#: src/fuser.c:755
+#: src/fuser.c:886
 msgid "Invalid namespace name"
 msgstr ""
 
-#: src/fuser.c:811
+#: src/fuser.c:912
+msgid "Namespace option requires an argument."
+msgstr ""
+
+#: src/fuser.c:966
 msgid "You can only use files with mountpoint option"
 msgstr ""
 
-#: src/fuser.c:840
+#: src/fuser.c:1001
 msgid "No process specification given"
 msgstr ""
 
-#: src/fuser.c:845
+#: src/fuser.c:1007
 msgid "You cannot use the mounted and mountpoint flags together"
 msgstr ""
 
-#: src/fuser.c:852
+#: src/fuser.c:1014
 msgid "all option cannot be used with silent option."
 msgstr ""
 
-#: src/fuser.c:856
+#: src/fuser.c:1019
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr ""
 
-#: src/fuser.c:901
+#: src/fuser.c:1090
 #, fuzzy, c-format
 msgid "%*s USER        PID ACCESS COMMAND\n"
 msgstr ""
 "\n"
 "%*s UTILIZATOR  PID ACCES  COMANDÃ\n"
 
-#: src/fuser.c:926 src/fuser.c:951
+#: src/fuser.c:1123 src/fuser.c:1178
 msgid "(unknown)"
 msgstr ""
 
-#: src/fuser.c:1021
+#: src/fuser.c:1254
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr ""
 
-#: src/fuser.c:1124
+#: src/fuser.c:1370
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr ""
 
-#: src/fuser.c:1160
-#, c-format
-msgid "Cannot open /etc/mtab: %s\n"
-msgstr ""
-
-#: src/fuser.c:1209
+#: src/fuser.c:1432
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Terminã process %d ? (y/N) "
 
-#: src/fuser.c:1233
+#: src/fuser.c:1458
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr ""
 
-#: src/fuser.c:1248
+#: src/fuser.c:1471
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr ""
 
-#: src/fuser.c:1252
+#: src/fuser.c:1475
 #, fuzzy, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "nu pot gãsi numerele dispozitivelor socket-urilor"
@@ -389,7 +379,7 @@ msgid ""
 "  Press CTRL-C to end output.\n"
 msgstr ""
 
-#: src/pstree.c:812
+#: src/pstree.c:815
 #, fuzzy, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -397,18 +387,19 @@ msgid ""
 "       pstree -V\n"
 "Display a tree of processes.\n"
 "\n"
-"    -a     show command line arguments\n"
-"    -A     use ASCII line drawing characters\n"
-"    -c     don't compact identical subtrees\n"
-"    -h     highlight current process and its ancestors\n"
-"    -H PID highlight this process and its ancestors\n"
-"    -G     use VT100 line drawing characters\n"
-"    -l     don't truncate long lines\n"
-"    -n     sort output by PID\n"
-"    -p     show PIDs; implies -c\n"
-"    -u     show uid transitions\n"
-"    -U     use UTF-8 (Unicode) line drawing characters\n"
-"    -V     display version information\n"
+"  -a, --arguments     show command line arguments\n"
+"  -A, --ascii         use ASCII line drawing characters\n"
+"  -c, --compact       don't compact identical subtrees\n"
+"  -h, --highlight-all highlight current process and its ancestors\n"
+"  -H PID,\n"
+"  --highlight-pid=PID highlight this process and its ancestors\n"
+"  -G, --vt100         use VT100 line drawing characters\n"
+"  -l, --long          don't truncate long lines\n"
+"  -n, --numeric-sort  sort output by PID\n"
+"  -p, --show-pids     show PIDs; implies -c\n"
+"  -u, --uid-changes   show uid transitions\n"
+"  -U, --unicode       use UTF-8 (Unicode) line drawing characters\n"
+"  -V, --version       display version information\n"
 msgstr ""
 "usage: pstree [ -a ] [ -c ] [ -h | -H pid ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 "              [ -A | -G | -U ] [ pid | user]\n"
@@ -425,18 +416,18 @@ msgstr ""
 "    -p     afiºeazã PID-urile; implicã -c\n"
 "    -u     afiºeazã tranziþiilr uid\n"
 
-#: src/pstree.c:830
+#: src/pstree.c:834
 #, fuzzy, c-format
-msgid "    -Z     show SELinux security contexts\n"
+msgid "  -Z     show         SELinux security contexts\n"
 msgstr ""
 "    -s     aratã SID-urile Flask\n"
 "    -x     aratã contextele de securitate Flask\n"
 
-#: src/pstree.c:833
+#: src/pstree.c:837
 #, fuzzy, c-format
 msgid ""
-"    PID    start at this PID; default is 1 (init)\n"
-"    USER   show only trees rooted at processes of this user\n"
+"  PID    start at this PID; default is 1 (init)\n"
+"  USER   show only trees rooted at processes of this user\n"
 "\n"
 msgstr ""
 "   -U      foloseºte caractere de desenare UTF-8 (Unicode)\n"
@@ -446,32 +437,32 @@ msgstr ""
 "[ator]\n"
 "\n"
 
-#: src/pstree.c:840
+#: src/pstree.c:844
 #, fuzzy, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (psmisc) %s\n"
 
-#: src/pstree.c:933
+#: src/pstree.c:955
 #, c-format
 msgid "TERM is not set\n"
 msgstr "TERM nu este setat\n"
 
-#: src/pstree.c:938
+#: src/pstree.c:960
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "Nu pot obþine capabilitãþile terminalului\n"
 
-#: src/pstree.c:982
+#: src/pstree.c:1004
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "Nici un utilizator cu acest nume: %s\n"
 
-#: src/pstree.c:998
+#: src/pstree.c:1020
 #, c-format
 msgid "No processes found.\n"
 msgstr "Nu a fost gãsit nici un proces.\n"
 
-#: src/pstree.c:1004
+#: src/pstree.c:1026
 #, c-format
 msgid "Press return to close\n"
 msgstr "Apãsaþi tasta return pentru a închide\n"
