@@ -1,20 +1,14 @@
 Changes in 22.8
 ===============
-2009-07-16 Craig Small
+	* Added Czech PO file
 	* rc1 update of Italian, Polish, Indonesian, Swedish and Russian PO files
-
-2009-07-14 Craig Small
 	* Updated Finnish, Italian and Vietnamese PO files
-
-2009-06-10 Craig Small
 	* Applied patch from Kari Hautio for lazy umount'ed filesystems SF#2545632
 	* Applied patch from Anonymous SF submitter to fix killall -l
 	  Fixes SF#2002570
 	* fuser will print mounts,nfs exports and swaps with -v Debian #356655
 	  and SF#533958
 	* pstree and fuser have long options Debian #517412
-
-2009-06-09 Craig Small
 	* Fixed pstree -a off-by-one error in buffer, Debian #536243
 	* Changed configure.ac to not use CXX SF# 2789801
 

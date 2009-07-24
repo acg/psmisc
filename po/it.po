@@ -74,8 +74,10 @@ msgstr ""
 
 #: src/killall.c:523
 #, c-format
-msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr "Uso: killall [-Z CONTESTO] [-u UTENTE] [ -eIgiqrvw ] [ -SEGNALE ] NOME...\n"
+msgid ""
+"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr ""
+"Uso: killall [-Z CONTESTO] [-u UTENTE] [ -eIgiqrvw ] [ -SEGNALE ] NOME...\n"
 
 #: src/killall.c:526
 #, c-format
@@ -104,7 +106,8 @@ msgstr ""
 "     killall -l, --list\n"
 "     killall -V --version\n"
 "\n"
-"  -e,--exact          richiede una corrispondenza esatta per i nomi molto lunghi\n"
+"  -e,--exact          richiede una corrispondenza esatta per i nomi molto "
+"lunghi\n"
 "  -I,--ignore-case    ignora maiuscole/minuscole nei nomi\n"
 "  -g,--process-group  termina il gruppo di processi invece del processo\n"
 "  -i,--interactive    chiede conferma prima di terminare\n"
@@ -167,7 +170,8 @@ msgstr "%s è vuoto (non montato?)\n"
 #: src/fuser.c:105
 #, c-format
 msgid ""
-"Usage: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n SPACE ] [ -k [ -i ] [ -SIGNAL ]] NAME...\n"
+"Usage: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n SPACE ] [ -k [ -"
+"i ] [ -SIGNAL ]] NAME...\n"
 "       fuser -l\n"
 "       fuser -V\n"
 "Show which processes use the named files, sockets, or filesystems.\n"
@@ -178,7 +182,8 @@ msgid ""
 "    -i        ask before killing (ignored without -k)\n"
 "    -k        kill processes accessing the named file\n"
 "    -l        list available signal names\n"
-"    -m        show all processes using the named filesystems or block device\n"
+"    -m        show all processes using the named filesystems or block "
+"device\n"
 "    -n SPACE  search in this name space (file, udp, or tcp)\n"
 "    -s        silent operation\n"
 "    -SIGNAL   send this signal instead of SIGKILL\n"
@@ -298,7 +303,8 @@ msgstr "L'opzione -a non può essere usata con l'opzione -s."
 
 #: src/fuser.c:1019
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
-msgstr "Impossibile cercare solo socket IPv4 e solo socket IPv6 allo stesso tempo"
+msgstr ""
+"Impossibile cercare solo socket IPv4 e solo socket IPv6 allo stesso tempo"
 
 # FIXME: COMANDO DI ACCESSO ?
 #: src/fuser.c:1090
