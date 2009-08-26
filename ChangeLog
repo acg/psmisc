@@ -1,3 +1,7 @@
+Changes in 22.9
+===============
+	* short option l returned in fuser Debian #539087
+
 Changes in 22.8
 ===============
 	* Added Czech PO file

@@ -833,9 +833,9 @@ int main(int argc, char *argv[])
 	ignore_options=0;
 	while ((optc =
 #ifdef WITH_IPV6
-		getopt_long(argc, argv, "46acfhikmn:sS:uvV", options,NULL)
+		getopt_long(argc, argv, "46acfhiklmn:sS:uvV", options,NULL)
 #else
-		getopt_long(argc, argv, "acfhikmn:sS:uvV", options,NULL)
+		getopt_long(argc, argv, "acfhikilmn:sS:uvV", options,NULL)
 #endif
 			    ) != -1) {
 	  if (ignore_options > 0) {
