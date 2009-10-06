@@ -2,6 +2,7 @@ fuser
 oldfuser
 peekfd
 killall
+prtstat
 pstree
 pstree.x11
 signames.h

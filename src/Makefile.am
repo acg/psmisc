@@ -1,7 +1,7 @@
 
 AM_CFLAGS = -Wall -DLOCALEDIR=\"/usr/share/locale\"
 
-bin_PROGRAMS = fuser killall pstree 
+bin_PROGRAMS = fuser killall pstree prtstat
 if WANT_PEEKFD_I386
   bin_PROGRAMS += peekfd
   AM_CFLAGS += -DI386
@@ -26,6 +26,8 @@ peekfd_SOURCES = peekfd.c
 pstree_SOURCES = pstree.c comm.h i18n.h
 
 pstree_LDADD = @TERMCAP_LIB@ @SELINUX_LIB@
+
+prtstat_SOURCES = prtstat.c
 
 BUILT_SOURCES = signames.h
 
