@@ -99,17 +99,33 @@ static double convert_time(const unsigned long ticks)
   return (float)ticks / (float)sc_clk_tck;
 }
 
-static void convert_bytes(char *buf, const long bytes)
+static void convert_bytes(char *buf, unsigned long bytes)
 {
-  if (bytes > (2^30))
-	sprintf(buf, "%lu GB",bytes << 30);
-  if (bytes > (2^20))
-	sprintf(buf, "%lu MB",bytes << 20);
-  else if (bytes > (2^10))
-	sprintf(buf, "%lu kB", bytes << 10);
+  if (bytes > (10000000))
+	sprintf(buf, "%lu MB",bytes/1000000L);
+  else if (bytes > (10000))
+	sprintf(buf, "%lu kB", bytes/1000L);
   else
 	sprintf(buf, "%lu B", bytes);
 }
+
+/* comes from SCHED_* from linux/sched.h */
+static char *convert_policy(const unsigned int policy)
+{
+  static char *policy_names[] = { "normal", "fifo","rr", "batch", "iso", "idle" };
+  if (policy < 6)
+	return policy_names[policy];
+  return "unknown";
+}
+
+/* minor is bits 31-20 and 7-0, major is 15-8 */
+static char *convert_tty(int tty_nr)
+{
+  static char buf[20];
+  sprintf(buf, "%d:%d",(tty_nr & 0xff00)>>8,(tty_nr & 0xff)|((tty_nr & 0xfff00000)>>20));
+  return buf;
+}
+
 
 static void print_raw_stat(const int pid,struct proc_info *pr)
 {
@@ -136,11 +152,19 @@ static void print_raw_stat(const int pid,struct proc_info *pr)
 }
 static void print_formated_stat(const int pid,struct proc_info *pr)
 {
-  char buf_vsize[200];
-  char buf_rsslim[200];
+  char buf_vsize[100];
+  char buf_rss[100];
+  char buf_rsslim[100];
+  long page_size;
 
-  printf(_("Process: %s\t\tState: %c (%s)\n"), pr->comm,
-	  pr->state, print_state(pr->state));
+  page_size = sysconf(_SC_PAGESIZE);
+  assert(page_size>1);
+
+  printf(_(
+		"Process: %-14s\t\tState: %c (%s)\n"
+		"  CPU#:  %-3d\t\tTTY: %s\tThreads: %ld\n"),
+	  pr->comm, pr->state, print_state(pr->state),
+	  pr->processor, convert_tty(pr->tty_nr), pr->num_threads);
   printf(_(
 		"Process, Group and Session IDs\n"
 		"  Process ID: %d\t\t  Parent ID: %d\n"
@@ -149,26 +173,36 @@ static void print_formated_stat(const int pid,struct proc_info *pr)
 	  pid, pr->ppid, pr->pgrp, pr->session, pr->tp_gid);
   printf(_(
 		"Page Faults\n"
-		"  This -      Minor: %-10lu\t\t Major:%lu\n"
-		"  Children -  Minor: %-10lu\t\t Major:%lu\n"),
+		"  This Process    (minor major): %8lu  %8lu\n"
+		"  Child Processes (minor major): %8lu  %8lu\n"),
 	  pr->minflt, pr->majflt, pr->cminflt, pr->cmajflt);
   printf(_(
 		"CPU Times\n"
-		"  This -     User: %-10.2f\t  System: %-10.2f\t Guest: %-10.2f\n"
-		"  Children - User: %-10.2f\t  System: %-10.2f\t Guest: %-10.2f\n"),
-	  convert_time(pr->utime), convert_time(pr->stime), convert_time(pr->guest_time),
+		"  This Process    (user system guest blkio): %6.2f %6.2f %6.2f %6.2f\n"
+		"  Child processes (user system guest):       %6.2f %6.2f %6.2f\n"),
+	  convert_time(pr->utime), convert_time(pr->stime), convert_time(pr->guest_time), convert_time(pr->blkio),
 	  convert_time(pr->cutime), convert_time(pr->cstime), convert_time(pr->cguest_time));
   convert_bytes(buf_vsize, pr->vsize);
+  convert_bytes(buf_rss, pr->rss*page_size);
   convert_bytes(buf_rsslim, pr->rsslim);
   printf(_(
 		"Memory\n"
-		"  Vsize: %-10s\n"
-		"  RSS: %-10lu\t\t pages RSS Limit: %s\n"
-		"  Code Area: %#10lx - %#10lx\tEIP: %#10lx\n"
-		"  Stack: %#10lx\t\tStack Pointer: %#10lx\n"),
-	  buf_vsize, pr->rss, buf_rsslim,
-	  pr->startcode, pr->endcode, pr->ksteip,
-	  pr->startstack, pr->kstesp);
+		"  Vsize:       %-10s\n"
+		"  RSS:         %-10s \t\t RSS Limit: %s\n"
+		"  Code Start:  %#-10lx\t\t Code Stop:  %#-10lx\n"
+		"  Stack Start: %#-10lx\n"
+		"  Stack Pointer (ESP): %#10lx\t Inst Pointer (EIP): %#10lx\n"),
+	  buf_vsize, buf_rss, buf_rsslim,
+	  pr->startcode, pr->endcode, 
+	  pr->startstack, pr->kstesp, pr->ksteip);
+  printf(_(
+		"Scheduling\n"
+		"  Policy: %s\n"
+		"  Nice:   %ld \t\t RT Priority: %ld %s\n"),
+	  convert_policy(pr->policy),
+	  pr->nice, (pr->priority>0?pr->priority-20:1-pr->priority),
+	  (pr->priority>0?"(non RT)":""));
+
 
 
 
