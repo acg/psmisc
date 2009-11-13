@@ -1,6 +1,8 @@
 Changes in 22.9
 ===============
 	* short option l returned in fuser Debian #539087
+	* long options terminated with 0s Debian #551833
+	* fuser only kills normal processes, patch thanks to Erik Li SF# 2892724
 
 Changes in 22.8
 ===============

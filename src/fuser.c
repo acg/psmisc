@@ -808,8 +808,7 @@ int main(int argc, char *argv[])
 		{"ipv6", 0, NULL, '6'},
 #endif
 		{"SIG", 1, NULL, 'S'},
-
-	
+		{ 0, 0, 0, 0 }
 	};
 
 #ifdef WITH_IPV6
@@ -1452,11 +1451,13 @@ kill_matched_proc(struct procs *proc_head, const opt_type opts,
 	struct procs *pptr;
 
 	for (pptr = proc_head; pptr != NULL; pptr = pptr->next) {
-		if ((opts & OPT_INTERACTIVE) && (ask(pptr->pid) == 0))
-			continue;
-		if (kill(pptr->pid, sig_number) < 0) {
-			fprintf(stderr, _("Could not kill process %d: %s\n"),
-				pptr->pid, strerror(errno));
+		if ( pptr->proc_type == PTYPE_NORMAL ){
+			if ((opts & OPT_INTERACTIVE) && (ask(pptr->pid) == 0))
+				continue;
+			if ( kill(pptr->pid, sig_number) < 0) {
+				fprintf(stderr, _("Could not kill process %d: %s\n"),
+						pptr->pid, strerror(errno));
+			}
 		}
 
 	}
