@@ -9,7 +9,7 @@ typedef unsigned char opt_type;
 #define OPT_INTERACTIVE 16
 #define OPT_SILENT 32
 #define OPT_USER 64
-#define OPT_MOUNTPOINT 128
+#define OPT_ISMOUNTPOINT 128
 
 struct procs {
 	pid_t pid;
@@ -77,6 +77,11 @@ struct unixsocket_list {
 	ino_t	net_inode;
 	dev_t	dev;
 	struct unixsocket_list *next;
+};
+
+struct mount_list {
+	char *mountpoint;
+	struct mount_list *next;
 };
 
 #define NAMESPACE_FILE 0

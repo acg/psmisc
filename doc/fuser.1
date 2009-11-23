@@ -1,4 +1,4 @@
-.TH FUSER 1 2009-07-15 "Linux" "User Commands"
+.TH FUSER 1 2009-11-23 "Linux" "User Commands"
 .SH NAME
 fuser \- identify processes using files or sockets
 .SH SYNOPSIS
@@ -11,6 +11,7 @@ fuser \- identify processes using files or sockets
 .IR space\  ]
 .RB [ \-k
 .RB [ \-i ]
+.RB [ \-M ]
 .RB [ \- \fISIGNAL
 ] ]
 .IR name " ..."
@@ -89,6 +90,11 @@ is mounted. All processes accessing files on that file system are listed.
 If a directory file is specified, it is automatically changed to
 \fINAME\fR/. to use any file system that might be mounted on that
 directory.
+.TP
+\fB\-M\f, \fB\-\-ismountpoint\fR
+Request will be fulfilled only if \fINAME\fR specifies a mountpoint.
+This is an invaluable seatbelt which prevents you from killing the machine
+if \fINAME\fR happens to not be a filesystem.
 .TP
 \fB\-n \fISPACE\fR, \fB\-\-namespace\fR \fISPACE\fR
 Select a different name space. The name spaces \fBfile\fR (file names, the

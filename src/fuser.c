@@ -102,7 +102,7 @@ static void usage(const char *errormsg)
 
 	fprintf(stderr,
 		_
-		("Usage: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n SPACE ] [ -k [ -i ] [ -SIGNAL ]] NAME...\n"
+		("Usage: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n SPACE] [-k [-i] [-SIGNAL]] NAME...\n"
 		 "       fuser -l\n" "       fuser -V\n"
 		 "Show which processes use the named files, sockets, or filesystems.\n\n"
 		 "    -a        display unused files too\n"
@@ -112,6 +112,7 @@ static void usage(const char *errormsg)
 		 "    -k        kill processes accessing the named file\n"
 		 "    -l        list available signal names\n"
 		 "    -m        show all processes using the named filesystems or block device\n"
+		 "    -M        fulfill request only if NAME is a mount point\n"
 		 "    -n SPACE  search in this name space (file, udp, or tcp)\n"
 		 "    -s        silent operation\n"
 		 "    -SIGNAL   send this signal instead of SIGKILL\n"
@@ -767,6 +768,56 @@ find_net6_sockets(struct inode_list **ino_list,
 }
 #endif
 
+static void
+read_proc_mounts(struct mount_list **mnt_list)
+{
+	FILE *fp;
+	char line[BUFSIZ];
+	char *find_mountp;
+	char *find_space;
+	struct mount_list *mnt_tmp;
+
+	if ((fp = fopen(PROC_MOUNTS, "r")) == NULL) {
+		fprintf(stderr, "Cannot open %s\n", PROC_MOUNTS);
+		return;
+	}
+	while (fgets(line, BUFSIZ, fp) != NULL) {
+		if ((find_mountp = strchr(line, ' ')) == NULL)
+			continue;
+		find_mountp++;
+		if ((find_space = strchr(find_mountp, ' ')) == NULL)
+			continue;
+		*find_space = '\0';
+		if ((mnt_tmp = malloc(sizeof(struct mount_list))) == NULL)
+			continue;
+		if ((mnt_tmp->mountpoint = strdup(find_mountp)) == NULL)
+			continue;
+		mnt_tmp->next = *mnt_list;
+		*mnt_list = mnt_tmp;
+	}
+	fclose(fp);
+}
+
+static int
+is_mountpoint(struct mount_list **mnt_list, char *arg)
+{
+	char *p;
+	struct mount_list *mnt_tmp;
+
+	if (*arg == '\0')
+		return 0;
+	/* Remove trailing slashes. */
+	for (p = arg; *p != '\0'; p++)
+		;
+	while (*(--p) == '/' && p > arg)
+		*p = '\0';
+
+	for (mnt_tmp = *mnt_list; mnt_tmp != NULL; mnt_tmp = mnt_tmp->next)
+		if (!strcmp(mnt_tmp->mountpoint, arg))
+			return 1;
+	return 0;
+}
+
 int main(int argc, char *argv[])
 {
 	opt_type opts;
@@ -777,6 +828,7 @@ int main(int argc, char *argv[])
 	unsigned char default_namespace = NAMESPACE_FILE;
 	struct device_list *match_devices = NULL;
 	struct unixsocket_list *unixsockets = NULL;
+	struct mount_list *mounts = NULL;
 
 	dev_t netdev;
 	struct ip_connections *tcp_connection_list = NULL;
@@ -798,6 +850,7 @@ int main(int argc, char *argv[])
 		{"interactive", 0, NULL, 'i'},
 		{"list-signals", 0, NULL, 'l'},
 		{"mount", 0, NULL, 'm'},
+		{"ismountpoint", 0, NULL, 'M'},
 		{"namespace", 1, NULL, 'n'},
 		{"silent", 0, NULL, 's'},
 		{"user", 0, NULL, 'u'},
@@ -832,9 +885,9 @@ int main(int argc, char *argv[])
 	ignore_options=0;
 	while ((optc =
 #ifdef WITH_IPV6
-		getopt_long(argc, argv, "46acfhiklmn:sS:uvV", options,NULL)
+		getopt_long(argc, argv, "46acfhiklmMn:sS:uvV", options,NULL)
 #else
-		getopt_long(argc, argv, "acfhikilmn:sS:uvV", options,NULL)
+		getopt_long(argc, argv, "acfhikilmMn:sS:uvV", options,NULL)
 #endif
 			    ) != -1) {
 	  if (ignore_options > 0) {
@@ -854,7 +907,7 @@ int main(int argc, char *argv[])
 			opts |= OPT_ALLFILES;
 			break;
 		case 'c':
-			opts |= OPT_MOUNTPOINT;
+			opts |= OPT_MOUNTS;
 			break;
 		case 'f':
 			/* ignored */
@@ -873,6 +926,9 @@ int main(int argc, char *argv[])
 			return 0;
 		case 'm':
 			opts |= OPT_MOUNTS;
+			break;
+		case 'M':
+			opts |= OPT_ISMOUNTPOINT;
 			break;
 		case 'n':
 			if (strcmp(optarg, "tcp") == 0)
@@ -933,16 +989,15 @@ int main(int argc, char *argv[])
 
 		}		/* switch */
 	}			/* while optc */
+	if (optc == argc)
+		usage(_("No process specification given"));
+	if (opts & OPT_ISMOUNTPOINT)
+		read_proc_mounts(&mounts);
 	for (optc = optind; optc < argc; optc++) {
 		/* File specifications */
 		if ((this_name = malloc(sizeof(struct names))) == NULL)
 			continue;
 		this_name->next = NULL;
-		if (names_head == NULL)
-			names_head = this_name;
-		if (names_tail != NULL)
-			names_tail->next = this_name;
-		names_tail = this_name;
 		/* try to find namespace spec */
 		this_name->name_space = default_namespace;
 		if (((nsptr = strchr(argv[optc], '/')) != NULL)
@@ -959,10 +1014,15 @@ int main(int argc, char *argv[])
 			}
 		}
 		this_name->matched_procs = NULL;
-		if ((opts & OPT_MOUNTS || opts & OPT_MOUNTPOINT)
+		if (opts & (OPT_MOUNTS|OPT_ISMOUNTPOINT)
 		    && this_name->name_space != NAMESPACE_FILE)
 			usage(_
-			      ("You can only use files with mountpoint option"));
+			      ("You can only use files with mountpoint options"));
+		if (opts & OPT_ISMOUNTPOINT &&
+		    !is_mountpoint(&mounts, argv[optc])) {
+			free(this_name);
+			continue;
+		}
 		switch (this_name->name_space) {
 		case NAMESPACE_TCP:
 			if (asprintf(&(this_name->filename), "%s/tcp", argv[optc]) > 0) {
@@ -989,22 +1049,18 @@ int main(int argc, char *argv[])
 			parse_file(this_name, &match_inodes);
 			parse_unixsockets(this_name, &match_inodes,
 					  unixsockets);
-			if (opts & OPT_MOUNTPOINT || opts & OPT_MOUNTS)
+			if (opts & OPT_MOUNTS)
 				parse_mounts(this_name, &match_devices, opts);
 			break;
 		}
 
+		if (names_head == NULL)
+			names_head = this_name;
+		if (names_tail != NULL)
+			names_tail->next = this_name;
+		names_tail = this_name;
 	}			/* for optc */
 
-	if (names_head == NULL) {
-		usage(_("No process specification given"));
-	}
-	/* Check conflicting operations */
-	if (opts & OPT_MOUNTPOINT) {
-		if (opts & OPT_MOUNTS)
-			usage(_
-			      ("You cannot use the mounted and mountpoint flags together"));
-	}
 	if (opts & OPT_SILENT) {
 		opts &= ~OPT_VERBOSE;
 		opts &= ~OPT_USER;
@@ -1451,15 +1507,14 @@ kill_matched_proc(struct procs *proc_head, const opt_type opts,
 	struct procs *pptr;
 
 	for (pptr = proc_head; pptr != NULL; pptr = pptr->next) {
-		if ( pptr->proc_type == PTYPE_NORMAL ){
-			if ((opts & OPT_INTERACTIVE) && (ask(pptr->pid) == 0))
-				continue;
-			if ( kill(pptr->pid, sig_number) < 0) {
-				fprintf(stderr, _("Could not kill process %d: %s\n"),
-						pptr->pid, strerror(errno));
-			}
+		if ( pptr->proc_type == PTYPE_NORMAL )
+		    continue;
+		if ((opts & OPT_INTERACTIVE) && (ask(pptr->pid) == 0))
+			continue;
+		if ( kill(pptr->pid, sig_number) < 0) {
+			fprintf(stderr, _("Could not kill process %d: %s\n"),
+					pptr->pid, strerror(errno));
 		}
-
 	}
 }
 

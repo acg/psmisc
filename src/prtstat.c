@@ -214,6 +214,9 @@ static void print_stat(const int pid, const opt_type options)
   char *bptr;
   FILE *fp;
 
+  struct proc_statnames psn[] = {
+	{"d", "blah", (union proc_values)3}
+  };
   struct proc_info *pr;
   pr = malloc(sizeof(struct proc_info));
 
@@ -285,7 +288,8 @@ int main(int argc, char *argv[])
 
   struct option options[] = {
 	{"raw"		,0, NULL, 'r' },
-	{"version", 0, NULL, 'V'}
+	{"version", 0, NULL, 'V'},
+	{ 0, 0, 0, 0}
   };
 
 #ifdef ENABLE_NLS
