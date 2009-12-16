@@ -19,18 +19,3 @@ struct proc_info
   unsigned long long starttime, blkio;
 };
 
-union proc_values {
-  int d;
-  char c;
-  long x;
-  unsigned long lu;
-  long ld;
-  unsigned long long lX;
-};
-
-
-struct proc_statnames {
-  char fmt[3];
-  char *name;
-  union proc_values value;
-};

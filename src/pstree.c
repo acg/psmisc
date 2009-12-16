@@ -37,6 +37,7 @@
 #include <term.h>
 #include <termios.h>
 #include <langinfo.h>
+#include <assert.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
@@ -416,6 +417,7 @@ dump_tree(PROC * current, int level, int rep, int leaf, int last,
     int lvl, i, add, offset, len, swapped, info, count, comm_len, first;
     const char *tmp, *here;
 
+    assert(closing >= 0);
     if (!current)
         return;
     if (!leaf)
@@ -484,7 +486,7 @@ dump_tree(PROC * current, int level, int rep, int leaf, int last,
     if (print_args || !current->children)
 #endif                                /*WITH_SELINUX */
     {
-        while (closing-- > 0)
+        while (closing--)
             out_char(']');
         out_newline();
     }
@@ -499,25 +501,26 @@ dump_tree(PROC * current, int level, int rep, int leaf, int last,
     {
         width[level] = swapped + (comm_len > 1 ? 0 : -1);
         count=0;
+        first=1;
         for (walk = current->children; walk; walk = next) {
           next = walk->next;
           count=0;
           if (compact && (walk->child->flags & PFLAG_THREAD)) {
             scan = &walk->next;
             while (*scan) {
-              if (tree_equal(walk->child, (*scan)->child)) {
-                count++;
+              if (!tree_equal(walk->child, (*scan)->child)) {
                 scan = &(*scan)->next;
               } else {
-                next = (*scan)->next;
-                scan = NULL;
+                if (next == *scan)
+                  next = (*scan)->next;
+                count++;
+                *scan = (*scan)->next;
               }
             }
             dump_tree(walk->child, level + 1, count + 1,
-                 walk == current->children, !next, current->uid,
-                 closing + (count ? 1 : 0));
+                  0, !next, current->uid, closing+ (count ? 2 : 1));
+                 //closing + (count ? 1 : 0));
           } else {
-            count = 0;
           dump_tree(walk->child, level + 1, 1, 0, !walk->next,
                       current->uid, 0);
           }

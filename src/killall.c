@@ -41,6 +41,8 @@
 #include <getopt.h>
 #include <pwd.h>
 #include <regex.h>
+#include <ctype.h>
+#include <assert.h>
 
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
@@ -50,13 +52,33 @@
 #include "comm.h"
 #include "signals.h"
 
-
 #define PROC_BASE "/proc"
 #define MAX_NAMES (int)(sizeof(unsigned long)*8)
 
+#define TSECOND "sec"
+#define TMINUTE "min"
+#define THOUR   "hour"
+#define TDAY    "day" 
+#define TWEEK   "WEEK"
+#define TMONTH  "MON" 
+#define TYEAR   "YEAR"
+
+#define TMAX_SECOND 31536000
+#define TMAX_MINUTE 525600  
+#define TMAX_HOUR   8760    
+#define TMAX_DAY    365     
+#define TMAX_WEEK   48      
+#define TMAX_MONTH  12      
+#define TMAX_YEAR   1       
+
+#define ER_REGFAIL -1
+#define ER_NOMEM   -2
+#define ER_UNKWN   -3
+#define ER_OOFRA   -4
 
 static int verbose = 0, exact = 0, interactive = 0, reg = 0,
            quiet = 0, wait_until_dead = 0, process_group = 0,
+           younger_than = 0, older_than = 0,
            ignore_case = 0, pidof;
 
 static int
@@ -93,6 +115,101 @@ ask (char *name, pid_t pid, const int signal)
     }
   } while(1);
   /* Never should get here */
+}
+
+static double
+uptime()
+{
+   char * savelocale;
+   char buf[2048];
+   FILE* file;
+   if (!(file=fopen( PROC_BASE "/uptime", "r"))) {
+      fprintf(stderr, "error opening uptime file\n");	
+      exit(1);
+   }
+   savelocale = setlocale(LC_NUMERIC, NULL);
+   setlocale(LC_NUMERIC,"C");
+   fscanf(file, "%s", buf);
+   fclose(file);
+   setlocale(LC_NUMERIC,savelocale);
+   return atof(buf);
+}
+
+/* process age from jiffies to seconds via uptime */
+static double process_age(const unsigned jf)
+{
+   double sc_clk_tck = sysconf(_SC_CLK_TCK);
+   assert(sc_clk_tck > 0);
+   return uptime() - jf / sc_clk_tck;
+}
+
+/* returns requested time interval in seconds, 
+ negative indicates error has occured  
+ */
+static time_t 
+parse_time_units(const char* age)
+{
+   regex_t preg;
+   if ( 0 == regcomp(&preg, "^[0-9]{1,8}[a-zA-Z]{1,8}$", REG_NOSUB | REG_EXTENDED)) {
+      int ret = regexec(&preg, age, (size_t)0, NULL, 0);
+      regfree(&preg);
+      if ( 0 != ret )
+	return ER_REGFAIL;
+   }
+
+   time_t res;
+   char * savelocale;
+   savelocale = setlocale(LC_ALL, NULL);
+   setlocale(LC_NUMERIC,"C");
+
+   unsigned int i;
+   for (i=0; i<strlen(age); i++) {
+      if ( isdigit( (int)age[i] ) )
+	continue;
+      else
+	break;
+   }
+
+   char *numb, *unit;
+   if ( NULL == (numb = calloc(sizeof(char), i +1)))
+     return ER_NOMEM;
+   if ( NULL == (unit = calloc(sizeof(char), strlen(age) -i +1))) {
+      free(numb);
+      return ER_NOMEM;
+   };
+   
+   strncpy(numb, &age[0], i +1);
+   strncpy(unit, &age[i], strlen(age) - i +1);
+   time_t numbll = atoll(numb);
+
+   if      ( (strlen(unit) == strlen(TSECOND)) && (0 == strncmp(TSECOND, unit, strlen(TSECOND)))) 
+     res = numbll <= TMAX_SECOND ? numbll : ER_OOFRA;
+
+   else if ( (strlen(unit) == strlen(TMINUTE)) && (0 == strncmp(TMINUTE, unit, strlen(TMINUTE))))
+     res = numbll <= TMAX_MINUTE ? numbll * 60 : ER_OOFRA;
+
+   else if ( (strlen(unit) == strlen(THOUR))   && (0 == strncmp(THOUR, unit, strlen(THOUR)))) 
+     res = numbll <=TMAX_HOUR    ? numbll * 60 * 60 : ER_OOFRA;
+
+   else if ( (strlen(unit) == strlen(TDAY) )   && (0 == strncmp(TDAY, unit, strlen(TDAY))))
+     res = numbll <= TMAX_DAY    ? numbll * 60 * 60 * 24 : ER_OOFRA;
+
+   else if ( (strlen(unit) == strlen(TWEEK) )  && (0 == strncmp(TWEEK, unit, strlen(TWEEK))))
+     res = numbll <= TMAX_WEEK   ? numbll * 60 * 60 * 24 * 7 : ER_OOFRA;
+
+   else if ( (strlen(unit) == strlen(TMONTH) ) && (0 == strncmp(TMONTH, unit, strlen(TMONTH))))
+     res = numbll <= TMAX_MONTH  ? numbll * 60 * 60 * 24 * 7 * 4 : ER_OOFRA;
+
+   else if ( (strlen(unit) == strlen(TYEAR) )  && (0 == strncmp(TYEAR, unit, strlen(TYEAR))))
+     res = numbll <= TMAX_YEAR   ? numbll * 60 * 60 * 24 * 7 * 4 * 12 : ER_OOFRA;
+   else
+     res = ER_UNKWN;
+
+   free(numb);
+   free(unit);   
+   setlocale(LC_ALL,savelocale);
+   
+   return res;
 }
 
 static int
@@ -254,7 +371,7 @@ kill_all (int signal, int names, char **namelist, struct passwd *pwent)
     {
       pid_t id;
       int found_name = -1;
-
+      double process_age_sec = 0;
       /* match by UID */
       if (pwent && match_process_uid(pid_table[i], pwent->pw_uid)==0)
 	continue;
@@ -281,9 +398,24 @@ kill_all (int signal, int names, char **namelist, struct passwd *pwent)
 	}
       free (path);
       okay = fscanf (file, "%*d (%15[^)]", comm) == 1;
-      (void) fclose (file);
-      if (!okay)
+      if (!okay) {
+	fclose(file);
 	continue;
+      }
+      if ( younger_than || older_than ) {
+	 rewind(file);
+	 unsigned int proc_stt_jf = 0;
+	 okay = fscanf(file, "%*d %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %ull", 
+		       &proc_stt_jf) == 1;
+	 if (!okay) {
+	    fclose(file);
+	    continue;
+	 }
+	 process_age_sec = process_age(proc_stt_jf);
+	 assert(process_age_sec > 0);
+      }
+      (void) fclose (file);
+       
       got_long = 0;
       command = NULL;		/* make gcc happy */
       length = strlen (comm);
@@ -356,6 +488,11 @@ kill_all (int signal, int names, char **namelist, struct passwd *pwent)
 	    }
 	  else /* non-regex */
 	    {
+	      if ( younger_than && process_age_sec && (process_age_sec > younger_than ) )
+		 continue;
+	      if ( older_than   && process_age_sec && (process_age_sec < older_than ) )
+		 continue;
+	       
  	      if (!sts[j].st_dev)
 	        {
 	          if (length != COMM_LEN - 1 || name_len[j] < COMM_LEN - 1)
@@ -531,6 +668,8 @@ usage_killall (void)
     "  -e,--exact          require exact match for very long names\n"
     "  -I,--ignore-case    case insensitive process name match\n"
     "  -g,--process-group  kill process group instead of process\n"
+    "  -y,--younger-than   kill processes younger than Nsec,min,hour,day,WEEK,MON,YEAR\n"
+    "  -o,--older-than     kill processes older than Nsec,min,hour,day,WEEK,MON,YEAR\n"		    
     "  -i,--interactive    ask for confirmation before killing\n"
     "  -l,--list           list all known signal names\n"
     "  -q,--quiet          don't print complaints\n"
@@ -580,13 +719,17 @@ main (int argc, char **argv)
   int myoptind;
   struct passwd *pwent = NULL;
   struct stat isproc;
-  
+  char yt[16];
+  char ot[16];
+
   //int optsig = 0;
 
   struct option options[] = {
     {"exact", 0, NULL, 'e'},
     {"ignore-case", 0, NULL, 'I'},
     {"process-group", 0, NULL, 'g'},
+    {"younger-than", 1, NULL, 'y'},
+    {"older-than", 1, NULL, 'o'},
     {"interactive", 0, NULL, 'i'},
     {"list-signals", 0, NULL, 'l'},
     {"quiet", 0, NULL, 'q'},
@@ -625,9 +768,9 @@ main (int argc, char **argv)
 
   opterr = 0;
 #ifdef WITH_SELINUX
-  while ( (optc = getopt_long_only(argc,argv,"egilqrs:u:vwZ:VI",options,NULL)) != -1) {
+  while ( (optc = getopt_long_only(argc,argv,"egy:o:ilqrs:u:vwZ:VI",options,NULL)) != -1) {
 #else
-  while ( (optc = getopt_long_only(argc,argv,"egilqrs:u:vwVI",options,NULL)) != -1) {
+  while ( (optc = getopt_long_only(argc,argv,"egy:o:ilqrs:u:vwVI",options,NULL)) != -1) {
 #endif
     switch (optc) {
       case 'e':
@@ -636,6 +779,20 @@ main (int argc, char **argv)
       case 'g':
         process_group = 1;
         break;
+      case 'y':
+       if (pidof)
+	 usage();
+       strncpy(yt, optarg, 16);
+       if ( 0 >= (younger_than = parse_time_units(yt) ) )
+	    usage();
+       break;
+      case 'o':
+       if (pidof)
+	 usage();       
+       strncpy(ot, optarg, 16);
+       if ( 0 >= (older_than = parse_time_units(ot) ) )
+	    usage();
+       break;
       case 'i':
         if (pidof)
           usage();
