@@ -80,8 +80,8 @@
 
 static int verbose = 0, exact = 0, interactive = 0, reg = 0,
            quiet = 0, wait_until_dead = 0, process_group = 0,
-           younger_than = 0, older_than = 0,
            ignore_case = 0, pidof;
+static long younger_than = 0, older_than = 0;
 
 static int
 ask (char *name, pid_t pid, const int signal)
@@ -148,13 +148,13 @@ static double process_age(const unsigned jf)
 /* returns requested time interval in seconds, 
  negative indicates error has occured  
  */
-static time_t 
+static long
 parse_time_units(const char* age)
 {
    char *unit;
-   time_t numbll;
+   long num;
 
-   numbll = strtoll(age,&unit,10);
+   num = strtol(age,&unit,10);
    if (age == unit) /* no digits found */
      return -1;
    if (unit[0] == '\0') /* no units found */
@@ -162,19 +162,19 @@ parse_time_units(const char* age)
 
    switch(unit[0]) {
    case 's':
-     return numbll;
+     return num;
    case 'm':
-     return (numbll * 60);
+     return (num * 60);
    case 'h':
-     return (numbll * 60 * 60);
+     return (num * 60 * 60);
    case 'd':
-     return (numbll * 60 * 60 * 24);
+     return (num * 60 * 60 * 24);
    case 'w':
-     return (numbll * 60 * 60 * 24 * 7);
+     return (num * 60 * 60 * 24 * 7);
    case 'M':
-     return (numbll * 60 * 60 * 24 * 7 * 4);
+     return (num * 60 * 60 * 24 * 7 * 4);
    case 'y':
-     return (numbll * 60 * 60 * 24 * 7 * 4 * 12);
+     return (num * 60 * 60 * 24 * 7 * 4 * 12);
    }
    return -1;
 }
