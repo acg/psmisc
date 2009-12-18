@@ -55,13 +55,13 @@
 #define PROC_BASE "/proc"
 #define MAX_NAMES (int)(sizeof(unsigned long)*8)
 
-#define TSECOND "sec"
-#define TMINUTE "min"
-#define THOUR   "hour"
-#define TDAY    "day" 
-#define TWEEK   "WEEK"
-#define TMONTH  "MON" 
-#define TYEAR   "YEAR"
+#define TSECOND "s"
+#define TMINUTE "m"
+#define THOUR   "h"
+#define TDAY    "d" 
+#define TWEEK   "w"
+#define TMONTH  "M" 
+#define TYEAR   "y"
 
 #define TMAX_SECOND 31536000
 #define TMAX_MINUTE 525600  
@@ -75,6 +75,8 @@
 #define ER_NOMEM   -2
 #define ER_UNKWN   -3
 #define ER_OOFRA   -4
+
+#define NOT_PIDOF_OPTION if (pidof) usage(NULL)
 
 static int verbose = 0, exact = 0, interactive = 0, reg = 0,
            quiet = 0, wait_until_dead = 0, process_group = 0,
@@ -149,67 +151,32 @@ static double process_age(const unsigned jf)
 static time_t 
 parse_time_units(const char* age)
 {
-   regex_t preg;
-   if ( 0 == regcomp(&preg, "^[0-9]{1,8}[a-zA-Z]{1,8}$", REG_NOSUB | REG_EXTENDED)) {
-      int ret = regexec(&preg, age, (size_t)0, NULL, 0);
-      regfree(&preg);
-      if ( 0 != ret )
-	return ER_REGFAIL;
+   char *unit;
+   time_t numbll;
+
+   numbll = strtoll(age,&unit,10);
+   if (age == unit) /* no digits found */
+     return -1;
+   if (unit[0] == '\0') /* no units found */
+     return -1;
+
+   switch(unit[0]) {
+   case 's':
+     return numbll;
+   case 'm':
+     return (numbll * 60);
+   case 'h':
+     return (numbll * 60 * 60);
+   case 'd':
+     return (numbll * 60 * 60 * 24);
+   case 'w':
+     return (numbll * 60 * 60 * 24 * 7);
+   case 'M':
+     return (numbll * 60 * 60 * 24 * 7 * 4);
+   case 'y':
+     return (numbll * 60 * 60 * 24 * 7 * 4 * 12);
    }
-
-   time_t res;
-   char * savelocale;
-   savelocale = setlocale(LC_ALL, NULL);
-   setlocale(LC_NUMERIC,"C");
-
-   unsigned int i;
-   for (i=0; i<strlen(age); i++) {
-      if ( isdigit( (int)age[i] ) )
-	continue;
-      else
-	break;
-   }
-
-   char *numb, *unit;
-   if ( NULL == (numb = calloc(sizeof(char), i +1)))
-     return ER_NOMEM;
-   if ( NULL == (unit = calloc(sizeof(char), strlen(age) -i +1))) {
-      free(numb);
-      return ER_NOMEM;
-   };
-   
-   strncpy(numb, &age[0], i +1);
-   strncpy(unit, &age[i], strlen(age) - i +1);
-   time_t numbll = atoll(numb);
-
-   if      ( (strlen(unit) == strlen(TSECOND)) && (0 == strncmp(TSECOND, unit, strlen(TSECOND)))) 
-     res = numbll <= TMAX_SECOND ? numbll : ER_OOFRA;
-
-   else if ( (strlen(unit) == strlen(TMINUTE)) && (0 == strncmp(TMINUTE, unit, strlen(TMINUTE))))
-     res = numbll <= TMAX_MINUTE ? numbll * 60 : ER_OOFRA;
-
-   else if ( (strlen(unit) == strlen(THOUR))   && (0 == strncmp(THOUR, unit, strlen(THOUR)))) 
-     res = numbll <=TMAX_HOUR    ? numbll * 60 * 60 : ER_OOFRA;
-
-   else if ( (strlen(unit) == strlen(TDAY) )   && (0 == strncmp(TDAY, unit, strlen(TDAY))))
-     res = numbll <= TMAX_DAY    ? numbll * 60 * 60 * 24 : ER_OOFRA;
-
-   else if ( (strlen(unit) == strlen(TWEEK) )  && (0 == strncmp(TWEEK, unit, strlen(TWEEK))))
-     res = numbll <= TMAX_WEEK   ? numbll * 60 * 60 * 24 * 7 : ER_OOFRA;
-
-   else if ( (strlen(unit) == strlen(TMONTH) ) && (0 == strncmp(TMONTH, unit, strlen(TMONTH))))
-     res = numbll <= TMAX_MONTH  ? numbll * 60 * 60 * 24 * 7 * 4 : ER_OOFRA;
-
-   else if ( (strlen(unit) == strlen(TYEAR) )  && (0 == strncmp(TYEAR, unit, strlen(TYEAR))))
-     res = numbll <= TMAX_YEAR   ? numbll * 60 * 60 * 24 * 7 * 4 * 12 : ER_OOFRA;
-   else
-     res = ER_UNKWN;
-
-   free(numb);
-   free(unit);   
-   setlocale(LC_ALL,savelocale);
-   
-   return res;
+   return -1;
 }
 
 static int
@@ -653,8 +620,10 @@ usage_pidof (void)
 
 
 static void
-usage_killall (void)
+usage_killall (const char *msg)
 {
+  if (msg != NULL)
+    fprintf(stderr, "%s\n", msg);
 #ifdef WITH_SELINUX
    fprintf(stderr, _(
      "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"));
@@ -668,8 +637,8 @@ usage_killall (void)
     "  -e,--exact          require exact match for very long names\n"
     "  -I,--ignore-case    case insensitive process name match\n"
     "  -g,--process-group  kill process group instead of process\n"
-    "  -y,--younger-than   kill processes younger than Nsec,min,hour,day,WEEK,MON,YEAR\n"
-    "  -o,--older-than     kill processes older than Nsec,min,hour,day,WEEK,MON,YEAR\n"		    
+    "  -y,--younger-than   kill processes younger than TIME\n"
+    "  -o,--older-than     kill processes older than TIME\n"		    
     "  -i,--interactive    ask for confirmation before killing\n"
     "  -l,--list           list all known signal names\n"
     "  -q,--quiet          don't print complaints\n"
@@ -689,12 +658,12 @@ usage_killall (void)
 
 
 static void
-usage (void)
+usage (const char *msg)
 {
   if (pidof)
     usage_pidof ();
   else
-    usage_killall ();
+    usage_killall (msg);
   exit (1);
 }
 
@@ -754,7 +723,7 @@ main (int argc, char **argv)
   security_context_t scontext = NULL;
   regex_t scontext_reg;
 
-  if ( argc < 2 ) usage(); /* do the obvious thing... */
+  if ( argc < 2 ) usage(NULL); /* do the obvious thing... */
 #endif /*WITH_SELINUX*/
 
   name = strrchr (*argv, '/');
@@ -773,102 +742,92 @@ main (int argc, char **argv)
   while ( (optc = getopt_long_only(argc,argv,"egy:o:ilqrs:u:vwVI",options,NULL)) != -1) {
 #endif
     switch (optc) {
-      case 'e':
-        exact = 1;
-        break;
-      case 'g':
-        process_group = 1;
-        break;
-      case 'y':
-       if (pidof)
-	 usage();
-       strncpy(yt, optarg, 16);
-       if ( 0 >= (younger_than = parse_time_units(yt) ) )
-	    usage();
-       break;
-      case 'o':
-       if (pidof)
-	 usage();       
-       strncpy(ot, optarg, 16);
-       if ( 0 >= (older_than = parse_time_units(ot) ) )
-	    usage();
-       break;
-      case 'i':
-        if (pidof)
-          usage();
-        interactive = 1;
-        break;
-      case 'l':
-        if (pidof)
-          usage();
-        list_signals();
-        return 0;
-        break;
-      case 'q':
-        if (pidof)
-          usage();
-        quiet = 1;
-        break;
-      case 'r':
-	if (pidof)
-	  usage();
-	reg = 1;
-	break;
-      case 's':
-	sig_num = get_signal (optarg, "killall");
-        break;
-      case 'u':
-	if (pidof)
-	  usage();
-        if (!(pwent = getpwnam(optarg)))
-	  {
-            fprintf (stderr, _("Cannot find user %s\n"), optarg);
-            exit (1);
-          }
-        break;
-      case 'v':
-        if (pidof)
-          usage();
-        verbose = 1;
-        break;
-      case 'w':
-        if (pidof)
-          usage();
-        wait_until_dead = 1;
-        break;
-      case 'I':
-        ignore_case = 1;
-        break;
-      case 'V':
-        print_version();
-        return 0;
-        break;
+    case 'e':
+      exact = 1;
+      break;
+    case 'g':
+      process_group = 1;
+      break;
+    case 'y':
+      NOT_PIDOF_OPTION;
+      strncpy(yt, optarg, 16);
+      if ( 0 >= (younger_than = parse_time_units(yt) ) )
+	    usage(_("Invalid time format"));
+      break;
+    case 'o':
+      NOT_PIDOF_OPTION;
+      strncpy(ot, optarg, 16);
+      if ( 0 >= (older_than = parse_time_units(ot) ) )
+	    usage(_("Invalid time format"));
+      break;
+    case 'i':
+      NOT_PIDOF_OPTION;
+      interactive = 1;
+      break;
+    case 'l':
+      NOT_PIDOF_OPTION;
+      list_signals();
+      return 0;
+      break;
+    case 'q':
+      NOT_PIDOF_OPTION;
+      quiet = 1;
+      break;
+    case 'r':
+      NOT_PIDOF_OPTION;
+	  reg = 1;
+	  break;
+    case 's':
+	  sig_num = get_signal (optarg, "killall");
+      break;
+    case 'u':
+      NOT_PIDOF_OPTION;
+      if (!(pwent = getpwnam(optarg))) {
+        fprintf (stderr, _("Cannot find user %s\n"), optarg);
+        exit (1);
+      }
+      break;
+    case 'v':
+      NOT_PIDOF_OPTION;
+      verbose = 1;
+      break;
+    case 'w':
+      NOT_PIDOF_OPTION;
+      wait_until_dead = 1;
+      break;
+    case 'I':
+      ignore_case = 1;
+      break;
+    case 'V':
+      print_version();
+      return 0;
+      break;
 #ifdef WITH_SELINUX
-      case 'Z': 
-        if (is_selinux_enabled()>0) {
-	  scontext=optarg;
-          if (regcomp(&scontext_reg, scontext, REG_EXTENDED|REG_NOSUB) != 0) {
-            fprintf(stderr, _("Bad regular expression: %s\n"), scontext);
-            exit (1);
-	  }
-        } else 
-           fprintf(stderr, "Warning: -Z (--context) ignored. Requires an SELinux enabled kernel\n");
-        break;
+    case 'Z': 
+      if (is_selinux_enabled()>0) {
+	    scontext=optarg;
+        if (regcomp(&scontext_reg, scontext, REG_EXTENDED|REG_NOSUB) != 0) {
+          fprintf(stderr, _("Bad regular expression: %s\n"), scontext);
+          exit (1);
+	    }
+      } else 
+        fprintf(stderr, "Warning: -Z (--context) ignored. Requires an SELinux enabled kernel\n");
+      break;
 #endif /*WITH_SELINUX*/
-      case '?':
-        /* Signal names are in uppercase, so check to see if the argv
-         * is upper case */
-        if (argv[optind-1][1] >= 'A' && argv[optind-1][1] <= 'Z') {
-	      sig_num = get_signal (argv[optind-1]+1, "killall");
+    case '?':
+      /* Signal names are in uppercase, so check to see if the argv
+       * is upper case */
+      if (argv[optind-1][1] >= 'A' && argv[optind-1][1] <= 'Z') {
+	    sig_num = get_signal (argv[optind-1]+1, "killall");
+      } else {
+        /* Might also be a -## signal too */
+        if (argv[optind-1][1] >= '0' && argv[optind-1][1] <= '9') {
+          sig_num = atoi(argv[optind-1]+1);
         } else {
-          /* Might also be a -## signal too */
-          if (argv[optind-1][1] >= '0' && argv[optind-1][1] <= '9') {
-            sig_num = atoi(argv[optind-1]+1);
-          } else {
-            usage();
-          }
+          usage(NULL);
         }
-        break;
+      }
+      break;
     }
   }
   myoptind = optind;
@@ -877,18 +836,16 @@ main (int argc, char **argv)
 #else
   if ((argc - myoptind < 1) && pwent==NULL)	  
 #endif
-    usage();
+    usage(NULL);
 
-  if (argc - myoptind > MAX_NAMES + 1)
-    {
-      fprintf (stderr, _("Maximum number of names is %d\n"), MAX_NAMES);
-      exit (1);
-    }
-  if (stat("/proc/self/stat", &isproc)==-1)
-    {
-      fprintf (stderr, _("%s is empty (not mounted ?)\n"), PROC_BASE);
-      exit (1);
-    }
+  if (argc - myoptind > MAX_NAMES + 1) {
+    fprintf (stderr, _("Maximum number of names is %d\n"), MAX_NAMES);
+    exit (1);
+  }
+  if (stat("/proc/self/stat", &isproc)==-1) {
+    fprintf (stderr, _("%s is empty (not mounted ?)\n"), PROC_BASE);
+    exit (1);
+  }
   argv = argv + myoptind;
   /*printf("sending signal %d to procs\n", sig_num);*/
 #ifdef WITH_SELINUX

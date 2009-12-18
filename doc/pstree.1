@@ -1,4 +1,4 @@
-.TH PSTREE 1 2009-07-16 "Linux" "User Commands"
+.TH PSTREE 1 2009-12-16 "Linux" "User Commands"
 .SH NAME
 pstree \- display a tree of processes
 .SH SYNOPSIS
@@ -57,7 +57,8 @@ has happened. This is useful for when \fBpstree\fR is run in a xterminal.
 .SH OPTIONS
 .IP \fB\-a\fP
 Show command line arguments. If the command line of a process is swapped out,
-that process is shown in parentheses. \fB\-a\fP implicitly disables compaction.
+that process is shown in parentheses. \fB\-a\fP implicitly disables compaction
+for processes but not threads.
 .IP \fB\-A\fP
 Use ASCII characters to draw the tree.
 .IP \fB\-c\fP
