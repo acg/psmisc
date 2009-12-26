@@ -839,9 +839,11 @@ int main(int argc, char *argv[])
 #endif
 	struct inode_list *match_inodes = NULL;
 	struct names *names_head, *this_name, *names_tail;
-	int optc;
+	int argc_cnt;
+    char *current_argv, *option;
+    char option_buf[3];
+    struct option *optr;
 	char *nsptr;
-	int ignore_options;
 	char *sig_aname;
 
 	struct option options[] = {
@@ -860,7 +862,6 @@ int main(int argc, char *argv[])
 		{"ipv4", 0, NULL, '4'},
 		{"ipv6", 0, NULL, '6'},
 #endif
-		{"SIG", 1, NULL, 'S'},
 		{ 0, 0, 0, 0 }
 	};
 
@@ -881,127 +882,118 @@ int main(int argc, char *argv[])
 	netdev = find_net_dev();
 	fill_unix_cache(&unixsockets);
 
-	opterr=0;
-	ignore_options=0;
-	while ((optc =
+    for (argc_cnt = 1; argc_cnt < argc; argc_cnt++) {
+      current_argv = argv[argc_cnt];
+      if (current_argv[0] == '-') { /* its an option */
+        if (current_argv[1] == '-') { /* its a long option */
+          if (current_argv[2] == '\0')  /* -- */
+            break;
+          /* Parse the long options */
+          option = option_buf;
+          for (optr = options; optr->name != NULL; optr++) {
+            if (strcmp(current_argv+2,optr->name) == 0) {
+              sprintf(option_buf, "-%c", (char)optr->val);
+              break;
+            }
+          }
+          if (optr->name == NULL) {
+			fprintf(stderr, _("%s: Invalid option %s\n"), argv[0],
+				current_argv);
+			usage(NULL);
+          }
+        } else {
+          option = current_argv;
+        }
+        while (option++ != '\0') { /* skips over the - */
+		  switch (*option) {
 #ifdef WITH_IPV6
-		getopt_long(argc, argv, "46acfhiklmMn:sS:uvV", options,NULL)
-#else
-		getopt_long(argc, argv, "acfhikilmMn:sS:uvV", options,NULL)
-#endif
-			    ) != -1) {
-	  if (ignore_options > 0) {
-		ignore_options--;
-		continue;
-	  }
-		switch (optc) {
-#ifdef WITH_IPV6
-		case '4':
+		  case '4':
 			ipv4_only = 1;
 			break;
-		case '6':
+		  case '6':
 			ipv6_only = 1;
 			break;
-#endif
-		case 'a':
+#endif /* WITH_IPV6 */
+		  case 'a':
 			opts |= OPT_ALLFILES;
 			break;
-		case 'c':
+		  case 'c':
 			opts |= OPT_MOUNTS;
 			break;
-		case 'f':
+		  case 'f':
 			/* ignored */
 			break;
-		case 'h':
+		  case 'h':
 			usage(NULL);
 			break;
-		case 'i':
+		  case 'i':
 			opts |= OPT_INTERACTIVE;
 			break;
-		case 'k':
+		  case 'k':
 			opts |= OPT_KILL;
 			break;
-		case 'l':
+		  case 'l':
 			list_signals();
 			return 0;
-		case 'm':
+		  case 'm':
 			opts |= OPT_MOUNTS;
 			break;
-		case 'M':
+		  case 'M':
 			opts |= OPT_ISMOUNTPOINT;
+		    read_proc_mounts(&mounts);
 			break;
-		case 'n':
-			if (strcmp(optarg, "tcp") == 0)
+		  case 'n':
+            argc_cnt++;
+            while(option != '\0') option++;
+            if (argc_cnt >= argc) {
+              usage(_ ("Namespace option requires an argument."));
+              break;
+            }
+			if (strcmp(argv[argc_cnt], "tcp") == 0)
 				default_namespace = NAMESPACE_TCP;
-			else if (strcmp(optarg, "udp") == 0)
+			else if (strcmp(argv[argc_cnt], "udp") == 0)
 				default_namespace = NAMESPACE_UDP;
-			else if (strcmp(optarg, "file") == 0)
+			else if (strcmp(argv[argc_cnt], "file") == 0)
 				default_namespace = NAMESPACE_FILE;
 			else
 				usage(_("Invalid namespace name"));
 			break;
-		case 's':
+		  case 's':
 			opts |= OPT_SILENT;
 			break;
-		case 'S':
-			{
-			  char *signame;
-			  if (asprintf(&signame, "S%s",optarg) > 0) {
-				sig_number = get_signal(signame,argv[0]);
-			    free(signame);
-			  }
-			  break;
-			}
-		case 'u':
+		  case 'u':
 			opts |= OPT_USER;
 			break;
-		case 'v':
+		  case 'v':
 			opts |= OPT_VERBOSE;
 			break;
-		case 'V':
+		  case 'V':
 			print_version();
 			return 0;
-		case '?':
-			if (optopt=='n') {
-				usage(_
-				      ("Namespace option requires an argument."));
-			}
-			if (isdigit(optopt)) {
-			  if (strlen(argv[optind-1]) == 2)
-				sig_aname =strdup(argv[optind-1]+1);
-			  else {
-				sig_aname = strdup(argv[optind]+1);
-			    ignore_options = strlen(argv[optind])-2;
-			  }
-			  sig_number = get_signal(sig_aname,argv[0]);
-			  free(sig_aname);
-			  break;
-			}
+          default:
+            if (isupper(*option) || isdigit(*option)) {
+              sig_number = get_signal(option, argv[0]);
+              while(option != '\0') option++;
+              break;
+            }
 			fprintf(stderr, "%s: Invalid option %c\n", argv[0],
-				optopt);
-			exit(1);
+				*option);
 			usage(NULL);
-
-			break;
-		default:
-			printf("unknown optc %c\n", optc);
 			exit(1);
+			break;
+		  }		/* switch */
+	    }			/* while option */
+        continue;
+      } /* an option */
+      /* Not an option, must be a file specification */
 
-		}		/* switch */
-	}			/* while optc */
-	if (optc == argc)
-		usage(_("No process specification given"));
-	if (opts & OPT_ISMOUNTPOINT)
-		read_proc_mounts(&mounts);
-	for (optc = optind; optc < argc; optc++) {
-		/* File specifications */
 		if ((this_name = malloc(sizeof(struct names))) == NULL)
 			continue;
 		this_name->next = NULL;
 		/* try to find namespace spec */
 		this_name->name_space = default_namespace;
-		if (((nsptr = strchr(argv[optc], '/')) != NULL)
-		    && (nsptr != argv[optc])) {
+		if (((nsptr = strchr(current_argv, '/')) != NULL)
+		    && (nsptr != current_argv)) {
 			if (strcmp(nsptr + 1, "tcp") == 0) {
 				this_name->name_space = NAMESPACE_TCP;
 				*nsptr = '\0';
@@ -1019,13 +1011,13 @@ int main(int argc, char *argv[])
 			usage(_
 			      ("You can only use files with mountpoint options"));
 		if (opts & OPT_ISMOUNTPOINT &&
-		    !is_mountpoint(&mounts, argv[optc])) {
+		    !is_mountpoint(&mounts, current_argv)) {
 			free(this_name);
 			continue;
 		}
 		switch (this_name->name_space) {
 		case NAMESPACE_TCP:
-			if (asprintf(&(this_name->filename), "%s/tcp", argv[optc]) > 0) {
+			if (asprintf(&(this_name->filename), "%s/tcp", current_argv) > 0) {
 #ifdef WITH_IPV6
 			  parse_inet(this_name, ipv4_only, ipv6_only,
 				   &tcp_connection_list, &tcp6_connection_list);
@@ -1035,7 +1027,7 @@ int main(int argc, char *argv[])
 			}
 			break;
 		case NAMESPACE_UDP:
-			if (asprintf(&(this_name->filename), "%s/udp", argv[optc]) > 0) {
+			if (asprintf(&(this_name->filename), "%s/udp", current_argv) > 0) {
 #ifdef WITH_IPV6
 			  parse_inet(this_name, ipv4_only, ipv6_only,
 				   &udp_connection_list, &udp6_connection_list);
@@ -1045,7 +1037,7 @@ int main(int argc, char *argv[])
 			}
 			break;
 		default:	/* FILE */
-			this_name->filename = strdup(argv[optc]);
+			this_name->filename = strdup(current_argv);
 			parse_file(this_name, &match_inodes);
 			parse_unixsockets(this_name, &match_inodes,
 					  unixsockets);
@@ -1059,7 +1051,9 @@ int main(int argc, char *argv[])
 		if (names_tail != NULL)
 			names_tail->next = this_name;
 		names_tail = this_name;
-	}			/* for optc */
+    } /* for across the argvs */
+	if (names_head == NULL)
+		usage(_("No process specification given"));
 
 	if (opts & OPT_SILENT) {
 		opts &= ~OPT_VERBOSE;

@@ -1,3 +1,4 @@
+
 Changes in 22.9
 ===============
 	* short option l returned in fuser Debian #539087
@@ -10,6 +11,8 @@ Changes in 22.9
 	* new program prtstat which prints contents of /proc/<pid>/stat 
 	  Debian #281706
 	* killall restricts by date. Thanks to George Danchev Debian #544657
+	* long options terminated in pstree too to stop segfault
+	* Re-worked fuser getopt again so -KILL options work
 
 Changes in 22.8
 ===============

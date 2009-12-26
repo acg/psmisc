@@ -872,6 +872,7 @@ int main(int argc, char **argv)
 #ifdef WITH_SELINUX
         {"security-context", 0, NULL, 'Z'},
 #endif                                /*WITH_SELINUX */
+        { 0, 0, 0, 0 }
     };
 
     if (ioctl(1, TIOCGWINSZ, &winsz) >= 0)
