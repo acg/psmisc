@@ -12,7 +12,7 @@ Changes in 22.9
 	  Debian #281706
 	* killall restricts by date. Thanks to George Danchev Debian #544657
 	* long options terminated in pstree too to stop segfault
-	* Re-worked fuser getopt again so -KILL options work
+	* Re-worked fuser getopt again so -KILL options work Gentoo #297423
 
 Changes in 22.8
 ===============
