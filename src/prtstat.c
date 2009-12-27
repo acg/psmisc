@@ -223,7 +223,7 @@ static void print_stat(const int pid, const opt_type options)
   }
   if ( (fp = fopen(pathname,"r")) == NULL) {
 	if (errno == ENOENT) 
-	  fprintf(stderr, _("Process PID=%d does not exist.\n"), pid);
+	  fprintf(stderr, _("Process with pid %d does not exist.\n"), pid);
 	else
 	  fprintf(stderr, _("Unable to open stat file for pid %d (%s)\n"),(int)pid,strerror(errno));
 	free(pathname);

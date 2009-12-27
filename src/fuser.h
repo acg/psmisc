@@ -38,6 +38,7 @@ struct procs {
 struct names {
 	char *filename;
 	unsigned char name_space;
+    struct stat st;
 	struct procs *matched_procs;
 	struct names *next;
 };
