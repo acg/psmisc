@@ -162,7 +162,7 @@ scan_procs(struct names *names_head, struct inode_list *ino_head,
 
 	if ((topproc_dir = opendir("/proc")) == NULL) {
 		fprintf(stderr, _("Cannot open /proc directory: %s\n"),
-			strerror(errno));
+		strerror(errno));
 		exit(1);
 	}
 	my_pid = getpid();

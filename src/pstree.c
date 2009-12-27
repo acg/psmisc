@@ -586,192 +586,156 @@ static void dump_by_user(PROC * current, uid_t uid)
  */
 static void read_proc(void)
 {
-    DIR *dir;
-    struct dirent *de;
-    FILE *file;
-    struct stat st;
-    char *path, *comm;
-    char *buffer;
-    size_t buffer_size;
-    char readbuf[BUFSIZ + 1];
-    char *tmpptr;
-    pid_t pid, ppid;
-    int fd, size;
-    int empty;
+  DIR *dir;
+  struct dirent *de;
+  FILE *file;
+  struct stat st;
+  char *path, *comm;
+  char *buffer;
+  size_t buffer_size;
+  char readbuf[BUFSIZ + 1];
+  char *tmpptr;
+  pid_t pid, ppid;
+  int fd, size;
+  int empty;
 #ifdef WITH_SELINUX
-    security_context_t scontext = NULL;
-    int selinux_enabled = is_selinux_enabled() > 0;
-#endif                                /*WITH_SELINUX */
+  security_context_t scontext = NULL;
+  int selinux_enabled = is_selinux_enabled() > 0;
+#endif                /*WITH_SELINUX */
 
-    if (trunc)
-        buffer_size = output_width + 1;
-    else
-        buffer_size = BUFSIZ + 1;
+  if (trunc)
+    buffer_size = output_width + 1;
+  else
+    buffer_size = BUFSIZ + 1;
 
-    if (!print_args)
-        buffer = NULL;
-    else if (!(buffer = malloc(buffer_size))) {
-        perror("malloc");
-        exit(1);
-    }
-    if (!(dir = opendir(PROC_BASE))) {
-        perror(PROC_BASE);
-        exit(1);
-    }
-    empty = 1;
-    while ((de = readdir(dir)) != NULL)
-        if ((pid = (pid_t) atoi(de->d_name)) != 0) {
-            if (!
-                (path =
-                 malloc(strlen(PROC_BASE) + strlen(de->d_name) + 10)))
-                exit(2);
-            sprintf(path, "%s/%d/stat", PROC_BASE, pid);
-            if ((file = fopen(path, "r")) != NULL) {
-                empty = 0;
-                sprintf(path, "%s/%d", PROC_BASE, pid);
+  if (!print_args)
+    buffer = NULL;
+  else if (!(buffer = malloc(buffer_size))) {
+    perror("malloc");
+    exit(1);
+  }
+  if (!(dir = opendir(PROC_BASE))) {
+    perror(PROC_BASE);
+    exit(1);
+  }
+  empty = 1;
+  while ((de = readdir(dir)) != NULL)
+    if ((pid = (pid_t) atoi(de->d_name)) != 0) {
+      if (! (path = malloc(strlen(PROC_BASE) + strlen(de->d_name) + 10)))
+        exit(2);
+      sprintf(path, "%s/%d/stat", PROC_BASE, pid);
+      if ((file = fopen(path, "r")) != NULL) {
+        empty = 0;
+        sprintf(path, "%s/%d", PROC_BASE, pid);
 #ifdef WITH_SELINUX
-                if (selinux_enabled)
-                    if (getpidcon(pid, &scontext) < 0) {
-                        perror(path);
-                        exit(1);
-                    }
-#endif                                /*WITH_SELINUX */
-                if (stat(path, &st) < 0) {
-                    perror(path);
-                    exit(1);
-                }
-                size = fread(readbuf, 1, BUFSIZ, file);
-                if (ferror(file) == 0) {
-                    readbuf[size] = 0;
-                    /*printf("readbuf: %s\n", readbuf); */
-                    /* commands may have spaces or ) in them.
-                     * so don't trust anything from the ( to the last ) */
-                    if ((comm = strchr(readbuf, '('))
-                        && (tmpptr = strrchr(comm, ')'))) {
-                        ++comm;
-                        *tmpptr = 0;
-                        /* We now have readbuf with pid and cmd, and tmpptr+2
-                         * with the rest */
-                        /*printf("tmpptr: %s\n", tmpptr+2); */
-                        if (sscanf(tmpptr + 2, "%*c %d", &ppid) == 1) {
-/*
-            if (fscanf
-                (file, "%d (%s) %c %d", &dummy, comm, (char *) &dummy,
-                 &ppid) == 4)
- */
-                            {
-                                DIR *taskdir;
-                                struct dirent *dt;
-                                char *taskpath;
-                                char *threadname;
-                                int thread;
-
-                                if (!
-                                    (taskpath =
-                                     malloc(strlen(path) + 10))) {
-                                    exit(2);
-                                }
-                                sprintf(taskpath, "%s/task", path);
-
-                                if ((taskdir = opendir(taskpath)) != 0) {
-                                    /* if we have this dir, we're on 2.6 */
-                                    if (!
-                                        (threadname =
-                                         malloc(strlen(comm) + 3))) {
-                                        exit(2);
-                                    }
-                                    sprintf(threadname, "{%s}", comm);
-                                    while ((dt = readdir(taskdir)) != NULL) {
-                                        if ((thread =
-                                             atoi(dt->d_name)) != 0) {
-                                            if (thread != pid) {
-#ifdef WITH_SELINUX
-                                                if (print_args)
-                                                    add_proc(threadname,
-                                                             thread, pid,
-                                                             st.st_uid,
-                                                             threadname,
-                                                             strlen
-                                                             (threadname) +
-                                                             1, 1,scontext);
-                                                else
-                                                    add_proc(threadname,
-                                                             thread, pid,
-                                                             st.st_uid,
-                                                             NULL, 0, 1,
-                                                             scontext);
-#else                                /*WITH_SELINUX */
-                                                if (print_args)
-                                                    add_proc(threadname,
-                                                             thread, pid,
-                                                             st.st_uid,
-                                                             threadname,
-                                                             strlen
-                                                             (threadname) +
-                                                             1, 1);
-                                                else
-                                                    add_proc(threadname,
-                                                             thread, pid,
-                                                             st.st_uid,
-                                                             NULL, 0, 1);
-#endif                                /*WITH_SELINUX */
-                                            }
-                                        }
-                                    }
-                                    free(threadname);
-                                    (void) closedir(taskdir);
-                                }
-                                free(taskpath);
-                            }
-
-                            if (!print_args)
-#ifdef WITH_SELINUX
-                                add_proc(comm, pid, ppid, st.st_uid, NULL,
-                                         0, 0, scontext);
-#else                                /*WITH_SELINUX */
-                                add_proc(comm, pid, ppid, st.st_uid, NULL,
-                                         0, 0);
-#endif                                /*WITH_SELINUX */
-                            else {
-                                sprintf(path, "%s/%d/cmdline", PROC_BASE,
-                                        pid);
-                                if ((fd = open(path, O_RDONLY)) < 0) {
-                                    perror(path);
-                                    exit(1);
-                                }
-                                if ((size =
-                                     read(fd, buffer, buffer_size)) < 0) {
-                                    perror(path);
-                                    exit(1);
-                                }
-                                (void) close(fd);
-                                /* If we have read the maximum screen length of args, bring it back by one to stop overflow */
-                                if (size >= buffer_size)
-                                    size--;
-                                if (size)
-                                    buffer[size++] = 0;
-#ifdef WITH_SELINUX
-                                add_proc(comm, pid, ppid, st.st_uid,
-                                         buffer, size, 0, scontext);
-#else                                /*WITH_SELINUX */
-                                add_proc(comm, pid, ppid, st.st_uid,
-                                         buffer, size, 0);
-#endif                                /*WITH_SELINUX */
-                            }
-                        }
-                    }
-                }
-                (void) fclose(file);
-            }
-            free(path);
+        if (selinux_enabled)
+          if (getpidcon(pid, &scontext) < 0) {
+            perror(path);
+            exit(1);
+          }
+#endif                /*WITH_SELINUX */
+        if (stat(path, &st) < 0) {
+          perror(path);
+          exit(1);
         }
-    (void) closedir(dir);
-    if (print_args)
-        free(buffer);
-    if (empty) {
-        fprintf(stderr, _("%s is empty (not mounted ?)\n"), PROC_BASE);
-        exit(1);
+        size = fread(readbuf, 1, BUFSIZ, file);
+        if (ferror(file) == 0) {
+          readbuf[size] = 0;
+          /* commands may have spaces or ) in them.
+           * so don't trust anything from the ( to the last ) */
+          if ((comm = strchr(readbuf, '('))
+            && (tmpptr = strrchr(comm, ')'))) {
+            ++comm;
+            *tmpptr = 0;
+            /* We now have readbuf with pid and cmd, and tmpptr+2
+             * with the rest */
+            /*printf("tmpptr: %s\n", tmpptr+2); */
+            if (sscanf(tmpptr + 2, "%*c %d", &ppid) == 1) {
+              DIR *taskdir;
+              struct dirent *dt;
+              char *taskpath;
+              char *threadname;
+              int thread;
+
+              if (! (taskpath = malloc(strlen(path) + 10)))
+                exit(2);
+              sprintf(taskpath, "%s/task", path);
+
+              if ((taskdir = opendir(taskpath)) != 0) {
+                /* if we have this dir, we're on 2.6 */
+                if (! (threadname = malloc(COMM_LEN+1))) {
+                    exit(2);
+                }
+                sprintf(threadname, "{%.*s}", COMM_LEN-2, comm);
+                while ((dt = readdir(taskdir)) != NULL) {
+                  if ((thread = atoi(dt->d_name)) != 0) {
+                    if (thread != pid) {
+#ifdef WITH_SELINUX
+                      if (print_args)
+                        add_proc(threadname, thread, pid, st.st_uid, 
+                            threadname, strlen (threadname) + 1, 1,scontext);
+                      else
+                        add_proc(threadname, thread, pid, st.st_uid, 
+                            NULL, 0, 1, scontext);
+#else                /*WITH_SELINUX */
+                      if (print_args)
+                        add_proc(threadname, thread, pid, st.st_uid,
+                            threadname, strlen (threadname) + 1, 1);
+                      else
+                        add_proc(threadname, thread, pid, st.st_uid,
+                            NULL, 0, 1);
+#endif                /*WITH_SELINUX */
+                      }
+                    }
+                  }
+                  free(threadname);
+                  (void) closedir(taskdir);
+                }
+              free(taskpath);
+              if (!print_args)
+#ifdef WITH_SELINUX
+                add_proc(comm, pid, ppid, st.st_uid, NULL, 0, 0, scontext);
+#else                /*WITH_SELINUX */
+                add_proc(comm, pid, ppid, st.st_uid, NULL, 0, 0);
+#endif                /*WITH_SELINUX */
+              else {
+                sprintf(path, "%s/%d/cmdline", PROC_BASE, pid);
+                if ((fd = open(path, O_RDONLY)) < 0) {
+                  perror(path);
+                  exit(1);
+                }
+                if ((size = read(fd, buffer, buffer_size)) < 0) {
+                  perror(path);
+                  exit(1);
+                }
+                (void) close(fd);
+                /* If we have read the maximum screen length of args, bring it back by one to stop overflow */
+                if (size >= buffer_size)
+                  size--;
+                if (size)
+                  buffer[size++] = 0;
+#ifdef WITH_SELINUX
+                add_proc(comm, pid, ppid, st.st_uid,
+                     buffer, size, 0, scontext);
+#else                /*WITH_SELINUX */
+                add_proc(comm, pid, ppid, st.st_uid,
+                     buffer, size, 0);
+#endif                /*WITH_SELINUX */
+              }
+            }
+          }
+        }
+        (void) fclose(file);
+      }
+      free(path);
     }
+  (void) closedir(dir);
+  if (print_args)
+    free(buffer);
+  if (empty) {
+    fprintf(stderr, _("%s is empty (not mounted ?)\n"), PROC_BASE);
+    exit(1);
+  }
 }
 
 

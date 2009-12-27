@@ -186,11 +186,14 @@ is when looking for TCP or UDP sockets when running
 as a non-root user. In this case 
 .B fuser
 will report no access
+.PP
+The mount \-m option will match any file within the save device as the 
+specified file, use the \-M option as well if you mean to specify only the mount point.
 .SH AUTHORS
 .PP
 Werner Almesberger <werner@almesberger.net>
 .PP
-Craig Small <csmall@small.dropbear.id.au>
+Craig Small <csmall@enc.com.au>
 .SH "SEE ALSO"
 .BR kill "(1), " killall "(1), " lsof "(8), " pkill "(1), " ps "(1), " kill (2).
 .\"{{{}}}

@@ -27,7 +27,7 @@ pstree_SOURCES = pstree.c comm.h i18n.h
 
 pstree_LDADD = @TERMCAP_LIB@ @SELINUX_LIB@
 
-prtstat_SOURCES = prtstat.c
+prtstat_SOURCES = prtstat.c prtstat.h
 
 BUILT_SOURCES = signames.h
 
