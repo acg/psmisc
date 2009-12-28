@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.2pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2009-12-27 18:11+1100\n"
+"POT-Creation-Date: 2009-12-28 13:54+1100\n"
 "PO-Revision-Date: 2006-03-07 12:01+0100\n"
 "Last-Translator: Trond Endrestøl <Trond.Endrestol@fagskolen.gjovik.no>\n"
 "Language-Team: Norwegian Bokmaal <i18n-nb@lister.ping.uio.no>\n"
@@ -361,17 +361,17 @@ msgstr "Kan ikke åpne /proc/net/unix: %s\n"
 msgid "Kill process %d ? (y/N) "
 msgstr "Drepe prosess %d ? (j/N) "
 
-#: src/fuser.c:1496
+#: src/fuser.c:1501
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Kunne ikke drepe prosessen %d: %s\n"
 
-#: src/fuser.c:1508
+#: src/fuser.c:1513
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Kan ikke åpne en nettverkssocket.\n"
 
-#: src/fuser.c:1512
+#: src/fuser.c:1517
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Kan ikke finne socketens enhetsnummer.\n"

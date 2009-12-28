@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 21.6cvs\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2009-12-27 18:11+1100\n"
+"POT-Creation-Date: 2009-12-28 13:54+1100\n"
 "PO-Revision-Date: 2004-12-08 12:46+0100\n"
 "Last-Translator: Guillem Jover <guillem@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -341,17 +341,17 @@ msgstr ""
 msgid "Kill process %d ? (y/N) "
 msgstr "Voleu matar el procés %d? (s/N)"
 
-#: src/fuser.c:1496
+#: src/fuser.c:1501
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr ""
 
-#: src/fuser.c:1508
+#: src/fuser.c:1513
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr ""
 
-#: src/fuser.c:1512
+#: src/fuser.c:1517
 #, fuzzy, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "no s'ha pogut trobar el nombre de dispositiu del sòcol"

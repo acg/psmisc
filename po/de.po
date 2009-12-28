@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.6\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2009-12-27 18:11+1100\n"
+"POT-Creation-Date: 2009-12-28 13:54+1100\n"
 "PO-Revision-Date: 2007-11-12 14:18+0100\n"
 "Last-Translator: Benno Schulenberg <benno@vertaalt.nl>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -342,17 +342,17 @@ msgstr "/proc/net/unix kann nicht geöffnet werden: %s\n"
 msgid "Kill process %d ? (y/N) "
 msgstr "Prozess %d abbrechen? (y/N) "
 
-#: src/fuser.c:1496
+#: src/fuser.c:1501
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Kann Prozess %d nicht abbrechen: %s\n"
 
-#: src/fuser.c:1508
+#: src/fuser.c:1513
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr ""
 
-#: src/fuser.c:1512
+#: src/fuser.c:1517
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Kann die Gerätenummer der Sockets nicht finden.\n"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 1.0\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2009-12-27 18:11+1100\n"
+"POT-Creation-Date: 2009-12-28 13:54+1100\n"
 "PO-Revision-Date: 2001-10-28 22:14-0200\n"
 "Last-Translator: Edesio Costa e Silva <edesio+psmisc@ieee.org>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
@@ -310,17 +310,17 @@ msgstr ""
 msgid "Kill process %d ? (y/N) "
 msgstr "Aborta processo %d ? (y/n) "
 
-#: src/fuser.c:1496
+#: src/fuser.c:1501
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr ""
 
-#: src/fuser.c:1508
+#: src/fuser.c:1513
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr ""
 
-#: src/fuser.c:1512
+#: src/fuser.c:1517
 #, fuzzy, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "não pode achar o número de dispositivo do socket"

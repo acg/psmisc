@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc-21.6pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2009-12-27 18:11+1100\n"
+"POT-Creation-Date: 2009-12-28 13:54+1100\n"
 "PO-Revision-Date: 2005-02-24 12:00-0500\n"
 "Last-Translator: Laurentiu Buzdugan <lbuz@rolix.org>\n"
 "Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
@@ -344,17 +344,17 @@ msgstr ""
 msgid "Kill process %d ? (y/N) "
 msgstr "Terminã process %d ? (y/N) "
 
-#: src/fuser.c:1496
+#: src/fuser.c:1501
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr ""
 
-#: src/fuser.c:1508
+#: src/fuser.c:1513
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr ""
 
-#: src/fuser.c:1512
+#: src/fuser.c:1517
 #, fuzzy, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "nu pot gãsi numerele dispozitivelor socket-urilor"

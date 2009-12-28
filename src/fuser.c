@@ -1486,12 +1486,17 @@ kill_matched_proc(struct procs *proc_head, const opt_type opts,
 		  const int sig_number)
 {
 	struct procs *pptr;
+  pid_t *mypid;
+
+  mypid = getpid();
 
 	for (pptr = proc_head; pptr != NULL; pptr = pptr->next) {
+    if ( pptr->pid == mypid)
+      continue; /* dont kill myself */
 		if ( pptr->proc_type == PTYPE_NORMAL )
-		    continue;
+	    continue;
 		if ((opts & OPT_INTERACTIVE) && (ask(pptr->pid) == 0))
-			continue;
+		  continue;
 		if ( kill(pptr->pid, sig_number) < 0) {
 			fprintf(stderr, _("Could not kill process %d: %s\n"),
 					pptr->pid, strerror(errno));

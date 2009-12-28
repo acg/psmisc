@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.8rc1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2009-12-27 18:11+1100\n"
+"POT-Creation-Date: 2009-12-28 13:54+1100\n"
 "PO-Revision-Date: 2009-07-15 13:47+0100\n"
 "Last-Translator: Marco Colombo <m.colombo@ed.ac.uk>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -343,19 +343,19 @@ msgstr "Impossibile aprire /proc/net/unix: %s\n"
 msgid "Kill process %d ? (y/N) "
 msgstr "Terminare il processo %d? (y/N) "
 
-#: src/fuser.c:1496
+#: src/fuser.c:1501
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Impossibile terminare il processo %d: %s\n"
 
 # FIXME
-#: src/fuser.c:1508
+#: src/fuser.c:1513
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Impossibile aprire un socket di rete.\n"
 
 # FIXME
-#: src/fuser.c:1512
+#: src/fuser.c:1517
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Impossibile trovare il numero di dispositivo del socket.\n"

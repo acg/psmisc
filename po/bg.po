@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.2pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2009-12-27 18:11+1100\n"
+"POT-Creation-Date: 2009-12-28 13:54+1100\n"
 "PO-Revision-Date: 2006-03-07 11:49+0200\n"
 "Last-Translator: Anton Zinoviev <zinoviev@debian.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -353,17 +353,17 @@ msgstr "Не може да се отвори /proc/net/unix: %s\n"
 msgid "Kill process %d ? (y/N) "
 msgstr "Да се убие ли процесът %d? (д/Н) "
 
-#: src/fuser.c:1496
+#: src/fuser.c:1501
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Процесът %d не може да бъде убит: %s\n"
 
-#: src/fuser.c:1508
+#: src/fuser.c:1513
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Не може да се отвори мрежово гнездо.\n"
 
-#: src/fuser.c:1512
+#: src/fuser.c:1517
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Не може да бъде намерен номерът на устройството на гнездото.\n"

@@ -1,3 +1,6 @@
+Changes in 22.10
+================
+	* fuser -k -m ... won't kill itself Debian #562767
 
 Changes in 22.9
 ===============
