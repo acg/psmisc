@@ -48,6 +48,10 @@
 #include <selinux/selinux.h>
 #endif /*WITH_SELINUX*/
 
+#ifdef HAVE_LOCALE_H
+#include <locale.h>
+#endif /* HAVE_LOCALE_H */
+
 #include "i18n.h"
 #include "comm.h"
 #include "signals.h"

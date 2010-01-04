@@ -1496,7 +1496,7 @@ kill_matched_proc(struct procs *proc_head, const opt_type opts,
 	for (pptr = proc_head; pptr != NULL; pptr = pptr->next) {
     if ( pptr->pid == mypid)
       continue; /* dont kill myself */
-		if ( pptr->proc_type == PTYPE_NORMAL )
+		if ( pptr->proc_type != PTYPE_NORMAL )
 	    continue;
 		if ((opts & OPT_INTERACTIVE) && (ask(pptr->pid) == 0))
 		  continue;

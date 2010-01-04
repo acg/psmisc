@@ -1,6 +1,9 @@
 Changes in 22.10
 ================
 	* fuser -k -m ... won't kill itself Debian #562767
+	* fuser -NAME fixed SF #2924691, Debian #563388, Gentoo #297423
+	* Added locale.h include for killall on non NLS SF #2922163
+	* Reversed normal file fuser -k check Debian #563387
 
 Changes in 22.9
 ===============
