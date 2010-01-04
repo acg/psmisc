@@ -4,7 +4,7 @@
  * Based on fuser.c Copyright (C) 1993-2005 Werner Almesberger and Craig Small
  *
  * Completely re-written
- * Copyright (C) 2005-2009 Craig Small
+ * Copyright (C) 2005-2010 Craig Small
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -133,7 +133,7 @@ void print_version()
 	fprintf(stderr, _("fuser (PSmisc) %s\n"), VERSION);
 	fprintf(stderr,
 		_
-		("Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n\n"));
+		("Copyright (C) 1993-2010 Werner Almesberger and Craig Small\n\n"));
 	fprintf(stderr,
 		_("PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
 		  "This is free software, and you are welcome to redistribute it under\n"
@@ -832,6 +832,7 @@ int main(int argc, char *argv[])
     char option_buf[3];
     struct option *optr;
 	char *nsptr;
+  int skip_argv;
 
 	struct option options[] = {
 		{"all", 0, NULL, 'a'},
@@ -891,7 +892,8 @@ int main(int argc, char *argv[])
         } else {
           option = current_argv;
         }
-        while (*(++option) != '\0') { /* skips over the - */
+        skip_argv=0;
+        while (*(++option) != '\0' && !skip_argv) { /* skips over the - */
 		  switch (*option) {
 #ifdef WITH_IPV6
 		  case '4':
@@ -935,6 +937,7 @@ int main(int argc, char *argv[])
               usage(_ ("Namespace option requires an argument."));
               exit(1);;
             }
+            skip_argv=1;
             //while(option != '\0') option++;
 			if (strcmp(argv[argc_cnt], "tcp") == 0)
 				default_namespace = NAMESPACE_TCP;
@@ -959,8 +962,8 @@ int main(int argc, char *argv[])
 			return 0;
           default:
             if (isupper(*option) || isdigit(*option)) {
-              sig_number = get_signal(option, argv[0]);
-             // while(option != '\0') option++;
+              sig_number = get_signal(current_argv+1, argv[0]);
+            skip_argv=1;
               break;
             }
 			fprintf(stderr, "%s: Invalid option %c\n", argv[0],
