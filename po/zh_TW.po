@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.6\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2009-12-28 13:54+1100\n"
+"POT-Creation-Date: 2010-01-04 21:42+1100\n"
 "PO-Revision-Date: 2009-03-23 23:10+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -16,42 +16,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/killall.c:98
+#: src/killall.c:102
 #, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "砍除 %s(%s%d)？(y/N) "
 
-#: src/killall.c:101
+#: src/killall.c:105
 #, c-format
 msgid "Signal %s(%s%d) ? (y/N) "
 msgstr "信號 %s(%s%d)？(y/N) "
 
-#: src/killall.c:205
+#: src/killall.c:209
 #, c-format
 msgid "Cannot get UID from process status\n"
 msgstr "無法從進程狀態取得 UID\n"
 
-#: src/killall.c:231 src/killall.c:810
+#: src/killall.c:235 src/killall.c:814
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr "不當的正規表示式：%s\n"
 
-#: src/killall.c:442
+#: src/killall.c:446
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "跳過部份符合 %s(%d)\n"
 
-#: src/killall.c:561
+#: src/killall.c:565
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "藉由信號 %4$d 砍除 %1$s(%2$s%3$d)\n"
 
-#: src/killall.c:575
+#: src/killall.c:579
 #, fuzzy, c-format
 msgid "%s: no process found\n"
 msgstr "%s: 沒有砍除任何進程\n"
 
-#: src/killall.c:613
+#: src/killall.c:617
 #, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -72,19 +72,19 @@ msgstr ""
 "   -V      顯示版本資訊\n"
 "\n"
 
-#: src/killall.c:629
+#: src/killall.c:633
 #, c-format
 msgid ""
 "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
 msgstr ""
 "用法：killall [-Z 上下文] [-u 使用者] [ -eIgiqrvw ] [ -SIGNAL ] 名稱…\n"
 
-#: src/killall.c:632
+#: src/killall.c:636
 #, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "用法：killall [選項]… [--] 名稱…\n"
 
-#: src/killall.c:635
+#: src/killall.c:639
 #, fuzzy, c-format
 msgid ""
 "       killall -l, --list\n"
@@ -121,7 +121,7 @@ msgstr ""
 " -V,--version        顯示版本資訊\n"
 " -w,--wait           等待進程的消滅\n"
 
-#: src/killall.c:653
+#: src/killall.c:657
 #, c-format
 msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
@@ -130,7 +130,7 @@ msgstr ""
 "  -Z,--context REGEXP 只砍除有此上下文的進程\n"
 "                     (必須位於其他引數之前)\n"
 
-#: src/killall.c:674
+#: src/killall.c:678
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -139,7 +139,7 @@ msgstr ""
 "著作權 © 1993-2005 Werner Almesberger 與 Craig Small\n"
 "\n"
 
-#: src/killall.c:676 src/fuser.c:138 src/peekfd.c:89 src/pstree.c:806
+#: src/killall.c:680 src/fuser.c:138 src/peekfd.c:89 src/pstree.c:806
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -152,21 +152,21 @@ msgstr ""
 "來再次散布它。\n"
 "請參看名為 COPYING 的檔案，以獲得更多關於這些問題的資訊。\n"
 
-#: src/killall.c:755 src/killall.c:761
+#: src/killall.c:759 src/killall.c:765
 msgid "Invalid time format"
 msgstr ""
 
-#: src/killall.c:786
+#: src/killall.c:790
 #, c-format
 msgid "Cannot find user %s\n"
 msgstr "找不到使用者 %s\n"
 
-#: src/killall.c:842
+#: src/killall.c:846
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "名稱的最大數量為 %d\n"
 
-#: src/killall.c:846 src/pstree.c:736
+#: src/killall.c:850 src/pstree.c:736
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s 是空的 (尚未掛載？)\n"
@@ -241,10 +241,10 @@ msgstr ""
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
 
-#: src/fuser.c:136 src/pstree.c:804
+#: src/fuser.c:136
 #, fuzzy, c-format
 msgid ""
-"Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
+"Copyright (C) 1993-2010 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
 "著作權 © 1993-2005 Werner Almesberger 與 Craig Small\n"
@@ -285,71 +285,71 @@ msgstr "不明的本機通訊埠 AF %d\n"
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "無法開啟協定檔案「%s」：%s\n"
 
-#: src/fuser.c:887
+#: src/fuser.c:888
 #, c-format
 msgid "%s: Invalid option %s\n"
 msgstr ""
 
-#: src/fuser.c:935
+#: src/fuser.c:937
 msgid "Namespace option requires an argument."
 msgstr "名稱空間選項需要一個引數。"
 
-#: src/fuser.c:946
+#: src/fuser.c:949
 msgid "Invalid namespace name"
 msgstr "無效的名稱空間名稱"
 
-#: src/fuser.c:999
+#: src/fuser.c:1002
 #, fuzzy
 msgid "You can only use files with mountpoint options"
 msgstr "您只能將檔案與掛載點選項一起使用"
 
-#: src/fuser.c:1043
+#: src/fuser.c:1046
 msgid "No process specification given"
 msgstr "沒有給定任何進程規格"
 
-#: src/fuser.c:1050
+#: src/fuser.c:1053
 msgid "all option cannot be used with silent option."
 msgstr "所有選項無法與安靜選項一起使用。"
 
-#: src/fuser.c:1055
+#: src/fuser.c:1058
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "您無法同時只搜尋 IPv4 又只搜尋 IPv6 通訊端"
 
-#: src/fuser.c:1126
+#: src/fuser.c:1129
 #, c-format
 msgid "%*s USER        PID ACCESS COMMAND\n"
 msgstr "%*s 使用者      PID 存取命令\n"
 
-#: src/fuser.c:1159 src/fuser.c:1214
+#: src/fuser.c:1162 src/fuser.c:1217
 msgid "(unknown)"
 msgstr "(不明)"
 
-#: src/fuser.c:1290
+#: src/fuser.c:1293
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "無法顯示檔案 %s：%s\n"
 
-#: src/fuser.c:1406
+#: src/fuser.c:1409
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "無法開啟 /proc/net/unix：%s\n"
 
-#: src/fuser.c:1468
+#: src/fuser.c:1471
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "砍除進程 %d？(y/N) "
 
-#: src/fuser.c:1501
+#: src/fuser.c:1504
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "無法砍除進程 %d：%s\n"
 
-#: src/fuser.c:1513
+#: src/fuser.c:1516
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "無法開啟網路通訊端。\n"
 
-#: src/fuser.c:1517
+#: src/fuser.c:1520
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "找不到通訊端裝置編號。\n"
@@ -456,6 +456,15 @@ msgstr ""
 #, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (PSmisc) %s\n"
+
+#: src/pstree.c:804
+#, fuzzy, c-format
+msgid ""
+"Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"著作權 © 1993-2005 Werner Almesberger 與 Craig Small\n"
+"\n"
 
 #: src/pstree.c:915
 #, c-format

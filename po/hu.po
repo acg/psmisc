@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.8rc1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2009-12-28 13:54+1100\n"
+"POT-Creation-Date: 2010-01-04 21:42+1100\n"
 "PO-Revision-Date: 2009-07-19 03:53+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -18,42 +18,42 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: src/killall.c:98
+#: src/killall.c:102
 #, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "Kilövi ezt: %s(%s%d) ? (i/N) "
 
-#: src/killall.c:101
+#: src/killall.c:105
 #, c-format
 msgid "Signal %s(%s%d) ? (y/N) "
 msgstr "Elküldi a(z) %s(%s%d) szignált? (i/N) "
 
-#: src/killall.c:205
+#: src/killall.c:209
 #, c-format
 msgid "Cannot get UID from process status\n"
 msgstr "Nem kérhető le a felhasználói azonosító a folyamat állapotából\n"
 
-#: src/killall.c:231 src/killall.c:810
+#: src/killall.c:235 src/killall.c:814
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr "Hibás reguláris kifejezés: %s\n"
 
-#: src/killall.c:442
+#: src/killall.c:446
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "%s(%d) részleges találat átlépése\n"
 
-#: src/killall.c:561
+#: src/killall.c:565
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "%s(%s%d) kilőve a(z) %d szignállal\n"
 
-#: src/killall.c:575
+#: src/killall.c:579
 #, c-format
 msgid "%s: no process found\n"
 msgstr "%s: nem található folyamat\n"
 
-#: src/killall.c:613
+#: src/killall.c:617
 #, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -75,7 +75,7 @@ msgstr ""
 "    -V      verzióinformációk megjelenítése\n"
 "\n"
 
-#: src/killall.c:629
+#: src/killall.c:633
 #, c-format
 msgid ""
 "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
@@ -83,12 +83,12 @@ msgstr ""
 "Használat: killall [-Z KONTEXTUS] [-u FELHASZNÁLÓ] [ -eIgiqrvw ] [ -"
 "SZIGNÁL ] NÉV...\n"
 
-#: src/killall.c:632
+#: src/killall.c:636
 #, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "Használat: killall [KAPCSOLÓ]... [--] NÉV...\n"
 
-#: src/killall.c:635
+#: src/killall.c:639
 #, fuzzy, c-format
 msgid ""
 "       killall -l, --list\n"
@@ -129,7 +129,7 @@ msgstr ""
 "  -V,--version        verzióinformációk megjelenítése\n"
 "  -w,--wait           várja meg, amíg a folyamatok meghalnak\n"
 
-#: src/killall.c:653
+#: src/killall.c:657
 #, c-format
 msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
@@ -138,7 +138,7 @@ msgstr ""
 "  -Z,--context REGEXP csak a kontextussal rendelkező folyamatok kilövése\n"
 "                      (meg kell előznie az egyéb argumentumokat)\n"
 
-#: src/killall.c:674
+#: src/killall.c:678
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -147,7 +147,7 @@ msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger és Craig Small\n"
 "\n"
 
-#: src/killall.c:676 src/fuser.c:138 src/peekfd.c:89 src/pstree.c:806
+#: src/killall.c:680 src/fuser.c:138 src/peekfd.c:89 src/pstree.c:806
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -159,21 +159,21 @@ msgstr ""
 "Ez egy szabad szoftver, a GNU General Public License feltételei mellett\n"
 "bármikor továbbíthatja, a részletekért lásd a COPYING fájlt.\n"
 
-#: src/killall.c:755 src/killall.c:761
+#: src/killall.c:759 src/killall.c:765
 msgid "Invalid time format"
 msgstr ""
 
-#: src/killall.c:786
+#: src/killall.c:790
 #, c-format
 msgid "Cannot find user %s\n"
 msgstr "A(z) %s felhasználó nem található\n"
 
-#: src/killall.c:842
+#: src/killall.c:846
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "A nevek maximális száma %d\n"
 
-#: src/killall.c:846 src/pstree.c:736
+#: src/killall.c:850 src/pstree.c:736
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "a(z) %s üres (nincs csatlakoztatva?)\n"
@@ -251,13 +251,13 @@ msgstr ""
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
 
-#: src/fuser.c:136 src/pstree.c:804
-#, c-format
+#: src/fuser.c:136
+#, fuzzy, c-format
 msgid ""
-"Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
+"Copyright (C) 1993-2010 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
-"Copyright (C) 1993-2009 Werner Almesberger és Craig Small\n"
+"Copyright (C) 1993-2005 Werner Almesberger és Craig Small\n"
 "\n"
 
 #: src/fuser.c:164
@@ -295,71 +295,71 @@ msgstr "Ismeretlen helyi port AF: %d\n"
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "Nem nyitható meg a(z) \"%s\" protokollfájl: %s\n"
 
-#: src/fuser.c:887
+#: src/fuser.c:888
 #, c-format
 msgid "%s: Invalid option %s\n"
 msgstr ""
 
-#: src/fuser.c:935
+#: src/fuser.c:937
 msgid "Namespace option requires an argument."
 msgstr "A névtér kapcsoló argumentumot igényel."
 
-#: src/fuser.c:946
+#: src/fuser.c:949
 msgid "Invalid namespace name"
 msgstr "Érvénytelen névtérnév"
 
-#: src/fuser.c:999
+#: src/fuser.c:1002
 #, fuzzy
 msgid "You can only use files with mountpoint options"
 msgstr "A fájlok csak a csatlakoztatási pont kapcsolóval használhatók"
 
-#: src/fuser.c:1043
+#: src/fuser.c:1046
 msgid "No process specification given"
 msgstr "Nincs megadva folyamatmeghatározás"
 
-#: src/fuser.c:1050
+#: src/fuser.c:1053
 msgid "all option cannot be used with silent option."
 msgstr "az összes kapcsoló nem használható a néma kapcsolóval."
 
-#: src/fuser.c:1055
+#: src/fuser.c:1058
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "Nem lehet egyszerre csak IPv4 és csak IPv6 foglalatokat keresni"
 
-#: src/fuser.c:1126
+#: src/fuser.c:1129
 #, c-format
 msgid "%*s USER        PID ACCESS COMMAND\n"
 msgstr "%*s FELHASZNÁLÓ  PID HOZZÁFÉRÉS PARANCS\n"
 
-#: src/fuser.c:1159 src/fuser.c:1214
+#: src/fuser.c:1162 src/fuser.c:1217
 msgid "(unknown)"
 msgstr "(ismeretlen)"
 
-#: src/fuser.c:1290
+#: src/fuser.c:1293
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "A(z) %s fájl nem érhető el: %s\n"
 
-#: src/fuser.c:1406
+#: src/fuser.c:1409
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "A /proc/net/unix könyvtár nem nyitható meg: %s\n"
 
-#: src/fuser.c:1468
+#: src/fuser.c:1471
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Kilövi a(z) %d folyamatot? (i/N) "
 
-#: src/fuser.c:1501
+#: src/fuser.c:1504
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "A(z) %d folymat kilövése nem sikerült: %s\n"
 
-#: src/fuser.c:1513
+#: src/fuser.c:1516
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Nem nyitható meg hálózati foglalat\n"
 
-#: src/fuser.c:1517
+#: src/fuser.c:1520
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Nem található a foglalat eszközszáma.\n"
@@ -469,6 +469,15 @@ msgstr ""
 #, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (PSmisc) %s\n"
+
+#: src/pstree.c:804
+#, c-format
+msgid ""
+"Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Copyright (C) 1993-2009 Werner Almesberger és Craig Small\n"
+"\n"
 
 #: src/pstree.c:915
 #, c-format

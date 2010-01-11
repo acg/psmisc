@@ -1,61 +1,60 @@
-# translation of psmisc-22.8rc1.ru.po to Russian
+# translation of psmisc-22.10.ru.po to Russian
 # Russian Translation for psmisc files
-# Copyright (C) 2002, 2009 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2009, 2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the psmisc package.
 #
 # Ilya Evseev <evseev@altlinux.ru>, 2005.
-# Yuri Kozlov <yuray@komyakino.ru>, 2009.
+# Yuri Kozlov <yuray@komyakino.ru>, 2009, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 22.8rc1\n"
+"Project-Id-Version: psmisc 22.10\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2009-12-28 13:54+1100\n"
-"PO-Revision-Date: 2009-07-15 21:55+0400\n"
+"POT-Creation-Date: 2010-01-04 21:42+1100\n"
+"PO-Revision-Date: 2010-01-08 13:29+0300\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <gnu@mx.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/killall.c:98
+#: src/killall.c:102
 #, c-format
 msgid "Kill %s(%s%d) ? (y/N) "
 msgstr "Завершить %s(%s%d)? (y/N) "
 
-#: src/killall.c:101
+#: src/killall.c:105
 #, c-format
 msgid "Signal %s(%s%d) ? (y/N) "
 msgstr "Послать сигнал %s(%s%d)? (y/N) "
 
-#: src/killall.c:205
+#: src/killall.c:209
 #, c-format
 msgid "Cannot get UID from process status\n"
 msgstr "Не удалось получить UID из состояния процесса\n"
 
-#: src/killall.c:231 src/killall.c:810
+#: src/killall.c:235 src/killall.c:814
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr "Неправильное регулярное выражение: %s\n"
 
-#: src/killall.c:442
+#: src/killall.c:446
 #, c-format
 msgid "skipping partial match %s(%d)\n"
 msgstr "игнорирование частичного совпадения %s(%d)\n"
 
-#: src/killall.c:561
+#: src/killall.c:565
 #, c-format
 msgid "Killed %s(%s%d) with signal %d\n"
 msgstr "%s(%s%d) завершён сигналом %d\n"
 
-#: src/killall.c:575
+#: src/killall.c:579
 #, c-format
 msgid "%s: no process found\n"
 msgstr "%s: процесс не найден\n"
 
-#: src/killall.c:613
+#: src/killall.c:617
 #, c-format
 msgid ""
 "Usage: pidof [ -eg ] NAME...\n"
@@ -72,26 +71,24 @@ msgstr ""
 "\n"
 "   -e          требовать полного совпадения для очень длинных имён;\n"
 "               игнорировать, если командная строка недоступна\n"
-"   -g          показывать идентификатор группы вместо идентификатора "
-"процесса\n"
+"   -g          показывать идентификатор группы вместо идентификатора процесса\n"
 "   -V          показать информацию о версии\n"
 "\n"
 
-#: src/killall.c:629
+#: src/killall.c:633
 #, c-format
-msgid ""
-"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
 msgstr ""
 "Использование: killall [-Z КОНТЕКСТ] [-u ПОЛЬЗОВАТЕЛЬ]\n"
 "                       [ -eIgiqrvw ] [ -СИГНАЛ ] ИМЯ...\n"
 
-#: src/killall.c:632
+#: src/killall.c:636
 #, c-format
 msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "Использование: killall [ПАРАМЕТР]... [--] ИМЯ...\n"
 
-#: src/killall.c:635
-#, fuzzy, c-format
+#: src/killall.c:639
+#, c-format
 msgid ""
 "       killall -l, --list\n"
 "       killall -V, --version\n"
@@ -117,20 +114,19 @@ msgstr ""
 "  -e,--exact           требовать полного совпадения для очень длинных имён\n"
 "  -I,--ignore-case     игнорировать регистр символов в именах процессов\n"
 "  -g,--process-group   завершать группу процесса вместо одного процесса\n"
-"  -i,--interactive     запрашивать подтверждение перед завершением "
-"процессов\n"
+"  -y,--younger-than    завершить процессы, новее чем заданногоВРЕМЕНИ\n"
+"  -o,--older-than      завершить процессы, старее чем заданного ВРЕМЕНИ\n"
+"  -i,--interactive     запрашивать подтверждение перед завершением процессов\n"
 "  -l,--list            вывести список допустимых имён сигналов\n"
 "  -q,--quiet           не показывать подробные сообщения\n"
-"  -r,--regexp          рассматривать ИМЯ как расширенное регулярное "
-"выражение\n"
+"  -r,--regexp          рассматривать ИМЯ как расширенное регулярное выражение\n"
 "  -s,--signal СИГНАЛ   посылать указанный СИГНАЛ, а не SIGTERM\n"
-"  -u,--user ПОЛЬЗВ      завершить процесс(ы), запущенный только "
-"ПОЛЬЗОВАТЕЛЕМ\n"
+"  -u,--user ПОЛЬЗВ      завершить процесс(ы), запущенный только ПОЛЬЗОВАТЕЛЕМ\n"
 "  -v,--verbose         уведомлять только при успешной отправке сигнала\n"
 "  -V,--version         показать информацию о версии\n"
 "  -w,--wait            ожидать завершения процессов\n"
 
-#: src/killall.c:653
+#: src/killall.c:657
 #, c-format
 msgid ""
 "  -Z,--context REGEXP kill only process(es) having context\n"
@@ -140,7 +136,7 @@ msgstr ""
 "                       (должен указываться раньше остальных параметров)\n"
 "\n"
 
-#: src/killall.c:674
+#: src/killall.c:678
 #, c-format
 msgid ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
@@ -149,7 +145,7 @@ msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
 "\n"
 
-#: src/killall.c:676 src/fuser.c:138 src/peekfd.c:89 src/pstree.c:806
+#: src/killall.c:680 src/fuser.c:138 src/peekfd.c:89 src/pstree.c:806
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -162,30 +158,29 @@ msgstr ""
 "Универсальной общественной лицензии GNU.\n"
 "Подробная информация об этих условиях приведена в файле COPYING.\n"
 
-#: src/killall.c:755 src/killall.c:761
+#: src/killall.c:759 src/killall.c:765
 msgid "Invalid time format"
-msgstr ""
+msgstr "неправильный формат времени"
 
-#: src/killall.c:786
+#: src/killall.c:790
 #, c-format
 msgid "Cannot find user %s\n"
 msgstr "Пользователь %s не найден\n"
 
-#: src/killall.c:842
+#: src/killall.c:846
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Количество имён не может превышать %d\n"
 
-#: src/killall.c:846 src/pstree.c:736
+#: src/killall.c:850 src/pstree.c:736
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s пуст (не смонтирован?)\n"
 
 #: src/fuser.c:105
-#, fuzzy, c-format
+#, c-format
 msgid ""
-"Usage: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n SPACE] [-k [-i] [-SIGNAL]] "
-"NAME...\n"
+"Usage: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n SPACE] [-k [-i] [-SIGNAL]] NAME...\n"
 "       fuser -l\n"
 "       fuser -V\n"
 "Show which processes use the named files, sockets, or filesystems.\n"
@@ -194,8 +189,7 @@ msgid ""
 "  -i,--interactive      ask before killing (ignored without -k)\n"
 "  -k,--kill             kill processes accessing the named file\n"
 "  -l,--list-signals     list available signal names\n"
-"  -m,--mount            show all processes using the named filesystems or "
-"block device\n"
+"  -m,--mount            show all processes using the named filesystems or block device\n"
 "  -M,--ismountpoint     fulfill request only if NAME is a mount point\n"
 "  -n,--namespace SPACE  search in this name space (file, udp, or tcp)\n"
 "  -s,--silent           silent operation\n"
@@ -204,46 +198,47 @@ msgid ""
 "  -v,--verbose          verbose output\n"
 "  -V,--version          display version information\n"
 msgstr ""
-"Использование: fuser [-fuv] [ -a | -s] [ -4 | -6 ] [ -c | -m | -n ОБЛАСТЬ ] "
-"[ -k [-i ] [ -СИГНАЛ ]] ИМЯ...\n"
-"               fuser -l\n"
-"               fuser -V\n"
+"Использование: fuser [-fMuv] [ -a | -s] [ -4 | -6 ] [ -c | -m | -n ОБЛАСТЬ ]\n"
+"               [ -k [-i ] [ -СИГНАЛ ]] ИМЯ...\n"
+"     fuser -l\n"
+"     fuser -V\n"
 "Показывает какие процессы используют указанные файлы, сокеты,\n"
 "или файловые системы.\n"
 "\n"
-"    -a          показывать также неиспользуемые файлы\n"
-"    -c          тоже, что и -m (для совместимости с POSIX)\n"
-"    -f          игнорируется (для совместимости с POSIX)\n"
-"    -i          запрашивать подтверждение завершения (игнорируется без -k)\n"
-"    -k          завершить процессы, открывшие заданный файл\n"
-"    -l          показать допустимые имена сигналов\n"
-"    -m          показать процессы, использующие указанные файловые системы\n"
-"                или блочные устройства\n"
-"    -n ОБЛАСТЬ  искать в указанном пространстве имён (file, udp, или tcp)\n"
-"    -s          не выводить сообщения\n"
-"    -СИГНАЛ     посылать указанный сигнал вместо SIGKILL\n"
-"    -u          показывать идентификатор пользователя (uid)\n"
-"    -v          включить подробные сообщения\n"
-"    -V          показать информацию о версии\n"
+"    -a                 показывать также неиспользуемые файлы\n"
+"    -i,--interactive   спрашивать подтверждение завершения (игнор. без -k)\n"
+"    -k,--kill          завершить процессы, открывшие заданный файл\n"
+"    -l,--list-signal   показать допустимые имена сигналов\n"
+"    -m,--mount         показать процессы, использующие указанные файловые\n"
+"                       системы или блочные устройства\n"
+"  -M,--ismountpoint    выполнять запрос, только если ИМЯ является точкой\n"
+"                       монтирования\n"
+"    -n,--namespace ОБЛАСТЬ\n"
+"                     искать в указанном пространстве имён (file, udp или tcp)\n"
+"    -s,--silent        не выводить сообщения\n"
+"    -СИГНАЛ            посылать указанный сигнал вместо SIGKILL\n"
+"    -u,--user          показывать идентификатор пользователя (uid)\n"
+"    -v,--verbose       включить подробные сообщения\n"
+"    -V,--version       показать информацию о версии\n"
 
 #: src/fuser.c:122
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  -4,--ipv4             search IPv4 sockets only\n"
 "  -6,--ipv6             search IPv6 sockets only\n"
 msgstr ""
-"    -4          поиск только среди сокетов IPv4\n"
-"    -6          поиск только среди сокетов IPv6\n"
+"    -4,--ipv4          поиск только среди сокетов IPv4\n"
+"    -6,--ipv6          поиск только среди сокетов IPv6\n"
 
 #: src/fuser.c:126
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  -                     reset options\n"
 "\n"
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"    -           отменить предыдущие параметры\n"
+"    -                  отменить предыдущие параметры\n"
 "\n"
 "  Имена udp/tcp: [локальный_порт][,[удалённый_хост][,[удалённый_порт]]]\n"
 "\n"
@@ -253,13 +248,13 @@ msgstr ""
 msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
 
-#: src/fuser.c:136 src/pstree.c:804
+#: src/fuser.c:136
 #, c-format
 msgid ""
-"Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
+"Copyright (C) 1993-2010 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
-"Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
+"Copyright (C) 1993-2010 Werner Almesberger and Craig Small\n"
 "\n"
 
 #: src/fuser.c:164
@@ -275,7 +270,7 @@ msgstr "Не удалось выделить память для проверя�
 #: src/fuser.c:398
 #, c-format
 msgid "Specified filename %s does not exist.\n"
-msgstr ""
+msgstr "Указанное имя файла %s не существует.\n"
 
 #: src/fuser.c:400
 #, c-format
@@ -297,73 +292,70 @@ msgstr "Неизвестный локальный порт AF %d\n"
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "Не удалось открыть файл протокола \"%s\": %s\n"
 
-#: src/fuser.c:887
+#: src/fuser.c:888
 #, c-format
 msgid "%s: Invalid option %s\n"
-msgstr ""
+msgstr "%s: неправильный параметр %s\n"
 
-#: src/fuser.c:935
+#: src/fuser.c:937
 msgid "Namespace option requires an argument."
 msgstr "Для параметра области требуется значение."
 
-#: src/fuser.c:946
+#: src/fuser.c:949
 msgid "Invalid namespace name"
 msgstr "Неверное имя области"
 
-#: src/fuser.c:999
-#, fuzzy
+#: src/fuser.c:1002
 msgid "You can only use files with mountpoint options"
-msgstr "Вы можете использовать файлы только с параметром смонтированных ФС"
+msgstr "Вы можете использовать файлы только с параметрами mountpoint"
 
-#: src/fuser.c:1043
+#: src/fuser.c:1046
 msgid "No process specification given"
 msgstr "Не указан процесс"
 
-#: src/fuser.c:1050
+#: src/fuser.c:1053
 msgid "all option cannot be used with silent option."
-msgstr ""
-"Параметр показа всех файлов нельзя использовать вместе с параметром "
-"отключения сообщений."
+msgstr "Параметр показа всех файлов нельзя использовать вместе с параметром отключения сообщений."
 
-#: src/fuser.c:1055
+#: src/fuser.c:1058
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "Нельзя выполнять поиск только по сокетам IPv4 и IPv6 одновременно"
 
-#: src/fuser.c:1126
+#: src/fuser.c:1129
 #, c-format
 msgid "%*s USER        PID ACCESS COMMAND\n"
 msgstr "%*s ПОЛЬЗ-ЛЬ    PID ДОСТУП КОМАНДА\n"
 
-#: src/fuser.c:1159 src/fuser.c:1214
+#: src/fuser.c:1162 src/fuser.c:1217
 msgid "(unknown)"
 msgstr "(неизвестно)"
 
-#: src/fuser.c:1290
+#: src/fuser.c:1293
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "Не удалось выполнить функцию stat для файла %s: %s\n"
 
-#: src/fuser.c:1406
+#: src/fuser.c:1409
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "Не удалось открыть /proc/net/unix: %s\n"
 
-#: src/fuser.c:1468
+#: src/fuser.c:1471
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Завершить процесс %d? (y/N) "
 
-#: src/fuser.c:1501
+#: src/fuser.c:1504
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Не удалось завершить процесс %d: %s\n"
 
-#: src/fuser.c:1513
+#: src/fuser.c:1516
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Не удалось открыть сетевой сокет.\n"
 
-#: src/fuser.c:1517
+#: src/fuser.c:1520
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Не удалось найти номер устройства сокета.\n"
@@ -432,8 +424,7 @@ msgid ""
 "  -U, --unicode       use UTF-8 (Unicode) line drawing characters\n"
 "  -V, --version       display version information\n"
 msgstr ""
-"Использование: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -"
-"u ]\n"
+"Использование: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 "              [ -A | -G | -U ] [ PID | ПОЛЬЗОВАТЕЛЬ ]\n"
 "       pstree -V\n"
 "Показывает дерево процессов.\n"
@@ -447,8 +438,7 @@ msgstr ""
 "  -G, --vt100         использовать символы рисования линий терминала VT100\n"
 "  -l, --long          не обрезать длинные строки\n"
 "  -n, --numeric-sort  сортировать вывод по PID\n"
-"  -p, --show-pids     показывать идентификаторы процессов (PID); включает -"
-"c\n"
+"  -p, --show-pids     показывать идентификаторы процессов (PID); включает -c\n"
 "  -u, --uid-changes   показывать переходы идентификаторов пользователей\n"
 "  -U, --unicode       использовать символы рисования линий UTF-8 (юникод)\n"
 "  -V, --version       показать информацию о версии\n"
@@ -466,14 +456,22 @@ msgid ""
 "\n"
 msgstr ""
 "  PID                 начинать от указанного PID; по умолчанию 1 (init)\n"
-"  ПОЛЬЗОВАТЕЛЬ        показать только дерево процессов указанного "
-"пользователя\n"
+"  ПОЛЬЗОВАТЕЛЬ        показать только дерево процессов указанного пользователя\n"
 "\n"
 
 #: src/pstree.c:801
 #, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (PSmisc) %s\n"
+
+#: src/pstree.c:804
+#, c-format
+msgid ""
+"Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
+"\n"
 
 #: src/pstree.c:915
 #, c-format
@@ -504,8 +502,3 @@ msgstr "Нажмите Enter для выхода\n"
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
 msgstr "%s: неизвестный сигнал; %s -l выводит список доступных сигналов.\n"
-
-#~ msgid "You cannot use the mounted and mountpoint flags together"
-#~ msgstr ""
-#~ "Нельзя использовать параметры смонтированных ФС и точек монтирования "
-#~ "одновременно"

@@ -1,3 +1,7 @@
+Changes in 22.11
+================
+	* Updated po files for: Dutch, Basque, Swedish, Czech, Polish  and Russian
+
 Changes in 22.10
 ================
 	* fuser -k -m ... won't kill itself Debian #562767
