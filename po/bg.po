@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.2pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2010-01-04 21:42+1100\n"
+"POT-Creation-Date: 2010-03-28 18:17+1100\n"
 "PO-Revision-Date: 2006-03-07 11:49+0200\n"
 "Last-Translator: Anton Zinoviev <zinoviev@debian.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -17,6 +17,208 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/fuser.c:105
+#, fuzzy, c-format
+msgid ""
+"Usage: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n SPACE] [-k [-i] [-SIGNAL]] "
+"NAME...\n"
+"       fuser -l\n"
+"       fuser -V\n"
+"Show which processes use the named files, sockets, or filesystems.\n"
+"\n"
+"  -a,--all              display unused files too\n"
+"  -i,--interactive      ask before killing (ignored without -k)\n"
+"  -k,--kill             kill processes accessing the named file\n"
+"  -l,--list-signals     list available signal names\n"
+"  -m,--mount            show all processes using the named filesystems or "
+"block device\n"
+"  -M,--ismountpoint     fulfill request only if NAME is a mount point\n"
+"  -n,--namespace SPACE  search in this name space (file, udp, or tcp)\n"
+"  -s,--silent           silent operation\n"
+"  -SIGNAL               send this signal instead of SIGKILL\n"
+"  -u,--user             display user IDs\n"
+"  -v,--verbose          verbose output\n"
+"  -V,--version          display version information\n"
+msgstr ""
+"Използване: fuser [ -a | -s | -c ] [ -n ВИДИМЕ ] [ -СИГНАЛ ] [ -kimuv ] "
+"ИМЕ...\n"
+"                  [ - ] [ -n ВИДИМЕ ] [ -СИГНАЛ ] [ -kimuv ] ИМЕ...\n"
+"            fuser -l\n"
+"            fuser -V\n"
+"Показва кои процеси използват посочените файлове, гнезда или файлови "
+"системи.\n"
+"\n"
+"    -a        извежда също и неизползваните файлове\n"
+"    -c        монтирана файлова система (същото като -m)\n"
+"    -f        игнорира се (за съвместимост с POSIX)\n"
+"    -i        пита преди да убие (без -k се игнорира)\n"
+"    -k        убива процесите, използващи посочения файл\n"
+"    -l        извежда достъпните имена на сигнали\n"
+"    -m        показва всички процеси, използващи зададената файлова система\n"
+"    -n ВИДИМЕ използва такъв вид имена (може да бъде file, udp или tcp)\n"
+"    -s        „тих режим“ - не съобщава какво се прави\n"
+"    -СИГНАЛ   изпраща този сигнал вместо SIGKILL\n"
+"    -u        извежда собствениците на процесите\n"
+"    -v        подробен изход\n"
+"    -V        извежда информация за версията на fuser\n"
+"    -4        търси само IPv4-гнезда\n"
+"    -6        търси само IPv6-гнезда\n"
+"    -         отменя всички опции\n"
+"\n"
+"Имената от вид udp/tcp са: [локален_порт][,[отдалечен_хост][,"
+"[отдалечен_порт]]]\n"
+"\n"
+
+#: src/fuser.c:122
+#, c-format
+msgid ""
+"  -4,--ipv4             search IPv4 sockets only\n"
+"  -6,--ipv6             search IPv6 sockets only\n"
+msgstr ""
+
+#: src/fuser.c:126
+#, c-format
+msgid ""
+"  -                     reset options\n"
+"\n"
+"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"\n"
+msgstr ""
+
+#: src/fuser.c:133
+#, c-format
+msgid "fuser (PSmisc) %s\n"
+msgstr "fuser (PSmisc) %s\n"
+
+#: src/fuser.c:136
+#, fuzzy, c-format
+msgid ""
+"Copyright (C) 1993-2010 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Copyright © 1993-2005 Werner Almesberger и Craig Small\n"
+"\n"
+
+#: src/fuser.c:138 src/killall.c:680 src/peekfd.c:89 src/prtstat.c:68
+#: src/pstree.c:806
+#, c-format
+msgid ""
+"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
+"This is free software, and you are welcome to redistribute it under\n"
+"the terms of the GNU General Public License.\n"
+"For more information about these matters, see the files named COPYING.\n"
+msgstr ""
+"PSmisc се разпространява без АБСОЛЮТНО НИКАКВИ ГАРАНЦИИ.\n"
+"Това е свободен софтуер и вие може да го разпространявате свободно съгласно\n"
+"условията на Основната общодостъпна лицензия на ГНУ.\n"
+"За повече информация относно това, погледнете файловете с име COPYING.\n"
+
+#: src/fuser.c:164
+#, c-format
+msgid "Cannot open /proc directory: %s\n"
+msgstr "Каталогът /proc не може да се отвори: %s\n"
+
+#: src/fuser.c:331 src/fuser.c:379
+#, c-format
+msgid "Cannot allocate memory for matched proc: %s\n"
+msgstr "Не може да се задели памет за съответстващ процес: %s\n"
+
+#: src/fuser.c:398
+#, c-format
+msgid "Specified filename %s does not exist.\n"
+msgstr ""
+
+#: src/fuser.c:400
+#, c-format
+msgid "Cannot stat %s: %s\n"
+msgstr "Не може да се достигне %s: %s\n"
+
+#: src/fuser.c:533
+#, c-format
+msgid "Cannot resolve local port %s: %s\n"
+msgstr "Не може да се определи локалният порт %s: %s\n"
+
+#: src/fuser.c:551
+#, c-format
+msgid "Unknown local port AF %d\n"
+msgstr "Непознат вид адрес на локалния порт %d (unknown local port AF)\n"
+
+#: src/fuser.c:641
+#, c-format
+msgid "Cannot open protocol file \"%s\": %s\n"
+msgstr "Не може да се отвори файлът за протокол „%s“: %s\n"
+
+#: src/fuser.c:888
+#, c-format
+msgid "%s: Invalid option %s\n"
+msgstr ""
+
+#: src/fuser.c:937
+msgid "Namespace option requires an argument."
+msgstr "Опцията за вид име изисква аргумент."
+
+#: src/fuser.c:949
+msgid "Invalid namespace name"
+msgstr "Неправилен вид имена"
+
+#: src/fuser.c:1002
+#, fuzzy
+msgid "You can only use files with mountpoint options"
+msgstr "При опцията за файлова система може да се посочват само файлове"
+
+#: src/fuser.c:1046
+msgid "No process specification given"
+msgstr "Не е зададена спецификация на процес"
+
+#: src/fuser.c:1053
+msgid "all option cannot be used with silent option."
+msgstr "опцията -a не може да се използва едновременно с -q"
+
+#: src/fuser.c:1058
+msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
+msgstr "Не може да търсите само IPv4-гнезда и в същото време само IPv6-гнезда"
+
+#: src/fuser.c:1129
+#, fuzzy, c-format
+msgid "%*s USER        PID ACCESS COMMAND\n"
+msgstr ""
+"\n"
+"%*s ПОТРЕБИТЕЛ Пот№ ДОСТЪП КОМАНДА\n"
+
+#: src/fuser.c:1162 src/fuser.c:1217
+msgid "(unknown)"
+msgstr "(неизвест)"
+
+#: src/fuser.c:1293
+#, c-format
+msgid "Cannot stat file %s: %s\n"
+msgstr "Файлът %s не може да се достигне: %s\n"
+
+#: src/fuser.c:1409
+#, c-format
+msgid "Cannot open /proc/net/unix: %s\n"
+msgstr "Не може да се отвори /proc/net/unix: %s\n"
+
+#: src/fuser.c:1471
+#, c-format
+msgid "Kill process %d ? (y/N) "
+msgstr "Да се убие ли процесът %d? (д/Н) "
+
+#: src/fuser.c:1504
+#, c-format
+msgid "Could not kill process %d: %s\n"
+msgstr "Процесът %d не може да бъде убит: %s\n"
+
+#: src/fuser.c:1516
+#, c-format
+msgid "Cannot open a network socket.\n"
+msgstr "Не може да се отвори мрежово гнездо.\n"
+
+#: src/fuser.c:1520
+#, c-format
+msgid "Cannot find socket's device number.\n"
+msgstr "Не може да бъде намерен номерът на устройството на гнездото.\n"
 
 #: src/killall.c:102
 #, c-format
@@ -35,7 +237,7 @@ msgstr ""
 "Въз основа на състоянието на процеса не може да се установи потребителят "
 "собственик\n"
 
-#: src/killall.c:235 src/killall.c:814
+#: src/killall.c:235 src/killall.c:825
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr "Неправилен регулярен израз: %s\n"
@@ -147,19 +349,6 @@ msgstr ""
 "Copyright © 1993-2005 Werner Almesberger и Craig Small\n"
 "\n"
 
-#: src/killall.c:680 src/fuser.c:138 src/peekfd.c:89 src/pstree.c:806
-#, c-format
-msgid ""
-"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
-"This is free software, and you are welcome to redistribute it under\n"
-"the terms of the GNU General Public License.\n"
-"For more information about these matters, see the files named COPYING.\n"
-msgstr ""
-"PSmisc се разпространява без АБСОЛЮТНО НИКАКВИ ГАРАНЦИИ.\n"
-"Това е свободен софтуер и вие може да го разпространявате свободно съгласно\n"
-"условията на Основната общодостъпна лицензия на ГНУ.\n"
-"За повече информация относно това, погледнете файловете с име COPYING.\n"
-
 #: src/killall.c:759 src/killall.c:765
 msgid "Invalid time format"
 msgstr ""
@@ -169,204 +358,16 @@ msgstr ""
 msgid "Cannot find user %s\n"
 msgstr "Не може да бъде намерен потребител с име %s\n"
 
-#: src/killall.c:846
+#: src/killall.c:857
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Максималният брой имена е %d\n"
 
 # Мисля, че става въпрос за /proc (Антон Зиновиев)
-#: src/killall.c:850 src/pstree.c:736
+#: src/killall.c:861 src/pstree.c:736
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s е празна (не е монтирана?)\n"
-
-#: src/fuser.c:105
-#, fuzzy, c-format
-msgid ""
-"Usage: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n SPACE] [-k [-i] [-SIGNAL]] "
-"NAME...\n"
-"       fuser -l\n"
-"       fuser -V\n"
-"Show which processes use the named files, sockets, or filesystems.\n"
-"\n"
-"  -a,--all              display unused files too\n"
-"  -i,--interactive      ask before killing (ignored without -k)\n"
-"  -k,--kill             kill processes accessing the named file\n"
-"  -l,--list-signals     list available signal names\n"
-"  -m,--mount            show all processes using the named filesystems or "
-"block device\n"
-"  -M,--ismountpoint     fulfill request only if NAME is a mount point\n"
-"  -n,--namespace SPACE  search in this name space (file, udp, or tcp)\n"
-"  -s,--silent           silent operation\n"
-"  -SIGNAL               send this signal instead of SIGKILL\n"
-"  -u,--user             display user IDs\n"
-"  -v,--verbose          verbose output\n"
-"  -V,--version          display version information\n"
-msgstr ""
-"Използване: fuser [ -a | -s | -c ] [ -n ВИДИМЕ ] [ -СИГНАЛ ] [ -kimuv ] "
-"ИМЕ...\n"
-"                  [ - ] [ -n ВИДИМЕ ] [ -СИГНАЛ ] [ -kimuv ] ИМЕ...\n"
-"            fuser -l\n"
-"            fuser -V\n"
-"Показва кои процеси използват посочените файлове, гнезда или файлови "
-"системи.\n"
-"\n"
-"    -a        извежда също и неизползваните файлове\n"
-"    -c        монтирана файлова система (същото като -m)\n"
-"    -f        игнорира се (за съвместимост с POSIX)\n"
-"    -i        пита преди да убие (без -k се игнорира)\n"
-"    -k        убива процесите, използващи посочения файл\n"
-"    -l        извежда достъпните имена на сигнали\n"
-"    -m        показва всички процеси, използващи зададената файлова система\n"
-"    -n ВИДИМЕ използва такъв вид имена (може да бъде file, udp или tcp)\n"
-"    -s        „тих режим“ - не съобщава какво се прави\n"
-"    -СИГНАЛ   изпраща този сигнал вместо SIGKILL\n"
-"    -u        извежда собствениците на процесите\n"
-"    -v        подробен изход\n"
-"    -V        извежда информация за версията на fuser\n"
-"    -4        търси само IPv4-гнезда\n"
-"    -6        търси само IPv6-гнезда\n"
-"    -         отменя всички опции\n"
-"\n"
-"Имената от вид udp/tcp са: [локален_порт][,[отдалечен_хост][,"
-"[отдалечен_порт]]]\n"
-"\n"
-
-#: src/fuser.c:122
-#, c-format
-msgid ""
-"  -4,--ipv4             search IPv4 sockets only\n"
-"  -6,--ipv6             search IPv6 sockets only\n"
-msgstr ""
-
-#: src/fuser.c:126
-#, c-format
-msgid ""
-"  -                     reset options\n"
-"\n"
-"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
-"\n"
-msgstr ""
-
-#: src/fuser.c:133
-#, c-format
-msgid "fuser (PSmisc) %s\n"
-msgstr "fuser (PSmisc) %s\n"
-
-#: src/fuser.c:136
-#, fuzzy, c-format
-msgid ""
-"Copyright (C) 1993-2010 Werner Almesberger and Craig Small\n"
-"\n"
-msgstr ""
-"Copyright © 1993-2005 Werner Almesberger и Craig Small\n"
-"\n"
-
-#: src/fuser.c:164
-#, c-format
-msgid "Cannot open /proc directory: %s\n"
-msgstr "Каталогът /proc не може да се отвори: %s\n"
-
-#: src/fuser.c:331 src/fuser.c:379
-#, c-format
-msgid "Cannot allocate memory for matched proc: %s\n"
-msgstr "Не може да се задели памет за съответстващ процес: %s\n"
-
-#: src/fuser.c:398
-#, c-format
-msgid "Specified filename %s does not exist.\n"
-msgstr ""
-
-#: src/fuser.c:400
-#, c-format
-msgid "Cannot stat %s: %s\n"
-msgstr "Не може да се достигне %s: %s\n"
-
-#: src/fuser.c:533
-#, c-format
-msgid "Cannot resolve local port %s: %s\n"
-msgstr "Не може да се определи локалният порт %s: %s\n"
-
-#: src/fuser.c:551
-#, c-format
-msgid "Unknown local port AF %d\n"
-msgstr "Непознат вид адрес на локалния порт %d (unknown local port AF)\n"
-
-#: src/fuser.c:641
-#, c-format
-msgid "Cannot open protocol file \"%s\": %s\n"
-msgstr "Не може да се отвори файлът за протокол „%s“: %s\n"
-
-#: src/fuser.c:888
-#, c-format
-msgid "%s: Invalid option %s\n"
-msgstr ""
-
-#: src/fuser.c:937
-msgid "Namespace option requires an argument."
-msgstr "Опцията за вид име изисква аргумент."
-
-#: src/fuser.c:949
-msgid "Invalid namespace name"
-msgstr "Неправилен вид имена"
-
-#: src/fuser.c:1002
-#, fuzzy
-msgid "You can only use files with mountpoint options"
-msgstr "При опцията за файлова система може да се посочват само файлове"
-
-#: src/fuser.c:1046
-msgid "No process specification given"
-msgstr "Не е зададена спецификация на процес"
-
-#: src/fuser.c:1053
-msgid "all option cannot be used with silent option."
-msgstr "опцията -a не може да се използва едновременно с -q"
-
-#: src/fuser.c:1058
-msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
-msgstr "Не може да търсите само IPv4-гнезда и в същото време само IPv6-гнезда"
-
-#: src/fuser.c:1129
-#, fuzzy, c-format
-msgid "%*s USER        PID ACCESS COMMAND\n"
-msgstr ""
-"\n"
-"%*s ПОТРЕБИТЕЛ Пот№ ДОСТЪП КОМАНДА\n"
-
-#: src/fuser.c:1162 src/fuser.c:1217
-msgid "(unknown)"
-msgstr "(неизвест)"
-
-#: src/fuser.c:1293
-#, c-format
-msgid "Cannot stat file %s: %s\n"
-msgstr "Файлът %s не може да се достигне: %s\n"
-
-#: src/fuser.c:1409
-#, c-format
-msgid "Cannot open /proc/net/unix: %s\n"
-msgstr "Не може да се отвори /proc/net/unix: %s\n"
-
-#: src/fuser.c:1471
-#, c-format
-msgid "Kill process %d ? (y/N) "
-msgstr "Да се убие ли процесът %d? (д/Н) "
-
-#: src/fuser.c:1504
-#, c-format
-msgid "Could not kill process %d: %s\n"
-msgstr "Процесът %d не може да бъде убит: %s\n"
-
-#: src/fuser.c:1516
-#, c-format
-msgid "Cannot open a network socket.\n"
-msgstr "Не може да се отвори мрежово гнездо.\n"
-
-#: src/fuser.c:1520
-#, c-format
-msgid "Cannot find socket's device number.\n"
-msgstr "Не може да бъде намерен номерът на устройството на гнездото.\n"
 
 #: src/peekfd.c:77
 #, c-format
@@ -397,6 +398,138 @@ msgid ""
 "    -h prints this help.\n"
 "\n"
 "  Press CTRL-C to end output.\n"
+msgstr ""
+
+#: src/prtstat.c:54
+#, c-format
+msgid ""
+"Usage: prtstat [options] PID ...\n"
+"       prtstat -V\n"
+"Print information about a process\n"
+"    -r,--raw       Raw display of information\n"
+"    -V,--version   Display version information and exit\n"
+msgstr ""
+
+#: src/prtstat.c:65
+#, fuzzy, c-format
+msgid "prtstat (PSmisc) %s\n"
+msgstr "pstree (PSmisc) %s\n"
+
+#: src/prtstat.c:66
+#, fuzzy, c-format
+msgid ""
+"Copyright (C) 2009 Craig Small\n"
+"\n"
+msgstr ""
+"Copyright © 1993-2005 Werner Almesberger и Craig Small\n"
+"\n"
+
+#: src/prtstat.c:78
+msgid "running"
+msgstr ""
+
+#: src/prtstat.c:80
+msgid "sleeping"
+msgstr ""
+
+#: src/prtstat.c:82
+msgid "disk sleep"
+msgstr ""
+
+#: src/prtstat.c:84
+msgid "zombie"
+msgstr ""
+
+#: src/prtstat.c:86
+msgid "traced"
+msgstr ""
+
+#: src/prtstat.c:88
+msgid "paging"
+msgstr ""
+
+#: src/prtstat.c:90
+#, fuzzy
+msgid "unknown"
+msgstr "(неизвест)"
+
+#: src/prtstat.c:164
+#, c-format
+msgid ""
+"Process: %-14s\t\tState: %c (%s)\n"
+"  CPU#:  %-3d\t\tTTY: %s\tThreads: %ld\n"
+msgstr ""
+
+#: src/prtstat.c:169
+#, c-format
+msgid ""
+"Process, Group and Session IDs\n"
+"  Process ID: %d\t\t  Parent ID: %d\n"
+"    Group ID: %d\t\t Session ID: %d\n"
+"  T Group ID: %d\n"
+"\n"
+msgstr ""
+
+#: src/prtstat.c:175
+#, c-format
+msgid ""
+"Page Faults\n"
+"  This Process    (minor major): %8lu  %8lu\n"
+"  Child Processes (minor major): %8lu  %8lu\n"
+msgstr ""
+
+#: src/prtstat.c:180
+#, c-format
+msgid ""
+"CPU Times\n"
+"  This Process    (user system guest blkio): %6.2f %6.2f %6.2f %6.2f\n"
+"  Child processes (user system guest):       %6.2f %6.2f %6.2f\n"
+msgstr ""
+
+#: src/prtstat.c:189
+#, c-format
+msgid ""
+"Memory\n"
+"  Vsize:       %-10s\n"
+"  RSS:         %-10s \t\t RSS Limit: %s\n"
+"  Code Start:  %#-10lx\t\t Code Stop:  %#-10lx\n"
+"  Stack Start: %#-10lx\n"
+"  Stack Pointer (ESP): %#10lx\t Inst Pointer (EIP): %#10lx\n"
+msgstr ""
+
+#: src/prtstat.c:199
+#, c-format
+msgid ""
+"Scheduling\n"
+"  Policy: %s\n"
+"  Nice:   %ld \t\t RT Priority: %ld %s\n"
+msgstr ""
+
+#: src/prtstat.c:221
+msgid "asprintf in print_stat failed.\n"
+msgstr ""
+
+#: src/prtstat.c:226
+#, c-format
+msgid "Process with pid %d does not exist.\n"
+msgstr ""
+
+#: src/prtstat.c:228
+#, c-format
+msgid "Unable to open stat file for pid %d (%s)\n"
+msgstr ""
+
+#: src/prtstat.c:308
+msgid "Invalid option"
+msgstr ""
+
+#: src/prtstat.c:313
+msgid "You must provide at least one PID."
+msgstr ""
+
+#: src/prtstat.c:317
+#, c-format
+msgid "/proc is not mounted, cannot stat /proc/self/stat.\n"
 msgstr ""
 
 #: src/pstree.c:774
@@ -500,11 +633,11 @@ msgstr "Натиснете Return, за да се завърши\n"
 msgid "%s: unknown signal; %s -l lists signals.\n"
 msgstr "%s: непознат сигнал; %s -l извежда познатите сигнали.\n"
 
-#~ msgid "You cannot use the mounted and mountpoint flags together"
-#~ msgstr "Не може да използвате едновременно опциите -m и -c"
-
 #~ msgid "Cannot stat mount point %s: %s\n"
 #~ msgstr "Не може да се достигне мястото на монтиране %s: %s\n"
+
+#~ msgid "You cannot use the mounted and mountpoint flags together"
+#~ msgstr "Не може да използвате едновременно опциите -m и -c"
 
 #~ msgid "Cannot open /etc/mtab: %s\n"
 #~ msgstr "Не може да се отвори /etc/mtab: %s\n"

@@ -800,11 +800,22 @@ main (int argc, char **argv)
       wait_until_dead = 1;
       break;
     case 'I':
-      ignore_case = 1;
+      /* option check is optind-1 but sig name is optind */
+      if (strcmp(argv[optind-1],"-I") == 0 || strncmp(argv[optind-1],"--",2) == 0) {
+        ignore_case = 1;
+      } else {
+        NOT_PIDOF_OPTION;
+	      sig_num = get_signal (argv[optind]+1, "killall");
+      }
       break;
     case 'V':
-      print_version();
-      return 0;
+      /* option check is optind-1 but sig name is optind */
+      if (strcmp(argv[optind-1],"-V") == 0 || strncmp(argv[optind-1],"--",2) == 0) {
+        print_version();
+        return 0;
+      }
+      NOT_PIDOF_OPTION;
+	    sig_num = get_signal (argv[optind]+1, "killall");
       break;
 #ifdef WITH_SELINUX
     case 'Z': 

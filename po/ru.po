@@ -1,4 +1,4 @@
-# translation of psmisc-22.10.ru.po to Russian
+# translation of psmisc-22.11-pre1.ru.po to Russian
 # Russian Translation for psmisc files
 # Copyright (C) 2002, 2009, 2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the psmisc package.
@@ -7,180 +7,24 @@
 # Yuri Kozlov <yuray@komyakino.ru>, 2009, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 22.10\n"
+"Project-Id-Version: psmisc 22.11-pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2010-01-04 21:42+1100\n"
-"PO-Revision-Date: 2010-01-08 13:29+0300\n"
+"POT-Creation-Date: 2010-03-28 18:17+1100\n"
+"PO-Revision-Date: 2010-03-28 19:36+0400\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <gnu@mx.ru>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-
-#: src/killall.c:102
-#, c-format
-msgid "Kill %s(%s%d) ? (y/N) "
-msgstr "Завершить %s(%s%d)? (y/N) "
-
-#: src/killall.c:105
-#, c-format
-msgid "Signal %s(%s%d) ? (y/N) "
-msgstr "Послать сигнал %s(%s%d)? (y/N) "
-
-#: src/killall.c:209
-#, c-format
-msgid "Cannot get UID from process status\n"
-msgstr "Не удалось получить UID из состояния процесса\n"
-
-#: src/killall.c:235 src/killall.c:814
-#, c-format
-msgid "Bad regular expression: %s\n"
-msgstr "Неправильное регулярное выражение: %s\n"
-
-#: src/killall.c:446
-#, c-format
-msgid "skipping partial match %s(%d)\n"
-msgstr "игнорирование частичного совпадения %s(%d)\n"
-
-#: src/killall.c:565
-#, c-format
-msgid "Killed %s(%s%d) with signal %d\n"
-msgstr "%s(%s%d) завершён сигналом %d\n"
-
-#: src/killall.c:579
-#, c-format
-msgid "%s: no process found\n"
-msgstr "%s: процесс не найден\n"
-
-#: src/killall.c:617
-#, c-format
-msgid ""
-"Usage: pidof [ -eg ] NAME...\n"
-"       pidof -V\n"
-"\n"
-"    -e      require exact match for very long names;\n"
-"            skip if the command line is unavailable\n"
-"    -g      show process group ID instead of process ID\n"
-"    -V      display version information\n"
-"\n"
-msgstr ""
-"Использование: pidof [ -eg ] ИМЯ...\n"
-"               pidof -V\n"
-"\n"
-"   -e          требовать полного совпадения для очень длинных имён;\n"
-"               игнорировать, если командная строка недоступна\n"
-"   -g          показывать идентификатор группы вместо идентификатора процесса\n"
-"   -V          показать информацию о версии\n"
-"\n"
-
-#: src/killall.c:633
-#, c-format
-msgid "Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr ""
-"Использование: killall [-Z КОНТЕКСТ] [-u ПОЛЬЗОВАТЕЛЬ]\n"
-"                       [ -eIgiqrvw ] [ -СИГНАЛ ] ИМЯ...\n"
-
-#: src/killall.c:636
-#, c-format
-msgid "Usage: killall [OPTION]... [--] NAME...\n"
-msgstr "Использование: killall [ПАРАМЕТР]... [--] ИМЯ...\n"
-
-#: src/killall.c:639
-#, c-format
-msgid ""
-"       killall -l, --list\n"
-"       killall -V, --version\n"
-"\n"
-"  -e,--exact          require exact match for very long names\n"
-"  -I,--ignore-case    case insensitive process name match\n"
-"  -g,--process-group  kill process group instead of process\n"
-"  -y,--younger-than   kill processes younger than TIME\n"
-"  -o,--older-than     kill processes older than TIME\n"
-"  -i,--interactive    ask for confirmation before killing\n"
-"  -l,--list           list all known signal names\n"
-"  -q,--quiet          don't print complaints\n"
-"  -r,--regexp         interpret NAME as an extended regular expression\n"
-"  -s,--signal SIGNAL  send this signal instead of SIGTERM\n"
-"  -u,--user USER      kill only process(es) running as USER\n"
-"  -v,--verbose        report if the signal was successfully sent\n"
-"  -V,--version        display version information\n"
-"  -w,--wait           wait for processes to die\n"
-msgstr ""
-"       killall -l, --list\n"
-"       killall -V, --version\n"
-"\n"
-"  -e,--exact           требовать полного совпадения для очень длинных имён\n"
-"  -I,--ignore-case     игнорировать регистр символов в именах процессов\n"
-"  -g,--process-group   завершать группу процесса вместо одного процесса\n"
-"  -y,--younger-than    завершить процессы, новее чем заданногоВРЕМЕНИ\n"
-"  -o,--older-than      завершить процессы, старее чем заданного ВРЕМЕНИ\n"
-"  -i,--interactive     запрашивать подтверждение перед завершением процессов\n"
-"  -l,--list            вывести список допустимых имён сигналов\n"
-"  -q,--quiet           не показывать подробные сообщения\n"
-"  -r,--regexp          рассматривать ИМЯ как расширенное регулярное выражение\n"
-"  -s,--signal СИГНАЛ   посылать указанный СИГНАЛ, а не SIGTERM\n"
-"  -u,--user ПОЛЬЗВ      завершить процесс(ы), запущенный только ПОЛЬЗОВАТЕЛЕМ\n"
-"  -v,--verbose         уведомлять только при успешной отправке сигнала\n"
-"  -V,--version         показать информацию о версии\n"
-"  -w,--wait            ожидать завершения процессов\n"
-
-#: src/killall.c:657
-#, c-format
-msgid ""
-"  -Z,--context REGEXP kill only process(es) having context\n"
-"                      (must precede other arguments)\n"
-msgstr ""
-"  -Z,--context РЕГВЫР  завершать только процессы(ы) с подходящим контекстом\n"
-"                       (должен указываться раньше остальных параметров)\n"
-"\n"
-
-#: src/killall.c:678
-#, c-format
-msgid ""
-"Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
-"\n"
-msgstr ""
-"Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
-"\n"
-
-#: src/killall.c:680 src/fuser.c:138 src/peekfd.c:89 src/pstree.c:806
-#, c-format
-msgid ""
-"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
-"This is free software, and you are welcome to redistribute it under\n"
-"the terms of the GNU General Public License.\n"
-"For more information about these matters, see the files named COPYING.\n"
-msgstr ""
-"PSmisc поставляется БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ.\n"
-"Это свободная программа; вы можете распространять её на условиях\n"
-"Универсальной общественной лицензии GNU.\n"
-"Подробная информация об этих условиях приведена в файле COPYING.\n"
-
-#: src/killall.c:759 src/killall.c:765
-msgid "Invalid time format"
-msgstr "неправильный формат времени"
-
-#: src/killall.c:790
-#, c-format
-msgid "Cannot find user %s\n"
-msgstr "Пользователь %s не найден\n"
-
-#: src/killall.c:846
-#, c-format
-msgid "Maximum number of names is %d\n"
-msgstr "Количество имён не может превышать %d\n"
-
-#: src/killall.c:850 src/pstree.c:736
-#, c-format
-msgid "%s is empty (not mounted ?)\n"
-msgstr "%s пуст (не смонтирован?)\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/fuser.c:105
 #, c-format
 msgid ""
-"Usage: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n SPACE] [-k [-i] [-SIGNAL]] NAME...\n"
+"Usage: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n SPACE] [-k [-i] [-SIGNAL]] "
+"NAME...\n"
 "       fuser -l\n"
 "       fuser -V\n"
 "Show which processes use the named files, sockets, or filesystems.\n"
@@ -189,7 +33,8 @@ msgid ""
 "  -i,--interactive      ask before killing (ignored without -k)\n"
 "  -k,--kill             kill processes accessing the named file\n"
 "  -l,--list-signals     list available signal names\n"
-"  -m,--mount            show all processes using the named filesystems or block device\n"
+"  -m,--mount            show all processes using the named filesystems or "
+"block device\n"
 "  -M,--ismountpoint     fulfill request only if NAME is a mount point\n"
 "  -n,--namespace SPACE  search in this name space (file, udp, or tcp)\n"
 "  -s,--silent           silent operation\n"
@@ -198,7 +43,8 @@ msgid ""
 "  -v,--verbose          verbose output\n"
 "  -V,--version          display version information\n"
 msgstr ""
-"Использование: fuser [-fMuv] [ -a | -s] [ -4 | -6 ] [ -c | -m | -n ОБЛАСТЬ ]\n"
+"Использование: fuser [-fMuv] [ -a | -s] [ -4 | -6 ] [ -c | -m | -n "
+"ОБЛАСТЬ ]\n"
 "               [ -k [-i ] [ -СИГНАЛ ]] ИМЯ...\n"
 "     fuser -l\n"
 "     fuser -V\n"
@@ -214,7 +60,8 @@ msgstr ""
 "  -M,--ismountpoint    выполнять запрос, только если ИМЯ является точкой\n"
 "                       монтирования\n"
 "    -n,--namespace ОБЛАСТЬ\n"
-"                     искать в указанном пространстве имён (file, udp или tcp)\n"
+"                     искать в указанном пространстве имён (file, udp или "
+"tcp)\n"
 "    -s,--silent        не выводить сообщения\n"
 "    -СИГНАЛ            посылать указанный сигнал вместо SIGKILL\n"
 "    -u,--user          показывать идентификатор пользователя (uid)\n"
@@ -256,6 +103,20 @@ msgid ""
 msgstr ""
 "Copyright (C) 1993-2010 Werner Almesberger and Craig Small\n"
 "\n"
+
+#: src/fuser.c:138 src/killall.c:680 src/peekfd.c:89 src/prtstat.c:68
+#: src/pstree.c:806
+#, c-format
+msgid ""
+"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
+"This is free software, and you are welcome to redistribute it under\n"
+"the terms of the GNU General Public License.\n"
+"For more information about these matters, see the files named COPYING.\n"
+msgstr ""
+"PSmisc поставляется БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ.\n"
+"Это свободная программа; вы можете распространять её на условиях\n"
+"Универсальной общественной лицензии GNU.\n"
+"Подробная информация об этих условиях приведена в файле COPYING.\n"
 
 #: src/fuser.c:164
 #, c-format
@@ -315,7 +176,9 @@ msgstr "Не указан процесс"
 
 #: src/fuser.c:1053
 msgid "all option cannot be used with silent option."
-msgstr "Параметр показа всех файлов нельзя использовать вместе с параметром отключения сообщений."
+msgstr ""
+"Параметр показа всех файлов нельзя использовать вместе с параметром "
+"отключения сообщений."
 
 #: src/fuser.c:1058
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
@@ -360,6 +223,156 @@ msgstr "Не удалось открыть сетевой сокет.\n"
 msgid "Cannot find socket's device number.\n"
 msgstr "Не удалось найти номер устройства сокета.\n"
 
+#: src/killall.c:102
+#, c-format
+msgid "Kill %s(%s%d) ? (y/N) "
+msgstr "Завершить %s(%s%d)? (y/N) "
+
+#: src/killall.c:105
+#, c-format
+msgid "Signal %s(%s%d) ? (y/N) "
+msgstr "Послать сигнал %s(%s%d)? (y/N) "
+
+#: src/killall.c:209
+#, c-format
+msgid "Cannot get UID from process status\n"
+msgstr "Не удалось получить UID из состояния процесса\n"
+
+#: src/killall.c:235 src/killall.c:825
+#, c-format
+msgid "Bad regular expression: %s\n"
+msgstr "Неправильное регулярное выражение: %s\n"
+
+#: src/killall.c:446
+#, c-format
+msgid "skipping partial match %s(%d)\n"
+msgstr "игнорирование частичного совпадения %s(%d)\n"
+
+#: src/killall.c:565
+#, c-format
+msgid "Killed %s(%s%d) with signal %d\n"
+msgstr "%s(%s%d) завершён сигналом %d\n"
+
+#: src/killall.c:579
+#, c-format
+msgid "%s: no process found\n"
+msgstr "%s: процесс не найден\n"
+
+#: src/killall.c:617
+#, c-format
+msgid ""
+"Usage: pidof [ -eg ] NAME...\n"
+"       pidof -V\n"
+"\n"
+"    -e      require exact match for very long names;\n"
+"            skip if the command line is unavailable\n"
+"    -g      show process group ID instead of process ID\n"
+"    -V      display version information\n"
+"\n"
+msgstr ""
+"Использование: pidof [ -eg ] ИМЯ...\n"
+"               pidof -V\n"
+"\n"
+"   -e          требовать полного совпадения для очень длинных имён;\n"
+"               игнорировать, если командная строка недоступна\n"
+"   -g          показывать идентификатор группы вместо идентификатора "
+"процесса\n"
+"   -V          показать информацию о версии\n"
+"\n"
+
+#: src/killall.c:633
+#, c-format
+msgid ""
+"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr ""
+"Использование: killall [-Z КОНТЕКСТ] [-u ПОЛЬЗОВАТЕЛЬ]\n"
+"                       [ -eIgiqrvw ] [ -СИГНАЛ ] ИМЯ...\n"
+
+#: src/killall.c:636
+#, c-format
+msgid "Usage: killall [OPTION]... [--] NAME...\n"
+msgstr "Использование: killall [ПАРАМЕТР]... [--] ИМЯ...\n"
+
+#: src/killall.c:639
+#, c-format
+msgid ""
+"       killall -l, --list\n"
+"       killall -V, --version\n"
+"\n"
+"  -e,--exact          require exact match for very long names\n"
+"  -I,--ignore-case    case insensitive process name match\n"
+"  -g,--process-group  kill process group instead of process\n"
+"  -y,--younger-than   kill processes younger than TIME\n"
+"  -o,--older-than     kill processes older than TIME\n"
+"  -i,--interactive    ask for confirmation before killing\n"
+"  -l,--list           list all known signal names\n"
+"  -q,--quiet          don't print complaints\n"
+"  -r,--regexp         interpret NAME as an extended regular expression\n"
+"  -s,--signal SIGNAL  send this signal instead of SIGTERM\n"
+"  -u,--user USER      kill only process(es) running as USER\n"
+"  -v,--verbose        report if the signal was successfully sent\n"
+"  -V,--version        display version information\n"
+"  -w,--wait           wait for processes to die\n"
+msgstr ""
+"       killall -l, --list\n"
+"       killall -V, --version\n"
+"\n"
+"  -e,--exact           требовать полного совпадения для очень длинных имён\n"
+"  -I,--ignore-case     игнорировать регистр символов в именах процессов\n"
+"  -g,--process-group   завершать группу процесса вместо одного процесса\n"
+"  -y,--younger-than    завершить процессы, новее чем заданногоВРЕМЕНИ\n"
+"  -o,--older-than      завершить процессы, старее чем заданного ВРЕМЕНИ\n"
+"  -i,--interactive     запрашивать подтверждение перед завершением "
+"процессов\n"
+"  -l,--list            вывести список допустимых имён сигналов\n"
+"  -q,--quiet           не показывать подробные сообщения\n"
+"  -r,--regexp          рассматривать ИМЯ как расширенное регулярное "
+"выражение\n"
+"  -s,--signal СИГНАЛ   посылать указанный СИГНАЛ, а не SIGTERM\n"
+"  -u,--user ПОЛЬЗВ      завершить процесс(ы), запущенный только "
+"ПОЛЬЗОВАТЕЛЕМ\n"
+"  -v,--verbose         уведомлять только при успешной отправке сигнала\n"
+"  -V,--version         показать информацию о версии\n"
+"  -w,--wait            ожидать завершения процессов\n"
+
+#: src/killall.c:657
+#, c-format
+msgid ""
+"  -Z,--context REGEXP kill only process(es) having context\n"
+"                      (must precede other arguments)\n"
+msgstr ""
+"  -Z,--context РЕГВЫР  завершать только процессы(ы) с подходящим контекстом\n"
+"                       (должен указываться раньше остальных параметров)\n"
+"\n"
+
+#: src/killall.c:678
+#, c-format
+msgid ""
+"Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
+"\n"
+
+#: src/killall.c:759 src/killall.c:765
+msgid "Invalid time format"
+msgstr "неправильный формат времени"
+
+#: src/killall.c:790
+#, c-format
+msgid "Cannot find user %s\n"
+msgstr "Пользователь %s не найден\n"
+
+#: src/killall.c:857
+#, c-format
+msgid "Maximum number of names is %d\n"
+msgstr "Количество имён не может превышать %d\n"
+
+#: src/killall.c:861 src/pstree.c:736
+#, c-format
+msgid "%s is empty (not mounted ?)\n"
+msgstr "%s пуст (не смонтирован?)\n"
+
 #: src/peekfd.c:77
 #, c-format
 msgid "Error attaching to pid %i\n"
@@ -402,6 +415,165 @@ msgstr ""
 "\n"
 "  Нажмите CTRL-C для завершения.\n"
 
+#: src/prtstat.c:54
+#, c-format
+msgid ""
+"Usage: prtstat [options] PID ...\n"
+"       prtstat -V\n"
+"Print information about a process\n"
+"    -r,--raw       Raw display of information\n"
+"    -V,--version   Display version information and exit\n"
+msgstr ""
+"Использование: prtstat [параметры] PID ...\n"
+"       prtstat -V\n"
+"Выводит информацию о процессе\n"
+"    -r,--raw       вывести информацию в необработанном виде\n"
+"    -V,--version   вывести информацию о версии и закончить работу\n"
+
+#: src/prtstat.c:65
+#, c-format
+msgid "prtstat (PSmisc) %s\n"
+msgstr "prtstat (PSmisc) %s\n"
+
+#: src/prtstat.c:66
+#, c-format
+msgid ""
+"Copyright (C) 2009 Craig Small\n"
+"\n"
+msgstr ""
+"Copyright (C) 2009 Craig Small\n"
+"\n"
+
+#: src/prtstat.c:78
+msgid "running"
+msgstr "работает"
+
+#: src/prtstat.c:80
+msgid "sleeping"
+msgstr "спит"
+
+#: src/prtstat.c:82
+msgid "disk sleep"
+msgstr "спит из-за диска"
+
+#: src/prtstat.c:84
+msgid "zombie"
+msgstr "зомби"
+
+#: src/prtstat.c:86
+msgid "traced"
+msgstr "трассируется"
+
+#: src/prtstat.c:88
+msgid "paging"
+msgstr "замещает страницы"
+
+#: src/prtstat.c:90
+msgid "unknown"
+msgstr "неизвестно"
+
+#: src/prtstat.c:164
+#, c-format
+msgid ""
+"Process: %-14s\t\tState: %c (%s)\n"
+"  CPU#:  %-3d\t\tTTY: %s\tThreads: %ld\n"
+msgstr ""
+"Процесс: %-14s\t\tСостояние: %c (%s)\n"
+"  ЦП#:  %-3d\t\tTTY: %s\tНитей: %ld\n"
+
+#: src/prtstat.c:169
+#, c-format
+msgid ""
+"Process, Group and Session IDs\n"
+"  Process ID: %d\t\t  Parent ID: %d\n"
+"    Group ID: %d\t\t Session ID: %d\n"
+"  T Group ID: %d\n"
+"\n"
+msgstr ""
+"ID процесса, группы и сеанса\n"
+"  ID процесса: %d\t\t  ID родителя: %d\n"
+"    ID группы: %d\t\t ID сеанса: %d\n"
+"  ID T-группы: %d\n"
+"\n"
+
+#: src/prtstat.c:175
+#, c-format
+msgid ""
+"Page Faults\n"
+"  This Process    (minor major): %8lu  %8lu\n"
+"  Child Processes (minor major): %8lu  %8lu\n"
+msgstr ""
+"Страничные отказы\n"
+"  Этот процесс      (первичный вторичный): %8lu  %8lu\n"
+"  Дочерние процессы (первичный вторичный): %8lu  %8lu\n"
+
+#: src/prtstat.c:180
+#, c-format
+msgid ""
+"CPU Times\n"
+"  This Process    (user system guest blkio): %6.2f %6.2f %6.2f %6.2f\n"
+"  Child processes (user system guest):       %6.2f %6.2f %6.2f\n"
+msgstr ""
+"Процессорное время\n"
+"  Этот процесс      (польз. систем. гостевое blkio): %6.2f %6.2f %6.2f %"
+"6.2f\n"
+"  Дочерние процессы (польз. систем. гостевое):       %6.2f %6.2f %6.2f\n"
+
+#: src/prtstat.c:189
+#, c-format
+msgid ""
+"Memory\n"
+"  Vsize:       %-10s\n"
+"  RSS:         %-10s \t\t RSS Limit: %s\n"
+"  Code Start:  %#-10lx\t\t Code Stop:  %#-10lx\n"
+"  Stack Start: %#-10lx\n"
+"  Stack Pointer (ESP): %#10lx\t Inst Pointer (EIP): %#10lx\n"
+msgstr ""
+"Память\n"
+"  Vsize:        %-10s\n"
+"  RSS:          %-10s \t\t Предел RSS: %s\n"
+"  Начало кода:  %#-10lx\t\t Конец кода:  %#-10lx\n"
+"  Начало стека: %#-10lx\n"
+"  Указатель стека (ESP): %#10lx\t Указатель инстр. (EIP): %#10lx\n"
+
+#: src/prtstat.c:199
+#, c-format
+msgid ""
+"Scheduling\n"
+"  Policy: %s\n"
+"  Nice:   %ld \t\t RT Priority: %ld %s\n"
+msgstr ""
+"Планировка\n"
+"  Политика:     %s\n"
+"  Уступчивость: %ld \t\t Приоритет RT: %ld %s\n"
+
+#: src/prtstat.c:221
+msgid "asprintf in print_stat failed.\n"
+msgstr "asprintf в print_stat завершилась неудачно.\n"
+
+#: src/prtstat.c:226
+#, c-format
+msgid "Process with pid %d does not exist.\n"
+msgstr "Процесс с pid %d не существует.\n"
+
+#: src/prtstat.c:228
+#, c-format
+msgid "Unable to open stat file for pid %d (%s)\n"
+msgstr "Не удалось открыть файл stat для pid %d (%s)\n"
+
+#: src/prtstat.c:308
+msgid "Invalid option"
+msgstr "неправильный параметр"
+
+#: src/prtstat.c:313
+msgid "You must provide at least one PID."
+msgstr "Вы должны указать не менее одного PID."
+
+#: src/prtstat.c:317
+#, c-format
+msgid "/proc is not mounted, cannot stat /proc/self/stat.\n"
+msgstr "/proc не смонтирован, возможно выполнить stat /proc/self/stat.\n"
+
 #: src/pstree.c:774
 #, c-format
 msgid ""
@@ -424,7 +596,8 @@ msgid ""
 "  -U, --unicode       use UTF-8 (Unicode) line drawing characters\n"
 "  -V, --version       display version information\n"
 msgstr ""
-"Использование: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+"Использование: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -"
+"u ]\n"
 "              [ -A | -G | -U ] [ PID | ПОЛЬЗОВАТЕЛЬ ]\n"
 "       pstree -V\n"
 "Показывает дерево процессов.\n"
@@ -438,7 +611,8 @@ msgstr ""
 "  -G, --vt100         использовать символы рисования линий терминала VT100\n"
 "  -l, --long          не обрезать длинные строки\n"
 "  -n, --numeric-sort  сортировать вывод по PID\n"
-"  -p, --show-pids     показывать идентификаторы процессов (PID); включает -c\n"
+"  -p, --show-pids     показывать идентификаторы процессов (PID); включает -"
+"c\n"
 "  -u, --uid-changes   показывать переходы идентификаторов пользователей\n"
 "  -U, --unicode       использовать символы рисования линий UTF-8 (юникод)\n"
 "  -V, --version       показать информацию о версии\n"
@@ -456,7 +630,8 @@ msgid ""
 "\n"
 msgstr ""
 "  PID                 начинать от указанного PID; по умолчанию 1 (init)\n"
-"  ПОЛЬЗОВАТЕЛЬ        показать только дерево процессов указанного пользователя\n"
+"  ПОЛЬЗОВАТЕЛЬ        показать только дерево процессов указанного "
+"пользователя\n"
 "\n"
 
 #: src/pstree.c:801

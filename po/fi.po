@@ -1,15 +1,15 @@
 # Finnish translation for psmisc.
-# Copyright © 2004 Free Software Foundation, Inc.
+# Copyright © 2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the psmisc package.
 # Lars Wirzenius <liw@iki.fi>, 2004.
-# Jorma Karvonen <karvonen.jorma@gmail.com>, 2008-2009.
+# Jorma Karvonen <karvonen.jorma@gmail.com>, 2008-2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 22.8rc1\n"
+"Project-Id-Version: psmisc 22.11-pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2010-01-04 21:42+1100\n"
-"PO-Revision-Date: 2009-07-25 16:08+0200\n"
+"POT-Creation-Date: 2010-03-28 18:17+1100\n"
+"PO-Revision-Date: 2010-04-05 09:56+0200\n"
 "Last-Translator: Jorma Karvonen <karvonen.jorma@gmail.com>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,209 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-Country: FINLAND\n"
+
+#: src/fuser.c:105
+#, c-format
+msgid ""
+"Usage: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n SPACE] [-k [-i] [-SIGNAL]] "
+"NAME...\n"
+"       fuser -l\n"
+"       fuser -V\n"
+"Show which processes use the named files, sockets, or filesystems.\n"
+"\n"
+"  -a,--all              display unused files too\n"
+"  -i,--interactive      ask before killing (ignored without -k)\n"
+"  -k,--kill             kill processes accessing the named file\n"
+"  -l,--list-signals     list available signal names\n"
+"  -m,--mount            show all processes using the named filesystems or "
+"block device\n"
+"  -M,--ismountpoint     fulfill request only if NAME is a mount point\n"
+"  -n,--namespace SPACE  search in this name space (file, udp, or tcp)\n"
+"  -s,--silent           silent operation\n"
+"  -SIGNAL               send this signal instead of SIGKILL\n"
+"  -u,--user             display user IDs\n"
+"  -v,--verbose          verbose output\n"
+"  -V,--version          display version information\n"
+msgstr ""
+"Käyttö: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n SPACE] [-k [-i] [-SIGNAL]] "
+"NIMI ...\n"
+"        fuser -l\n"
+"        fuser -V\n"
+"Näytä mitkä prosessit käyttävät nimettyjä tiedostoja, pistokkeita tai "
+"tiedostojärjestelmiä.\n"
+"\n"
+"  -a,--all              näytä myös käyttämättömät tiedostot\n"
+"  -i,--interactive      kysy ennen kill-komennon käyttämistä (ei merkitystä "
+"ilman valitsinta -k)\n"
+"  -i,--interactive      kysy ennen signaalin lähetystä kill-käskyllä (ei "
+"merkitystä ilman ”-k”-valitsinta)\n"
+"  -k,--kill             lähetä signaali kill-käskyllä prosesseille, jotka "
+"käyttävät tiedostoa\n"
+"  -l,--list-signals     näytä signaalinimien luettelo\n"
+"  -m,--mount            näytä kaikki nimettyjä tiedostojärjestelmiä tai "
+"lohkolaitteita käyttävät prosessit\n"
+"  -n,--namespace SPACE  etsi tästä SPACE-nimiavaruudesta (file, udp, tai "
+"tcp)\n"
+"  -s,--silent           vaimennettu toiminta\n"
+"  -SIGNAL               lähetä muu signaali kuin SIGKILL\n"
+"  -u,--user             näytä käyttäjätunnukset\n"
+"  -v,--verbose          laveasti\n"
+"  -V,--version          näytä versiotiedot\n"
+
+#: src/fuser.c:122
+#, c-format
+msgid ""
+"  -4,--ipv4             search IPv4 sockets only\n"
+"  -6,--ipv6             search IPv6 sockets only\n"
+msgstr ""
+"  -4,--ipv4             etsi vain IPv4-pistokkeita\n"
+"  -6,--ipv6             etsi vain IPv6-pistokkeita\n"
+
+#: src/fuser.c:126
+#, c-format
+msgid ""
+"  -                     reset options\n"
+"\n"
+"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"\n"
+msgstr ""
+"  -                     nollaa valitsimet\n"
+"\n"
+"  ”udp/tcp”-nimet: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"\n"
+
+#: src/fuser.c:133
+#, c-format
+msgid "fuser (PSmisc) %s\n"
+msgstr "fuser (PSmisc) %s\n"
+
+#: src/fuser.c:136
+#, c-format
+msgid ""
+"Copyright (C) 1993-2010 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Copyright © 1993-2010 Werner Almesberger ja Craig Small\n"
+"\n"
+
+#: src/fuser.c:138 src/killall.c:680 src/peekfd.c:89 src/prtstat.c:68
+#: src/pstree.c:806
+#, c-format
+msgid ""
+"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
+"This is free software, and you are welcome to redistribute it under\n"
+"the terms of the GNU General Public License.\n"
+"For more information about these matters, see the files named COPYING.\n"
+msgstr ""
+"PSmisc-ohjelmistolla EI EHDOTTOMASTI OLE MITÄÄN TAKUUTA.\n"
+"Tämä on vapaa ohjelmisto ja saat kopioida ja levittää sitä GNU General "
+"Public\n"
+"License -lisenssin mukaisesti. Tiedostossa COPYING on tarkemmat tiedot.\n"
+
+#: src/fuser.c:164
+#, c-format
+msgid "Cannot open /proc directory: %s\n"
+msgstr "Ei voida avata ”/proc”-hakemistoa: %s\n"
+
+#: src/fuser.c:331 src/fuser.c:379
+#, c-format
+msgid "Cannot allocate memory for matched proc: %s\n"
+msgstr "Ei voida varata muistia täsmäävälle ”proc”-hakemistolle: %s\n"
+
+#: src/fuser.c:398
+#, c-format
+msgid "Specified filename %s does not exist.\n"
+msgstr "Määriteltyä tiedostonimeä %s ei ole olemassa.\n"
+
+#: src/fuser.c:400
+#, c-format
+msgid "Cannot stat %s: %s\n"
+msgstr "Ei voida suorittaa stat-käskyä %s: %s\n"
+
+#: src/fuser.c:533
+#, c-format
+msgid "Cannot resolve local port %s: %s\n"
+msgstr "Ei voida ratkaista paikallista porttia %s: %s\n"
+
+#: src/fuser.c:551
+#, c-format
+msgid "Unknown local port AF %d\n"
+msgstr "Tuntematon paikallinen portti AF %d\n"
+
+#: src/fuser.c:641
+#, c-format
+msgid "Cannot open protocol file \"%s\": %s\n"
+msgstr "Ei voida avata yhteyskäytäntötiedostoa ”%s”: %s\n"
+
+#: src/fuser.c:888
+#, c-format
+msgid "%s: Invalid option %s\n"
+msgstr "%s: Virheellinen valitsin %s\n"
+
+#: src/fuser.c:937
+msgid "Namespace option requires an argument."
+msgstr "Nimiavaruusvalitsin vaatii argumentin."
+
+#: src/fuser.c:949
+msgid "Invalid namespace name"
+msgstr "Virheellinen nimiavaruusnimi"
+
+#: src/fuser.c:1002
+msgid "You can only use files with mountpoint options"
+msgstr "Voit käyttää tiedostoja vain ”mountpoint”-valitsimien kanssa"
+
+#: src/fuser.c:1046
+msgid "No process specification given"
+msgstr "Prosessimäärittelyä ei ole annettu"
+
+#: src/fuser.c:1053
+msgid "all option cannot be used with silent option."
+msgstr "”all”-valitsinta ei voi käyttää ”silent”-valitsimen kanssa."
+
+#: src/fuser.c:1058
+msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
+msgstr "Ei voida etsiä ”vain IPv4”- ja ”vain IPv6”-pistokkeita samaan aikaan"
+
+#: src/fuser.c:1129
+#, c-format
+msgid "%*s USER        PID ACCESS COMMAND\n"
+msgstr "%*s KÄYTTÄJÄ    PID ACCESS KÄSKY\n"
+
+#: src/fuser.c:1162 src/fuser.c:1217
+msgid "(unknown)"
+msgstr "(tuntematon)"
+
+#: src/fuser.c:1293
+#, c-format
+msgid "Cannot stat file %s: %s\n"
+msgstr "Ei voida suorittaa stat-käskyä tiedostolle %s: %s\n"
+
+#: src/fuser.c:1409
+#, c-format
+msgid "Cannot open /proc/net/unix: %s\n"
+msgstr "Ei voida avata tiedostoa ”/proc/net/unix”: %s\n"
+
+#: src/fuser.c:1471
+#, c-format
+msgid "Kill process %d ? (y/N) "
+msgstr ""
+"Lähetä signaali prosessille %d? (y=kyllä, N=ei, ”kyllä” yleensä lopettaa "
+"prosessin) "
+
+#: src/fuser.c:1504
+#, c-format
+msgid "Could not kill process %d: %s\n"
+msgstr "Ei voitu lähettää signaalia prosessille %d: %s\n"
+
+#: src/fuser.c:1516
+#, c-format
+msgid "Cannot open a network socket.\n"
+msgstr "Ei voida avata verkkopistoketta.\n"
+
+#: src/fuser.c:1520
+#, c-format
+msgid "Cannot find socket's device number.\n"
+msgstr "Pistokkeen laitenumeroa ei löydy.\n"
 
 #  Kill-käskyn käyttämä signaali on tässä SIGTERM (tunnetaan myös nimellä TERM).
 #: src/killall.c:102
@@ -38,7 +241,7 @@ msgstr ""
 msgid "Cannot get UID from process status\n"
 msgstr "Ei saada UID-käyttäjätunnistetta prosessitilasta\n"
 
-#: src/killall.c:235 src/killall.c:814
+#: src/killall.c:235 src/killall.c:825
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr "Virheellinen säännöllinen lauseke: %s\n"
@@ -93,7 +296,7 @@ msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "Käyttö: killall [VALITSIN]... [--] NIMI...\n"
 
 #: src/killall.c:639
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "       killall -l, --list\n"
 "       killall -V, --version\n"
@@ -121,6 +324,8 @@ msgstr ""
 "  -I,--ignore-case     merkkikoosta riippumaton prosessinimi täsmää\n"
 "  -g,--process-group   lähetä signaali kill-käskyllä prosessiryhmälle "
 "prosessin sijasta\n"
+"  -y,--younger-than    tapa prosessit, jotka ovat nuorempia kuin TIME\n"
+"  -o,--older-than      tapa prosessit, jotka ovat vanhempia kuin TIME\n"
 "  -i,--interactive     kysy vahvistusta ennen kill-käskyä\n"
 "  -l,--list            luettele kaikki tunnetut signaalinimet\n"
 "  -q,--quiet           älä tulosta valituksia\n"
@@ -152,226 +357,24 @@ msgstr ""
 "Copyright © 1993-2005 Werner Almesberger ja Craig Small\n"
 "\n"
 
-#: src/killall.c:680 src/fuser.c:138 src/peekfd.c:89 src/pstree.c:806
-#, c-format
-msgid ""
-"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
-"This is free software, and you are welcome to redistribute it under\n"
-"the terms of the GNU General Public License.\n"
-"For more information about these matters, see the files named COPYING.\n"
-msgstr ""
-"PSmisc-ohjelmistolla EI EHDOTTOMASTI OLE MITÄÄN TAKUUTA.\n"
-"Tämä on vapaa ohjelmisto ja saat kopioida ja levittää sitä GNU General "
-"Public\n"
-"License -lisenssin mukaisesti. Tiedostossa COPYING on tarkemmat tiedot.\n"
-
 #: src/killall.c:759 src/killall.c:765
 msgid "Invalid time format"
-msgstr ""
+msgstr "Virheellinen aikamuoto"
 
 #: src/killall.c:790
 #, c-format
 msgid "Cannot find user %s\n"
 msgstr "Ei löydy käyttäjää %s\n"
 
-#: src/killall.c:846
+#: src/killall.c:857
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Suurin sallittu määrä nimiä on %d\n"
 
-#: src/killall.c:850 src/pstree.c:736
+#: src/killall.c:861 src/pstree.c:736
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s on tyhjä (ei liitetty?)\n"
-
-#: src/fuser.c:105
-#, fuzzy, c-format
-msgid ""
-"Usage: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n SPACE] [-k [-i] [-SIGNAL]] "
-"NAME...\n"
-"       fuser -l\n"
-"       fuser -V\n"
-"Show which processes use the named files, sockets, or filesystems.\n"
-"\n"
-"  -a,--all              display unused files too\n"
-"  -i,--interactive      ask before killing (ignored without -k)\n"
-"  -k,--kill             kill processes accessing the named file\n"
-"  -l,--list-signals     list available signal names\n"
-"  -m,--mount            show all processes using the named filesystems or "
-"block device\n"
-"  -M,--ismountpoint     fulfill request only if NAME is a mount point\n"
-"  -n,--namespace SPACE  search in this name space (file, udp, or tcp)\n"
-"  -s,--silent           silent operation\n"
-"  -SIGNAL               send this signal instead of SIGKILL\n"
-"  -u,--user             display user IDs\n"
-"  -v,--verbose          verbose output\n"
-"  -V,--version          display version information\n"
-msgstr ""
-"Käyttö: fuser [ -fuv ] [ -a | -s  ] [  -4 | -6 ] [ -c | -m | -n SPACE ] [ -k "
-"[ -i ] [ -SIGNAL ]] NIMI ...\n"
-"        fuser -l\n"
-"        fuser -V\n"
-"Näytä mitkä prosessit käyttävät nimettyjä tiedostoja, pistokkeita tai "
-"tiedostojärjestelmiä.\n"
-"\n"
-"    -a        näytä myös käyttämättömät tiedostot\n"
-"    -c        sama kuin -m (POSIX-yhteensopivuutta varten)\n"
-"    -f        ei merkitystä (tarvitaan POSIX-yhteensopivuuden takia)\n"
-"    -i        kysy ennen signaalin lähetystä kill-käskyllä (ei merkitystä "
-"ilman ”-k”-valitsinta)\n"
-"    -k        lähetä signaali kill-käskyllä prosesseille, jotka käyttävät "
-"tiedostoa\n"
-"    -l        näytä signaalinimien luettelo\n"
-"    -m        näytä kaikki nimettyjä tiedostojärjestelmiä tai lohkolaitteita "
-"käyttävät prosessit\n"
-"    -n SPACE  etsi tästä SPACE-nimiavaruudesta (file, udp, tai tcp)\n"
-"    -s        vaimennettu toiminta\n"
-"    -SIGNAL   lähetä muu signaali kuin SIGKILL\n"
-"    -u        näytä käyttäjätunnukset\n"
-"    -v        laveasti\n"
-"    -V        näytä versiotiedot\n"
-
-#: src/fuser.c:122
-#, fuzzy, c-format
-msgid ""
-"  -4,--ipv4             search IPv4 sockets only\n"
-"  -6,--ipv6             search IPv6 sockets only\n"
-msgstr ""
-"    -4        etsi vain IPv4-pistokkeita\n"
-"    -6        etsi vain IPv6-pistokkeita\n"
-
-#: src/fuser.c:126
-#, fuzzy, c-format
-msgid ""
-"  -                     reset options\n"
-"\n"
-"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
-"\n"
-msgstr ""
-"    -         nollaa valitsimet\n"
-"\n"
-"  ”udp/tcp”-nimet: [local_port][,[rmt_host][,[rmt_port]]]\n"
-"\n"
-
-#: src/fuser.c:133
-#, c-format
-msgid "fuser (PSmisc) %s\n"
-msgstr "fuser (PSmisc) %s\n"
-
-#: src/fuser.c:136
-#, fuzzy, c-format
-msgid ""
-"Copyright (C) 1993-2010 Werner Almesberger and Craig Small\n"
-"\n"
-msgstr ""
-"Copyright © 1993-2005 Werner Almesberger ja Craig Small\n"
-"\n"
-
-#: src/fuser.c:164
-#, c-format
-msgid "Cannot open /proc directory: %s\n"
-msgstr "Ei voida avata ”/proc”-hakemistoa: %s\n"
-
-#: src/fuser.c:331 src/fuser.c:379
-#, c-format
-msgid "Cannot allocate memory for matched proc: %s\n"
-msgstr "Ei voida varata muistia täsmäävälle ”proc”-hakemistolle: %s\n"
-
-#: src/fuser.c:398
-#, c-format
-msgid "Specified filename %s does not exist.\n"
-msgstr ""
-
-#: src/fuser.c:400
-#, c-format
-msgid "Cannot stat %s: %s\n"
-msgstr "Ei voida suorittaa stat-käskyä %s: %s\n"
-
-#: src/fuser.c:533
-#, c-format
-msgid "Cannot resolve local port %s: %s\n"
-msgstr "Ei voida ratkaista paikallista porttia %s: %s\n"
-
-#: src/fuser.c:551
-#, c-format
-msgid "Unknown local port AF %d\n"
-msgstr "Tuntematon paikallinen portti AF %d\n"
-
-#: src/fuser.c:641
-#, c-format
-msgid "Cannot open protocol file \"%s\": %s\n"
-msgstr "Ei voida avata yhteyskäytäntötiedostoa ”%s”: %s\n"
-
-#: src/fuser.c:888
-#, fuzzy, c-format
-msgid "%s: Invalid option %s\n"
-msgstr "%s/%s: epäkelpo määrittely\n"
-
-#: src/fuser.c:937
-msgid "Namespace option requires an argument."
-msgstr "Nimiavaruusvalitsin vaatii argumentin."
-
-#: src/fuser.c:949
-msgid "Invalid namespace name"
-msgstr "Virheellinen nimiavaruusnimi"
-
-#: src/fuser.c:1002
-#, fuzzy
-msgid "You can only use files with mountpoint options"
-msgstr "Voit käyttää tiedostoja vain ”mountpoint”-valitsimen kanssa"
-
-#: src/fuser.c:1046
-msgid "No process specification given"
-msgstr "Prosessimäärittelyä ei ole annettu"
-
-#: src/fuser.c:1053
-msgid "all option cannot be used with silent option."
-msgstr "”all”-valitsinta ei voi käyttää ”silent”-valitsimen kanssa"
-
-#: src/fuser.c:1058
-msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
-msgstr "Ei voida etsiä ”vain IPv4”- ja ”vain IPv6”-pistokkeita samaan aikaan"
-
-#: src/fuser.c:1129
-#, c-format
-msgid "%*s USER        PID ACCESS COMMAND\n"
-msgstr "%*s KÄYTTÄJÄ    PID ACCESS KÄSKY\n"
-
-#: src/fuser.c:1162 src/fuser.c:1217
-msgid "(unknown)"
-msgstr "(tuntematon)"
-
-#: src/fuser.c:1293
-#, c-format
-msgid "Cannot stat file %s: %s\n"
-msgstr "Ei voida suorittaa stat-käskyä tiedostolle %s: %s\n"
-
-#: src/fuser.c:1409
-#, c-format
-msgid "Cannot open /proc/net/unix: %s\n"
-msgstr "Ei voida avata tiedostoa ”/proc/net/unix”: %s\n"
-
-#: src/fuser.c:1471
-#, c-format
-msgid "Kill process %d ? (y/N) "
-msgstr ""
-"Lähetä signaali prosessille %d? (y=kyllä, N=ei, ”kyllä” yleensä lopettaa "
-"prosessin) "
-
-#: src/fuser.c:1504
-#, c-format
-msgid "Could not kill process %d: %s\n"
-msgstr "Ei voida lähettää signaalia prosessille %d: %s\n"
-
-#: src/fuser.c:1516
-#, c-format
-msgid "Cannot open a network socket.\n"
-msgstr "Ei voida avata verkkopistoketta.\n"
-
-#: src/fuser.c:1520
-#, c-format
-msgid "Cannot find socket's device number.\n"
-msgstr "pistokkeen laitenumeroa ei löydy.\n"
 
 #: src/peekfd.c:77
 #, c-format
@@ -406,14 +409,176 @@ msgid ""
 "  Press CTRL-C to end output.\n"
 msgstr ""
 "Käyttö: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
-"    -8 tuloste puhtaana 8-bittisenä virtana\n"
+"    -8 tuloste puhtaina 8-bittisinä virtoina.\n"
 "    -n älä näytä lukemisia ja kirjoittamisia fd-otsakkeista.\n"
 "    -c kurkista myös kaikkien tytärprosessien aikana.\n"
-"    -d poista tulosteesta lukeminen ja kirjoittaminen.\n"
+"    -d poista tulosteesta lukemis- ja kirjoittamistoimintojen "
+"kaksoiskappaleet.\n"
 "    -V tulostaa versiotiedot.\n"
 "    -h tulostaa tämän ohjeen.\n"
 "\n"
 "  Lopeta tulostus painamalla näppäimiä CTRL-C.\n"
+
+#: src/prtstat.c:54
+#, c-format
+msgid ""
+"Usage: prtstat [options] PID ...\n"
+"       prtstat -V\n"
+"Print information about a process\n"
+"    -r,--raw       Raw display of information\n"
+"    -V,--version   Display version information and exit\n"
+msgstr ""
+"Käyttö: prtstat [valitsimet] PID-prosessitunniste ...\n"
+"       prtstat -V\n"
+"Tulosta tiedot prosesseista\n"
+"    -r,--raw       Tietojen raakanäyttö\n"
+"    -V,--version   Näytä versiotiedot ja poistu\n"
+
+#: src/prtstat.c:65
+#, c-format
+msgid "prtstat (PSmisc) %s\n"
+msgstr "prtstat (PSmisc) %s\n"
+
+#: src/prtstat.c:66
+#, c-format
+msgid ""
+"Copyright (C) 2009 Craig Small\n"
+"\n"
+msgstr ""
+"Copyright © 2009 Craig Small\n"
+"\n"
+
+#: src/prtstat.c:78
+msgid "running"
+msgstr "suoritetaan"
+
+#: src/prtstat.c:80
+msgid "sleeping"
+msgstr "levätään"
+
+#: src/prtstat.c:82
+msgid "disk sleep"
+msgstr "levylepo"
+
+#: src/prtstat.c:84
+msgid "zombie"
+msgstr "zombi"
+
+#: src/prtstat.c:86
+msgid "traced"
+msgstr "jäljitetty"
+
+#: src/prtstat.c:88
+msgid "paging"
+msgstr "sivutetaan"
+
+#: src/prtstat.c:90
+msgid "unknown"
+msgstr "tuntematon"
+
+#: src/prtstat.c:164
+#, c-format
+msgid ""
+"Process: %-14s\t\tState: %c (%s)\n"
+"  CPU#:  %-3d\t\tTTY: %s\tThreads: %ld\n"
+msgstr ""
+"Prosessi: %-14s\t\tTila: %c (%s)\n"
+"  Suoritinnro:  %-3d\t\tTTY: %s\tSäikeet: %ld\n"
+
+#: src/prtstat.c:169
+#, c-format
+msgid ""
+"Process, Group and Session IDs\n"
+"  Process ID: %d\t\t  Parent ID: %d\n"
+"    Group ID: %d\t\t Session ID: %d\n"
+"  T Group ID: %d\n"
+"\n"
+msgstr ""
+"Prosessi-, ryhmä- ja istuntotunnisteet\n"
+"  Prosessitunniste: %d\t\t  Emotunniste: %d\n"
+"    Ryhmätunniste: %d\t\t Istuntotunniste: %d\n"
+"  T-ryhmätunniste: %d\n"
+"\n"
+
+#: src/prtstat.c:175
+#, c-format
+msgid ""
+"Page Faults\n"
+"  This Process    (minor major): %8lu  %8lu\n"
+"  Child Processes (minor major): %8lu  %8lu\n"
+msgstr ""
+"Sivuvirheet\n"
+"  Tämä Prosessi    (minor major): %8lu  %8lu\n"
+"  Lapsiprosessit (minor major): %8lu  %8lu\n"
+
+#: src/prtstat.c:180
+#, c-format
+msgid ""
+"CPU Times\n"
+"  This Process    (user system guest blkio): %6.2f %6.2f %6.2f %6.2f\n"
+"  Child processes (user system guest):       %6.2f %6.2f %6.2f\n"
+msgstr ""
+"Suoritinajat\n"
+"  Tämä prosessi    (käyttäjä järjestelmä vieras blkio): %6.2f %6.2f %6.2f %"
+"6.2f\n"
+"  Lapsiprosessit (käyttäjä järjestelmä vieras blkio): %6.2f %6.2f %6.2f\n"
+
+#: src/prtstat.c:189
+#, c-format
+msgid ""
+"Memory\n"
+"  Vsize:       %-10s\n"
+"  RSS:         %-10s \t\t RSS Limit: %s\n"
+"  Code Start:  %#-10lx\t\t Code Stop:  %#-10lx\n"
+"  Stack Start: %#-10lx\n"
+"  Stack Pointer (ESP): %#10lx\t Inst Pointer (EIP): %#10lx\n"
+msgstr ""
+"Muisti\n"
+"  Vsize:       %-10s\n"
+"  RSS:         %-10s \t\t RSS-raja: %s\n"
+"  Koodialku:  %#-10lx\t\t Koodiloppu:  %#-10lx\n"
+"  Pinoalku: %#-10lx\n"
+"  Pino-osoitin (ESP): %#10lx\t Käskyosoitin (EIP): %#10lx\n"
+
+#: src/prtstat.c:199
+#, c-format
+msgid ""
+"Scheduling\n"
+"  Policy: %s\n"
+"  Nice:   %ld \t\t RT Priority: %ld %s\n"
+msgstr ""
+"Vuorottaminen\n"
+"  Menettelytapa: %s\n"
+"  Nice:   %ld \t\t RT Prioriteetti: %ld %s\n"
+
+#: src/prtstat.c:221
+msgid "asprintf in print_stat failed.\n"
+msgstr "asprintf kutsussa print_stat epäonnistui.\n"
+
+#: src/prtstat.c:226
+#, c-format
+msgid "Process with pid %d does not exist.\n"
+msgstr "Ei ole olemassa prosessia, jonka prosessitunniste on %d.\n"
+
+#: src/prtstat.c:228
+#, c-format
+msgid "Unable to open stat file for pid %d (%s)\n"
+msgstr "Ei kyetä avaamaan stat-tiedostoa prosessitunnisteelle %d (%s)\n"
+
+#: src/prtstat.c:308
+msgid "Invalid option"
+msgstr "Virheellinen valitsin"
+
+#: src/prtstat.c:313
+msgid "You must provide at least one PID."
+msgstr "Sinun on tarjottava vähintään yksi PID-prosessitunniste."
+
+#: src/prtstat.c:317
+#, c-format
+msgid "/proc is not mounted, cannot stat /proc/self/stat.\n"
+msgstr ""
+"/proc ei ole liitetty, ei voi suorittaa stat-käskyä tiedostolle /proc/self/"
+"stat.\n"
 
 #: src/pstree.c:774
 #, c-format
@@ -440,7 +605,7 @@ msgstr ""
 "Käyttö: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
 "              [ -A | -G | -U ] [ PID | KÄYTTÄJÄ ]\n"
 "       pstree -V\n"
-"Näytä prosessipuu.\n"
+"Näytä prosessien puu.\n"
 "\n"
 "  -a, --arguments     näytä komentoriviargumentit\n"
 "  -A, --ascii         käytä ASCII-pseudografiikkamerkkejä\n"
@@ -457,9 +622,9 @@ msgstr ""
 "  -V, --version       näytä versiotiedot\n"
 
 #: src/pstree.c:792
-#, fuzzy, c-format
+#, c-format
 msgid "  -Z     show         SELinux security contexts\n"
-msgstr "  -Z     show   SELinux-turvakontekstit\n"
+msgstr "  -Z     näytä SELinux-turvakontekstit\n"
 
 #: src/pstree.c:794
 #, c-format

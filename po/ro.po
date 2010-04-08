@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc-21.6pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2010-01-04 21:42+1100\n"
+"POT-Creation-Date: 2010-03-28 18:17+1100\n"
 "PO-Revision-Date: 2005-02-24 12:00-0500\n"
 "Last-Translator: Laurentiu Buzdugan <lbuz@rolix.org>\n"
 "Language-Team: Romanian <translation-team-ro@lists.sourceforge.net>\n"
@@ -17,6 +17,180 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/fuser.c:105
+#, c-format
+msgid ""
+"Usage: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n SPACE] [-k [-i] [-SIGNAL]] "
+"NAME...\n"
+"       fuser -l\n"
+"       fuser -V\n"
+"Show which processes use the named files, sockets, or filesystems.\n"
+"\n"
+"  -a,--all              display unused files too\n"
+"  -i,--interactive      ask before killing (ignored without -k)\n"
+"  -k,--kill             kill processes accessing the named file\n"
+"  -l,--list-signals     list available signal names\n"
+"  -m,--mount            show all processes using the named filesystems or "
+"block device\n"
+"  -M,--ismountpoint     fulfill request only if NAME is a mount point\n"
+"  -n,--namespace SPACE  search in this name space (file, udp, or tcp)\n"
+"  -s,--silent           silent operation\n"
+"  -SIGNAL               send this signal instead of SIGKILL\n"
+"  -u,--user             display user IDs\n"
+"  -v,--verbose          verbose output\n"
+"  -V,--version          display version information\n"
+msgstr ""
+
+#: src/fuser.c:122
+#, c-format
+msgid ""
+"  -4,--ipv4             search IPv4 sockets only\n"
+"  -6,--ipv6             search IPv6 sockets only\n"
+msgstr ""
+
+#: src/fuser.c:126
+#, c-format
+msgid ""
+"  -                     reset options\n"
+"\n"
+"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
+"\n"
+msgstr ""
+
+#: src/fuser.c:133
+#, fuzzy, c-format
+msgid "fuser (PSmisc) %s\n"
+msgstr "fuser (psmisc) %s\n"
+
+#: src/fuser.c:136
+#, fuzzy, c-format
+msgid ""
+"Copyright (C) 1993-2010 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Copyright (C) 1993-2002 Werner Almesberger ºi Craig Small\n"
+"\n"
+
+#: src/fuser.c:138 src/killall.c:680 src/peekfd.c:89 src/prtstat.c:68
+#: src/pstree.c:806
+#, c-format
+msgid ""
+"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
+"This is free software, and you are welcome to redistribute it under\n"
+"the terms of the GNU General Public License.\n"
+"For more information about these matters, see the files named COPYING.\n"
+msgstr ""
+"PSmisc vine fãrã ABSOLUT NICI O GARANÞIE.\n"
+"Acesta este software liber, ºi sunteþi benevenit sã îl redistribuiþi\n"
+"în conformitate cu termenii GNU General Public License.\n"
+"Pentru informaþii suplimentare referitoare la aceste chestiuni,\n"
+"vedeþi fiºierele numite COPYING.\n"
+
+#: src/fuser.c:164
+#, c-format
+msgid "Cannot open /proc directory: %s\n"
+msgstr ""
+
+#: src/fuser.c:331 src/fuser.c:379
+#, c-format
+msgid "Cannot allocate memory for matched proc: %s\n"
+msgstr ""
+
+#: src/fuser.c:398
+#, c-format
+msgid "Specified filename %s does not exist.\n"
+msgstr ""
+
+#: src/fuser.c:400
+#, c-format
+msgid "Cannot stat %s: %s\n"
+msgstr ""
+
+#: src/fuser.c:533
+#, c-format
+msgid "Cannot resolve local port %s: %s\n"
+msgstr ""
+
+#: src/fuser.c:551
+#, c-format
+msgid "Unknown local port AF %d\n"
+msgstr ""
+
+#: src/fuser.c:641
+#, c-format
+msgid "Cannot open protocol file \"%s\": %s\n"
+msgstr ""
+
+#: src/fuser.c:888
+#, fuzzy, c-format
+msgid "%s: Invalid option %s\n"
+msgstr "%s/%s: specificaþie invalidã\n"
+
+#: src/fuser.c:937
+msgid "Namespace option requires an argument."
+msgstr ""
+
+#: src/fuser.c:949
+msgid "Invalid namespace name"
+msgstr ""
+
+#: src/fuser.c:1002
+msgid "You can only use files with mountpoint options"
+msgstr ""
+
+#: src/fuser.c:1046
+msgid "No process specification given"
+msgstr ""
+
+#: src/fuser.c:1053
+msgid "all option cannot be used with silent option."
+msgstr ""
+
+#: src/fuser.c:1058
+msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
+msgstr ""
+
+#: src/fuser.c:1129
+#, fuzzy, c-format
+msgid "%*s USER        PID ACCESS COMMAND\n"
+msgstr ""
+"\n"
+"%*s UTILIZATOR  PID ACCES  COMANDÃ\n"
+
+#: src/fuser.c:1162 src/fuser.c:1217
+msgid "(unknown)"
+msgstr ""
+
+#: src/fuser.c:1293
+#, c-format
+msgid "Cannot stat file %s: %s\n"
+msgstr ""
+
+#: src/fuser.c:1409
+#, c-format
+msgid "Cannot open /proc/net/unix: %s\n"
+msgstr ""
+
+#: src/fuser.c:1471
+#, c-format
+msgid "Kill process %d ? (y/N) "
+msgstr "Terminã process %d ? (y/N) "
+
+#: src/fuser.c:1504
+#, c-format
+msgid "Could not kill process %d: %s\n"
+msgstr ""
+
+#: src/fuser.c:1516
+#, c-format
+msgid "Cannot open a network socket.\n"
+msgstr ""
+
+#: src/fuser.c:1520
+#, fuzzy, c-format
+msgid "Cannot find socket's device number.\n"
+msgstr "nu pot gãsi numerele dispozitivelor socket-urilor"
 
 #: src/killall.c:102
 #, c-format
@@ -33,7 +207,7 @@ msgstr "Terminã %s(%s%d) ? (y/N) "
 msgid "Cannot get UID from process status\n"
 msgstr ""
 
-#: src/killall.c:235 src/killall.c:814
+#: src/killall.c:235 src/killall.c:825
 #, c-format
 msgid "Bad regular expression: %s\n"
 msgstr ""
@@ -142,20 +316,6 @@ msgstr ""
 "Copyright (C) 1993-2002 Werner Almesberger ºi Craig Small\n"
 "\n"
 
-#: src/killall.c:680 src/fuser.c:138 src/peekfd.c:89 src/pstree.c:806
-#, c-format
-msgid ""
-"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
-"This is free software, and you are welcome to redistribute it under\n"
-"the terms of the GNU General Public License.\n"
-"For more information about these matters, see the files named COPYING.\n"
-msgstr ""
-"PSmisc vine fãrã ABSOLUT NICI O GARANÞIE.\n"
-"Acesta este software liber, ºi sunteþi benevenit sã îl redistribuiþi\n"
-"în conformitate cu termenii GNU General Public License.\n"
-"Pentru informaþii suplimentare referitoare la aceste chestiuni,\n"
-"vedeþi fiºierele numite COPYING.\n"
-
 #: src/killall.c:759 src/killall.c:765
 msgid "Invalid time format"
 msgstr ""
@@ -165,199 +325,15 @@ msgstr ""
 msgid "Cannot find user %s\n"
 msgstr ""
 
-#: src/killall.c:846
+#: src/killall.c:857
 #, c-format
 msgid "Maximum number of names is %d\n"
 msgstr "Numãr maxim de nume este %d\n"
 
-#: src/killall.c:850 src/pstree.c:736
+#: src/killall.c:861 src/pstree.c:736
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s este gol (nu este montat ?)\n"
-
-#: src/fuser.c:105
-#, fuzzy, c-format
-msgid ""
-"Usage: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n SPACE] [-k [-i] [-SIGNAL]] "
-"NAME...\n"
-"       fuser -l\n"
-"       fuser -V\n"
-"Show which processes use the named files, sockets, or filesystems.\n"
-"\n"
-"  -a,--all              display unused files too\n"
-"  -i,--interactive      ask before killing (ignored without -k)\n"
-"  -k,--kill             kill processes accessing the named file\n"
-"  -l,--list-signals     list available signal names\n"
-"  -m,--mount            show all processes using the named filesystems or "
-"block device\n"
-"  -M,--ismountpoint     fulfill request only if NAME is a mount point\n"
-"  -n,--namespace SPACE  search in this name space (file, udp, or tcp)\n"
-"  -s,--silent           silent operation\n"
-"  -SIGNAL               send this signal instead of SIGKILL\n"
-"  -u,--user             display user IDs\n"
-"  -v,--verbose          verbose output\n"
-"  -V,--version          display version information\n"
-msgstr ""
-"folosire: fuser [ -a | -s | -c ] [ -n spaþiu ] [ -signal ] [ -kimuv ] "
-"nume ...\n"
-"             [ - ] [ -n spaþiu ] [ -signal ] [ -kimuv ] nume ...\n"
-"       fuser -l\n"
-"       fuser -V\n"
-"\n"
-"    -a        afiºeazã ºî fiºierele nefolosite\n"
-"    -c        FS montat(e)\n"
-"    -f        ignorat pe tãcute (pentru compatibilitate POSIX)\n"
-"    -k        terminã procesele ce acceseazã acel fiºier\n"
-"    -i        întreabã înainte de a termina (ignorat fãrã -k)\n"
-"    -l        listeazã numele semnalelor\n"
-"    -m        FS montat(e)\n"
-"    -n spaþiu cautã în numele de spaþiu specificat (fiºier, udp, sau tcp)\n"
-"    -s        operare pe tãcute\n"
-"    -signal   trimite semnal în loc de SIGKILL\n"
-"    -u        afiºeazã ID-uri utilizator\n"
-"    -v        ieºire detaliatã\n"
-"    -V        afiºeazã informaþii despre versiune\n"
-"    -4        cautã numai socket-urile IPv4\n"
-"    -6        cautã numai socket-urile IPv6\n"
-"    -         reseteazã opþiuni\n"
-"\n"
-"  nume udp/tcp: [local_port][,[rmt_host][,[rmt_port]]]\n"
-"\n"
-
-#: src/fuser.c:122
-#, c-format
-msgid ""
-"  -4,--ipv4             search IPv4 sockets only\n"
-"  -6,--ipv6             search IPv6 sockets only\n"
-msgstr ""
-
-#: src/fuser.c:126
-#, c-format
-msgid ""
-"  -                     reset options\n"
-"\n"
-"  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
-"\n"
-msgstr ""
-
-#: src/fuser.c:133
-#, fuzzy, c-format
-msgid "fuser (PSmisc) %s\n"
-msgstr "fuser (psmisc) %s\n"
-
-#: src/fuser.c:136
-#, fuzzy, c-format
-msgid ""
-"Copyright (C) 1993-2010 Werner Almesberger and Craig Small\n"
-"\n"
-msgstr ""
-"Copyright (C) 1993-2002 Werner Almesberger ºi Craig Small\n"
-"\n"
-
-#: src/fuser.c:164
-#, c-format
-msgid "Cannot open /proc directory: %s\n"
-msgstr ""
-
-#: src/fuser.c:331 src/fuser.c:379
-#, c-format
-msgid "Cannot allocate memory for matched proc: %s\n"
-msgstr ""
-
-#: src/fuser.c:398
-#, c-format
-msgid "Specified filename %s does not exist.\n"
-msgstr ""
-
-#: src/fuser.c:400
-#, c-format
-msgid "Cannot stat %s: %s\n"
-msgstr ""
-
-#: src/fuser.c:533
-#, c-format
-msgid "Cannot resolve local port %s: %s\n"
-msgstr ""
-
-#: src/fuser.c:551
-#, c-format
-msgid "Unknown local port AF %d\n"
-msgstr ""
-
-#: src/fuser.c:641
-#, c-format
-msgid "Cannot open protocol file \"%s\": %s\n"
-msgstr ""
-
-#: src/fuser.c:888
-#, fuzzy, c-format
-msgid "%s: Invalid option %s\n"
-msgstr "%s/%s: specificaþie invalidã\n"
-
-#: src/fuser.c:937
-msgid "Namespace option requires an argument."
-msgstr ""
-
-#: src/fuser.c:949
-msgid "Invalid namespace name"
-msgstr ""
-
-#: src/fuser.c:1002
-msgid "You can only use files with mountpoint options"
-msgstr ""
-
-#: src/fuser.c:1046
-msgid "No process specification given"
-msgstr ""
-
-#: src/fuser.c:1053
-msgid "all option cannot be used with silent option."
-msgstr ""
-
-#: src/fuser.c:1058
-msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
-msgstr ""
-
-#: src/fuser.c:1129
-#, fuzzy, c-format
-msgid "%*s USER        PID ACCESS COMMAND\n"
-msgstr ""
-"\n"
-"%*s UTILIZATOR  PID ACCES  COMANDÃ\n"
-
-#: src/fuser.c:1162 src/fuser.c:1217
-msgid "(unknown)"
-msgstr ""
-
-#: src/fuser.c:1293
-#, c-format
-msgid "Cannot stat file %s: %s\n"
-msgstr ""
-
-#: src/fuser.c:1409
-#, c-format
-msgid "Cannot open /proc/net/unix: %s\n"
-msgstr ""
-
-#: src/fuser.c:1471
-#, c-format
-msgid "Kill process %d ? (y/N) "
-msgstr "Terminã process %d ? (y/N) "
-
-#: src/fuser.c:1504
-#, c-format
-msgid "Could not kill process %d: %s\n"
-msgstr ""
-
-#: src/fuser.c:1516
-#, c-format
-msgid "Cannot open a network socket.\n"
-msgstr ""
-
-#: src/fuser.c:1520
-#, fuzzy, c-format
-msgid "Cannot find socket's device number.\n"
-msgstr "nu pot gãsi numerele dispozitivelor socket-urilor"
 
 #: src/peekfd.c:77
 #, c-format
@@ -388,6 +364,137 @@ msgid ""
 "    -h prints this help.\n"
 "\n"
 "  Press CTRL-C to end output.\n"
+msgstr ""
+
+#: src/prtstat.c:54
+#, c-format
+msgid ""
+"Usage: prtstat [options] PID ...\n"
+"       prtstat -V\n"
+"Print information about a process\n"
+"    -r,--raw       Raw display of information\n"
+"    -V,--version   Display version information and exit\n"
+msgstr ""
+
+#: src/prtstat.c:65
+#, fuzzy, c-format
+msgid "prtstat (PSmisc) %s\n"
+msgstr "pstree (psmisc) %s\n"
+
+#: src/prtstat.c:66
+#, fuzzy, c-format
+msgid ""
+"Copyright (C) 2009 Craig Small\n"
+"\n"
+msgstr ""
+"Copyright (C) 1993-2002 Werner Almesberger ºi Craig Small\n"
+"\n"
+
+#: src/prtstat.c:78
+msgid "running"
+msgstr ""
+
+#: src/prtstat.c:80
+msgid "sleeping"
+msgstr ""
+
+#: src/prtstat.c:82
+msgid "disk sleep"
+msgstr ""
+
+#: src/prtstat.c:84
+msgid "zombie"
+msgstr ""
+
+#: src/prtstat.c:86
+msgid "traced"
+msgstr ""
+
+#: src/prtstat.c:88
+msgid "paging"
+msgstr ""
+
+#: src/prtstat.c:90
+msgid "unknown"
+msgstr ""
+
+#: src/prtstat.c:164
+#, c-format
+msgid ""
+"Process: %-14s\t\tState: %c (%s)\n"
+"  CPU#:  %-3d\t\tTTY: %s\tThreads: %ld\n"
+msgstr ""
+
+#: src/prtstat.c:169
+#, c-format
+msgid ""
+"Process, Group and Session IDs\n"
+"  Process ID: %d\t\t  Parent ID: %d\n"
+"    Group ID: %d\t\t Session ID: %d\n"
+"  T Group ID: %d\n"
+"\n"
+msgstr ""
+
+#: src/prtstat.c:175
+#, c-format
+msgid ""
+"Page Faults\n"
+"  This Process    (minor major): %8lu  %8lu\n"
+"  Child Processes (minor major): %8lu  %8lu\n"
+msgstr ""
+
+#: src/prtstat.c:180
+#, c-format
+msgid ""
+"CPU Times\n"
+"  This Process    (user system guest blkio): %6.2f %6.2f %6.2f %6.2f\n"
+"  Child processes (user system guest):       %6.2f %6.2f %6.2f\n"
+msgstr ""
+
+#: src/prtstat.c:189
+#, c-format
+msgid ""
+"Memory\n"
+"  Vsize:       %-10s\n"
+"  RSS:         %-10s \t\t RSS Limit: %s\n"
+"  Code Start:  %#-10lx\t\t Code Stop:  %#-10lx\n"
+"  Stack Start: %#-10lx\n"
+"  Stack Pointer (ESP): %#10lx\t Inst Pointer (EIP): %#10lx\n"
+msgstr ""
+
+#: src/prtstat.c:199
+#, c-format
+msgid ""
+"Scheduling\n"
+"  Policy: %s\n"
+"  Nice:   %ld \t\t RT Priority: %ld %s\n"
+msgstr ""
+
+#: src/prtstat.c:221
+msgid "asprintf in print_stat failed.\n"
+msgstr ""
+
+#: src/prtstat.c:226
+#, c-format
+msgid "Process with pid %d does not exist.\n"
+msgstr ""
+
+#: src/prtstat.c:228
+#, c-format
+msgid "Unable to open stat file for pid %d (%s)\n"
+msgstr ""
+
+#: src/prtstat.c:308
+msgid "Invalid option"
+msgstr ""
+
+#: src/prtstat.c:313
+msgid "You must provide at least one PID."
+msgstr ""
+
+#: src/prtstat.c:317
+#, c-format
+msgid "/proc is not mounted, cannot stat /proc/self/stat.\n"
 msgstr ""
 
 #: src/pstree.c:774
@@ -435,18 +542,12 @@ msgstr ""
 "    -x     aratã contextele de securitate Flask\n"
 
 #: src/pstree.c:794
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  PID    start at this PID; default is 1 (init)\n"
 "  USER   show only trees rooted at processes of this user\n"
 "\n"
 msgstr ""
-"   -U      foloseºte caractere de desenare UTF-8 (Unicode)\n"
-"   -V      afiºeazã informaþii despre versiune\n"
-"   pid     începe la pid, implicit 1 (init)\n"
-"   utiliz  aratã numai arborii cu rãdacinã la procesele acestui utiliz"
-"[ator]\n"
-"\n"
 
 #: src/pstree.c:801
 #, fuzzy, c-format
@@ -492,10 +593,6 @@ msgstr "Apãsaþi tasta return pentru a închide\n"
 msgid "%s: unknown signal; %s -l lists signals.\n"
 msgstr "%s: semnal necunoscut; %s -l listeazã semnalele.\n"
 
-#, fuzzy
-#~ msgid "Internal error: MAX_DEPTH not big enough.\n"
-#~ msgstr "MAX_DEPTH nu este suficient de mare.\n"
-
 #~ msgid "%s: SID (%s) must be numeric\n"
 #~ msgstr "%s: SID (%s) trebuie sã fie numeric\n"
 
@@ -526,5 +623,76 @@ msgstr "%s: semnal necunoscut; %s -l listeazã semnalele.\n"
 #~ msgid "kernel swap   "
 #~ msgstr "kernel swap   "
 
+#~ msgid ""
+#~ "usage: fuser [ -a | -s | -c ] [ -n space ] [ -signal ] [ -kimuv ] "
+#~ "name ...\n"
+#~ "             [ - ] [ -n space ] [ -signal ] [ -kimuv ] name ...\n"
+#~ "       fuser -l\n"
+#~ "       fuser -V\n"
+#~ "\n"
+#~ "    -a        display unused files too\n"
+#~ "    -c        mounted FS\n"
+#~ "    -f        silently ignored (for POSIX compatibility)\n"
+#~ "    -k        kill processes accessing that file\n"
+#~ "    -i        ask before killing (ignored without -k)\n"
+#~ "    -l        list signal names\n"
+#~ "    -m        mounted FS\n"
+#~ "    -n space  search in the specified name space (file, udp, or tcp)\n"
+#~ "    -s        silent operation\n"
+#~ "    -signal   send signal instead of SIGKILL\n"
+#~ "    -u        display user ids\n"
+#~ "    -v        verbose output\n"
+#~ "    -V        display version information\n"
+#~ "    -4        search IPv4 sockets only\n"
+#~ "    -6        search IPv6 sockets only\n"
+#~ "    -         reset options\n"
+#~ "\n"
+#~ "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
+#~ "\n"
+#~ msgstr ""
+#~ "folosire: fuser [ -a | -s | -c ] [ -n spaþiu ] [ -signal ] [ -kimuv ] "
+#~ "nume ...\n"
+#~ "             [ - ] [ -n spaþiu ] [ -signal ] [ -kimuv ] nume ...\n"
+#~ "       fuser -l\n"
+#~ "       fuser -V\n"
+#~ "\n"
+#~ "    -a        afiºeazã ºî fiºierele nefolosite\n"
+#~ "    -c        FS montat(e)\n"
+#~ "    -f        ignorat pe tãcute (pentru compatibilitate POSIX)\n"
+#~ "    -k        terminã procesele ce acceseazã acel fiºier\n"
+#~ "    -i        întreabã înainte de a termina (ignorat fãrã -k)\n"
+#~ "    -l        listeazã numele semnalelor\n"
+#~ "    -m        FS montat(e)\n"
+#~ "    -n spaþiu cautã în numele de spaþiu specificat (fiºier, udp, sau "
+#~ "tcp)\n"
+#~ "    -s        operare pe tãcute\n"
+#~ "    -signal   trimite semnal în loc de SIGKILL\n"
+#~ "    -u        afiºeazã ID-uri utilizator\n"
+#~ "    -v        ieºire detaliatã\n"
+#~ "    -V        afiºeazã informaþii despre versiune\n"
+#~ "    -4        cautã numai socket-urile IPv4\n"
+#~ "    -6        cautã numai socket-urile IPv6\n"
+#~ "    -         reseteazã opþiuni\n"
+#~ "\n"
+#~ "  nume udp/tcp: [local_port][,[rmt_host][,[rmt_port]]]\n"
+#~ "\n"
+
 #~ msgid "ignoring -m in name space \"%s\"\n"
 #~ msgstr "ignor -m în spaþiul de nume \"%s\"\n"
+
+#~ msgid "MAX_DEPTH not big enough.\n"
+#~ msgstr "MAX_DEPTH nu este suficient de mare.\n"
+
+#~ msgid ""
+#~ "    -U     use UTF-8 (Unicode) line drawing characters\n"
+#~ "    -V     display version information\n"
+#~ "    pid    start at pid, default 1 (init)\n"
+#~ "    user   show only trees rooted at processes of that user\n"
+#~ "\n"
+#~ msgstr ""
+#~ "   -U      foloseºte caractere de desenare UTF-8 (Unicode)\n"
+#~ "   -V      afiºeazã informaþii despre versiune\n"
+#~ "   pid     începe la pid, implicit 1 (init)\n"
+#~ "   utiliz  aratã numai arborii cu rãdacinã la procesele acestui utiliz"
+#~ "[ator]\n"
+#~ "\n"

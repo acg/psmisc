@@ -1,6 +1,6 @@
 Changes in 22.11
 ================
-	* Updated po files for: Dutch, Basque, Swedish, Czech, Polish  and Russian
+	* Another attempted at killall -SIGNAME Debian #573924
 
 Changes in 22.10
 ================

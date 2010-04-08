@@ -22,168 +22,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.2pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2010-01-04 21:42+1100\n"
+"POT-Creation-Date: 2010-03-28 18:17+1100\n"
 "PO-Revision-Date: 2006-03-07 12:01+0100\n"
 "Last-Translator: Trond Endrestøl <Trond.Endrestol@fagskolen.gjovik.no>\n"
 "Language-Team: Norwegian Bokmaal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: src/killall.c:102
-#, c-format
-msgid "Kill %s(%s%d) ? (y/N) "
-msgstr "Drepe %s(%s%d) ? (j/n) "
-
-#: src/killall.c:105
-#, fuzzy, c-format
-msgid "Signal %s(%s%d) ? (y/N) "
-msgstr "Drepe %s(%s%d) ? (j/n) "
-
-#: src/killall.c:209
-#, c-format
-msgid "Cannot get UID from process status\n"
-msgstr "Kan ikke finne UID fra prosesstatus\n"
-
-#: src/killall.c:235 src/killall.c:814
-#, c-format
-msgid "Bad regular expression: %s\n"
-msgstr "Ugyldig regulært uttrykk: %s\n"
-
-#: src/killall.c:446
-#, c-format
-msgid "skipping partial match %s(%d)\n"
-msgstr "hopper over delvis treff %s(%d)\n"
-
-#: src/killall.c:565
-#, c-format
-msgid "Killed %s(%s%d) with signal %d\n"
-msgstr "Drepte %s(%s%d) med signalet %d\n"
-
-#: src/killall.c:579
-#, fuzzy, c-format
-msgid "%s: no process found\n"
-msgstr "%s: drepte ingen prosess\n"
-
-#: src/killall.c:617
-#, c-format
-msgid ""
-"Usage: pidof [ -eg ] NAME...\n"
-"       pidof -V\n"
-"\n"
-"    -e      require exact match for very long names;\n"
-"            skip if the command line is unavailable\n"
-"    -g      show process group ID instead of process ID\n"
-"    -V      display version information\n"
-"\n"
-msgstr ""
-"Bruksmåte: pidof [ -eg ] navn ...\n"
-"           pidof -V\n"
-"\n"
-"    -e      krever nøyaktig treff for veldig lange navn;\n"
-"            hopp over dersom kommandolinjen er utilgjengelig\n"
-"    -g      vis prosessgruppe ID i stedet for prosess ID\n"
-"    -V      vis programversjon\n"
-"\n"
-
-#: src/killall.c:633
-#, c-format
-msgid ""
-"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
-msgstr ""
-"Bruksmåte: killall [-Z kontekst] [-u bruker] [ -egiqvw ] [ -signal ] "
-"navn ...\n"
-
-#: src/killall.c:636
-#, c-format
-msgid "Usage: killall [OPTION]... [--] NAME...\n"
-msgstr "Bruksmåte: killall [VALG]... [--] navn...\n"
-
-#: src/killall.c:639
-#, fuzzy, c-format
-msgid ""
-"       killall -l, --list\n"
-"       killall -V, --version\n"
-"\n"
-"  -e,--exact          require exact match for very long names\n"
-"  -I,--ignore-case    case insensitive process name match\n"
-"  -g,--process-group  kill process group instead of process\n"
-"  -y,--younger-than   kill processes younger than TIME\n"
-"  -o,--older-than     kill processes older than TIME\n"
-"  -i,--interactive    ask for confirmation before killing\n"
-"  -l,--list           list all known signal names\n"
-"  -q,--quiet          don't print complaints\n"
-"  -r,--regexp         interpret NAME as an extended regular expression\n"
-"  -s,--signal SIGNAL  send this signal instead of SIGTERM\n"
-"  -u,--user USER      kill only process(es) running as USER\n"
-"  -v,--verbose        report if the signal was successfully sent\n"
-"  -V,--version        display version information\n"
-"  -w,--wait           wait for processes to die\n"
-msgstr ""
-"       killall -l, --list\n"
-"       killall -V, --version\n"
-"\n"
-"  -e,--exact          krever nøyaktig treff for veldig lange navn\n"
-"  -I,--ignore-case    ignorerer store/små bokstaver i prosessnavn\n"
-"  -g,--process-group  drep prosessgrupper i stedet for prosesser\n"
-"  -i,--interactive    spør om bekreftelse før dreping\n"
-"  -l,--list           vis alle kjente signalnavn\n"
-"  -q,--quiet          ikke syt dersom det ikke går bra\n"
-"  -r,--regexp         tolk NAVN som et utvidet regulært uttrykk\n"
-"  -s,--signal         send signal i stedet for SIGTERM\n"
-"  -v,--verbose        rapporter dersom signalet ble vellykket sendt\n"
-"  -V,--version        vis programinformasjon\n"
-"  -w,--wait           vent til prosessen er død\n"
-
-#: src/killall.c:657
-#, c-format
-msgid ""
-"  -Z,--context REGEXP kill only process(es) having context\n"
-"                      (must precede other arguments)\n"
-msgstr ""
-"  -Z,--context REGEXP bare drep prosesser med kontekst\n"
-"                      (må komme foran andre argumenter)\n"
-
-#: src/killall.c:678
-#, c-format
-msgid ""
-"Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
-"\n"
-msgstr ""
-"Copyright (C) 1993-2005 Werner Almesberger og Craig Small\n"
-"\n"
-
-#: src/killall.c:680 src/fuser.c:138 src/peekfd.c:89 src/pstree.c:806
-#, c-format
-msgid ""
-"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
-"This is free software, and you are welcome to redistribute it under\n"
-"the terms of the GNU General Public License.\n"
-"For more information about these matters, see the files named COPYING.\n"
-msgstr ""
-"PSmisc kommer ABSOLUTT UTEN NOEN GARANTI.\n"
-"Dette er fri programvare, og du har tillatelse til å redistribuere det\n"
-"under betingelsene i GNU General Public License.\n"
-"For mer informasjon om dette, les filene som heter COPYING.\n"
-
-#: src/killall.c:759 src/killall.c:765
-msgid "Invalid time format"
-msgstr ""
-
-#: src/killall.c:790
-#, c-format
-msgid "Cannot find user %s\n"
-msgstr "Kan ikke finne brukeren %s\n"
-
-#: src/killall.c:846
-#, c-format
-msgid "Maximum number of names is %d\n"
-msgstr "Maksimalt antall navn er %d\n"
-
-#: src/killall.c:850 src/pstree.c:736
-#, c-format
-msgid "%s is empty (not mounted ?)\n"
-msgstr "%s er tom (ikke montert?)\n"
 
 #: src/fuser.c:105
 #, fuzzy, c-format
@@ -267,6 +112,20 @@ msgid ""
 msgstr ""
 "Copyright (C) 1993-2005 Werner Almesberger og Craig Small\n"
 "\n"
+
+#: src/fuser.c:138 src/killall.c:680 src/peekfd.c:89 src/prtstat.c:68
+#: src/pstree.c:806
+#, c-format
+msgid ""
+"PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
+"This is free software, and you are welcome to redistribute it under\n"
+"the terms of the GNU General Public License.\n"
+"For more information about these matters, see the files named COPYING.\n"
+msgstr ""
+"PSmisc kommer ABSOLUTT UTEN NOEN GARANTI.\n"
+"Dette er fri programvare, og du har tillatelse til å redistribuere det\n"
+"under betingelsene i GNU General Public License.\n"
+"For mer informasjon om dette, les filene som heter COPYING.\n"
 
 #: src/fuser.c:164
 #, c-format
@@ -376,6 +235,148 @@ msgstr "Kan ikke åpne en nettverkssocket.\n"
 msgid "Cannot find socket's device number.\n"
 msgstr "Kan ikke finne socketens enhetsnummer.\n"
 
+#: src/killall.c:102
+#, c-format
+msgid "Kill %s(%s%d) ? (y/N) "
+msgstr "Drepe %s(%s%d) ? (j/n) "
+
+#: src/killall.c:105
+#, fuzzy, c-format
+msgid "Signal %s(%s%d) ? (y/N) "
+msgstr "Drepe %s(%s%d) ? (j/n) "
+
+#: src/killall.c:209
+#, c-format
+msgid "Cannot get UID from process status\n"
+msgstr "Kan ikke finne UID fra prosesstatus\n"
+
+#: src/killall.c:235 src/killall.c:825
+#, c-format
+msgid "Bad regular expression: %s\n"
+msgstr "Ugyldig regulært uttrykk: %s\n"
+
+#: src/killall.c:446
+#, c-format
+msgid "skipping partial match %s(%d)\n"
+msgstr "hopper over delvis treff %s(%d)\n"
+
+#: src/killall.c:565
+#, c-format
+msgid "Killed %s(%s%d) with signal %d\n"
+msgstr "Drepte %s(%s%d) med signalet %d\n"
+
+#: src/killall.c:579
+#, fuzzy, c-format
+msgid "%s: no process found\n"
+msgstr "%s: drepte ingen prosess\n"
+
+#: src/killall.c:617
+#, c-format
+msgid ""
+"Usage: pidof [ -eg ] NAME...\n"
+"       pidof -V\n"
+"\n"
+"    -e      require exact match for very long names;\n"
+"            skip if the command line is unavailable\n"
+"    -g      show process group ID instead of process ID\n"
+"    -V      display version information\n"
+"\n"
+msgstr ""
+"Bruksmåte: pidof [ -eg ] navn ...\n"
+"           pidof -V\n"
+"\n"
+"    -e      krever nøyaktig treff for veldig lange navn;\n"
+"            hopp over dersom kommandolinjen er utilgjengelig\n"
+"    -g      vis prosessgruppe ID i stedet for prosess ID\n"
+"    -V      vis programversjon\n"
+"\n"
+
+#: src/killall.c:633
+#, c-format
+msgid ""
+"Usage: killall [-Z CONTEXT] [-u USER] [ -eIgiqrvw ] [ -SIGNAL ] NAME...\n"
+msgstr ""
+"Bruksmåte: killall [-Z kontekst] [-u bruker] [ -egiqvw ] [ -signal ] "
+"navn ...\n"
+
+#: src/killall.c:636
+#, c-format
+msgid "Usage: killall [OPTION]... [--] NAME...\n"
+msgstr "Bruksmåte: killall [VALG]... [--] navn...\n"
+
+#: src/killall.c:639
+#, fuzzy, c-format
+msgid ""
+"       killall -l, --list\n"
+"       killall -V, --version\n"
+"\n"
+"  -e,--exact          require exact match for very long names\n"
+"  -I,--ignore-case    case insensitive process name match\n"
+"  -g,--process-group  kill process group instead of process\n"
+"  -y,--younger-than   kill processes younger than TIME\n"
+"  -o,--older-than     kill processes older than TIME\n"
+"  -i,--interactive    ask for confirmation before killing\n"
+"  -l,--list           list all known signal names\n"
+"  -q,--quiet          don't print complaints\n"
+"  -r,--regexp         interpret NAME as an extended regular expression\n"
+"  -s,--signal SIGNAL  send this signal instead of SIGTERM\n"
+"  -u,--user USER      kill only process(es) running as USER\n"
+"  -v,--verbose        report if the signal was successfully sent\n"
+"  -V,--version        display version information\n"
+"  -w,--wait           wait for processes to die\n"
+msgstr ""
+"       killall -l, --list\n"
+"       killall -V, --version\n"
+"\n"
+"  -e,--exact          krever nøyaktig treff for veldig lange navn\n"
+"  -I,--ignore-case    ignorerer store/små bokstaver i prosessnavn\n"
+"  -g,--process-group  drep prosessgrupper i stedet for prosesser\n"
+"  -i,--interactive    spør om bekreftelse før dreping\n"
+"  -l,--list           vis alle kjente signalnavn\n"
+"  -q,--quiet          ikke syt dersom det ikke går bra\n"
+"  -r,--regexp         tolk NAVN som et utvidet regulært uttrykk\n"
+"  -s,--signal         send signal i stedet for SIGTERM\n"
+"  -v,--verbose        rapporter dersom signalet ble vellykket sendt\n"
+"  -V,--version        vis programinformasjon\n"
+"  -w,--wait           vent til prosessen er død\n"
+
+#: src/killall.c:657
+#, c-format
+msgid ""
+"  -Z,--context REGEXP kill only process(es) having context\n"
+"                      (must precede other arguments)\n"
+msgstr ""
+"  -Z,--context REGEXP bare drep prosesser med kontekst\n"
+"                      (må komme foran andre argumenter)\n"
+
+#: src/killall.c:678
+#, c-format
+msgid ""
+"Copyright (C) 1993-2005 Werner Almesberger and Craig Small\n"
+"\n"
+msgstr ""
+"Copyright (C) 1993-2005 Werner Almesberger og Craig Small\n"
+"\n"
+
+#: src/killall.c:759 src/killall.c:765
+msgid "Invalid time format"
+msgstr ""
+
+#: src/killall.c:790
+#, c-format
+msgid "Cannot find user %s\n"
+msgstr "Kan ikke finne brukeren %s\n"
+
+#: src/killall.c:857
+#, c-format
+msgid "Maximum number of names is %d\n"
+msgstr "Maksimalt antall navn er %d\n"
+
+#: src/killall.c:861 src/pstree.c:736
+#, c-format
+msgid "%s is empty (not mounted ?)\n"
+msgstr "%s er tom (ikke montert?)\n"
+
 #: src/peekfd.c:77
 #, c-format
 msgid "Error attaching to pid %i\n"
@@ -405,6 +406,138 @@ msgid ""
 "    -h prints this help.\n"
 "\n"
 "  Press CTRL-C to end output.\n"
+msgstr ""
+
+#: src/prtstat.c:54
+#, c-format
+msgid ""
+"Usage: prtstat [options] PID ...\n"
+"       prtstat -V\n"
+"Print information about a process\n"
+"    -r,--raw       Raw display of information\n"
+"    -V,--version   Display version information and exit\n"
+msgstr ""
+
+#: src/prtstat.c:65
+#, fuzzy, c-format
+msgid "prtstat (PSmisc) %s\n"
+msgstr "pstree (psmisc) %s\n"
+
+#: src/prtstat.c:66
+#, fuzzy, c-format
+msgid ""
+"Copyright (C) 2009 Craig Small\n"
+"\n"
+msgstr ""
+"Copyright (C) 1993-2005 Werner Almesberger og Craig Small\n"
+"\n"
+
+#: src/prtstat.c:78
+msgid "running"
+msgstr ""
+
+#: src/prtstat.c:80
+msgid "sleeping"
+msgstr ""
+
+#: src/prtstat.c:82
+msgid "disk sleep"
+msgstr ""
+
+#: src/prtstat.c:84
+msgid "zombie"
+msgstr ""
+
+#: src/prtstat.c:86
+msgid "traced"
+msgstr ""
+
+#: src/prtstat.c:88
+msgid "paging"
+msgstr ""
+
+#: src/prtstat.c:90
+#, fuzzy
+msgid "unknown"
+msgstr "(ukjent)"
+
+#: src/prtstat.c:164
+#, c-format
+msgid ""
+"Process: %-14s\t\tState: %c (%s)\n"
+"  CPU#:  %-3d\t\tTTY: %s\tThreads: %ld\n"
+msgstr ""
+
+#: src/prtstat.c:169
+#, c-format
+msgid ""
+"Process, Group and Session IDs\n"
+"  Process ID: %d\t\t  Parent ID: %d\n"
+"    Group ID: %d\t\t Session ID: %d\n"
+"  T Group ID: %d\n"
+"\n"
+msgstr ""
+
+#: src/prtstat.c:175
+#, c-format
+msgid ""
+"Page Faults\n"
+"  This Process    (minor major): %8lu  %8lu\n"
+"  Child Processes (minor major): %8lu  %8lu\n"
+msgstr ""
+
+#: src/prtstat.c:180
+#, c-format
+msgid ""
+"CPU Times\n"
+"  This Process    (user system guest blkio): %6.2f %6.2f %6.2f %6.2f\n"
+"  Child processes (user system guest):       %6.2f %6.2f %6.2f\n"
+msgstr ""
+
+#: src/prtstat.c:189
+#, c-format
+msgid ""
+"Memory\n"
+"  Vsize:       %-10s\n"
+"  RSS:         %-10s \t\t RSS Limit: %s\n"
+"  Code Start:  %#-10lx\t\t Code Stop:  %#-10lx\n"
+"  Stack Start: %#-10lx\n"
+"  Stack Pointer (ESP): %#10lx\t Inst Pointer (EIP): %#10lx\n"
+msgstr ""
+
+#: src/prtstat.c:199
+#, c-format
+msgid ""
+"Scheduling\n"
+"  Policy: %s\n"
+"  Nice:   %ld \t\t RT Priority: %ld %s\n"
+msgstr ""
+
+#: src/prtstat.c:221
+msgid "asprintf in print_stat failed.\n"
+msgstr ""
+
+#: src/prtstat.c:226
+#, c-format
+msgid "Process with pid %d does not exist.\n"
+msgstr ""
+
+#: src/prtstat.c:228
+#, c-format
+msgid "Unable to open stat file for pid %d (%s)\n"
+msgstr ""
+
+#: src/prtstat.c:308
+msgid "Invalid option"
+msgstr ""
+
+#: src/prtstat.c:313
+msgid "You must provide at least one PID."
+msgstr ""
+
+#: src/prtstat.c:317
+#, c-format
+msgid "/proc is not mounted, cannot stat /proc/self/stat.\n"
 msgstr ""
 
 #: src/pstree.c:774
@@ -507,11 +640,11 @@ msgstr "Trykk på enter for å lukke.\n"
 msgid "%s: unknown signal; %s -l lists signals.\n"
 msgstr "%s: ukjent signal; %s -l angir kjente signaler.\n"
 
-#~ msgid "You cannot use the mounted and mountpoint flags together"
-#~ msgstr "Du kan ikke bruke montert- og monteringspunktvalgene samtidig"
-
 #~ msgid "Cannot stat mount point %s: %s\n"
 #~ msgstr "Kan ikke kjøre stat på monteringspunktet %s: %s\n"
+
+#~ msgid "You cannot use the mounted and mountpoint flags together"
+#~ msgstr "Du kan ikke bruke montert- og monteringspunktvalgene samtidig"
 
 #~ msgid "Cannot open /etc/mtab: %s\n"
 #~ msgstr "Kan ikke åpne /etc/mtab: %s\n"
