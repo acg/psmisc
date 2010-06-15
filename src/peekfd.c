@@ -27,6 +27,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/syscall.h>
+#include <asm/ptrace.h>
 #include <byteswap.h>
 #include <endian.h>
 #include <sys/user.h>
@@ -54,6 +55,24 @@
 	#define REG_PARAM1 orig_gpr3
 	#define REG_PARAM2 gpr[4]
 	#define REG_PARAM3 gpr[5]
+#elif defined(ARM)
+#ifndef __ARM_EABI__
+#error arm oabi not supported
+#endif
+	#define REG_ORIG_ACCUM ARM_r7
+	#define REG_ACCUM ARM_r0
+	#define REG_PARAM1 ARM_ORIG_r0
+	#define REG_PARAM2 ARM_r1
+	#define REG_PARAM3 ARM_r2
+#elif defined(MIPS)
+#ifndef MIPSEL
+#error only little endian supported
+#endif
+	#define REG_ORIG_ACCUM regs[3]
+	#define REG_ACCUM regs[2]
+	#define REG_PARAM1 regs[4]
+	#define REG_PARAM2 regs[5]
+	#define REG_PARAM3 regs[6]
 #ifndef PT_ORIG_R3
 	#define PT_ORIG_R3 34
 #endif
@@ -180,7 +199,7 @@ int main(int argc, char **argv)
       numfds = argc - optind;
       fds = malloc(sizeof(int) * numfds);
 	  for (i = 0; i < numfds; i++)
-		fds[i] = atoi(argv[optind + i]);
+		fds[i] = atoi(argv[optind + i + 1]);
     }
 
 	attach(target_pid);
@@ -208,6 +227,17 @@ int main(int argc, char **argv)
 			regs.gpr[4] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R4, 0);
 			regs.gpr[5] = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_R5, 0);
 			regs.orig_gpr3 = ptrace(PTRACE_PEEKUSER, pid, 4 * PT_ORIG_R3, 0);
+#elif defined(ARM)
+			struct pt_regs regs;
+			ptrace(PTRACE_GETREGS, pid, 0, &regs);
+#elif defined(MIPS)
+			struct pt_regs regs;
+			long pc = ptrace(PTRACE_PEEKUSER, pid, 64, 0);
+			regs.regs[2] = ptrace(PTRACE_PEEKUSER,pid,2,0);
+			regs.regs[3] = ptrace(PTRACE_PEEKTEXT, pid, pc - 8, 0) & 0xffff;
+			regs.regs[4] = ptrace(PTRACE_PEEKUSER,pid,4,0);
+			regs.regs[5] = ptrace(PTRACE_PEEKUSER,pid,5,0);
+			regs.regs[6] = ptrace(PTRACE_PEEKUSER,pid,6,0);
 #else
 			struct user_regs_struct regs;
 			ptrace(PTRACE_GETREGS, pid, 0, &regs);

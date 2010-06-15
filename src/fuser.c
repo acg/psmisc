@@ -1056,7 +1056,7 @@ int main(int argc, char *argv[])
 	if (ipv4_only && ipv6_only)
 		usage(_
 		      ("You cannot search for only IPv4 and only IPv6 sockets at the same time"));
-	if (!ipv4_only) {
+	if (!ipv6_only) {
 #endif
 		if (tcp_connection_list != NULL)
 			find_net_sockets(&match_inodes, tcp_connection_list,
@@ -1066,7 +1066,7 @@ int main(int argc, char *argv[])
 					 "udp", netdev);
 #ifdef WITH_IPV6
 	}
-	if (!ipv6_only) {
+	if (!ipv4_only) {
 		if (tcp6_connection_list != NULL)
 			find_net6_sockets(&match_inodes, tcp6_connection_list,
 					  "tcp", netdev);
@@ -1489,7 +1489,7 @@ kill_matched_proc(struct procs *proc_head, const opt_type opts,
 		  const int sig_number)
 {
 	struct procs *pptr;
-  pid_t *mypid;
+  pid_t mypid;
 
   mypid = getpid();
 

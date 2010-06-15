@@ -10,10 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc-22.11-pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2010-03-28 18:17+1100\n"
+"POT-Creation-Date: 2010-05-29 20:15+1000\n"
 "PO-Revision-Date: 2010-03-29 15:15+0200\n"
 "Last-Translator: Frédéric Marchal <fmarchal@perso.be>\n"
 "Language-Team: French <traduc@traduc.org>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -104,7 +105,7 @@ msgstr ""
 "Copyright (C) 1993-2010 Werner Almesberger et Craig Small\n"
 "\n"
 
-#: src/fuser.c:138 src/killall.c:680 src/peekfd.c:89 src/prtstat.c:68
+#: src/fuser.c:138 src/killall.c:680 src/peekfd.c:108 src/prtstat.c:68
 #: src/pstree.c:806
 #, c-format
 msgid ""
@@ -374,17 +375,17 @@ msgstr "Le nombre maximum de noms est %d\n"
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s est vide (pas monté ?)\n"
 
-#: src/peekfd.c:77
+#: src/peekfd.c:96
 #, c-format
 msgid "Error attaching to pid %i\n"
 msgstr "Erreur lors de l'attachement au pid %i\n"
 
-#: src/peekfd.c:85
+#: src/peekfd.c:104
 #, c-format
 msgid "peekfd (PSmisc) %s\n"
 msgstr "peekfd (PSmisc) %s\n"
 
-#: src/peekfd.c:87
+#: src/peekfd.c:106
 #, c-format
 msgid ""
 "Copyright (C) 2007 Trent Waddington\n"
@@ -393,7 +394,7 @@ msgstr ""
 "Copyright (C) 2007 Trent Waddington\n"
 "\n"
 
-#: src/peekfd.c:97
+#: src/peekfd.c:116
 #, c-format
 msgid ""
 "Usage: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
@@ -516,8 +517,8 @@ msgid ""
 "  Child processes (user system guest):       %6.2f %6.2f %6.2f\n"
 msgstr ""
 "Temps CPU\n"
-"  Ce processus   (utilisateur système invité blkio): %6.2f %6.2f %6.2f %"
-"6.2f\n"
+"  Ce processus   (utilisateur système invité blkio): %6.2f %6.2f %6.2f "
+"%6.2f\n"
 "  Processus fils (utilisateur système invitéà:       %6.2f %6.2f %6.2f\n"
 
 #: src/prtstat.c:189

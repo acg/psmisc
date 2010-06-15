@@ -14,6 +14,15 @@ if WANT_PEEKFD_PPC
   bin_PROGRAMS += peekfd
   AM_CFLAGS += -DPPC
 endif
+if WANT_PEEKFD_ARM
+  bin_PROGRAMS += peekfd
+  AM_CFLAGS += -DARM
+endif
+if WANT_PEEKFD_MIPS
+  bin_PROGRAMS += peekfd
+  AM_CFLAGS += -DMIPS
+endif
+
 
 fuser_SOURCES = fuser.c comm.h signals.c signals.h i18n.h fuser.h
 

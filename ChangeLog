@@ -1,3 +1,10 @@
+Changes in 22.12
+================
+	* In fuser, switched the ipv6 and ipv4 checks around Debian #581604
+	* peekfd configure patch for x86_64 SF#2986027
+	* peekfd works with ARM and MIPS thanks to patch by Arnaud Patard
+	* peekfd off-by-one patch applied SF#1948351
+
 Changes in 22.11
 ================
 	* Another attempted at killall -SIGNAME Debian #573924

@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.11-pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2010-03-28 18:17+1100\n"
+"POT-Creation-Date: 2010-05-29 20:15+1000\n"
 "PO-Revision-Date: 2010-03-29 21:25+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -48,7 +49,8 @@ msgstr ""
 "có tên đưa ra.\n"
 "\n"
 "  -a,--all              cũng hiển thị các tập tin không dùng\n"
-"  -i,--interactive      hỏi trước khi ép buộc (bị bỏ qua mà không có « -k »)\n"
+"  -i,--interactive      hỏi trước khi ép buộc (bị bỏ qua mà không có « -k "
+"»)\n"
 "  -k,--kill             buộc kết thúc mỗi tiến trình đang truy cập đến tập "
 "tin có tên đưa ra\n"
 "  -l,--list-signals     liệt kê những tên tín hiệu vẫn sẵn sàng\n"
@@ -98,7 +100,7 @@ msgstr ""
 "Tác quyền © năm 1993-2010 của Werner Almesberger và Craig Small\n"
 "\n"
 
-#: src/fuser.c:138 src/killall.c:680 src/peekfd.c:89 src/prtstat.c:68
+#: src/fuser.c:138 src/killall.c:680 src/peekfd.c:108 src/prtstat.c:68
 #: src/pstree.c:806
 #, c-format
 msgid ""
@@ -362,17 +364,17 @@ msgstr "Số tên tối đa là %d\n"
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s trống (lắp chưa?)\n"
 
-#: src/peekfd.c:77
+#: src/peekfd.c:96
 #, c-format
 msgid "Error attaching to pid %i\n"
 msgstr "Gặp lỗi khi đính kèm đến PID %i\n"
 
-#: src/peekfd.c:85
+#: src/peekfd.c:104
 #, c-format
 msgid "peekfd (PSmisc) %s\n"
 msgstr "peekfd (PSmisc) %s\n"
 
-#: src/peekfd.c:87
+#: src/peekfd.c:106
 #, c-format
 msgid ""
 "Copyright (C) 2007 Trent Waddington\n"
@@ -381,7 +383,7 @@ msgstr ""
 "Tác quyền © năm 2007 của Trent Waddington\n"
 "\n"
 
-#: src/peekfd.c:97
+#: src/peekfd.c:116
 #, c-format
 msgid ""
 "Usage: peekfd [-8] [-n] [-c] [-d] [-V] [-h] <pid> [<fd> ..]\n"
@@ -561,7 +563,8 @@ msgstr "Phải cung cấp ít nhất một PID (mã số tiến trình)."
 #, c-format
 msgid "/proc is not mounted, cannot stat /proc/self/stat.\n"
 msgstr ""
-"Chưa gắn kết « /proc » thì không lấy được trạng thái về « /proc/self/stat ».\n"
+"Chưa gắn kết « /proc » thì không lấy được trạng thái về « /proc/self/stat "
+"».\n"
 
 #: src/pstree.c:774
 #, c-format

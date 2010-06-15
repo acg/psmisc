@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.61)
-AC_INIT([psmisc],[22.11])
+AC_INIT([psmisc],[22.12])
 AC_CONFIG_SRCDIR([src/comm.h])
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_AUX_DIR([config])
@@ -65,9 +65,13 @@ AC_CHECK_MEMBERS([struct user_regs_struct.orig_eax,
 		struct user_regs_struct.rax,
 		struct user_regs_struct.rdi,
 		struct user_regs_struct.rsi,
-		struct user_regs_struct.rdx], [],[], [#include <sys/user.h>])
+		struct user_regs_struct.rdx], [],[],
+    [#include <sys/types.h #include <sys/user.h>])
 AC_CHECK_MEMBERS([struct pt_regs.orig_gpr3,
 		struct pt_regs.gpr], [],[], [#include <linux/ptrace.h>])
+AC_CHECK_MEMBERS([struct pt_regs.uregs],[],[], [#include <asm/ptrace.h>])
+AC_CHECK_MEMBERS([struct pt_regs.regs],[],[], [#include <asm/ptrace.h>])
+
 AM_CONDITIONAL(WANT_PEEKFD_I386,
  test $ac_cv_member_struct_user_regs_struct_orig_eax = yes &&
    test $ac_cv_member_struct_user_regs_struct_eax = yes &&
@@ -83,6 +87,10 @@ AM_CONDITIONAL(WANT_PEEKFD_X86_64,
 AM_CONDITIONAL(WANT_PEEKFD_PPC,
    test $ac_cv_member_struct_pt_regs_orig_gpr3 = yes &&
    test $ac_cv_member_struct_pt_regs_gpr = yes )
+AM_CONDITIONAL(WANT_PEEKFD_ARM,
+   test $ac_cv_member_struct_pt_regs_uregs = yes)
+AM_CONDITIONAL(WANT_PEEKFD_MIPS,
+   test $ac_cv_member_struct_pt_regs_regs = yes)
 
 dnl Check for language stuff
 AM_GNU_GETTEXT([external])
