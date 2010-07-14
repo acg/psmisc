@@ -1,15 +1,15 @@
 # Italian messages for psmisc.
-# Copyright (C) 2001, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
+# Copyright (C) 2001, 2005, 2006, 2007, 2009, 2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the psmisc package.
-# Marco Colombo <m.colombo@ed.ac.uk>, 2005, 2006, 2007, 2009.
+# Marco Colombo <m.colombo@ed.ac.uk>, 2005, 2006, 2007, 2009, 2010.
 # Daniele Pagano <esaurito@users.sourceforge.net>, 2001.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: psmisc 22.8rc1\n"
+"Project-Id-Version: psmisc 22.12\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2010-05-29 20:15+1000\n"
-"PO-Revision-Date: 2009-07-15 13:47+0100\n"
+"POT-Creation-Date: 2010-07-12 21:10+1000\n"
+"PO-Revision-Date: 2010-06-18 17:59+0100\n"
 "Last-Translator: Marco Colombo <m.colombo@ed.ac.uk>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/fuser.c:105
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n SPACE] [-k [-i] [-SIGNAL]] "
 "NAME...\n"
@@ -40,44 +40,45 @@ msgid ""
 "  -v,--verbose          verbose output\n"
 "  -V,--version          display version information\n"
 msgstr ""
-"Uso: fuser [ -fuv ] [ -a | -s ] [ -4 | -6 ] [ -c | -m | -n CONTESTO ]\n"
-"           [ -k [ -i ] [ -SEGNALE ] ] NOME...\n"
+"Uso: fuser [-fMuv] [-a|-s] [-4|-6] [-c|-m|-n CONTESTO] [-k [-i] [-SEGNALE]] "
+"NOME...\n"
 "     fuser -l\n"
 "     fuser -V\n"
 "Mostra quali processi stanno usando un certo file, socket o filesystem.\n"
 "\n"
-"    -a        mostra anche i file inutilizzati\n"
-"    -c        come -m (per compatibilità POSIX)\n"
-"    -f        ignorata (per compatibilità POSIX)\n"
-"    -i        conferma prima di terminare (ignorato senza -k)\n"
-"    -k        termina i processi che accedono al file specificato\n"
-"    -l        elenca i nomi dei segnali disponibili\n"
-"    -m        mostra tutti i processi che usano il filesystem specificato\n"
-"    -n CONTESTO  cerca nel contesto specificato (file, udp, o tcp)\n"
-"    -s        opera silenziosamente\n"
-"    -SEGNALE  invia il segnale indicato invece di SIGKILL\n"
-"    -u        mostra i nomi utente\n"
-"    -v        output prolisso\n"
-"    -V        mostra le informazioni sulla versione\n"
+"  -a,--all           mostra anche i file inutilizzati\n"
+"  -i,--interactive   conferma prima di terminare (ignorato senza -k)\n"
+"  -k,--kill          termina i processi che accedono al file specificato\n"
+"  -l,--list-signals  elenca i nomi dei segnali disponibili\n"
+"  -m,--mount         mostra tutti i processi che usano il filesystem "
+"specificato\n"
+"  -M,--ismountpoint  soddisfa la richiesta solo se NOME è un mount point\n"
+"  -n,--namespace CONTESTO  cerca nel contesto specificato (file, udp, o "
+"tcp)\n"
+"  -s,--silent        opera silenziosamente\n"
+"  -SEGNALE           invia il segnale indicato invece di SIGKILL\n"
+"  -u,--user          mostra gli ID utente\n"
+"  -v,--verbose       output prolisso\n"
+"  -V,--verion        mostra le informazioni sulla versione\n"
 
 #: src/fuser.c:122
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  -4,--ipv4             search IPv4 sockets only\n"
 "  -6,--ipv6             search IPv6 sockets only\n"
 msgstr ""
-"    -4        cerca solo socket IPv4\n"
-"    -6        cerca solo socket IPv6\n"
+"  -4,--ipv4             cerca solo socket IPv4\n"
+"  -6,--ipv6             cerca solo socket IPv6\n"
 
 #: src/fuser.c:126
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  -                     reset options\n"
 "\n"
 "  udp/tcp names: [local_port][,[rmt_host][,[rmt_port]]]\n"
 "\n"
 msgstr ""
-"    -         riazzera le opzioni\n"
+"  -                     riazzera le opzioni\n"
 "\n"
 "  nomi udp/tcp: [porta locale][,[host remoto][,[porta remota]]]\n"
 
@@ -87,16 +88,16 @@ msgid "fuser (PSmisc) %s\n"
 msgstr "fuser (PSmisc) %s\n"
 
 #: src/fuser.c:136
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Copyright (C) 1993-2010 Werner Almesberger and Craig Small\n"
 "\n"
 msgstr ""
-"Copyright (C) 1993-2005 Werner Almesberger e Craig Small\n"
+"Copyright (C) 1993-2010 Werner Almesberger e Craig Small\n"
 "\n"
 
 #: src/fuser.c:138 src/killall.c:680 src/peekfd.c:108 src/prtstat.c:68
-#: src/pstree.c:806
+#: src/pstree.c:808
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -122,7 +123,7 @@ msgstr "Impossibile allocare memoria per il processo corrispondente: %s\n"
 #: src/fuser.c:398
 #, c-format
 msgid "Specified filename %s does not exist.\n"
-msgstr ""
+msgstr "Il file indicato %s non esiste.\n"
 
 #: src/fuser.c:400
 #, c-format
@@ -147,7 +148,7 @@ msgstr "Impossibile aprire il file di protocollo \"%s\": %s\n"
 #: src/fuser.c:888
 #, c-format
 msgid "%s: Invalid option %s\n"
-msgstr ""
+msgstr "%s: Opzione %s non valida\n"
 
 #: src/fuser.c:937
 msgid "Namespace option requires an argument."
@@ -159,7 +160,6 @@ msgstr "Nome di contesto non valido"
 
 # NdT: dato che non so come tradurre "mounpoint option", uso -m
 #: src/fuser.c:1002
-#, fuzzy
 msgid "You can only use files with mountpoint options"
 msgstr "Con l'opzione -m si possono specificare solo file"
 
@@ -287,7 +287,7 @@ msgid "Usage: killall [OPTION]... [--] NAME...\n"
 msgstr "Uso: killall [OPZIONE]... [--] NOME...\n"
 
 #: src/killall.c:639
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "       killall -l, --list\n"
 "       killall -V, --version\n"
@@ -308,12 +308,14 @@ msgid ""
 "  -w,--wait           wait for processes to die\n"
 msgstr ""
 "     killall -l, --list\n"
-"     killall -V --version\n"
+"     killall -V, --version\n"
 "\n"
 "  -e,--exact          richiede una corrispondenza esatta per i nomi molto "
 "lunghi\n"
 "  -I,--ignore-case    ignora maiuscole/minuscole nei nomi\n"
 "  -g,--process-group  termina il gruppo di processi invece del processo\n"
+"  -y,--younger-than   termina i processi più recenti di ORARIO\n"
+"  -o,--older-than     termina i processi più vecchi di ORARIO\n"
 "  -i,--interactive    chiede conferma prima di terminare\n"
 "  -l,--list           elenca i nomi di segnale conosciuti\n"
 "  -q,--quiet          opera silenziosamente\n"
@@ -345,7 +347,7 @@ msgstr ""
 
 #: src/killall.c:759 src/killall.c:765
 msgid "Invalid time format"
-msgstr ""
+msgstr "Formato orario non valido"
 
 #: src/killall.c:790
 #, c-format
@@ -357,7 +359,7 @@ msgstr "Impossibile trovare l'utente %s\n"
 msgid "Maximum number of names is %d\n"
 msgstr "Il massimo numero di nomi è %d\n"
 
-#: src/killall.c:861 src/pstree.c:736
+#: src/killall.c:861 src/pstree.c:738
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s è vuoto (non montato?)\n"
@@ -414,24 +416,29 @@ msgid ""
 "    -r,--raw       Raw display of information\n"
 "    -V,--version   Display version information and exit\n"
 msgstr ""
+"Uso: prtstat [opzioni] PID ...\n"
+"     prtstat -V\n"
+"Stampa informazioni su un processo\n"
+"    -r,--raw       Mostra informazioni grezze\n"
+"    -V,--version   Mostra le informazioni sulla versione ed esce\n"
 
 #: src/prtstat.c:65
-#, fuzzy, c-format
+#, c-format
 msgid "prtstat (PSmisc) %s\n"
-msgstr "pstree (PSmisc) %s\n"
+msgstr "prtstat (PSmisc) %s\n"
 
 #: src/prtstat.c:66
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Copyright (C) 2009 Craig Small\n"
 "\n"
 msgstr ""
-"Copyright (C) 1993-2009 Werner Almesberger e Craig Small\n"
+"Copyright (C) 2009 Craig Small\n"
 "\n"
 
 #: src/prtstat.c:78
 msgid "running"
-msgstr ""
+msgstr "in esecuzione"
 
 #: src/prtstat.c:80
 msgid "sleeping"
@@ -443,7 +450,7 @@ msgstr ""
 
 #: src/prtstat.c:84
 msgid "zombie"
-msgstr ""
+msgstr "zombie"
 
 #: src/prtstat.c:86
 msgid "traced"
@@ -454,9 +461,8 @@ msgid "paging"
 msgstr ""
 
 #: src/prtstat.c:90
-#, fuzzy
 msgid "unknown"
-msgstr "(sconosciuto)"
+msgstr "sconosciuto"
 
 #: src/prtstat.c:164
 #, c-format
@@ -464,6 +470,8 @@ msgid ""
 "Process: %-14s\t\tState: %c (%s)\n"
 "  CPU#:  %-3d\t\tTTY: %s\tThreads: %ld\n"
 msgstr ""
+"Processo: %-14s\t\tStato: %c (%s)\n"
+"  CPU#:  %-3d\t\tTTY: %s\tThreads: %ld\n"
 
 #: src/prtstat.c:169
 #, c-format
@@ -512,32 +520,32 @@ msgstr ""
 
 #: src/prtstat.c:221
 msgid "asprintf in print_stat failed.\n"
-msgstr ""
+msgstr "asprintf in print_stat non riuscito.\n"
 
 #: src/prtstat.c:226
 #, c-format
 msgid "Process with pid %d does not exist.\n"
-msgstr ""
+msgstr "Il processo con pid %d non esiste.\n"
 
 #: src/prtstat.c:228
 #, c-format
 msgid "Unable to open stat file for pid %d (%s)\n"
-msgstr ""
+msgstr "Impossibile aprire il file di stat per il pid %d (%s)\n"
 
 #: src/prtstat.c:308
 msgid "Invalid option"
-msgstr ""
+msgstr "Opzione non valida"
 
 #: src/prtstat.c:313
 msgid "You must provide at least one PID."
-msgstr ""
+msgstr "Occorre indicare almeno un PID."
 
 #: src/prtstat.c:317
 #, c-format
 msgid "/proc is not mounted, cannot stat /proc/self/stat.\n"
-msgstr ""
+msgstr "/proc non è montato, impossibile fare stat di /proc/self/stat.\n"
 
-#: src/pstree.c:774
+#: src/pstree.c:776
 #, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -578,12 +586,12 @@ msgstr ""
 "  -U, --unicode        usa caratteri grafici UTF-8 (Unicode)\n"
 "  -V, --version        mostra le informazioni sulla versione\n"
 
-#: src/pstree.c:792
+#: src/pstree.c:794
 #, c-format
 msgid "  -Z     show         SELinux security contexts\n"
 msgstr "  -Z     show         mostra i contesti di sicurezza SELinux\n"
 
-#: src/pstree.c:794
+#: src/pstree.c:796
 #, c-format
 msgid ""
 "  PID    start at this PID; default is 1 (init)\n"
@@ -594,12 +602,12 @@ msgstr ""
 "    UTENTE    mostra solo gli alberi con radice nei processi dell'utente\n"
 "\n"
 
-#: src/pstree.c:801
+#: src/pstree.c:803
 #, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (PSmisc) %s\n"
 
-#: src/pstree.c:804
+#: src/pstree.c:806
 #, c-format
 msgid ""
 "Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
@@ -608,27 +616,27 @@ msgstr ""
 "Copyright (C) 1993-2009 Werner Almesberger e Craig Small\n"
 "\n"
 
-#: src/pstree.c:915
+#: src/pstree.c:917
 #, c-format
 msgid "TERM is not set\n"
 msgstr "TERM non è impostato\n"
 
-#: src/pstree.c:919
+#: src/pstree.c:921
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "Impossibile determinare le capacità del terminale\n"
 
-#: src/pstree.c:961
+#: src/pstree.c:963
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "Questo nome utente non esiste: %s\n"
 
-#: src/pstree.c:977
+#: src/pstree.c:979
 #, c-format
 msgid "No processes found.\n"
 msgstr "Nessun processo trovato.\n"
 
-#: src/pstree.c:983
+#: src/pstree.c:985
 #, c-format
 msgid "Press return to close\n"
 msgstr "Premere Invio per chiudere\n"
@@ -637,39 +645,3 @@ msgstr "Premere Invio per chiudere\n"
 #, c-format
 msgid "%s: unknown signal; %s -l lists signals.\n"
 msgstr "%s: segnale sconosciuto; usare %s -l per elencare i segnali.\n"
-
-#~ msgid "You cannot use the mounted and mountpoint flags together"
-#~ msgstr "Impossibile usare le opzioni -c e -m allo stesso tempo"
-
-#~ msgid "Cannot stat mount point %s: %s\n"
-#~ msgstr "Impossibile fare stat del mount point %s: %s\n"
-
-#~ msgid "Cannot open /etc/mtab: %s\n"
-#~ msgstr "Impossibile aprire /etc/mtab: %s\n"
-
-#~ msgid "Internal error: MAX_DEPTH not big enough.\n"
-#~ msgstr "Errore interno: MAX_DEPTH non è abbastanza grande.\n"
-
-#~ msgid "Cannot open protocol file \"%s\": %s"
-#~ msgstr "Impossibile aprire il file di protocollo \"%s\": %s"
-
-#~ msgid "-4 flag used but proc file %s is not readable\n"
-#~ msgstr "è stata usata l'opzione -4,  ma il file proc %s non è leggibile\n"
-
-#~ msgid "No automatic removal. Please use  umount %s\n"
-#~ msgstr "Impossible rimuovere automaticamente. Usare umount %s\n"
-
-#~ msgid "No automatic removal. Please use  swapoff %s\n"
-#~ msgstr "Impossible rimuovere automaticamente. Usare swapoff %s\n"
-
-#~ msgid "kernel mount  "
-#~ msgstr "mount del kernel"
-
-#~ msgid "kernel loop   "
-#~ msgstr "ciclo del kernel"
-
-#~ msgid "kernel swap   "
-#~ msgstr "file di swap del kernel"
-
-#~ msgid "ignoring -m in name space \"%s\"\n"
-#~ msgstr "ignorato -m nel contesto \"%s\"\n"

@@ -66,7 +66,7 @@ AC_CHECK_MEMBERS([struct user_regs_struct.orig_eax,
 		struct user_regs_struct.rdi,
 		struct user_regs_struct.rsi,
 		struct user_regs_struct.rdx], [],[],
-    [#include <sys/types.h #include <sys/user.h>])
+    [#include <sys/user.h>])
 AC_CHECK_MEMBERS([struct pt_regs.orig_gpr3,
 		struct pt_regs.gpr], [],[], [#include <linux/ptrace.h>])
 AC_CHECK_MEMBERS([struct pt_regs.uregs],[],[], [#include <asm/ptrace.h>])

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc-22.11-pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2010-05-29 20:15+1000\n"
+"POT-Creation-Date: 2010-07-12 21:10+1000\n"
 "PO-Revision-Date: 2010-04-04 12:18+0200\n"
 "Last-Translator: Benno Schulenberg <benno@vertaalt.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -105,7 +105,7 @@ msgstr ""
 "\n"
 
 #: src/fuser.c:138 src/killall.c:680 src/peekfd.c:108 src/prtstat.c:68
-#: src/pstree.c:806
+#: src/pstree.c:808
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -361,7 +361,7 @@ msgstr "Kan gebruiker %s niet vinden\n"
 msgid "Maximum number of names is %d\n"
 msgstr "Het maximum aantal namen is %d\n"
 
-#: src/killall.c:861 src/pstree.c:736
+#: src/killall.c:861 src/pstree.c:738
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s is leeg -- misschien niet aangekoppeld?\n"
@@ -570,7 +570,7 @@ msgid "/proc is not mounted, cannot stat /proc/self/stat.\n"
 msgstr ""
 "/proc is niet aangekoppeld, kan status van /proc/self/stat niet bepalen.\n"
 
-#: src/pstree.c:774
+#: src/pstree.c:776
 #, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -612,12 +612,12 @@ msgstr ""
 "  -U, --unicode        Unicode-tekens (UTF-8) voor de lijntjes gebruiken\n"
 "  -V, --version        de programmaversie tonen\n"
 
-#: src/pstree.c:792
+#: src/pstree.c:794
 #, c-format
 msgid "  -Z     show         SELinux security contexts\n"
 msgstr "  -Z                  SELinux-veiligheidscontexten tonen\n"
 
-#: src/pstree.c:794
+#: src/pstree.c:796
 #, c-format
 msgid ""
 "  PID    start at this PID; default is 1 (init)\n"
@@ -629,12 +629,12 @@ msgstr ""
 "gebruiker\n"
 "\n"
 
-#: src/pstree.c:801
+#: src/pstree.c:803
 #, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (PSmisc) %s\n"
 
-#: src/pstree.c:804
+#: src/pstree.c:806
 #, c-format
 msgid ""
 "Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
@@ -643,27 +643,27 @@ msgstr ""
 "Copyright (C) 1993-2009 Werner Almesberger en Craig Small\n"
 "\n"
 
-#: src/pstree.c:915
+#: src/pstree.c:917
 #, c-format
 msgid "TERM is not set\n"
 msgstr "Omgevingsvariabele TERM heeft geen waarde.\n"
 
-#: src/pstree.c:919
+#: src/pstree.c:921
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "Kan terminalcapaciteiten niet bepalen\n"
 
-#: src/pstree.c:961
+#: src/pstree.c:963
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "Geen bestaande gebruikersnaam: %s\n"
 
-#: src/pstree.c:977
+#: src/pstree.c:979
 #, c-format
 msgid "No processes found.\n"
 msgstr "Geen processen gevonden.\n"
 
-#: src/pstree.c:983
+#: src/pstree.c:985
 #, c-format
 msgid "Press return to close\n"
 msgstr "Druk op Enter om af te sluiten\n"

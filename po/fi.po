@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.11-pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2010-05-29 20:15+1000\n"
+"POT-Creation-Date: 2010-07-12 21:10+1000\n"
 "PO-Revision-Date: 2010-04-05 09:56+0200\n"
 "Last-Translator: Jorma Karvonen <karvonen.jorma@gmail.com>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
@@ -105,7 +105,7 @@ msgstr ""
 "\n"
 
 #: src/fuser.c:138 src/killall.c:680 src/peekfd.c:108 src/prtstat.c:68
-#: src/pstree.c:806
+#: src/pstree.c:808
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -372,7 +372,7 @@ msgstr "Ei löydy käyttäjää %s\n"
 msgid "Maximum number of names is %d\n"
 msgstr "Suurin sallittu määrä nimiä on %d\n"
 
-#: src/killall.c:861 src/pstree.c:736
+#: src/killall.c:861 src/pstree.c:738
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s on tyhjä (ei liitetty?)\n"
@@ -581,7 +581,7 @@ msgstr ""
 "/proc ei ole liitetty, ei voi suorittaa stat-käskyä tiedostolle /proc/self/"
 "stat.\n"
 
-#: src/pstree.c:774
+#: src/pstree.c:776
 #, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -622,12 +622,12 @@ msgstr ""
 "  -U, --unicode       käytä UTF-8 (Unicode)-pseudografiikkamerkkejä\n"
 "  -V, --version       näytä versiotiedot\n"
 
-#: src/pstree.c:792
+#: src/pstree.c:794
 #, c-format
 msgid "  -Z     show         SELinux security contexts\n"
 msgstr "  -Z     näytä SELinux-turvakontekstit\n"
 
-#: src/pstree.c:794
+#: src/pstree.c:796
 #, c-format
 msgid ""
 "  PID    start at this PID; default is 1 (init)\n"
@@ -638,12 +638,12 @@ msgstr ""
 "  USER   näytä vain puita, jotka alkavat käyttäjän omistuksessa\n"
 "\n"
 
-#: src/pstree.c:801
+#: src/pstree.c:803
 #, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (PSmisc) %s\n"
 
-#: src/pstree.c:804
+#: src/pstree.c:806
 #, c-format
 msgid ""
 "Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
@@ -652,27 +652,27 @@ msgstr ""
 "Copyright © 1993-2009 Werner Almesberger ja Craig Small\n"
 "\n"
 
-#: src/pstree.c:915
+#: src/pstree.c:917
 #, c-format
 msgid "TERM is not set\n"
 msgstr "TERM-signaali ei ole asetettu\n"
 
-#: src/pstree.c:919
+#: src/pstree.c:921
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "Päätteen ominaisuudet eivät ole selvillä\n"
 
-#: src/pstree.c:961
+#: src/pstree.c:963
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "Käyttäjätunnus puuttuu: %s\n"
 
-#: src/pstree.c:977
+#: src/pstree.c:979
 #, c-format
 msgid "No processes found.\n"
 msgstr "Prosesseja ei löydy.\n"
 
-#: src/pstree.c:983
+#: src/pstree.c:985
 #, c-format
 msgid "Press return to close\n"
 msgstr "Enter-näppäin sulkee\n"

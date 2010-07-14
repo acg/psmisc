@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.6\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2010-05-29 20:15+1000\n"
+"POT-Creation-Date: 2010-07-12 21:10+1000\n"
 "PO-Revision-Date: 2007-11-06 21:28+0800\n"
 "Last-Translator: LI Daobing <lidaobing@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -97,7 +97,7 @@ msgstr ""
 "\n"
 
 #: src/fuser.c:138 src/killall.c:680 src/peekfd.c:108 src/prtstat.c:68
-#: src/pstree.c:806
+#: src/pstree.c:808
 #, c-format
 msgid ""
 "PSmisc comes with ABSOLUTELY NO WARRANTY.\n"
@@ -350,7 +350,7 @@ msgstr "无法找到用户 %s\n"
 msgid "Maximum number of names is %d\n"
 msgstr "最大名字数量是 %d\n"
 
-#: src/killall.c:861 src/pstree.c:736
+#: src/killall.c:861 src/pstree.c:738
 #, c-format
 msgid "%s is empty (not mounted ?)\n"
 msgstr "%s 是空的 (未挂载?)\n"
@@ -529,7 +529,7 @@ msgstr ""
 msgid "/proc is not mounted, cannot stat /proc/self/stat.\n"
 msgstr ""
 
-#: src/pstree.c:774
+#: src/pstree.c:776
 #, fuzzy, c-format
 msgid ""
 "Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
@@ -569,12 +569,12 @@ msgstr ""
 "    -U        使用 UTF-8 (Unicode) 划线符\n"
 "    -V        显示版本信息\n"
 
-#: src/pstree.c:792
+#: src/pstree.c:794
 #, fuzzy, c-format
 msgid "  -Z     show         SELinux security contexts\n"
 msgstr "    -Z     显示 SELinux 安全环境\n"
 
-#: src/pstree.c:794
+#: src/pstree.c:796
 #, fuzzy, c-format
 msgid ""
 "  PID    start at this PID; default is 1 (init)\n"
@@ -585,12 +585,12 @@ msgstr ""
 "    用户      仅显示从该 \"用户\" 的进程开始的进程树\n"
 "\n"
 
-#: src/pstree.c:801
+#: src/pstree.c:803
 #, c-format
 msgid "pstree (PSmisc) %s\n"
 msgstr "pstree (PSmisc) %s\n"
 
-#: src/pstree.c:804
+#: src/pstree.c:806
 #, fuzzy, c-format
 msgid ""
 "Copyright (C) 1993-2009 Werner Almesberger and Craig Small\n"
@@ -599,27 +599,27 @@ msgstr ""
 "版权所有 © 1993-2005 Werner Almesberger 和 Craig Small\n"
 "\n"
 
-#: src/pstree.c:915
+#: src/pstree.c:917
 #, c-format
 msgid "TERM is not set\n"
 msgstr "未设置环境变量TERM\n"
 
-#: src/pstree.c:919
+#: src/pstree.c:921
 #, c-format
 msgid "Can't get terminal capabilities\n"
 msgstr "无法获取终端大小\n"
 
-#: src/pstree.c:961
+#: src/pstree.c:963
 #, c-format
 msgid "No such user name: %s\n"
 msgstr "无用户名: %s\n"
 
-#: src/pstree.c:977
+#: src/pstree.c:979
 #, c-format
 msgid "No processes found.\n"
 msgstr "未发现进程。\n"
 
-#: src/pstree.c:983
+#: src/pstree.c:985
 #, c-format
 msgid "Press return to close\n"
 msgstr "按回车后关闭\n"

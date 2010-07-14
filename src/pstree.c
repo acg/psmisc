@@ -268,6 +268,8 @@ static PROC *new_proc(const char *comm, pid_t pid, uid_t uid)
     new->pid = pid;
     new->uid = uid;
     new->flags = 0;
+    new->argc = 0;
+    new->argv = NULL;
 #ifdef WITH_SELINUX
     new->scontext = scontext;
 #endif                                /*WITH_SELINUX */
