@@ -1,3 +1,10 @@
+Changes in 22.13
+================
+	* configure patch for x86_64 properly applied SF#3029302 by snowman123
+	* patch configure so pt_regs isn't used on SuperH. Fix by
+	  Nobuhiro Iwamatsu in Debian #588986
+	* Fixed configure.ac so only mipsel not mips compiles peekfd
+
 Changes in 22.12
 ================
 	* In fuser, switched the ipv6 and ipv4 checks around Debian #581604
