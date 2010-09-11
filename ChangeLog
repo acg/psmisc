@@ -1,3 +1,10 @@
+Changes in 22.14
+================
+  * Fix file descriptor as weel as memory leaks in fuser
+	* Strip @ symbol from file names read from /proc/net/unix
+	* Above 2 changes close openSuSE bugs #536209, #529520, and #417841
+	  and provided by Werner Fink
+
 Changes in 22.13
 ================
 	* configure patch for x86_64 properly applied SF#3029302 by snowman123

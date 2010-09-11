@@ -148,17 +148,11 @@ scan_procs(struct names *names_head, struct inode_list *ino_head,
 {
 	DIR *topproc_dir;
 	struct dirent *topproc_dent;
-	char *fd_dirpath, *fd_pathname;
 	struct inode_list *ino_tmp;
 	struct device_list *dev_tmp;
 	pid_t pid, my_pid;
 	uid_t uid;
 	struct stat *cwd_stat, *exe_stat, *root_stat;
-
-	if ((fd_dirpath = malloc(MAX_PATHNAME)) == NULL)
-		return;
-	if ((fd_pathname = malloc(MAX_PATHNAME)) == NULL)
-		return;
 
 	if ((topproc_dir = opendir("/proc")) == NULL) {
 		fprintf(stderr, _("Cannot open /proc directory: %s\n"),
@@ -219,6 +213,9 @@ scan_procs(struct names *names_head, struct inode_list *ino_head,
 				}
 			}
 		}
+		if (root_stat) free(root_stat);
+		if (cwd_stat)  free(cwd_stat);
+		if (exe_stat)  free(exe_stat);
 		check_dir(pid, "lib", dev_head, ino_head, uid, ACCESS_MMAP,
 			  sockets, netdev);
 		check_dir(pid, "mmap", dev_head, ino_head, uid, ACCESS_MMAP,
@@ -237,10 +234,9 @@ add_inode(struct inode_list **ino_list, struct names *this_name,
 {
 	struct inode_list *ino_tmp, *ino_head;
 
-	ino_head = *ino_list;
-
-	if ((ino_tmp = malloc(sizeof(struct inode_list))) == NULL)
+	if ((ino_tmp = (struct inode_list*)malloc(sizeof(struct inode_list))) == NULL)
 		return;
+	ino_head = *ino_list;
 	ino_tmp->name = this_name;
 	ino_tmp->device = device;
 	ino_tmp->inode = inode;
@@ -254,10 +250,10 @@ add_device(struct device_list **dev_list, struct names *this_name, dev_t device)
 	struct device_list *dev_tmp, *dev_head;
 
 	/*printf("Adding device %s %d\n", this_name->filename, device); */
-	dev_head = *dev_list;
 
-	if ((dev_tmp = malloc(sizeof(struct device_list))) == NULL)
+	if ((dev_tmp = (struct device_list*)malloc(sizeof(struct device_list))) == NULL)
 		return;
+	dev_head = *dev_list;
 	dev_tmp->name = this_name;
 	dev_tmp->device = device;
 	dev_tmp->next = dev_head;
@@ -271,10 +267,9 @@ add_ip_conn(struct ip_connections **ip_list, const char *protocol,
 {
 	struct ip_connections *ip_tmp, *ip_head;
 
-	ip_head = *ip_list;
-
-	if ((ip_tmp = malloc(sizeof(struct ip_connections))) == NULL)
+	if ((ip_tmp = (struct ip_connections*)malloc(sizeof(struct ip_connections))) == NULL)
 		return;
+	ip_head = *ip_list;
 	ip_tmp->name = this_name;
 	ip_tmp->lcl_port = lcl_port;
 	ip_tmp->rmt_port = rmt_port;
@@ -292,10 +287,9 @@ add_ip6_conn(struct ip6_connections **ip_list, const char *protocol,
 {
 	struct ip6_connections *ip_tmp, *ip_head;
 
-	ip_head = *ip_list;
-
-	if ((ip_tmp = malloc(sizeof(struct ip6_connections))) == NULL)
+	if ((ip_tmp = (struct ip6_connections*)malloc(sizeof(struct ip6_connections))) == NULL)
 		return;
+	ip_head = *ip_list;
 	ip_tmp->name = this_name;
 	ip_tmp->lcl_port = lcl_port;
 	ip_tmp->rmt_port = rmt_port;
@@ -326,7 +320,7 @@ add_matched_proc(struct names *name_list, const pid_t pid, const uid_t uid,
 		}
 	}
 	/* Not found */
-	if ((pptr = malloc(sizeof(struct procs))) == NULL) {
+	if ((pptr = (struct procs*)malloc(sizeof(struct procs))) == NULL) {
 		fprintf(stderr,
 			_("Cannot allocate memory for matched proc: %s\n"),
 			strerror(errno));
@@ -339,10 +333,13 @@ add_matched_proc(struct names *name_list, const pid_t pid, const uid_t uid,
 	pptr->next = NULL;
 	/* set command name */
 	pptr->command = NULL;
+
+	fp = NULL;
+	pathname = NULL;
 	if ((asprintf(&pathname, "/proc/%d/stat", pid) > 0) &&
 	    ((fp = fopen(pathname, "r")) != NULL) &&
 	    (fscanf(fp, "%*d (%100[^)]", cmdname) == 1))
-		if ((pptr->command = malloc(MAX_CMDNAME + 1)) != NULL) {
+		if ((pptr->command = (char*)malloc(MAX_CMDNAME + 1)) != NULL) {
 			cmdlen = 0;
 			for (cptr = cmdname; cmdlen < MAX_CMDNAME && *cptr;
 			     cptr++) {
@@ -359,6 +356,10 @@ add_matched_proc(struct names *name_list, const pid_t pid, const uid_t uid,
 		name_list->matched_procs = pptr;
 	else
 		last_proc->next = pptr;
+	if (pathname)
+		free(pathname);
+	if (fp)
+		fclose(fp);
 }
 
 /* Adds a knfsd etc process */
@@ -680,7 +681,7 @@ find_net_sockets(struct inode_list **ino_list,
 		}
 
 	}
-	return;
+	fclose(fp);
 }
 
 #ifdef WITH_IPV6
@@ -753,6 +754,7 @@ find_net6_sockets(struct inode_list **ino_list,
 			}
 		}
 	}
+	fclose(fp);
 }
 #endif
 
@@ -1253,13 +1255,15 @@ static struct stat *get_pidstat(const pid_t pid, const char *filename)
 	char pathname[256];
 	struct stat *st;
 
-	if ((st = malloc(sizeof(struct stat))) == NULL)
+	if ((st = (struct stat*)malloc(sizeof(struct stat))) == NULL)
 		return NULL;
 	snprintf(pathname, 256, "/proc/%d/%s", pid, filename);
 	if (stat(pathname, st) != 0)
-		return NULL;
-	else
-		return st;
+		goto out;
+	return st;
+out:
+	free(st);
+	return NULL;
 }
 
 static void
@@ -1267,7 +1271,7 @@ check_dir(const pid_t pid, const char *dirname, struct device_list *dev_head,
 	  struct inode_list *ino_head, const uid_t uid, const char access,
 	  struct unixsocket_list *sockets, dev_t netdev)
 {
-	char *dirpath, *filepath;
+	char *dirpath = NULL, *filepath = NULL;
 	DIR *dirp;
 	struct dirent *direntry;
 	struct inode_list *ino_tmp;
@@ -1275,14 +1279,14 @@ check_dir(const pid_t pid, const char *dirname, struct device_list *dev_head,
 	struct unixsocket_list *sock_tmp;
 	struct stat st, lst;
 
-	if ((dirpath = malloc(MAX_PATHNAME)) == NULL)
-		return;
-	if ((filepath = malloc(MAX_PATHNAME)) == NULL)
-		return;
+	if ((dirpath = (char*)malloc(MAX_PATHNAME)) == NULL)
+		goto out;
+	if ((filepath = (char*)malloc(MAX_PATHNAME)) == NULL)
+		goto out;
 
 	snprintf(dirpath, MAX_PATHNAME, "/proc/%d/%s", pid, dirname);
 	if ((dirp = opendir(dirpath)) == NULL)
-		return;
+		goto out;
 	while ((direntry = readdir(dirp)) != NULL) {
 		if (direntry->d_name[0] < '0' || direntry->d_name[0] > '9')
 			continue;
@@ -1341,6 +1345,11 @@ check_dir(const pid_t pid, const char *dirname, struct device_list *dev_head,
 		}
 	}			/* while fd_dent */
 	closedir(dirp);
+out:
+	if (dirpath)
+		free(dirpath);
+	if (filepath)
+		free(filepath);
 }
 
 static void
@@ -1400,7 +1409,6 @@ void fill_unix_cache(struct unixsocket_list **unixsocket_head)
 {
 	FILE *fp;
 	char line[BUFSIZ];
-	char *scanned_path;
 	int scanned_inode;
 	struct stat st;
 	struct unixsocket_list *newsocket;
@@ -1411,24 +1419,38 @@ void fill_unix_cache(struct unixsocket_list **unixsocket_head)
 		return;
 	}
 	while (fgets(line, BUFSIZ, fp) != NULL) {
+		char * path;
+		char * scanned_path = NULL;
 		if (sscanf(line, "%*x: %*x %*x %*x %*x %*d %d %as",
-			   &scanned_inode, &scanned_path) != 2)
-			continue;
-		if (stat(scanned_path, &st) < 0) {
-			free(scanned_path);
+			   &scanned_inode, &scanned_path) != 2) {
+			if (scanned_path)
+				free(scanned_path);
 			continue;
 		}
-		if ((newsocket =
-		     malloc(sizeof(struct unixsocket_list))) == NULL)
+		if (scanned_path == NULL)
 			continue;
+		path = scanned_path;
+		if (*scanned_path == '@')
+			scanned_path++;
+		if (stat(scanned_path, &st) < 0) {
+			free(path);
+			continue;
+		}
+		if ((newsocket = (struct unixsocket_list*)
+		     malloc(sizeof(struct unixsocket_list))) == NULL) {
+			free(path);
+			continue;
+		}
 		newsocket->sun_name = strdup(scanned_path);
 		newsocket->inode = st.st_ino;
 		newsocket->dev = st.st_dev;
 		newsocket->net_inode = scanned_inode;
 		newsocket->next = *unixsocket_head;
 		*unixsocket_head = newsocket;
+		free(path);
 	}			/* while */
 
+	fclose(fp);
 }
 
 #ifdef DEBUG
@@ -1567,6 +1589,7 @@ scan_knfsd(struct names *names_head, struct inode_list *ino_head,
 						 line);
 		}
 	}
+	fclose(fp);
 }
 
 static void
@@ -1610,6 +1633,7 @@ scan_mounts(struct names *names_head, struct inode_list *ino_head,
 						 find_mountp);
 		}
 	}
+	fclose(fp);
 }
 
 static void
@@ -1656,4 +1680,5 @@ scan_swaps(struct names *names_head, struct inode_list *ino_head,
 						 line);
 		}
 	}
+	fclose(fp);
 }
