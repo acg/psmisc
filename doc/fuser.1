@@ -12,6 +12,7 @@ fuser \- identify processes using files or sockets
 .RB [ \-k
 .RB [ \-i ]
 .RB [ \-M ]
+.RB [ \-w ]
 .RB [ \- \fISIGNAL
 ] ]
 .IR name " ..."
@@ -95,6 +96,10 @@ directory.
 Request will be fulfilled only if \fINAME\fR specifies a mountpoint.
 This is an invaluable seatbelt which prevents you from killing the machine
 if \fINAME\fR happens to not be a filesystem.
+.TP
+\fB\-w\fP
+Kill only processes which have write access. This option is
+silently ignored if \fB\-k\fP is not present too.
 .TP
 \fB\-n \fISPACE\fR, \fB\-\-namespace\fR \fISPACE\fR
 Select a different name space. The name spaces \fBfile\fR (file names, the

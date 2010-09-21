@@ -71,7 +71,7 @@ static struct stat *get_pidstat(const pid_t pid, const char *filename);
 static uid_t getpiduid(const pid_t pid);
 static int print_matches(struct names *names_head, const opt_type opts,
 			 const int sig_number);
-static void kill_matched_proc(struct procs *pptr, const opt_type opts,
+static int kill_matched_proc(struct procs *pptr, const opt_type opts,
 			      const int sig_number);
 
 /*int parse_mount(struct names *this_name, struct device_list **dev_list);*/
@@ -116,6 +116,7 @@ static void usage(const char *errormsg)
 		 "  -SIGNAL               send this signal instead of SIGKILL\n"
 		 "  -u,--user             display user IDs\n"
 		 "  -v,--verbose          verbose output\n"
+		 "  -w,--writeonly        kill only processes with write access\n"
 		 "  -V,--version          display version information\n"));
 #ifdef WITH_IPV6
 	fprintf(stderr, _(
@@ -847,6 +848,7 @@ int main(int argc, char *argv[])
 		{"silent", 0, NULL, 's'},
 		{"user", 0, NULL, 'u'},
 		{"verbose", 0, NULL, 'v'},
+		{"writeonly", 0, NULL, 'w'},
 		{"version", 0, NULL, 'V'},
 #ifdef WITH_IPV6
 		{"ipv4", 0, NULL, '4'},
@@ -958,6 +960,9 @@ int main(int argc, char *argv[])
 			break;
 		  case 'v':
 			opts |= OPT_VERBOSE;
+			break;
+		  case 'w':
+			opts |= OPT_WRITE;
 			break;
 		  case 'V':
 			print_version();
@@ -1102,6 +1107,7 @@ print_matches(struct names *names_head, const opt_type opts,
 	int len = 0;
 	struct passwd *pwent = NULL;
 	int have_match = 0;
+	int have_kill = 0;
 	int name_has_procs;
 
 	for (nptr = names_head; nptr != NULL; nptr = nptr->next) {
@@ -1242,8 +1248,8 @@ print_matches(struct names *names_head, const opt_type opts,
 			}
 		}		/* be silent */
 		if (opts & OPT_KILL)
-			kill_matched_proc(nptr->matched_procs, opts,
-					  sig_number);
+			have_kill = kill_matched_proc(nptr->matched_procs,
+						      opts, sig_number);
 
 	}			/* next name */
 	return (have_match == 1 ? 0 : 1);
@@ -1506,12 +1512,13 @@ static int ask(const pid_t pid)
 	}			/* while */
 }
 
-static void
+static int
 kill_matched_proc(struct procs *proc_head, const opt_type opts,
 		  const int sig_number)
 {
 	struct procs *pptr;
   pid_t mypid;
+	int ret = 0;
 
   mypid = getpid();
 
@@ -1520,13 +1527,18 @@ kill_matched_proc(struct procs *proc_head, const opt_type opts,
       continue; /* dont kill myself */
 		if ( pptr->proc_type != PTYPE_NORMAL )
 	    continue;
+		if ((opts & OPT_WRITE) && ((pptr->access & ACCESS_FILEWR) == 0))
+			continue;
 		if ((opts & OPT_INTERACTIVE) && (ask(pptr->pid) == 0))
 		  continue;
 		if ( kill(pptr->pid, sig_number) < 0) {
 			fprintf(stderr, _("Could not kill process %d: %s\n"),
 					pptr->pid, strerror(errno));
+			continue;
 		}
+		ret = 1;
 	}
+	return ret;
 }
 
 static dev_t find_net_dev(void)

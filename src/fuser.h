@@ -1,6 +1,6 @@
 
 /* Option Flags */
-typedef unsigned char opt_type;
+typedef unsigned short opt_type;
 
 #define OPT_VERBOSE 1
 #define OPT_ALLFILES 2
@@ -10,6 +10,7 @@ typedef unsigned char opt_type;
 #define OPT_SILENT 32
 #define OPT_USER 64
 #define OPT_ISMOUNTPOINT 128
+#define OPT_WRITE 256
 
 struct procs {
 	pid_t pid;
