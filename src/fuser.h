@@ -86,6 +86,17 @@ struct mount_list {
 	struct mount_list *next;
 };
 
+#if defined (__GNUC__) && defined(__OPTIMIZE__)
+# include "lists.h"
+typedef struct mntinfo_s {
+    list_t   this;
+    int id, parid;
+    dev_t     dev;
+    size_t   nlen;
+    char  *mpoint;
+} mntinfo_t;
+#endif
+
 #define NAMESPACE_FILE 0
 #define NAMESPACE_TCP 1
 #define NAMESPACE_UDP 2

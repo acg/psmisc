@@ -4,6 +4,14 @@ Changes in 22.14
 	* Strip @ symbol from file names read from /proc/net/unix
 	* Above 2 changes close openSuSE bugs #536209, #529520, and #417841
 	  and provided by Werner Fink
+	* Applied patch from Werner Fink to avoid stat(2) on NFS mounts
+	* Zeros process group memory - Patch by jgorig SF#3152925 RH#666213
+	* fuser -m -s flags work - Patch by jgorig SF#31110178 RH#651794
+	* fuser silent if /proc/swaps not available SF#3072134
+	* ppc 64 support for peekfd by jgorig SF#3166444
+	* jiffies now ULL in killall SF#3138538
+	* pstree can show parents of a process. Patch supplied by Curtis
+	  Hawthorne SF#3135157
 
 Changes in 22.13
 ================

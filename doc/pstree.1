@@ -1,4 +1,4 @@
-.TH PSTREE 1 2009-12-16 "Linux" "User Commands"
+.TH PSTREE 1 2011-02-22 "Linux" "User Commands"
 .SH NAME
 pstree \- display a tree of processes
 .SH SYNOPSIS
@@ -10,6 +10,7 @@ pstree \- display a tree of processes
 .RB [ \-l | \-\-long ]
 .RB [ \-n | \-\-numeric\-sort ]
 .RB [ \-p | \-\-show\-pids ]
+.RB [ \-s | \-\-show\-parents ]
 .RB [ \-u | \-\-uid\-changes ]
 .RB [ \-Z | \-\-security\-context ]
 .RB [ \-A | \-\-ascii | \-G | \-\-vt100 | \-U | \-\-unicode ]
@@ -83,6 +84,8 @@ sort.)
 .IP \fB\-p\fP
 Show PIDs. PIDs are shown as decimal numbers in parentheses after each
 process name. \fB\-p\fP implicitly disables compaction.
+.IP \fB\-s\fP
+Show parent processes of the specified process.
 .IP \fB\-u\fP
 Show uid transitions. Whenever the uid of a process differs from the uid of
 its parent, the new uid is shown in parentheses after the process name.
@@ -101,7 +104,7 @@ pstree is compilied with SELinux support.
 .fi
 .SH AUTHORS
 Werner Almesberger <werner@almesberger.net>
-Craig Small <csmall@small.dropbear.id.au>
+Craig Small <csmall@enc.com.au>
 .SH BUGS
 Some character sets may be incompatible with the VT100 characters.
 

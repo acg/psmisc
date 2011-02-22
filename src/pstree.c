@@ -122,8 +122,8 @@ static int capacity = 0;
 static int *width = NULL;
 static int *more = NULL;
 
-static int print_args = 0, compact = 1, user_change = 0, pids = 0, by_pid =
-    0, trunc = 1, wait_end = 0;
+static int print_args = 0, compact = 1, user_change = 0, pids = 0,
+    show_parents = 0, by_pid = 0, trunc = 1, wait_end = 0;
 #ifdef WITH_SELINUX
 static int show_scontext = 0;
 #endif                                /*WITH_SELINUX */
@@ -581,6 +581,21 @@ static void dump_by_user(PROC * current, uid_t uid)
         dump_by_user(walk->child, uid);
 }
 
+static void trim_tree_by_parent(PROC * current)
+{
+  if (!current)
+    return;
+
+  PROC * parent = current->parent;
+
+  if (!parent)
+    return;
+
+  parent->children = NULL;
+  add_child(parent, current);
+  trim_tree_by_parent(parent);
+}
+
 
 /*
  * read_proc now uses a similar method as procps for finding the process
@@ -786,6 +801,7 @@ static void usage(void)
              "  -l, --long          don't truncate long lines\n"
              "  -n, --numeric-sort  sort output by PID\n"
              "  -p, --show-pids     show PIDs; implies -c\n"
+             "  -s, --show-parents  show parents of the selected process\n"
              "  -u, --uid-changes   show uid transitions\n"
              "  -U, --unicode       use UTF-8 (Unicode) line drawing characters\n"
              "  -V, --version       display version information\n"));
@@ -829,9 +845,10 @@ int main(int argc, char **argv)
         {"vt100", 0, NULL, 'G'},
         {"highlight-all", 0, NULL, 'h'},
         {"highlight-pid", 1, NULL, 'H'},
+        {"long", 0, NULL, 'l'},
         {"numeric-sort", 0, NULL, 'n'},
         {"show-pids", 0, NULL, 'p'},
-        {"long", 0, NULL, 'l'},
+        {"show-parents", 0, NULL, 's'},
         {"uid-changes", 0, NULL, 'u'},
         {"unicode", 0, NULL, 'U'},
         {"version", 0, NULL, 'V'},
@@ -884,11 +901,11 @@ int main(int argc, char **argv)
 
 #ifdef WITH_SELINUX
     while ((c =
-            getopt_long(argc, argv, "aAcGhH:npluUVZ", options,
+            getopt_long(argc, argv, "aAcGhH:nplsuUVZ", options,
                         NULL)) != -1)
 #else                                /*WITH_SELINUX */
     while ((c =
-            getopt_long(argc, argv, "aAcGhH:npluUV", options, NULL)) != -1)
+            getopt_long(argc, argv, "aAcGhH:nplsuUV", options, NULL)) != -1)
 #endif                                /*WITH_SELINUX */
         switch (c) {
         case 'a':
@@ -934,6 +951,9 @@ int main(int argc, char **argv)
             pids = 1;
             compact = 0;
             break;
+        case 's':
+            show_parents = 1;
+            break;
         case 'u':
             user_change = 1;
             break;
@@ -971,6 +991,13 @@ int main(int argc, char **argv)
     for (current = find_proc(highlight); current;
          current = current->parent)
         current->flags |= PFLAG_HILIGHT;
+
+    if(show_parents && pid != 0) {
+      trim_tree_by_parent(find_proc(pid));
+
+      pid = 1;
+    }
+
     if (!pw)
         dump_tree(find_proc(pid), 0, 1, 1, 1, 0, 0);
     else {

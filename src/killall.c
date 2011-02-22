@@ -142,7 +142,7 @@ uptime()
 }
 
 /* process age from jiffies to seconds via uptime */
-static double process_age(const unsigned jf)
+static double process_age(const unsigned long long jf)
 {
    double sc_clk_tck = sysconf(_SC_CLK_TCK);
    assert(sc_clk_tck > 0);
@@ -331,7 +331,7 @@ kill_all (int signal, int names, char **namelist, struct passwd *pwent)
     pgids = NULL;		/* silence gcc */
   else
     {
-      pgids = malloc (pids * sizeof (pid_t));
+      pgids = calloc (pids, sizeof (pid_t));
       if (!pgids)
 	{
 	  perror ("malloc");
@@ -375,7 +375,7 @@ kill_all (int signal, int names, char **namelist, struct passwd *pwent)
       }
       if ( younger_than || older_than ) {
 	 rewind(file);
-	 unsigned int proc_stt_jf = 0;
+	 unsigned long long proc_stt_jf = 0;
 	 okay = fscanf(file, "%*d %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %ull", 
 		       &proc_stt_jf) == 1;
 	 if (!okay) {
