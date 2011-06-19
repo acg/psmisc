@@ -4,7 +4,7 @@
  * Based on fuser.c Copyright (C) 1993-2005 Werner Almesberger and Craig Small
  *
  * Completely re-written
- * Copyright (C) 2005-2010 Craig Small
+ * Copyright (C) 2005-2011 Craig Small
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -983,6 +983,7 @@ int main(int argc, char *argv[])
 			return 0;
 		  case 'm':
 			opts |= OPT_MOUNTS;
+		    read_proc_mounts(&mounts);
 			break;
 		  case 'M':
 			opts |= OPT_ISMOUNTPOINT;
@@ -1162,11 +1163,12 @@ print_matches(struct names *names_head, const opt_type opts,
 	struct passwd *pwent = NULL;
 	int have_match = 0;
 	int have_kill = 0;
-	int name_has_procs;
+	int name_has_procs = 0;
 
 	for (nptr = names_head; nptr != NULL; nptr = nptr->next) {
 		if (opts & OPT_SILENT) {
-			have_match = nptr->matched_procs ? 1 : have_match;
+            if (nptr->matched_procs != NULL)
+                have_match = 1;
 		} else {	/* We're not silent */
 			if ((opts & OPT_ALLFILES) == 0) {
 				name_has_procs = 0;
@@ -1306,7 +1308,10 @@ print_matches(struct names *names_head, const opt_type opts,
 						      opts, sig_number);
 
 	}			/* next name */
-	return (have_match == 1 ? 0 : 1);
+    if (opts & OPT_KILL)
+        return (have_kill == 1 ? 0 : 1);
+    else
+        return (have_match == 1 ? 0 : 1);
 
 }
 

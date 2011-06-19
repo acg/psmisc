@@ -14,7 +14,10 @@ Changes in 22.14
 	  Hawthorne SF#3135157
 	* killall creates right size buffer instead of MAX_PATH Debian #623425
 	* check for /proc/$$/stat not /proc/self/stat which is not available
-	  on hurb platforms. Same Debian bug as above
+	  on hurd platforms. Same Debian bug as above
+	* fuser understands IPv6 addresses, removed comment in fuser.1 that it
+	  doesn't Debian #609904
+	* fuser -k only returns 0 if you kill something.
 
 Changes in 22.13
 ================
