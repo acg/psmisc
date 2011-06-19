@@ -12,6 +12,9 @@ Changes in 22.14
 	* jiffies now ULL in killall SF#3138538
 	* pstree can show parents of a process. Patch supplied by Curtis
 	  Hawthorne SF#3135157
+	* killall creates right size buffer instead of MAX_PATH Debian #623425
+	* check for /proc/$$/stat not /proc/self/stat which is not available
+	  on hurb platforms. Same Debian bug as above
 
 Changes in 22.13
 ================

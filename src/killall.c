@@ -511,11 +511,14 @@ kill_all (int signal, int names, char **namelist, struct passwd *pwent)
 		      /* maybe the binary has been modified and std[j].st_ino
 		       * is not reliable anymore. We need to compare paths.
 		       */
-		      char linkbuf[PATH_MAX];
+		      size_t len = strlen(namelist[j]);
+		      char *linkbuf = malloc(len + 1);
 
-		      if (readlink(path, linkbuf, sizeof(linkbuf)) <= 0 ||
-					  strcmp(namelist[j], linkbuf))
+		      if (!linkbuf ||
+			  readlink(path, linkbuf, len + 1) != len ||
+			  memcmp(namelist[j], linkbuf, len))
 			ok = 0;
+		      free(linkbuf);
 		    }
 
 		  free(path);
@@ -683,6 +686,17 @@ void print_version()
     "For more information about these matters, see the files named COPYING.\n"));
 }
 
+static int
+have_proc_self_stat (void)
+{
+  char filename[128];
+  struct stat isproc;
+  pid_t pid = getpid();
+
+  snprintf(filename, sizeof(filename), PROC_BASE"/%d/stat", (int) pid);
+  return stat(filename, &isproc) == 0;
+}
+
 int
 main (int argc, char **argv)
 {
@@ -691,7 +705,6 @@ main (int argc, char **argv)
   int optc;
   int myoptind;
   struct passwd *pwent = NULL;
-  struct stat isproc;
   char yt[16];
   char ot[16];
 
@@ -857,8 +870,8 @@ main (int argc, char **argv)
     fprintf (stderr, _("Maximum number of names is %d\n"), MAX_NAMES);
     exit (1);
   }
-  if (stat("/proc/self/stat", &isproc)==-1) {
-    fprintf (stderr, _("%s is empty (not mounted ?)\n"), PROC_BASE);
+  if (!have_proc_self_stat()) {
+    fprintf (stderr, _("%s lacks process entries (not mounted ?)\n"), PROC_BASE);
     exit (1);
   }
   argv = argv + myoptind;
