@@ -24,7 +24,7 @@ if WANT_PEEKFD_MIPS
 endif
 
 
-fuser_SOURCES = fuser.c comm.h signals.c signals.h i18n.h fuser.h
+fuser_SOURCES = fuser.c comm.h signals.c signals.h i18n.h fuser.h lists.h
 
 killall_SOURCES = killall.c comm.h signals.c signals.h i18n.h
 
