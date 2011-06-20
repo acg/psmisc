@@ -18,6 +18,7 @@ Changes in 22.14
 	* fuser understands IPv6 addresses, removed comment in fuser.1 that it
 	  doesn't Debian #609904
 	* fuser -k only returns 0 if you kill something.
+	* fuser doesn't complain if /proc/#/fd disappears SF#3310990
 
 Changes in 22.13
 ================

@@ -376,7 +376,7 @@ kill_all (int signal, int names, char **namelist, struct passwd *pwent)
       if ( younger_than || older_than ) {
 	 rewind(file);
 	 unsigned long long proc_stt_jf = 0;
-	 okay = fscanf(file, "%*d %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %ull", 
+	 okay = fscanf(file, "%*d %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %Lu", 
 		       &proc_stt_jf) == 1;
 	 if (!okay) {
 	    fclose(file);

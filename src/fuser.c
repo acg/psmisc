@@ -166,7 +166,6 @@ scan_procs(struct names *names_head, struct inode_list *ino_head,
 	struct device_list *dev_tmp;
 	pid_t pid, my_pid;
 	uid_t uid;
-	int dfd;
 
 	if ((topproc_dir = opendir("/proc")) == NULL) {
 		fprintf(stderr, _("Cannot open /proc directory: %s\n"),
@@ -174,7 +173,6 @@ scan_procs(struct names *names_head, struct inode_list *ino_head,
 		exit(1);
 	}
 	my_pid = getpid();
-	dfd = dirfd(topproc_dir);
 	while ((topproc_dent = readdir(topproc_dir)) != NULL) {
 		dev_t cwd_dev, exe_dev, root_dev;
 		struct stat *cwd_stat = NULL;
@@ -406,11 +404,9 @@ static void
 add_special_proc(struct names *name_list, const char ptype, const uid_t uid,
 		 const char *command)
 {
-	struct procs *pptr, *last_proc;
+	struct procs *pptr;
 
-	last_proc = NULL;
 	for (pptr = name_list->matched_procs; pptr != NULL; pptr = pptr->next) {
-		last_proc = pptr;
 		if (pptr->proc_type == ptype)
 			return;
 	}
@@ -750,12 +746,9 @@ find_net6_sockets(struct inode_list **ino_list,
 	struct in6_addr rmt_addr;
 	unsigned int tmp_addr[4];
 	char rmt_addr6str[INET6_ADDRSTRLEN];
-	struct ip6_connections *head, *tmpptr, *tail;
 	struct ip6_connections *conn_tmp;
 	unsigned long scanned_inode;
 	ino_t inode;
-
-	head = tmpptr = tail = NULL;
 
 	if (snprintf(pathname, 200, "/proc/net/%s6", protocol) < 0)
 		return;
@@ -1367,8 +1360,10 @@ check_dir(const pid_t pid, const char *dirname, struct device_list *dev_head,
 		if (!st.st_ino && timeout(stat, filepath, &st, 5) != 0)
 #endif
 		{
-			fprintf(stderr, _("Cannot stat file %s: %s\n"),
-				filepath, strerror(errno));
+            if (errno != ENOENT) {
+                fprintf(stderr, _("Cannot stat file %s: %s\n"),
+				    filepath, strerror(errno));
+            }
 		} else {
 			if (thedev == netdev) {
 				for (sock_tmp = sockets; sock_tmp != NULL;
