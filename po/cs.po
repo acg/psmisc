@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.11-pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2011-06-19 14:27+1000\n"
+"POT-Creation-Date: 2011-06-20 21:47+1000\n"
 "PO-Revision-Date: 2010-03-28 19:35+0200\n"
 "Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
@@ -115,105 +115,105 @@ msgstr ""
 "GNU Obecné veřejné licence (GPL).\n"
 "Podrobnosti v této záležitosti naleznete v souborech pojmenovaných COPYING.\n"
 
-#: src/fuser.c:172
+#: src/fuser.c:171
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr "Adresář /proc nelze otevřít: %s\n"
 
-#: src/fuser.c:364 src/fuser.c:419 src/fuser.c:1874
+#: src/fuser.c:362 src/fuser.c:415 src/fuser.c:1869
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr "Paměť pro odpovídající proc nelze alokovat: %s\n"
 
-#: src/fuser.c:453
+#: src/fuser.c:449
 #, c-format
 msgid "Specified filename %s does not exist.\n"
 msgstr "Soubor zadaného názvu %s neexistuje.\n"
 
-#: src/fuser.c:455
+#: src/fuser.c:451
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr "Nelze získat informace (stat(2)) o %s: %s\n"
 
-#: src/fuser.c:588
+#: src/fuser.c:584
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr "Místní port %s nelze přeložit: %s\n"
 
-#: src/fuser.c:606
+#: src/fuser.c:602
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "Neznámá rodina adres %d místního portu\n"
 
-#: src/fuser.c:696
+#: src/fuser.c:692
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "Soubor s protokoly „%s“ nelze otevřít: %s\n"
 
-#: src/fuser.c:945
+#: src/fuser.c:938
 #, c-format
 msgid "%s: Invalid option %s\n"
 msgstr "%s: Neplatný přepínač %s\n"
 
-#: src/fuser.c:995
+#: src/fuser.c:988
 msgid "Namespace option requires an argument."
 msgstr "Přepínač jmenného prostoru vyžaduje argument."
 
-#: src/fuser.c:1007
+#: src/fuser.c:1000
 msgid "Invalid namespace name"
 msgstr "Neplatný název jmenného prostoru"
 
-#: src/fuser.c:1063
+#: src/fuser.c:1056
 msgid "You can only use files with mountpoint options"
 msgstr "Spolu s přepínači bodů připojení lze použít jen soubory"
 
-#: src/fuser.c:1108
+#: src/fuser.c:1101
 msgid "No process specification given"
 msgstr "Žádné kritérium procesu nebylo zadáno"
 
-#: src/fuser.c:1115
+#: src/fuser.c:1108
 msgid "all option cannot be used with silent option."
 msgstr "Přepínač -a nelze použít spolu s přepínačem -s."
 
-#: src/fuser.c:1120
+#: src/fuser.c:1113
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "Nelze současně hledat jen v IPv4 a jen v IPv6 socketech."
 
-#: src/fuser.c:1193
+#: src/fuser.c:1186
 #, c-format
 msgid "%*s USER        PID ACCESS COMMAND\n"
 msgstr "%*s UŽIVATEL    PID PŘÍSTUP PŘÍKAZ\n"
 
-#: src/fuser.c:1226 src/fuser.c:1281
+#: src/fuser.c:1219 src/fuser.c:1274
 msgid "(unknown)"
 msgstr "(neznámo)"
 
-#: src/fuser.c:1370 src/fuser.c:1407
+#: src/fuser.c:1364 src/fuser.c:1402
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "O souboru %s nelze získat informace: %s\n"
 
-#: src/fuser.c:1498
+#: src/fuser.c:1493
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "/proc/net/unix nelze otevřít: %s\n"
 
-#: src/fuser.c:1574
+#: src/fuser.c:1569
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Zabít proces %d? (a/N) "
 
-#: src/fuser.c:1610
+#: src/fuser.c:1605
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Proces %d nebylo možné zabít: %s\n"
 
-#: src/fuser.c:1625
+#: src/fuser.c:1620
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Síťový socket nelze otevřít.\n"
 
-#: src/fuser.c:1629
+#: src/fuser.c:1624
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Nelze nalézt číslo zařízení socketu.\n"

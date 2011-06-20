@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.11-pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2011-06-19 14:27+1000\n"
+"POT-Creation-Date: 2011-06-20 21:47+1000\n"
 "PO-Revision-Date: 2010-03-28 19:36+0400\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <gnu@mx.ru>\n"
@@ -120,107 +120,107 @@ msgstr ""
 "Универсальной общественной лицензии GNU.\n"
 "Подробная информация об этих условиях приведена в файле COPYING.\n"
 
-#: src/fuser.c:172
+#: src/fuser.c:171
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr "Не удалось открыть каталог /proc: %s\n"
 
-#: src/fuser.c:364 src/fuser.c:419 src/fuser.c:1874
+#: src/fuser.c:362 src/fuser.c:415 src/fuser.c:1869
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr "Не удалось выделить память для проверяемого proc: %s\n"
 
-#: src/fuser.c:453
+#: src/fuser.c:449
 #, c-format
 msgid "Specified filename %s does not exist.\n"
 msgstr "Указанное имя файла %s не существует.\n"
 
-#: src/fuser.c:455
+#: src/fuser.c:451
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr "Не удалось выполнить функцию stat для %s: %s\n"
 
-#: src/fuser.c:588
+#: src/fuser.c:584
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr "Не удалось определить имя локального порта %s: %s\n"
 
-#: src/fuser.c:606
+#: src/fuser.c:602
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "Неизвестный локальный порт AF %d\n"
 
-#: src/fuser.c:696
+#: src/fuser.c:692
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "Не удалось открыть файл протокола \"%s\": %s\n"
 
-#: src/fuser.c:945
+#: src/fuser.c:938
 #, c-format
 msgid "%s: Invalid option %s\n"
 msgstr "%s: неправильный параметр %s\n"
 
-#: src/fuser.c:995
+#: src/fuser.c:988
 msgid "Namespace option requires an argument."
 msgstr "Для параметра области требуется значение."
 
-#: src/fuser.c:1007
+#: src/fuser.c:1000
 msgid "Invalid namespace name"
 msgstr "Неверное имя области"
 
-#: src/fuser.c:1063
+#: src/fuser.c:1056
 msgid "You can only use files with mountpoint options"
 msgstr "Вы можете использовать файлы только с параметрами mountpoint"
 
-#: src/fuser.c:1108
+#: src/fuser.c:1101
 msgid "No process specification given"
 msgstr "Не указан процесс"
 
-#: src/fuser.c:1115
+#: src/fuser.c:1108
 msgid "all option cannot be used with silent option."
 msgstr ""
 "Параметр показа всех файлов нельзя использовать вместе с параметром "
 "отключения сообщений."
 
-#: src/fuser.c:1120
+#: src/fuser.c:1113
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "Нельзя выполнять поиск только по сокетам IPv4 и IPv6 одновременно"
 
-#: src/fuser.c:1193
+#: src/fuser.c:1186
 #, c-format
 msgid "%*s USER        PID ACCESS COMMAND\n"
 msgstr "%*s ПОЛЬЗ-ЛЬ    PID ДОСТУП КОМАНДА\n"
 
-#: src/fuser.c:1226 src/fuser.c:1281
+#: src/fuser.c:1219 src/fuser.c:1274
 msgid "(unknown)"
 msgstr "(неизвестно)"
 
-#: src/fuser.c:1370 src/fuser.c:1407
+#: src/fuser.c:1364 src/fuser.c:1402
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "Не удалось выполнить функцию stat для файла %s: %s\n"
 
-#: src/fuser.c:1498
+#: src/fuser.c:1493
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "Не удалось открыть /proc/net/unix: %s\n"
 
-#: src/fuser.c:1574
+#: src/fuser.c:1569
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Завершить процесс %d? (y/N) "
 
-#: src/fuser.c:1610
+#: src/fuser.c:1605
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Не удалось завершить процесс %d: %s\n"
 
-#: src/fuser.c:1625
+#: src/fuser.c:1620
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Не удалось открыть сетевой сокет.\n"
 
-#: src/fuser.c:1629
+#: src/fuser.c:1624
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Не удалось найти номер устройства сокета.\n"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.11-pre1\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2011-06-19 14:27+1000\n"
+"POT-Creation-Date: 2011-06-20 21:47+1000\n"
 "PO-Revision-Date: 2010-06-07 18:11+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -115,105 +115,105 @@ msgstr ""
 "i informativt syfte. För alla juridiska tolkningar gäller den engelska "
 "originaltexten.\n"
 
-#: src/fuser.c:172
+#: src/fuser.c:171
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr "Kan inte öppna katalogen /proc: %s\n"
 
-#: src/fuser.c:364 src/fuser.c:419 src/fuser.c:1874
+#: src/fuser.c:362 src/fuser.c:415 src/fuser.c:1869
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr "Kan inte allokera minne för matchande proc: %s\n"
 
-#: src/fuser.c:453
+#: src/fuser.c:449
 #, c-format
 msgid "Specified filename %s does not exist.\n"
 msgstr "Angivna filnamnet %s finns inte.\n"
 
-#: src/fuser.c:455
+#: src/fuser.c:451
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr "Kan inte ta status på %s: %s\n"
 
-#: src/fuser.c:588
+#: src/fuser.c:584
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr "Kan inte slå upp lokal port %s: %s\n"
 
-#: src/fuser.c:606
+#: src/fuser.c:602
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "Okänt lokal port AF %d\n"
 
-#: src/fuser.c:696
+#: src/fuser.c:692
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "Kan inte öppna protokollfilen \"%s\": %s\n"
 
-#: src/fuser.c:945
+#: src/fuser.c:938
 #, c-format
 msgid "%s: Invalid option %s\n"
 msgstr "%s: Ogiltig flagga %s\n"
 
-#: src/fuser.c:995
+#: src/fuser.c:988
 msgid "Namespace option requires an argument."
 msgstr "Flagga för namnrymd kräver ett argument."
 
-#: src/fuser.c:1007
+#: src/fuser.c:1000
 msgid "Invalid namespace name"
 msgstr "Ogiltigt namn för namnrymd"
 
-#: src/fuser.c:1063
+#: src/fuser.c:1056
 msgid "You can only use files with mountpoint options"
 msgstr "Du kan endast använda filer med monteringspunktflaggor"
 
-#: src/fuser.c:1108
+#: src/fuser.c:1101
 msgid "No process specification given"
 msgstr "Ingen processpecifikation angiven"
 
-#: src/fuser.c:1115
+#: src/fuser.c:1108
 msgid "all option cannot be used with silent option."
 msgstr "flagga för alla, -m,  kan inte användas med flaggan för tyst, -s."
 
-#: src/fuser.c:1120
+#: src/fuser.c:1113
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "Du kan inte söka efter endast IPv4- och endast IPv6-uttag samtidigt"
 
-#: src/fuser.c:1193
+#: src/fuser.c:1186
 #, c-format
 msgid "%*s USER        PID ACCESS COMMAND\n"
 msgstr "%*s ANVÄNDARE   PID ÅTKOMS KOMMANDO\n"
 
-#: src/fuser.c:1226 src/fuser.c:1281
+#: src/fuser.c:1219 src/fuser.c:1274
 msgid "(unknown)"
 msgstr "(okänd)"
 
-#: src/fuser.c:1370 src/fuser.c:1407
+#: src/fuser.c:1364 src/fuser.c:1402
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "Kan inte ta status på fil %s: %s\n"
 
-#: src/fuser.c:1498
+#: src/fuser.c:1493
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "Kan inte öppna /proc/net/unix: %s\n"
 
-#: src/fuser.c:1574
+#: src/fuser.c:1569
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "Döda process %d ? (y/N) "
 
-#: src/fuser.c:1610
+#: src/fuser.c:1605
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "Kunde inte döda process %d: %s\n"
 
-#: src/fuser.c:1625
+#: src/fuser.c:1620
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "Kan inte öppna ett nätverksuttag.\n"
 
-#: src/fuser.c:1629
+#: src/fuser.c:1624
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "Kan inte hitta uttagets enhetsnummer.\n"

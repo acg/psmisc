@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: psmisc 22.6\n"
 "Report-Msgid-Bugs-To: csmall@small.dropbear.id.au\n"
-"POT-Creation-Date: 2011-06-19 14:27+1000\n"
+"POT-Creation-Date: 2011-06-20 21:47+1000\n"
 "PO-Revision-Date: 2009-03-23 23:10+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -111,106 +111,106 @@ msgstr ""
 "來再次散布它。\n"
 "請參看名為 COPYING 的檔案，以獲得更多關於這些問題的資訊。\n"
 
-#: src/fuser.c:172
+#: src/fuser.c:171
 #, c-format
 msgid "Cannot open /proc directory: %s\n"
 msgstr "無法開啟 /proc 目錄：%s\n"
 
-#: src/fuser.c:364 src/fuser.c:419 src/fuser.c:1874
+#: src/fuser.c:362 src/fuser.c:415 src/fuser.c:1869
 #, c-format
 msgid "Cannot allocate memory for matched proc: %s\n"
 msgstr "無法為符合的進程配置記憶體：%s\n"
 
-#: src/fuser.c:453
+#: src/fuser.c:449
 #, c-format
 msgid "Specified filename %s does not exist.\n"
 msgstr ""
 
-#: src/fuser.c:455
+#: src/fuser.c:451
 #, c-format
 msgid "Cannot stat %s: %s\n"
 msgstr "無法顯示 %s:%s\n"
 
-#: src/fuser.c:588
+#: src/fuser.c:584
 #, c-format
 msgid "Cannot resolve local port %s: %s\n"
 msgstr "無法解析本機通訊埠 %s:%s\n"
 
-#: src/fuser.c:606
+#: src/fuser.c:602
 #, c-format
 msgid "Unknown local port AF %d\n"
 msgstr "不明的本機通訊埠 AF %d\n"
 
-#: src/fuser.c:696
+#: src/fuser.c:692
 #, c-format
 msgid "Cannot open protocol file \"%s\": %s\n"
 msgstr "無法開啟協定檔案「%s」：%s\n"
 
-#: src/fuser.c:945
+#: src/fuser.c:938
 #, c-format
 msgid "%s: Invalid option %s\n"
 msgstr ""
 
-#: src/fuser.c:995
+#: src/fuser.c:988
 msgid "Namespace option requires an argument."
 msgstr "名稱空間選項需要一個引數。"
 
-#: src/fuser.c:1007
+#: src/fuser.c:1000
 msgid "Invalid namespace name"
 msgstr "無效的名稱空間名稱"
 
-#: src/fuser.c:1063
+#: src/fuser.c:1056
 #, fuzzy
 msgid "You can only use files with mountpoint options"
 msgstr "您只能將檔案與掛載點選項一起使用"
 
-#: src/fuser.c:1108
+#: src/fuser.c:1101
 msgid "No process specification given"
 msgstr "沒有給定任何進程規格"
 
-#: src/fuser.c:1115
+#: src/fuser.c:1108
 msgid "all option cannot be used with silent option."
 msgstr "所有選項無法與安靜選項一起使用。"
 
-#: src/fuser.c:1120
+#: src/fuser.c:1113
 msgid "You cannot search for only IPv4 and only IPv6 sockets at the same time"
 msgstr "您無法同時只搜尋 IPv4 又只搜尋 IPv6 通訊端"
 
-#: src/fuser.c:1193
+#: src/fuser.c:1186
 #, c-format
 msgid "%*s USER        PID ACCESS COMMAND\n"
 msgstr "%*s 使用者      PID 存取命令\n"
 
-#: src/fuser.c:1226 src/fuser.c:1281
+#: src/fuser.c:1219 src/fuser.c:1274
 msgid "(unknown)"
 msgstr "(不明)"
 
-#: src/fuser.c:1370 src/fuser.c:1407
+#: src/fuser.c:1364 src/fuser.c:1402
 #, c-format
 msgid "Cannot stat file %s: %s\n"
 msgstr "無法顯示檔案 %s：%s\n"
 
-#: src/fuser.c:1498
+#: src/fuser.c:1493
 #, c-format
 msgid "Cannot open /proc/net/unix: %s\n"
 msgstr "無法開啟 /proc/net/unix：%s\n"
 
-#: src/fuser.c:1574
+#: src/fuser.c:1569
 #, c-format
 msgid "Kill process %d ? (y/N) "
 msgstr "砍除進程 %d？(y/N) "
 
-#: src/fuser.c:1610
+#: src/fuser.c:1605
 #, c-format
 msgid "Could not kill process %d: %s\n"
 msgstr "無法砍除進程 %d：%s\n"
 
-#: src/fuser.c:1625
+#: src/fuser.c:1620
 #, c-format
 msgid "Cannot open a network socket.\n"
 msgstr "無法開啟網路通訊端。\n"
 
-#: src/fuser.c:1629
+#: src/fuser.c:1624
 #, c-format
 msgid "Cannot find socket's device number.\n"
 msgstr "找不到通訊端裝置編號。\n"
