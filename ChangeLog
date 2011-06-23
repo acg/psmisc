@@ -1,3 +1,7 @@
+Changes in 22.15
+================
+	* Really apply patch for SF#31110178 RH#651794
+
 Changes in 22.14
 ================
   * Fix file descriptor as weel as memory leaks in fuser

@@ -1160,8 +1160,13 @@ print_matches(struct names *names_head, const opt_type opts,
 
 	for (nptr = names_head; nptr != NULL; nptr = nptr->next) {
 		if (opts & OPT_SILENT) {
-            if (nptr->matched_procs != NULL)
-                have_match = 1;
+			for (pptr = nptr->matched_procs; pptr != NULL;
+			     pptr = pptr->next) {
+				if(pptr->proc_type != PTYPE_NORMAL)
+					continue;
+
+				have_match = 1;
+			}
 		} else {	/* We're not silent */
 			if ((opts & OPT_ALLFILES) == 0) {
 				name_has_procs = 0;
