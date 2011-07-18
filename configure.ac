@@ -24,6 +24,16 @@ if test "$enable_selinux" = "yes"; then
 fi
 AC_SUBST([SELINUX_LIB])
 
+dnl Call fork before all stat calls to stop hanging on NFS mounts
+AC_SUBST([WITH_TIMEOUT_STAT])
+AC_ARG_ENABLE([TIMEOUT_STAT],
+  [AS_HELP_STRING([--enable-timeout-stat], [Use a timeout on stat calls])],
+  [enable_timeout_stat=$enableval],
+  [enable_timeout_stat="no"])
+if test "$enable_timeout_stat" = "yes"; then
+  AC_DEFINE([WITH_timeout_stat], [1], [Use timeout on stat calls])
+fi
+
 dnl ipv4 only option
 AC_SUBST([WITH_IPV6])
 AC_ARG_ENABLE([ipv6],

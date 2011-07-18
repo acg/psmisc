@@ -106,7 +106,11 @@ static dev_t device(const char *path);
 static char *expandpath(const char *path);
 
 typedef int (*stat_t)(const char*, struct stat*);
+#ifdef WITH_TIMEOUT_STAT
 static int timeout(stat_t func, const char *path, struct stat *buf, unsigned int seconds);
+#else
+#define timeout(func,path,buf,dummy) (func)((path),(buf))
+#endif /* WITH_TIMEOUT_STAT */
 
 static void usage(const char *errormsg)
 {
@@ -1321,12 +1325,11 @@ static struct stat *get_pidstat(const pid_t pid, const char *filename)
 	if ((st = (struct stat*)malloc(sizeof(struct stat))) == NULL)
 		return NULL;
 	snprintf(pathname, 256, "/proc/%d/%s", pid, filename);
-	if (timeout(stat, pathname, st, 5) != 0)
-		goto out;
+	if (timeout(stat, pathname, st, 5) != 0) {
+      free(st);
+	  return NULL;
+    }
 	return st;
-out:
-	free(st);
-	return NULL;
 }
 
 static void
@@ -1783,6 +1786,7 @@ sigalarm(int sig)
 		siglongjmp(jenv, 1);
 }
 
+#ifdef HAVE_TIMEOUT_STAT
 static int
 timeout(stat_t func, const char *path, struct stat *buf, unsigned int seconds)
 {
@@ -1831,6 +1835,7 @@ timeout(stat_t func, const char *path, struct stat *buf, unsigned int seconds)
 err:
 	return -1;
 }
+#endif /* HAVE_TIMEOUT_STAT */
 
 #ifdef _LISTS_H
 /*
