@@ -23,20 +23,23 @@ if WANT_PEEKFD_MIPS
   AM_CFLAGS += -DMIPS
 endif
 
-
 fuser_SOURCES = fuser.c comm.h signals.c signals.h i18n.h fuser.h lists.h
+
+fuser_LDADD = @LIBINTL@
 
 killall_SOURCES = killall.c comm.h signals.c signals.h i18n.h
 
-killall_LDADD = @SELINUX_LIB@
+killall_LDADD = @LIBINTL@ @SELINUX_LIB@
 
 peekfd_SOURCES = peekfd.c
 
 pstree_SOURCES = pstree.c comm.h i18n.h
 
-pstree_LDADD = @TERMCAP_LIB@ @SELINUX_LIB@
+pstree_LDADD = @LIBINTL@ @TERMCAP_LIB@ @SELINUX_LIB@
 
 prtstat_SOURCES = prtstat.c prtstat.h
+
+prtstat_LDADD = @LIBINTL@
 
 BUILT_SOURCES = signames.h
 

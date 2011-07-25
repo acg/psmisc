@@ -48,6 +48,12 @@
 #include <signal.h>
 #include <getopt.h>
 #include <setjmp.h>
+#include <limits.h>
+/* MAXSYMLINKS is a BSDism.  If it doesn't exist, fall back to SYMLINK_MAX,
+   which is the POSIX name. */
+#ifndef MAXSYMLINKS
+#define MAXSYMLINKS SYMLINK_MAX
+#endif
 
 #include "fuser.h"
 #include "signals.h"
@@ -1231,7 +1237,7 @@ print_matches(struct names *names_head, const opt_type opts,
 							pwent->pw_name);
 				}
 				if (pptr->proc_type == PTYPE_NORMAL)
-					printf("%6d", pptr->pid);
+					printf(" %5d", pptr->pid);
 				else
 					printf("kernel");
 				fflush(stdout);
@@ -1977,7 +1983,11 @@ char* expandpath(const char * path)
 	if (*path != '/') {
 		if (!getcwd(curr, PATH_MAX))
 			return (char*)0;
+#ifdef HAVE_RAWMEMCHR
 		dest = rawmemchr(curr, '\0');
+#else
+		dest = strchr(curr, '\0');
+#endif
 	} else {
 		*curr = '/';
 		dest = curr + 1;

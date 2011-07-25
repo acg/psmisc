@@ -2,6 +2,7 @@ Changes in 22.15
 ================
 	* Really apply patch for SF#31110178 RH#651794
 	* Conditionally use fork before stat calls
+	* Patch from Corrina Vinschen for compiling on cygwin
 
 Changes in 22.14
 ================

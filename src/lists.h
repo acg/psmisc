@@ -68,7 +68,7 @@ extern inline void attribute((used,__gnu_inline__,always_inline,__artificial__))
     asm volatile ("lfetch [%0]"    :: "r" (x))
 #elif defined(__powerpc64__)
     asm volatile ("dcbt 0,%0"      :: "r" (x))
-#elif 1 && defined(__i386__)
+#elif !defined(__CYGWIN__) && defined(__i386__)
     asm volatile ("661:\n\t"
 		  ".byte 0x8d,0x74,0x26,0x00\n"
 		  "\n662:\n"
