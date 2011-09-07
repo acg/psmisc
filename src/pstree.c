@@ -680,10 +680,10 @@ static void read_proc(void)
 
               if ((taskdir = opendir(taskpath)) != 0) {
                 /* if we have this dir, we're on 2.6 */
-                if (! (threadname = malloc(COMM_LEN+1))) {
+                if (! (threadname = malloc(COMM_LEN + 2 + 1))) {
                     exit(2);
                 }
-                sprintf(threadname, "{%.*s}", COMM_LEN-2, comm);
+                sprintf(threadname, "{%.*s}", COMM_LEN, comm);
                 while ((dt = readdir(taskdir)) != NULL) {
                   if ((thread = atoi(dt->d_name)) != 0) {
                     if (thread != pid) {

@@ -3,10 +3,12 @@ Changes in 22.15
 	* Really apply patch for SF#31110178 RH#651794
 	* Conditionally use fork before stat calls
 	* Patch from Corrina Vinschen for compiling on cygwin
+	* Remove doubled content in src/lists.h
+	* Add another 2 for thread brackets in pstree.c
 
 Changes in 22.14
 ================
-  * Fix file descriptor as weel as memory leaks in fuser
+	* Fix file descriptor as well as memory leaks in fuser
 	* Strip @ symbol from file names read from /proc/net/unix
 	* Above 2 changes close openSuSE bugs #536209, #529520, and #417841
 	  and provided by Werner Fink
