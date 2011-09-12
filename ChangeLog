@@ -5,6 +5,7 @@ Changes in 22.15
 	* Patch from Corrina Vinschen for compiling on cygwin
 	* Remove doubled content in src/lists.h
 	* Add another 2 for thread brackets in pstree.c
+	* Correct defines for timeout in configure.ac
 
 Changes in 22.14
 ================
