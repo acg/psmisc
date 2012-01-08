@@ -73,6 +73,7 @@ typedef struct _proc {
     char **argv;                /* only used : argv[0] is 1st arg; undef if argc < 1 */
     int argc;                        /* with -a   : number of arguments, -1 if swapped    */
     pid_t pid;
+    pid_t pgid;
     uid_t uid;
 #ifdef WITH_SELINUX
     security_context_t scontext;
@@ -122,7 +123,7 @@ static int capacity = 0;
 static int *width = NULL;
 static int *more = NULL;
 
-static int print_args = 0, compact = 1, user_change = 0, pids = 0,
+static int print_args = 0, compact = 1, user_change = 0, pids = 0, pgids = 0,
     show_parents = 0, by_pid = 0, trunc = 1, wait_end = 0;
 #ifdef WITH_SELINUX
 static int show_scontext = 0;
@@ -335,11 +336,11 @@ static void set_args(PROC * this, const char *args, int size)
 
 #ifdef WITH_SELINUX
 static void
-add_proc(const char *comm, pid_t pid, pid_t ppid, uid_t uid,
+add_proc(const char *comm, pid_t pid, pid_t ppid, pid_t pgid, uid_t uid,
          const char *args, int size, char isthread, security_context_t scontext)
 #else                                /*WITH_SELINUX */
 static void
-add_proc(const char *comm, pid_t pid, pid_t ppid, uid_t uid,
+add_proc(const char *comm, pid_t pid, pid_t ppid, pid_t pgid, uid_t uid,
          const char *args, int size, char isthread)
 #endif                                /*WITH_SELINUX */
 {
@@ -359,6 +360,7 @@ add_proc(const char *comm, pid_t pid, pid_t ppid, uid_t uid,
         set_args(this, args, size);
     if (pid == ppid)
         ppid = 0;
+    this->pgid = pgid;
     if (isthread)
       this->flags |= PFLAG_THREAD;
     if (!(parent = find_proc(ppid)))
@@ -448,6 +450,10 @@ dump_tree(PROC * current, int level, int rep, int leaf, int last,
     if (pids) {
         out_char(info++ ? ',' : '(');
         (void) out_int(current->pid);
+    }
+    if (pgids) {
+        out_char(info++ ? ',' : '(');
+        (void) out_int(current->pgid);
     }
     if (user_change && prev_uid != current->uid) {
         out_char(info++ ? ',' : '(');
@@ -612,7 +618,7 @@ static void read_proc(void)
   size_t buffer_size;
   char readbuf[BUFSIZ + 1];
   char *tmpptr;
-  pid_t pid, ppid;
+  pid_t pid, ppid, pgid;
   int fd, size;
   int empty;
 #ifdef WITH_SELINUX
@@ -667,7 +673,7 @@ static void read_proc(void)
             /* We now have readbuf with pid and cmd, and tmpptr+2
              * with the rest */
             /*printf("tmpptr: %s\n", tmpptr+2); */
-            if (sscanf(tmpptr + 2, "%*c %d", &ppid) == 1) {
+            if (sscanf(tmpptr + 2, "%*c %d %d", &ppid, &pgid) == 2) {
               DIR *taskdir;
               struct dirent *dt;
               char *taskpath;
@@ -689,17 +695,17 @@ static void read_proc(void)
                     if (thread != pid) {
 #ifdef WITH_SELINUX
                       if (print_args)
-                        add_proc(threadname, thread, pid, st.st_uid, 
+                        add_proc(threadname, thread, pid, pgid, st.st_uid, 
                             threadname, strlen (threadname) + 1, 1,scontext);
                       else
-                        add_proc(threadname, thread, pid, st.st_uid, 
+                        add_proc(threadname, thread, pid, pgid, st.st_uid, 
                             NULL, 0, 1, scontext);
 #else                /*WITH_SELINUX */
                       if (print_args)
-                        add_proc(threadname, thread, pid, st.st_uid,
+                        add_proc(threadname, thread, pid, pgid, st.st_uid,
                             threadname, strlen (threadname) + 1, 1);
                       else
-                        add_proc(threadname, thread, pid, st.st_uid,
+                        add_proc(threadname, thread, pid, pgid, st.st_uid,
                             NULL, 0, 1);
 #endif                /*WITH_SELINUX */
                       }
@@ -711,9 +717,9 @@ static void read_proc(void)
               free(taskpath);
               if (!print_args)
 #ifdef WITH_SELINUX
-                add_proc(comm, pid, ppid, st.st_uid, NULL, 0, 0, scontext);
+                add_proc(comm, pid, ppid, pgid, st.st_uid, NULL, 0, 0, scontext);
 #else                /*WITH_SELINUX */
-                add_proc(comm, pid, ppid, st.st_uid, NULL, 0, 0);
+                add_proc(comm, pid, ppid, pgid, st.st_uid, NULL, 0, 0);
 #endif                /*WITH_SELINUX */
               else {
                 sprintf(path, "%s/%d/cmdline", PROC_BASE, pid);
@@ -732,10 +738,10 @@ static void read_proc(void)
                 if (size)
                   buffer[size++] = 0;
 #ifdef WITH_SELINUX
-                add_proc(comm, pid, ppid, st.st_uid,
+                add_proc(comm, pid, ppid, pgid, st.st_uid,
                      buffer, size, 0, scontext);
 #else                /*WITH_SELINUX */
-                add_proc(comm, pid, ppid, st.st_uid,
+                add_proc(comm, pid, ppid, pgid, st.st_uid,
                      buffer, size, 0);
 #endif                /*WITH_SELINUX */
               }
@@ -788,7 +794,7 @@ static void usage(void)
 {
     fprintf(stderr,
             _
-            ("Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -u ]\n"
+            ("Usage: pstree [ -a ] [ -c ] [ -h | -H PID ] [ -l ] [ -n ] [ -p ] [ -g ] [ -u ]\n"
              "              [ -A | -G | -U ] [ PID | USER ]\n"
              "       pstree -V\n" "Display a tree of processes.\n\n"
              "  -a, --arguments     show command line arguments\n"
@@ -801,6 +807,7 @@ static void usage(void)
              "  -l, --long          don't truncate long lines\n"
              "  -n, --numeric-sort  sort output by PID\n"
              "  -p, --show-pids     show PIDs; implies -c\n"
+             "  -g, --show-pgids    show process group ids; implies -c\n"
              "  -s, --show-parents  show parents of the selected process\n"
              "  -u, --uid-changes   show uid transitions\n"
              "  -U, --unicode       use UTF-8 (Unicode) line drawing characters\n"
@@ -848,6 +855,7 @@ int main(int argc, char **argv)
         {"long", 0, NULL, 'l'},
         {"numeric-sort", 0, NULL, 'n'},
         {"show-pids", 0, NULL, 'p'},
+        {"show-pgids", 0, NULL, 'g'},
         {"show-parents", 0, NULL, 's'},
         {"uid-changes", 0, NULL, 'u'},
         {"unicode", 0, NULL, 'U'},
@@ -901,11 +909,11 @@ int main(int argc, char **argv)
 
 #ifdef WITH_SELINUX
     while ((c =
-            getopt_long(argc, argv, "aAcGhH:nplsuUVZ", options,
+            getopt_long(argc, argv, "aAcGhH:npglsuUVZ", options,
                         NULL)) != -1)
 #else                                /*WITH_SELINUX */
     while ((c =
-            getopt_long(argc, argv, "aAcGhH:nplsuUV", options, NULL)) != -1)
+            getopt_long(argc, argv, "aAcGhH:npglsuUV", options, NULL)) != -1)
 #endif                                /*WITH_SELINUX */
         switch (c) {
         case 'a':
@@ -949,6 +957,10 @@ int main(int argc, char **argv)
             break;
         case 'p':
             pids = 1;
+            compact = 0;
+            break;
+        case 'g':
+            pgids = 1;
             compact = 0;
             break;
         case 's':
