@@ -1332,7 +1332,11 @@ static struct stat *get_pidstat(const pid_t pid, const char *filename)
 		return NULL;
 	snprintf(pathname, 256, "/proc/%d/%s", pid, filename);
 	if (timeout(stat, pathname, st, 5) != 0) {
-      free(st);
+	  if (errno != ENOENT) {
+	  	fprintf(stderr, _("Cannot stat file %s: %s\n"),
+			pathname, strerror(errno));
+	  }
+	  free(st);
 	  return NULL;
     }
 	return st;
